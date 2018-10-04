@@ -3,7 +3,8 @@
 ## Members
 * Someone
 * Sometwo
-* Somethree
-* 1234
-* 5678
-* 9999
+* Something
+* somewhere
+
+
+>>>>>>> branch 'master' of https://github.com/jakarta99/iii-ee104.git
