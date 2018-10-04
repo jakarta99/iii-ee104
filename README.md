@@ -4,5 +4,4 @@
 * Someone
 * Sometwo
 * Somethree
-* anchor!!!
-*!!!
+* anchor
