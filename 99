@@ -1,0 +1,19 @@
+package test;
+
+public class Test {
+
+	public static void main(String[] args) {
+		for(int x=1;x<=9;x++) {
+			for(int y =1;y<=9;y++) {
+				if(x*y<10) {
+				System.out.print(y+"x"+x+"="+" "+x*y+"  ");
+				}else {
+				System.out.print(y+"x"+x+"="+x*y+"  ");	
+				}
+			}
+			System.out.println("");
+		}
+
+	}
+
+}
