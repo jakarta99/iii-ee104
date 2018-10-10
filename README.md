@@ -1,17 +1,9 @@
 # iii-ee104
 
 ## Members
-* Somefour
-* Sometwo
-* Somethree
-* Something
-* Somewhere
-* Anywhere
-* test132321
-* testbrian123
-* testbrian123456777778888
-* testbrian12345677777888899999
-* test
-* jasminetest
-* jasminetest_twice
-* 12345
+* 李怡萱
+* 曾昱潔
+* 宋明家
+* 趙珩安
+* 白晉宇
+* 陳宥任
