@@ -20,5 +20,4 @@ public class CalculateServicImpl implements CalculateService {
 		return a * b;
 	}
 
-
 }
