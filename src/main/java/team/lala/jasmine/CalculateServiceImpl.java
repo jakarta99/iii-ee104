@@ -1,10 +1,10 @@
-package team.lala.app.jasmine.app;
+package team.lala.jasmine;
 
-public class TestApp {
+public class CalculateServiceImpl {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("jasmine");
+
 	}
 
 }
