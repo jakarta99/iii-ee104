@@ -2,7 +2,7 @@ package team.lala.jasmine.service;
 
 import team.lala.service.CalculateService;
 
-public class calculateServicImpl implements CalculateService {
+public class CalculateServicImpl implements CalculateService {
 
 	@Override
 	public int add(int a, int b) {
