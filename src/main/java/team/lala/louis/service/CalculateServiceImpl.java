@@ -2,7 +2,7 @@ package team.lala.louis.service;
 
 import team.lala.service.CalculateService;
 
-public class calculateService implements CalculateService {
+public class CalculateServiceImpl implements CalculateService {
 
 	@Override
 	public int add(int a, int b) {
