@@ -1,4 +1,4 @@
-package team.lala.anchor.app;
+package team.lala.anchor.service;
 
 import team.lala.service.CalculateService;
 
@@ -19,7 +19,7 @@ public class CalculateServiceImpl implements CalculateService {
 	@Override
 	public int mul(int a, int b) {
 		int mul = a*b;
-		return 0;
+		return mul;
 	}
 
 }
