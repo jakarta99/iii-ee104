@@ -26,7 +26,7 @@ public class CalculateServiceTest {
 	public void testMul() {
 		CalculateServiceImpl calculateService = new CalculateServiceImpl();
 		int result = calculateService.mul(3, 2);
-		assertEquals(6, result);
+		assertEquals(6, result); 
 	}
 
 }
