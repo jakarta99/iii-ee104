@@ -20,9 +20,5 @@ public class CalculateServicImpl implements CalculateService {
 		return a * b;
 	}
 
-	public static void main(String[] args) {
-		
-
-	}
 
 }
