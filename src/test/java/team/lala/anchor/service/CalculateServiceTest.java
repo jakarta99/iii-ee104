@@ -14,6 +14,7 @@ public class CalculateServiceTest {
 	public void testAdd() {
 		CalculateService calculateService = new CalculateServiceImpl();
 		assertEquals(7, calculateService.add(3, 4));
+		assertEquals(10, calculateService.add(6, 4));
 	}
 
 	@Test
