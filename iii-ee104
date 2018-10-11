@@ -1,0 +1,19 @@
+tree d5ea51cd0ee8b27d1425cea426c8b64a3f71b152
+parent 5134f3c2f802f6ee75e3710c4da8d263bfbb4811
+author Gary Lee <jakarta99@gmail.com> 1539254428 +0800
+committer GitHub <noreply@github.com> 1539254428 +0800
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsBcBAABCAAQBQJbvyicCRBK7hj4Ov3rIwAAdHIIAGSgsT+HQ8vLcRel/Ffgm84C
+ d1Y/drD0fDm9e+1K1ukiUsQQMlvmb7XQsToTAvCYAFXcnte1W4HkhAdFWOTKmGDM
+ v0FLQ+oawP9AaQR3PkCCEt8/bnsPPIPFb3hC/n+93yoxz8t9rNYC1Wf4lFpjlpqJ
+ zHq34PycqGNPpQc3TiUjRHzqgG2UyO4xIhSzMEAxf7eRGwRL5hCIVd7IPiTCMso1
+ aJDl20/O9e1RmYdAx171wvO5cI2fizNzRvKvjzzmexbsI7ugcZ886SzYijgwsPnr
+ T6b6sfQ3JjE5w6AnmIZZT1iC05qVJw6Z2FyH5eiFwLa2pRzILrNo7G3REietJOs=
+ =DxGI
+ -----END PGP SIGNATURE-----
+ 
+
+Delete .project
+
+remove .project
