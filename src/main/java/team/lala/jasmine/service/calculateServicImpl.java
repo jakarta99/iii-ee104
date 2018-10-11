@@ -17,7 +17,7 @@ public class calculateServicImpl implements CalculateService {
 
 	@Override
 	public int mul(int a, int b) {
-		return 0;
+		return a;
 	}
 
 	public static void main(String[] args) {
