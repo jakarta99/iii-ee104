@@ -1,25 +1,25 @@
-package brian.service;
+package team.lala.brian.service;
 
 import team.lala.service.CalculateService;
 
-public class CalculatServicelmpl implements CalculateService {
+public class CalculateServicelmpl implements CalculateService {
 
 	@Override
 	public int add(int a, int b) {
-		// TODO Auto-generated method stub
-		return 0;
+		int add=a+b;
+		return add;
 	}
 
 	@Override
 	public int sub(int a, int b) {
-		// TODO Auto-generated method stub
-		return 0;
+		int sub=a-b;
+		return sub;
 	}
 
 	@Override
 	public int mul(int a, int b) {
-		// TODO Auto-generated method stub
-		return 0;
+		int mul=a*b;
+		return mul;
 	}
 
 	public static void main(String[] args) {
