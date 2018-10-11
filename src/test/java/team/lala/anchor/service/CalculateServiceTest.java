@@ -21,12 +21,14 @@ public class CalculateServiceTest {
 	public void testSub() {
 		CalculateService calculateService = new CalculateServiceImpl();
 		assertEquals(3, calculateService.sub(7, 4));
+		assertEquals(2, calculateService.sub(6, 4));
 	}
 
 	@Test
 	public void testMul() {
 		CalculateService calculateService = new CalculateServiceImpl();
 		assertEquals(12, calculateService.mul(3, 4));
+		assertEquals(24, calculateService.mul(6, 4));
 	}
 
 }
