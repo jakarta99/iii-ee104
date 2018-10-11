@@ -1,8 +1,8 @@
-package team.lala.anchor.service;
+package team.lala.jasmine.service;
 
 import team.lala.service.CalculateService;
 
-public class CalculateServiceImpl implements CalculateService {
+public class CalculateServicImpl implements CalculateService {
 
 	@Override
 	public int add(int a, int b) {
@@ -11,12 +11,18 @@ public class CalculateServiceImpl implements CalculateService {
 
 	@Override
 	public int sub(int a, int b) {
+		
 		return a - b;
 	}
 
 	@Override
 	public int mul(int a, int b) {
 		return a * b;
+	}
+
+	public static void main(String[] args) {
+		
+
 	}
 
 }
