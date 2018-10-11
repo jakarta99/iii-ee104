@@ -14,6 +14,10 @@ public class CalculateServiceTest {
 		int sum = calculateService.add(1, 2);
 		
 		assertEquals(3, sum);
+		
+		assertEquals(5, calculateService.add(3, 2));
+		
+		assertEquals(2002, calculateService.add(2000, 2));
 	}
 	
 	@Test
