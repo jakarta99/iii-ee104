@@ -3,7 +3,8 @@ package team.lala.app;
 public class JasmineApp {
 
 	public static void main(String[] args) {
-		System.out.println("Hello Jasmine!");
+		// TODO Auto-generated method stub
+		System.out.println("jasmine");
 	}
 
 }
