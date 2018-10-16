@@ -9,8 +9,8 @@ public class CalculateServiceTest {
 	@Test
 	public void testAdd() {
 		CalculateServiceImpl calculateService = new CalculateServiceImpl();
-		assertEquals(3, calculateService.add(1, 2));
-		assertEquals(9, calculateService.add(4, 5));
+		assertEquals(12, calculateService.add(10, 2));
+		assertEquals(10, calculateService.add(5, 5));
 	}
 
 	@Test
