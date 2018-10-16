@@ -11,7 +11,7 @@ public class CalculateServiceTest {
 		CalculateServiceImpl calculateService = new CalculateServiceImpl();
 
 
-		assertEquals(8, calculateService.add(4, 4));
+		assertEquals(9, calculateService.add(5, 4));
 		assertEquals(7, calculateService.add(3, 5));
 
 	}
