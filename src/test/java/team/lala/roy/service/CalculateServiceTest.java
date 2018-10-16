@@ -1,31 +1,32 @@
-package team.lala.jasmine.service;
+package team.lala.roy.service;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import team.lala.gary.service.CalculateServiceImpl;
 
 public class CalculateServiceTest {
 
 	@Test
 	public void testAdd() {
 		CalculateServiceImpl calculateService = new CalculateServiceImpl();
-		assertEquals(3, calculateService.add(1, 2));
-		assertEquals(9, calculateService.add(4, 5));
+		int sum = calculateService.add(4, 2);
+		assertEquals(6, sum);
 	}
-	
+
 	@Test
 	public void testSub() {
 		CalculateServiceImpl calculateService = new CalculateServiceImpl();
-		assertEquals(3, calculateService.sub(5, 2));
-		assertEquals(12, calculateService.sub(15, 3));
+		int result = calculateService.sub(3, 2);
+		assertEquals(1, result);
 	}
-	
+
 	@Test
 	public void testMul() {
 		CalculateServiceImpl calculateService = new CalculateServiceImpl();
-		assertEquals(6, calculateService.mul(3, 2));
-		assertEquals(20, calculateService.mul(4, 5));
+		int result = calculateService.mul(3, 2);
+		assertEquals(6, result); 
 	}
-	
 
 }
