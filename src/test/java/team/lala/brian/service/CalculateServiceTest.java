@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class CalculateServiceTest {
-	
+
 	@Test
 	public void testAdd() {
 		CalculateServiceImpl calculateService = new CalculateServiceImpl();
