@@ -11,6 +11,7 @@ public class CalculateServiceTest2 {
 		CalculateServiceImpl a = new CalculateServiceImpl();
 		assertEquals(7, a.add(2, 5));
 		assertEquals(7, a.add(2, 5));
+		assertEquals(15, a.add(8, 7));
 	}
 	
 	@Test
@@ -24,6 +25,7 @@ public class CalculateServiceTest2 {
 	public void testMul(){
 		CalculateServiceImpl a = new CalculateServiceImpl();
 		assertEquals(30, a.mul(5, 6));
+		assertEquals(225, a.mul(15, 15));
 		assertEquals(20, a.mul(4, 5));
 	}
 
