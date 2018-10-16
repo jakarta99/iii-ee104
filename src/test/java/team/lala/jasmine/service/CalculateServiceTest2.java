@@ -10,6 +10,7 @@ public class CalculateServiceTest2 {
 	public void testAdd() {
 		CalculateServiceImpl a = new CalculateServiceImpl();
 		assertEquals(7, a.add(2, 5));
+		assertEquals(15, a.add(8, 7));
 	}
 	
 	@Test
