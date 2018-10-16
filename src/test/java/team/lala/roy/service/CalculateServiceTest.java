@@ -11,8 +11,8 @@ public class CalculateServiceTest {
 	@Test
 	public void testAdd() {
 		CalculateServiceImpl calculateService = new CalculateServiceImpl();
-		int sum = calculateService.add(1, 2);
-		assertEquals(3, sum);
+		int sum = calculateService.add(4, 2);
+		assertEquals(6, sum);
 	}
 
 	@Test
