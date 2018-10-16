@@ -25,7 +25,6 @@ public class CalculateServiceTest2 {
 		CalculateServiceImpl a = new CalculateServiceImpl();
 		assertEquals(30, a.mul(5, 6));
 		assertEquals(56, a.mul(8, 7));
-		
 	}
 
 }
