@@ -9,7 +9,11 @@ public class CalculateServiceTest2 {
 	@Test
 	public void testAdd() {
 		CalculateServiceImpl a = new CalculateServiceImpl();
-		assertEquals(9, a.add(4, 5));
+//<<<<<<< HEAD
+//		assertEquals(12, a.add(6, 6));
+//=======
+//		 assertEquals(15, a.add(10, 5));
+//>>>>>>> branch 'master' of https://github.com/jakarta99/iii-ee104
 		assertEquals(7, a.add(2, 5));
 	}
 	

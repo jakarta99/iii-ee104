@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import junit.framework.Assert;
 
 public class CalculateServiceTest {
 
@@ -28,8 +27,8 @@ public class CalculateServiceTest {
 	public void testMul() {
 		CalculateServiceImpl calculateService = new CalculateServiceImpl();
 		
-		assertEquals(6, calculateService.sub(3, 2));
-		assertEquals(2, calculateService.sub(1, 2));
+		assertEquals(6, calculateService.mul(3, 2));
+		assertEquals(12, calculateService.mul(4, 3));
 	}
 
 }
