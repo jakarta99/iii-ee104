@@ -18,5 +18,12 @@ public class CalculateServiceImpl implements CalculateService {
 	public int mul(int a, int b) {
 		return a * b;
 	}
+	
+	public double div(int a, double b) {
+		if (b!=0) {
+			return a / b;
+		}
+		else return 0;
+	}
 
 }
