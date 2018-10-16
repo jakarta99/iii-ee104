@@ -5,12 +5,14 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class CalculateServiceTest {
-	
+
 	@Test
 	public void testAdd() {
 		CalculateServiceImpl calculateService = new CalculateServiceImpl();
+
 		assertEquals(12, calculateService.add(10, 2));
 		assertEquals(10, calculateService.add(5, 5));
+
 	}
 
 	@Test
