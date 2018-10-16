@@ -18,6 +18,4 @@ public class CalculateServiceImpl implements CalculateService {
 	public int mul(int a, int b) {
 		return a * b;
 	}
-	int i=123;
-	int y=123;
 }

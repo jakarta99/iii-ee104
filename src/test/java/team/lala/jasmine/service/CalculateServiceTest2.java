@@ -9,11 +9,6 @@ public class CalculateServiceTest2 {
 	@Test
 	public void testAdd() {
 		CalculateServiceImpl a = new CalculateServiceImpl();
-//<<<<<<< HEAD
-//		assertEquals(12, a.add(6, 6));
-//=======
-//		 assertEquals(15, a.add(10, 5));
-//>>>>>>> branch 'master' of https://github.com/jakarta99/iii-ee104
 		assertEquals(7, a.add(2, 5));
 	}
 	
@@ -28,7 +23,8 @@ public class CalculateServiceTest2 {
 	public void testMul(){
 		CalculateServiceImpl a = new CalculateServiceImpl();
 		assertEquals(30, a.mul(5, 6));
-		assertEquals(56, a.mul(8, 7));
+		assertEquals(225, a.mul(15, 15));
+		assertEquals(20, a.mul(4, 5));
 	}
 
 }
