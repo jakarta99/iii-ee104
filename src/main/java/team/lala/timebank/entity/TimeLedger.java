@@ -22,7 +22,7 @@ public class TimeLedger {
 	
 	private int depositValue;
 	
-	private int withdrawlValue;
+	private int withdrawalValue;
 	
 	private int balanceValue;
 	
