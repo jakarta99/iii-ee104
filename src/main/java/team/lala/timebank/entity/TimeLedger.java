@@ -65,7 +65,7 @@ public class TimeLedger {
 	}
 
 	public void setWithdrawlValue(int withdrawlValue) {
-		this.withdrawlValue = withdrawlValue;
+		this.withdrawalValue = withdrawlValue;
 	}
 
 	public int getBalanceValue() {
