@@ -44,12 +44,12 @@ public class TimeLedgerDao {
 	}
 	
 	//查出TIME_LEDGER資料表中所有資料
-	private static final String FIND_ALL_STMT="SELECT * FROM TIME_LEDGER";
+	private static final String FIND_ALL_STMT = "SELECT * FROM TIME_LEDGER";
 	public Collection<TimeLedger> findAll() {
 		TimeLedger timeLedger = null;
 		Collection<TimeLedger> timeLedgerCollection = new ArrayList<TimeLedger>();
 		try {
-			PreparedStatement ppst= connection.prepareStatement(FIND_ALL_STMT);
+			PreparedStatement ppst = connection.prepareStatement(FIND_ALL_STMT);
 			ResultSet rs = ppst.executeQuery();
 			while(rs.next()) {
 				timeLedger = new TimeLedger();
@@ -71,11 +71,11 @@ public class TimeLedgerDao {
 	}
 	
 	//透過ID查尋TIME_LEDGER資料表資料
-	private static final String FIND_ONE_STMT="SELECT * FROM TIME_LEDGER WHERE ID=?";
+	private static final String FIND_ONE_STMT = "SELECT * FROM TIME_LEDGER WHERE ID=?";
 	public TimeLedger findOne(Long id) {
 		TimeLedger timeLedger = new TimeLedger();
 		try {
-			PreparedStatement ppst= connection.prepareStatement(FIND_ONE_STMT);
+			PreparedStatement ppst = connection.prepareStatement(FIND_ONE_STMT);
 			ppst.setLong(1, id);
 			ResultSet rs = ppst.executeQuery();
 			while(rs.next()) {
@@ -96,12 +96,12 @@ public class TimeLedgerDao {
 	}
 	
 	//新增單筆資料進TIME_LEDGER資料表
-	private static final String INSERT_STMT="INSERT INTO "
+	private static final String INSERT_STMT = "INSERT INTO "
 											+ "TIME_LEDGER(MEMBER_ID,TRANSACTION_TIME,DEPOSIT_VALUE,WITHDRAWAL_VALUE,BALANCE_VALUE,DISCRIPTION) "
 											+ "VALUES(?,?,?,?,?,?)";
 	public void insert(TimeLedger timeLedger) {
 		try {
-			PreparedStatement ppst= connection.prepareStatement(INSERT_STMT);
+			PreparedStatement ppst = connection.prepareStatement(INSERT_STMT);
 			//id屬性由資料庫自動產生
 			ppst.setLong(1, timeLedger.getMemberId());  
 			ppst.setTimestamp(2, Timestamp.valueOf(timeLedger.getTransactionTime()));
@@ -117,12 +117,12 @@ public class TimeLedgerDao {
 	}
 	
 	//透過ID更新該筆資料
-	private static final String UPDATE_STMT="UPDATE TIME_LEDGER "
+	private static final String UPDATE_STMT = "UPDATE TIME_LEDGER "
 											+ "SET MEMBER_ID=?,TRANSACTION_TIME=?,DEPOSIT_VALUE=?,WITHDRAWAL_VALUE=?,BALANCE_VALUE=?,DISCRIPTION=? "
 											+ "WHERE ID=?";
 	public void update(TimeLedger timeLedger) {
 		try {
-			PreparedStatement ppst= connection.prepareStatement(UPDATE_STMT);
+			PreparedStatement ppst = connection.prepareStatement(UPDATE_STMT);
 			//id屬性由資料庫自動產生
 			ppst.setLong(1, timeLedger.getMemberId());  
 			ppst.setTimestamp(2, Timestamp.valueOf(timeLedger.getTransactionTime()));
@@ -139,11 +139,11 @@ public class TimeLedgerDao {
 	}
 	
 	//透過ID刪除資料
-	private static final String DELETE_STMT="DELETE FROM TIME_LEDGER "
+	private static final String DELETE_STMT = "DELETE FROM TIME_LEDGER "
 											+ "WHERE ID=?";
 	public void delete(Long id) {
 		try {
-			PreparedStatement ppst= connection.prepareStatement(DELETE_STMT);
+			PreparedStatement ppst = connection.prepareStatement(DELETE_STMT);
 			ppst.setLong(1, id);
 			ppst.executeUpdate();
 			ppst.close();
@@ -153,13 +153,13 @@ public class TimeLedgerDao {
 	}
 	
 	//透過MemberId，找出會員最近一筆的交易資料
-	private static final String FIND_TOP1_MEMID_BY_TRASACTIME_STMT="SELECT TOP 1 * "
+	private static final String FIND_TOP1_MEMID_BY_TRASACTIME_STMT = "SELECT TOP 1 * "
 																	+ "FROM TIME_LEDGER "
 																	+ "WHERE MEMBER_ID=? ORDER BY TRANSACTION_TIME DESC";
 	public TimeLedger findTop1ByMemberIdOrderByTransactionTime(Long memberId) {
 		TimeLedger timeLedger = new TimeLedger();
 		try {
-			PreparedStatement ppst= connection.prepareStatement(FIND_TOP1_MEMID_BY_TRASACTIME_STMT);
+			PreparedStatement ppst = connection.prepareStatement(FIND_TOP1_MEMID_BY_TRASACTIME_STMT);
 			ppst.setLong(1, memberId);
 			ResultSet rs = ppst.executeQuery();
 			while(rs.next()) {
