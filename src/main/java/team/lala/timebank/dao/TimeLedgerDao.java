@@ -53,7 +53,7 @@ public class TimeLedgerDao {
 			ResultSet rs = ppst.executeQuery();
 			while(rs.next()) {
 				timeLedger = new TimeLedger();
-				timeLedger.setId(rs.getLong("ID"));;
+				timeLedger.setId(rs.getLong("ID"));
 				timeLedger.setMemberId(rs.getLong("MEMBER_ID"));  
 				timeLedger.setTransactionTime(rs.getTimestamp("TRANSACTION_TIME").toLocalDateTime());
 				timeLedger.setDepositValue(rs.getInt("DEPOSIT_VALUE"));
