@@ -61,7 +61,7 @@ public class TimeLedger {
 	}
 
 	public int getWithdrawlValue() {
-		return withdrawlValue;
+		return withdrawalValue;
 	}
 
 	public void setWithdrawlValue(int withdrawlValue) {
