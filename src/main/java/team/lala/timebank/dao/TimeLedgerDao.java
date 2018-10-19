@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import team.lala.timebank.entity.TimeLedger;
 
-public class TimeLedgerDao {
+public class Job {
 
 	public Collection<TimeLedger> findAll() {
 		
