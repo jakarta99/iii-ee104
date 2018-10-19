@@ -87,7 +87,7 @@ public class TimeLedger {
 	@Override
 	public String toString() {
 		return "TimeLedger [id=" + id + ", memberId=" + memberId + ", transactionTime=" + transactionTime
-				+ ", depositValue=" + depositValue + ", withdrawlValue=" + withdrawlValue + ", balanceValue="
+				+ ", depositValue=" + depositValue + ", withdrawlValue=" + withdrawalValue + ", balanceValue="
 				+ balanceValue + ", description=" + description + "]";
 	}
 	
