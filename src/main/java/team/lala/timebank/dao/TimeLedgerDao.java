@@ -118,7 +118,8 @@ public class TimeLedgerDao {
 	
 	//透過ID更新該筆資料
 	private static final String UPDATE_STMT = "UPDATE TIME_LEDGER "
-											+ "SET MEMBER_ID=?,TRANSACTION_TIME=?,DEPOSIT_VALUE=?,WITHDRAWAL_VALUE=?,BALANCE_VALUE=?,DISCRIPTION=? "
+											+ "SET MEMBER_ID=?,TRANSACTION_TIME=?,DEPOSIT_VALUE=?"
+													+ ",WITHDRAWAL_VALUE=?,BALANCE_VALUE=?,DISCRIPTION=? "
 											+ "WHERE ID=?";
 	public void update(TimeLedger timeLedger) {
 		try {
