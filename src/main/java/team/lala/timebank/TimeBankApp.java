@@ -24,7 +24,7 @@ public class TimeBankApp {
 //			System.out.println(timeLedger.toString());			
 //		}
 		
-		timeLedgerService.searchALLTransaction(memberId);
+//		timeLedgerService.searchALLTransaction(memberId);
 
 		
 		// 2. Show Job List
@@ -34,7 +34,7 @@ public class TimeBankApp {
 //		}
 		
 		// 3. Choose one Job (id:1) from Job List
-		Long jobId = 1l;	
+		Long jobId = 6l;	
 		Job job = jobService.findOne(jobId);
 		System.out.println("find jobId = " + jobId);
 		if (job != null) {
@@ -45,14 +45,14 @@ public class TimeBankApp {
 		
 
 		// 4. After verified, Deposit service hours
-		TimeLedgerDao timeLedgerDao = new TimeLedgerDao();
-		timeLedgerDao.getConnection();
-		TimeLedger myTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
-		System.out.println("更新前: " + myTimeLedger.toString());
-		timeLedgerService.deposit(job.getTimeValue(),memberId);
-		myTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
-
-		System.out.println("更新後: "+ myTimeLedger.toString());
+//		TimeLedgerDao timeLedgerDao = new TimeLedgerDao();
+//		timeLedgerDao.getConnection();
+//		TimeLedger myTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
+//		System.out.println("更新前: " + myTimeLedger.toString());
+//		timeLedgerService.deposit(job.getTimeValue(),memberId);
+//		myTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
+//
+//		System.out.println("更新後: "+ myTimeLedger.toString());
 
 	}
 
