@@ -10,8 +10,10 @@ import team.lala.timebank.service.*;
 public class TimeBankApp {
 
 	public static void main(String[] args) {
-
+		
 		Long memberId = 1L;
+//		Long memberId = 6L;
+		
 		MemberService memberService = new MemberService();
 		TimeLedgerService timeLedgerService = new TimeLedgerService();
 		JobService jobService =new JobService();
@@ -25,10 +27,6 @@ public class TimeBankApp {
 		timeLedgerService.searchALLTransaction(memberId);
 
 		
-		
-		
-		
-
 		// 2. Show Job List
 //		Collection<Job> jobList = jobService.findAll();
 //		for (Job job: jobList) {
