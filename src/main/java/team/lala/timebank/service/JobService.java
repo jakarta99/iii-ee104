@@ -11,15 +11,14 @@ public class JobService {
 	private JobDao jobDao = new JobDao();
 	
 	// 使用者刊登志工需求
-	public void insertJob(Job job) { 
+	public void insert(Job job) { 
 		jobDao.getConnection();
 		jobDao.insert(job);
 		jobDao.closeConnection();
-
 	}
 	
 	// 更新志工需求
-	public void updateJob(Job job) {
+	public void update(Job job) {
 		jobDao.getConnection();
 		jobDao.update(job);
 		jobDao.closeConnection();
@@ -27,26 +26,24 @@ public class JobService {
 	}
 	
 	//搜尋所有志工需求表
-	public void findAllJob() {
+	public Collection<Job> findAll() {
 		jobDao.getConnection();
 		Collection<Job> jobList = jobDao.findAll();
-		for(Job job : jobList) {
-			System.out.println(job.toString());
-		}
 		jobDao.closeConnection();
+		return jobList;
 	}
 	
 	
 	//根據jobId搜尋志工需求
-	public void findOneJobByJobId(Long jobId) {
+	public Job findOne(Long jobId) {
 		jobDao.getConnection();
 		Job job = jobDao.findOne(jobId);
-		System.out.println(job.toString());
 		jobDao.closeConnection();
+		return job;
 	}
 	
 	//刪除志工需求
-	public void deleteJobByJobId(Long jobId) {
+	public void delete(Long jobId) {
 		jobDao.getConnection();		
 		jobDao.delete(jobId);
 		jobDao.closeConnection();

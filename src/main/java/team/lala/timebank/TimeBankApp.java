@@ -12,26 +12,30 @@ public class TimeBankApp {
 	public static void main(String[] args) {
 
 		Long memberId = 1L;
+//		MemberService memberService;
+		TimeLedgerService timeLedgerService = new TimeLedgerService();
+		JobService jobService =new JobService();
 
 		// 1. List my ledgers 
-		TimeLedgerService timeLedgerService = new TimeLedgerService();
-		Collection<TimeLedger> myTimeLedgers = timeLedgerService.getLedgersByMemberId(memberId);
-		for (TimeLedger timeLedger : myTimeLedgers) {
-			System.out.println(timeLedger.toString());			
-		}
-
-		MemberService memberService;
+//		Collection<TimeLedger> myTimeLedgers = timeLedgerService.findByMemberId(memberId);
+//		for (TimeLedger timeLedger : myTimeLedgers) {
+//			System.out.println(timeLedger.toString());			
+//		}
 
 		// 2. Show Job List
-		JobService jobService =new JobService();
-		jobService.getAll();
-		//forEach List;
-
+		Collection<Job> jobList = jobService.findAll();
+		for (Job job: jobList) {
+			System.out.println(job.toString());
+		}
+		
 		// 3. Choose one Job (id:1) from Job List
-		jobService.getByJobId(1l);
+		Long jobId = 1l;
+		Job job = jobService.findOne(jobId);
+		System.out.println(job.toString());
 
-//		// 4. After verified, Deposit service hours
-//		timeLedgerService.deposit(job.getHours(), memberId);
+		// 4. After verified, Deposit service hours
+//		timeLedgerService.deposit(job.getTimeValue(),memberId);
+//		System.out.println(timeLedgerService.toString());
 
 	}
 
