@@ -6,18 +6,29 @@ import team.lala.timebank.dao.JobDao;
 
 import team.lala.timebank.entity.Job;
 
+/**
+ * Using the methods of JobDao to implement some service
+ * @author Sheila
+ *
+ */
 public class JobService {
 
 	private JobDao jobDao = new JobDao();
 	
-	// 使用者刊登志工需求
+	/**
+	 * posting recruit for volunteers 
+	 * @param job 
+	 */
 	public void insert(Job job) { 
 		jobDao.getConnection();
 		jobDao.insert(job);
 		jobDao.closeConnection();
 	}
 	
-	// 更新志工需求
+	/**
+	 * update the job recruit
+	 * @param job
+	 */
 	public void update(Job job) {
 		jobDao.getConnection();
 		jobDao.update(job);
@@ -25,7 +36,10 @@ public class JobService {
 
 	}
 	
-	//搜尋所有志工需求表
+	/**
+	 * lists all the jobs
+	 * @return the collection of all jobs
+	 */
 	public Collection<Job> findAll() {
 		jobDao.getConnection();
 		Collection<Job> jobList = jobDao.findAll();
@@ -37,10 +51,14 @@ public class JobService {
 	}
 	
 	
-	//根據jobId搜尋志工需求
-	public Job findOne(Long jobId) {
+	/**
+	 * find a job by using id
+	 * @param id
+	 * @return the job found by using id
+	 */
+	public Job findOne(Long id) {
 		jobDao.getConnection();
-		Job job = jobDao.findOne(jobId);
+		Job job = jobDao.findOne(id);
 		jobDao.closeConnection();
 		if(job == null) {
 			System.out.println("jobId does not exist");
@@ -48,10 +66,13 @@ public class JobService {
 		return job;
 	}
 	
-	//刪除志工需求
-	public void delete(Long jobId) {
+	/**
+	 * delete the recruit
+	 * @param id
+	 */
+	public void delete(Long id) {
 		jobDao.getConnection();		
-		jobDao.delete(jobId);
+		jobDao.delete(id);
 		jobDao.closeConnection();
 	}
 	
