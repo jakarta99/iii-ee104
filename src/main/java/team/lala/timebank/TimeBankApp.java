@@ -29,9 +29,15 @@ public class TimeBankApp {
 		}
 		
 		// 3. Choose one Job (id:1) from Job List
-		Long jobId = 5l;
+		Long jobId = 6l;	
 		Job job = jobService.findOne(jobId);
-		System.out.println(job.toString());
+		System.out.println("find jobId = " + jobId);
+		if (job != null) {
+			System.out.println(job.toString());			
+		} else {
+			System.out.println("cannot find jobId = "+ jobId);
+		}
+		
 
 		// 4. After verified, Deposit service hours
 //		timeLedgerService.deposit(job.getTimeValue(),memberId);
