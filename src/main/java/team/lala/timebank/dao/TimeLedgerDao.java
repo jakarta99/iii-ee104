@@ -128,11 +128,7 @@ public class TimeLedgerDao {
 			rs.close();
 			ppst.close();
 			// FIXME test on console
-			if(count != 0) {
-				System.out.println(memberId + "號會員共查出" + count + "筆資料");
-			} else {
-				System.out.println("查無" + memberId + "號會員資料");
-			}
+			System.out.println(memberId + "號會員共查出" + count + "筆資料");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
