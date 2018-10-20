@@ -62,4 +62,10 @@ public class Member {
 		this.mobile = mobile;
 	}
 
+	@Override
+	public String toString() {
+		return "Member [id=" + id + ", name=" + name + ", type=" + type + ", email=" + email + ", telephone="
+				+ telephone + ", mobile=" + mobile + "]";
+	}
+
 }
