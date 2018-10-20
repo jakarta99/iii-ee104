@@ -29,7 +29,7 @@ public class TimeBankApp {
 		}
 		
 		// 3. Choose one Job (id:1) from Job List
-		Long jobId = 1l;
+		Long jobId = 5l;
 		Job job = jobService.findOne(jobId);
 		System.out.println(job.toString());
 
