@@ -10,9 +10,11 @@ import team.lala.timebank.service.*;
 public class TimeBankApp {
 
 	public static void main(String[] args) {
-
+		
 		Long memberId = 1L;
-//		MemberService memberService;
+//		Long memberId = 6L;
+		
+		MemberService memberService = new MemberService();
 		TimeLedgerService timeLedgerService = new TimeLedgerService();
 		JobService jobService =new JobService();
 
@@ -21,12 +23,15 @@ public class TimeBankApp {
 //		for (TimeLedger timeLedger : myTimeLedgers) {
 //			System.out.println(timeLedger.toString());			
 //		}
+		
+//		timeLedgerService.searchALLTransaction(memberId);
 
+		
 		// 2. Show Job List
-		Collection<Job> jobList = jobService.findAll();
-		for (Job job: jobList) {
-			System.out.println(job.toString());
-		}
+//		Collection<Job> jobList = jobService.findAll();
+//		for (Job job: jobList) {
+//			System.out.println(job.toString());
+//		}
 		
 		// 3. Choose one Job (id:1) from Job List
 		Long jobId = 6l;	
@@ -40,8 +45,14 @@ public class TimeBankApp {
 		
 
 		// 4. After verified, Deposit service hours
+//		TimeLedgerDao timeLedgerDao = new TimeLedgerDao();
+//		timeLedgerDao.getConnection();
+//		TimeLedger myTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
+//		System.out.println("更新前: " + myTimeLedger.toString());
 //		timeLedgerService.deposit(job.getTimeValue(),memberId);
-//		System.out.println(timeLedgerService.toString());
+//		myTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
+//
+//		System.out.println("更新後: "+ myTimeLedger.toString());
 
 	}
 

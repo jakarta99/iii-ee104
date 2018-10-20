@@ -30,6 +30,9 @@ public class JobService {
 		jobDao.getConnection();
 		Collection<Job> jobList = jobDao.findAll();
 		jobDao.closeConnection();
+		if(jobList ==null) {
+			System.out.println("jobList does not exist");
+		}
 		return jobList;
 	}
 	
@@ -39,6 +42,9 @@ public class JobService {
 		jobDao.getConnection();
 		Job job = jobDao.findOne(jobId);
 		jobDao.closeConnection();
+		if(job == null) {
+			System.out.println("jobId does not exist");
+		}
 		return job;
 	}
 	
