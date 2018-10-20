@@ -106,7 +106,9 @@ public class MemberDao {
 			ppst.setString(5, member.getMobile());
 			ppst.executeUpdate();
 			ppst.close();
+			System.out.println("[MEMBER] INSERT成功");
 		} catch (SQLException e) {
+			System.out.println("[MEMBER] INSERT失敗");
 			e.printStackTrace();
 		}
 	}
@@ -126,7 +128,9 @@ public class MemberDao {
 			ppst.setLong(6, member.getId());
 			ppst.executeUpdate();
 			ppst.close();
+			System.out.println("[MEMBER] UPDATE成功");
 		} catch (SQLException e) {
+			System.out.println("[MEMBER] UPDATE失敗");
 			e.printStackTrace();
 		}
 	}
@@ -140,7 +144,9 @@ public class MemberDao {
 			ppst.setLong(1, id);
 			ppst.executeUpdate();
 			ppst.close();
+			System.out.println("[MEMBER] DELETE成功");
 		} catch (SQLException e) {
+			System.out.println("[MEMBER] DELETE失敗");
 			e.printStackTrace();
 		}
 	}
