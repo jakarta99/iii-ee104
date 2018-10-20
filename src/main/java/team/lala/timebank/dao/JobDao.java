@@ -79,7 +79,7 @@ public class JobDao {
 			pstmt.setLong(1, id);
 			ResultSet rs = pstmt.executeQuery();
 
-			while (rs.next()) {
+			if(rs.next()) {
 				job.setId(rs.getLong(1));
 				job.setRequester(rs.getString(2));
 				job.setJobTitle(rs.getString(3));
