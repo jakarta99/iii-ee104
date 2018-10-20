@@ -25,8 +25,10 @@ public class TimeLedgerDao {
 	public void getConnection() {
 		try {
 			connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			// FIXME test on console
 			System.out.println("資料庫連線成功");
 		} catch (SQLException e) {
+			// FIXME test on console
 			System.out.println("連結資料庫失敗");
 			e.printStackTrace();
 		} 
@@ -36,6 +38,7 @@ public class TimeLedgerDao {
 		if (connection != null) {
 			try {
 				connection.close();
+				// FIXME test on console
 				System.out.println("關閉資料庫連線");
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -48,6 +51,7 @@ public class TimeLedgerDao {
 	public Collection<TimeLedger> findAll() {
 		TimeLedger timeLedger = null;
 		Collection<TimeLedger> timeLedgerCollection = new ArrayList<TimeLedger>();
+		int count = 0;
 		try {
 			PreparedStatement ppst = connection.prepareStatement(FIND_ALL_STMT);
 			ResultSet rs = ppst.executeQuery();
@@ -61,16 +65,20 @@ public class TimeLedgerDao {
 				timeLedger.setBalanceValue(rs.getInt("BALANCE_VALUE"));
 				timeLedger.setDescription(rs.getString("DISCRIPTION"));
 				timeLedgerCollection.add(timeLedger);
+				count++;
 			}
 			rs.close();
 			ppst.close();
+			// FIXME test on console
+			System.out.println("共查出" + count + "筆資料");
+						
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return timeLedgerCollection;
 	}
 	
-	//透過ID查尋TIME_LEDGER資料表資料
+	//透過ID查尋TIME_LEDGER資料表中單筆交易紀錄
 	private static final String FIND_ONE_STMT = "SELECT * FROM TIME_LEDGER WHERE ID=?";
 	public TimeLedger findOne(Long id) {
 		TimeLedger timeLedger = new TimeLedger();
@@ -94,6 +102,43 @@ public class TimeLedgerDao {
 		}
 		return timeLedger;
 	}
+	
+	//10/20討論:透過MEMBER_ID查尋TIME_LEDGER資料表中，特定會員的全部資料
+	private static final String FIND_MEMBER_ID_STMT="SELECT * FROM TIME_LEDGER WHERE MEMBER_ID=?";
+	public Collection<TimeLedger> findByMemberId(Long memberId) {
+		TimeLedger timeLedger = null;
+		Collection<TimeLedger> specificMemberTimeLedgers = new ArrayList<TimeLedger>();
+		int count = 0;
+		try {
+			PreparedStatement ppst= connection.prepareStatement(FIND_MEMBER_ID_STMT);
+			ppst.setLong(1, memberId);
+			ResultSet rs = ppst.executeQuery();
+			while(rs.next()) {
+				timeLedger = new TimeLedger();
+				timeLedger.setId(rs.getLong("ID"));
+				timeLedger.setMemberId(rs.getLong("MEMBER_ID"));
+				timeLedger.setTransactionTime(rs.getTimestamp("TRANSACTION_TIME").toLocalDateTime());
+				timeLedger.setDepositValue(rs.getInt("DEPOSIT_VALUE"));
+				timeLedger.setWithdrawlValue(rs.getInt("WITHDRAWAL_VALUE"));
+				timeLedger.setBalanceValue(rs.getInt("BALANCE_VALUE"));
+				timeLedger.setDescription(rs.getString("DISCRIPTION"));
+				specificMemberTimeLedgers.add(timeLedger);
+				count++;
+			}
+			rs.close();
+			ppst.close();
+			// FIXME test on console
+			if(count != 0) {
+				System.out.println(memberId + "號會員共查出" + count + "筆資料");
+			} else {
+				System.out.println("查無" + memberId + "號會員資料");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return specificMemberTimeLedgers;
+	}
+	
 	
 	//新增單筆資料進TIME_LEDGER資料表
 	private static final String INSERT_STMT = "INSERT INTO "
@@ -136,14 +181,16 @@ public class TimeLedgerDao {
 			ppst.setLong(7, timeLedger.getId());
 			ppst.executeUpdate();
 			ppst.close();
+			// FIXME test on console
 			System.out.println("[TIME_LEDGER] UPDATE成功");
 		} catch (SQLException e) {
+			// FIXME test on console
 			System.out.println("[TIME_LEDGER] UPDATE失敗");
 			e.printStackTrace();
 		}		
 	}
 	
-	//透過ID刪除資料
+	//透過ID刪除資料(直接進資料庫刪資料，而非在資料庫註記已刪除)
 	private static final String DELETE_STMT = "DELETE FROM TIME_LEDGER "
 											+ "WHERE ID=?";
 	public void delete(Long id) {
@@ -152,8 +199,10 @@ public class TimeLedgerDao {
 			ppst.setLong(1, id);
 			ppst.executeUpdate();
 			ppst.close();
+			// FIXME test on console
 			System.out.println("[TIME_LEDGER] DELETE成功 ");
 		} catch (SQLException e) {
+			// FIXME test on console
 			System.out.println("[TIME_LEDGER] DELETE失敗");
 			e.printStackTrace();
 		}		
