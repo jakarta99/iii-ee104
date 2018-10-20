@@ -111,6 +111,7 @@ public class TimeLedgerDao {
 			ppst.setString(6, timeLedger.getDescription());
 			ppst.executeUpdate();
 			ppst.close();
+			System.out.println("TIME_LEDGER--INSERT成功");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -134,6 +135,7 @@ public class TimeLedgerDao {
 			ppst.setLong(7, timeLedger.getId());
 			ppst.executeUpdate();
 			ppst.close();
+			System.out.println("TIME_LEDGER--UPDATE成功");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}		
@@ -148,6 +150,7 @@ public class TimeLedgerDao {
 			ppst.setLong(1, id);
 			ppst.executeUpdate();
 			ppst.close();
+			System.out.println("TIME_LEDGER--DELETE成功");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}		
