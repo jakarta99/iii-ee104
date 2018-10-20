@@ -2,7 +2,10 @@ package team.lala.timebank;
 
 import java.util.Collection;
 
+import team.lala.timebank.dao.TimeLedgerDao;
 import team.lala.timebank.entity.TimeLedger;
+import team.lala.timebank.service.JobService;
+import team.lala.timebank.service.MemberService;
 import team.lala.timebank.service.TimeLedgerService;
 
 public class TimeBankApp {
@@ -11,13 +14,16 @@ public class TimeBankApp {
 		
 		Long memberId = 1L;
 		
-		TimeLedgerService timeLedgerService;
+		
+
 		// 1. List my ledgers 
-		Collection<TimeLedger> timeLedgers = timeLedgerService.getByMemberId(memberId);
-		for(TimeLedger timeLedger : timeLedgers) {
-			System.out.println(timeLedger); // @asdf124
+		TimeLedgerService timeLedgerService = new TimeLedgerService();
+		Collection<TimeLedger> myTimeLedgers = timeLedgerService.getLedgersByMemberId(memberId);
+		for (TimeLedger timeLedger : myTimeLedgers) {
+			System.out.println(timeLedger.toString());			
 		}
 		
+		MemberService memberService;
 		// 2. Show Job List
 		JobService.getAll();
 		forEach List;
