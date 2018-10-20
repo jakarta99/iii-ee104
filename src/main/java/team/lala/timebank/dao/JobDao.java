@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import team.lala.timebank.entity.Job;
-import team.lala.timebank.entity.Member;
 
 public class JobDao {
 	private final static String SERVERNAME = "localhost";
