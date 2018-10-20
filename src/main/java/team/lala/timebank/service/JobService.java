@@ -1,9 +1,5 @@
 package team.lala.timebank.service;
-
-<<<<<<< HEAD
-=======
 import java.util.ArrayList;
->>>>>>> branch 'master' of https://github.com/jakarta99/iii-ee104
 import java.util.Collection;
 
 import team.lala.timebank.dao.JobDao;
@@ -13,59 +9,51 @@ import team.lala.timebank.entity.Job;
 public class JobService {
 
 	private JobDao jobDao = new JobDao();
-<<<<<<< HEAD
 	
 	// 使用者刊登志工需求
 	public void insertJob(Job job) { 
-		jobDao.insert(job);
-=======
-
-	public void getAll() {
 		jobDao.getConnection();
-
-		Collection<Job> jobList = jobDao.findAll();
-		for (Job job : jobList) {
-			System.out.println(job.getJobId());
-			System.out.println(job.getRequester());
-			System.out.println(job.getJobTitle());
-			System.out.println(job.getTimeValue());
-		}
+		jobDao.insert(job);
 		jobDao.closeConnection();
 
->>>>>>> branch 'master' of https://github.com/jakarta99/iii-ee104
 	}
-<<<<<<< HEAD
 	
 	// 更新志工需求
 	public void updateJob(Job job) {
-		jobDao.update(job);
-=======
-
-	public void getByJobId(Long jobId) {
 		jobDao.getConnection();
-		Job job = jobDao.findOne(jobId);
-
-		System.out.println(job.getJobId());
-		System.out.println(job.getRequester());
-		System.out.println(job.getJobTitle());
-		System.out.println(job.getTimeValue());
+		jobDao.update(job);
 		jobDao.closeConnection();
 
->>>>>>> branch 'master' of https://github.com/jakarta99/iii-ee104
 	}
 	
-	public void deleteJob(Long jobId) {
-		jobDao.delete(jobId);
-	}
-	
-	public Job findOneJob(Long jobId) {
-		Job job = jobDao.findOne(jobId);
-		return job;
-	}
-	public Collection<Job> findAllJob() {
+	//搜尋所有志工需求表
+	public void findAllJob() {
+		jobDao.getConnection();
 		Collection<Job> jobList = jobDao.findAll();
-		return jobList;
+		for(Job job : jobList) {
+			System.out.println(job.toString());
+		}
+		jobDao.closeConnection();
 	}
+	
+	
+	//根據jobId搜尋志工需求
+	public void findOneJobByJobId(Long jobId) {
+		jobDao.getConnection();
+		Job job = jobDao.findOne(jobId);
+		System.out.println(job.toString());
+		jobDao.closeConnection();
+	}
+	
+	//刪除志工需求
+	public void deleteJobByJobId(Long jobId) {
+		jobDao.getConnection();		
+		jobDao.delete(jobId);
+		jobDao.closeConnection();
+	}
+	
+	
+	
 	
 
 	
