@@ -82,7 +82,7 @@ public class TimeLedgerService {
 
 	// 查詢全部交易紀錄
 	public void searchALLTransaction(Long memberId) {
-		timeLedgerDao.closeConnection();
+		timeLedgerDao.getConnection();
 
 		Collection<TimeLedger> specificMemberTimeLedgers = timeLedgerDao.findByMemberId(memberId);
 		for (TimeLedger timeLedger : specificMemberTimeLedgers) {
