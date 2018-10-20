@@ -44,19 +44,20 @@ public class TimeLedgerService {
 		if (lastTimeLedger.getBalanceValue() < hours) {
 			System.out.println("餘額不足");
 
+		} else {
+
+			// 2. prepare timeledger data
+			TimeLedger timeLedger = new TimeLedger();
+			timeLedger.setMemberId(memberId);
+			timeLedger.setWithdrawlValue(hours);
+			timeLedger.setTransactionTime(LocalDateTime.now());
+			timeLedger.setBalanceValue(lastTimeLedger.getBalanceValue() - hours);
+			timeLedger.setDescription("withdrawal");
+
+			// 3. insert
+			timeLedgerDao.insert(timeLedger);
+			System.out.println("提款成功");
 		}
-
-		// 2. prepare timeledger data
-		TimeLedger timeLedger = new TimeLedger();
-		timeLedger.setMemberId(memberId);
-		timeLedger.setWithdrawlValue(hours);
-		timeLedger.setTransactionTime(LocalDateTime.now());
-		timeLedger.setBalanceValue(lastTimeLedger.getBalanceValue() - hours);
-		timeLedger.setDescription("withdrawal");
-
-		// 3. insert
-		timeLedgerDao.insert(timeLedger);
-		System.out.println("提款成功");
 		timeLedgerDao.closeConnection();
 
 	}
