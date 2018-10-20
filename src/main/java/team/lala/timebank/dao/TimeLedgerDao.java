@@ -79,7 +79,7 @@ public class TimeLedgerDao {
 			ppst.setLong(1, id);
 			ResultSet rs = ppst.executeQuery();
 			while(rs.next()) {
-				timeLedger.setId(rs.getLong("ID"));;
+				timeLedger.setId(rs.getLong("ID"));
 				timeLedger.setMemberId(rs.getLong("MEMBER_ID"));
 				timeLedger.setTransactionTime(rs.getTimestamp("TRANSACTION_TIME").toLocalDateTime());
 				timeLedger.setDepositValue(rs.getInt("DEPOSIT_VALUE"));
@@ -111,8 +111,9 @@ public class TimeLedgerDao {
 			ppst.setString(6, timeLedger.getDescription());
 			ppst.executeUpdate();
 			ppst.close();
-			System.out.println("TIME_LEDGER--INSERT成功");
+			System.out.println("[TIME_LEDGER] INSERT成功");
 		} catch (SQLException e) {
+			System.out.println("[TIME_LEDGER] INSERT失敗");
 			e.printStackTrace();
 		}
 	}
@@ -135,8 +136,9 @@ public class TimeLedgerDao {
 			ppst.setLong(7, timeLedger.getId());
 			ppst.executeUpdate();
 			ppst.close();
-			System.out.println("TIME_LEDGER--UPDATE成功");
+			System.out.println("[TIME_LEDGER] UPDATE成功");
 		} catch (SQLException e) {
+			System.out.println("[TIME_LEDGER] UPDATE失敗");
 			e.printStackTrace();
 		}		
 	}
@@ -150,8 +152,9 @@ public class TimeLedgerDao {
 			ppst.setLong(1, id);
 			ppst.executeUpdate();
 			ppst.close();
-			System.out.println("TIME_LEDGER--DELETE成功");
+			System.out.println("[TIME_LEDGER] DELETE成功 ");
 		} catch (SQLException e) {
+			System.out.println("[TIME_LEDGER] DELETE失敗");
 			e.printStackTrace();
 		}		
 	}
