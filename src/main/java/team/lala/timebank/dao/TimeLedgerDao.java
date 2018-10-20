@@ -209,12 +209,13 @@ public class TimeLedgerDao {
 																	+ "FROM TIME_LEDGER "
 																	+ "WHERE MEMBER_ID=? ORDER BY TRANSACTION_TIME DESC";
 	public TimeLedger findTop1ByMemberIdOrderByTransactionTime(Long memberId) {
-		TimeLedger timeLedger = new TimeLedger();
+		TimeLedger timeLedger = null;
 		try {
 			PreparedStatement ppst = connection.prepareStatement(FIND_TOP1_MEMID_BY_TRASACTIME_STMT);
 			ppst.setLong(1, memberId);
 			ResultSet rs = ppst.executeQuery();
 			while(rs.next()) {
+				timeLedger = new TimeLedger();
 				timeLedger.setId(rs.getLong("ID"));
 				timeLedger.setMemberId(rs.getLong("MEMBER_ID"));
 				timeLedger.setTransactionTime(rs.getTimestamp("TRANSACTION_TIME").toLocalDateTime());
