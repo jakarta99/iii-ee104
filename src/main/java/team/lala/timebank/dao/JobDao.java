@@ -61,8 +61,9 @@ public class JobDao {
 			}
 			rs.close();
 			pstmt.close();
+			System.out.println("搜尋成功");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("搜尋失敗");
 			e.printStackTrace();
 		}
 		return jobs;
@@ -86,8 +87,9 @@ public class JobDao {
 			}
 			rs.close();
 			pstmt.close();
+			System.out.println("搜尋成功");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("搜尋失敗");
 			e.printStackTrace();
 		}
 

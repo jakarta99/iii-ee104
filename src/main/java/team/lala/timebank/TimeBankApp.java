@@ -15,21 +15,21 @@ public class TimeBankApp {
 		TimeLedgerService timeLedgerService;
 		
 		// 1. List my ledgers
-		Collection<TimeLedger> timeLedgers = timeLedgerService.getByMemberId(memberId);
-		for (TimeLedger timeLedger : timeLedgers) {
-			System.out.println(timeLedger); // @asdf124
-		}
+//		Collection<TimeLedger> timeLedgers = timeLedgerService.getByMemberId(memberId);
+//		for (TimeLedger timeLedger : timeLedgers) {
+//			System.out.println(timeLedger); // @asdf124
+//		}
 
 		// 2. Show Job List
-		JobService jobService ;
-		JobService.getAll();
-		forEach List;
+		JobService jobService =new JobService();
+		jobService.getAll();
+		//forEach List;
 
 		// 3. Choose one Job (id:1) from Job List
-		JobService.getByJobId(1l);
+		jobService.getByJobId(1l);
 
-		// 4. After verified, Deposit service hours
-		timeLedgerService.deposit(job.getHours(), memberId);
+//		// 4. After verified, Deposit service hours
+//		timeLedgerService.deposit(job.getHours(), memberId);
 
 	}
 
