@@ -105,9 +105,9 @@ public class JobDao {
 			pstmt.setString(1, job.getRequester());
 			pstmt.setString(2, job.getJobTitle());
 			pstmt.setInt(3, job.getTimeValue());
-			pstmt.executeUpdate();
+			int insertCount =pstmt.executeUpdate();
 			pstmt.close();
-			System.out.println("insert成功");
+			System.out.println("insert" +insertCount+"筆資料成功");
 		} catch (SQLException e) {
 			System.out.println("insert失敗");
 			e.printStackTrace();
