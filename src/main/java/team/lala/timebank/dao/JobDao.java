@@ -72,7 +72,7 @@ public class JobDao {
 	private static final String FIND_ONE_STMT = "SELECT * FROM JOB WHERE JOB_ID=?";
 
 	public Job findOne(Long id) {
-		Job job = new Job();
+		Job job = null;
 
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(FIND_ONE_STMT);
@@ -80,6 +80,7 @@ public class JobDao {
 			ResultSet rs = pstmt.executeQuery();
 
 			if(rs.next()) {
+				job=new Job();
 				job.setId(rs.getLong(1));
 				job.setRequester(rs.getString(2));
 				job.setJobTitle(rs.getString(3));
