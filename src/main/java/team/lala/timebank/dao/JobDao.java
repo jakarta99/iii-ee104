@@ -53,7 +53,7 @@ public class JobDao {
 
 			while (rs.next()) {
 				job = new Job();
-				job.setJobId(rs.getLong(1));
+				job.setId(rs.getLong(1));
 				job.setRequester(rs.getString(2));
 				job.setJobTitle(rs.getString(3));
 				job.setTimeValue(rs.getInt(4));
@@ -71,16 +71,16 @@ public class JobDao {
 
 	private static final String FIND_ONE_STMT = "SELECT * FROM JOB WHERE JOB_ID=?";
 
-	public Job findOne(Long jobId) {
+	public Job findOne(Long id) {
 		Job job = new Job();
 
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(FIND_ONE_STMT);
-			pstmt.setLong(1, jobId);
+			pstmt.setLong(1, id);
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				job.setJobId(rs.getLong(1));
+				job.setId(rs.getLong(1));
 				job.setRequester(rs.getString(2));
 				job.setJobTitle(rs.getString(3));
 				job.setTimeValue(rs.getInt(4));
@@ -124,7 +124,7 @@ public class JobDao {
 			pstmt.setString(1, job.getRequester());
 			pstmt.setString(2, job.getJobTitle());
 			pstmt.setInt(3, job.getTimeValue());
-			pstmt.setLong(4, job.getJobId());
+			pstmt.setLong(4, job.getId());
 			pstmt.executeUpdate();
 			pstmt.close();
 			System.out.println("update成功");
@@ -137,11 +137,11 @@ public class JobDao {
 
 	private static final String DELETE_STMT = "DELETE FROM JOB where JOB_ID=?";
 
-	public void delete(Long jobId) {
+	public void delete(Long id) {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(DELETE_STMT);
 
-			pstmt.setLong(1, jobId);
+			pstmt.setLong(1, id);
 			pstmt.executeUpdate();
 			System.out.println("delete成功");
 		} catch (SQLException e) {

@@ -3,7 +3,7 @@ package team.lala.timebank.entity;
 import java.time.LocalDateTime;
 
 public class Job {
-	private long jobId;// 工作ID
+	private long id;// 工作ID
 
 	private String requester; // 刊登者
 
@@ -29,12 +29,12 @@ public class Job {
 //
 //	private String contactEmail;// 聯絡信箱
 
-	public long getJobId() {
-		return jobId;
+	public long getId() {
+		return id;
 	}
 
-	public void setJobId(long jobId) {
-		this.jobId = jobId;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getRequester() {
@@ -64,7 +64,7 @@ public class Job {
 	@Override
 	public String toString() {
 
-		return "Job [jobId=" + jobId + ", requester=" + requester + ", jobTitle=" + jobTitle + ", timeValue="
+		return "Job [id=" + id + ", requester=" + requester + ", jobTitle=" + jobTitle + ", timeValue="
 				+ timeValue + "]";
 	}
 
