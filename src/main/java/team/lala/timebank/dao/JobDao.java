@@ -56,14 +56,12 @@ public class JobDao {
 		}
 		return jobs;
 	}
-	
-	
-	
+
 	private static final String FIND_ONE_STMT = "SELECT * FROM JOB WHERE JOB_ID=?";
 
 	public Job findOne(Long jobId) {
-		Job job=new Job();
-		
+		Job job = new Job();
+
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(FIND_ONE_STMT);
 			pstmt.setLong(1, jobId);
@@ -81,24 +79,59 @@ public class JobDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return job;
 	}
 
-	private static final String INSERT_STMT ="INSERT INTO JOB(INSTITUTE_NAME,JOB_TITLE,TIME_VALUE) VALUES(?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO JOB(INSTITUTE_NAME,JOB_TITLE,TIME_VALUE) VALUES(?,?,?,?)";
+
 	public void insert(Job job) {
-		
-		
-		
-		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(INSERT_STMT);
+
+			pstmt.setString(1, job.getRequester());
+			pstmt.setString(2, job.getJobTitle());
+			pstmt.setInt(3, job.getTimeValue());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
+
+	private static final String UPDATE_STMT = "UPDATE JOB SET INSTITUTE_NAME=?,JOB_TITLE=?,TIME_VALUE=?WHERE JOB_ID=?";
 
 	public void update(Job job) {
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(UPDATE_STMT);
+
+			pstmt.setString(1, job.getRequester());
+			pstmt.setString(2, job.getJobTitle());
+			pstmt.setInt(3, job.getTimeValue());
+			pstmt.setLong(4, job.getJobId());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
+	private static final String DELETE_STMT = "DELETE FROM JOB where JOB_ID=?";
+
 	public void delete(Long jobId) {
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(DELETE_STMT);
+
+			pstmt.setLong(1, jobId);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
