@@ -2,34 +2,46 @@ package team.lala.timebank;
 
 import java.util.Collection;
 
-import team.lala.timebank.entity.TimeLedger;
-import team.lala.timebank.service.JobService;
-import team.lala.timebank.service.TimeLedgerService;
+import team.lala.timebank.dao.*;
+import team.lala.timebank.entity.*;
+import team.lala.timebank.service.*;
+
 
 public class TimeBankApp {
 
 	public static void main(String[] args) {
 
 		Long memberId = 1L;
+//		MemberService memberService;
+		TimeLedgerService timeLedgerService = new TimeLedgerService();
+		JobService jobService =new JobService();
 
-		TimeLedgerService timeLedgerService;
-		
-		// 1. List my ledgers
-//		Collection<TimeLedger> timeLedgers = timeLedgerService.getByMemberId(memberId);
-//		for (TimeLedger timeLedger : timeLedgers) {
-//			System.out.println(timeLedger); // @asdf124
+		// 1. List my ledgers 
+//		Collection<TimeLedger> myTimeLedgers = timeLedgerService.findByMemberId(memberId);
+//		for (TimeLedger timeLedger : myTimeLedgers) {
+//			System.out.println(timeLedger.toString());			
 //		}
 
 		// 2. Show Job List
-		JobService jobService =new JobService();
-		jobService.getAll();
-		//forEach List;
-
+		Collection<Job> jobList = jobService.findAll();
+		for (Job job: jobList) {
+			System.out.println(job.toString());
+		}
+		
 		// 3. Choose one Job (id:1) from Job List
-		jobService.getByJobId(1l);
+		Long jobId = 6l;	
+		Job job = jobService.findOne(jobId);
+		System.out.println("find jobId = " + jobId);
+		if (job != null) {
+			System.out.println(job.toString());			
+		} else {
+			System.out.println("cannot find jobId = "+ jobId);
+		}
+		
 
-//		// 4. After verified, Deposit service hours
-//		timeLedgerService.deposit(job.getHours(), memberId);
+		// 4. After verified, Deposit service hours
+//		timeLedgerService.deposit(job.getTimeValue(),memberId);
+//		System.out.println(timeLedgerService.toString());
 
 	}
 

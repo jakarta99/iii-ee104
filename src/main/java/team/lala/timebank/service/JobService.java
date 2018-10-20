@@ -1,5 +1,4 @@
 package team.lala.timebank.service;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -10,31 +9,50 @@ import team.lala.timebank.entity.Job;
 public class JobService {
 
 	private JobDao jobDao = new JobDao();
-
-	public void getAll() {
+	
+	// 使用者刊登志工需求
+	public void insert(Job job) { 
 		jobDao.getConnection();
-
-		Collection<Job> jobList = jobDao.findAll();
-		for (Job job : jobList) {
-			System.out.println(job.getJobId());
-			System.out.println(job.getRequester());
-			System.out.println(job.getJobTitle());
-			System.out.println(job.getTimeValue());
-		}
+		jobDao.insert(job);
+		jobDao.closeConnection();
+	}
+	
+	// 更新志工需求
+	public void update(Job job) {
+		jobDao.getConnection();
+		jobDao.update(job);
 		jobDao.closeConnection();
 
 	}
-
-	public void getByJobId(Long jobId) {
+	
+	//搜尋所有志工需求表
+	public Collection<Job> findAll() {
+		jobDao.getConnection();
+		Collection<Job> jobList = jobDao.findAll();
+		jobDao.closeConnection();
+		return jobList;
+	}
+	
+	
+	//根據jobId搜尋志工需求
+	public Job findOne(Long jobId) {
 		jobDao.getConnection();
 		Job job = jobDao.findOne(jobId);
-
-		System.out.println(job.getJobId());
-		System.out.println(job.getRequester());
-		System.out.println(job.getJobTitle());
-		System.out.println(job.getTimeValue());
 		jobDao.closeConnection();
-
+		return job;
 	}
+	
+	//刪除志工需求
+	public void delete(Long jobId) {
+		jobDao.getConnection();		
+		jobDao.delete(jobId);
+		jobDao.closeConnection();
+	}
+	
+	
+	
+	
+
+	
 
 }
