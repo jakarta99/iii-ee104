@@ -3,8 +3,12 @@ package team.lala.timebank.entity;
 import java.time.LocalDateTime;
 
 public class Job {
-	
+
 	private String requester; // 刊登者
+
+	private String jobTitle;// 活動名稱
+
+	private int timeValue;// 可獲得時數(工作的時間)
 
 	private LocalDateTime postedDay;// po文&徵人日期
 
@@ -23,12 +27,8 @@ public class Job {
 	private String contactTel;// 聯絡電話
 
 	private String contactEmail;// 聯絡信箱
-	
-	
-	
-	
-	
-	private long jobId;//工作ID
+
+	private long jobId;// 工作ID
 
 	public long getJobId() {
 		return jobId;
@@ -117,7 +117,21 @@ public class Job {
 	public void setContactEmail(String contactEmail) {
 		this.contactEmail = contactEmail;
 	}
-	
-	
+
+	public String getJobTitle() {
+		return jobTitle;
+	}
+
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
+	}
+
+	public int getTimeValue() {
+		return timeValue;
+	}
+
+	public void setTimeValue(int timeValue) {
+		this.timeValue = timeValue;
+	}
 
 }
