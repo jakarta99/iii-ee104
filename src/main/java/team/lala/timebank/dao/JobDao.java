@@ -120,7 +120,6 @@ public class JobDao {
 	public void update(Job job) {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(UPDATE_STMT);
-
 			pstmt.setString(1, job.getRequester());
 			pstmt.setString(2, job.getJobTitle());
 			pstmt.setInt(3, job.getTimeValue());
