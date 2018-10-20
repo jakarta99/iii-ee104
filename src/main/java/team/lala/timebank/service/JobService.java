@@ -6,14 +6,24 @@ import team.lala.timebank.entity.Job;
 
 public class JobService {
 
-	private JobDao jobDao = new JobDao();
+	private  JobDao jobDao = new JobDao();
 
-	public void applyJob(Long id) {// 會員申請工作
+	
+	
 
+	public void getAll() {
+		jobDao.findAll();
+		
+		
+		
 	}
 
-	public void approval() {//使用者認證確定會員入取
-
+	public void getByJobId(Long jobId) {
+		jobDao.findOne(jobId);
+		
+		
+		
 	}
+	
 
 }

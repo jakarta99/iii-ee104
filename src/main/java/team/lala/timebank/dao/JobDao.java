@@ -19,12 +19,24 @@ public class JobDao {
 
 	Connection conn = null;
 
-	public void getConnection() throws SQLException {
-		conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+	public void getConnection() {
+		try {
+			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			System.out.println("連線成功");
+		} catch (SQLException e) {
+			System.out.println("連線失敗");
+			e.printStackTrace();
+		}
 	}
 
-	public void closeConnection() throws SQLException {
-		conn.close();
+	public void closeConnection() {
+		try {
+			conn.close();
+			System.out.println("關閉連線成功");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -93,8 +105,9 @@ public class JobDao {
 			pstmt.setInt(3, job.getTimeValue());
 			pstmt.executeUpdate();
 			pstmt.close();
+			System.out.println("insert成功");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("insert失敗");
 			e.printStackTrace();
 		}
 
@@ -112,8 +125,9 @@ public class JobDao {
 			pstmt.setLong(4, job.getJobId());
 			pstmt.executeUpdate();
 			pstmt.close();
+			System.out.println("update成功");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("update失敗");
 			e.printStackTrace();
 		}
 
@@ -127,8 +141,9 @@ public class JobDao {
 
 			pstmt.setLong(1, jobId);
 			pstmt.executeUpdate();
+			System.out.println("delete成功");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("delete失敗");
 			e.printStackTrace();
 		}
 
