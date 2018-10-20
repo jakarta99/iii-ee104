@@ -37,20 +37,21 @@ public class TimeLedgerService {
 
 	// 提款
 	public void withdrawal(int hours, Long memberId) {
-		timeLedgerDao.closeConnection();
+		timeLedgerDao.getConnection();
 
 		// 1. findTimeLedgerByMemberId
-		TimeLedger lastTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
-		if (lastTimeLedger == null) {
-			lastTimeLedger = new TimeLedger();
-		}
-
+				TimeLedger lastTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
+				if(lastTimeLedger.getBalanceValue() < hours) {
+					System.out.println("餘額不足");
+					
+				}
+				
 		// 2. prepare timeledger data
 		TimeLedger timeLedger = new TimeLedger();
 		timeLedger.setMemberId(memberId);
 		timeLedger.setWithdrawlValue(hours);
-		timeLedger.setBalanceValue(lastTimeLedger.getBalanceValue() - hours);
 		timeLedger.setTransactionTime(LocalDateTime.now());
+		timeLedger.setBalanceValue(lastTimeLedger.getBalanceValue() - hours);
 		timeLedger.setDescription("withdrawal");
 
 		// 3. insert
@@ -82,17 +83,17 @@ public class TimeLedgerService {
 
 	// 查詢全部交易紀錄
 	public void searchALLTransaction(Long memberId) {
-		timeLedgerDao.closeConnection();
+		timeLedgerDao.getConnection();
 
 		Collection<TimeLedger> specificMemberTimeLedgers = timeLedgerDao.findByMemberId(memberId);
 		for (TimeLedger timeLedger : specificMemberTimeLedgers) {
-			System.out.print(timeLedger.getId());
-			System.out.print(timeLedger.getMemberId());
-			System.out.print(timeLedger.getTransactionTime());
+			System.out.print(timeLedger.getId().toString());
+			System.out.print(timeLedger.getMemberId().toString());
+			System.out.print(timeLedger.getTransactionTime().toString());
 			System.out.print(timeLedger.getDepositValue());
 			System.out.print(timeLedger.getWithdrawlValue());
 			System.out.print(timeLedger.getBalanceValue());
-			System.out.println(timeLedger.getDescription());
+			System.out.println(timeLedger.getDescription().toString());
 
 		}
 
