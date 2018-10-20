@@ -30,7 +30,7 @@ public class TimeLedgerService {
 
 		// 3. insert
 		timeLedgerDao.insert(timeLedger);
-
+		System.out.println("存款成功");
 		timeLedgerDao.closeConnection();
 
 	}
@@ -40,12 +40,12 @@ public class TimeLedgerService {
 		timeLedgerDao.getConnection();
 
 		// 1. findTimeLedgerByMemberId
-				TimeLedger lastTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
-				if(lastTimeLedger.getBalanceValue() < hours) {
-					System.out.println("餘額不足");
-					
-				}
-				
+		TimeLedger lastTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
+		if (lastTimeLedger.getBalanceValue() < hours) {
+			System.out.println("餘額不足");
+
+		}
+
 		// 2. prepare timeledger data
 		TimeLedger timeLedger = new TimeLedger();
 		timeLedger.setMemberId(memberId);
@@ -56,49 +56,55 @@ public class TimeLedgerService {
 
 		// 3. insert
 		timeLedgerDao.insert(timeLedger);
-
+		System.out.println("提款成功");
 		timeLedgerDao.closeConnection();
 
 	}
 
-	// 查詢某段時間的交易紀錄
-	public void searchOneTransactionByTime(LocalDateTime transactionTimeBegin, LocalDateTime transactionTimeEnd) {
-		timeLedgerDao.getConnection();
-		
-		Collection<TimeLedger> periodMemberTimeLedgers = timeLedgerDao.findByPeriodTime(transactionTimeBegin, transactionTimeEnd);
-
-		for (TimeLedger timeLedger : periodMemberTimeLedgers) {
-			System.out.print(timeLedger.getId());
-			System.out.print(timeLedger.getMemberId());
-			System.out.print(timeLedger.getTransactionTime());
-			System.out.print(timeLedger.getDepositValue());
-			System.out.print(timeLedger.getWithdrawlValue());
-			System.out.print(timeLedger.getBalanceValue());
-			System.out.println(timeLedger.getDescription());
-
-		}
-
-		timeLedgerDao.closeConnection();
-	}
+	/*
+	 * 查詢某段時間的交易紀錄 public void searchOneTransactionByTime(LocalDateTime
+	 * transactionTimeBegin, LocalDateTime transactionTimeEnd) {
+	 * timeLedgerDao.getConnection();
+	 * 
+	 * Collection<TimeLedger> periodMemberTimeLedgers =
+	 * timeLedgerDao.findByPeriodTime(transactionTimeBegin, transactionTimeEnd); if
+	 * (periodMemberTimeLedgers == null) { System.out.println("查無此會員"); }else{ for
+	 * (TimeLedger timeLedger : periodMemberTimeLedgers) {
+	 * System.out.print(timeLedger.getId());
+	 * System.out.print(timeLedger.getMemberId());
+	 * System.out.print(timeLedger.getTransactionTime());
+	 * System.out.print(timeLedger.getDepositValue());
+	 * System.out.print(timeLedger.getWithdrawlValue());
+	 * System.out.print(timeLedger.getBalanceValue());
+	 * System.out.println(timeLedger.getDescription());
+	 * 
+	 * } } timeLedgerDao.closeConnection(); }
+	 */
 
 	// 查詢全部交易紀錄
-	public void searchALLTransaction(Long memberId) {
+	public Collection<TimeLedger> searchALLTransaction(Long memberId) {
 		timeLedgerDao.getConnection();
 
 		Collection<TimeLedger> specificMemberTimeLedgers = timeLedgerDao.findByMemberId(memberId);
-		for (TimeLedger timeLedger : specificMemberTimeLedgers) {
-			System.out.print(timeLedger.getId().toString());
-			System.out.print(timeLedger.getMemberId().toString());
-			System.out.print(timeLedger.getTransactionTime().toString());
-			System.out.print(timeLedger.getDepositValue());
-			System.out.print(timeLedger.getWithdrawlValue());
-			System.out.print(timeLedger.getBalanceValue());
-			System.out.println(timeLedger.getDescription().toString());
-
+		if (specificMemberTimeLedgers == null) {
+			System.out.println("查無此會員");
 		}
 
 		timeLedgerDao.closeConnection();
+		return specificMemberTimeLedgers;
+	}
 
+	// 尋找最新一筆資料
+	public TimeLedger searchLastTransaction(Long memberId) {
+		timeLedgerDao.getConnection();
+
+		TimeLedger timeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
+		if (timeLedger == null) {
+			System.out.println("查無此會員");
+		}
+
+		timeLedgerDao.closeConnection();
+		return timeLedger;
 	}
 
 }
