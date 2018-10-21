@@ -61,7 +61,7 @@ public class JobService {
 		Job job = jobDao.findOne(id);
 		jobDao.closeConnection();
 		if(job == null) {
-			System.out.println("jobId does not exist");
+			System.out.println( "id" + id + " does not exist");
 		}
 		return job;
 	}
