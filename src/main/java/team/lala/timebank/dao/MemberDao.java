@@ -71,12 +71,13 @@ public class MemberDao {
 	private static final String FIND_ONE_STMT = "SELECT * FROM MEMBER WHERE ID=?";
 
 	public Member findOne(Long id) {
-		Member member = new Member();
+		Member member = null;
 		try {
 			PreparedStatement ppst = connection.prepareStatement(FIND_ONE_STMT);
 			ppst.setLong(1, id);
 			ResultSet rs = ppst.executeQuery();
 			while (rs.next()) {
+				member = new Member();
 				member.setId(rs.getLong("ID"));
 				member.setName(rs.getString("NAME"));
 				member.setType(rs.getString("TYPE"));
