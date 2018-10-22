@@ -152,8 +152,10 @@ public class MemberDao {
 			ppst.setLong(1, id);
 			ppst.executeUpdate();
 			ppst.close();
+			// FIXME
 			System.out.println("[MEMBER] DELETE完成");
 		} catch (SQLException e) {
+			// FIXME
 			System.out.println("[MEMBER] DELETE失敗");
 			e.printStackTrace();
 		}
