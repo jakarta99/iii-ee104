@@ -45,6 +45,7 @@ public class JobService {
 		Collection<Job> jobList = jobDao.findAll();
 		jobDao.closeConnection();
 		if(jobList ==null) {
+			// FIXME test on console
 			System.out.println("jobList does not exist");
 		}
 		return jobList;
@@ -61,6 +62,7 @@ public class JobService {
 		Job job = jobDao.findOne(id);
 		jobDao.closeConnection();
 		if(job == null) {
+			// FIXME test on console
 			System.out.println( "id" + id + " does not exist");
 		}
 		return job;
