@@ -20,6 +20,7 @@ public class TimeLedgerService {
 		TimeLedger lastTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
 		if (lastTimeLedger == null) {
 			lastTimeLedger = new TimeLedger();
+			System.out.println("開戶成功");
 		}
 
 		// 2. prepare timeledger data
