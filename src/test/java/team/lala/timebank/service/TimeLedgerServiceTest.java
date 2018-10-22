@@ -2,6 +2,8 @@ package team.lala.timebank.service;
 
 import static org.junit.Assert.*;
 
+import java.util.Collection;
+
 import org.junit.Test;
 
 import team.lala.timebank.entity.TimeLedger;
@@ -31,34 +33,36 @@ public class TimeLedgerServiceTest {
         //超額提款
 		timeLedgerService.withdrawal(3000, 2L);
 	}
-
-*/
 	@Test
 	public void testUpdate() {
-		TimeLedger timeLedger = new TimeLedger();
-		
-		timeLedgerService.update(timeLedger);
-	}
 	
+	}
 	@Test
 	public void testDelete() {
-		//正向
-		timeLedgerService.delete(2L);
 		
-		
-		//反向
-		timeLedgerService.delete(10L);
 	}
-
 
 	@Test
 	public void testSearchALLTransaction() {
-		fail("Not yet implemented");
+		Collection<TimeLedger> timeLedgers = timeLedgerService.searchALLTransaction(1L);
+		for(TimeLedger timeLedger : timeLedgers) {
+			System.out.println(timeLedger.toString());
+		}
+		
+		timeLedgerService.searchALLTransaction(10L);
 	}
+*/
+	
+
+
 
 	@Test
 	public void testSearchLastTransaction() {
-		fail("Not yet implemented");
+		TimeLedger timeLedger = timeLedgerService.searchLastTransaction(1L);
+		System.out.println(timeLedger.toString());
+		
+		timeLedgerService.searchLastTransaction(10L);
+		
 	}
 
 }
