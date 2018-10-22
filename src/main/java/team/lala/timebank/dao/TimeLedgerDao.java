@@ -51,7 +51,6 @@ public class TimeLedgerDao {
 	public Collection<TimeLedger> findAll() {
 		TimeLedger timeLedger = null;
 		Collection<TimeLedger> timeLedgerCollection = new ArrayList<TimeLedger>();
-		int count = 0;
 		try {
 			PreparedStatement ppst = connection.prepareStatement(FIND_ALL_STMT);
 			ResultSet rs = ppst.executeQuery();
@@ -65,12 +64,11 @@ public class TimeLedgerDao {
 				timeLedger.setBalanceValue(rs.getInt("BALANCE_VALUE"));
 				timeLedger.setDescription(rs.getString("DISCRIPTION"));
 				timeLedgerCollection.add(timeLedger);
-				count++;
 			}
 			rs.close();
 			ppst.close();
 			// FIXME test on console
-			System.out.println("共查出" + count + "筆資料");
+			System.out.println("共查出" + timeLedgerCollection.size() + "筆資料");
 						
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -109,7 +107,6 @@ public class TimeLedgerDao {
 	public Collection<TimeLedger> findByMemberId(Long memberId) {
 		TimeLedger timeLedger = null;
 		Collection<TimeLedger> specificMemberTimeLedgers = new ArrayList<TimeLedger>();
-		int count = 0;
 		try {
 			PreparedStatement ppst= connection.prepareStatement(FIND_MEMBER_ID_STMT);
 			ppst.setLong(1, memberId);
@@ -124,12 +121,11 @@ public class TimeLedgerDao {
 				timeLedger.setBalanceValue(rs.getInt("BALANCE_VALUE"));
 				timeLedger.setDescription(rs.getString("DISCRIPTION"));
 				specificMemberTimeLedgers.add(timeLedger);
-				count++;
 			}
 			rs.close();
 			ppst.close();
 			// FIXME test on console
-			System.out.println(memberId + "號會員共查出" + count + "筆資料");
+			System.out.println(memberId + "號會員共查出" + specificMemberTimeLedgers.size() + "筆資料");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
