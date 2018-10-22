@@ -81,12 +81,13 @@ public class TimeLedgerDao {
 	//透過ID查尋TIME_LEDGER資料表中單筆交易紀錄
 	private static final String FIND_ONE_STMT = "SELECT * FROM TIME_LEDGER WHERE ID=?";
 	public TimeLedger findOne(Long id) {
-		TimeLedger timeLedger = new TimeLedger();
+		TimeLedger timeLedger = null;
 		try {
 			PreparedStatement ppst = connection.prepareStatement(FIND_ONE_STMT);
 			ppst.setLong(1, id);
 			ResultSet rs = ppst.executeQuery();
 			while(rs.next()) {
+				timeLedger = new TimeLedger();
 				timeLedger.setId(rs.getLong("ID"));
 				timeLedger.setMemberId(rs.getLong("MEMBER_ID"));
 				timeLedger.setTransactionTime(rs.getTimestamp("TRANSACTION_TIME").toLocalDateTime());

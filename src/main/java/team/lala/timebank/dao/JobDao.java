@@ -97,7 +97,7 @@ public class JobDao {
 		return job;
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO JOB(INSTITUTE_NAME,JOB_TITLE,TIME_VALUE) VALUES(?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO JOB(INSTITUTE_NAME,JOB_TITLE,TIME_VALUE) VALUES(?,?,?)";
 
 	public void insert(Job job) {
 		try {
@@ -116,7 +116,7 @@ public class JobDao {
 
 	}
 
-	private static final String UPDATE_STMT = "UPDATE JOB SET INSTITUTE_NAME=?,JOB_TITLE=?,TIME_VALUE=?WHERE JOB_ID=?";
+	private static final String UPDATE_STMT = "UPDATE JOB SET INSTITUTE_NAME=?,JOB_TITLE=?,TIME_VALUE=? WHERE JOB_ID=?";
 
 	public void update(Job job) {
 		try {
