@@ -38,12 +38,32 @@ public class JobDaoTest {
 
 	@Test
 	public void testFindOne() {
-		fail("Not yet implemented");
+//		JobDao job4=new JobDao();
+//		job4.getConnection();
+//		Job job=job4.findOne(1L);
+//		System.out.println(job.toString());
+//		job4.closeConnection();
+//		
+		JobDao job5=new JobDao();
+		job5.getConnection();
+		Job job=job5.findOne(10L);
+		System.out.println(job.toString());
+		job5.closeConnection();
+		
 	}
 
 	@Test
 	public void testInsert() {
-		fail("Not yet implemented");
+		JobDao job6=new JobDao();
+		job6.getConnection();
+		
+		
+		
+		
+		
+		
+		//job6.insert(job);
+		job6.closeConnection();
 	}
 
 	@Test
