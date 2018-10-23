@@ -1,6 +1,7 @@
 package team.lala.timebank.service;
 
 import java.time.LocalDateTime;
+
 import java.util.Collection;
 
 import team.lala.timebank.dao.TimeLedgerDao;
@@ -18,6 +19,7 @@ public class TimeLedgerService {
 		TimeLedger lastTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
 		if (lastTimeLedger == null) {
 			lastTimeLedger = new TimeLedger();
+			System.out.println("開戶成功");
 		}
 
 		// 2. prepare timeledger data
@@ -82,6 +84,23 @@ public class TimeLedgerService {
 	 * } } timeLedgerDao.closeConnection(); }
 	 */
 
+	// 更新一筆資料
+
+	public void update(TimeLedger timeLedger) {
+		timeLedgerDao.getConnection();
+		timeLedgerDao.update(timeLedger);
+		System.out.println("更新成功");
+		timeLedgerDao.closeConnection();
+	}
+
+	// 刪除一筆資料
+	public void delete(Long id) {
+		timeLedgerDao.getConnection();
+		timeLedgerDao.delete(id);
+		System.out.println("刪除成功");
+		timeLedgerDao.closeConnection();
+	}
+
 	// 查詢全部交易紀錄
 	public Collection<TimeLedger> searchALLTransaction(Long memberId) {
 		timeLedgerDao.getConnection();
@@ -90,7 +109,7 @@ public class TimeLedgerService {
 		if (specificMemberTimeLedgers == null) {
 			System.out.println("查無此會員");
 		}
-
+		
 		timeLedgerDao.closeConnection();
 		return specificMemberTimeLedgers;
 	}

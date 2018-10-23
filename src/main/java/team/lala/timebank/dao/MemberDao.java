@@ -22,8 +22,10 @@ public class MemberDao {
 	public void getConnection() {
 		try {
 			connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			// FIXME
 			System.out.println("資料庫連線成功");
 		} catch (SQLException e) {
+			// FIXME
 			System.out.println("資料庫連線失敗");
 			e.printStackTrace();
 		}
@@ -33,6 +35,7 @@ public class MemberDao {
 		if (connection != null) {
 			try {
 				connection.close();
+				// FIXME
 				System.out.println("關閉資料庫連線");
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -107,8 +110,10 @@ public class MemberDao {
 			ppst.setString(5, member.getMobile());
 			ppst.executeUpdate();
 			ppst.close();
-			System.out.println("[MEMBER] INSERT成功");
+			// FIXME
+			System.out.println("[MEMBER] INSERT完成");
 		} catch (SQLException e) {
+			// FIXME
 			System.out.println("[MEMBER] INSERT失敗");
 			e.printStackTrace();
 		}
@@ -129,8 +134,10 @@ public class MemberDao {
 			ppst.setLong(6, member.getId());
 			ppst.executeUpdate();
 			ppst.close();
-			System.out.println("[MEMBER] UPDATE成功");
+			// FIXME
+			System.out.println("[MEMBER] UPDATE完成");
 		} catch (SQLException e) {
+			// FIXME
 			System.out.println("[MEMBER] UPDATE失敗");
 			e.printStackTrace();
 		}
@@ -145,8 +152,10 @@ public class MemberDao {
 			ppst.setLong(1, id);
 			ppst.executeUpdate();
 			ppst.close();
-			System.out.println("[MEMBER] DELETE成功");
+			// FIXME
+			System.out.println("[MEMBER] DELETE完成");
 		} catch (SQLException e) {
+			// FIXME
 			System.out.println("[MEMBER] DELETE失敗");
 			e.printStackTrace();
 		}
