@@ -11,19 +11,22 @@ import team.lala.timebank.entity.TimeLedger;
 public class TimeLedgerServiceTest {
 
 	private TimeLedgerService timeLedgerService = new TimeLedgerService();
-/*
+
 	
 	@Test
 	public void testDeposit() {
          //正常存款
+		System.out.println(timeLedgerService.searchLastTransaction(2L).getBalanceValue());
 		timeLedgerService.deposit(2, 2L);
+		System.out.println(timeLedgerService.searchLastTransaction(2L).toString());
 		
         //第一次存款
+		System.out.println(timeLedgerService.searchLastTransaction(3L).toString());
 		timeLedgerService.deposit(20, 3L);
+		System.out.println(timeLedgerService.searchLastTransaction(3L).toString());
+
 	}
-
-
-
+/*
 	@Test
 	public void testWithdrawal() {
         //正常提款
@@ -33,6 +36,7 @@ public class TimeLedgerServiceTest {
         //超額提款
 		timeLedgerService.withdrawal(3000, 2L);
 	}
+	
 	@Test
 	public void testUpdate() {
 	
@@ -51,8 +55,7 @@ public class TimeLedgerServiceTest {
 		
 		timeLedgerService.searchALLTransaction(10L);
 	}
-*/
-	
+
 
 
 
@@ -64,5 +67,5 @@ public class TimeLedgerServiceTest {
 		timeLedgerService.searchLastTransaction(10L);
 		
 	}
-
+*/
 }
