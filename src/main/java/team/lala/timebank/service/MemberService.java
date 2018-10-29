@@ -2,9 +2,12 @@ package team.lala.timebank.service;
 
 import java.util.Collection;
 
+import org.springframework.stereotype.Service;
+
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.entity.Member;
 
+@Service
 public class MemberService {
 
 	private MemberDao memberDao = new MemberDao();

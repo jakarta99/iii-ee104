@@ -2,6 +2,8 @@ package team.lala.timebank.service;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.springframework.stereotype.Service;
+
 import team.lala.timebank.dao.JobDao;
 
 import team.lala.timebank.entity.Job;
@@ -11,6 +13,7 @@ import team.lala.timebank.entity.Job;
  * @author Sheila
  *
  */
+@Service
 public class JobService {
 
 	private JobDao jobDao = new JobDao();

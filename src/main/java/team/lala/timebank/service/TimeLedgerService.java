@@ -4,9 +4,12 @@ import java.time.LocalDateTime;
 
 import java.util.Collection;
 
+import org.springframework.stereotype.Service;
+
 import team.lala.timebank.dao.TimeLedgerDao;
 import team.lala.timebank.entity.TimeLedger;
 
+@Service
 public class TimeLedgerService {
 
 	private TimeLedgerDao timeLedgerDao = new TimeLedgerDao();
