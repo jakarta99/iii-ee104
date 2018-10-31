@@ -37,7 +37,7 @@ public class TimeBankApp2 {
 	Long memberId = 1L;
 	Long jobId = 1l;
 
-	@RequestMapping("/")
+	@RequestMapping("/user")
 	public String listMyTimeLedgers() {
 		// 1. List my ledgers
 		Collection<TimeLedger> timeLedgerList = timeLedgerService.searchALLTransaction(memberId);
