@@ -1,16 +1,30 @@
 package team.lala.timebank.entity;
 
-import java.time.LocalDateTime;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name="Job")
 public class Job {
-	private long id;// 工作ID
-
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
+	private Long id;// 工作ID
+	
+	@Column(name="requester")
 	private String requester; // 刊登者
 
+	@Column(name="jobTitle")
 	private String jobTitle;// 活動名稱
 
-	private int timeValue;// 可獲得時數(工作的時間)
+	@Column(name="timeValue")
+	private Integer timeValue;// 可獲得時數(工作的時間)
 
+	
+	
+	
 //	private LocalDateTime postedDay;// po文&徵人日期
 //
 //	private LocalDateTime postedEndDay;// 徵人結束文日期
@@ -29,37 +43,63 @@ public class Job {
 //
 //	private String contactEmail;// 聯絡信箱
 
-	public long getId() {
+	
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+
+
+
+	public void setId(Long id) {
 		this.id = id;
 	}
+
+
+
 
 	public String getRequester() {
 		return requester;
 	}
 
+
+
+
 	public void setRequester(String requester) {
 		this.requester = requester;
 	}
+
+
+
 
 	public String getJobTitle() {
 		return jobTitle;
 	}
 
+
+
+
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
 
-	public int getTimeValue() {
+
+
+
+	public Integer getTimeValue() {
 		return timeValue;
 	}
 
-	public void setTimeValue(int timeValue) {
+
+
+
+	public void setTimeValue(Integer timeValue) {
 		this.timeValue = timeValue;
 	}
+
+
+
 
 	@Override
 	public String toString() {
