@@ -40,7 +40,7 @@ public class TimeBankApp2 {
 	@RequestMapping("/user")
 	public String listMyTimeLedgers() {
 		// 1. List my ledgers
-		Collection<TimeLedger> timeLedgerList = timeLedgerService.searchALLTransaction(memberId);
+		Collection<TimeLedger> timeLedgerList = timeLedgerService.getAll(memberId);
 		String result = "<html><h1>Hello World!</h1><p>";
 		for (TimeLedger timeLedger : timeLedgerList) {
 			result += timeLedger.toString() + "<br>";
@@ -68,11 +68,11 @@ public class TimeBankApp2 {
 		result += "</p><p>";
 
 		// 4. After verified, Deposit service hours
-		TimeLedger timeLedger = timeLedgerService.searchLastTransaction(memberId);
-		result += "before deposit:" + timeLedger.toString();
-		timeLedgerService.deposit(job1.getTimeValue(), memberId);
-		timeLedger = timeLedgerService.searchLastTransaction(memberId);
-		result += "after deposit:" + timeLedger.toString();
+//		TimeLedger timeLedger = timeLedgerService.
+//		result += "before deposit:" + timeLedger.toString();
+//		timeLedgerService.deposit(job1.getTimeValue(), memberId);
+//		timeLedger = timeLedgerService.searchLastTransaction(memberId);
+//		result += "after deposit:" + timeLedger.toString();
 
 		result += "</p></html>";
 
