@@ -93,6 +93,7 @@ public class TimeLedgerService {
 
 	public void update(TimeLedger timeLedger) {
 		timeLedgerDao.save(timeLedger);
+		
 		System.out.println("更新成功");
 	}
 
