@@ -1,4 +1,5 @@
 package team.lala.timebank;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,19 +14,16 @@ public class StringBoot {
 
 	@Autowired
 	private CalculateService calculateService;
-	
-	
+
 	@RequestMapping("/")
 	String home() {
-		
-		
-		
+
 		String result = "<html><h1>Hello World!</h1></html>";
-		
-		int data = calculateService.add(1,4);
-		
+
+		int data = calculateService.add(1, 4);
+
 		result += data;
-		
+
 		return result;
 	}
 

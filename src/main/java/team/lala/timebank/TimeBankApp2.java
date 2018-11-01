@@ -47,7 +47,7 @@ public class TimeBankApp2 {
 
 		}
 		result += "</p><p>";
-		
+
 		// 2. Show Job List
 		Collection<Job> jobList = jobService.findAll();
 		if (jobList != null) {
@@ -56,7 +56,7 @@ public class TimeBankApp2 {
 			}
 		}
 		result += "</p><p>";
-		
+
 		// 3. Choose one Job (id:1) from Job List
 		Job job1 = jobService.findOne(jobId);
 		if (job1 != null) {
@@ -66,14 +66,13 @@ public class TimeBankApp2 {
 			result += "cannot find jobId = " + jobId + "<br>";
 		}
 		result += "</p><p>";
-		
+
 		// 4. After verified, Deposit service hours
 		TimeLedger timeLedger = timeLedgerService.searchLastTransaction(memberId);
-		 result+="before deposit:"+ timeLedger.toString();
-		 timeLedgerService.deposit(job1.getTimeValue(), memberId);
-		 timeLedger = timeLedgerService.searchLastTransaction(memberId);
-		 result+="after deposit:" + timeLedger.toString();
-		
+		result += "before deposit:" + timeLedger.toString();
+		timeLedgerService.deposit(job1.getTimeValue(), memberId);
+		timeLedger = timeLedgerService.searchLastTransaction(memberId);
+		result += "after deposit:" + timeLedger.toString();
 
 		result += "</p></html>";
 
