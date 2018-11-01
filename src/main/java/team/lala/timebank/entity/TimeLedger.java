@@ -2,6 +2,13 @@ package team.lala.timebank.entity;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * DATETIME    MEMBER_ID   DEPOSIT         WITHDRAWAL           BALANCE          DESCRIPTION 
  * -----------------------------------------------------------------------------   
@@ -12,83 +19,107 @@ import java.time.LocalDateTime;
  * @author Gary Lee
  *
  */
+@Entity
+@Table(name="Time_Ledger")
 public class TimeLedger {
-	
+	@GeneratedValue(strategy=GenerationType.AUTO) //ID生成的策略
+	@Id
 	private Long id;
-
+	
+	@Column(name="member_Id")
 	private Long memberId;
 	
+	@Column(name="transaction_Time")
 	private LocalDateTime transactionTime;
 	
-	private int depositValue;
+	@Column(name="deposit_Value")
+	private Integer depositValue;
 	
-	private int withdrawalValue;
+	@Column(name="withdrawal_Value")
+	private Integer withdrawalValue;
 	
-	private int balanceValue;
+	@Column(name="balance_Value")
+	private Integer balanceValue;
 	
-	private String description;
+	@Column(name="discription")
+	private String discription;
 
+	
 	public Long getId() {
 		return id;
 	}
+
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+
 	public Long getMemberId() {
 		return memberId;
 	}
+
 
 	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
 	}
 
+
 	public LocalDateTime getTransactionTime() {
 		return transactionTime;
 	}
+
 
 	public void setTransactionTime(LocalDateTime transactionTime) {
 		this.transactionTime = transactionTime;
 	}
 
-	public int getDepositValue() {
+
+	public Integer getDepositValue() {
 		return depositValue;
 	}
 
-	public void setDepositValue(int depositValue) {
+
+	public void setDepositValue(Integer depositValue) {
 		this.depositValue = depositValue;
 	}
 
-	public int getWithdrawlValue() {
+
+	public Integer getWithdrawalValue() {
 		return withdrawalValue;
 	}
 
-	public void setWithdrawlValue(int withdrawlValue) {
-		this.withdrawalValue = withdrawlValue;
+
+	public void setWithdrawalValue(Integer withdrawalValue) {
+		this.withdrawalValue = withdrawalValue;
 	}
 
-	public int getBalanceValue() {
+
+	public Integer getBalanceValue() {
 		return balanceValue;
 	}
 
-	public void setBalanceValue(int balanceValue) {
+
+	public void setBalanceValue(Integer balanceValue) {
 		this.balanceValue = balanceValue;
 	}
 
-	public String getDescription() {
-		return description;
+
+	public String getDiscription() {
+		return discription;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+
+	public void setDiscription(String discription) {
+		this.discription = discription;
 	}
+
 
 	@Override
 	public String toString() {
 		return "TimeLedger [id=" + id + ", memberId=" + memberId + ", transactionTime=" + transactionTime
 				+ ", depositValue=" + depositValue + ", withdrawlValue=" + withdrawalValue + ", balanceValue="
-				+ balanceValue + ", description=" + description + "]";
+				+ balanceValue + ", description=" + discription + "]";
 	}
 	
 	
