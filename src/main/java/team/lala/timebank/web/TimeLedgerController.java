@@ -45,7 +45,7 @@ public class TimeLedgerController {
 		result += "</p><p>";
 
 		// 3. Choose one Job (id:1) from Job List
-		Requests requests1 = requestsService.findOne(requestsId);
+		Requests requests1 = requestsService.findByRequestListId(requestsId);
 		if (requests1 != null) {
 			result += requests1.toString() + "<br>";
 
