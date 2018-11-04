@@ -8,12 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import team.lala.timebank.entity.Job;
-import team.lala.timebank.entity.Member;
-import team.lala.timebank.entity.TimeLedger;
-import team.lala.timebank.service.JobService;
-import team.lala.timebank.service.MemberService;
-import team.lala.timebank.service.TimeLedgerService;
+
 
 /**
  * find all the timeLedger list, find all the job list, choose a job, after
