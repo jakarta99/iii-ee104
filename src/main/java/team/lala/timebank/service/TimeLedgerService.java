@@ -79,7 +79,6 @@ public class TimeLedgerService {
 	}
 
 	// 更新一筆資料
-
 	public void update(TimeLedger timeLedger) {
 		timeLedgerDao.save(timeLedger);
 		System.out.println("更新單筆存摺資料成功");

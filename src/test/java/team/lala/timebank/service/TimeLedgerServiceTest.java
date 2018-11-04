@@ -17,7 +17,7 @@ public class TimeLedgerServiceTest {
 	public void testDeposit() {
         //過去已有交易紀錄之會員
 		System.out.println("存款前記錄=" + timeLedgerService.searchLastTransaction(2L).toString());
-		timeLedgerService.deposit(2, 2L);
+		timeLedgerService.deposit(20, 2L);
 		System.out.println("存款後記錄=" + timeLedgerService.searchLastTransaction(2L).toString());
 		
         //第一次存款之會員
@@ -36,13 +36,29 @@ public class TimeLedgerServiceTest {
         //超額提款
 		timeLedgerService.withdrawal(3000, 2L);
 		
-		//從無交易紀錄之會員提款
+		//無交易紀錄之會員提款
 		timeLedgerService.withdrawal(3000, 10L);
 	}
 	
+	//更新測試
 	@Test
 	public void testUpdate() {
-	
+		//更改1號會員最近一筆交易紀錄之存款金額(50改為80)
+			//1.查出1號會員最近一筆交易紀錄
+			TimeLedger timeLedger = timeLedgerService.searchLastTransaction(1L);
+			System.out.println("1號會員最近一筆交易紀錄(更新前)=" + timeLedger.toString());
+			
+			//2.更改1號會員存款金額
+			timeLedger.setDepositValue(80);
+			
+			//3.更新
+			timeLedgerService.update(timeLedger);
+			
+			//4.再次查詢1號會員資料，確認更新結果
+			timeLedger = timeLedgerService.searchLastTransaction(1L);
+			System.out.println("1號會員最近一筆交易紀錄(更新後)=" + timeLedger.toString());
+		
+		//待續
 	}
 	
 	@Test
@@ -50,6 +66,7 @@ public class TimeLedgerServiceTest {
 		
 	}
 
+	
 	@Test
 	public void testGetAll() {
 		Collection<TimeLedger> timeLedgers = timeLedgerService.getAll(1L);
