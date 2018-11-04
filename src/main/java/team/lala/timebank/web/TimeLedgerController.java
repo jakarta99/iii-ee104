@@ -6,23 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import team.lala.timebank.entity.Job;
+import team.lala.timebank.entity.Requests;
 import team.lala.timebank.entity.TimeLedger;
-import team.lala.timebank.service.JobService;
 import team.lala.timebank.service.MemberService;
+import team.lala.timebank.service.RequestsService;
 import team.lala.timebank.service.TimeLedgerService;
 
 @RestController
 public class TimeLedgerController {
 	@Autowired
-	private JobService jobService;
+	private RequestsService requestsService;
 	@Autowired
 	private TimeLedgerService timeLedgerService;
 	@Autowired
 	private MemberService memberService;
 
 	Long memberId = 1L;
-	Long jobId = 1l;
+	Long requestsId = 1l;
 
 	@RequestMapping("/user")
 	public String listMyTimeLedgers() {
@@ -36,21 +36,21 @@ public class TimeLedgerController {
 		result += "</p><p>";
 
 		// 2. Show Job List
-		Collection<Job> jobList = jobService.findAll();
-		if (jobList != null) {
-			for (Job job : jobList) {
-				result += job.toString() + "<br>";
+		Collection<Requests> requestsList = requestsService.findAll();
+		if (requestsList != null) {
+			for (Requests requests : requestsList) {
+				result += requests.toString() + "<br>";
 			}
 		}
 		result += "</p><p>";
 
 		// 3. Choose one Job (id:1) from Job List
-		Job job1 = jobService.findOne(jobId);
-		if (job1 != null) {
-			result += job1.toString() + "<br>";
+		Requests requests1 = requestsService.findOne(requestsId);
+		if (requests1 != null) {
+			result += requests1.toString() + "<br>";
 
 		} else {
-			result += "cannot find jobId = " + jobId + "<br>";
+			result += "cannot find requestsId = " + requestsId + "<br>";
 		}
 		result += "</p><p>";
 
