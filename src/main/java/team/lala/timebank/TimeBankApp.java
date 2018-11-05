@@ -27,7 +27,7 @@ public class TimeBankApp {
 
 		MemberService memberService = new MemberService();
 		TimeLedgerService timeLedgerService = new TimeLedgerService();
-		JobService jobService = new JobService();
+		RequestsService requestService = new RequestsService();
 
 		// 1. List my ledgers
 		Collection<TimeLedger> myTimeLedgers = timeLedgerService.searchALLTransaction(memberId);
@@ -37,21 +37,21 @@ public class TimeBankApp {
 		System.out.println("-----------------------------------------------------------");
 
 		// 2. Show Job List
-		Collection<Job> jobList = jobService.findAll();
-		for (Job job : jobList) {
-			System.out.println(job.toString());
+		Collection<Requests> requsetsList = requestService.findAll();
+		for (Requests requsets : requsetsList) {
+			System.out.println(requsets.toString());
 		}
 		System.out.println("-----------------------------------------------------------");
 
 		// 3. Choose one Job (id:1) from Job List
-		Long jobId = 1l;
+		Long requestListId = 1l;
 		// Long jobId = 6l;
-		Job job = jobService.findOne(jobId);
-		System.out.println("try to find: jobId = " + jobId);
-		if (job != null) {
-			System.out.println(job.toString());
+		Requests requsets = requestService.findByRequestListId(requestListId);
+		System.out.println("try to find: requestListId = " + requestListId);
+		if (requsets != null) {
+			System.out.println(requsets.toString());
 		} else {
-			System.out.println("cannot find jobId = " + jobId);
+			System.out.println("cannot find requestListId = " + requestListId);
 		}
 		System.out.println("-----------------------------------------------------------");
 
@@ -60,7 +60,7 @@ public class TimeBankApp {
 		timeLedgerDao.getConnection();
 		TimeLedger myTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
 		System.out.println("更新前: " + myTimeLedger.toString());
-		timeLedgerService.deposit(job.getTimeValue(), memberId);
+		timeLedgerService.deposit(requsets.getTimeValue(), memberId);
 		myTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
 
 		System.out.println("更新後: " + myTimeLedger.toString());
