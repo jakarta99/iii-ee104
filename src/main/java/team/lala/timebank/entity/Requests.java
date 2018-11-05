@@ -32,13 +32,13 @@ public class Requests {
 	@Column(name = "serviceType", nullable = false)
 	private Integer serviceType;// 服務類型
 
-	@Column(name = "jobStartDateTime", nullable = false)
-	private java.util.Date jobStartDateTime;// 工作開始時間
+//	@Column(name = "jobStartDateTime", nullable = false)
+//	private java.util.Date jobStartDateTime;// 工作開始時間
+//
+//	@Column(name = "jobEndDateTime", nullable = false)
+//	private java.util.Date jobEndDateTime;// 工作開始時間
 
-	@Column(name = "jobEndDateTime", nullable = false)
-	private java.util.Date jobEndDateTime;// 工作開始時間
 
-	
 	
 	public Long getRequestListId() {
 		return requestListId;
@@ -124,36 +124,12 @@ public class Requests {
 
 
 
-	public java.util.Date getJobStartDateTime() {
-		return jobStartDateTime;
-	}
-
-
-
-	public void setJobStartDateTime(java.util.Date jobStartDateTime) {
-		this.jobStartDateTime = jobStartDateTime;
-	}
-
-
-
-	public java.util.Date getJobEndDateTime() {
-		return jobEndDateTime;
-	}
-
-
-
-	public void setJobEndDateTime(java.util.Date jobEndDateTime) {
-		this.jobEndDateTime = jobEndDateTime;
-	}
-
-
-
 	@Override
 	public String toString() {
 
 		return "Requests [requestListId=" + requestListId + ", memberID=" + memberID + ", jobTitle=" + jobTitle
 				+ ", timeValue=" + timeValue + ", termType" + termType + ", serviceType" + serviceType
-				+ ", jobStartDateTime" + jobStartDateTime + ", jobEndDateTime" + jobEndDateTime + "]";
+				+  "]";
 	}
 
 }
