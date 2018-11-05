@@ -14,8 +14,8 @@ public class Requests {
 	@Id
 	private Long requestListId;// 工作ID
 
-	@Column(name = "memberID", nullable = false)
-	private String memberID; // 刊登者
+	@Column(name = "memberId", nullable = false)
+	private String memberId; // 刊登者
 
 	@Column(name = "jobTitle", nullable = false, length = 50)
 	private String jobTitle;// 活動名稱
@@ -52,14 +52,14 @@ public class Requests {
 
 
 
-	public String getMemberID() {
-		return memberID;
+	public String getMemberId() {
+		return memberId;
 	}
 
 
 
-	public void setMemberID(String memberID) {
-		this.memberID = memberID;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 
@@ -127,8 +127,8 @@ public class Requests {
 	@Override
 	public String toString() {
 
-		return "Requests [requestListId=" + requestListId + ", memberID=" + memberID + ", jobTitle=" + jobTitle
-				+ ", timeValue=" + timeValue + ", termType" + termType + ", serviceType" + serviceType
+		return "Requests [requestListId=" + requestListId + ", memberId=" + memberId + ", jobTitle=" + jobTitle
+				+ ", timeValue=" + timeValue + ", termType=" + termType + ", serviceType=" + serviceType
 				+  "]";
 	}
 
