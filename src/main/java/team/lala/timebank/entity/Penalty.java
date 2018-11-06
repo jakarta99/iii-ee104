@@ -2,19 +2,23 @@ package team.lala.timebank.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="penalty")
+@Table(name="PENALTY")
 public class Penalty {
-	@Column(name="penalty_list_id")
-	Integer penaltyListId ;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long penaltyListId ;
 	
 	@Column(name="order_list_id")
-	Integer orderListId ;
+	private Long orderListId ;
 	
 	@Column(name="member_id")
-	Integer memberId ;
+	private Long memberId ;
 	
 	@Column(name="description")
 	String description ;
@@ -25,43 +29,55 @@ public class Penalty {
 	@Column(name="penalty_time_value")
 	Integer penaltyTimeValue ;
 	
-	
-	public Integer getPenaltyListId() {
+	public Long getPenaltyListId() {
 		return penaltyListId;
 	}
-	public void setPenaltyListId(Integer penaltyListId) {
+
+	public void setPenaltyListId(Long penaltyListId) {
 		this.penaltyListId = penaltyListId;
 	}
-	public Integer getOrderListId() {
+
+	public Long getOrderListId() {
 		return orderListId;
 	}
-	public void setOrderListId(Integer orderListId) {
+
+	public void setOrderListId(Long orderListId) {
 		this.orderListId = orderListId;
 	}
-	public Integer getMemberId() {
+
+	public Long getMemberId() {
 		return memberId;
 	}
-	public void setMemberId(Integer memberId) {
+
+	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public Integer getStatus() {
 		return status;
 	}
+
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+
 	public Integer getPenaltyTimeValue() {
 		return penaltyTimeValue;
 	}
+
 	public void setPenaltyTimeValue(Integer penaltyTimeValue) {
 		this.penaltyTimeValue = penaltyTimeValue;
 	}
+
+
 	
 
 }
