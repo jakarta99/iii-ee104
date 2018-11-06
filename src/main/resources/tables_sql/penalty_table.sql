@@ -1,9 +1,9 @@
 use timebank
 go
 
-DROP table penalty
+DROP table PENALTY
 
-create table penalty(
+create table PENALTY(
 penalty_list_id BIGINT primary key,
 order_list_id BIGINT NOT NULL,
 member_id BIGINT NOT NULL,
@@ -13,10 +13,10 @@ penalty_time_value INT
 )
 
 INSERT INTO PENALTY (penalty_list_id, order_list_id, member_id, description, status, penalty_time_value)
-VALUES(1, 2, 5, '¯Ê®u', 1 , 4)
+VALUES(1, 2, 5, 'ç¼ºå¸­', 1 , 4)
 
 INSERT INTO PENALTY (penalty_list_id, order_list_id, member_id, description, status, penalty_time_value)
-VALUES(2, 3, 8, '¿ğ¨ì1¤p®É', 2 , 2)
+VALUES(2, 3, 8, 'é²åˆ°1å°æ™‚', 2 , 2)
 
 INSERT INTO PENALTY (penalty_list_id, order_list_id, member_id, description, status, penalty_time_value)
-VALUES(3, 4, 9, 'ªA°ÈºA«×¤£¨Î', 3 , 0)
+VALUES(3, 4, 9, 'æœå‹™æ…‹åº¦ä¸ä½³', 3 ,0)
