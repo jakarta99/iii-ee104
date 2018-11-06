@@ -1,17 +1,32 @@
 package team.lala.timebank.entity;
 
-public class Member {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "MEMBER")
+public class Member {
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
 	private Long id;
 
+	@Column(name = "NAME")
 	private String name;
 
+	@Column(name = "TYPE")
 	private String type; // P: Person; O: Organization
 
+	@Column(name = "EMAIL")
 	private String email;
 
+	@Column(name = "TEL")
 	private String telephone;
 
+	@Column(name = "MOBILE")
 	private String mobile;
 
 	public Long getId() {
