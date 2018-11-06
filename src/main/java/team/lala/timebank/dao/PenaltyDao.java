@@ -1,4 +1,4 @@
-package team.lala.timebank;
+package team.lala.timebank.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
