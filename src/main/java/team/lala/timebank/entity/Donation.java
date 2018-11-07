@@ -16,6 +16,9 @@ public class Donation {
 	@Id
 	private Long id;
 
+	@Column(name = "donation_list_id")
+	private Long donationListId;
+
 	@Column(name = "member_id")
 	private Long memberId;
 
@@ -34,6 +37,14 @@ public class Donation {
 
 	public Long getId() {
 		return id;
+	}
+
+	public void setDonationListId(Long donationListId) {
+		this.donationListId = donationListId;
+	}
+
+	public Long getDonationListId() {
+		return donationListId;
 	}
 
 	public void setMemberId(Long memberId) {
@@ -68,4 +79,10 @@ public class Donation {
 		return donateTime;
 	}
 
+	@Override
+	public String toString() {
+		return "Donation [id=" + id + ", donationListId" + donationListId + ", memberId=" + memberId
+				+ ", donateOrganizationId=" + donateOrganizationId + ", donateValue=" + donateValue + ", donateTime="
+				+ donateTime + "]";
+	}
 }
