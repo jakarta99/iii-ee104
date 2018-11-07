@@ -19,8 +19,8 @@ public class DonationService {
 	}
 
 	public Donation findById(Long id) {
-		Donation order = donationDao.getOne(id);
-		return order;
+		Donation donation = donationDao.getOne(id);
+		return donation;
 	}
 
 	public Collection<Donation> findAll() {
