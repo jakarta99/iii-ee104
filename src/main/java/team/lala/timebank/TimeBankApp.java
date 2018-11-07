@@ -2,9 +2,12 @@ package team.lala.timebank;
 
 import java.util.Collection;
 
-import team.lala.timebank.dao.*;
-import team.lala.timebank.entity.*;
-import team.lala.timebank.service.*;
+import team.lala.timebank.dao.TimeLedgerDao;
+import team.lala.timebank.entity.Requests;
+import team.lala.timebank.entity.TimeLedger;
+import team.lala.timebank.service.MemberService;
+import team.lala.timebank.service.RequestsService;
+import team.lala.timebank.service.TimeLedgerService;
 
 /**
  * find all the timeLedger list, find all the job list, choose a job, after
@@ -30,7 +33,7 @@ public class TimeBankApp {
 		RequestsService requestService = new RequestsService();
 
 		// 1. List my ledgers
-		Collection<TimeLedger> myTimeLedgers = timeLedgerService.searchALLTransaction(memberId);
+		Collection<TimeLedger> myTimeLedgers = timeLedgerService.getAll(memberId);
 		for (TimeLedger timeLedger : myTimeLedgers) {
 			System.out.println(timeLedger.toString());
 		}
@@ -56,12 +59,10 @@ public class TimeBankApp {
 		System.out.println("-----------------------------------------------------------");
 
 		// 4. After verified, Deposit service hours
-		TimeLedgerDao timeLedgerDao = new TimeLedgerDao();
-		timeLedgerDao.getConnection();
-		TimeLedger myTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
+		TimeLedger myTimeLedger = timeLedgerService.searchLastTransaction(memberId);
 		System.out.println("更新前: " + myTimeLedger.toString());
 		timeLedgerService.deposit(requsets.getTimeValue(), memberId);
-		myTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
+		myTimeLedger = timeLedgerService.searchLastTransaction(memberId);
 
 		System.out.println("更新後: " + myTimeLedger.toString());
 
