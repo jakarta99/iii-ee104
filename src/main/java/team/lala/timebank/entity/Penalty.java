@@ -10,9 +10,22 @@ import javax.persistence.Table;
 @Entity
 @Table(name="PENALTY")
 public class Penalty {
+	
+
+	public Penalty(Long id, Long orderListId, Long memberId, String description, Integer status,
+			Integer penaltyTimeValue) {
+		super();
+		this.id = id;
+		this.orderListId = orderListId;
+		this.memberId = memberId;
+		this.description = description;
+		this.status = status;
+		this.penaltyTimeValue = penaltyTimeValue;
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long penaltyListId ;
+	private Long id ;
 	
 	@Column(name="order_list_id")
 	private Long orderListId ;
@@ -29,12 +42,12 @@ public class Penalty {
 	@Column(name="penalty_time_value")
 	Integer penaltyTimeValue ;
 	
-	public Long getPenaltyListId() {
-		return penaltyListId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setPenaltyListId(Long penaltyListId) {
-		this.penaltyListId = penaltyListId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Long getOrderListId() {
