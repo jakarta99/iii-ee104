@@ -8,40 +8,33 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="PENALTY")
+@Table(name = "PENALTY")
 public class Penalty {
-	
-
-	public Penalty(Long id, Long orderListId, Long memberId, String description, Integer status,
-			Integer penaltyTimeValue) {
-		super();
-		this.id = id;
-		this.orderListId = orderListId;
-		this.memberId = memberId;
-		this.description = description;
-		this.status = status;
-		this.penaltyTimeValue = penaltyTimeValue;
-	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id ;
-	
-	@Column(name="order_list_id")
-	private Long orderListId ;
-	
-	@Column(name="member_id")
-	private Long memberId ;
-	
-	@Column(name="description")
-	String description ;
-	
-	@Column(name="status")
-	Integer status ;
-	
-	@Column(name="penalty_time_value")
-	Integer penaltyTimeValue ;
-	
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
+	@Column(name = "order_list_id")
+	private Long orderListId;
+
+	@Column(name = "member_id")
+	private Long memberId;
+
+	@Column(name = "description")
+	String description;
+
+	@Column(name = "status")
+	Integer status;
+
+	@Column(name = "penalty_time_value")
+	Integer penaltyTimeValue;
+
+	public String toString() {
+		return "Penalty [id=" + id + ", orderListId=" + orderListId + ", memberId=" + memberId + ", description="
+				+ description + ", status=" + status + ", penaltyTimeValue=" + penaltyTimeValue + "]";
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -89,8 +82,5 @@ public class Penalty {
 	public void setPenaltyTimeValue(Integer penaltyTimeValue) {
 		this.penaltyTimeValue = penaltyTimeValue;
 	}
-
-
-	
 
 }

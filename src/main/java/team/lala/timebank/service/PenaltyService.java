@@ -17,9 +17,14 @@ public class PenaltyService {
 		penaltyDao.save(penalty);
 	}
 
-	public List<Penalty> findAll(long id) {
+	public List<Penalty> findSomeoneAll(long id) {
 		List<Penalty> specificMemberPenalty = penaltyDao.findAll();
 		return specificMemberPenalty;
+	}
+	
+	public List<Penalty> findAll(){
+		List<Penalty> penalty = penaltyDao.findAll();
+		return penalty;
 	}
 
 	public void delete(Long penaltyListId) {
