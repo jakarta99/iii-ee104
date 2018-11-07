@@ -4,12 +4,12 @@ go
 DROP table PENALTY
 
 create table PENALTY(
-penalty_list_id BIGINT IDENTITY PRIMARY KEY,
-order_list_id BIGINT NOT NULL,
-member_id VARCHAR(100) NOT NULL,
-description VARCHAR(50),
-status INT NOT NULL,
-penalty_time_value INT 
+ID BIGINT IDENTITY PRIMARY KEY,
+ORDER_LIST_ID BIGINT NOT NULL,
+MEMBER_ID VARCHAR(100) NOT NULL,
+DESCRIPTION VARCHAR(50),
+STATUS INT NOT NULL,
+PENALTY_TIME_VALUE INT 
 )
 
 INSERT INTO PENALTY (order_list_id, member_id, description, status, penalty_time_value)
