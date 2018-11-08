@@ -20,17 +20,14 @@ public class RequestsService {
 
 	@Autowired
 	private RequestsDao requestsDao;
-	
-	
-	//update
+
+	// update
 	public void update(Requests request) {
 
 		requestsDao.save(request);
 
 	}
-	
-	
-	
+
 	public List<Requests> findAll() {
 
 		List<Requests> requestsList = requestsDao.findAll();
@@ -41,7 +38,6 @@ public class RequestsService {
 		}
 		return requestsList;
 	}
-	
 
 	public Requests findByRequestListId(Long id) {
 
@@ -60,4 +56,15 @@ public class RequestsService {
 
 	}
 
+	public Collection<Requests> findByJobAreaAndServiceType(Integer jobArea, Integer serviceType) {
+
+		Collection<Requests> requestsList = requestsDao.findByJobAreaAndServiceType(jobArea, serviceType);
+
+		if (requestsList == null) {
+			
+			System.out.println("requestsList does not exist");
+			
+		}
+		return requestsList;
+	}
 }

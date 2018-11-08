@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Requests {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
-	private Long requestListId;// 工作ID
+	private Long id;// 工作ID
 
 	@Column(name = "memberId", nullable = false)
 	private String memberId; // 刊登者
@@ -40,14 +40,14 @@ public class Requests {
 
 
 	
-	public Long getRequestListId() {
-		return requestListId;
+	public Long id() {
+		return id;
 	}
 
 
 
-	public void setRequestListId(Long requestListId) {
-		this.requestListId = requestListId;
+	public void setRequestListId(Long id) {
+		this.id = id;
 	}
 
 
@@ -127,7 +127,7 @@ public class Requests {
 	@Override
 	public String toString() {
 
-		return "Requests [requestListId=" + requestListId + ", memberId=" + memberId + ", jobTitle=" + jobTitle
+		return "Requests [id=" + id + ", memberId=" + memberId + ", jobTitle=" + jobTitle
 				+ ", timeValue=" + timeValue + ", termType=" + termType + ", serviceType=" + serviceType
 				+  "]";
 	}
