@@ -41,8 +41,8 @@ public class TimeLedger {
 	@Column(name="balance_Value")
 	private Integer balanceValue;
 	
-	@Column(name="discription")
-	private String discription;
+	@Column(name="description")
+	private String description;
 
 	
 	public Long getId() {
@@ -105,24 +105,24 @@ public class TimeLedger {
 	}
 
 
-	public String getDiscription() {
-		return discription;
+	public String getDescription() {
+		return description;
 	}
 
 
-	public void setDiscription(String discription) {
-		this.discription = discription;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 
 	@Override
 	public String toString() {
 		return "TimeLedger [id=" + id + ", memberId=" + memberId + ", transactionTime=" + transactionTime
-				+ ", depositValue=" + depositValue + ", withdrawlValue=" + withdrawalValue + ", balanceValue="
-				+ balanceValue + ", description=" + discription + "]";
+				+ ", depositValue=" + depositValue + ", withdrawalValue=" + withdrawalValue + ", balanceValue="
+				+ balanceValue + ", description=" + description + "]";
 	}
-	
-	
+
+
 	
 	
 	

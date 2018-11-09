@@ -10,10 +10,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "MEMBER")
 public class Member {
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
+	
+	@Column(name="LOGIN_ACCOUNT")
+	private String loginAccount;
+	
+	@Column(name = "PASSWORD")
+	private String password;
+	
 	@Column(name = "NAME")
 	private String name;
 
@@ -37,6 +43,22 @@ public class Member {
 		this.id = id;
 	}
 
+	public String getLoginAccount() {
+		return loginAccount;
+	}
+
+	public void setLoginAccount(String loginAccount) {
+		this.loginAccount = loginAccount;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -79,8 +101,9 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", name=" + name + ", type=" + type + ", email=" + email + ", telephone="
-				+ telephone + ", mobile=" + mobile + "]";
+		return "Member [id=" + id + ", loginAccount=" + loginAccount + ", password=" + password + ", name=" + name
+				+ ", type=" + type + ", email=" + email + ", telephone=" + telephone + ", mobile=" + mobile + "]";
 	}
 
+	
 }
