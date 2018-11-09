@@ -33,7 +33,7 @@ public class TimeLedgerService {
 		timeLedger.setDepositValue(hours);
 		timeLedger.setBalanceValue(lastTimeLedger.getBalanceValue() + hours);
 		timeLedger.setTransactionTime(LocalDateTime.now());
-		timeLedger.setDiscription("deposit");
+		timeLedger.setDescription("deposit");
 
 		// 3. insert
 		timeLedgerDao.save(timeLedger);
@@ -55,7 +55,7 @@ public class TimeLedgerService {
 			timeLedger.setWithdrawalValue(hours);
 			timeLedger.setTransactionTime(LocalDateTime.now());
 			timeLedger.setBalanceValue(lastTimeLedger.getBalanceValue() - hours);
-			timeLedger.setDiscription("withdrawal");
+			timeLedger.setDescription("withdrawal");
 
 			// 3. insert
 			timeLedgerDao.save(timeLedger);
