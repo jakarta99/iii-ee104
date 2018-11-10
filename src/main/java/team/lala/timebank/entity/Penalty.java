@@ -1,5 +1,7 @@
 package team.lala.timebank.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +23,9 @@ public class Penalty {
 	@Column(name = "member_id")
 	private Long memberId;
 
+	@Column(name = "update_date")
+	private LocalDateTime updateDate;
+
 	@Column(name = "description")
 	String description;
 
@@ -31,8 +36,9 @@ public class Penalty {
 	Integer penaltyTimeValue;
 
 	public String toString() {
-		return "Penalty [id=" + id + ", orderListId=" + orderListId + ", memberId=" + memberId + ", description="
-				+ description + ", status=" + status + ", penaltyTimeValue=" + penaltyTimeValue + "]";
+		return "Penalty [id=" + id + ", orderListId=" + orderListId + ", memberId=" + memberId + ", updateDate="
+				+ updateDate + ", description=" + description + ", status=" + status + ", penaltyTimeValue="
+				+ penaltyTimeValue + "]";
 	}
 
 	public Long getId() {
@@ -57,6 +63,14 @@ public class Penalty {
 
 	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
+	}
+
+	public LocalDateTime getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(LocalDateTime updateDate) {
+		this.updateDate = updateDate;
 	}
 
 	public String getDescription() {
