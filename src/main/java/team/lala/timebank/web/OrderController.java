@@ -16,16 +16,33 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
+	//模擬2號會員(志工)查詢申請紀錄(申請服務)及審核狀態
+	private Long supplierId = 2L; 
+	
 	@RequestMapping("/order")
-	public String findOrders() {
-		String result="<html><p>";
-		Collection<Order> orders = orderService.findAll();
-		for (Order order : orders) {
-			result += orders.toString() + "<br>";
+	public String findMemberOrders() {
+		String htmlString = "<html><h4>【OrderController Test_1】透過志工會員id查詢所有申請紀錄(申請服務)及目前審核狀態</h4>";
+		Collection<Order> orders1 = orderService.findBySupplierId(supplierId);
+		for (Order order : orders1) {
+			htmlString += order.toString() + "<br>";
 		}
-		result += "</p></html>";
 		
-		return result;
+		htmlString += "</html>";
+		return htmlString;
 	}
 	
+	
+	
+// 查詢order資料表的全部資料	
+//	@RequestMapping("/order")
+//	public String findOrders() {
+//		String result="<html><p>";
+//		Collection<Order> orders = orderService.findAll();
+//		for (Order order : orders) {
+//			result += order.toString() + "<br>";
+//		}
+//		result += "</p></html>";
+//		
+//		return result;
+//	}
 }
