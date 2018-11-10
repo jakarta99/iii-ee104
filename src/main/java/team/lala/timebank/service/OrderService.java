@@ -31,6 +31,21 @@ public class OrderService {
 	public void deleteById(Long id) {
 		orderDao.deleteById(id);
 	}
+	
+	
+	//Jasmine
+	//透過志工會員id查詢所有申請及目前審核狀態 (流程：志工申請提供服務的紀錄)
+	public Collection<Order> findBySupplierId(Long supplierId) {
+		Collection<Order> orders = orderDao.findBySupplierId(supplierId);
+		return orders;
+	}
+	
+	
+	//JOIN TABLE 
+//	public Collection<Order> findBySupplierIdFromRequestAndOrder(){
+//		Collection<Order> orders = orderDao.findBySupplierIdFromRequestAndOrder();
+//		return orders;
+//	}
 
 	
 	
