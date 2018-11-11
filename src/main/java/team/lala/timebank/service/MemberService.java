@@ -100,14 +100,14 @@ public class MemberService {
 		// 檢查家電
 		boolean btelephone = false;
 		if (telephone == null || telephone.trim().length() != 10) {
-			System.out.println("電話格式錯誤");
+			System.out.println("電話格式錯誤-1");
 		} else {
 			for (int i = 0; i < telephone.length(); i++) {
-				String test = name.substring(i, i + 1);
+				String test = telephone.substring(i, i + 1);
 				if (test.matches("[0-9]")) {
 					btelephone = true;
 				} else {
-					System.out.println("電話格式錯誤");
+					System.out.println("電話格式錯誤-2");
 					btelephone = false;
 					break;
 				}
@@ -131,22 +131,43 @@ public class MemberService {
 		}
 		if (baccount && bpassword && bemail && bname && btelephone && bmobile) {
 			// 檢查格式是否都符合
-			Member member = memberDao.findByLoginAccount(loginAccount);
-			// 檢查帳號是否存在
-			if (member != null) {
-				System.out.println("帳號重複");
-			} else {
+			Member member = null;
+			try {
+				member = memberDao.findByLoginAccount(loginAccount);
+				if (member != null) {
+					System.out.println("帳號重複");
+				}
+			} catch (Exception e) {
 				member = new Member();
 				member.setLoginAccount(loginAccount);
 				member.setPassword(password);
+				member.setName(name);
 				member.setEmail(email);
 				member.setType(type);
 				member.setTelephone(telephone);
 				member.setMobile(mobile);
 				memberDao.save(member);
+				System.out.println("註冊成功");
 				return true;
 			}
+
+			// 檢查帳號是否存在
+//			if (member != null) {
+//				System.out.println("帳號重複");
+//			} else {
+//				member = new Member();
+//				member.setLoginAccount(loginAccount);
+//				member.setPassword(password);
+//				member.setEmail(email);
+//				member.setType(type);
+//				member.setTelephone(telephone);
+//				member.setMobile(mobile);
+//				memberDao.save(member);
+//				System.out.println("註冊成功");
+//				return true;
+//			}
 		}
+		System.out.println("註冊失敗");
 		return false;
 
 	}
