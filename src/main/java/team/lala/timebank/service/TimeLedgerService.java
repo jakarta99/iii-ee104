@@ -19,7 +19,7 @@ public class TimeLedgerService {
 	// 存款
 	public void deposit(int hours, Long memberId) {
 		// 1.找出會員最近一筆交易紀錄
-		TimeLedger lastTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
+		TimeLedger lastTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTimeDesc(memberId);
 
 		// 尚無交易紀錄者，先將存款餘額設為0
 		if (lastTimeLedger == null) {
@@ -44,7 +44,7 @@ public class TimeLedgerService {
 	// 提款
 	public void withdrawal(Integer hours, Long memberId) {
 		// 1. findTimeLedgerByMemberId
-		TimeLedger lastTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
+		TimeLedger lastTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTimeDesc(memberId);
 
 		// 尚無交易紀錄，或帳戶餘額小於本次提款時數者，不得提款
 		if (lastTimeLedger == null || lastTimeLedger.getBalanceValue() < hours) {
@@ -99,7 +99,7 @@ public class TimeLedgerService {
 
 	// 尋找最新一筆資料
 	public TimeLedger searchLastTransaction(Long memberId) {
-		TimeLedger timeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
+		TimeLedger timeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTimeDesc(memberId);
 		// 尚無交易紀錄者
 		if (timeLedger == null) {
 			System.out.println("會員尚無交易紀錄");
