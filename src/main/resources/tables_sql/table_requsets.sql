@@ -2,13 +2,13 @@ use timebank
 go
 
 
-DROP TABLE JOB
+DROP TABLE REQUESTS
 
 
 
 CREATE TABLE REQUESTS(
 request_List_Id BIGINT IDENTITY PRIMARY KEY,
-member_Id VARCHAR(100),
+id VARCHAR(100),
 job_Title VARCHAR(20),
 time_Value INT,
 job_Area INT,

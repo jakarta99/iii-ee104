@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.TimeLedgerDao;
+import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.entity.TimeLedger;
 
 @Service
@@ -104,6 +105,15 @@ public class TimeLedgerService {
 			System.out.println("會員尚無交易紀錄");
 		}
 		return timeLedger;
+	}
+
+	public int getBalanceValueByMemberId(Long memberId) {
+		int balanceValue = 0;
+		TimeLedger timeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTime(memberId);
+		balanceValue += timeLedger.getBalanceValue();
+
+		return balanceValue;
+
 	}
 
 }

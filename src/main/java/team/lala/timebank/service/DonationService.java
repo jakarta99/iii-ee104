@@ -10,7 +10,7 @@ import team.lala.timebank.entity.Donation;
 
 @Service
 public class DonationService {
-	
+
 	@Autowired
 	private DonationDao donationDao;
 
@@ -30,5 +30,15 @@ public class DonationService {
 
 	public void deleteById(Long id) {
 		donationDao.deleteById(id);
+	}
+
+	public int getTimeValuesByMemberId(Long memberId) {
+		int timeValues = 0;
+		Collection<Donation> donations = donationDao.findByMemberId(memberId);
+		for (Donation donation : donations) {
+			timeValues += donation.getDonateValue();
+
+		}
+		return timeValues;
 	}
 }
