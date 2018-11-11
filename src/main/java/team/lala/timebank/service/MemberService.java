@@ -15,8 +15,9 @@ public class MemberService {
 	@Autowired
 	private MemberDao memberDao;
 
-	public void update(Member member) {
-		memberDao.save(member);
+	public Member save(Member m) {
+		Member member = memberDao.save(m);
+		return member;
 	}
 
 	public void deleteById(Long id) {
@@ -32,6 +33,17 @@ public class MemberService {
 		Collection<Member> members = memberDao.findAll();
 		return members;
 	}
+	
+	public Member login(String account, String password) {
+		Member member = memberDao.findByLoginAccount(account);
+		if (member != null) {
+			if (member.getPassword().equals(password)) {
+				return member;
+			}
+		}
+		return null;
+	}
+
 
 	public boolean registered(String loginAccount, String password, String name, String type, String email,
 			String telephone, String mobile) {
