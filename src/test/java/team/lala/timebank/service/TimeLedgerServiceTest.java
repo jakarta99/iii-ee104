@@ -3,13 +3,18 @@ package team.lala.timebank.service;
 import java.util.Collection;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import team.lala.timebank.entity.TimeLedger;
+
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class TimeLedgerServiceTest {
-
-	private TimeLedgerService timeLedgerService = new TimeLedgerService();
+	@Autowired
+	private TimeLedgerService timeLedgerService;
 
 	//存款測試
 	@Test
