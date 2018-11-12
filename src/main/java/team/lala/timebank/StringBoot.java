@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import team.lala.timebank.service.CalculateService;
 
-@RestController
-@SpringBootApplication
+//@RestController
+//@SpringBootApplication
 public class StringBoot {
 
 	@Autowired

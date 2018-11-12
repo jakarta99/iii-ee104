@@ -3,8 +3,7 @@ package team.lala.gary.service;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
-
-import team.lala.timebank.service.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class CalculateServiceImplTest {
 

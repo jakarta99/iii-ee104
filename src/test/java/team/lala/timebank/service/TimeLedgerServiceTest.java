@@ -1,10 +1,9 @@
 package team.lala.timebank.service;
 
-import static org.junit.Assert.*;
-
 import java.util.Collection;
 
 import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import team.lala.timebank.entity.TimeLedger;
 @SpringBootTest

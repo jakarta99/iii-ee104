@@ -1,6 +1,7 @@
 package team.lala.timebank.service;
 
 import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import team.lala.timebank.entity.Member;
 @SpringBootTest

@@ -1,11 +1,12 @@
 package team.lala.timebank.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import java.util.Collection;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.bind.annotation.RestController;
 
 import team.lala.timebank.entity.Requests;
