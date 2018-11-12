@@ -28,7 +28,7 @@ public class MemberDataController {
 	private TimeLedgerService timeLedgetService;
 	
 
-	private Long memberId = 1L;
+	private Long memberId = 3L;
 
 	@RequestMapping("/memberData")
 	public String findMemberData() {
