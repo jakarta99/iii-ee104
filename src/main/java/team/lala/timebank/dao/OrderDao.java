@@ -12,22 +12,17 @@ public interface OrderDao extends JpaRepository<Order,Long>{
 	//透過志工會員id查詢所有申請及目前審核狀態 (流程：志工申請提供服務的紀錄)
 	public Collection<Order> findBySupplierId(Long supplierId);
 	
+	//Jasmine
+	//情境：篩選資料的欄位，跨資料表時
+	//步驟一：合併表格(ENTITY要設好一對多及多對一的關係)(參考hybernate)
+	//步驟二：@QUERY寫法 
+	//參考網址=>  https://www.cnblogs.com/zj0208/p/6008627.html
+	//參考網址=>  https://www.baeldung.com/spring-data-jpa-query
 	
-	
-	
-//	Jasmine
-//	透過志工會員id查詢所有申請及目前審核狀態 (流程：志工申請提供服務的紀錄)
-//	合併查詢:Order與Request兩資料表合併，查出
-//	final static String Q_GET_SUPPLIER_ORDERS 
-//		= "SELECT ID,SUPPLIER_ID,REQUESTER_ID,SUPPLIER_ACCEPTION,SERVICE_CONFIRMATION,[STATUS],"
-//				+ "r.REQUEST_LIST_ID, job_Title, time_Value, job_Area, term_Type, service_Type"
-//		  + " FROM ORDER_LIST o JOIN REQUESTS r"
-//		  + " on o.REQUEST_LIST_ID = r.REQUEST_LIST_ID";
-//	= "SELECT *"
-//	  + " FROM ORDER_LIST o JOIN REQUESTS r"
-//	  + " on o.REQUEST_LIST_ID = r.REQUEST_LIST_ID";
-//
-//	@Query(Q_GET_SUPPLIER_ORDERS)
-//	Collection<Order> findBySupplierIdFromRequestAndOrder();
-	
+	@Query(value = "select * from ORDER_LIST o join requests r "
+					+ "on o.request_List_Id = r.request_List_Id"
+					+ " where o.supplier_Id=?1 and r.job_Title =?2", nativeQuery = true)
+	public Order findOrderBySupplierIdAndJobTitle(Long supplierId, String jobTitle);
+
+
 }

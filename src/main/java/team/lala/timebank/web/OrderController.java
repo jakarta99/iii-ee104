@@ -16,7 +16,7 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
-	//模擬2號會員(志工)查詢申請紀錄(申請服務)及審核狀態
+	//Jasmine:模擬2號會員(志工)查詢申請紀錄(申請服務)及審核狀態
 	private Long supplierId = 2L; 
 	
 	@RequestMapping("/order")
@@ -26,6 +26,18 @@ public class OrderController {
 		for (Order order : orders1) {
 			htmlString += order.toString() + "<br>";
 		}
+		
+		htmlString += "<h4>【OrderController Test_2】ORDER join REQUEST後，透過志工會員id查詢所有申請紀錄</h4>";
+		Collection<Order> orders2 = orderService.findBySupplierId(supplierId);
+		for (Order order : orders2) {
+			htmlString += order.joinTableToString() + "<br>";
+		}
+		
+		htmlString += "<h4>【OrderController Test_3】使用@Query註解，跨資料表作條件篩選"
+					+ "(透過[Order]志工id及[Request]活動名稱查詢所有申請紀錄</h4>";
+		Order orders3 = orderService.findOrderBySupplierIdAndJobTitle(supplierId, "平日活動志工");
+		htmlString += "只印Order==>" + orders3.toString() + "<br>";
+		htmlString += "印Order==>" + orders3.joinTableToString() + "<br>";
 		
 		htmlString += "</html>";
 		return htmlString;
