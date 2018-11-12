@@ -28,6 +28,14 @@ public class RequestsService {
 
 	}
 
+	public Collection<Requests> findAllById(Long id) {
+
+		Collection<Requests> requests = requestsDao.findAllById(id);
+
+		return requests;
+
+	}
+
 	public List<Requests> findAll() {
 
 		List<Requests> requestsList = requestsDao.findAll();
@@ -61,9 +69,9 @@ public class RequestsService {
 		Collection<Requests> requestsList = requestsDao.findByJobAreaAndServiceType(jobArea, serviceType);
 
 		if (requestsList == null) {
-			
+
 			System.out.println("requestsList does not exist");
-			
+
 		}
 		return requestsList;
 	}
