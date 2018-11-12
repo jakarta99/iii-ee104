@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import team.lala.timebank.entity.Requests;
 
 @RestController
+@SpringBootTest
 public class RequestsServiceTest {
 	@Autowired
 	private RequestsService requestsService;

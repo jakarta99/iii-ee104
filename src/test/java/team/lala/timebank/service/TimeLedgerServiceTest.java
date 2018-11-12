@@ -7,7 +7,7 @@ import java.util.Collection;
 import org.junit.Test;
 
 import team.lala.timebank.entity.TimeLedger;
-
+@SpringBootTest
 public class TimeLedgerServiceTest {
 
 	private TimeLedgerService timeLedgerService = new TimeLedgerService();

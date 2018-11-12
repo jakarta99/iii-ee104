@@ -3,7 +3,7 @@ package team.lala.timebank.service;
 import org.junit.Test;
 
 import team.lala.timebank.entity.Member;
-
+@SpringBootTest
 public class RegisteredTest {
 	MemberService memberService = new MemberService();
 
