@@ -27,12 +27,15 @@ public class MemberDataController {
 	@Autowired
 	private TimeLedgerService timeLedgetService;
 	
+	@Autowired
+	private MemberService memberService;
+	
 
-	private Long memberId = 1L;
+	private Long memberId = 3L;
 
 	@RequestMapping("/memberData")
 	public String findMemberData() {
-		String result = "<html><h3>查詢會員資料</h3>";
+		String result = "<html><h3>查詢"+memberService.getNameByMemberId(memberId)+"資料</h3>";
 		int donateTime = donationService.getTimeValuesByMemberId(memberId);
 		result += "您的捐贈時間為:" + donateTime + "小時<br>";
 		

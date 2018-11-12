@@ -1,6 +1,7 @@
 package team.lala.timebank.service;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -247,5 +248,14 @@ public class MemberService {
 	// memberDao.delete(id);
 	// memberDao.closeConnection();
 	// }
+	
+	public String getNameByMemberId(Long memberId) {
+		
+		String name="";
+		Member member=memberDao.getOne(memberId);
+		name=member.getName();
+		return name;
+		
+	}
 
 }

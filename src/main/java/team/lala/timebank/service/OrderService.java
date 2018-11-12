@@ -40,13 +40,11 @@ public class OrderService {
 		return orders;
 	}
 	
+	public Order findOrderBySupplierIdAndJobTitle(Long supplierId, String jobTitle) {
+		Order order = orderDao.findOrderBySupplierIdAndJobTitle(supplierId, jobTitle);
+		return order;
+	}
 	
-	//JOIN TABLE 
-//	public Collection<Order> findBySupplierIdFromRequestAndOrder(){
-//		Collection<Order> orders = orderDao.findBySupplierIdFromRequestAndOrder();
-//		return orders;
-//	}
 
-	
 	
 }

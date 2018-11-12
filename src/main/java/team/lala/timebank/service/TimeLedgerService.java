@@ -109,9 +109,14 @@ public class TimeLedgerService {
 
 	public int getBalanceValueByMemberId(Long memberId) {
 		int balanceValue = 0;
+		
 		TimeLedger timeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTimeDesc(memberId);
-		balanceValue += timeLedger.getBalanceValue();
+		if (timeLedger == null) {
+			balanceValue=0;
+		}else {
 
+		balanceValue += timeLedger.getBalanceValue();
+		}
 		return balanceValue;
 
 	}
