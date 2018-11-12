@@ -4,6 +4,8 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import team.lala.timebank.service.SpringBootTest;
+@SpringBootTest
 public class CalculateServiceImplTest {
 
 	@Test
