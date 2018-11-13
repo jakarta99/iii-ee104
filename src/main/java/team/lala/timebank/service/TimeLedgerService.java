@@ -107,7 +107,6 @@ public class TimeLedgerService {
 		return timeLedger;
 	}
 
-<<<<<<< HEAD
 	public int getBalanceValueByMemberId(Long memberId) {
 		int balanceValue = 0;
 		
@@ -122,11 +121,10 @@ public class TimeLedgerService {
 
 	}
 	
+	// 尋找一筆資料 更新by Anchor
 	public Collection<TimeLedger> findAllByMemberId(Long memberId) {
 		Collection<TimeLedger> timeLedgers = timeLedgerDao.findAllByMemberId(memberId);
 		return timeLedgers;
 	}
 
-=======
->>>>>>> branch 'master' of https://github.com/jakarta99/iii-ee104
 }
