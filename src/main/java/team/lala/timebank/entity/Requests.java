@@ -21,6 +21,7 @@ public class Requests {
 	@OneToMany(mappedBy="request")
 	private Set<Order> orders;
 	
+
 	@Column(name = "member_Id", nullable = false)
 	private String memberId; // 刊登者
 
