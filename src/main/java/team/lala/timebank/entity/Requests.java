@@ -23,7 +23,7 @@ public class Requests {
 	
 
 	@Column(name = "member_Id", nullable = false)
-	private String memberId; // 刊登者
+	private Integer memberId; // 刊登者  //改這裡
 
 	@Column(name = "job_Title", nullable = false, length = 50)
 	private String jobTitle;// 活動名稱
@@ -60,13 +60,13 @@ public class Requests {
 
 
 
-	public String getMemberId() {
+	public Integer getMemberId() {
 		return memberId;
 	}
 
 
 
-	public void setMemberId(String memberId) {
+	public void setMemberId(Integer memberId) {
 		this.memberId = memberId;
 	}
 
