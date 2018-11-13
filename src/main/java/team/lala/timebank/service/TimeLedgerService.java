@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.TimeLedgerDao;
-import team.lala.timebank.entity.Penalty;
-import team.lala.timebank.entity.Requests;
 import team.lala.timebank.entity.TimeLedger;
 
 @Service
