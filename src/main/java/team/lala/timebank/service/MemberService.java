@@ -249,13 +249,13 @@ public class MemberService {
 	// memberDao.closeConnection();
 	// }
 	
-	public String getNameByMemberId(Long memberId) {
-		
-		String name="";
-		Member member=memberDao.getOne(memberId);
-		name=member.getName();
-		return name;
-		
-	}
+//	public String getNameByMemberId(Long memberId) {
+//		
+//		String name="";
+//		Member member=memberDao.getOne(memberId);
+//		name=member.getName();
+//		return name;
+//		
+//	}
 
 }
