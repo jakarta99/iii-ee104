@@ -32,16 +32,6 @@ public class DonationService {
 		donationDao.deleteById(id);
 	}
 
-//	public int getTimeValuesByMemberId(Long memberId) {
-//		int timeValues = 0;
-//		Collection<Donation> donations = donationDao.findByMemberId(memberId);
-//		for (Donation donation : donations) {
-//			timeValues += donation.getDonateValue();
-//
-//		}
-//		return timeValues;
-//	}
-
 	// 查某人所有的Donations(更改by Brian)
 	public Collection<Donation> findDonationsByMemberId(Long memberId) {
 

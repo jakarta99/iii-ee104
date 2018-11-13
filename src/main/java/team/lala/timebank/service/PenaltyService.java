@@ -34,15 +34,6 @@ public class PenaltyService {
 
 	}
 
-//	public int getPenaltyTimeValueByMemberId(Long memberId){
-//		int penaltyTimeValue=0;
-//		Collection<Penalty> penaltys = penaltyDao.findByMemberId(memberId);
-//		for (Penalty penalty : penaltys) {
-//			penaltyTimeValue += penalty.getPenaltyTimeValue();
-//
-//		}
-//		return penaltyTimeValue;
-
 	// 查詢某人的所有Penalty (更改by Brian)
 	public Collection<Penalty> findPenaltyTimeValueByMemberId(Long memberId) {
 

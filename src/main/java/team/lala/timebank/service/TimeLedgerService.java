@@ -106,18 +106,4 @@ public class TimeLedgerService {
 		return timeLedger;
 	}
 
-//	public int getBalanceValueByMemberId(Long memberId) {
-//		int balanceValue = 0;
-//		
-//		TimeLedger timeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTimeDesc(memberId);
-//		if (timeLedger == null) {
-//			balanceValue=0;
-//		}else {
-//
-//		balanceValue = timeLedger.getBalanceValue();
-//		}
-//		return balanceValue;
-//
-//	}
-
 }

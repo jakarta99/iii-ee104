@@ -17,9 +17,6 @@ import team.lala.timebank.service.TimeLedgerService;
 public class MemberDataController {
 
 	@Autowired
-	private MemberService memberservice;
-
-	@Autowired
 	private DonationService donationService;
 
 	@Autowired
@@ -31,7 +28,7 @@ public class MemberDataController {
 	@Autowired
 	private MemberService memberService;
 
-	private Long memberId = 3L;
+	private Long memberId = 2L;
 
 	@RequestMapping("/memberData")
 	public String findMemberData() {
@@ -52,11 +49,11 @@ public class MemberDataController {
 		}
 
 		result += "您的處罰時間為:" + totalPenaltyTime + "小時<br>";
-		int balanceValue =0;
-		if(timeLedgetService.getLastTransaction(memberId)==null) {
-			
-		}else {
-		balanceValue = timeLedgetService.getLastTransaction(memberId).getBalanceValue();
+		int balanceValue = 0;
+		if (timeLedgetService.getLastTransaction(memberId) == null) {
+
+		} else {
+			balanceValue = timeLedgetService.getLastTransaction(memberId).getBalanceValue();
 		}
 		result += "您的餘額為:" + balanceValue + "小時<br>";
 
