@@ -74,7 +74,7 @@ public class MemberService {
 				if (test.matches("[a-zA-Z0-9]")) {
 					bpassword = true;
 				} else {
-					System.out.println("帳號格式錯誤");
+					System.out.println("密碼格式錯誤");
 					bpassword = false;
 					break;
 				}
