@@ -18,14 +18,20 @@ public class OrderService {
 		orderDao.save(order);
 	}
 	
-	public Order findById(Long id) {
+	public Order getById(Long id) {
 		Order order = orderDao.getOne(id);
-		return order;
+		if(order != null) {
+			return order;
+		}
+		return null;
 	}
 	
 	public Collection<Order> findAll() {
 		Collection<Order> orders = orderDao.findAll();
-		return orders;
+		if(!orders.isEmpty()) {
+			return orders;
+		}
+		return null;
 	}
 	
 	public void deleteById(Long id) {
@@ -37,12 +43,18 @@ public class OrderService {
 	//透過志工會員id查詢所有申請及目前審核狀態 (流程：志工申請提供服務的紀錄)
 	public Collection<Order> findBySupplierId(Long supplierId) {
 		Collection<Order> orders = orderDao.findBySupplierId(supplierId);
-		return orders;
+		if(!orders.isEmpty()) {
+			return orders;
+		}
+		return null;
 	}
 	
-	public Order findOrderBySupplierIdAndJobTitle(Long supplierId, String jobTitle) {
+	public Order getOrderBySupplierIdAndJobTitle(Long supplierId, String jobTitle) {
 		Order order = orderDao.findOrderBySupplierIdAndJobTitle(supplierId, jobTitle);
-		return order;
+		if(order != null) {
+			return order;
+		}
+		return null;
 	}
 	
 
