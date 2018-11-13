@@ -34,7 +34,7 @@ public class MemberService {
 		Collection<Member> members = memberDao.findAll();
 		return members;
 	}
-	
+
 	public Member login(String account, String password) {
 		Member member = memberDao.findByLoginAccount(account);
 		if (member != null) {
@@ -44,7 +44,6 @@ public class MemberService {
 		}
 		return null;
 	}
-
 
 	public boolean registered(String loginAccount, String password, String name, String type, String email,
 			String telephone, String mobile) {
@@ -248,14 +247,5 @@ public class MemberService {
 	// memberDao.delete(id);
 	// memberDao.closeConnection();
 	// }
-	
-	public String getNameByMemberId(Long memberId) {
-		
-		String name="";
-		Member member=memberDao.getOne(memberId);
-		name=member.getName();
-		return name;
-		
-	}
 
 }

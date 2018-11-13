@@ -20,14 +20,14 @@ public class TimeLedgerServiceTest {
 	@Test
 	public void testDeposit() {
         //過去已有交易紀錄之會員
-		System.out.println("存款前記錄=" + timeLedgerService.searchLastTransaction(2L).toString());
+		System.out.println("存款前記錄=" + timeLedgerService.getLastTransaction(2L).toString());
 		timeLedgerService.deposit(20, 2L);
-		System.out.println("存款後記錄=" + timeLedgerService.searchLastTransaction(2L).toString());
+		System.out.println("存款後記錄=" + timeLedgerService.getLastTransaction(2L).toString());
 		
         //第一次存款之會員
-		System.out.println("存款前記錄=" + timeLedgerService.searchLastTransaction(3L).toString());
+		System.out.println("存款前記錄=" + timeLedgerService.getLastTransaction(3L).toString());
 		timeLedgerService.deposit(20, 3L);
-		System.out.println("存款後記錄=" + timeLedgerService.searchLastTransaction(3L).toString());
+		System.out.println("存款後記錄=" + timeLedgerService.getLastTransaction(3L).toString());
 
 	}
 
@@ -49,7 +49,7 @@ public class TimeLedgerServiceTest {
 	public void testUpdate() {
 		//更改1號會員最近一筆交易紀錄之存款金額(50改為80)
 			//1.查出1號會員最近一筆交易紀錄
-			TimeLedger timeLedger = timeLedgerService.searchLastTransaction(1L);
+			TimeLedger timeLedger = timeLedgerService.getLastTransaction(1L);
 			System.out.println("1號會員最近一筆交易紀錄(更新前)=" + timeLedger.toString());
 			
 			//2.更改1號會員存款金額
@@ -59,7 +59,7 @@ public class TimeLedgerServiceTest {
 			timeLedgerService.update(timeLedger);
 			
 			//4.再次查詢1號會員資料，確認更新結果
-			timeLedger = timeLedgerService.searchLastTransaction(1L);
+			timeLedger = timeLedgerService.getLastTransaction(1L);
 			System.out.println("1號會員最近一筆交易紀錄(更新後)=" + timeLedger.toString());
 		
 		//待續
@@ -86,10 +86,10 @@ public class TimeLedgerServiceTest {
 
 	@Test
 	public void testSearchLastTransaction() {
-		TimeLedger timeLedger = timeLedgerService.searchLastTransaction(1L);
+		TimeLedger timeLedger = timeLedgerService.getLastTransaction(1L);
 		System.out.println(timeLedger.toString());
 		
-		timeLedgerService.searchLastTransaction(10L);
+		timeLedgerService.getLastTransaction(10L);
 		
 	}
 

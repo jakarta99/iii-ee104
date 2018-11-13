@@ -23,26 +23,24 @@ public class PenaltyService {
 		List<Penalty> specificMemberPenalty = penaltyDao.findAll();
 		return specificMemberPenalty;
 	}
-	
-	public List<Penalty> findAll(){
+
+	public List<Penalty> findAll() {
 		List<Penalty> penalty = penaltyDao.findAll();
 		return penalty;
 	}
 
 	public void delete(Long penaltyListId) {
 		penaltyDao.deleteById(penaltyListId);
-		
-	}
-	
-	public int getPenaltyTimeValueByMemberId(Long memberId){
-		int penaltyTimeValue=0;
-		Collection<Penalty> penaltys = penaltyDao.findByMemberId(memberId);
-		for (Penalty penalty : penaltys) {
-			penaltyTimeValue += penalty.getPenaltyTimeValue();
 
-		}
-		return penaltyTimeValue;
-		
-	}	
+	}
+
+	// 查詢某人的所有Penalty (更改by Brian)
+	public Collection<Penalty> findPenaltyTimeValueByMemberId(Long memberId) {
+
+		Collection<Penalty> penaltys = penaltyDao.findByMemberId(memberId);
+
+		return penaltys;
+
+	}
 
 }

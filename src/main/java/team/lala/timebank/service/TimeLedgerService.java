@@ -98,16 +98,16 @@ public class TimeLedgerService {
 		return specificMemberTimeLedgers;
 	}
 
-	// 尋找最新一筆資料
-	public TimeLedger searchLastTransaction(Long memberId) {
+	// 尋找最新一筆資料 更新by Brian
+	public TimeLedger getLastTransaction(Long memberId) {
 		TimeLedger timeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTimeDesc(memberId);
-		// 尚無交易紀錄者
 		if (timeLedger == null) {
-			System.out.println("會員尚無交易紀錄");
+			return null;
 		}
 		return timeLedger;
 	}
 
+<<<<<<< HEAD
 	public int getBalanceValueByMemberId(Long memberId) {
 		int balanceValue = 0;
 		
@@ -127,4 +127,6 @@ public class TimeLedgerService {
 		return timeLedgers;
 	}
 
+=======
+>>>>>>> branch 'master' of https://github.com/jakarta99/iii-ee104
 }

@@ -59,10 +59,10 @@ public class TimeBankApp {
 		System.out.println("-----------------------------------------------------------");
 
 		// 4. After verified, Deposit service hours
-		TimeLedger myTimeLedger = timeLedgerService.searchLastTransaction(memberId);
+		TimeLedger myTimeLedger = timeLedgerService.getLastTransaction(memberId);
 		System.out.println("更新前: " + myTimeLedger.toString());
 		timeLedgerService.deposit(requsets.getTimeValue(), memberId);
-		myTimeLedger = timeLedgerService.searchLastTransaction(memberId);
+		myTimeLedger = timeLedgerService.getLastTransaction(memberId);
 
 		System.out.println("更新後: " + myTimeLedger.toString());
 
