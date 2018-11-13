@@ -30,7 +30,7 @@ public class OrderController {
 		htmlString += "<h4>【OrderController Test_2】ORDER join REQUEST後，透過志工會員id查詢所有申請紀錄</h4>";
 		Collection<Order> orders2 = orderService.findBySupplierId(supplierId);
 		for (Order order : orders2) {
-			htmlString += order.joinTableToString() + "<br>";
+			htmlString += order.joinTableToString() + "<br>";  //這裡的方法有多印request實例變數
 		}
 		
 		htmlString += "<h4>【OrderController Test_3】使用@Query註解，跨資料表作條件篩選"
