@@ -33,7 +33,7 @@ public class TimeBankApp {
 		RequestsService requestService = new RequestsService();
 
 		// 1. List my ledgers
-		Collection<TimeLedger> myTimeLedgers = timeLedgerService.getAll(memberId);
+		Collection<TimeLedger> myTimeLedgers = timeLedgerService.findAll(memberId);
 		for (TimeLedger timeLedger : myTimeLedgers) {
 			System.out.println(timeLedger.toString());
 		}

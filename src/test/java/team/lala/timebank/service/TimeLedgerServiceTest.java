@@ -73,12 +73,12 @@ public class TimeLedgerServiceTest {
 	
 	@Test
 	public void testGetAll() {
-		Collection<TimeLedger> timeLedgers = timeLedgerService.getAll(1L);
+		Collection<TimeLedger> timeLedgers = timeLedgerService.findAll(1L);
 		for(TimeLedger timeLedger : timeLedgers) {
 			System.out.println(timeLedger.toString());
 		}
 		
-		timeLedgerService.getAll(10L);
+		timeLedgerService.findAll(10L);
 	}
 
 

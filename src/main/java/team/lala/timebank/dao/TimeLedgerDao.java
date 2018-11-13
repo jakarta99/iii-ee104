@@ -17,5 +17,5 @@ public interface TimeLedgerDao extends JpaRepository<TimeLedger, Long> {
 			LocalDateTime transactionTimeBegin, LocalDateTime transactionTimeEnd);
 	
 	
-	public Collection<TimeLedger> findByMemberId(Long memberId);
+	public Collection<TimeLedger> findAllByMemberId(Long memberId);
 }

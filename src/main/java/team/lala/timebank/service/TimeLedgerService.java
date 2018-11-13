@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.TimeLedgerDao;
 import team.lala.timebank.entity.Penalty;
+import team.lala.timebank.entity.Requests;
 import team.lala.timebank.entity.TimeLedger;
 
 @Service
@@ -66,7 +67,7 @@ public class TimeLedgerService {
 	}
 
 	// 查詢特定會員某段時間的交易紀錄
-	public void searchTransactionByMemberIdAndTime(Long memberId, LocalDateTime transactionTimeBegin,
+	public void findTransactionByMemberIdAndTime(Long memberId, LocalDateTime transactionTimeBegin,
 			LocalDateTime transactionTimeEnd) {
 		Collection<TimeLedger> periodSpecificMemberTimeLedgers = timeLedgerDao
 				.findByMemberIdAndTransactionTimeBetween(memberId, transactionTimeBegin, transactionTimeEnd);
@@ -92,7 +93,7 @@ public class TimeLedgerService {
 	}
 
 	// 查詢全部交易紀錄
-	public Collection<TimeLedger> getAll(Long memberId) {
+	public Collection<TimeLedger> findAll(Long memberId) {
 		Collection<TimeLedger> specificMemberTimeLedgers = timeLedgerDao.findAll();
 		return specificMemberTimeLedgers;
 	}
@@ -119,6 +120,11 @@ public class TimeLedgerService {
 		}
 		return balanceValue;
 
+	}
+	
+	public Collection<TimeLedger> findAllByMemberId(Long memberId) {
+		Collection<TimeLedger> timeLedgers = timeLedgerDao.findAllByMemberId(memberId);
+		return timeLedgers;
 	}
 
 }
