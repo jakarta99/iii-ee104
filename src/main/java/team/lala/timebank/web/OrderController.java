@@ -21,23 +21,27 @@ public class OrderController {
 	
 	@RequestMapping("/order")
 	public String findMemberOrders() {
-		String htmlString = "<html><h4>【OrderController Test_1】透過志工會員id查詢所有申請紀錄(申請服務)及目前審核狀態</h4>";
+		//【沒有JOIN版--ORDER_LIST資料表】志工透過id查詢自己的所有申請紀錄
+		String htmlString = "<html><h4>【沒有JOIN版--ORDER_LIST資料表】志工透過id查詢自己的所有申請紀錄</h4>";
 		Collection<Order> orders1 = orderService.findBySupplierId(supplierId);
 		for (Order order : orders1) {
 			htmlString += order.toString() + "<br>";
 		}
 		
-		htmlString += "<h4>【OrderController Test_2】ORDER join REQUEST後，透過志工會員id查詢所有申請紀錄</h4>";
+		//【JOIN版(v.1)--ORDER_LIST資料表+REQUESTS資料表】志工透過id查詢自己的所有申請紀錄(多了REQUESTS資料表中，有關機構徵人的細節)
+		htmlString += "<h4>【JOIN版(v.1)--ORDER_LIST資料表+REQUESTS資料表】志工透過id查詢自己的所有申請紀錄"
+					+ "(多了REQUESTS資料表中，有關機構徵人的細節)</h4>";
 		Collection<Order> orders2 = orderService.findBySupplierId(supplierId);
 		for (Order order : orders2) {
-			htmlString += order.joinTableToString() + "<br>";  //這裡的方法有多印request實例變數
+			htmlString += order.ToStringByJoinOrderAndRequestResult() + "<br>";  //多印order entity 中的request實例變數
 		}
-		
-		htmlString += "<h4>【OrderController Test_3】使用@Query註解，跨資料表作條件篩選"
-					+ "(透過[Order]志工id及[Request]活動名稱查詢所有申請紀錄</h4>";
-		Order orders3 = orderService.findOrderBySupplierIdAndJobTitle(supplierId, "平日活動志工");
+
+		//【JOIN版(v.2)--ORDER_LIST資料表+REQUESTS資料表】志工透過自己的id和jobtitle篩選申請紀錄(where條件跨資料表)
+		htmlString += "<h4>【JOIN版(v.2)--ORDER_LIST資料表+REQUESTS資料表】"
+					+ "志工透過自己的id和jobtitle篩選申請紀錄(where條件跨資料表)</h4>";
+		Order orders3 = orderService.findOrderBySupplierIdAndJobTitle(supplierId, "中華關懷協會");
 		htmlString += "只印Order==>" + orders3.toString() + "<br>";
-		htmlString += "印Order==>" + orders3.joinTableToString() + "<br>";
+		htmlString += "印Order + Request==>" + orders3.ToStringByJoinOrderAndRequestResult() + "<br>";
 		
 		htmlString += "</html>";
 		return htmlString;

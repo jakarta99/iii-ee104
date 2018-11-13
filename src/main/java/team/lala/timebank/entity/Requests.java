@@ -13,9 +13,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "requests")
 public class Requests {
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@Column(name = "request_List_Id") //Jasmine:作為PK的id，需要join table時，則Column的Annotation(對應資料表的欄位名稱)必加。
+	@Column(name = "request_List_Id") //Jasmine:此處id為pk鍵，需要join table時，	
+										       //Column的Annotation必加，以協助對應資料表的欄位名稱。
 	private Long id;// 工作ID
 
 	@OneToMany(mappedBy="request")
@@ -23,7 +24,7 @@ public class Requests {
 	
 
 	@Column(name = "member_Id", nullable = false)
-	private Integer memberId; // 刊登者  //改這裡
+	private Integer memberId; // 刊登者  
 
 	@Column(name = "job_Title", nullable = false, length = 50)
 	private String jobTitle;// 活動名稱

@@ -48,10 +48,8 @@ public class Order {
 				+ ", status=" + status + "]";
 	}
 	
-	public String joinTableToString() {
-		return "Order [id=" + id + ", requestListId=" + requestListId + ", supplierId=" + supplierId + ", requesterId="
-				+ requesterId + ", supplierAcception=" + supplierAcception + ", confirmation=" + confirmation
-				+ ", status=" + status 
+	public String ToStringByJoinOrderAndRequestResult() {
+		return  this.toString() 
 				+ "。【join REQUEST】" + request.toString()
 				+ "]";
 	}
