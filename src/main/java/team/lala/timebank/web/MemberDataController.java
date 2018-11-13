@@ -31,7 +31,7 @@ public class MemberDataController {
 	private MemberService memberService;
 	
 
-	private Long memberId = 3L;
+	private Long memberId = 1L;
 
 	@RequestMapping("/memberData")
 	public String findMemberData() {

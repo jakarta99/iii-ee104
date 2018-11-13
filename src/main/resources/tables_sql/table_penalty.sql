@@ -14,7 +14,7 @@ PENALTY_TIME_VALUE INT
 )
 
 INSERT INTO PENALTY (order_list_id, member_id, update_date, description, status, penalty_time_value)
-VALUES(2, 5, '2018-11-10', '缺席', 1 , 4)
+VALUES(2, 1, '2018-11-10', '缺席', 1 , 4)
 
 INSERT INTO PENALTY (order_list_id, member_id, update_date, description, status, penalty_time_value)
 VALUES(3, 8, '2018-11-10', '遲到1小時', 2 , 2)
