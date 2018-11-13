@@ -121,7 +121,7 @@ public class TimeLedgerService {
 
 	}
 	
-	// 尋找一筆資料 更新by Anchor
+	// 尋找一名會員所有資料 更新by Anchor
 	public Collection<TimeLedger> findAllByMemberId(Long memberId) {
 		Collection<TimeLedger> timeLedgers = timeLedgerDao.findAllByMemberId(memberId);
 		return timeLedgers;

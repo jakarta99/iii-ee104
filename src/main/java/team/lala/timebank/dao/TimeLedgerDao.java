@@ -5,7 +5,6 @@ import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.entity.TimeLedger;
 
 public interface TimeLedgerDao extends JpaRepository<TimeLedger, Long> {
@@ -19,6 +18,4 @@ public interface TimeLedgerDao extends JpaRepository<TimeLedger, Long> {
 	// 查詢某人的所有交易紀錄(by Anchor)
 	public Collection<TimeLedger> findAllByMemberId(Long memberId);
 
-	// 查詢某人的所有交易紀錄(by Brian)
-	public Collection<TimeLedger> findByMemberId(Long memberId);
 }
