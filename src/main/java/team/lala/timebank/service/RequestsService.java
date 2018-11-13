@@ -28,9 +28,9 @@ public class RequestsService {
 
 	}
 
-	public Collection<Requests> findAllById(Long id) {
+	public Collection<Requests> findAllByMemberId(Long id) {
 
-		Collection<Requests> requests = requestsDao.findAllById(id);
+		Collection<Requests> requests = requestsDao.findAllByMemberId(id);
 
 		return requests;
 

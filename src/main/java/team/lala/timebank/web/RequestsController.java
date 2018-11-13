@@ -21,7 +21,7 @@ public class RequestsController {
 	@RequestMapping("/requests")
 	public String findRequestListById() {
 		String htmlString = "<html><h4>透過志工會員id查詢工作表</h4>";
-		Collection<Requests> requestCollection = requestsService.findAllById(id);
+		Collection<Requests> requestCollection = requestsService.findAllByMemberId(id);
 		for (Requests requests : requestCollection) {
 			htmlString += requests.toString() + "<br>";
 		}

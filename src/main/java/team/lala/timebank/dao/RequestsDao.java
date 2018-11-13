@@ -11,7 +11,7 @@ public interface RequestsDao extends JpaRepository<Requests,Long>{
 	
 	public Collection<Requests> findByJobAreaAndServiceType(Integer jobArea,Integer serviceType );
 	
-	@Query(value="select id,memberId,jobTitle,timeValue,jobArea,termType,serviceType from requests where memberId = ?1",nativeQuery = true)
-	public Collection<Requests> findAllById(Long id);
+	@Query(value="select * from requests where member_Id = ?1",nativeQuery = true)
+	public Collection<Requests> findAllByMemberId(Long id);
 	
 }

@@ -14,22 +14,22 @@ public class Requests {
 	@Id
 	private Long id;// 工作ID
 
-	@Column(name = "memberId", nullable = false)
+	@Column(name = "member_Id", nullable = false)
 	private String memberId; // 刊登者
 
-	@Column(name = "jobTitle", nullable = false, length = 50)
+	@Column(name = "job_Title", nullable = false, length = 50)
 	private String jobTitle;// 活動名稱
 
-	@Column(name = "timeValue", nullable = false)
+	@Column(name = "time_Value", nullable = false)
 	private Integer timeValue;// 可獲得時數(工作的時間)
 
-	@Column(name = "jobArea", nullable = false)
+	@Column(name = "job_Area", nullable = false)
 	private Integer jobArea;// 工作地點
 
-	@Column(name = "termType", nullable = false)
+	@Column(name = "term_Type", nullable = false)
 	private Integer termType;// 長短期
 
-	@Column(name = "serviceType", nullable = false)
+	@Column(name = "service_Type", nullable = false)
 	private Integer serviceType;// 服務類型
 
 //	@Column(name = "jobStartDateTime", nullable = false)
