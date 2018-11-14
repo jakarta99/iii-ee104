@@ -21,7 +21,7 @@ public class OrderController {
 	private String jobTitle = "中華關懷協會"; // 篩選欄位來自requests資料表(目前資料表中的jobTitle暫時塞的假資料是機構名稱，日後再改)。
 
 	
-	
+	// Jasmine
 	@RequestMapping("/order")
 	public String findMemberOrders() {
 		//STEP1-VIEW傳入的資料驗證
@@ -33,7 +33,7 @@ public class OrderController {
 			//【沒有JOIN版--ORDER_LIST資料表】志工透過id查詢自己的所有申請紀錄
 			String htmlString = "<html><h4>【沒有JOIN版--ORDER_LIST資料表】志工透過id查詢自己的所有申請紀錄</h4>";
 			Collection<Order> orders1 = orderService.findBySupplierId(supplierId);
-			if(orders1 == null) {
+			if(orders1 == null) { //service已處理過:如果Collection為empty，則回傳null，因此以下一律以null判斷
 				htmlString += "查無【" + supplierId + "】號志工提出之order<br>";
 			} else {
 				for (Order order : orders1) {
