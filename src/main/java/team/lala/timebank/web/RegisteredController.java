@@ -2,12 +2,17 @@ package team.lala.timebank.web;
 
 import java.util.regex.Pattern;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.service.MemberService;
 
 //louis
+@RestController
 public class RegisteredController {
-	MemberService memberService = new MemberService();
+	@Autowired
+	private MemberService memberService ;
 
 	public Member MemberRegistered(String loginAccount, String password, String name, String type, String email,
 			String telephone, String mobile) {
