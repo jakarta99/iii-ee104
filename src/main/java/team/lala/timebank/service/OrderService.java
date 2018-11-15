@@ -1,6 +1,7 @@
 package team.lala.timebank.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,47 +15,37 @@ public class OrderService {
 	@Autowired
 	private OrderDao orderDao;
 	
-	public void update(Order order) {
-		orderDao.save(order);
+	public Order save(Order order) {
+		Order o = orderDao.save(order);
+		return o;
 	}
 	
 	public Order getById(Long id) {
 		Order order = orderDao.getOne(id);
-		if(order != null) {
-			return order;
-		}
-		return null;
+		return order;
 	}
 	
-	public Collection<Order> findAll() {
-		Collection<Order> orders = orderDao.findAll();
-		if(!orders.isEmpty()) {
-			return orders;
-		}
-		return null;
+	public List<Order> findAll() {
+		List<Order> orders = orderDao.findAll();
+		return orders;
 	}
 	
 	public void deleteById(Long id) {
 		orderDao.deleteById(id);
+		//dao預設void
 	}
 	
 	
 	//Jasmine
 	//透過志工會員id查詢所有申請及目前審核狀態 (流程：志工申請提供服務的紀錄)
-	public Collection<Order> findBySupplierId(Long supplierId) {
-		Collection<Order> orders = orderDao.findBySupplierId(supplierId);
-		if(!orders.isEmpty()) {
-			return orders;
-		}
-		return null;
+	public List<Order> findBySupplierId(Long supplierId) {
+		List<Order> orders = orderDao.findBySupplierId(supplierId);
+		return orders;
 	}
 	
 	public Order getOrderBySupplierIdAndJobTitle(Long supplierId, String jobTitle) {
 		Order order = orderDao.findOrderBySupplierIdAndJobTitle(supplierId, jobTitle);
-		if(order != null) {
-			return order;
-		}
-		return null;
+		return order;
 	}
 	
 
