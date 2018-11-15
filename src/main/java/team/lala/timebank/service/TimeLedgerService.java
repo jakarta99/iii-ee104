@@ -65,23 +65,17 @@ public class TimeLedgerService {
 	}
 
 	// 查詢特定會員某段時間的交易紀錄
-	public void findTransactionByMemberIdAndTime(Long memberId, LocalDateTime transactionTimeBegin,
+	public Collection<TimeLedger> findByMemberIdAndTransactionTimeBetween(Long memberId, LocalDateTime transactionTimeBegin,
 			LocalDateTime transactionTimeEnd) {
 		Collection<TimeLedger> periodSpecificMemberTimeLedgers = timeLedgerDao
 				.findByMemberIdAndTransactionTimeBetween(memberId, transactionTimeBegin, transactionTimeEnd);
-		if (periodSpecificMemberTimeLedgers.isEmpty()) {
-			System.out.println("此區間查無交易紀錄");
-		} else {
-			for (TimeLedger timeLedger : periodSpecificMemberTimeLedgers) {
-				System.out.print(timeLedger.toString());
-			}
-		}
+		return periodSpecificMemberTimeLedgers;
 	}
 
 	// 更新一筆資料
-	public void update(TimeLedger timeLedger) {
+	public TimeLedger save(TimeLedger timeLedger) {
 		timeLedgerDao.save(timeLedger);
-		System.out.println("更新單筆存摺資料成功");
+		return timeLedger;
 	}
 
 	// 刪除一筆資料
@@ -91,7 +85,7 @@ public class TimeLedgerService {
 	}
 
 	// 查詢全部交易紀錄
-	public Collection<TimeLedger> findAll(Long memberId) {
+	public Collection<TimeLedger> findAll() {
 		Collection<TimeLedger> specificMemberTimeLedgers = timeLedgerDao.findAll();
 		return specificMemberTimeLedgers;
 	}
@@ -103,20 +97,6 @@ public class TimeLedgerService {
 			return null;
 		}
 		return timeLedger;
-	}
-
-	public int getBalanceValueByMemberId(Long memberId) {
-		int balanceValue = 0;
-		
-		TimeLedger timeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTimeDesc(memberId);
-		if (timeLedger == null) {
-			balanceValue=0;
-		}else {
-
-		balanceValue += timeLedger.getBalanceValue();
-		}
-		return balanceValue;
-
 	}
 	
 	// 尋找一名會員所有資料 更新by Anchor

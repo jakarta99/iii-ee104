@@ -27,7 +27,7 @@ public class TimeLedgerController {
 	@RequestMapping("/user")
 	public String listMyTimeLedgers() {
 		// 1. List my ledgers
-		Collection<TimeLedger> timeLedgerList = timeLedgerService.findAll(memberId);
+		Collection<TimeLedger> timeLedgerList = timeLedgerService.findAll();
 		String result = "<html><h1>Hello World!</h1><p>";
 		for (TimeLedger timeLedger : timeLedgerList) {
 			result += timeLedger.toString() + "<br>";
