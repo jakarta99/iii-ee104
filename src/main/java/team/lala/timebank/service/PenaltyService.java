@@ -15,14 +15,12 @@ public class PenaltyService {
 	@Autowired
 	private PenaltyDao penaltyDao;
 
-	public void update(Penalty penalty) {
-		penaltyDao.save(penalty);
+	public Penalty update(Penalty p) {
+		Penalty penalty=penaltyDao.save(p);
+		return penalty;
 	}
 
-	public List<Penalty> findSomeoneAll(long id) {
-		List<Penalty> specificMemberPenalty = penaltyDao.findAll();
-		return specificMemberPenalty;
-	}
+	
 
 	public List<Penalty> findAll() {
 		List<Penalty> penalty = penaltyDao.findAll();
