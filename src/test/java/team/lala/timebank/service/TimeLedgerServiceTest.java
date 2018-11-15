@@ -56,7 +56,7 @@ public class TimeLedgerServiceTest {
 			timeLedger.setDepositValue(80);
 			
 			//3.更新
-			timeLedgerService.update(timeLedger);
+			timeLedgerService.save(timeLedger);
 			
 			//4.再次查詢1號會員資料，確認更新結果
 			timeLedger = timeLedgerService.getLastTransaction(1L);
@@ -73,12 +73,12 @@ public class TimeLedgerServiceTest {
 	
 	@Test
 	public void testGetAll() {
-		Collection<TimeLedger> timeLedgers = timeLedgerService.findAll(1L);
+		Collection<TimeLedger> timeLedgers = timeLedgerService.findAll();
 		for(TimeLedger timeLedger : timeLedgers) {
 			System.out.println(timeLedger.toString());
 		}
 		
-		timeLedgerService.findAll(10L);
+		timeLedgerService.findAll();
 	}
 
 
