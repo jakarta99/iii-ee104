@@ -30,7 +30,7 @@ public class MemberDataController {
 	private MemberService memberService;
 
 	private Long memberId = 2L;
-
+	//列出特定會員的資料
 	@RequestMapping("/memberData")
 	public String findMemberData() {
 		String memberName = memberService.findMemberById(memberId).getName();
