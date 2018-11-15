@@ -2,6 +2,7 @@ package team.lala.timebank.web;
 
 import java.util.Collection;
 
+import org.hibernate.query.criteria.internal.predicate.IsEmptyPredicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,22 +38,24 @@ public class MemberDataController {
 
 		int totalDonateTime = 0;
 		Collection<Donation> donations = donationService.findByMemberId(memberId);
-		for (Donation donation : donations) {
-			totalDonateTime += donation.getDonateValue();
+		if (donations != null) {
+			for (Donation donation : donations) {
+				totalDonateTime += donation.getDonateValue();
+			}
 		}
 		result += "您的捐贈時間為:" + totalDonateTime + "小時<br>";
 
 		int totalPenaltyTime = 0;
 		Collection<Penalty> penaltys = penaltyService.findByMemberId(memberId);
-		for (Penalty penalty : penaltys) {
-			totalPenaltyTime += penalty.getPenaltyTimeValue();
+		if (penaltys != null) {
+			for (Penalty penalty : penaltys) {
+				totalPenaltyTime += penalty.getPenaltyTimeValue();
+			}
 		}
 
 		result += "您的處罰時間為:" + totalPenaltyTime + "小時<br>";
 		int balanceValue = 0;
-		if (timeLedgetService.getLastTransaction(memberId) == null) {
-
-		} else {
+		if (timeLedgetService.getLastTransaction(memberId) != null) {
 			balanceValue = timeLedgetService.getLastTransaction(memberId).getBalanceValue();
 		}
 		result += "您的餘額為:" + balanceValue + "小時<br>";
