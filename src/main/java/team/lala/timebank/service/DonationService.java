@@ -14,8 +14,9 @@ public class DonationService {
 	@Autowired
 	private DonationDao donationDao;
 
-	public void update(Donation donation) {
-		donationDao.save(donation);
+	public Donation update(Donation d) {
+		Donation donation =donationDao.save(d);
+		return donation;
 	}
 
 	public Donation findById(Long id) {
