@@ -33,7 +33,7 @@ public class DonationService {
 	}
 
 	// 查某人所有的Donations(更改by Brian)
-	public Collection<Donation> findDonationsByMemberId(Long memberId) {
+	public Collection<Donation> findByMemberId(Long memberId) {
 
 		Collection<Donation> donations = donationDao.findByMemberId(memberId);
 
