@@ -1,4 +1,4 @@
-package team.lala.timebank.entity;
+package team.lala.timebank.entity.jdbcQuery;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import team.lala.timebank.entity.Area;
+import team.lala.timebank.entity.OrgMember;
 
 @Entity
 @Table(name = "MEMBER")
