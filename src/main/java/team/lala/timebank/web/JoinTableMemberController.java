@@ -1,7 +1,6 @@
 package team.lala.timebank.web;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,10 +10,9 @@ import team.lala.timebank.entity.Area;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.OrgMember;
 import team.lala.timebank.entity.Type;
-import team.lala.timebank.entity.inherit.MemberInherit;
+import team.lala.timebank.entity.inherit.OrgMemberInherit;
 import team.lala.timebank.service.AreaService;
 import team.lala.timebank.service.MemberService;
-import team.lala.timebank.service.OrderService;
 
 @RestController
 public class JoinTableMemberController {
@@ -24,13 +22,21 @@ public class JoinTableMemberController {
 
 	@Autowired
 	private MemberService memberService;
-	@Autowired
-	private OrderService orderService;
+	
 	@Autowired
 	private AreaService areaService;
+	private Long memberId = 4l;
+	
+	@RequestMapping("/deleteMemberByJoining") //成功
+	public String deleteMemberByJoining() {
+		String result = "<html><h3>Find All Members By Inheriting tables</h3><p>";
+		memberService.deleteById(memberId);
+//		result += "</p></html>";
+		return result;
+	}
 
 	// findAllMember，並印出 member的結果 (join tables : area & orgMember ) 
-	@RequestMapping("/findMemberByJoining")
+	@RequestMapping("/findMemberByJoining") //成功
 	public String findMemberByJoining() {
 		String result = "<html><h3>Find All Members By Joining tables</h3><p>";
 		long begin = System.currentTimeMillis();	
@@ -62,67 +68,68 @@ public class JoinTableMemberController {
 		return result;
 	}
 	
-	
-	
-	@RequestMapping("/saveMemberByJoining")
-	public String saveMemberByInheriting() {
-		String result = "<html><h3>Save  Members By Joining tables</h3><p>";
-		// 1
-		// OrgMemberInherit orgMem = new OrgMemberInherit();
-		// orgMem.setId(2L); //無效，且程式仍可正常運作
-		// orgMem.setLoginAccount("JESE");
-		// orgMem.setPassword("asdf");
-		// orgMem.setEmail("CATHY@gmail.com");
-		// orgMem.setType("O");
-		// orgMem.setName("CATHY");
-		// orgMem.setArea(3l);
-		// orgMem.setCeo("Jim");
-		// orgMem.setFounder("黃CATHY");
-		// OrgMemberInherit orgMember = orgDao.save(orgMem);
-		// result += "Id = " + orgMember.getId() + ", ";
-		// result += "LoginAccount = " + orgMember.getLoginAccount() + ", ";
-		// result += "Name = " + orgMember.getName() + ", ";
-		// result += "Founder = " + orgMember.getFounder() + ", ";
-		// result += "Ceo = " + orgMember.getCeo() + " ";
-		// result += "<br>";
-
-		// 2
-		Member mem = new Member();
-//		mem.setId(1L); 
+	@RequestMapping("/updateMemberByJoining") //update成功
+	public String updateMemberByJoining() {
+		String result = "<html><h3>Save(update) Members By Joining tables</h3><p>";
+		Member mem = new Member();//設id >update
+		mem.setId(memberId); 
 		mem.setLoginAccount("Sam");
 		mem.setPassword("asdf");
 		mem.setEmail("anchor@gmail.com");	
 		mem.setType("P");
 		mem.setName("anchor");
+
+		OrgMember orgMem = new OrgMember();
+		orgMem.setCeo("Jim");
+		orgMem.setFounder("黃CATHY");
+		
+		mem.setOrgMember(orgMem);
+		orgMem.setMember(mem);
 		// mem.setArea(2l);
-		Member member = memberService.save(mem);
+		Member member = memberService.save(mem);		
+	
 		result += "Id = " + member.getId() + ", ";
 		result += "LoginAccount = " + member.getLoginAccount() + ", ";
 		result += "Name = " + member.getName() + ", ";
+		result += "Founder = " + member.getOrgMember().getFounder() + ", ";
+		result += "Ceo = " + member.getOrgMember().getCeo() + " ";
 		result += "<br>";
-
+		
 		result += "</p></html>";
-		return result;
+		return result; 
+	}
+	
+	@RequestMapping("/insertMemberByJoining") //insert成功
+	public String insertMemberByInheriting() {
+		String result = "<html><h3>Save(insert)  Members By Joining tables</h3><p>";	
+		Member mem = new Member(); //不設id >insert
+		mem.setLoginAccount("Bruse");
+		mem.setPassword("asdf");
+		mem.setEmail("Bruse@gmail.com");	
+		mem.setType("P");
+		mem.setName("Bruse");
+
+		OrgMember orgMem = new OrgMember();
+		orgMem.setCeo("anchor");
+		orgMem.setFounder("黃CATHY");
+		
+		mem.setOrgMember(orgMem);
+		orgMem.setMember(mem);
+		// mem.setArea(2l);
+		Member member = memberService.save(mem);		
+	
+		result += "Id = " + member.getId() + ", ";
+		result += "LoginAccount = " + member.getLoginAccount() + ", ";
+		result += "Name = " + member.getName() + ", ";
+		result += "Founder = " + member.getOrgMember().getFounder() + ", ";
+		result += "Ceo = " + member.getOrgMember().getCeo() + " ";
+		result += "<br>";
+		
+		result += "</p></html>";
+		return result; 
 	}
 	
 	
-	// @RequestMapping("/passwordConfirmation")
-	// public String identityConfirm() {
-	// String result = "<html>";
-	// if (password != null) {
-	//
-	// }
-	//
-	// result += "</html>";
-	// return result;
-	// }
-
-	// @RequestMapping("/changePassword")
-	// public String changePassword() {
-	// String result = "<html>";
-	//
-	// result += "</html>";
-	// return result;
-	// }
+	
 
 }

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import team.lala.timebank.entity.Area;
+import team.lala.timebank.entity.Member;
+import team.lala.timebank.entity.OrgMember;
 import team.lala.timebank.entity.Type;
 
 @RestController
@@ -17,8 +19,16 @@ public class InheritTableMemberController {
 
 	@Autowired
 	private OrgMemberDao orgDao;
+	
+	@RequestMapping("/deleteMemberByInheriting") //成功
+	public String deleteMemberByInheriting() {
+		String result = "<html><h3>Find All Members By Inheriting tables</h3><p>";
+		orgDao.deleteById(2l);
+//		result += "</p></html>";
+		return result;
+	}
 
-	@RequestMapping("/findMemberByInheriting")
+	@RequestMapping("/findMemberByInheriting") //成功
 	public String findMemberByInheriting() {
 		String result = "<html><h3>Find All Members By Inheriting tables</h3><p>";
 		long begin = System.currentTimeMillis();
@@ -59,8 +69,10 @@ public class InheritTableMemberController {
 		result += "</p></html>";
 		return result;
 	}
+	
 
-	@RequestMapping("/saveMemberByInheriting")
+
+	@RequestMapping("/saveMemberByInheriting") // 失敗
 	public String saveMemberByInheriting() {
 		String result = "<html><h3>Save  Members By Inheriting tables</h3><p>";
 		// 1
