@@ -17,9 +17,9 @@ public class Order {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name="REQUEST_LIST_ID"   //Jasmine:代表本entity欄位名稱
+	@JoinColumn(name="REQUEST_LIST_ID"   //代表本entity欄位名稱
 				, referencedColumnName="request_List_Id",  //代表合併的目標entity，其對應的欄位名稱
-				insertable=false, updatable=false) //insertable與updatable一定要加(?)，否則會噴錯
+				insertable=false, updatable=false) //insertable與updatable預設true，但子表一定要設false
 	private Requests request;
 	
 	@Column(name="REQUEST_LIST_ID")
