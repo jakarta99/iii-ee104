@@ -2,6 +2,7 @@ package team.lala.timebank.service;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class TimeLedgerService {
 	private TimeLedgerDao timeLedgerDao;
 
 	// 存款
-	public void deposit(int hours, Long memberId) {
+	public TimeLedger deposit(int hours, Long memberId) {
 		// 1.找出會員最近一筆交易紀錄
 		TimeLedger lastTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTimeDesc(memberId);
 
@@ -36,38 +37,34 @@ public class TimeLedgerService {
 		timeLedger.setDescription("deposit");
 
 		// 3. insert
-		timeLedgerDao.save(timeLedger);
-		System.out.println("存款成功");
+		return timeLedgerDao.save(timeLedger);
 	}
 
 	// 提款
-	public void withdrawal(Integer hours, Long memberId) {
+	public TimeLedger withdrawal(Integer hours, Long memberId) {
 		// 1. findTimeLedgerByMemberId
 		TimeLedger lastTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTimeDesc(memberId);
+		TimeLedger timeLedger = null;
 
 		// 尚無交易紀錄，或帳戶餘額小於本次提款時數者，不得提款
-		if (lastTimeLedger == null || lastTimeLedger.getBalanceValue() < hours) {
-			System.out.println("餘額不足，不得提款");
-		} else {
+		if (lastTimeLedger != null && lastTimeLedger.getBalanceValue() >= hours) {
 			// 2. prepare timeledger data
-			TimeLedger timeLedger = new TimeLedger();
+			timeLedger = new TimeLedger();
 			timeLedger.setMemberId(memberId);
 			timeLedger.setWithdrawalValue(hours);
 			timeLedger.setTransactionTime(LocalDateTime.now());
 			timeLedger.setBalanceValue(lastTimeLedger.getBalanceValue() - hours);
 			timeLedger.setDescription("withdrawal");
-
-			// 3. insert
-			timeLedgerDao.save(timeLedger);
-			System.out.println("提款成功");
 		}
+		// 3. insert
+		return timeLedgerDao.save(timeLedger);
 
 	}
 
 	// 查詢特定會員某段時間的交易紀錄
-	public Collection<TimeLedger> findByMemberIdAndTransactionTimeBetween(Long memberId, LocalDateTime transactionTimeBegin,
+	public List<TimeLedger> findByMemberIdAndTransactionTimeBetween(Long memberId, LocalDateTime transactionTimeBegin,
 			LocalDateTime transactionTimeEnd) {
-		Collection<TimeLedger> periodSpecificMemberTimeLedgers = timeLedgerDao
+		List<TimeLedger> periodSpecificMemberTimeLedgers = timeLedgerDao
 				.findByMemberIdAndTransactionTimeBetween(memberId, transactionTimeBegin, transactionTimeEnd);
 		return periodSpecificMemberTimeLedgers;
 	}
@@ -85,8 +82,8 @@ public class TimeLedgerService {
 	}
 
 	// 查詢全部交易紀錄
-	public Collection<TimeLedger> findAll() {
-		Collection<TimeLedger> specificMemberTimeLedgers = timeLedgerDao.findAll();
+	public List<TimeLedger> findAll() {
+		List<TimeLedger> specificMemberTimeLedgers = timeLedgerDao.findAll();
 		return specificMemberTimeLedgers;
 	}
 
@@ -98,10 +95,10 @@ public class TimeLedgerService {
 		}
 		return timeLedger;
 	}
-	
+
 	// 尋找一名會員所有資料 更新by Anchor
-	public Collection<TimeLedger> findAllByMemberId(Long memberId) {
-		Collection<TimeLedger> timeLedgers = timeLedgerDao.findAllByMemberId(memberId);
+	public List<TimeLedger> findAllByMemberId(Long memberId) {
+		List<TimeLedger> timeLedgers = timeLedgerDao.findAllByMemberId(memberId);
 		return timeLedgers;
 	}
 

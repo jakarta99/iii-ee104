@@ -13,13 +13,13 @@ import javax.persistence.Table;
 @Table(name="ORDER_LIST")
 public class Order {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name="REQUEST_LIST_ID"   //Jasmine:代表本Class對應資料庫的欄位名稱
-				, referencedColumnName="request_List_Id",  //代表合併的目標資料表，其對應資料庫的欄位名稱
-				insertable=false, updatable=false) //insertable與updatable一定要加，否則會噴錯
+	@JoinColumn(name="REQUEST_LIST_ID"   //代表本entity欄位名稱
+				, referencedColumnName="request_List_Id",  //代表合併的目標entity，其對應的欄位名稱
+				insertable=false, updatable=false) //insertable與updatable預設true，但子表一定要設false
 	private Requests request;
 	
 	@Column(name="REQUEST_LIST_ID")
@@ -52,6 +52,20 @@ public class Order {
 		return  this.toString() 
 				+ "。【join REQUEST】" + request.toString()
 				+ "]";
+	}
+	
+	public Order() {
+		
+	}
+	
+	public Order(Long requestListId, Long supplierId, Long requesterId,
+			boolean supplierAcception, boolean confirmation, String status) {
+		this.requestListId = requestListId;
+		this.supplierId = supplierId;
+		this.requesterId = requesterId;
+		this.supplierAcception = supplierAcception;
+		this.confirmation = confirmation;
+		this.status = status;
 	}
 
 	public Long getId() {

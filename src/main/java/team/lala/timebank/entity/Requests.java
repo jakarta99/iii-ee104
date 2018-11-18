@@ -15,8 +15,7 @@ import javax.persistence.Table;
 public class Requests {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@Column(name = "request_List_Id") //Jasmine:此處id為pk鍵，需要join table時，	
-										       //Column的Annotation必加，以協助對應資料表的欄位名稱。
+	@Column(name = "request_List_Id") 
 	private Long id;// 工作ID
 
 	@OneToMany(mappedBy="request")

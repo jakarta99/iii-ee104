@@ -1,9 +1,10 @@
 package team.lala.timebank.web;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,13 +16,53 @@ public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
-
-
+	
+//	private Requests requestTest = new Requests();
 	private Long supplierId = 2L; // 篩選欄位來自order_list資料表
 	private String jobTitle = "中華關懷協會"; // 篩選欄位來自requests資料表
+
+	
+	@RequestMapping("/insertOrder")
+	public String insertOrders() {
+		Order order = new Order(6L, supplierId, 2L,	false, false, "3");
+		String htmlString = "<html><h4>【save Order】</h4></html>";
+		Order order2 = orderService.save(order);
+		htmlString += supplierId + "號會員提出申請成功，內容：" + order2.toString();
+		return htmlString;
+	}
+	
+	@RequestMapping("/updateOrder")
+	public String updateOrders() {
+		String htmlString = "<html><h4>【save Order】</h4></html>";
+		Order order = orderService.getById(2L);
+		if(order != null) {
+			htmlString += "更新前資料:" + order.toString() + "<br>";
+			order.setStatus("4");
+			order = orderService.save(order);
+			htmlString += "更新後資料:" + order.toString();
+		} else {
+			htmlString += "查無該筆資料";
+		}		
+		return htmlString;
+	}
+	
+	@RequestMapping("/deleteOrder")
+	public String deleteOrders() {
+		String htmlString = "<html><h4>【delete Order by Id】</h4></html>";
+		try {
+			Order order = orderService.getById(10L);
+			htmlString += "即將刪除資料為[" + order.toString() + "<br>";
+			orderService.deleteById(10L);
+			htmlString += "刪除完成";
+		} catch (EmptyResultDataAccessException e) {
+			htmlString += "ID不存在，無法刪除";
+			return htmlString;
+		}
+		return htmlString;
+	}
 	
 	
-	@RequestMapping("/order")
+	@RequestMapping("/findMemberOrders")
 	public String findMemberOrders() {
 		//VIEW傳入的資料驗證
 		if(supplierId == null || supplierId == 0 || jobTitle==null || jobTitle.trim().length()==0) {

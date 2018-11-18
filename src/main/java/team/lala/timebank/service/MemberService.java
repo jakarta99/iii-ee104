@@ -51,15 +51,12 @@ public class MemberService {
 	}
 
 	// louis
-	public boolean checkAccountDuplicates(Member member) {
+	public Member findByLoginAccount(Member m) {
 		// 根據帳號在資料庫中尋找
-		member = memberDao.findByLoginAccount(member.getLoginAccount());
-		if (member != null) {
-			return false;
-		} else {
-			memberDao.save(member);
-			return true;
-		}
+		Member member = null;
+		member = memberDao.findByLoginAccount(m.getLoginAccount());
+		return member;
+
 	}
 
 

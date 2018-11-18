@@ -1,8 +1,10 @@
 package team.lala.timebank.service;
 
-import java.util.Collection;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Optional;
+=======
+>>>>>>> branch 'master' of https://github.com/jakarta99/iii-ee104
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ public class PenaltyService {
 		Penalty penalty=penaltyDao.save(p);
 		return penalty;
 	}
+
 	 
 	public Penalty getOne(Long id) {
 		Penalty penalty = penaltyDao.getOne(id);
@@ -32,6 +35,7 @@ public class PenaltyService {
 	}
 	
 
+
 	public List<Penalty> findAll() {
 		List<Penalty> penalty = penaltyDao.findAll();
 		return penalty;
@@ -43,9 +47,9 @@ public class PenaltyService {
 	}
 
 	// 查詢某人的所有Penalty (更改by Brian)
-	public Collection<Penalty> findByMemberId(Long memberId) {
+	public List<Penalty> findByMemberId(Long memberId) {
 
-		Collection<Penalty> penaltys = penaltyDao.findByMemberId(memberId);
+		List<Penalty> penaltys = penaltyDao.findByMemberId(memberId);
 
 		return penaltys;
 
