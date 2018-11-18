@@ -44,11 +44,11 @@ public class MemberService {
 	}
 
 	// louis
-	public Member findByLoginAccount(Member member) {
+	public Member findByLoginAccount(Member m) {
 		// 根據帳號在資料庫中尋找
-		Member m = null;
-		m = memberDao.findByLoginAccount(member.getLoginAccount());
-		return m;
+		Member member = null;
+		member = memberDao.findByLoginAccount(m.getLoginAccount());
+		return member;
 
 	}
 

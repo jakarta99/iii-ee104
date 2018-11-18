@@ -3,6 +3,7 @@ package team.lala.timebank.web;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import team.lala.timebank.entity.Member;
@@ -13,7 +14,31 @@ import team.lala.timebank.service.MemberService;
 public class MemberRegisteredController {
 	@Autowired
 	private MemberService memberService;
+
+	@Autowired
 	private MemberRegisteredController memberRegisteredController;
+
+	@RequestMapping("/MemberRegistered")
+	public String MemberRegistered() {
+		String result = "<html><h3>MemberRegistered</h3><p>";
+		String loginAccount = "louis1112";
+		String password = "asdfgh";
+		String email = "qqq123@yahoo.com.tw";
+		String name = "陳怡君";
+		String mobile = "0912456789";
+		String type = "1";
+		String telephone = "0245634569";
+		Member member = memberRegisteredController.MemberRegistered(loginAccount, password, name, type, email,
+				telephone, mobile);
+		if (member != null) {
+			result += member.toString();
+			result += "</p><br><h3>註冊成功</h3></html>";
+		} else {
+			result += "註冊失敗</p></html>";
+		}
+
+		return result;
+	}
 
 	public Member MemberRegistered(String loginAccount, String password, String name, String type, String email,
 			String telephone, String mobile) {
@@ -25,9 +50,10 @@ public class MemberRegisteredController {
 		boolean bmobile = memberRegisteredController.checkphone(mobile); // 檢查手機
 
 		// 檢查格式是否都符合
-		Member member = new Member();
+		Member member = null;
 		if (baccount && bpassword && bemail && bname && btelephone && bmobile) {
 			// 將註冊者的資料封裝
+			member = new Member();
 			member.setLoginAccount(loginAccount);
 			member.setPassword(password);
 			member.setName(name);
@@ -39,8 +65,8 @@ public class MemberRegisteredController {
 			return member;
 		}
 		// 檢查帳號是否重複，如果沒重複則insert資料庫
-		member = memberService.findByLoginAccount(member);
-		if (member != null) {
+		// findByLoginAccount回傳直如果是null，代表資料庫沒相同的帳號，可以註冊
+		if (memberService.findByLoginAccount(member) == null) {
 			member = memberService.save(member);
 		}
 		return member;
