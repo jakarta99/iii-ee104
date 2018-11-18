@@ -1,6 +1,7 @@
 package team.lala.timebank.service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,12 @@ public class MemberService {
 
 	public Member findMemberById(Long id) {
 		Member member = memberDao.getOne(id);
+		return member;
+	}
+	
+	public Member findById(Long id){
+		Optional<Member> m = memberDao.findById(id);
+		Member member = m.orElse(null);
 		return member;
 	}
 
@@ -55,68 +62,5 @@ public class MemberService {
 		}
 	}
 
-	// /**
-	// * insert member
-	// *
-	// * @param member
-	// */
-	// public void insert(Member member) {
-	// memberDao.getConnection();
-	// memberDao.insert(member);
-	// memberDao.closeConnection();
-	// }
-	//
-	// /**
-	// * update member
-	// *
-	// * @param member
-	// */
-	// public void update(Member member) {
-	// memberDao.getConnection();
-	// memberDao.update(member);
-	// memberDao.closeConnection();
-	// }
-	//
-	// /**
-	// * find member by id
-	// *
-	// * @param id
-	// * @return member
-	// */
-	// public Member findMemberById(Long id) {
-	// memberDao.getConnection();
-	// Member member = memberDao.findOne(id);
-	// memberDao.closeConnection();
-	// if (member == null) {
-	// System.out.println("memberId does not exist");
-	// }
-	// return member;
-	// }
-	//
-	// /**
-	// * lists all the members
-	// *
-	// * @return the collection of all members
-	// */
-	// public Collection<Member> findAll() {
-	// memberDao.getConnection();
-	// Collection<Member> memberCollection = memberDao.findAll();
-	// memberDao.closeConnection();
-	// if (memberCollection == null) {
-	// System.out.println("memberCollection does not exist");
-	// }
-	// return memberCollection;
-	// }
-	//
-	// /**
-	// * delete member by id
-	// *
-	// * @param id
-	// */
-	// public void delete(Long id) {
-	// memberDao.getConnection();
-	// memberDao.delete(id);
-	// memberDao.closeConnection();
-	// }
 
 }

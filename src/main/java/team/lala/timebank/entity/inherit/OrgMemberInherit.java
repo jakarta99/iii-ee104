@@ -14,11 +14,7 @@ import team.lala.timebank.entity.Member;
 @Table(name="ORG_MEMBER")
 @PrimaryKeyJoinColumn(name="ID")  
 public class OrgMemberInherit extends MemberInherit{
-	
-//	@Id
-//	@GeneratedValue(strategy =GenerationType.AUTO)
-//	private Long id;
-	
+
 	@Column(name="FOUNDER")
 	private String founder;
 
@@ -30,7 +26,9 @@ public class OrgMemberInherit extends MemberInherit{
 	
 	@Override
 	public String toString() {
-		return "OrgMemberInherit [founder=" + founder + ", ceo=" + ceo + "]";
+		return "OrgMemberInherit [id=" + getId() + ", loginAccount=" + getLoginAccount() + ", password=" + getPassword() + ", name=" + 
+				getName() + ", type=" + getType() + ", email=" + getEmail() + ", telephone=" + getTelephone() + ", mobile=" + getMobile() + 
+					", area=" + getArea() + ", founder=" + founder + ", ceo=" + ceo + "]";
 	}
 
 	public String getFounder() {
