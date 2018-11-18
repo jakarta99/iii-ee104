@@ -1,6 +1,6 @@
 package team.lala.timebank.service;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +24,7 @@ public class MemberService {
 		memberDao.deleteById(id);
 	}
 
+	//Anchor 功能與下方findById雷同，是否需刪除 或 改List
 	public Member findMemberById(Long id) {
 		Member member = memberDao.getOne(id);
 		return member;
@@ -35,8 +36,8 @@ public class MemberService {
 		return member;
 	}
 
-	public Collection<Member> findAll() {
-		Collection<Member> members = memberDao.findAll();
+	public List<Member> findAll() {
+		List<Member> members = memberDao.findAll();
 		return members;
 	}
 
