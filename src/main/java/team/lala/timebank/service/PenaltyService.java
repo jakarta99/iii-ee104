@@ -1,10 +1,8 @@
 package team.lala.timebank.service;
 
 import java.util.List;
-<<<<<<< HEAD
 import java.util.Optional;
-=======
->>>>>>> branch 'master' of https://github.com/jakarta99/iii-ee104
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
