@@ -1,6 +1,6 @@
 package team.lala.timebank.service;
 
-import java.util.Collection;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +24,8 @@ public class DonationService {
 		return donation;
 	}
 
-	public Collection<Donation> findAll() {
-		Collection<Donation> donations = donationDao.findAll();
+	public List<Donation> findAll() {
+		List<Donation> donations = donationDao.findAll();
 		return donations;
 	}
 
@@ -34,9 +34,9 @@ public class DonationService {
 	}
 
 	// 查某人所有的Donations(更改by Brian)
-	public Collection<Donation> findByMemberId(Long memberId) {
+	public List<Donation> findByMemberId(Long memberId) {
 
-		Collection<Donation> donations = donationDao.findByMemberId(memberId);
+		List<Donation> donations = donationDao.findByMemberId(memberId);
 
 		return donations;
 
