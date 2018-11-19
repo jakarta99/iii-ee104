@@ -1,6 +1,6 @@
 package team.lala.timebank.web;
 
-import java.util.Collection;
+import java.util.*;
 
 import org.hibernate.query.criteria.internal.predicate.IsEmptyPredicate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class MemberDataController {
 		String result = "<html><h3>查詢" + memberName + "資料</h3>";
 
 		int totalDonateTime = 0;
-		Collection<Donation> donations = donationService.findByMemberId(memberId);
+		List<Donation> donations = donationService.findByMemberId(memberId);
 		if (donations != null) {
 			for (Donation donation : donations) {
 				totalDonateTime += donation.getDonateValue();
@@ -46,7 +46,7 @@ public class MemberDataController {
 		result += "您的捐贈時間為:" + totalDonateTime + "小時<br>";
 
 		int totalPenaltyTime = 0;
-		Collection<Penalty> penaltys = penaltyService.findByMemberId(memberId);
+		List<Penalty> penaltys = penaltyService.findByMemberId(memberId);
 		if (penaltys != null) {
 			for (Penalty penalty : penaltys) {
 				totalPenaltyTime += penalty.getPenaltyTimeValue();
