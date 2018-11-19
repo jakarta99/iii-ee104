@@ -22,15 +22,15 @@ public class RequestsService {
 	private RequestsDao requestsDao;
 
 	// update
-	public void update(Requests request) {
+	public void save(Requests request) {
 
 		requestsDao.save(request);
 
 	}
 
-	public Collection<Requests> findAllByMemberId(Long id) {
+	public List<Requests> findByMemberId(Long memberid) {
 
-		Collection<Requests> requests = requestsDao.findAllByMemberId(id);
+		List<Requests> requests = requestsDao.findByMemberId(memberid);
 
 		return requests;
 

@@ -16,12 +16,12 @@ public class RequestsController {
 	@Autowired
 	private RequestsService requestsService;
 	
-	private Long id = 2L;  //查詢ID2號
+	private Long memberid = 2L;  //查詢ID2號
 	
 	@RequestMapping("/requests")
 	public String findRequestListById() {
 		String htmlString = "<html><h4>透過志工會員id查詢工作表</h4>";
-		Collection<Requests> requestCollection = requestsService.findAllByMemberId(id);
+		Collection<Requests> requestCollection = requestsService.findByMemberId(memberid);
 		for (Requests requests : requestCollection) {
 			htmlString += requests.toString() + "<br>";
 		}
