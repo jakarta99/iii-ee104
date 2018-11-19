@@ -1,7 +1,6 @@
 package team.lala.timebank.dao;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,9 +9,10 @@ import team.lala.timebank.entity.Requests;
 
 public interface RequestsDao extends JpaRepository<Requests,Long>{
 	
-	public Collection<Requests> findByJobAreaAndServiceType(Integer jobArea,Integer serviceType );
+	public List<Requests> findByJobAreaAndServiceType(Integer jobArea,Integer serviceType );
 	
+
 //	@Query(value="select * from requests where member_Id = ?1",nativeQuery = true)
 	public List<Requests> findByMemberId(Long memberid);
-	
+
 }
