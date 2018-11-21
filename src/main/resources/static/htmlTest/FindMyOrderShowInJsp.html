@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Find My Order(JSP)(JoinTable)</title>
+</head>
+<body>
+<h3>查詢志工申請狀態(Order join Request)</h3>
+<h4>本頁送出後會呼叫Controller，透過其ModelAndView物件導向jsp</h4>
+<form action="/findMyOrdersByJsp" method="Post">
+	志工ID(提示-2):<input type="text" name="supplierId"></input><p>
+	服務機構(提示-中華關懷協會):<input type="text" name="jobTitle"></input><p>
+	<input type="submit" value="Send"/>
+</form>
+</body>
+</html>

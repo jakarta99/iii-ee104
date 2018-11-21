@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ORDER_LIST")
-public class Order {
+public class Order{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -75,7 +75,15 @@ public class Order {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public Requests getRequest() {
+		return request;
+	}
 
+	public void setRequest(Requests request) {
+		this.request = request;
+	}
+	
 	public Long getRequestListId() {
 		return requestListId;
 	}

@@ -22,7 +22,7 @@ public interface OrderDao extends JpaRepository<Order,Long>{
 	@Query(value = "select * from ORDER_LIST o join requests r "
 					+ "on o.request_List_Id = r.request_List_Id"
 					+ " where o.supplier_Id=?1 and r.job_Title =?2", nativeQuery = true)
-	public Order findOrderBySupplierIdAndJobTitle(Long supplierId, String jobTitle);
+	public List<Order> findOrderBySupplierIdAndJobTitle(Long supplierId, String jobTitle);
 
 
 }

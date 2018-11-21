@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Find My Order(HTML)</title>
+<script>
+	function doPost(){
+		var queryStr = "supplierId=" + document.getElementById("supplierId").value;
+		xhttp.open("POST", "/findMyOrdersByhtml",true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.send(queryStr);
+	}
+	
+
+</script>
+</head>
+
+<body>
+<h3>查詢志工申請狀態</h3>
+<h4>本頁送出後會呼叫Controller，回傳資料到本頁(Ajax)</h4>
+<form>
+	志工ID:<input type="text" id="supplierId"></input><p>
+	<button type="button" onclick="doPost()">Send(HTML)</button>
+</form>
+<div id="result"></div>
+
+<script>
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function(){
+		if(xhttp.readyState == 4 && xhttp.status == 200){
+			document.getElementById("result").innerHTML = xhttp.responseText;
+		}
+	}
+
+</script>
+
+
+</body>
+</html>
