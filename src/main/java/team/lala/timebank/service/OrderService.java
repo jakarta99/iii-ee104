@@ -28,7 +28,7 @@ public class OrderService {
 	}
 	
 	//測試join用
-	public List<Order> getOrderBySupplierIdAndJobTitle(Long supplierId, String jobTitle) {
+	public List<Order> findOrderBySupplierIdAndJobTitle(Long supplierId, String jobTitle) {
 		List<Order> order = orderDao.findOrderBySupplierIdAndJobTitle(supplierId, jobTitle);
 		return order;
 	}
