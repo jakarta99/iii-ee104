@@ -1,8 +1,8 @@
 package team.lala.timebank.service;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,9 +97,15 @@ public class TimeLedgerService {
 	}
 
 	// 尋找一名會員所有資料 更新by Anchor
-	public List<TimeLedger> findAllByMemberId(Long memberId) {
-		List<TimeLedger> timeLedgers = timeLedgerDao.findAllByMemberId(memberId);
-		return timeLedgers;
+//	public List<TimeLedger> findAllByMemberId(Long memberId) {
+//		List<TimeLedger> timeLedgers = timeLedgerDao.findAllByMemberId(memberId);
+//		return timeLedgers;
+//	}
+	
+	public TimeLedger findById(Long id) {
+		Optional<TimeLedger> t = timeLedgerDao.findById(id);
+		TimeLedger timeLedger = t.orElse(null);
+		return timeLedger;
 	}
 	
 	

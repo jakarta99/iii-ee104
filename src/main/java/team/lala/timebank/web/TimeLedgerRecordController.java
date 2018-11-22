@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.TimeLedger;
 import team.lala.timebank.service.TimeLedgerService;
 
@@ -24,41 +25,62 @@ public class TimeLedgerRecordController {
 		model.addAttribute("timeLedgers", timeLedgers);
 		return "/time_ledger/time-ledger_list";
 	}
-	
+
 	@RequestMapping("/add")
 	public String addPage() {
 		return "/time_ledger/time-ledger_add";
 	}
-	
+
 	@RequestMapping("/edit")
 	public String editPage(@RequestParam("id") Long id, Model model) {
-		List<TimeLedger> timeLedger = timeLedgerService.findAllByMemberId(id);
+		TimeLedger timeLedger = timeLedgerService.findById(id);
 		model.addAttribute("timeLedger", timeLedger);
 		return "/time_ledger/time-ledger_edit";
 	}
-	
-	@RequestMapping("delete")
-	public String deletePage(@RequestParam("id") Long id, Model model) {
-		timeLedgerService.delete(id);
-		return "/time_ledger/time-ledger_list";
+
+	@RequestMapping("/insert")
+	public String insert(TimeLedger timeLedger) {
+		timeLedgerService.save(timeLedger);
+		return "/time_ledger/time-ledger_add";
 	}
 
-//	Long memberId = 1L;
-//
-//	@RequestMapping("/TimeLedger")
-//	public String findTimeLedgerRecord() {
-//		String result = "<html><h2>[TimeLedgerRecordController Test]透過memberId查詢所有帳戶變動紀錄!</h2>";
-//		List<TimeLedger> timeLedgerRecord = timeLedgerService.findAllByMemberId(memberId);
-//
-//		for (TimeLedger timeLedger : timeLedgerRecord) {
-//			result += timeLedger.toString() + "<br>";
-//		}
-//
-//		result += "</html>";
-//		return result;
-//
-//	}
-	
-	
+	@RequestMapping("/update")
+	public String update(TimeLedger timeLedger, Model model) {
+		TimeLedger dbTimeLedger = timeLedgerService.findById(timeLedger.getId());
+
+		dbTimeLedger.setBalanceValue(timeLedger.getBalanceValue());
+		dbTimeLedger.setDepositValue(timeLedger.getDepositValue());
+		dbTimeLedger.setDescription(timeLedger.getDescription());
+		dbTimeLedger.setMemberId(timeLedger.getMemberId());
+		dbTimeLedger.setTransactionTime(timeLedger.getTransactionTime());
+		dbTimeLedger.setWithdrawalValue(timeLedger.getWithdrawalValue());
+
+		timeLedgerService.save(dbTimeLedger);
+		return editPage(timeLedger.getId(), model);
+	}
+
+	@RequestMapping("/delete")
+	public String delete(@RequestParam("id") Long id, Model model) {
+		timeLedgerService.delete(id);
+		return listPage(model);
+	}
+
+	// Long memberId = 1L;
+	//
+	// @RequestMapping("/TimeLedger")
+	// public String findTimeLedgerRecord() {
+	// String result = "<html><h2>[TimeLedgerRecordController
+	// Test]透過memberId查詢所有帳戶變動紀錄!</h2>";
+	// List<TimeLedger> timeLedgerRecord =
+	// timeLedgerService.findAllByMemberId(memberId);
+	//
+	// for (TimeLedger timeLedger : timeLedgerRecord) {
+	// result += timeLedger.toString() + "<br>";
+	// }
+	//
+	// result += "</html>";
+	// return result;
+	//
+	// }
 
 }
