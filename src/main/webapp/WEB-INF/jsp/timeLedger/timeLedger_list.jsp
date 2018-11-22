@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +13,6 @@
  <h1> TimeLedger List </h1>
 
 <button onclick="javascript:document.location.href='/timeLedger/add'">Add</button>
-
 <c:forEach items="${timeLedgers}" var="timeLedger">
 <li>
 <button onclick="javascript:document.location.href='/timeLedger/edit?id=${timeLedger.id}'">Edit</button>

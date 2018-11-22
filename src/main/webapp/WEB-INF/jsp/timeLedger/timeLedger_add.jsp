@@ -13,7 +13,6 @@
 <h1> TimeLedger Add </h1>
 
 <form action="/timeLedger/insert" method="post">
-
 <input type="text" value="" id="" name="name"> XXX
 </form>
 </body>
