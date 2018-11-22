@@ -1,6 +1,6 @@
 package team.lala.timebank.web;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +21,11 @@ public class RequestsController {
 	@RequestMapping("/requests")
 	public String findRequestListById() {
 		String htmlString = "<html><h4>透過志工會員id查詢工作表</h4>";
-		Collection<Requests> requestCollection = requestsService.findByMemberId(memberid);
-		for (Requests requests : requestCollection) {
+		List<Requests> requestList = requestsService.findByMemberId(memberid);
+		for (Requests requests : requestList) {
+			if(requests != null) {
 			htmlString += requests.toString() + "<br>";
+			}
 		}
 		htmlString += "</html>";
 		return htmlString;
