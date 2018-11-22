@@ -47,7 +47,7 @@ public class RequestsService {
 		return requestsList;
 	}
 
-	public Requests findByRequestListId(Long id) {
+	public Requests getOne(Long id) {
 
 		Requests requests = requestsDao.getOne(id);
 
