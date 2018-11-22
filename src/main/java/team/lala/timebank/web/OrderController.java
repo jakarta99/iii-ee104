@@ -10,7 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -121,7 +121,7 @@ public class OrderController {
 			//【ORDER_LIST資料表+REQUESTS資料表】志工透過自己的id和jobtitle篩選申請紀錄(where條件跨資料表)
 			htmlString += "<h4>【ORDER_LIST資料表+REQUESTS資料表】"
 						+ "志工透過自己的id和jobtitle篩選申請紀錄(條件跨資料表)</h4>";
-			List<Order> orders3 = orderService.getOrderBySupplierIdAndJobTitle(supplierId, jobTitle);
+			List<Order> orders3 = orderService.findOrderBySupplierIdAndJobTitle(supplierId, jobTitle);
 			if(orders3 == null) {
 				htmlString += "查無【" + supplierId + "】號志工申請【" + jobTitle +"】之紀錄<br>";
 			} else {
@@ -255,7 +255,7 @@ public class OrderController {
 		
 		//HttpSession session = request.getSession();
 		//DB取資料
-		List<Order> orders = orderService.getOrderBySupplierIdAndJobTitle(supplier_Id, job_Title);
+		List<Order> orders = orderService.findOrderBySupplierIdAndJobTitle(supplier_Id, job_Title);
 		//List<Order> orders = orderService.findBySupplierId(supplier_Id);
 		if(orders != null) { 
 //			session.setAttribute("orderBean", orders);
