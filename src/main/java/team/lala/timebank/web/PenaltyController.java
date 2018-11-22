@@ -22,30 +22,30 @@ public class PenaltyController {
 	@RequestMapping("/add")
 	public String addPage() {
 
-		return "penalty_add";
+		return "/penalty/penalty_add";
 
 	}
 
 	@RequestMapping("/edit")
-	public String editPage(@RequestParam("id")Long id, Model model) {
+	public String editPage(@RequestParam("id") Long id, Model model) {
 		Optional<Penalty> penalty = penaltyService.findById(id);
 		model.addAttribute("penalty", penalty);
-		return "penalty_edit";
+		return "/penalty/penalty_edit";
 
 	}
 
 	@RequestMapping("/delete")
-	public String deletePage(@RequestParam("id")Long id, Model model) {
+	public String deletePage(@RequestParam("id") Long id, Model model) {
 		penaltyService.delete(id);
-		return "penalty_delete";
+		return "/penalty/penalty_list";
 
 	}
 
 	@RequestMapping("/list")
 	public String listPage(Model model) {
-		List<Penalty> penaltys = penaltyService.findAll();
-		model.addAttribute("Penaltys", penaltys);
-		return "penalty_list";
+		List<Penalty> penalties = penaltyService.findAll();
+		model.addAttribute("penaltys", penalties);
+		return "/penalty/penalty_list";
 
 	}
 
