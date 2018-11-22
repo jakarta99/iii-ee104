@@ -33,7 +33,7 @@ public class MemberDataController {
 	//列出特定會員的資料
 	@RequestMapping("/memberData")
 	public String findMemberData() {
-		String memberName = memberService.findMemberById(memberId).getName();
+		String memberName = memberService.getOne(memberId).getName();
 		String result = "<html><h3>查詢" + memberName + "資料</h3>";
 
 		int totalDonateTime = 0;

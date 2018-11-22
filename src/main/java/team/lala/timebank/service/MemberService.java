@@ -25,7 +25,7 @@ public class MemberService {
 	}
 
 	//Anchor 功能與下方findById雷同，是否需刪除 或 改List
-	public Member findMemberById(Long id) {
+	public Member getOne(Long id) {
 		Member member = memberDao.getOne(id);
 		return member;
 	}
