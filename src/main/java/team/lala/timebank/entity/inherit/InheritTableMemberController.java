@@ -20,7 +20,7 @@ public class InheritTableMemberController {
 	@Autowired
 	private OrgMemberDao orgDao;
 
-	private Long memberId = 10l;
+	private Long memberId = 1l;
 
 	// 根據id刪除個人或組織會員的資料
 	@RequestMapping("/deleteMemberByInheriting")
