@@ -15,7 +15,16 @@
 
 <form action="/order/insert" method="post">
 
-<input type="text" value="" id="" name="name"> XXX
+<!-- id:<input type="text" value="" id="id" name="id"/> -->
+requestListId:<input type="text" value="" id="requestListId" name="requestListId"/><p>
+supplierId:<input type="text" value="" id="supplierId" name="supplierId"/><p>
+requesterId<input type="text" value="" id="requesterId" name="requesterId"/><p>
+supplierAcception(boolean):<input type="text" value="" id="supplierAcception" name="supplierAcception"><p>
+confirmation(boolean):<input type="text" value="" id="confirmation" name="confirmation"><p>
+status:<input type="text" value="" id="status" name="status"><p>
+<input type="submit"/>
 </form>
+<div>back to order_list</div>
+
 </body>
 </html>

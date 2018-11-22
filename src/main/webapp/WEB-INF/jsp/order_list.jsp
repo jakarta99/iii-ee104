@@ -15,11 +15,11 @@
 
 <button onclick="javascript:document.location.href='/order/add'">Add</button>
 
-<c:forEach items="${orders }" var="order">
+<c:forEach items="${orders}" var="order">
 <li>
 <button onclick="javascript:document.location.href='/order/edit?id=${order.id}'">Edit</button>
-<button onclick="javascript:document.location.href='/order/delete'">Delete</button>
-${order.id }</li>
+<button onclick="javascript:document.location.href='/order/delete?id=${order.id}'">Delete</button>
+${order.id}  ${order.request.jobTitle}</li>
 </c:forEach>
 </body>
 </html>
