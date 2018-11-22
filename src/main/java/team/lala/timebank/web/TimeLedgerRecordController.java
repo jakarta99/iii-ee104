@@ -12,7 +12,7 @@ import team.lala.timebank.entity.TimeLedger;
 import team.lala.timebank.service.TimeLedgerService;
 
 @Controller
-@RequestMapping("/TimeLedger")
+@RequestMapping("/time-ledger")
 public class TimeLedgerRecordController {
 
 	@Autowired
@@ -22,25 +22,25 @@ public class TimeLedgerRecordController {
 	public String listPage(Model model) {
 		List<TimeLedger> timeLedgers = timeLedgerService.findAll();
 		model.addAttribute("timeLedgers", timeLedgers);
-		return "/timeLedger_list";
+		return "/time_ledger/time-ledger_list";
 	}
 	
 	@RequestMapping("/add")
 	public String addPage() {
-		return "/timeLedger_add";
+		return "/time_ledger/time-ledger_add";
 	}
 	
 	@RequestMapping("/edit")
 	public String editPage(@RequestParam("id") Long id, Model model) {
 		List<TimeLedger> timeLedger = timeLedgerService.findAllByMemberId(id);
 		model.addAttribute("timeLedger", timeLedger);
-		return "/timeLedger_edit";
+		return "/time_ledger/time-ledger_edit";
 	}
 	
 	@RequestMapping("delete")
 	public String deletePage(@RequestParam("id") Long id, Model model) {
 		timeLedgerService.delete(id);
-		return "/timeLedger_list";
+		return "/time_ledger/time-ledger_list";
 	}
 
 //	Long memberId = 1L;
