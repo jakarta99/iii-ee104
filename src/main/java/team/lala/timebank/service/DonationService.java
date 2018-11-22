@@ -14,12 +14,12 @@ public class DonationService {
 	@Autowired
 	private DonationDao donationDao;
 
-	public Donation update(Donation d) {
+	public Donation save(Donation d) {
 		Donation donation =donationDao.save(d);
 		return donation;
 	}
 
-	public Donation findById(Long id) {
+	public Donation getOne(Long id) {
 		Donation donation = donationDao.getOne(id);
 		return donation;
 	}
