@@ -3,33 +3,50 @@ package team.lala.timebank.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import team.lala.timebank.entity.Requests;
 import team.lala.timebank.service.RequestsService;
 
-
-@RestController
+@Controller
+@RequestMapping("/requests")
 public class RequestsController {
-	
+
 	@Autowired
 	private RequestsService requestsService;
-	
-	private Long memberid = 2L;  //查詢ID2號
-	
-	@RequestMapping("/requests")
-	public String findRequestListById() {
-		String htmlString = "<html><h4>透過志工會員id查詢工作表</h4>";
-		List<Requests> requestList = requestsService.findByMemberId(memberid);
-		for (Requests requests : requestList) {
-			if(requests != null) {
-			htmlString += requests.toString() + "<br>";
-			}
-		}
-		htmlString += "</html>";
-		return htmlString;
+
+	@RequestMapping("/requestsList")
+	public String requestsList(Model model) {
+		List<Requests> requests = requestsService.findAll();
+
+		model.addAttribute("requests", requests);
+
+		return "requests_requestsList";
 	}
-	
-	
+
+	@RequestMapping("/requestsadd")
+	public String addPage(@RequestParam("id") Long id, Model model) {
+		Requests request = requestsService.getOne(id);
+		model.addAttribute("request", request);
+		return "/requestsList_add";
+	}
+
+	@RequestMapping("/requestsedit")
+	public String editPage(@RequestParam("id") Long id, Model model) {
+		Requests request = requestsService.getOne(id);
+		model.addAttribute("request", request);
+		return "/requestsList_edit";
+	}
+
+	@RequestMapping("/requestsedelete")
+	public String deletePage(@RequestParam("id") Long id, Model model) {
+		Requests request = requestsService.getOne(id);
+		model.addAttribute("request", request);
+		return "/requestsList_delete";
+	}
+
 }
