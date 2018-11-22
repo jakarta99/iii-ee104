@@ -101,5 +101,7 @@ public class TimeLedgerService {
 		List<TimeLedger> timeLedgers = timeLedgerDao.findAllByMemberId(memberId);
 		return timeLedgers;
 	}
+	
+	
 
 }
