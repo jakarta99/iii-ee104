@@ -1,24 +1,28 @@
-package team.lala.timebank.entity.inherit;
+package team.lala.timebank.web;
 
 import java.util.Collection;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import team.lala.timebank.entity.Area;
+import team.lala.timebank.entity.Member;
+
+import team.lala.timebank.entity.OrgMember;
+
 import team.lala.timebank.entity.Type;
+import team.lala.timebank.service.MemberService;
+import team.lala.timebank.service.OrgMemberService;
 
 //使用inheritence建立member與orgMember關係的新刪修查
 @RestController
 public class InheritTableMemberController {
 
 	@Autowired
-	private MemberInheritService inheritService;
+	private MemberService memberService;
 
 	@Autowired
-	private OrgMemberDao orgDao;
+	private OrgMemberService orgMemberService;
 
 	private Long memberId = 1l;
 
@@ -26,7 +30,7 @@ public class InheritTableMemberController {
 	@RequestMapping("/deleteMemberByInheriting")
 	public String deleteMemberByInheriting() {
 		String result = "<html><h3>Delete Member By Inheriting tables</h3><p>";
-		inheritService.deleteById(memberId);
+		memberService.deleteById(memberId);
 		result += "Deleted id : " + memberId;
 		result += "</p></html>";
 		return result;
@@ -39,12 +43,12 @@ public class InheritTableMemberController {
 		public String getOneByInheriting() {
 			String result = "<html><h3>Get One Member By Inheriting tables</h3><p>";
 			//使用getOne，若id不存在會出現錯誤，且getOne的回傳物件無法判定是否為子類別(instanceOf無法判定)，需針對子類別再做查詢動作(orgDao.getOne(id))才可獲得子類別物件
-			MemberInherit member = inheritService.getOne(memberId); 
+			Member member = memberService.getOne(memberId); 
 			if (member != null) { //若id不存在，會直接丟出例外，無法處理此種狀況
 				// 判斷是否為orgMember類別
 				if (member.getType()==Type.O) {
 					// 進行OrgMember類別的型態轉換
-					OrgMemberInherit orgMember = (OrgMemberInherit) member;
+					OrgMember orgMember = (OrgMember) member;
 					result += orgMember.toString();
 					result += "<br><br>";
 				} else {
@@ -63,12 +67,12 @@ public class InheritTableMemberController {
 	@RequestMapping("/findByIdMemberByInheriting")
 	public String findByIdMemberByInheriting() {
 		String result = "<html><h3>Find One Member By Inheriting tables</h3><p>";
-		MemberInherit member = inheritService.findById(memberId); 
+		Member member = memberService.findById(memberId); 
 		if (member != null) {
 			// 判斷是否為orgMember類別
-			if (member instanceof OrgMemberInherit) {
+			if (member instanceof OrgMember) {
 				// 進行OrgMember類別的型態轉換
-				OrgMemberInherit orgMember = (OrgMemberInherit) member;
+				OrgMember orgMember = (OrgMember) member;
 				result += orgMember.toString();
 				result += "<br><br>";
 			} else {
@@ -87,13 +91,13 @@ public class InheritTableMemberController {
 	@RequestMapping("/findAllMemberByInheriting")
 	public String findAllMemberByInheriting() {
 		String result = "<html><h3>Find All Members By Inheriting tables</h3><p>";
-		Collection<MemberInherit> members = inheritService.findAll();
+		Collection<Member> members = memberService.findAll();
 		if (members != null) {
-			for (MemberInherit m : members) {
+			for (Member m : members) {
 				// 判斷是否為orgMember類別
-				if (m instanceof OrgMemberInherit) {
+				if (m instanceof OrgMember) {
 					// 進行OrgMember類別的型態轉換
-					OrgMemberInherit orgMember = (OrgMemberInherit) m;
+					OrgMember orgMember = (OrgMember) m;
 					result += orgMember.toString();
 					result += "<br><br>";
 				} else {
@@ -112,25 +116,25 @@ public class InheritTableMemberController {
 	@RequestMapping("/updateMemberByInheriting")
 	public String updateMemberByInheriting() {
 		String result = "<html><h3>Update Member By Inheriting tables</h3><p>";
-		MemberInherit m = inheritService.findById(memberId); // 查詢id是否存在
+		Member m = memberService.findById(memberId); // 查詢id是否存在
 		if (m != null) { // DB有此id的資料
 			// 判斷是否為orgMember類別
-			if (m instanceof OrgMemberInherit) { // orgMember類別
+			if (m instanceof OrgMember) { // orgMember類別
 				// 進行OrgMember類別的型態轉換
-				OrgMemberInherit orgMember = (OrgMemberInherit) m;
+				OrgMember orgMember = (OrgMember) m;
 				// 設定其要改變的欄位屬性
 				orgMember.setLoginAccount("Tom");
 				orgMember.setName("Tom");
 				orgMember.setCeo("Jim");
 				orgMember.setFounder("Jack");
-				orgMember = orgDao.save(orgMember); // 使用OrgMember的service進行save
+				orgMember = orgMemberService.save(orgMember); // 使用OrgMember的service進行save
 				result += orgMember.toString(); // 更新結果
 			} else { // Member類別
 				// 設定其要改變的欄位屬性
 				m.setLoginAccount("Frank");
 				m.setPassword("asdf");
 				m.setName("Frank");
-				m = inheritService.save(m); // 使用Member的service進行save
+				m = memberService.save(m); // 使用Member的service進行save
 				result += m.toString(); // 更新結果
 			}
 		} else { // DB無此id的資料
@@ -146,7 +150,7 @@ public class InheritTableMemberController {
 	public String insertOrgMemberByInheriting() {
 		String result = "<html><h3>Insert OrgMember By Inheriting tables</h3><p>";
 		// 組織會員的類別為OrgMember，type屬性為Type.O
-		OrgMemberInherit orgMem = new OrgMemberInherit();
+		OrgMember orgMem = new OrgMember();
 		orgMem.setType(Type.O);
 		// 設定欄位(不設定則預設為null)
 		orgMem.setLoginAccount("Sam");
@@ -157,7 +161,7 @@ public class InheritTableMemberController {
 		// 設定orgMember才有的欄位
 		orgMem.setCeo("Jim");
 		orgMem.setFounder("黃CATHY");
-		orgMem = orgDao.save(orgMem);
+		OrgMember orgMember = orgMemberService.save(orgMem);
 
 		result += orgMem.toString(); // 新增結果
 		result += "<br>";
@@ -170,7 +174,7 @@ public class InheritTableMemberController {
 	public String insertMemberByInheriting() {
 		String result = "<html><h3>Insert Member By Inheriting tables</h3><p>";
 		// 個人會員的類別為Member，type屬性為Type.P
-		MemberInherit mem = new MemberInherit();
+		Member mem = new Member();
 		mem.setType(Type.P);
 		// 設定欄位屬性(不設定則預設為null)
 		mem.setLoginAccount("Sean");
@@ -178,7 +182,7 @@ public class InheritTableMemberController {
 		mem.setEmail("Sean@gmail.com");
 		mem.setName("Sean");
 		// mem.setArea(2l);
-		mem = inheritService.save(mem);
+		mem = memberService.save(mem);
 
 		result += mem.toString(); // 新增結果
 		result += "<br>";

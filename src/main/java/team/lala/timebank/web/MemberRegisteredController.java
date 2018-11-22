@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import team.lala.timebank.entity.Member;
+import team.lala.timebank.entity.Type;
 import team.lala.timebank.service.MemberService;
 
 //louis
@@ -58,7 +59,7 @@ public class MemberRegisteredController {
 			member.setPassword(password);
 			member.setName(name);
 			member.setEmail(email);
-			member.setType(type);
+			member.setType(Type.O);
 			member.setTelephone(telephone);
 			member.setMobile(mobile);
 		} else {
