@@ -2,6 +2,8 @@ package team.lala.timebank.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,20 +47,27 @@ public class OrderController {
 	}
 
 	@RequestMapping("/insert")
-	public String insertOrder(@RequestParam("requestListId") Long requestListId
-			,@RequestParam("supplierId") Long supplierId, @RequestParam("requesterId") Long requesterId
-			,@RequestParam("supplierAcception") boolean supplierAcception, @RequestParam("confirmation") boolean confirmation
-			,@RequestParam("status") String status	
-			, Model model) {
-		Order order = new Order(requestListId, supplierId, requesterId, supplierAcception, confirmation, status);
+	public String insert(Order order) {
 		orderService.save(order);
-		return "/order_add";
+		return "redirect:/order_add";
+	}
+	
+	@RequestMapping("/update")
+	public String update(Order order, Model model) {
+		Order dbOrder = orderService.getById(order.getId());
+		
+		dbOrder.setStatus(order.getStatus());
+		dbOrder.setSupplierAcception(order.getSupplierAcception());
+		
+		orderService.save(dbOrder);
+		return editPage(order.getId(), model);
 	}
 	
 	@RequestMapping("/delete")
-	public String deleteOrder(@RequestParam("id") Long id, Model model) {
+	public String delete(@RequestParam("id") Long id, Model model) {
 		orderService.deleteById(id);
-		return "/order_list";
+		
+		return listPage(model);
 	}
 	
 	

@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import team.lala.timebank.enums.Type;
+
 @Entity
 @Table(name="MEMBER")
 @Inheritance(strategy=InheritanceType.JOINED)  

@@ -15,7 +15,11 @@
 
 <form action="/order/insert" method="post">
 
-<input type="text" value="" id="" name="name"> XXX
+id:<input type="hidden" value="${order.id}" id="id" name="id"/>
+supplierAcception(boolean):<input type="text" value="" id="supplierAcception" name="supplierAcception"><p>
+confirmation(boolean):<input type="text" value="" id="confirmation" name="confirmation"><p>
+status:<input type="text" value="" id="status" name="status"><p>
+<input type="submit"/>
 </form>
 </body>
 </html>

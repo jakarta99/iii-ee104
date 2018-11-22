@@ -1,4 +1,4 @@
-package team.lala.timebank.entity;
+package team.lala.timebank.enums;
 
 public enum Type {
 	P,

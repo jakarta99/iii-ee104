@@ -2,12 +2,16 @@ package team.lala.timebank.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import team.lala.timebank.enums.YesNo;
 
 @Entity
 @Table(name="ORDER_LIST")
@@ -31,11 +35,13 @@ public class Order{
 	@Column(name="REQUESTER_ID")
 	private Long requesterId;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name="SUPPLIER_ACCEPTION")
-	private boolean supplierAcception;
+	private YesNo supplierAcception;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name="SERVICE_CONFIRMATION")
-	private boolean confirmation;
+	private YesNo confirmation;
 	
 	@Column(name="STATUS")
 	private String status;
@@ -58,15 +64,6 @@ public class Order{
 		
 	}
 	
-	public Order(Long requestListId, Long supplierId, Long requesterId,
-			boolean supplierAcception, boolean confirmation, String status) {
-		this.requestListId = requestListId;
-		this.supplierId = supplierId;
-		this.requesterId = requesterId;
-		this.supplierAcception = supplierAcception;
-		this.confirmation = confirmation;
-		this.status = status;
-	}
 
 	public Long getId() {
 		return id;
@@ -108,28 +105,29 @@ public class Order{
 		this.requesterId = requesterId;
 	}
 
-	public boolean isSupplierAcception() {
-		return supplierAcception;
-	}
-
-	public void setSupplierAcception(boolean supplierAcception) {
-		this.supplierAcception = supplierAcception;
-	}
-
-	public boolean isConfirmation() {
-		return confirmation;
-	}
-
-	public void setConfirmation(boolean confirmation) {
-		this.confirmation = confirmation;
-	}
-
+	
 	public String getStatus() {
 		return status;
 	}
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public YesNo getSupplierAcception() {
+		return supplierAcception;
+	}
+
+	public void setSupplierAcception(YesNo supplierAcception) {
+		this.supplierAcception = supplierAcception;
+	}
+
+	public YesNo getConfirmation() {
+		return confirmation;
+	}
+
+	public void setConfirmation(YesNo confirmation) {
+		this.confirmation = confirmation;
 	}
 
 }
