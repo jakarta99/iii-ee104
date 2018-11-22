@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import team.lala.timebank.entity.Member;
+
 @Service
 public class MemberInheritService {
 	
@@ -15,6 +17,11 @@ public class MemberInheritService {
 	public MemberInherit findById(Long id) {
 		Optional<MemberInherit> m = dao.findById(id);
 		MemberInherit member = m.orElse(null);
+		return member;
+	}
+	
+	public MemberInherit getOne(Long id) {
+		MemberInherit member = dao.getOne(id);
 		return member;
 	}
 	

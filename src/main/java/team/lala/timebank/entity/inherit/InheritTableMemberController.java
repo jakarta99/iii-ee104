@@ -20,7 +20,7 @@ public class InheritTableMemberController {
 	@Autowired
 	private OrgMemberDao orgDao;
 
-	private Long memberId = 10l;
+	private Long memberId = 1l;
 
 	// 根據id刪除個人或組織會員的資料
 	@RequestMapping("/deleteMemberByInheriting")
@@ -33,13 +33,36 @@ public class InheritTableMemberController {
 	} 
 	//結果: 若會員為組織會員，則會員在member表及orgMember表的資料都會被刪除
 	//	若id不存在會出現錯誤
+	
+	// 根據getOne(id)查詢個人或組織會員的資料
+		@RequestMapping("/getOneByInheriting")
+		public String getOneByInheriting() {
+			String result = "<html><h3>Get One Member By Inheriting tables</h3><p>";
+			//使用getOne，若id不存在會出現錯誤，且getOne的回傳物件無法判定是否為子類別(instanceOf無法判定)，需針對子類別再做查詢動作(orgDao.getOne(id))才可獲得子類別物件
+			MemberInherit member = inheritService.getOne(memberId); 
+			if (member != null) { //若id不存在，會直接丟出例外，無法處理此種狀況
+				// 判斷是否為orgMember類別
+				if (member.getType()==Type.O) {
+					// 進行OrgMember類別的型態轉換
+					OrgMemberInherit orgMember = (OrgMemberInherit) member;
+					result += orgMember.toString();
+					result += "<br><br>";
+				} else {
+					result += member.toString();
+					result += "<br><br>";
+				}
+			} else {
+				result += "無查詢結果";
+			}
+			result += "</p></html>";
+			return result;
+		}
+		
 
-	// 根據id查詢個人或組織會員的資料
+	// 根據findById(id)查詢個人或組織會員的資料
 	@RequestMapping("/findByIdMemberByInheriting")
 	public String findByIdMemberByInheriting() {
 		String result = "<html><h3>Find One Member By Inheriting tables</h3><p>";
-		//補充:使用findById，而非getOne的原因: 
-		//使用getOne，若id不存在會出現錯誤，且getOne的回傳物件無法判定是否為子類別(instanceOf無法判定)，需針對子類別再做查詢動作(orgDao.getOne(id))才可獲得子類別物件
 		MemberInherit member = inheritService.findById(memberId); 
 		if (member != null) {
 			// 判斷是否為orgMember類別
