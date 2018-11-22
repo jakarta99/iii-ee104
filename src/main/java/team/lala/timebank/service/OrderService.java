@@ -2,6 +2,7 @@ package team.lala.timebank.service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,8 +33,17 @@ public class OrderService {
 		return order;
 	}
 	
+	
 	public Order getById(Long id) {
+		//getOne查無資料不會回傳null，而是噴錯(確認是在Service處理Exception，還是在Controller)
 		Order order = orderDao.getOne(id);
+		return order;
+	}
+	
+	
+	//測試用，待確認Optional物件用法，用不到記得刪
+	public Optional<Order> findById(Long id) {
+		Optional<Order> order = orderDao.findById(id);
 		return order;
 	}
 	

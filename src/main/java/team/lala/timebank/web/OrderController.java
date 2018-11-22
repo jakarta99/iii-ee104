@@ -3,7 +3,9 @@ package team.lala.timebank.web;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +32,20 @@ public class OrderController {
 	private Long supplierId = 3L; // 篩選欄位來自order_list資料表
 	private String jobTitle = "中華關懷協會"; // 篩選欄位來自requests資料表
 
+	@RequestMapping("/getOrdersById")
+	public String getOrdersById() {
+		String htmlString = "<html><h4>【save Order】</h4></html>";
+		Order order;
+		try {
+			order = orderService.getById(4L);
+			htmlString += order.toString();
+		} catch (EntityNotFoundException e) {
+			htmlString += "ID不存在<br>" + e.toString();
+		}
+
+		return htmlString;
+	}
+	
 	
 	@RequestMapping("/insertOrder")
 	public String insertOrders() {
