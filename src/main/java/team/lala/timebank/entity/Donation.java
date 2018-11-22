@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Donation")
 public class Donation {
-	@GeneratedValue(strategy = GenerationType.AUTO) // ID生成的策略
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // ID生成的策略
 	@Id
 	private Long id;
 

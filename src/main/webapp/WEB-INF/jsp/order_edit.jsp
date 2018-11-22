@@ -13,7 +13,7 @@
 
  <h1> Order Edit </h1>
 
-<form action="/order/insert" method="post">
+<form action="/order/update" method="post">
 
 id:<input type="hidden" value="${order.id}" id="id" name="id"/>
 supplierAcception(boolean):<input type="text" value="" id="supplierAcception" name="supplierAcception"><p>

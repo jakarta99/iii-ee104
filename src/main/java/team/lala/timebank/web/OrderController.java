@@ -49,7 +49,7 @@ public class OrderController {
 	@RequestMapping("/insert")
 	public String insert(Order order) {
 		orderService.save(order);
-		return "redirect:/order_add";
+		return "/order_add";
 	}
 	
 	@RequestMapping("/update")

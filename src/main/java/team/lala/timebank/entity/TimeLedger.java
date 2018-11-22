@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Time_Ledger")
 public class TimeLedger {
-	@GeneratedValue(strategy=GenerationType.AUTO) //ID生成的策略
+	@GeneratedValue(strategy=GenerationType.IDENTITY) //ID生成的策略
 	@Id
 	private Long id;
 	
