@@ -9,7 +9,7 @@
 <body>
 
 	<h2>Member Add</h2>
-	<form action="/member/insert" method="post">
+	<form action="/member/add" method="post">
 
 		<input type="text" value="" id="" name="name"> XXX
 	</form>

@@ -9,9 +9,14 @@
 <body>
 
 	<h2>Member Edit</h2>
-	<form action="/order/insert" method="post">
-		<input type="text" value="" id="" name="name"> XXX
-		
+	<form action="/member/edit" method="post">
+		<h4>Member ${member.id}</h4>
+		Account <input type="text" value="${member.loginAccount }"
+			id="loginAccount" name="loginAccount"> Password <input
+			type="text" value="${member.password }" id="password" name="password">
+		Account <input type="text" value="${member.loginAccount }"
+			id="loginAccount" name="loginAccount">
+
 	</form>
 </body>
 </html>
