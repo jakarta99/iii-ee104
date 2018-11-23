@@ -52,6 +52,31 @@ public class Member{
 //	@Column(name="city")
 	private Area area;
 
+	@Column(name="FOUNDER")
+	private String founder;
+
+	@Column(name="CEO")
+	private String ceo;
+	
+	
+	
+	
+	public String getFounder() {
+		return founder;
+	}
+
+	public void setFounder(String founder) {
+		this.founder = founder;
+	}
+
+	public String getCeo() {
+		return ceo;
+	}
+
+	public void setCeo(String ceo) {
+		this.ceo = ceo;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -128,9 +153,9 @@ public class Member{
 
 	@Override
 	public String toString() {
-		return "MemberInherit [id=" + id + ", loginAccount=" + loginAccount + ", password=" + password + ", name="
-				+ name + ", type=" + type + ", email=" + email + ", telephone=" + telephone + ", mobile=" + mobile
-				+ ", area=" + area + "]";
+		return "Member [id=" + id + ", loginAccount=" + loginAccount + ", password=" + password + ", name=" + name
+				+ ", type=" + type + ", email=" + email + ", telephone=" + telephone + ", mobile=" + mobile + ", area="
+				+ area + ", founder=" + founder + ", ceo=" + ceo + "]";
 	}
 
 	

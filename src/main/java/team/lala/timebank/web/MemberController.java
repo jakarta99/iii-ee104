@@ -16,12 +16,12 @@ import team.lala.timebank.service.MemberService;
 public class MemberController {
 	
 	@Autowired
-	private MemberService service;
+	private MemberService memberService;
 	
-	@RequestMapping("/listMember")
+	@RequestMapping("/list")
 	public String listMember(Model model) {
-		List<Member> member = service.findAll();
-		model.addAttribute("members", member);
+		List<Member> members = memberService.findAll();
+		model.addAttribute("members", members);
 		return "/member/member_list";
 		
 	}
@@ -35,7 +35,7 @@ public class MemberController {
 	
 	@RequestMapping("/edit")
 	public String editMember(@RequestParam("id") Long id,Model model) {
-		Member member = service.getOne(id);
+		Member member = memberService.getOne(id);
 		
 		model.addAttribute("member",member);
 		return "/member/member_edit";
@@ -44,10 +44,9 @@ public class MemberController {
 	
 	@RequestMapping("/delete")
 	public String deleteMember(@RequestParam("id") Long id,Model model) {
-//		Member member = service.getOne(id);
-//		model.addAttribute("member",member);
+		memberService.deleteById(id);
 	
-		return "/member/member_delete";
+		return "/member/member_list";
 		
 	}
 	
