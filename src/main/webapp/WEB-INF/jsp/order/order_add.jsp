@@ -16,15 +16,15 @@
 <form action="/order/insert" method="post">
 
 <!-- id:<input type="text" value="" id="id" name="id"/> -->
-requestListId:<input type="text" value="" id="requestListId" name="requestListId"/><p>
+requestListId(FK, range:1~6):<input type="text" value="" id="requestListId" name="requestListId"/><p>
 supplierId:<input type="text" value="" id="supplierId" name="supplierId"/><p>
 requesterId<input type="text" value="" id="requesterId" name="requesterId"/><p>
-supplierAcception(boolean):<input type="text" value="" id="supplierAcception" name="supplierAcception"><p>
-confirmation(boolean):<input type="text" value="" id="confirmation" name="confirmation"><p>
+supplierAcception(Y/N):<input type="text" value="" id="supplierAcception" name="supplierAcception"><p>
+confirmation(Y/N):<input type="text" value="" id="confirmation" name="confirmation"><p>
 status:<input type="text" value="" id="status" name="status"><p>
 <input type="submit"/>
-</form>
-<div>back to order_list</div>
+</form><p>
+<a href="/order/list">back to order_list</a>
 
 </body>
 </html>

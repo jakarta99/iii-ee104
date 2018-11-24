@@ -2,8 +2,6 @@ package team.lala.timebank.web;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,13 +25,13 @@ public class OrderController {
 
 		model.addAttribute("orders", orders);
 
-		return "/order_list"; // getRequestDispatcher("/WEB-INF/jsp/order_list.jsp").forward(request,
+		return "/order/order_list"; // getRequestDispatcher("/WEB-INF/jsp/order_list.jsp").forward(request,
 								// response);
 	}
 
 	@RequestMapping("/add")
 	public String addPage() {
-		return "/order_add";
+		return "/order/order_add";
 	}
 
 	@RequestMapping("/edit")
@@ -43,25 +41,32 @@ public class OrderController {
 		
 		model.addAttribute("order", order);
 		
-		return "/order_edit";
+		return "/order/order_edit";
 	}
 
-	@RequestMapping("/insert")
-	public String insert(Order order) {
-		orderService.save(order);
-		return "/order_add";
-	}
-	
 	@RequestMapping("/update")
 	public String update(Order order, Model model) {
+		
 		Order dbOrder = orderService.getById(order.getId());
 		
-		dbOrder.setStatus(order.getStatus());
 		dbOrder.setSupplierAcception(order.getSupplierAcception());
+		dbOrder.setConfirmation(order.getConfirmation());
+		dbOrder.setStatus(order.getStatus());
 		
 		orderService.save(dbOrder);
+		
 		return editPage(order.getId(), model);
 	}
+	
+	@RequestMapping("/insert")
+	public String insert(Order order) {
+		
+		orderService.save(order);
+		
+		return "/order/order_add";
+	}
+	
+
 	
 	@RequestMapping("/delete")
 	public String delete(@RequestParam("id") Long id, Model model) {
