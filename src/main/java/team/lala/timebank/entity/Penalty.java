@@ -15,6 +15,7 @@ public class Penalty {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "penalty_List_Id")
 	private Long id;
 
 	@Column(name = "order_list_id")
@@ -26,14 +27,14 @@ public class Penalty {
 	@Column(name = "update_date")
 	private LocalDateTime updateDate;
 
-	@Column(name = "description")
-	String description;
+	@Column(name = "description", length = 50)
+	private String description;
 
 	@Column(name = "status")
-	Integer status;
+	private Integer status;
 
 	@Column(name = "penalty_time_value")
-	Integer penaltyTimeValue;
+	private Integer penaltyTimeValue;
 
 	public String toString() {
 		return "Penalty [id=" + id + ", orderListId=" + orderListId + ", memberId=" + memberId + ", updateDate="

@@ -30,3 +30,14 @@ VALUES(1, '2018-11-11',50,150,0,'deposit');
 
 INSERT INTO TIME_LEDGER (MEMBER_ID,TRANSACTION_TIME,DEPOSIT_VALUE,WITHDRAWAL_VALUE,BALANCE_VALUE,DESCRIPTION)
 VALUES(2, '2018-11-11', 500, 500,0,'deposit');
+
+--penalty
+
+INSERT INTO PENALTY (order_list_id, member_id, update_date, description, status, penalty_time_value)
+VALUES(2, 1, '2018-11-10', '缺席', 1 , 4);
+
+INSERT INTO PENALTY (order_list_id, member_id, update_date, description, status, penalty_time_value)
+VALUES(3, 2, '2018-11-10', '遲到1小時', 2 , 2);
+
+INSERT INTO PENALTY (order_list_id, member_id, update_date, description, status, penalty_time_value)
+VALUES(1, 3, '2018-11-10', '服務態度不佳', 3 ,0);
