@@ -10,5 +10,6 @@ public interface PenaltyDao extends JpaRepository<Penalty, Long> {
 
 	// 查詢某人的Penalty by Brian
 	public List<Penalty> findByMemberId(Long memberId);
+	
 
 }
