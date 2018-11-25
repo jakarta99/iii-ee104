@@ -9,44 +9,70 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Requests;
 import team.lala.timebank.service.RequestsService;
 
 @Controller
-@RequestMapping("/requests")
+@RequestMapping("/request")
 public class RequestsController {
 
 	@Autowired
 	private RequestsService requestsService;
 
-	@RequestMapping("/requestsList")
-	public String requestsList(Model model) {
+	@RequestMapping("/list")
+	public String listPage(Model model) {
 		List<Requests> requests = requestsService.findAll();
 
 		model.addAttribute("requests", requests);
 
-		return "requests_requestsList";
+		return "/request/request_list";
 	}
 
-	@RequestMapping("/requestsadd")
-	public String addPage(@RequestParam("id") Long id, Model model) {
-		Requests request = requestsService.getOne(id);
-		model.addAttribute("request", request);
-		return "/requestsList_add";
+	@RequestMapping("/add")
+	public String addPage() {
+		
+		return "/request/request_add";
 	}
 
-	@RequestMapping("/requestsedit")
+	@RequestMapping("/edit")
 	public String editPage(@RequestParam("id") Long id, Model model) {
 		Requests request = requestsService.getOne(id);
 		model.addAttribute("request", request);
-		return "/requestsList_edit";
+		return "/request/request_edit";
 	}
 
-	@RequestMapping("/requestsedelete")
+	@RequestMapping("/delete")
 	public String deletePage(@RequestParam("id") Long id, Model model) {
-		Requests request = requestsService.getOne(id);
-		model.addAttribute("request", request);
-		return "/requestsList_delete";
+		requestsService.delete(id);
+		
+		return listPage(model);
 	}
+	
+	@RequestMapping("/update")
+	public String update(Requests requests, Model model) {
+		
+		Requests r =requestsService.getOne(requests.getId());
+		r.setJobArea(requests.getJobArea());
+		r.setJobTitle(requests.getJobTitle());
+		r.setServiceType(requests.getServiceType());
+		r.setTermType(requests.getTermType());
+		r.setTimeValue(requests.getTimeValue());
+		
+		requestsService.save(r);
+		
+		
+		return "redirect:/request/list";
+	}
+	
+	@RequestMapping("/insert")
+	public String insert(Requests requests) {
+		
+		requestsService.save(requests);
+		
+		
+		return "redirect:/request/list";
+	}
+	
 
 }

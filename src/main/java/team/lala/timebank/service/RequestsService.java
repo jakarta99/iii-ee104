@@ -22,9 +22,10 @@ public class RequestsService {
 	private RequestsDao requestsDao;
 
 	// update
-	public void save(Requests request) {
-
-		requestsDao.save(request);
+	public Requests save(Requests request) {
+		
+		Requests r=requestsDao.save(request);
+		return r;
 
 	}
 
