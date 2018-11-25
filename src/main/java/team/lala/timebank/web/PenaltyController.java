@@ -44,7 +44,7 @@ public class PenaltyController {
 	@RequestMapping("/list")
 	public String listPage(Model model) {
 		List<Penalty> penalties = penaltyService.findAll();
-		model.addAttribute("penaltys", penalties);
+		model.addAttribute("penalties", penalties);
 		return "/penalty/penalty_list";
 
 	}
