@@ -1,6 +1,6 @@
 package team.lala.timebank.enums;
 
-public enum Type {
+public enum MemberType {
 	P,
 	O;
 
