@@ -49,10 +49,10 @@ fieldset {
 				memberId:<input type="text" value="" id="memberId" name="memberId"
 					class="form-control" />
 			</div>
-			<div class="form-group">
-				transactionTime:<input type="text" value="" id="transactionTime"
-					name="transactionTime" class="form-control" />
-			</div>
+<!-- 			<div class="form-group"> -->
+<!-- 				transactionTime:<input type="text" value="" id="transactionTime" -->
+<!-- 					name="transactionTime" class="form-control" /> -->
+<!-- 			</div> -->
 			<div class="form-group">
 				description:<input type="text" value="" id="description"
 					name="description" class="form-control" />

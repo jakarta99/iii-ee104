@@ -49,11 +49,11 @@ fieldset {
 				memberId: <input type="text" value="${timeLedger.memberId}"
 					id="memberId" name="memberId" class="form-control" />
 			</div>
-			<div class="form-group">
-				transactionTime: <input type="text"
-					value="${timeLedger.transactionTime}" id="transactionTime"
-					name="transactionTime" class="form-control" />
-			</div>
+<!-- 			<div class="form-group"> -->
+<!-- 				transactionTime: <input type="text" -->
+<%-- 					value="${timeLedger.transactionTime}" id="transactionTime" --%>
+<!-- 					name="transactionTime" class="form-control" /> -->
+<!-- 			</div> -->
 			<div class="form-group">
 				description: <input type="text" value="${timeLedger.description}"
 					id="description" name="description" class="form-control" />
