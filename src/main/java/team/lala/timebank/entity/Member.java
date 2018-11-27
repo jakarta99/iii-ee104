@@ -14,12 +14,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import team.lala.timebank.enums.Type;
+import team.lala.timebank.enums.MemberType;
 
 @Entity
-@Table(name="MEMBER")
-@Inheritance(strategy=InheritanceType.JOINED)  
-public class Member{
+@Table(name = "MEMBER")
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Member {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +36,7 @@ public class Member{
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "TYPE")
-	private Type type; // P: Person; O: Organization
+	private MemberType memberType; // P: Person; O: Organization
 
 	@Column(name = "EMAIL")
 	private String email;
@@ -47,10 +47,32 @@ public class Member{
 	@Column(name = "MOBILE")
 	private String mobile;
 
-	@ManyToOne(fetch=FetchType.LAZY,optional = false)
-	@JoinColumn(name = "CITY")
-//	@Column(name="city")
-	private Area area;
+	// @ManyToOne(fetch=FetchType.LAZY,optional = false)
+	// @JoinColumn(name = "CITY")
+	@Column(name = "city")
+	private Long area;
+
+	@Column(name = "FOUNDER")
+	private String founder;
+
+	@Column(name = "CEO")
+	private String ceo;
+
+	public String getFounder() {
+		return founder;
+	}
+
+	public void setFounder(String founder) {
+		this.founder = founder;
+	}
+
+	public String getCeo() {
+		return ceo;
+	}
+
+	public void setCeo(String ceo) {
+		this.ceo = ceo;
+	}
 
 	public Long getId() {
 		return id;
@@ -84,12 +106,12 @@ public class Member{
 		this.name = name;
 	}
 
-	public Type getType() {
-		return type;
+	public MemberType getMemberType() {
+		return memberType;
 	}
 
-	public void setType(Type type) {
-		this.type = type;
+	public void setMemberType(MemberType memberType) {
+		this.memberType = memberType;
 	}
 
 	public String getEmail() {
@@ -116,23 +138,19 @@ public class Member{
 		this.mobile = mobile;
 	}
 
-
-
-	public Area getArea() {
+	public Long getArea() {
 		return area;
 	}
 
-	public void setArea(Area area) {
-		this.area = area;
+	public void setArea(Long areaId) {
+		this.area = areaId;
 	}
 
 	@Override
 	public String toString() {
-		return "MemberInherit [id=" + id + ", loginAccount=" + loginAccount + ", password=" + password + ", name="
-				+ name + ", type=" + type + ", email=" + email + ", telephone=" + telephone + ", mobile=" + mobile
-				+ ", area=" + area + "]";
+		return "Member [id=" + id + ", loginAccount=" + loginAccount + ", password=" + password + ", name=" + name
+				+ ", type=" + memberType + ", email=" + email + ", telephone=" + telephone + ", mobile=" + mobile
+				+ ", area=" + area + ", founder=" + founder + ", ceo=" + ceo + "]";
 	}
-
-	
 
 }
