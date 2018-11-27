@@ -52,14 +52,15 @@ public class RequestsController {
 	@RequestMapping("/update")
 	public String update(Requests requests, Model model) {
 		
-		Requests r =requestsService.getOne(requests.getId());
-		r.setJobArea(requests.getJobArea());
-		r.setJobTitle(requests.getJobTitle());
-		r.setServiceType(requests.getServiceType());
-		r.setTermType(requests.getTermType());
-		r.setTimeValue(requests.getTimeValue());
+//		Requests r =requestsService.getOne(requests.getId());
 		
-		requestsService.save(r);
+//		r.setJobArea(requests.getJobArea());
+//		r.setJobTitle(requests.getJobTitle());
+//		r.setServiceType(requests.getServiceType());
+//		r.setTermType(requests.getTermType());
+//		r.setTimeValue(requests.getTimeValue());
+		
+		requestsService.save(requests);
 		
 		
 		return "redirect:/request/list";
