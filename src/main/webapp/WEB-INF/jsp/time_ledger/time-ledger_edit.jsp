@@ -47,7 +47,7 @@ fieldset {
 			<!-- id:<input type="text" value="" id="id" name="id"/> -->
 			<div class="form-group">
 				memberId: <input type="text" value="${timeLedger.memberId}"
-					id="memberId" name="memberId" class="form-control" />
+					id="memberId" name="memberId" class="form-control" disabled />
 			</div>
 			<!-- 			<div class="form-group"> transactionTime:-->
 			<input type="hidden" value="${timeLedger.transactionTime}"
@@ -74,11 +74,11 @@ fieldset {
 				<input type="submit" class="btn btn-outline-secondary" /> <input
 					type="reset" class="btn btn-outline-secondary" />
 			</div>
+			<div>
+				<a href='/time-ledger/list'><i
+					class="fas fa-arrow-alt-circle-left"></i>back to TimeLedger List</a>
+			</div>
 		</fieldset>
 	</form>
-	<div>
-		<a href='/time-ledger/list'><i
-			class="fas fa-arrow-alt-circle-left"></i>back to TimeLedger List</a>
-	</div>
 </body>
 </html>

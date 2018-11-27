@@ -50,12 +50,12 @@ fieldset {
 					class="form-control" />
 			</div>
 			<!-- 			<div class="form-group"> transactionTime:-->
-							<input type="hidden" value="" id="transactionTime"
-								name="transactionTime" class="form-control" />
+			<input type="hidden" value="" id="transactionTime"
+				name="transactionTime" class="form-control" />
 			<!-- 			</div> -->
 			<!-- 			<div class="form-group"> description:-->
-							<input type="hidden" value="" id="description"
-								name="description" class="form-control" />
+			<input type="hidden" value="" id="description" name="description"
+				class="form-control" />
 			<!-- 			</div> -->
 			<div class="form-group">
 				depositValue:<input type="text" value="" id="depositValue"
@@ -66,18 +66,18 @@ fieldset {
 					name="withdrawalValue" class="form-control" />
 			</div>
 			<!-- 			<div class="form-group"> balanceValue:-->
-							<input type="hidden" value="" id="balanceValue"
-								name="balanceValue" class="form-control" />
+			<input type="hidden" value="" id="balanceValue" name="balanceValue"
+				class="form-control" />
 			<!-- 			</div> -->
 			<div class="form-group">
 				<input type="submit" class="btn btn-outline-secondary" /> <input
 					type="reset" class="btn btn-outline-secondary" />
 			</div>
+			<div>
+				<a href='/time-ledger/list'><i
+					class="fas fa-arrow-alt-circle-left"></i>back to TimeLedger List</a>
+			</div>
 		</fieldset>
 	</form>
-	<div>
-		<a href='/time-ledger/list'><i
-			class="fas fa-arrow-alt-circle-left"></i>back to TimeLedger List</a>
-	</div>
 </body>
 </html>
