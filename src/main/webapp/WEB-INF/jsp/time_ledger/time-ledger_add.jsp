@@ -49,14 +49,14 @@ fieldset {
 				memberId:<input type="text" value="" id="memberId" name="memberId"
 					class="form-control" />
 			</div>
-<!-- 			<div class="form-group"> -->
-<!-- 				transactionTime:<input type="text" value="" id="transactionTime" -->
-<!-- 					name="transactionTime" class="form-control" /> -->
-<!-- 			</div> -->
-<!-- 			<div class="form-group"> -->
-<!-- 				description:<input type="text" value="" id="description" -->
-<!-- 					name="description" class="form-control" /> -->
-<!-- 			</div> -->
+			<!-- 			<div class="form-group"> transactionTime:-->
+							<input type="hidden" value="" id="transactionTime"
+								name="transactionTime" class="form-control" />
+			<!-- 			</div> -->
+			<!-- 			<div class="form-group"> description:-->
+							<input type="hidden" value="" id="description"
+								name="description" class="form-control" />
+			<!-- 			</div> -->
 			<div class="form-group">
 				depositValue:<input type="text" value="" id="depositValue"
 					name="depositValue" class="form-control" />
@@ -65,14 +65,15 @@ fieldset {
 				withdrawalValue:<input type="text" value="" id="withdrawalValue"
 					name="withdrawalValue" class="form-control" />
 			</div>
-<!-- 			<div class="form-group"> -->
-<!-- 				balanceValue:<input type="text" value="" id="balanceValue" -->
-<!-- 					name="balanceValue" class="form-control" /> -->
-<!-- 			</div> -->
+			<!-- 			<div class="form-group"> balanceValue:-->
+							<input type="hidden" value="" id="balanceValue"
+								name="balanceValue" class="form-control" />
+			<!-- 			</div> -->
 			<div class="form-group">
 				<input type="submit" class="btn btn-outline-secondary" /> <input
 					type="reset" class="btn btn-outline-secondary" />
 			</div>
+		</fieldset>
 	</form>
 	<div>
 		<a href='/time-ledger/list'><i

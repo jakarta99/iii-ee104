@@ -49,15 +49,14 @@ fieldset {
 				memberId: <input type="text" value="${timeLedger.memberId}"
 					id="memberId" name="memberId" class="form-control" />
 			</div>
-<!-- 			<div class="form-group"> -->
-<!-- 				transactionTime: <input type="text" -->
-<%-- 					value="${timeLedger.transactionTime}" id="transactionTime" --%>
-<!-- 					name="transactionTime" class="form-control" /> -->
-<!-- 			</div> -->
-<!-- 			<div class="form-group"> -->
-<%-- 				description: <input type="text" value="${timeLedger.description}" --%>
-<!-- 					id="description" name="description" class="form-control" /> -->
-<!-- 			</div> -->
+			<!-- 			<div class="form-group"> transactionTime:-->
+			<input type="hidden" value="${timeLedger.transactionTime}"
+				id="transactionTime" name="transactionTime" class="form-control" />
+			<!-- 			</div> -->
+			<!-- 			<div class="form-group"> description:-->
+			<input type="hidden" value="${timeLedger.description}"
+				id="description" name="description" class="form-control" />
+			<!-- 			</div> -->
 			<div class="form-group">
 				depositValue: <input type="text" value="${timeLedger.depositValue}"
 					id="depositValue" name="depositValue" class="form-control" />
@@ -67,14 +66,15 @@ fieldset {
 					value="${timeLedger.withdrawalValue}" id="withdrawalValue"
 					name="withdrawalValue" class="form-control" />
 			</div>
-<!-- 			<div class="form-group"> -->
-<%-- 				balanceValue: <input type="text" value="${timeLedger.balanceValue}" --%>
-<!-- 					id="balanceValue" name="balanceValue" class="form-control" /> -->
-<!-- 			</div> -->
+			<!-- 			<div class="form-group"> balanceValue:-->
+			<input type="hidden" value="${timeLedger.balanceValue}"
+				id="balanceValue" name="balanceValue" class="form-control" />
+			<!-- 			</div> -->
 			<div class="form-group">
 				<input type="submit" class="btn btn-outline-secondary" /> <input
 					type="reset" class="btn btn-outline-secondary" />
 			</div>
+		</fieldset>
 	</form>
 	<div>
 		<a href='/time-ledger/list'><i
