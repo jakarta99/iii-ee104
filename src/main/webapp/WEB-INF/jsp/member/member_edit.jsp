@@ -47,7 +47,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
 		$(document).ready(function(){
-			$("option:eq("+ (${member.area} -1) +")").prop("selected",true);
+			$("option[value='"+ ${member.area.id} +"']").prop("selected",true);
 		})
 	
 	</script>

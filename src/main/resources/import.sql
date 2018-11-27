@@ -7,14 +7,14 @@ INSERT INTO AREA VALUES ('新竹市');
 INSERT INTO AREA VALUES ('新竹縣');
 
 --member
-INSERT INTO MEMBER ( LOGIN_ACCOUNT, PASSWORD, NAME, TYPE, EMAIL, CITY)
-VALUES('sheila1112','asdf','sheila', 'P', 'sheila000@gmail.com', 1);
+INSERT INTO MEMBER ( LOGIN_ACCOUNT, PASSWORD, NAME, TYPE, EMAIL, CITY,TEL, MOBILE)
+VALUES('sheila1112','asdf','sheila', 'P', 'sheila000@gmail.com', 1,'25644433', '0912356278');
 
-INSERT INTO MEMBER (LOGIN_ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, CITY)
-VALUES('anchor1112','asdf','anchor', 'P', 'anchor001@gmail.com', 2);
+INSERT INTO MEMBER (LOGIN_ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, CITY,TEL, MOBILE)
+VALUES('anchor1112','asdf','anchor', 'P', 'anchor001@gmail.com', 2,'25644433', '0912356278');
 
-INSERT INTO MEMBER (LOGIN_ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, CITY, FOUNDER, CEO)
-VALUES('jasmine1112','asdf','jasmine', 'O', 'jasmine002@gmail.com', 3, 'Tom老師', '鄭正');
+INSERT INTO MEMBER (LOGIN_ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, CITY, FOUNDER, CEO,TEL, MOBILE)
+VALUES('jasmine1112','asdf','jasmine', 'O', 'jasmine002@gmail.com', 3, 'Tom老師', '鄭正','25644433', '0912356278');
 
 
 

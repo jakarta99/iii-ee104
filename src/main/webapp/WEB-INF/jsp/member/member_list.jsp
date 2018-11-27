@@ -54,7 +54,7 @@
 					<td width="200px">${member.memberType}</td>
 					<td width="200px">${member.telephone}</td>
 					<td width="200px">${member.mobile}</td>
-					<td width="200px">${member.area}</td>
+					<td width="200px">${member.area.city}</td>
 <%-- 					<c:if test="${member.type eq 'O' }"> --%>
 <%-- 						<td width="200px">${member.founder}</td> --%>
 <%-- 						<td width="200px">${member.ceo}</td> --%>

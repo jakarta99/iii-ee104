@@ -47,10 +47,10 @@ public class Member {
 	@Column(name = "MOBILE")
 	private String mobile;
 
-	// @ManyToOne(fetch=FetchType.LAZY,optional = false)
-	// @JoinColumn(name = "CITY")
-	@Column(name = "city")
-	private Long area;
+	 @ManyToOne(fetch=FetchType.LAZY, optional = false)
+	 @JoinColumn(name = "CITY")
+//	@Column(name = "city")
+	private Area area;
 
 	@Column(name = "FOUNDER")
 	private String founder;
@@ -138,12 +138,14 @@ public class Member {
 		this.mobile = mobile;
 	}
 
-	public Long getArea() {
+	
+
+	public Area getArea() {
 		return area;
 	}
 
-	public void setArea(Long areaId) {
-		this.area = areaId;
+	public void setArea(Area area) {
+		this.area = area;
 	}
 
 	@Override

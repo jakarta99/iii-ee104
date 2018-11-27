@@ -99,7 +99,7 @@ public class MemberController {
 		if (member.getArea() != null) {		
 			newMember.setArea(member.getArea());
 		} else {
-			newMember.setArea(1l);
+			newMember.setArea(areaService.getOne(1l));
 		}
 		if (member.getCeo() != null) {
 			newMember.setCeo(member.getCeo());

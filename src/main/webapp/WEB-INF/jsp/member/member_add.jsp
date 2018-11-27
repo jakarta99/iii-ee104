@@ -31,7 +31,7 @@
 			</c:forEach>
 		</select><br>
 		
-		<c:if test="${type eq 'O' }">
+		<c:if test="${memberType eq 'O' }">
 			創辦人: <input type="text" value="${param.founder }" id="founder" name="founder"><br>
 			執行長: <input type="text" value="${param.ceo }" id="ceo" name="ceo"><br>
 		</c:if>
