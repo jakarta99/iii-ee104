@@ -15,9 +15,9 @@
 
 <form action="/order/update" method="post">
 	<input type="hidden" value="${order.id}" id="id" name="id"/>
-	supplierAcception(Y/N):<input type="text" value="" id="supplierAcception" name="supplierAcception"><p>
-	confirmation(Y/N):<input type="text" value="" id="confirmation" name="confirmation"><p>
-	status:<input type="text" value="" id="status" name="status"><p>
+	supplierAcception(Y/N):<input type="text" value="${order.supplierAcception}" id="supplierAcception" name="supplierAcception"><p>
+	confirmation(Y/N):<input type="text" value="${order.confirmation}" id="confirmation" name="confirmation"><p>
+	status:<input type="text" value="${order.status}" id="status" name="status"><p>
 	<input type="submit"/>
 </form>
 <a href="/order/list">back to order_list</a>
