@@ -16,8 +16,8 @@
 <body>
 	<h2>Member Add</h2>
 	<form action="/member/insert" method="post">	
-		<input type="text" value="" id="id" name="id"/>
-		<input type="text" value="${memberType}" id="memberType" name="memberType"/><br>
+		<input type="hidden" value="" id="id" name="id"/>
+		<input type="hidden" value="${memberType}" id="memberType" name="memberType"/><br>
 		帳號 : <input type="text" value="${param.loginAccount }" id="loginAccount" name="loginAccount" ><br> 
 		密碼 : <input type="text" value="${param.password }" id="password" name="password"><br>
 		名字 : <input type="text" value="${param.name }" id="name" name="name"><br>
