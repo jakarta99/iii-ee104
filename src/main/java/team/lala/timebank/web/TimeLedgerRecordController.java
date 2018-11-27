@@ -46,16 +46,16 @@ public class TimeLedgerRecordController {
 
 	@RequestMapping("/update")
 	public String update(TimeLedger timeLedger, Model model) {
-		TimeLedger dbTimeLedger = timeLedgerService.findById(timeLedger.getId());
-
-		dbTimeLedger.setBalanceValue(timeLedger.getBalanceValue());
-		dbTimeLedger.setDepositValue(timeLedger.getDepositValue());
-		dbTimeLedger.setDescription(timeLedger.getDescription());
-		dbTimeLedger.setMemberId(timeLedger.getMemberId());
-		dbTimeLedger.setTransactionTime(timeLedger.getTransactionTime());
-		dbTimeLedger.setWithdrawalValue(timeLedger.getWithdrawalValue());
-
-		timeLedgerService.save(dbTimeLedger);
+//		TimeLedger dbTimeLedger = timeLedgerService.findById(timeLedger.getId());
+//		dbTimeLedger.setBalanceValue(timeLedger.getBalanceValue());
+//		dbTimeLedger.setDepositValue(timeLedger.getDepositValue());
+//		dbTimeLedger.setDescription(timeLedger.getDescription());
+//		dbTimeLedger.setMemberId(timeLedger.getMemberId());
+//		dbTimeLedger.setTransactionTime(timeLedger.getTransactionTime());
+//		dbTimeLedger.setWithdrawalValue(timeLedger.getWithdrawalValue());
+//		timeLedgerService.save(dbTimeLedger);
+		
+		timeLedgerService.save(timeLedger);
 		return editPage(timeLedger.getId(), model);
 	}
 
@@ -64,23 +64,5 @@ public class TimeLedgerRecordController {
 		timeLedgerService.delete(id);
 		return listPage(model);
 	}
-
-	// Long memberId = 1L;
-	//
-	// @RequestMapping("/TimeLedger")
-	// public String findTimeLedgerRecord() {
-	// String result = "<html><h2>[TimeLedgerRecordController
-	// Test]透過memberId查詢所有帳戶變動紀錄!</h2>";
-	// List<TimeLedger> timeLedgerRecord =
-	// timeLedgerService.findAllByMemberId(memberId);
-	//
-	// for (TimeLedger timeLedger : timeLedgerRecord) {
-	// result += timeLedger.toString() + "<br>";
-	// }
-	//
-	// result += "</html>";
-	// return result;
-	//
-	// }
 
 }
