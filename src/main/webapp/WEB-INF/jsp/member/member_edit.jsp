@@ -20,8 +20,8 @@
 	<form action="/member/update" method="post">
 	
 		<h4>Member ${member.id}</h4>
-		<input type="text" value="${member.id}" id="id" name="id"/>
-		<input type="text" value="${member.memberType}" id="memberType" name="memberType"/><br>
+		<input type="hidden" value="${member.id}" id="id" name="id"/>
+		<input type="hidden" value="${member.memberType}" id="memberType" name="memberType"/><br>
 		帳號 :<input type="text" value="${member.loginAccount }" id="loginAccount" name="loginAccount" disabled><br> 
 		密碼 :<input type="text" value="${member.password }" id="password" name="password"><br>
 		名字 :<input type="text" value="${member.name }" id="name" name="name"><br>
