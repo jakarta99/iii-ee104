@@ -1,10 +1,11 @@
 package team.lala.timebank.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +21,12 @@ import team.lala.timebank.enums.MemberType;
 @Table(name = "MEMBER")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Member {
+	
+	@ManyToOne
+	@JoinColumn(name = "CITY", referencedColumnName="Id",
+				insertable=false, updatable=false)
+	private Area area;
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,31 +54,24 @@ public class Member {
 	@Column(name = "MOBILE")
 	private String mobile;
 
-	 @ManyToOne(fetch=FetchType.LAZY, optional = false)
-	 @JoinColumn(name = "CITY")
-//	@Column(name = "city")
-	private Area area;
+	@Column(name = "CITY")
+	private Integer areaId;
 
 	@Column(name = "FOUNDER")
 	private String founder;
 
 	@Column(name = "CEO")
 	private String ceo;
+	
+	@Column(name="SIGN_UP_DATE")
+	private Date signUpDate;
 
-	public String getFounder() {
-		return founder;
+	public Date getSignUpDate() {
+		return signUpDate;
 	}
 
-	public void setFounder(String founder) {
-		this.founder = founder;
-	}
-
-	public String getCeo() {
-		return ceo;
-	}
-
-	public void setCeo(String ceo) {
-		this.ceo = ceo;
+	public void setSignUpDate(Date signUpDate) {
+		this.signUpDate = signUpDate;
 	}
 
 	public Long getId() {
@@ -138,14 +138,36 @@ public class Member {
 		this.mobile = mobile;
 	}
 
-	
-
 	public Area getArea() {
 		return area;
 	}
 
 	public void setArea(Area area) {
 		this.area = area;
+	}
+
+	public Integer getAreaId() {
+		return areaId;
+	}
+
+	public void setAreaId(Integer areaId) {
+		this.areaId = areaId;
+	}
+
+	public String getFounder() {
+		return founder;
+	}
+
+	public void setFounder(String founder) {
+		this.founder = founder;
+	}
+
+	public String getCeo() {
+		return ceo;
+	}
+
+	public void setCeo(String ceo) {
+		this.ceo = ceo;
 	}
 
 	@Override

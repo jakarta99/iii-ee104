@@ -13,17 +13,14 @@ import com.google.gson.Gson;
 /**
  * find all the timeLedger list, find all the job list, choose a job, after
  * providing service timeLedger increased.
- * 
- * @author Sheila
- *
  */
 
 
 @SpringBootApplication
-public class TimeBankApp2 {
+public class TimeBankApp {
 	
 	public static void main(String[] args) {
-		SpringApplication.run(TimeBankApp2.class, args);
+		SpringApplication.run(TimeBankApp.class, args);
 	}
 
 }
