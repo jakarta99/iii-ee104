@@ -17,110 +17,88 @@ import team.lala.timebank.service.MemberService;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-	
+
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private AreaService areaService;
-	
+
 	@RequestMapping("/list")
 	public String listMember(Model model) {
 		List<Member> members = memberService.findAll();
 		model.addAttribute("members", members);
 		return "/member/member_list";
-		
+
 	}
-	
+
 	@RequestMapping("/add")
 	public String addMember(@RequestParam("memberType") MemberType memberType, Model model) {
 		List<Area> areaList = areaService.findAll();
 		model.addAttribute("areaList", areaList);
-		model.addAttribute("memberType",memberType);
+		model.addAttribute("memberType", memberType);
 		return "/member/member_add";
-		
+
 	}
-	
+
 	@RequestMapping("/edit")
-	public String editMember(@RequestParam("id") Long id,Model model) {
-		Member member = memberService.getOne(id);		
-		model.addAttribute("member",member);
+	public String editMember(@RequestParam("id") Long id, Model model) {
+		Member member = memberService.getOne(id);
+		model.addAttribute("member", member);
 		List<Area> areaList = areaService.findAll();
 		model.addAttribute("areaList", areaList);
-		return "/member/member_edit";	
+		return "/member/member_edit";
 	}
-	
-	
+
 	@RequestMapping("/update")
-	public String updateMember(Member member,Model model) {
-		if (member.getId() != null) {			
+	public String updateMember(Member member, Model model) {
+		if (member.getId() != null) {
+			// System.out.println("member = " + member);
 			Member dbMember = memberService.getOne(member.getId());
 			dbMember.setPassword(member.getPassword());
 			dbMember.setName(member.getName());
 			dbMember.setEmail(member.getEmail());
 			dbMember.setTelephone(member.getTelephone());
 			dbMember.setMobile(member.getMobile());
-			dbMember.setArea(member.getArea());
-			System.out.println("area="+member.getArea());
+			dbMember.setAreaId(member.getAreaId());
 			if (member.getMemberType() == MemberType.O) {
 				dbMember.setCeo(member.getCeo());
-				dbMember.setFounder(member.getFounder());				
+				dbMember.setFounder(member.getFounder());
 			}
-			memberService.save(dbMember);	
+			// System.out.println("dbMember= " + dbMember);
+			memberService.save(dbMember);
 		}
-   
-		return editMember(member.getId(), model);	
+
+		return editMember(member.getId(), model);
 	}
-	
-	
+
 	@RequestMapping("/insert")
 	public String insertMember(Member member, Model model) {
+		// System.out.println("member = " + member);
 		Member newMember = new Member();
 		newMember.setMemberType(member.getMemberType());
-		
-		if (member.getLoginAccount() != null) {
-			newMember.setLoginAccount(member.getLoginAccount());
-		}
-		if (member.getPassword() != null) {
-			newMember.setPassword(member.getPassword());
-		}
-		if (member.getName() != null) {
-			newMember.setName(member.getName());
-		}
-		if (member.getEmail() != null) {
-			newMember.setEmail(member.getEmail());
-		}
-		if (member.getTelephone() != null) {
-			newMember.setTelephone(member.getTelephone());
-		}
-		if (member.getMobile() != null) {
-			newMember.setMobile(member.getMobile());
-		}	
-		if (member.getArea() != null) {		
-			newMember.setArea(member.getArea());
-		} else {
-			newMember.setArea(areaService.getOne(1l));
-		}
-		if (member.getCeo() != null) {
-			newMember.setCeo(member.getCeo());
-		}
-		if (member.getFounder() != null) {
-			newMember.setFounder(member.getFounder());
-		}
+		newMember.setLoginAccount(member.getLoginAccount());
+		newMember.setPassword(member.getPassword());
+		newMember.setName(member.getName());
+		newMember.setEmail(member.getEmail());
+		newMember.setTelephone(member.getTelephone());
+		newMember.setMobile(member.getMobile());
+		newMember.setAreaId(member.getAreaId());
+
+		newMember.setCeo(member.getCeo());
+		newMember.setFounder(member.getFounder());
+		// System.out.println("newMember = " + newMember);
 		memberService.save(newMember);
-		
+
 		return "redirect:/member/list";
-		
 	}
-	
-	
+
 	@RequestMapping("/delete")
-	public String deleteMember(@RequestParam("id") Long id,Model model) {
+	public String deleteMember(@RequestParam("id") Long id, Model model) {
 		memberService.deleteById(id);
-	
+
 		return "redirect:/member/list";
-		
+
 	}
-	
 
 }
