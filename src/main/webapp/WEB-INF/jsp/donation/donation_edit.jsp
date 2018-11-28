@@ -5,10 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title> edit donation </title>
 </head>
 <body>
-
-<h1>${donation.MemberId}</h1>
+<h1> edit memberId = ${donation.memberId} donation</h1>
+<form action="/donation/update" method="post">
+	<input type="hidden" value="${donation.id}" id="id" name="id"/>
+	donateValue:<input type="text" value="${donation.donateValue}" id="donateValue" name="donateValue"/><p>
+	<input  type="submit"/>
+</form>
+<a href="/donation/list">back to donation_list</a>
 </body>
 </html>

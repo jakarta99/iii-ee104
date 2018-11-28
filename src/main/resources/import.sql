@@ -62,3 +62,14 @@ VALUES(3, 2, '2018-11-10', '遲到1小時', 2 , 2);
 
 INSERT INTO PENALTY (order_list_id, member_id, update_date, description, status, penalty_time_value)
 VALUES(1, 3, '2018-11-10', '服務態度不佳', 3 ,0);
+
+--donation
+
+INSERT INTO DONATION(donation_list_id,member_id,donate_organization_id,donate_value,donate_time) 
+VALUES(1,1,123,10,'2018-11-6');
+
+INSERT INTO DONATION(donation_list_id,member_id,donate_organization_id,donate_value,donate_time) 
+VALUES(2,2,1253,15,'2018-05-6');
+
+INSERT INTO DONATION(donation_list_id,member_id,donate_organization_id,donate_value,donate_time) 
+VALUES(3,3,1243,3,'2018-10-6');
