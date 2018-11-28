@@ -63,7 +63,7 @@ public class OrderController {
 		
 		orderService.save(order);
 		
-		return "/order/order_add";
+		return "redirect:/order/add";
 	}
 	
 
