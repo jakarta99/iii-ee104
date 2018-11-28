@@ -7,9 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Member Edit</title>
 <style>
-	input,select{
-		margin-bottom:20px;
-	}
+ 	input,select{ 
+ 		margin-bottom:20px; 
+	} 
 </style>
 
 
@@ -17,9 +17,8 @@
 <body>
 
 	<h2>Member Edit</h2>
-	<form action="/member/update" method="post">
-	
-		<h4>Member ${member.id}</h4>
+	<h4>Member ${member.id}</h4>
+	<form action="/member/update" method="post" >
 		<input type="hidden" value="${member.id}" id="id" name="id"/>
 		<input type="hidden" value="${member.memberType}" id="memberType" name="memberType"/><br>
 		帳號 :<input type="text" value="${member.loginAccount }" id="loginAccount" name="loginAccount" disabled><br> 
@@ -29,7 +28,7 @@
 		住家電話: <input type="text" value="${member.telephone }" id="telephone" name="telephone"><br>
 		手機: <input type="text" value="${member.mobile }" id="mobile" name="mobile"><br>
 		居住地區: 
-		<select id="area" name="area" >
+		<select id="area" name="areaId" >
 			<c:forEach items="${areaList}" var="area">
 				<option value="${area.id}" >${area.city}</option>
 			</c:forEach>
@@ -47,7 +46,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
 		$(document).ready(function(){
-			$("option[value='"+ ${member.area.id} +"']").prop("selected",true);
+			$("option[value='"+ ${member.areaId} +"']").prop("selected",true);
 		})
 	
 	</script>

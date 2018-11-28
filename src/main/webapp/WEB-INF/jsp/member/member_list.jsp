@@ -17,7 +17,7 @@
 </style>
 </head>
 <body>
-	<input type="button" onclick="javascript:document.location.href=''" value="回首頁" />
+<!-- 	<input type="button" onclick="javascript:document.location.href=''" value="回首頁" /> -->
 	<h2>Member List</h2>
 	<table border="1">
 		<tr>
@@ -35,7 +35,7 @@
 				<th>Member type</th>
 				<th>telephone</th>
 				<th>mobile</th>
-				<th>area</th>
+<!-- 				<th>area</th> -->
 <!-- 				<th>founder</th> -->
 <!-- 				<th>ceo</th> -->
 			</tr>
@@ -54,7 +54,7 @@
 					<td width="200px">${member.memberType}</td>
 					<td width="200px">${member.telephone}</td>
 					<td width="200px">${member.mobile}</td>
-					<td width="200px">${member.area.city}</td>
+<%-- 					<td width="200px">${member.area.city}</td> --%>
 <%-- 					<c:if test="${member.type eq 'O' }"> --%>
 <%-- 						<td width="200px">${member.founder}</td> --%>
 <%-- 						<td width="200px">${member.ceo}</td> --%>

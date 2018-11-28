@@ -11,9 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import team.lala.timebank.enums.MemberType;
 
@@ -22,9 +21,12 @@ import team.lala.timebank.enums.MemberType;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Member {
 	
-	@ManyToOne
-	@JoinColumn(name = "CITY", referencedColumnName="Id",
-				insertable=false, updatable=false)
+	
+	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "CITY", referencedColumnName="Id",
+//				insertable=false, updatable=false)
+	@Transient
 	private Area area;
 
 
@@ -55,7 +57,7 @@ public class Member {
 	private String mobile;
 
 	@Column(name = "CITY")
-	private Integer areaId;
+	private Long areaId;
 
 	@Column(name = "FOUNDER")
 	private String founder;
@@ -146,11 +148,11 @@ public class Member {
 		this.area = area;
 	}
 
-	public Integer getAreaId() {
+	public Long getAreaId() {
 		return areaId;
 	}
 
-	public void setAreaId(Integer areaId) {
+	public void setAreaId(Long areaId) {
 		this.areaId = areaId;
 	}
 
@@ -172,9 +174,14 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", loginAccount=" + loginAccount + ", password=" + password + ", name=" + name
-				+ ", type=" + memberType + ", email=" + email + ", telephone=" + telephone + ", mobile=" + mobile
-				+ ", area=" + area + ", founder=" + founder + ", ceo=" + ceo + "]";
+		return "Member [area=" + area + ", id=" + id + ", loginAccount=" + loginAccount + ", password=" + password
+				+ ", name=" + name + ", memberType=" + memberType + ", email=" + email + ", telephone=" + telephone
+				+ ", mobile=" + mobile + ", areaId=" + areaId + ", founder=" + founder + ", ceo=" + ceo
+				+ ", signUpDate=" + signUpDate + "]";
 	}
+
+	
+
+	
 
 }

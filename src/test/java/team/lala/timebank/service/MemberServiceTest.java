@@ -26,8 +26,7 @@ public class MemberServiceTest {
 		if (memberService!= null) {
 			Collection<Member> members = memberService.findAll();
 			for (Member m :members) {
-				System.out.println(m.getId());
-				System.out.println(m.getLoginAccount());
+				System.out.println(m);
 			}
 			
 		}

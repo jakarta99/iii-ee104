@@ -25,7 +25,7 @@
 		住家電話: <input type="text" value="${param.telephone }" id="telephone" name="telephone"><br>
 		手機: <input type="text" value="${param.mobile }" id="mobile" name="mobile"><br>
 		居住地區: 
-		<select id="area" name="area">
+		<select id="area" name="areaId">
 			<c:forEach items="${areaList}" var="area">
 				<option value="${area.id}" >${area.city}</option>
 			</c:forEach>
