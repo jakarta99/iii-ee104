@@ -72,7 +72,8 @@ public class OrderController {
 	public String delete(@RequestParam("id") Long id, Model model) {
 		orderService.deleteById(id);
 		
-		return listPage(model);
+//		return listPage(model);
+		return "redirect:/order/list";
 	}
 	
 	
