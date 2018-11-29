@@ -9,9 +9,14 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
 <meta charset="UTF-8">
 <title>request list</title>
 <style>
+
+
         fieldset {
             width: 1200px;
             border-radius: 20px;
@@ -23,6 +28,14 @@
         .s2{
             text-align: center
         }
+        npm install datatables.net    # Core library
+npm install datatables.net-dt # Styling
+
+var $  = require( 'jquery' );
+var dt = require( 'datatables.net' )();
+
+bower install --save datatables.net
+bower install --save datatables.net-dt
     </style>
 </head>
 <body>
@@ -30,7 +43,7 @@
 	<h1 class="s2">request list</h1>
 	<fieldset>
 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/request/add'">add</button>
-	<table class="table table-hover">
+	<table id="table" class="table table-hover">
 	<thead>
 	<tr>
 		<th>選項</th>
@@ -64,7 +77,11 @@
 	</table>
 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/'">回列表頁</button>
 	</fieldset>
-	
+	<script>
+	$(document).ready( function () {
+    $('#table').DataTable();
+} );
+	</script>	
 </body>
 
 </html>
