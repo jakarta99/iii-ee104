@@ -21,8 +21,8 @@ public class Order{
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name="REQUESTS_ID"   //代表本entity欄位名稱
-				, referencedColumnName="id",  //代表合併的目標entity，其對應的欄位名稱
+	@JoinColumn(name="requests",    //代表本entity欄位名稱
+				referencedColumnName="id",  //代表合併的目標entity，其對應的欄位名稱
 				insertable=false, updatable=false) //子表一定要設false，否則insert時會被視為一個欄位，導致語法錯誤
 	private Requests requests;
 	
