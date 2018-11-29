@@ -62,6 +62,7 @@
 	</c:forEach>
 	 </tbody>
 	</table>
+	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/'">回列表頁</button>
 	</fieldset>
 	
 </body>
