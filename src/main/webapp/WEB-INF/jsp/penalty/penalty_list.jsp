@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
+<script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
+
 <meta charset="UTF-8">
 <title>Penalty List</title>
 </head>
@@ -36,6 +39,8 @@
 				<td>${penalty.description}</td>
 			</tr>
 		</c:forEach>
+	</table>
+	<table id="table_id">
 	</table>
 
 </body>

@@ -21,14 +21,19 @@ public class Order{
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name="REQUEST_LIST_ID"   //代表本entity欄位名稱
-				, referencedColumnName="request_List_Id",  //代表合併的目標entity，其對應的欄位名稱
+	@JoinColumn(name="REQUESTS_ID"   //代表本entity欄位名稱
+				, referencedColumnName="id",  //代表合併的目標entity，其對應的欄位名稱
 				insertable=false, updatable=false) //子表一定要設false，否則insert時會被視為一個欄位，導致語法錯誤
-	private Requests request;
+	private Requests requests;
 	
-	@Column(name="REQUEST_LIST_ID")
-	private Long requestListId;
-	
+	public Requests getRequests() {
+		return requests;
+	}
+
+	public void setRequests(Requests requests) {
+		this.requests = requests;
+	}
+
 	@Column(name="SUPPLIER_ID")
 	private Long supplierId;
 	
@@ -46,24 +51,12 @@ public class Order{
 	@Column(name="STATUS")
 	private String status;
 
-
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", requestListId=" + requestListId + ", supplierId=" + supplierId + ", requesterId="
+		return "Order [id=" + id + ", requests=" + requests + ", supplierId=" + supplierId + ", requesterId="
 				+ requesterId + ", supplierAcception=" + supplierAcception + ", confirmation=" + confirmation
 				+ ", status=" + status + "]";
 	}
-	
-	public String ToStringByJoinOrderAndRequestResult() {
-		return  this.toString() 
-				+ "。【join REQUEST】" + request.toString()
-				+ "]";
-	}
-	
-	public Order() {
-		
-	}
-	
 
 	public Long getId() {
 		return id;
@@ -72,22 +65,8 @@ public class Order{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public Requests getRequest() {
-		return request;
-	}
 
-	public void setRequest(Requests request) {
-		this.request = request;
-	}
-	
-	public Long getRequestListId() {
-		return requestListId;
-	}
 
-	public void setRequestListId(Long requestListId) {
-		this.requestListId = requestListId;
-	}
 
 	public Long getSupplierId() {
 		return supplierId;

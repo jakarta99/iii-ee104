@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Requests {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@Column(name = "request_List_Id") 
+	@Column(name = "id") 
 	private Long id;// 工作ID
 
 	@OneToMany(mappedBy="request")

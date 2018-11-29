@@ -1,7 +1,6 @@
 package team.lala.timebank.web;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,11 +33,16 @@ public class PenaltyController {
 
 	@RequestMapping("/edit")
 	public String edit(@RequestParam("id") Long id, Model model) {
-		Optional<Penalty> penalty1 = penaltyService.findById(id);
-		Penalty penalty2 = penalty1.orElse(null);
-		model.addAttribute("penalty", penalty2);
+		Penalty penalty = penaltyService.getOne(id);
+		model.addAttribute("penalty", penalty);
 		return "/penalty/penalty_edit";
 
+	}
+	
+	@RequestMapping("/update")
+	public String update(Penalty penalty, Model model) {
+		penaltyService.save(penalty);
+		return "/penalty/penalty_list";
 	}
 
 	@RequestMapping("/delete")
