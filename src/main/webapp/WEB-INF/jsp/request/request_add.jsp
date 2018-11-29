@@ -70,9 +70,9 @@
      <div class="form-group">
 	<input type="submit" class="btn btn-outline-secondary"/>
 	<input type="reset"  class="btn btn-outline-secondary"/>
-	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/request/list'">回列表頁</button>
 	</div>
 	</form>
+	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/request/list'">回列表頁</button>
 	</fieldset>
 </body>
 </html>
