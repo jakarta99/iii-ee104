@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.lala.timebank.entity.Area;
 import team.lala.timebank.entity.Member;
@@ -29,7 +30,7 @@ public class MemberController {
 	public String listMember(Model model) {
 		List<Member> members = memberService.findAll();
 		model.addAttribute("members", members);
-		return "/member/member_list";
+		return "/member/member_list3";
 
 	}
 
@@ -90,6 +91,13 @@ public class MemberController {
 
 		return "redirect:/member/list";
 
+	}
+	
+	@RequestMapping("/query")
+	@ResponseBody
+	public List<Member> query(Model model){
+		List<Member> members = memberService.findAll();
+		return members;
 	}
 
 }

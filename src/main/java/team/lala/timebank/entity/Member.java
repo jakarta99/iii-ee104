@@ -1,16 +1,20 @@
 package team.lala.timebank.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -21,12 +25,10 @@ import team.lala.timebank.enums.YesNo;
 @Table(name = "MEMBER")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Member {
-	
-	
-	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "CITY", referencedColumnName="Id",
-//				insertable=false, updatable=false)
+		
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CITY", referencedColumnName="Id",
+				insertable=false, updatable=false)
 	@Transient
 	private Area area;
 
@@ -75,7 +77,8 @@ public class Member {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="ORG_IDENTITY_CONFIRMATION")
-	private YesNo orgIDConfirmation = YesNo.N;
+	private YesNo orgIdConfirmation = YesNo.N;
+	
 
 	public Area getArea() {
 		return area;
@@ -189,12 +192,14 @@ public class Member {
 		this.orgCeo = orgCeo;
 	}
 
-	public YesNo getOrgIDConfirmation() {
-		return orgIDConfirmation;
+
+
+	public YesNo getOrgIdConfirmation() {
+		return orgIdConfirmation;
 	}
 
-	public void setOrgIDConfirmation(YesNo orgIDConfirmation) {
-		this.orgIDConfirmation = orgIDConfirmation;
+	public void setOrgIdConfirmation(YesNo orgIdConfirmation) {
+		this.orgIdConfirmation = orgIdConfirmation;
 	}
 
 	@Override
@@ -202,8 +207,8 @@ public class Member {
 		return "Member [area=" + area + ", id=" + id + ", loginAccount=" + loginAccount + ", password=" + password
 				+ ", name=" + name + ", memberType=" + memberType + ", email=" + email + ", telephone=" + telephone
 				+ ", mobile=" + mobile + ", city=" + city + ", emailVerification=" + emailVerification + ", signUpDate="
-				+ signUpDate + ", orgFounder=" + orgFounder + ", orgCeo=" + orgCeo + ", orgIDConfirmation="
-				+ orgIDConfirmation + "]";
+				+ signUpDate + ", orgFounder=" + orgFounder + ", orgCeo=" + orgCeo + ", orgIdConfirmation="
+				+ orgIdConfirmation + "]";
 	}
 
 

@@ -59,13 +59,13 @@
 <!-- 			Y <input type="radio" value="Y" name="orgIDConfirmation" /> -->
 <!-- 			N <input type="radio" value="N" name="orgIDConfirmation" /><br> -->
 <%-- 			<c:choose > --%>
-<%-- 				<c:when test="${member.emailVerification eq 'Y'}"> --%>
-<!-- 					Y <input type="radio" value="Y" name="orgIDConfirmation" checked/> -->
-<!-- 					N <input type="radio" value="N" name="orgIDConfirmation" /><br> -->
+<%-- 				<c:when test="${member.orgIdConfirmation eq 'Y'}"> --%>
+<!-- 					Y <input type="radio" value="Y" name="orgIdConfirmation" checked/> -->
+<!-- 					N <input type="radio" value="N" name="orgIdConfirmation" /><br> -->
 <%-- 				</c:when> --%>
-<%-- 				<c:when test="${member.emailVerification eq 'N'}"> --%>
-<!-- 					Y <input type="radio" value="Y" name="orgIDConfirmation" /> -->
-<!-- 					N <input type="radio" value="N" name="orgIDConfirmation" checked/><br> -->
+<%-- 				<c:when test="${member.orgIdConfirmation eq 'N'}"> --%>
+<!-- 					Y <input type="radio" value="Y" name="orgIdConfirmation" /> -->
+<!-- 					N <input type="radio" value="N" name="orgIdConfirmation" checked/><br> -->
 <%-- 				</c:when>			 --%>
 <%-- 			</c:choose>		 --%>
 			
@@ -82,9 +82,7 @@
 			$("option[value='"+ ${member.city} +"']").prop("selected",true);
 // 			alert(${member.emailVerification})
 // 			$("input[name='emailVerification'][value='"+${member.emailVerification}+"']").prop("checked",true);	
-// 			$("input[name='orgIDConfirmation'][value='"+${member.orgIDConfirmation}+"']").prop("checked",true);	
-
-				
+// 			$("input[name='orgIdConfirmation'][value='"+${member.orgIdConfirmation}+"']").prop("checked",true);	
 			
 		})
 	
