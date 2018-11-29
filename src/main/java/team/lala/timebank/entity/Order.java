@@ -23,7 +23,7 @@ public class Order{
 	@ManyToOne
 	@JoinColumn(name="REQUEST_LIST_ID"   //代表本entity欄位名稱
 				, referencedColumnName="request_List_Id",  //代表合併的目標entity，其對應的欄位名稱
-				insertable=false, updatable=false) //insertable與updatable預設true，但子表一定要設false
+				insertable=false, updatable=false) //子表一定要設false，否則insert時會被視為一個欄位，導致語法錯誤
 	private Requests request;
 	
 	@Column(name="REQUEST_LIST_ID")

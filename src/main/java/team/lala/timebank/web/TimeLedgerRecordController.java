@@ -41,7 +41,7 @@ public class TimeLedgerRecordController {
 	@RequestMapping("/insert")
 	public String insert(TimeLedger timeLedger) {
 		timeLedgerService.save(timeLedger);
-		return "/time_ledger/time-ledger_add";
+		return "redirect:/time-ledger/add";
 	}
 
 	@RequestMapping("/update")
@@ -62,7 +62,7 @@ public class TimeLedgerRecordController {
 	@RequestMapping("/delete")
 	public String delete(@RequestParam("id") Long id, Model model) {
 		timeLedgerService.delete(id);
-		return listPage(model);
+		return "redirect:/time-ledger/list";
 	}
 
 }
