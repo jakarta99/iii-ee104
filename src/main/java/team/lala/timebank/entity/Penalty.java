@@ -15,7 +15,7 @@ public class Penalty {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "penalty_List_Id")
+	@Column(name = "id")
 	private Long id;
 
 	@Column(name = "order_list_id")

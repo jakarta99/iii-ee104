@@ -41,7 +41,10 @@ public class PenaltyController {
 	
 	@RequestMapping("/update")
 	public String update(Penalty penalty, Model model) {
-		penaltyService.save(penalty);
+		Penalty penalty1 = penaltyService.getOne(penalty.getId());
+		penalty1.setPenaltyTimeValue(penalty.getPenaltyTimeValue());
+		penalty1.setStatus(penalty.getStatus());
+		penaltyService.save(penalty1);
 		return "/penalty/penalty_list";
 	}
 
