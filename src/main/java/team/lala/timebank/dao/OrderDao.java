@@ -19,10 +19,10 @@ public interface OrderDao extends JpaRepository<Order,Long>{
 	//步驟二：@QUERY寫法 
 	//參考網址=>  https://www.cnblogs.com/zj0208/p/6008627.html
 	//參考網址=>  https://www.baeldung.com/spring-data-jpa-query
-	@Query(value = "select * from ORDER_LIST o join requests r "
-					+ "on o.request_List_Id = r.request_List_Id"
-					+ " where o.supplier_Id=?1 and r.job_Title =?2", nativeQuery = true)
-	public List<Order> findOrderBySupplierIdAndJobTitle(Long supplierId, String jobTitle);
+//	@Query(value = "select * from ORDER_LIST o join requests r "
+//					+ "on o.request_List_Id = r.request_List_Id"
+//					+ " where o.supplier_Id=?1 and r.job_Title =?2", nativeQuery = true)
+//	public List<Order> findOrderBySupplierIdAndJobTitle(Long supplierId, String jobTitle);
 
 
 }
