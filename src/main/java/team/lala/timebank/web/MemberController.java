@@ -77,20 +77,9 @@ public class MemberController {
 	@RequestMapping("/insert")
 	public String insertMember(Member member, Model model) {
 		// System.out.println("member = " + member);
-		Member newMember = new Member();
-		newMember.setMemberType(member.getMemberType());
-		newMember.setLoginAccount(member.getLoginAccount());
-		newMember.setPassword(member.getPassword());
-		newMember.setName(member.getName());
-		newMember.setEmail(member.getEmail());
-		newMember.setTelephone(member.getTelephone());
-		newMember.setMobile(member.getMobile());
-		newMember.setCity(member.getCity());
-		newMember.setSignUpDate(new Date());
-		newMember.setOrgCeo(member.getOrgCeo());
-		newMember.setOrgFounder(member.getOrgFounder());
-		// System.out.println("newMember = " + newMember);
-		memberService.save(newMember);
+		member.setSignUpDate(new Date());
+
+		memberService.save(member);
 
 		return "redirect:/member/list";
 	}
