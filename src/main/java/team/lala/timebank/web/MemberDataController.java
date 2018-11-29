@@ -40,7 +40,7 @@ public class MemberDataController {
 		List<Donation> donations = donationService.findByMemberId(memberId);
 		if (donations != null) {
 			for (Donation donation : donations) {
-				totalDonateTime += donation.getDonateValue();
+				totalDonateTime += donation.getValue();
 			}
 		}
 		result += "您的捐贈時間為:" + totalDonateTime + "小時<br>";

@@ -30,10 +30,9 @@
 		<tr>
 			<th></th>
 			<th scope="col">id</th>
-			<th scope="col">donationListId</th>
 			<th scope="col">memberId</th>
-			<th scope="col">donateOrganizationId</th>
-			<th scope="col">donateValue</th>
+			<th scope="col">organizationId</th>
+			<th scope="col">value</th>
 			<th scope="col">donateTime</th>
 		</tr>
 		<c:forEach var="donation" items="${donations}">
@@ -43,10 +42,9 @@
 				<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/donation/delete?id=${donation.id}'">Delete</button>
 			</td>
 			<td>${donation.id}</td>
-			<td>${donation.donationListId}</td>
 			<td>${donation.memberId}</td>
-			<td>${donation.donateOrganizationId}</td>
-			<td>${donation.donateValue}</td>
+			<td>${donation.organizationId}</td>
+			<td>${donation.value}</td>
 			<td>${donation.donateTime}</td>
 		</tr>
 		</c:forEach>
