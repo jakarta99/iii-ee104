@@ -1,5 +1,6 @@
 package team.lala.timebank.web;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,7 @@ public class MemberController {
 	@RequestMapping("/update")
 	public String updateMember(Member member, Model model) {
 		if (member.getId() != null) {
-			 System.out.println("member = " + member);
+//			 System.out.println("member = " + member);
 			Member dbMember = memberService.getOne(member.getId());
 			dbMember.setPassword(member.getPassword());
 			dbMember.setName(member.getName());
@@ -85,7 +86,7 @@ public class MemberController {
 		newMember.setTelephone(member.getTelephone());
 		newMember.setMobile(member.getMobile());
 		newMember.setCity(member.getCity());
-
+		newMember.setSignUpDate(new Date());
 		newMember.setOrgCeo(member.getOrgCeo());
 		newMember.setOrgFounder(member.getOrgFounder());
 		// System.out.println("newMember = " + newMember);

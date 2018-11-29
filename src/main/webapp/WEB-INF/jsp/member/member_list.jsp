@@ -7,10 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Member List</title>
 <style>
-	*{
-		margin:0;
-		padding:0;
-	}
+
 	 td{
 	 	text-align:center;
 	 }
@@ -40,9 +37,8 @@
 				<th>會員信箱</th>
 				<th>會員手機</th>
 				<th>註冊日期</th>
-				<th>驗證信確認</th>
-<!-- 				<th></th> -->
-<!-- 				<th> </th> -->
+<!-- 				<th>驗證信確認</th> -->
+
 				
 			</tr>
 		</thead>
@@ -53,8 +49,6 @@
 					<td width="150px">
 						<button
 							onclick="javascript:document.location.href='/member/edit?id=${member.id}'">Edit</button>
-<!-- 						<button -->
-<%-- 							class="edit" id="${member.id}"  >Edit ${member.id}</button> --%>
 						<button
 							class="delete"
 							onclick="javascript:document.location.href='/member/delete?id=${member.id}'">Delete</button>
@@ -66,7 +60,7 @@
 					<td width="200px" class="email">${member.email}</td>
 					<td width="200px" class="mobile">${member.mobile}</td>
 					<td width="200px" class="signUpDate">${member.signUpDate}</td>
-					<td width="50px" class="emailVerification">${member.emailVerification}</td>
+<%-- 					<td width="50px" class="emailVerification">${member.emailVerification}</td> --%>
 					
 
 					
@@ -75,22 +69,6 @@
 		</tbody>
 	</table>
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script>
-// 		$(document).ready(function(){
-// 			$("td>button[class='edit']").click(function(){
-// 				var id = $(this).attr("id");
-// 				var trId = $("#row"+id).prop("id");
-				
-// 				$.each( $("#"+trId+">td:gt(0)"),function(idx, value){
-// 					$(value).html("<input type='text' value="+$(value).text()+" id="+$(value).prop("class")+" name="+$(value).prop("class")+ " width="+$(value).prop("width")+">")
-					
-// 				})
-				
-// 			})
-// 		})
-	
-	</script>
 
 </body>
 </html>

@@ -34,19 +34,19 @@
 			</c:forEach>
 		</select> <br>	
 		
-		email驗證信確認(Y/N): 
+<!-- 		email驗證信確認(Y/N):  -->
 <!-- 		Y <input type="radio" value="Y" name="emailVerification" /> -->
 <!-- 		N <input type="radio" value="N" name="emailVerification" /><br> -->
-		<c:choose >
-			<c:when test="${member.emailVerification eq 'Y'}">
-				Y <input type="radio" value="Y" name="emailVerification" checked/>
-				N <input type="radio" value="N" name="emailVerification" /><br>
-			</c:when>
-			<c:when test="${member.emailVerification eq 'N'}">
-				Y <input type="radio" value="Y" name="emailVerification" />
-				N <input type="radio" value="N" name="emailVerification" checked /><br>
-			</c:when>			
-		</c:choose>
+<%-- 		<c:choose > --%>
+<%-- 			<c:when test="${member.emailVerification eq 'Y'}"> --%>
+<!-- 				Y <input type="radio" value="Y" name="emailVerification" checked/> -->
+<!-- 				N <input type="radio" value="N" name="emailVerification" /><br> -->
+<%-- 			</c:when> --%>
+<%-- 			<c:when test="${member.emailVerification eq 'N'}"> --%>
+<!-- 				Y <input type="radio" value="Y" name="emailVerification" /> -->
+<!-- 				N <input type="radio" value="N" name="emailVerification" checked /><br> -->
+<%-- 			</c:when>			 --%>
+<%-- 		</c:choose> --%>
 		
 		
 <%-- 		<input type="text" value="${member.emailVerification }" id="emailVerification" name="emailVerification"><br>		 --%>
@@ -55,19 +55,19 @@
 			創辦人: <input type="text" value="${member.orgFounder }" id="orgFounder" name="orgFounder"><br>
 			執行長: <input type="text" value="${member.orgCeo }" id="orgCeo" name="orgCeo"><br>
 			
-			機構身分驗證 (Y/N): 
+<!-- 			機構身分驗證 (Y/N):  -->
 <!-- 			Y <input type="radio" value="Y" name="orgIDConfirmation" /> -->
 <!-- 			N <input type="radio" value="N" name="orgIDConfirmation" /><br> -->
-			<c:choose >
-				<c:when test="${member.emailVerification eq 'Y'}">
-					Y <input type="radio" value="Y" name="orgIDConfirmation" checked/>
-					N <input type="radio" value="N" name="orgIDConfirmation" /><br>
-				</c:when>
-				<c:when test="${member.emailVerification eq 'N'}">
-					Y <input type="radio" value="Y" name="orgIDConfirmation" />
-					N <input type="radio" value="N" name="orgIDConfirmation" checked/><br>
-				</c:when>			
-			</c:choose>		
+<%-- 			<c:choose > --%>
+<%-- 				<c:when test="${member.emailVerification eq 'Y'}"> --%>
+<!-- 					Y <input type="radio" value="Y" name="orgIDConfirmation" checked/> -->
+<!-- 					N <input type="radio" value="N" name="orgIDConfirmation" /><br> -->
+<%-- 				</c:when> --%>
+<%-- 				<c:when test="${member.emailVerification eq 'N'}"> --%>
+<!-- 					Y <input type="radio" value="Y" name="orgIDConfirmation" /> -->
+<!-- 					N <input type="radio" value="N" name="orgIDConfirmation" checked/><br> -->
+<%-- 				</c:when>			 --%>
+<%-- 			</c:choose>		 --%>
 			
 		</c:if>
 		<input type="submit" value="儲存" />
