@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import team.lala.timebank.enums.MemberType;
+import team.lala.timebank.enums.YesNo;
 
 @Entity
 @Table(name = "MEMBER")
@@ -57,23 +58,31 @@ public class Member {
 	private String mobile;
 
 	@Column(name = "CITY")
-	private Long areaId;
+	private Long city;
 
-	@Column(name = "FOUNDER")
-	private String founder;
-
-	@Column(name = "CEO")
-	private String ceo;
+	@Enumerated(EnumType.STRING)
+	@Column(name="EMAIL_VERTIFICATION")
+	private YesNo emailVerification = YesNo.N;
 	
 	@Column(name="SIGN_UP_DATE")
 	private Date signUpDate;
 
-	public Date getSignUpDate() {
-		return signUpDate;
+	@Column(name = "ORG_FOUNDER")
+	private String orgFounder;
+
+	@Column(name = "ORG_CEO")
+	private String orgCeo;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="ORG_IDENTITY_CONFIRMATION")
+	private YesNo orgIDConfirmation = YesNo.N;
+
+	public Area getArea() {
+		return area;
 	}
 
-	public void setSignUpDate(Date signUpDate) {
-		this.signUpDate = signUpDate;
+	public void setArea(Area area) {
+		this.area = area;
 	}
 
 	public Long getId() {
@@ -140,45 +149,64 @@ public class Member {
 		this.mobile = mobile;
 	}
 
-	public Area getArea() {
-		return area;
+	public Long getCity() {
+		return city;
 	}
 
-	public void setArea(Area area) {
-		this.area = area;
+	public void setCity(Long city) {
+		this.city = city;
 	}
 
-	public Long getAreaId() {
-		return areaId;
+	public YesNo getEmailVerification() {
+		return emailVerification;
 	}
 
-	public void setAreaId(Long areaId) {
-		this.areaId = areaId;
+	public void setEmailVerification(YesNo emailVerification) {
+		this.emailVerification = emailVerification;
 	}
 
-	public String getFounder() {
-		return founder;
+	public Date getSignUpDate() {
+		return signUpDate;
 	}
 
-	public void setFounder(String founder) {
-		this.founder = founder;
+	public void setSignUpDate(Date signUpDate) {
+		this.signUpDate = signUpDate;
 	}
 
-	public String getCeo() {
-		return ceo;
+	public String getOrgFounder() {
+		return orgFounder;
 	}
 
-	public void setCeo(String ceo) {
-		this.ceo = ceo;
+	public void setOrgFounder(String orgFounder) {
+		this.orgFounder = orgFounder;
+	}
+
+	public String getOrgCeo() {
+		return orgCeo;
+	}
+
+	public void setOrgCeo(String orgCeo) {
+		this.orgCeo = orgCeo;
+	}
+
+	public YesNo getOrgIDConfirmation() {
+		return orgIDConfirmation;
+	}
+
+	public void setOrgIDConfirmation(YesNo orgIDConfirmation) {
+		this.orgIDConfirmation = orgIDConfirmation;
 	}
 
 	@Override
 	public String toString() {
 		return "Member [area=" + area + ", id=" + id + ", loginAccount=" + loginAccount + ", password=" + password
 				+ ", name=" + name + ", memberType=" + memberType + ", email=" + email + ", telephone=" + telephone
-				+ ", mobile=" + mobile + ", areaId=" + areaId + ", founder=" + founder + ", ceo=" + ceo
-				+ ", signUpDate=" + signUpDate + "]";
+				+ ", mobile=" + mobile + ", city=" + city + ", emailVerification=" + emailVerification + ", signUpDate="
+				+ signUpDate + ", orgFounder=" + orgFounder + ", orgCeo=" + orgCeo + ", orgIDConfirmation="
+				+ orgIDConfirmation + "]";
 	}
+
+
 
 	
 

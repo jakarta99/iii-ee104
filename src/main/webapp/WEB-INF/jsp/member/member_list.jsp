@@ -7,17 +7,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Member List</title>
 <style>
- td{
- 	text-align:center;
- }
- button{
-	 margin:5px;
- }
+	*{
+		margin:0;
+		padding:0;
+	}
+	 td{
+	 	text-align:center;
+	 }
+	 button{
+		 margin:5px;
+	 }
  
 </style>
 </head>
 <body>
-<!-- 	<input type="button" onclick="javascript:document.location.href=''" value="回首頁" /> -->
+	<input type="button" onclick="javascript:document.location.href='/'" value="回首頁" />
 	<h2>Member List</h2>
 	<table border="1">
 		<tr>
@@ -29,43 +33,64 @@
 
 		<thead>
 			<tr>
-				<th>Member ID</th>
-				<th>Login Account</th>
-				<th>Name</th>
-				<th>Member type</th>
-				<th>telephone</th>
-				<th>mobile</th>
-<!-- 				<th>area</th> -->
-<!-- 				<th>founder</th> -->
-<!-- 				<th>ceo</th> -->
+				<th>會員編號</th>
+				<th>會員帳號</th>
+				<th>會員姓名</th>
+				<th>會員型態</th>
+				<th>會員信箱</th>
+				<th>會員手機</th>
+				<th>註冊日期</th>
+				<th>驗證信確認</th>
+<!-- 				<th></th> -->
+<!-- 				<th> </th> -->
+				
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach var="member" items="${members}">
 
-				<tr>
-					<td width="120px"><button
-							onclick="javascript:document.location.href='/member/edit?id=${member.id}'">Edit</button>
+				<tr id="row${member.id}">
+					<td width="150px">
 						<button
-							onclick="javascript:document.location.href='/member/delete?id=${member.id}'">Delete</button></td>
+							onclick="javascript:document.location.href='/member/edit?id=${member.id}'">Edit</button>
+<!-- 						<button -->
+<%-- 							class="edit" id="${member.id}"  >Edit ${member.id}</button> --%>
+						<button
+							class="delete"
+							onclick="javascript:document.location.href='/member/delete?id=${member.id}'">Delete</button>
+					</td>
 					<%-- 				<td width="20px">${member.id}</td> --%>
-					<td width="100px">${member.loginAccount}</td>
-					<td width="100px">${member.name}</td>
-					<td width="200px">${member.memberType}</td>
-					<td width="200px">${member.telephone}</td>
-					<td width="200px">${member.mobile}</td>
-<%-- 					<td width="200px">${member.area.city}</td> --%>
-<%-- 					<c:if test="${member.type eq 'O' }"> --%>
-<%-- 						<td width="200px">${member.founder}</td> --%>
-<%-- 						<td width="200px">${member.ceo}</td> --%>
-<%-- 					</c:if> --%>
+					<td width="150px" class="loginAccount">${member.loginAccount}</td>
+					<td width="100px" class="name">${member.name}</td>
+					<td width="100px" class="memberType">${member.memberType}</td>
+					<td width="200px" class="email">${member.email}</td>
+					<td width="200px" class="mobile">${member.mobile}</td>
+					<td width="200px" class="signUpDate">${member.signUpDate}</td>
+					<td width="50px" class="emailVerification">${member.emailVerification}</td>
+					
+
 					
 				</tr>
 			</c:forEach>
 		</tbody>
-
-
 	</table>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+// 		$(document).ready(function(){
+// 			$("td>button[class='edit']").click(function(){
+// 				var id = $(this).attr("id");
+// 				var trId = $("#row"+id).prop("id");
+				
+// 				$.each( $("#"+trId+">td:gt(0)"),function(idx, value){
+// 					$(value).html("<input type='text' value="+$(value).text()+" id="+$(value).prop("class")+" name="+$(value).prop("class")+ " width="+$(value).prop("width")+">")
+					
+// 				})
+				
+// 			})
+// 		})
+	
+	</script>
 
 </body>
 </html>

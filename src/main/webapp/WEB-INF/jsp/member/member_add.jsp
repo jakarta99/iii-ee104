@@ -25,15 +25,15 @@
 		住家電話: <input type="text" value="${param.telephone }" id="telephone" name="telephone"><br>
 		手機: <input type="text" value="${param.mobile }" id="mobile" name="mobile"><br>
 		居住地區: 
-		<select id="area" name="areaId">
+		<select id="area" name="city">
 			<c:forEach items="${areaList}" var="area">
 				<option value="${area.id}" >${area.city}</option>
 			</c:forEach>
 		</select><br>
 		
 		<c:if test="${memberType eq 'O' }">
-			創辦人: <input type="text" value="${param.founder }" id="founder" name="founder"><br>
-			執行長: <input type="text" value="${param.ceo }" id="ceo" name="ceo"><br>
+			創辦人: <input type="text" value="${param.orgFounder }" id="orgFounder" name="orgFounder"><br>
+			執行長: <input type="text" value="${param.orgCeo }" id="orgCeo" name="orgCeo"><br>
 		</c:if>
 		
 		<input type="submit" value="確定送出" />

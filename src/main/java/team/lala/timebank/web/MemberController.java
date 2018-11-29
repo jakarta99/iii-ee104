@@ -53,19 +53,20 @@ public class MemberController {
 	@RequestMapping("/update")
 	public String updateMember(Member member, Model model) {
 		if (member.getId() != null) {
-			// System.out.println("member = " + member);
+			 System.out.println("member = " + member);
 			Member dbMember = memberService.getOne(member.getId());
 			dbMember.setPassword(member.getPassword());
 			dbMember.setName(member.getName());
 			dbMember.setEmail(member.getEmail());
 			dbMember.setTelephone(member.getTelephone());
 			dbMember.setMobile(member.getMobile());
-			dbMember.setAreaId(member.getAreaId());
+			dbMember.setCity(member.getCity());
+			dbMember.setEmailVerification(member.getEmailVerification());
 			if (member.getMemberType() == MemberType.O) {
-				dbMember.setCeo(member.getCeo());
-				dbMember.setFounder(member.getFounder());
+				dbMember.setOrgCeo(member.getOrgCeo());
+				dbMember.setOrgFounder(member.getOrgFounder());
 			}
-			// System.out.println("dbMember= " + dbMember);
+			 System.out.println("dbMember= " + dbMember);
 			memberService.save(dbMember);
 		}
 
@@ -83,10 +84,10 @@ public class MemberController {
 		newMember.setEmail(member.getEmail());
 		newMember.setTelephone(member.getTelephone());
 		newMember.setMobile(member.getMobile());
-		newMember.setAreaId(member.getAreaId());
+		newMember.setCity(member.getCity());
 
-		newMember.setCeo(member.getCeo());
-		newMember.setFounder(member.getFounder());
+		newMember.setOrgCeo(member.getOrgCeo());
+		newMember.setOrgFounder(member.getOrgFounder());
 		// System.out.println("newMember = " + newMember);
 		memberService.save(newMember);
 
