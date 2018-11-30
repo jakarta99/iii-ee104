@@ -20,7 +20,7 @@
 <body>
 	<input type="button" onclick="javascript:document.location.href='/'" value="回首頁" />
 	<h2>Member List</h2>
-	<table border="1">
+	<table border="1" >
 		<tr>
 			<button
 				onclick="javascript:document.location.href='/member/add?memberType=P'">一般會員註冊</button>
@@ -42,32 +42,36 @@
 				
 			</tr>
 		</thead>
-		<tbody>
-			<c:forEach var="member" items="${members}">
-
-				<tr id="row${member.id}">
-					<td width="150px">
-						<button
-							onclick="javascript:document.location.href='/member/edit?id=${member.id}'">Edit</button>
-						<button
-							class="delete"
-							onclick="javascript:document.location.href='/member/delete?id=${member.id}'">Delete</button>
-					</td>
-					<%-- 				<td width="20px">${member.id}</td> --%>
-					<td width="150px" class="loginAccount">${member.loginAccount}</td>
-					<td width="100px" class="name">${member.name}</td>
-					<td width="100px" class="memberType">${member.memberType}</td>
-					<td width="200px" class="email">${member.email}</td>
-					<td width="200px" class="mobile">${member.mobile}</td>
-					<td width="200px" class="signUpDate">${member.signUpDate}</td>
-<%-- 					<td width="50px" class="emailVerification">${member.emailVerification}</td> --%>
-					
-
-					
-				</tr>
-			</c:forEach>
+		<tbody id="memberTableBody">
+			
 		</tbody>
 	</table>
+	
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$.getJSON("/member/query",function(data){
+				$.each(data, function(idx, member){
+					var editButt= "<button	onclick=\"javascript:document.location.href='/member/edit?id="+member.id+"'\">Edit</button>";
+					var deleteButt="<button onclick=\"javascript:document.location.href='/member/delete?id="+member.id+"'\">Delete</button>";
+					$("#memberTableBody").append("<tr id='row"+ member.id +"'><td>"+editButt + deleteButt+"</td></tr>");					
+					var memberRow = $("#row"+member.id);
+					memberRow.append("<td width='150px' >"+member.loginAccount+"</td>");
+					memberRow.append("<td width='150px' >"+member.name+"</td>");
+					memberRow.append("<td width='150px' >"+member.memberType+"</td>");
+					memberRow.append("<td width='150px' >"+member.email+"</td>");
+					memberRow.append("<td width='150px' >"+member.mobile+"</td>");
+					memberRow.append("<td width='150px' >"+ new Date(member.signUpDate).toLocaleDateString()+"</td>");
+											
+				})
+			})
+		})	
+				
+
+	
+	
+	</script>
 	
 
 </body>

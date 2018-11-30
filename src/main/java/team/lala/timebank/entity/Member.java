@@ -23,14 +23,13 @@ import team.lala.timebank.enums.YesNo;
 
 @Entity
 @Table(name = "MEMBER")
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Member {
 		
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CITY", referencedColumnName="Id",
-				insertable=false, updatable=false)
-	@Transient
-	private Area area;
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "CITY", referencedColumnName="Id",
+//				insertable=false, updatable=false)
+//	@Transient
+//	private Area area;
 
 
 	@Id
@@ -80,13 +79,13 @@ public class Member {
 	private YesNo orgIdConfirmation = YesNo.N;
 	
 
-	public Area getArea() {
-		return area;
-	}
-
-	public void setArea(Area area) {
-		this.area = area;
-	}
+//	public Area getArea() {
+//		return area;
+//	}
+//
+//	public void setArea(Area area) {
+//		this.area = area;
+//	}
 
 	public Long getId() {
 		return id;
@@ -204,7 +203,7 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [area=" + area + ", id=" + id + ", loginAccount=" + loginAccount + ", password=" + password
+		return "Member [ id=" + id + ", loginAccount=" + loginAccount + ", password=" + password
 				+ ", name=" + name + ", memberType=" + memberType + ", email=" + email + ", telephone=" + telephone
 				+ ", mobile=" + mobile + ", city=" + city + ", emailVerification=" + emailVerification + ", signUpDate="
 				+ signUpDate + ", orgFounder=" + orgFounder + ", orgCeo=" + orgCeo + ", orgIdConfirmation="
