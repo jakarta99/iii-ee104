@@ -15,10 +15,10 @@
 
 </head>
 <body>
-<!-- 使用MVC -->
+<!-- 使用AJAX -->
 	<h2>Member Edit</h2>
 	<h4>Member ${member.id}</h4>
-	<form action="/member/update" method="post" >
+	<form action="#" method="post" >
 		<input type="hidden" value="${member.id}" id="id" name="id"/>
 		<input type="hidden" value="${member.memberType}" id="memberType" name="memberType"/><br>
 		帳號 :<input type="text" value="${member.loginAccount }" id="loginAccount" name="loginAccount" disabled><br> 
@@ -48,7 +48,7 @@
 			N <input type="radio" value="N" name="orgIDConfirmation" /><br>
 
 		</c:if>
-		<input type="submit" value="儲存" />
+		<input type="button" value="儲存" id="update"/>
 		<input type="button" onclick="javascript:document.location.href='/member/list'" value="回上一頁" />
 	</form>
 	
@@ -58,8 +58,49 @@
 	<script>
 		$(document).ready(function(){
 			$("option[value='"+ ${member.city} +"']").prop("selected",true);
-			$("input[name='emailVerification'][value="+ '${member.emailVerification}' +"]").prop("checked",true);	
-			$("input[name='orgIdConfirmation'][value="+'${member.orgIdConfirmation}' +"]").prop("checked",true);	
+			$("input[name='emailVerification'][value="+ '${member.emailVerification}' +"]").prop("checked",true);
+			if ('${member.memberType }'=='O'){
+				$("input[name='orgIdConfirmation'][value="+'${member.orgIdConfirmation}' +"]").prop("checked",true);					
+			}
+			
+				
+			$("#update").click(function(){
+				$.getJSON("/member/update",$("form").serialize(),function(data){
+					$.each(data, function(key, value){
+						if (key == 'msg'){
+							alert(value);							
+						}	
+					})
+				})
+				
+				
+// 				$.ajax({
+// 					  method: "get",
+// 					  dataType: "json",         
+// 					  url: "/member/update",
+// 					  data: $("form").serialize()  
+// 					})
+// 					  .done(function(data){
+// 							$.each(data, function(key, value){
+// 								if (key == 'msg'){
+// 									alert(value);
+// 								} else if (key == 'memberInfo'){
+// 									$("input[name='id']").val(value.id);
+// 									$("input[name='memberType']").val(value.memberType);
+// 									$("input[name='loginAccount']").val(value.loginAccount);
+// 									$("input[name='password']").val(value.password);
+// 									$("input[name='name']").val(value.name);
+// 									$("input[name='email']").val(value.email);
+// 									$("input[name='telephone']").val(value.telephone);
+// 									$("input[name='mobile']").val(value.mobile);		
+// 								}
+// 							})
+// 					  });	
+
+
+
+			})
+			
 			
 		})
 	

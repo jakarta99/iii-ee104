@@ -17,7 +17,6 @@
 	<tr>
 		<th></th>
 		<th>id</th>
-		<th>requestListId</th>
 		<th>supplierId</th>
 		<th>requesterId</th>
 		<th>supplierAcception</th>
@@ -33,14 +32,13 @@
 				<button onclick="javascript:document.location.href='/order/delete?id=${order.id}'">Delete</button>
 			</td>
 			<td>${order.id}</td>
-			<td>${order.requestListId}</td>
 			<td>${order.supplierId}</td>
 			<td>${order.requesterId}</td>
 			<td>${order.supplierAcception}</td>
 			<td>${order.confirmation}</td>
 			<td>${order.status}</td>
-			<td>${order.request.jobTitle}</td>
-			<td>${order.request.timeValue}</td>
+			<td>${order.requests.jobTitle}</td>
+			<td>${order.requests.timeValue}</td>
 		</tr>
 	</c:forEach>
 </table>

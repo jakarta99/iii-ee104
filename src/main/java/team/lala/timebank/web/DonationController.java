@@ -49,7 +49,7 @@ public class DonationController {
 
 		donationService.save(donation);
 
-		return "/donation/donation_add";
+		return "redirect:/donation/add";
 	}
 
 	@RequestMapping("/delete")
@@ -61,14 +61,14 @@ public class DonationController {
 	}
 
 	@RequestMapping("/update")
-	public String updateDonation(Donation donation, Model model) {
+	public String updateDonation(Donation donation) {
 
 		Donation dbDonation = donationService.getOne(donation.getId());
 		
-		dbDonation.setDonateValue(donation.getDonateValue());
+		dbDonation.setValue(donation.getValue());
 		donationService.save(dbDonation);
 
-		return editDonation(donation.getId(), model);
+		return "redirect:/donation/list";
 	}
 
 }

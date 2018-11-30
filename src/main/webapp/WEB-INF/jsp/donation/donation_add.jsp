@@ -10,10 +10,10 @@
 <h1>add donation</h1>
 <form action="/donation/insert" method="post">
 
-donationListId<input type="text" value="" id="donationListId" name="donationListId"/><p>
+
 memberId<input type="text" value="" id="memberId" name="memberId"/><p>
-donateOrganizationId<input type="text" value="" id="donateOrganizationId" name="donateOrganizationId"/><p>
-donateValue<input type="text" value="" id="donateValue" name="donateValue"/><p>
+organizationId<input type="text" value="" id="organizationId" name="organizationId"/><p>
+Value<input type="text" value="" id="value" name="value"/><p>
 <input type="hidden" value="" id="donateTime" name="donateTime"/><p>
 <input type="submit"/>
 </form>

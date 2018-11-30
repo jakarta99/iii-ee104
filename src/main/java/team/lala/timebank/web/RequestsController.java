@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import team.lala.timebank.entity.Order;
@@ -31,7 +32,7 @@ public class RequestsController {
 
 	@RequestMapping("/add")
 	public String addPage() {
-		
+
 		return "/request/request_add";
 	}
 
@@ -45,35 +46,39 @@ public class RequestsController {
 	@RequestMapping("/delete")
 	public String deletePage(@RequestParam("id") Long id, Model model) {
 		requestsService.delete(id);
-		
+
 		return listPage(model);
 	}
-	
+
 	@RequestMapping("/update")
 	public String update(Requests requests, Model model) {
-		
-//		Requests r =requestsService.getOne(requests.getId());
-		
-//		r.setJobArea(requests.getJobArea());
-//		r.setJobTitle(requests.getJobTitle());
-//		r.setServiceType(requests.getServiceType());
-//		r.setTermType(requests.getTermType());
-//		r.setTimeValue(requests.getTimeValue());
-		
+
+		// Requests r =requestsService.getOne(requests.getId());
+
+		// r.setJobArea(requests.getJobArea());
+		// r.setJobTitle(requests.getJobTitle());
+		// r.setServiceType(requests.getServiceType());
+		// r.setTermType(requests.getTermType());
+		// r.setTimeValue(requests.getTimeValue());
+
 		requestsService.save(requests);
-		
-		
+
 		return "redirect:/request/list";
 	}
-	
+
 	@RequestMapping("/insert")
 	public String insert(Requests requests) {
-		
+
 		requestsService.save(requests);
-		
-		
+
 		return "redirect:/request/list";
 	}
-	
+
+	@RequestMapping("/query")
+	@ResponseBody
+	public List<Requests> query(Model model) {
+		List<Requests> requests = requestsService.findAll();
+		return requests;
+	}
 
 }

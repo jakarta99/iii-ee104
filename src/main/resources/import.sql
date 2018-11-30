@@ -75,11 +75,11 @@ VALUES(1, 3, '2018-11-10', '服務態度不佳', 3 ,0);
 
 --donation
 
-INSERT INTO DONATION(donation_list_id,member_id,donate_organization_id,donate_value,donate_time) 
-VALUES(1,1,123,10,'2018-11-6');
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(1,123,10,'2018-11-6');
 
-INSERT INTO DONATION(donation_list_id,member_id,donate_organization_id,donate_value,donate_time) 
-VALUES(2,2,1253,15,'2018-05-6');
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(2,1253,15,'2018-05-6');
 
-INSERT INTO DONATION(donation_list_id,member_id,donate_organization_id,donate_value,donate_time) 
-VALUES(3,3,1243,3,'2018-10-6');
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(3,1243,3,'2018-10-6');
