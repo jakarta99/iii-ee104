@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
@@ -29,7 +30,7 @@
         .s2{
             text-align: center
         }
-        npm install datatables.net    # Core library
+npm install datatables.net    # Core library
 npm install datatables.net-dt # Styling
 
 var $  = require( 'jquery' );
@@ -58,31 +59,61 @@ bower install --save datatables.net-dt
 	</tr>
 	 </thead>
 	
-	 <tbody>
-	<c:forEach items="${requests}" var="request">
-		<tr>
-			<td>
-			<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/request/edit?id=${request.id}'">Edit</button>
-			<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/request/delete?id=${request.id}'">Delete</button>
-			</td>
-			<td>${request.id}</td>
-			<td>${request.jobArea}</td>
-			<td>${request.jobTitle}</td>
-			<td>${request.memberId}</td>
-			<td>${request.serviceType}</td>
-			<td>${request.termType}</td>
-			<td>${request.timeValue}</td>	
-		</tr>
-	</c:forEach>
+	 <tbody id="tbody">
+	
 	 </tbody>
 	</table>
 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/'">回列表頁</button>
 	</fieldset>
 	<script>
+// 	$(document).ready(function(){
+// 		$.getJSON("/member/query",function(data){
+// 			$.each(data, function(idx, member){
+// 				var editButt= "<button	onclick=\"javascript:document.location.href='/member/edit?id="+member.id+"'\">Edit</button>";
+// 				var deleteButt="<button onclick=\"javascript:document.location.href='/member/delete?id="+member.id+"'\">Delete</button>";
+// 				$("#memberTableBody").append("<tr id='row"+ member.id +"'><td>"+editButt + deleteButt+"</td></tr>");					
+// 				var memberRow = $("#row"+member.id);
+// 				memberRow.append("<td width='150px' >"+member.loginAccount+"</td>");
+// 				memberRow.append("<td width='150px' >"+member.name+"</td>");
+// 				memberRow.append("<td width='150px' >"+member.memberType+"</td>");
+// 				memberRow.append("<td width='150px' >"+member.email+"</td>");
+// 				memberRow.append("<td width='150px' >"+member.mobile+"</td>");
+// 				memberRow.append("<td width='150px' >"+ new Date(member.signUpDate).toLocaleDateString()+"</td>");
+										
+// 			})
+// 		})
+// 	})	
+	
+	
+	
+	
+	
 	$(document).ready( function () {
+		$.getJSON("/request/query",function(data){
+			var docFragment=$(document.createDocumentFragment());
+			var tb = $('#tbody');
+		        tb.empty();
+			$.each(data,function(index,request){
+			    var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/edit?id="+request.id+"'\">Edit</button>";     
+			   	var deletebutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/delete?id="+request.id+"'\">Delete</button>"; 	
+				var cell1 = $('<td></td>').html(editbutton+deletebutton);
+				var cell2 = $('<td></td>').text(request.id);
+		        var cell3 = $('<td></td>').text(request.jobArea);
+		        var cell4 = $('<td></td>').text(request.jobTitle);
+		        var cell5 = $('<td></td>').text(request.memberId);
+		        var cell6 = $('<td></td>').text(request.serviceType);
+		        var cell7 = $('<td></td>').text(request.termType);
+		        var cell8 = $('<td></td>').text(request.timeValue);
+				var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4,cell5,cell6,cell7,cell8]);
+		            docFragment.append(row);
+			});
+			tb.html(docFragment);
+		});
+		
+		
+		
+		
     $('#table').DataTable();
-    
-    
 } );
 	</script>	
 </body>
