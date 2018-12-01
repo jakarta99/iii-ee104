@@ -23,7 +23,7 @@ public class OrderController {
 	private RequestsService requestsService;
 
 	@RequestMapping("/list")
-	public String listPage(Model model) {
+	public String listPage() {
 //		List<Order> orders = orderService.findAll();
 //		model.addAttribute("orders", orders);
 		return "/order/order_list"; // getRequestDispatcher("/WEB-INF/jsp/order_list.jsp").forward(request,
@@ -50,6 +50,19 @@ public class OrderController {
 	public String addPage() {
 		return "/order/order_add";
 	}
+	
+	
+	@RequestMapping("/insert")
+	@ResponseBody
+	public String insert(Order order) {
+		try {
+			orderService.save(order);
+			return "【no." + order.getId() + " order】 has been inserted";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Failed to insert 【no." + order.getId() + "order】";
+		}
+	}
 
 	@RequestMapping("/edit")
 	public String editPage(@RequestParam("id") Long id, Model model) {
@@ -61,6 +74,7 @@ public class OrderController {
 		return "/order/order_edit";
 	}
 
+	
 	@RequestMapping("/update")
 	@ResponseBody
 	public String update(Order order, Model model) {
@@ -80,23 +94,6 @@ public class OrderController {
 		}
 		
 	}
-	
-	
-	
-	@RequestMapping("/insert")
-	@ResponseBody
-	public String insert(Order order) {
-		try {
-			orderService.save(order);
-			return "【no." + order.getId() + " order】 has been inserted";
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "Failed to insert 【no." + order.getId() + "order】";
-		}
-	}
-	
-
-	
 
 	
 	@RequestMapping("/delete")
