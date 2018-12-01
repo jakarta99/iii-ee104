@@ -28,7 +28,7 @@ public class PenaltyController {
 	@RequestMapping("/insert")
 	public String insert(Penalty penalty) {		
 		penaltyService.save(penalty);		
-		return "/penalty/penalty_add";
+		return "redirect:/penalty/add";
 	}
 
 	@RequestMapping("/edit")
@@ -45,7 +45,7 @@ public class PenaltyController {
 		penalty1.setPenaltyTimeValue(penalty.getPenaltyTimeValue());
 		penalty1.setStatus(penalty.getStatus());
 		penaltyService.save(penalty1);
-		return "/penalty/penalty_list";
+		return "redirect:/penalty/list";
 	}
 
 	@RequestMapping("/delete")
