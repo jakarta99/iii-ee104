@@ -60,15 +60,15 @@
 	})
 	
 	function findAllOrders(){
-		$("#confirmation").val("");  //如要查全部資料，需先將查詢confirmation的參數清空
+		$("#confirmation").val("");  //如要查全部資料，需先將confirmation的值清空，再呼叫findByConfirmation()
 		findByConfirmation();
 	}
 	
 	function findByConfirmation(){
 		$.ajax({
-			url:'/order/query',  //如未傳入parameter(?confirmation=XXX)，該controller傳回所有資料
+			url:'/order/query',  
 			type:'get',
-			data:'confirmation=' + $("#confirmation").val(), 
+			data:'confirmation=' + $("#confirmation").val(), //如未傳入parameter(?confirmation=XXX)，該controller會傳回所有資料
 			dataType:'json',
 			success:function(orders){
 				$("tbody").text(""); 
@@ -77,8 +77,8 @@
 					var editBtn = $("<button onclick=\"javascript:document.location.href='/order/edit?id="+order.id+"'\">Edit</button>");
 					var delBtn = $("<button onclick=\"deleteOrder("+order.id+")\">Delete</button>");						
 					var btn =$("<td></td>").append([editBtn, delBtn]); 
-					
-					var id = $("<td></td>").text(order.id);					//將order的每個屬性放入欄
+					//將order的每個屬性放入欄位
+					var id = $("<td></td>").text(order.id);					
 					var supplierId = $("<td></td>").text(order.supplierId);
 					var requesterId = $("<td></td>").text(order.requesterId);
 					var supplierAcception = $("<td></td>").text(order.supplierAcception);
@@ -95,7 +95,7 @@
 	}
 	
 	
-	function deleteOrder(orderId){
+	function deleteOrder(orderId){  //delBtn的onclick會呼叫此方法，並傳入參數
 		$.ajax({
 			url:'/order/delete?id=' + orderId,
 			type:'delete',

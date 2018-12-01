@@ -27,7 +27,7 @@ public class OrderController {
 //		List<Order> orders = orderService.findAll();
 //		model.addAttribute("orders", orders);
 		return "/order/order_list"; // getRequestDispatcher("/WEB-INF/jsp/order_list.jsp").forward(request,
-								// response);
+									// response);
 	}
 	
 	@RequestMapping("/query")
@@ -41,7 +41,7 @@ public class OrderController {
 		}
 		
 		List<Order> orders = orderService.findAll();
-		return orders;
+		return orders;  //回傳json
 	}
 	
 
