@@ -106,35 +106,7 @@
 			},
 		})
 	}
-	
-	
-//【findAll_version1  (double foreach)】	
-// 	function findAll(){
-// 		$.ajax({
-// 			url:'/order/query',
-// 			type:'post',
-// 			dataType:'json',
-// 			success:function(orders){
-// 				$.each(orders, function(index, order){ //讀陣列資料(每筆資料為物件order)，放入列
-// 					var row = $("<tr></tr>");
-// 					var col = $("<td></td>");
-// 					var editBtn = $("<button onclick=\"javascript:document.location.href='/order/edit?id="+order.id+"'\">Edit</button>");
-// 					var delBtn = $("<button onclick=\"javascript:document.location.href='/order/delete?id="+order.id+"'\">Delete</button>");
-// 					row.append([col, editBtn, delBtn]);
-// 					$.each(order,function(orderField, orderValue){   //讀物件order的屬性值，放入欄
-// 						if(typeof orderValue != 'object'){
-// 							col.text(orderValue);
-// 						}else{
-// 							col.text(orderValue.jobTitle);			//order的屬性為物件的情況
-// 						}
-// 						row.append(col);
-// 						col = $("<td></td>");
-// 					})
-// 					$("tbody").append(row);
-// 				})
-// 			}
-// 		})
-// 	}
+
 </script>
 
 
