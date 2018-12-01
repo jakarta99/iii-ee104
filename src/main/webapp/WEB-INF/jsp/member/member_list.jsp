@@ -23,9 +23,9 @@
 	<table border="1" >
 		<tr>
 			<button
-				onclick="javascript:document.location.href='/member/add?memberType=P'">一般會員註冊</button>
+				onclick="javascript:document.location.href='/member/add?memberType=P'">新增一般會員</button>
 			<button
-				onclick="javascript:document.location.href='/member/add?memberType=O'">公益團體註冊</button>
+				onclick="javascript:document.location.href='/member/add?memberType=O'">新增公益團體</button>
 		</tr>
 
 		<thead>
@@ -38,11 +38,11 @@
 				<th>會員手機</th>
 				<th>註冊日期</th>
 <!-- 				<th>驗證信確認</th> -->
-
-				
+			
 			</tr>
 		</thead>
 		<tbody id="memberTableBody">
+			<!-- 由程式產生出的member清單 -->
 			
 		</tbody>
 	</table>
@@ -50,11 +50,14 @@
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
-		$(document).ready(function(){
+	
+// 		列出會員清單函式
+		function listMember(){
+			$("#memberTableBody").text("");
 			$.getJSON("/member/query",function(data){
 				$.each(data, function(idx, member){
-					var editButt= "<button	onclick=\"javascript:document.location.href='/member/edit?id="+member.id+"'\">Edit</button>";
-					var deleteButt="<button onclick=\"javascript:document.location.href='/member/delete?id="+member.id+"'\">Delete</button>";
+					var editButt= "<button onclick=\"javascript:document.location.href='/member/edit?id="+member.id+"'\">修改</button>";
+					var deleteButt="<input type='button' id='deleteButt"+ member.id +"' value='刪除' />"
 					$("#memberTableBody").append("<tr id='row"+ member.id +"'><td>"+editButt + deleteButt+"</td></tr>");					
 					var memberRow = $("#row"+member.id);
 					memberRow.append("<td width='150px' >"+member.loginAccount+"</td>");
@@ -66,6 +69,36 @@
 											
 				})
 			})
+		}
+	
+	
+		
+		$(document).ready(function(){
+			listMember();
+			
+			//將deleteButt綁定click事件
+			$("#memberTableBody").on("click", "input[value='刪除']", function(){
+				var memberId = $(this).attr("id").substring(10);
+				$.ajax({
+					type: "post",
+					dataType: "json",         
+					url: "/member/delete",
+					data: {"id":memberId}					
+				})
+				.done(function(data){
+					alert(data.msg);
+					listMember();
+				})
+				
+				
+			})
+
+
+			
+			
+			
+			
+			
 		})	
 				
 

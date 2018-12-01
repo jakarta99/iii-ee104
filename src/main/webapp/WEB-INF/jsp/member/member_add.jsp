@@ -15,7 +15,7 @@
 </head>
 <body>
 	<h2>Member Add</h2>
-	<form action="/member/insert" method="post">	
+	<form action="" method="post">	
 		<input type="hidden" value="" id="id" name="id"/>
 		<input type="hidden" value="${memberType}" id="memberType" name="memberType"/><br>
 		帳號 : <input type="text" value="${param.loginAccount }" id="loginAccount" name="loginAccount" ><br> 
@@ -36,10 +36,26 @@
 			執行長: <input type="text" value="${param.orgCeo }" id="orgCeo" name="orgCeo"><br>
 		</c:if>
 		
-		<input type="submit" value="確定送出" />
+		<input type="button" value="確定送出" />
 		<input type="reset" value="清除重填" />
 		
 	</form>
+	
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		$("input[type='button']").click(function(){
+			$.ajax({
+				method:"post",
+				dataType: "json",        
+				url:"/member/insert",
+				data: $("form").serialize()
+			}).done(function(data){
+				alert(data.msg);
+				window.location.replace("/member/list");
+			})
+		})
+	</script>
 	
 
 	
