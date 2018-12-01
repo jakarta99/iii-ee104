@@ -7,17 +7,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Order Add</title>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 </head>
 <body>
 
 
 <h1> Order Add </h1>
 
-<form action="/order/insert" method="post">
+<form>
 
 <!-- id:<input type="text" value="" id="id" name="id"/> -->
-requestListId(FK, range:1~6):
-<input type="text" value="" id="requestListId" name="requestListId"/><p>
+requestList_Id(FK, range:1~11):
+<input type="text" value="" id="requests" name="requests"/><p> 
 
 supplierId:
 <input type="text" value="" id="supplierId" name="supplierId"/><p>
@@ -33,9 +37,25 @@ confirmation(Y/N):
 
 status:
 <input type="text" value="" id="status" name="status"><p>
-<input type="submit"/>
+
+<button type="button" onclick="addOrder()">add</button>
 </form><p>
 <a href="/order/list">back to order_list</a>
 
+<script>
+
+function addOrder(){
+	$.ajax({
+		url:'/order/insert',
+		type:'post',
+		data:$('form').serialize(),
+		dataType:'text',
+		success:function(addResult){
+			alert(addResult);
+		},
+	})
+}
+
+</script>
 </body>
 </html>

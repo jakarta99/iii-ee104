@@ -18,8 +18,8 @@ public class Requests {
 	@Column(name = "id") 
 	private Long id;// 工作ID
 
-	@OneToMany(mappedBy="requests")
-	private Set<Order> orders;
+//	@OneToMany(mappedBy="requests")
+//	private Set<Order> orders;
 	
 
 	@Column(name = "member_Id", nullable = false)

@@ -1,17 +1,19 @@
 package team.lala.timebank.dao;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import team.lala.timebank.entity.Order;
+import team.lala.timebank.enums.YesNo;
 
 public interface OrderDao extends JpaRepository<Order,Long>{
 	//Jasmine
 	//透過志工會員id查詢所有申請及目前審核狀態 (流程：志工申請提供服務的紀錄)
 	public List<Order> findBySupplierId(Long supplierId);
+	
+	public List<Order> findByConfirmation(YesNo confirmation);
 	
 	//Jasmine
 	//情境：篩選資料的欄位跨資料表時

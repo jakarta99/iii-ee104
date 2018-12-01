@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.OrderDao;
 import team.lala.timebank.entity.Order;
+import team.lala.timebank.enums.YesNo;
 
 @Service
 public class OrderService {
@@ -32,6 +33,11 @@ public class OrderService {
 		List<Order> order = orderDao.findOrderBySupplierIdAndJobTitle(supplierId, jobTitle);
 		return order;
 	}
+	
+	public List<Order> findByConfirmation(YesNo confirmation){
+		List<Order> order = orderDao.findByConfirmation(confirmation);
+		return order;
+	};
 	
 	
 	public Order getById(Long id) {

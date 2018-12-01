@@ -19,20 +19,6 @@ public class Order{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	
-	@ManyToOne
-	@JoinColumn(name="requests",    //代表本entity欄位名稱
-				referencedColumnName="id",  //代表合併的目標entity，其對應的欄位名稱
-				insertable=false, updatable=false) //子表一定要設false，否則insert時會被視為一個欄位，導致語法錯誤
-	private Requests requests;
-	
-	public Requests getRequests() {
-		return requests;
-	}
-
-	public void setRequests(Requests requests) {
-		this.requests = requests;
-	}
 
 	@Column(name="SUPPLIER_ID")
 	private Long supplierId;
@@ -50,6 +36,21 @@ public class Order{
 	
 	@Column(name="STATUS")
 	private String status;
+	
+	@ManyToOne
+	@JoinColumn(name="requests",    //代表本entity屬性名稱
+				referencedColumnName="id",  //代表合併的目標entity，其對應的欄位名稱
+				insertable=true, updatable=true) //spring boot自動產生資料時，會把Requests主表的@Id當作一個欄位，產生資料表
+													//故此處insertable必須設為true
+	private Requests requests;  
+	
+	public Requests getRequests() {
+		return requests;
+	}
+
+	public void setRequests(Requests requests) {
+		this.requests = requests;
+	}
 
 	@Override
 	public String toString() {
