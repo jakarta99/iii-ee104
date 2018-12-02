@@ -12,9 +12,7 @@
   crossorigin="anonymous"></script>
 </head>
 <body>
-<h1> Order Lists </h1>
-
-<hr>
+<h2> Order Lists </h2>
 <div>
 	find all orders:
 	<button onclick="findAllOrders()">findAllOrders</button>
@@ -27,7 +25,7 @@
 			<option value="Y">Y</option>
 			<option value="N">N</option>
 		</select>
-<!-- 	<input type="text" name="confirmation" id="confirmation" value=""/> -->
+
 	<button onclick="findByConfirmation()">find</button>
 </div>
 <hr>
