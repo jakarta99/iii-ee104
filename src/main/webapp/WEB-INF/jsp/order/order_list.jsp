@@ -31,7 +31,7 @@
 <hr>
 
 
-<table border="1">
+<table border="1"> 
 	<thead>
 		<tr class="tableTitle">
 			<th><button onclick="javascript:document.location.href='/order/add'">Add</button></th>
