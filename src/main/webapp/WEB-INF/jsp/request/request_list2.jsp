@@ -66,33 +66,11 @@ bower install --save datatables.net-dt
 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/'">回列表頁</button>
 	</fieldset>
 	<script>
-// 	$(document).ready(function(){
-// 		$.getJSON("/member/query",function(data){
-// 			$.each(data, function(idx, member){
-// 				var editButt= "<button	onclick=\"javascript:document.location.href='/member/edit?id="+member.id+"'\">Edit</button>";
-// 				var deleteButt="<button onclick=\"javascript:document.location.href='/member/delete?id="+member.id+"'\">Delete</button>";
-// 				$("#memberTableBody").append("<tr id='row"+ member.id +"'><td>"+editButt + deleteButt+"</td></tr>");					
-// 				var memberRow = $("#row"+member.id);
-// 				memberRow.append("<td width='150px' >"+member.loginAccount+"</td>");
-// 				memberRow.append("<td width='150px' >"+member.name+"</td>");
-// 				memberRow.append("<td width='150px' >"+member.memberType+"</td>");
-// 				memberRow.append("<td width='150px' >"+member.email+"</td>");
-// 				memberRow.append("<td width='150px' >"+member.mobile+"</td>");
-// 				memberRow.append("<td width='150px' >"+ new Date(member.signUpDate).toLocaleDateString()+"</td>");
-										
-// 			})
-// 		})
-// 	})	
-	
-	
-	
-	
-	
 	$(document).ready( function () {
 		$.getJSON("/request/query",function(data){
 			var docFragment=$(document.createDocumentFragment());
 			var tb = $('#tbody');
-		        tb.empty();
+		    tb.empty();
 			$.each(data,function(index,request){
 			    var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/edit?id="+request.id+"'\">Edit</button>";     
 			   	var deletebutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/delete?id="+request.id+"'\">Delete</button>"; 	
@@ -105,16 +83,12 @@ bower install --save datatables.net-dt
 		        var cell7 = $('<td></td>').text(request.termType);
 		        var cell8 = $('<td></td>').text(request.timeValue);
 				var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4,cell5,cell6,cell7,cell8]);
-		            docFragment.append(row);
+		        docFragment.append(row);
 			});
 			tb.html(docFragment);
-		});
-		
-		
-		
-		
-    $('#table').DataTable();
-} );
+		});		
+    	$('#table').DataTable();
+	});
 	</script>	
 </body>
 
