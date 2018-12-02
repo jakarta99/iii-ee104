@@ -36,6 +36,7 @@ function updateOrder(){
 		dataType:'text',
 		success:function(editResult){
 			alert(editResult);
+			document.location.href="/order/list";
 		}
 	})
 }

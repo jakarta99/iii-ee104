@@ -52,6 +52,7 @@ function addOrder(){
 		dataType:'text',
 		success:function(addResult){
 			alert(addResult);
+			document.location.href="/order/add";
 		},
 	})
 }
