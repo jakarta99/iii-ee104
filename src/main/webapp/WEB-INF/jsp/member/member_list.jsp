@@ -6,13 +6,34 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Member List</title>
+
+<!-- Bootstrap core CSS -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+	crossorigin="anonymous">
+
+
 <style>
 
 	 td{
 	 	text-align:center;
 	 }
+	 .btn{
+	 	margin-left:10px;
+	 }
 	 button{
-		 margin:5px;
+		 margin:15px;
 	 }
  
 </style>
@@ -20,23 +41,24 @@
 <body>
 	<input type="button" onclick="javascript:document.location.href='/'" value="回首頁" />
 	<h2>Member List</h2>
-	<table border="1" >
+	<table  class="table table-striped table-bordered">
 		<tr>
-			<button
+			<button class="btn btn-primary btn-sm"
 				onclick="javascript:document.location.href='/member/add?memberType=P'">新增一般會員</button>
-			<button
+			<button class="btn btn-primary btn-sm"
 				onclick="javascript:document.location.href='/member/add?memberType=O'">新增公益團體</button>
 		</tr>
 
 		<thead>
 			<tr>
-				<th>會員編號</th>
-				<th>會員帳號</th>
-				<th>會員姓名</th>
-				<th>會員型態</th>
-				<th>會員信箱</th>
-				<th>會員手機</th>
-				<th>註冊日期</th>
+				<th scope="col">會員編號</th>
+				<th scope="col">會員帳號</th>
+				<th scope="col">會員姓名</th>
+				<th scope="col">會員型態</th>
+				<th scope="col">會員信箱</th>
+				<th scope="col">會員手機</th>
+				<th scope="col">會員居住地址</th>
+				<th scope="col">註冊日期</th>
 <!-- 				<th>驗證信確認</th> -->
 			
 			</tr>
@@ -48,7 +70,7 @@
 	</table>
 	
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 	<script>
 	
 // 		列出會員清單函式
@@ -56,16 +78,16 @@
 			$("#memberTableBody").text("");
 			$.getJSON("/member/query",function(data){
 				$.each(data, function(idx, member){
-					var editButt= "<button onclick=\"javascript:document.location.href='/member/edit?id="+member.id+"'\">修改</button>";
-					var deleteButt="<input type='button' id='deleteButt"+ member.id +"' value='刪除' />"
+					var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/member/edit?id="+member.id+"'\" value='修改'  />";
+					var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" id='deleteButt"+ member.id +"' value='刪除' />"
 					$("#memberTableBody").append("<tr id='row"+ member.id +"'><td>"+editButt + deleteButt+"</td></tr>");					
 					var memberRow = $("#row"+member.id);
-					memberRow.append("<td width='150px' >"+member.loginAccount+"</td>");
-					memberRow.append("<td width='150px' >"+member.name+"</td>");
-					memberRow.append("<td width='150px' >"+member.memberType+"</td>");
-					memberRow.append("<td width='150px' >"+member.email+"</td>");
-					memberRow.append("<td width='150px' >"+member.mobile+"</td>");
-					memberRow.append("<td width='150px' >"+ new Date(member.signUpDate).toLocaleDateString()+"</td>");
+					memberRow.append("<td  >"+member.loginAccount+"</td>");
+					memberRow.append("<td  >"+member.name+"</td>");
+					memberRow.append("<td  >"+member.memberType+"</td>");
+					memberRow.append("<td >"+member.email+"</td>");
+					memberRow.append("<td >"+member.mobile+"</td>");
+					memberRow.append("<td >"+ new Date(member.signUpDate).toLocaleDateString()+"</td>");
 											
 				})
 			})
