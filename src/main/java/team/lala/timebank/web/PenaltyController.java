@@ -1,12 +1,15 @@
 package team.lala.timebank.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.service.PenaltyService;
@@ -49,17 +52,34 @@ public class PenaltyController {
 	}
 
 	@RequestMapping("/delete")
-	public String delete(@RequestParam("id") Long id, Model model) {
-		penaltyService.delete(id);
-		return list(model);
+	@ResponseBody
+	public Map<String, String> delete(@RequestParam("id") Long id, Model model) {
+		Map<String, String> msg = new HashMap<>();	
+		try {
+			penaltyService.delete(id);
+			msg.put("msg", "刪除成功");
+		} catch (Exception e) {
+			msg.put("msg", "刪除失敗");
+			e.printStackTrace();
+		} 
+			return msg;			
+		
 
 	}
-
+	
 	@RequestMapping("/list")
 	public String list(Model model) {
 		List<Penalty> penalties = penaltyService.findAll();
 		model.addAttribute("penalties", penalties);
 		return "/penalty/penalty_list";
+
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getList")
+	public List<Penalty> getList() {
+		List<Penalty> penalties = penaltyService.findAll();
+		return penalties;
 
 	}
 
