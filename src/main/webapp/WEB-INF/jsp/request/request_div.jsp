@@ -35,7 +35,7 @@
 
 
         fieldset {
-            width: 1200px;
+            width: 80%;
             border-radius: 20px;
             padding: 20px;
             margin: 20px;
@@ -51,52 +51,37 @@
 <body>
 	
 	<h1 class="s2">request list</h1>
+	
 	<fieldset>
+		<div class="container">
 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/request/add'">add</button>
-	<table id="table" class="table table-hover">
-	<thead>
-	<tr>
-		<th>選項</th>
-		<th scope="col">id</th>
-		<th scope="col">jobArea</th>
-		<th scope="col">jobTitle</th>
-		<th scope="col">memberId</th>
-		<th scope="col">serviceType</th>
-		<th scope="col">termType</th>
-		<th scope="col">timeValue</th>
-	</tr>
-	 </thead>
-	
-	 <tbody id="tbody">
-	
-	 </tbody>
-	</table>
-	
-	
+			<div class="row" id="body">
+				
+			</div>
 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/'">回列表頁</button>
+		</div>
 	</fieldset>
-	
-	
 	<script>
 	$(document).ready( function () {
 		$.getJSON("/request/query",function(data){
 			var docFragment=$(document.createDocumentFragment());
-			var tb = $('#tbody');
+			var tb = $('#body');
  		    tb.empty();
  		   
 			$.each(data,function(index,request){
-			    var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/edit?id="+request.id+"'\">Edit</button>";     
+				var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/edit?id="+request.id+"'\">Edit</button>";     
 			   	var deletebutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/delete?id="+request.id+"'\">Delete</button>"; 	
-				var cell1 = $('<td></td>').html(editbutton+deletebutton);
-				var cell2 = $('<td></td>').text(request.id);
-		        var cell3 = $('<td></td>').text(request.jobArea);
-		        var cell4 = $('<td></td>').text(request.jobTitle);
-		        var cell5 = $('<td></td>').text(request.memberId);
-		        var cell6 = $('<td></td>').text(request.serviceType);
-		        var cell7 = $('<td></td>').text(request.termType);
-		        var cell8 = $('<td></td>').text(request.timeValue);
-				var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4,cell5,cell6,cell7,cell8]);
-		        docFragment.append(row);
+			   	var cell1 = $('<p></p>').html(editbutton+deletebutton);
+				var cell2 = $('<p></p>').text("id:"+request.id);
+		        var cell3 = $('<p></p>').text("jobArea:"+request.jobArea);
+		        var cell4 = $('<p></p>').text("jobTitle:"+request.jobTitle);
+		        var cell5 = $('<p></p>').text("memberId:"+request.memberId);
+		        var cell6 = $('<p></p>').text("serviceType:"+request.serviceType);
+		        var cell7 = $('<p></p>').text("termType:"+request.termType);
+		        var cell8 = $('<p></p>').text("timeValue:"+request.timeValue);
+				var row = $('<div class="col-md-4" ></div>').append([cell1, cell2, cell3, cell4,cell5,cell6,cell7,cell8]);
+		 
+			   	docFragment.append(row);
 			});
 			tb.html(docFragment);
 		});		
