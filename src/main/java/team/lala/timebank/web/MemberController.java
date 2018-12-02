@@ -38,8 +38,6 @@ public class MemberController {
 
 	@RequestMapping("/add")
 	public String addMember(@RequestParam("memberType") MemberType memberType, Model model) {
-		List<Area> areaList = areaService.findAll();
-		model.addAttribute("areaList", areaList);
 		model.addAttribute("memberType", memberType);
 		return "/member/member_add";
 
@@ -49,8 +47,6 @@ public class MemberController {
 	public String editMember(@RequestParam("id") Long id, Model model) {
 		Member member = memberService.getOne(id);
 		model.addAttribute("member", member);
-		List<Area> areaList = areaService.findAll();
-		model.addAttribute("areaList", areaList);
 		return "/member/member_edit";
 	}
 	
@@ -75,7 +71,9 @@ public class MemberController {
 			dbMember.setEmail(member.getEmail());
 			dbMember.setTelephone(member.getTelephone());
 			dbMember.setMobile(member.getMobile());
-			dbMember.setCity(member.getCity());
+			dbMember.setCounty(member.getCounty());
+			dbMember.setDistrict(member.getDistrict());
+			dbMember.setAddress(member.getAddress());
 			dbMember.setEmailVerification(member.getEmailVerification());
 			if (member.getMemberType() == MemberType.O) {
 				dbMember.setOrgCeo(member.getOrgCeo());

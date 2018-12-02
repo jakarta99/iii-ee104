@@ -55,7 +55,7 @@ public class MemberRegisteredController {
 		if (baccount && bpassword && bemail && bname && btelephone && bmobile) {
 			// 將註冊者的資料封裝
 			member = new Member();
-			member.setLoginAccount(loginAccount);
+			member.setAccount(loginAccount);
 			member.setPassword(password);
 			member.setName(name);
 			member.setEmail(email);

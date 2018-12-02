@@ -24,20 +24,12 @@ import team.lala.timebank.enums.YesNo;
 @Entity
 @Table(name = "MEMBER")
 public class Member {
-		
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "CITY", referencedColumnName="Id",
-//				insertable=false, updatable=false)
-//	@Transient
-//	private Area area;
-
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "LOGIN_ACCOUNT")
-	private String loginAccount;
+	@Column(name = "ACCOUNT")
+	private String account;
 
 	@Column(name = "PASSWORD")
 	private String password;
@@ -58,14 +50,44 @@ public class Member {
 	@Column(name = "MOBILE")
 	private String mobile;
 
-	@Column(name = "CITY")
-	private Long city;
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCounty() {
+		return county;
+	}
+
+	public void setCounty(String county) {
+		this.county = county;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	@Column(name = "COUNTY")
+	private String county;
+	
+	@Column(name = "DISTRICT")
+	private String district;
+
+	@Column(name = "ADDRESS")
+	private String address;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name="EMAIL_VERTIFICATION")
+	@Column(name = "EMAIL_VERTIFICATION")
 	private YesNo emailVerification = YesNo.N;
-	
-	@Column(name="SIGN_UP_DATE")
+
+	@Column(name = "SIGN_UP_DATE")
 	private Date signUpDate;
 
 	@Column(name = "ORG_FOUNDER")
@@ -73,19 +95,10 @@ public class Member {
 
 	@Column(name = "ORG_CEO")
 	private String orgCeo;
-	
-	@Enumerated(EnumType.STRING)
-	@Column(name="ORG_IDENTITY_CONFIRMATION")
-	private YesNo orgIdConfirmation = YesNo.N;
-	
 
-//	public Area getArea() {
-//		return area;
-//	}
-//
-//	public void setArea(Area area) {
-//		this.area = area;
-//	}
+	@Enumerated(EnumType.STRING)
+	@Column(name = "ORG_IDENTITY_CONFIRMATION")
+	private YesNo orgIdConfirmation = YesNo.N;
 
 	public Long getId() {
 		return id;
@@ -95,12 +108,12 @@ public class Member {
 		this.id = id;
 	}
 
-	public String getLoginAccount() {
-		return loginAccount;
+	public String getAccount() {
+		return account;
 	}
 
-	public void setLoginAccount(String loginAccount) {
-		this.loginAccount = loginAccount;
+	public void setAccount(String account) {
+		this.account = account;
 	}
 
 	public String getPassword() {
@@ -151,14 +164,6 @@ public class Member {
 		this.mobile = mobile;
 	}
 
-	public Long getCity() {
-		return city;
-	}
-
-	public void setCity(Long city) {
-		this.city = city;
-	}
-
 	public YesNo getEmailVerification() {
 		return emailVerification;
 	}
@@ -191,8 +196,6 @@ public class Member {
 		this.orgCeo = orgCeo;
 	}
 
-
-
 	public YesNo getOrgIdConfirmation() {
 		return orgIdConfirmation;
 	}
@@ -203,17 +206,11 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [ id=" + id + ", loginAccount=" + loginAccount + ", password=" + password
-				+ ", name=" + name + ", memberType=" + memberType + ", email=" + email + ", telephone=" + telephone
-				+ ", mobile=" + mobile + ", city=" + city + ", emailVerification=" + emailVerification + ", signUpDate="
-				+ signUpDate + ", orgFounder=" + orgFounder + ", orgCeo=" + orgCeo + ", orgIdConfirmation="
-				+ orgIdConfirmation + "]";
+		return "Member [id=" + id + ", account=" + account + ", password=" + password + ", name=" + name
+				+ ", memberType=" + memberType + ", email=" + email + ", telephone=" + telephone + ", mobile=" + mobile
+				+ ", county=" + county + ", district=" + district + ", address=" + address + ", emailVerification="
+				+ emailVerification + ", signUpDate=" + signUpDate + ", orgFounder=" + orgFounder + ", orgCeo=" + orgCeo
+				+ ", orgIdConfirmation=" + orgIdConfirmation + "]";
 	}
-
-
-
-	
-
-	
 
 }

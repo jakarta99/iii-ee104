@@ -29,6 +29,15 @@ public class RequestsController {
 
 		return "/request/request_list";
 	}
+	
+	@RequestMapping("/div")
+	public String divPage(Model model) {
+		List<Requests> requests = requestsService.findAll();
+
+		model.addAttribute("requests", requests);
+
+		return "/request/request_div";
+	}
 
 	@RequestMapping("/add")
 	public String addPage() {

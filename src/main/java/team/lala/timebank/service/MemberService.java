@@ -42,7 +42,7 @@ public class MemberService {
 	}
 
 	public Member login(String account, String password) {
-		Member member = memberDao.findByLoginAccount(account);
+		Member member = memberDao.findByAccount(account);
 		if (member != null) {
 			if (member.getPassword().equals(password)) {
 				return member;
@@ -55,7 +55,7 @@ public class MemberService {
 	public Member findByLoginAccount(Member m) {
 		// 根據帳號在資料庫中尋找
 		Member member = null;
-		member = memberDao.findByLoginAccount(m.getLoginAccount());
+		member = memberDao.findByAccount(m.getAccount());
 		return member;
 
 	}
