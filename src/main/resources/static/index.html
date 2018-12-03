@@ -49,7 +49,7 @@
 
 		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link" href="#">Home
+				<li class="nav-item active"><a class="nav-link" href="/">Home
 						<span class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
@@ -154,11 +154,11 @@
 
 	<script>
 		$(document).ready(function(){
-			$("#backStage-order").click(function(event){
-				event.preventDefault(); //event.preventDefault():關掉<a>的href屬性的預設行為(預設跳頁到指定位置。未設指定位置則預設為""，會不斷跳轉回首頁)
-										//其他關掉href預設行為的方法:href="#"  or   href="javascript:void(0)"
-				toBackStage("/order/list");
-			});
+// 			$("#backStage-order").click(function(event){
+// 				event.preventDefault(); //event.preventDefault():關掉<a>的href屬性的預設行為(預設跳頁到指定位置。未設指定位置則預設為""，會不斷跳轉回首頁)
+// 										//其他關掉href預設行為的方法:href="#"  or   href="javascript:void(0)"
+// 				toBackStage("/order/list");
+// 			});
 			
 // 			$("#backStage-member").click(function(event){
 // 				event.preventDefault(); 
