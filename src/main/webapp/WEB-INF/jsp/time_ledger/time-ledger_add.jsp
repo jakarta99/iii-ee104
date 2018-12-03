@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
@@ -70,8 +70,9 @@ fieldset {
 				class="form-control" />
 			<!-- 			</div> -->
 			<div class="form-group">
-				<input type="submit" class="btn btn-outline-secondary" /> <input
-					type="reset" class="btn btn-outline-secondary" />
+				<button type="button" onclick="addTimeLedger()"
+					class="btn btn-outline-secondary">Add</button>
+				<input type="reset" class="btn btn-outline-secondary" />
 			</div>
 			<div>
 				<a href='/time-ledger/list'><i
@@ -79,5 +80,19 @@ fieldset {
 			</div>
 		</fieldset>
 	</form>
+	<script>
+		function addTimeLedger() {
+			$.ajax({
+				url : '/time-ledger/insert',
+				type : 'post',
+				data : $('form').serialize(),
+				dataType : 'text',
+				success : function(addResult) {
+					alert(addResult);
+					document.location.href = "/time-ledger/add";
+				},
+			})
+		}
+	</script>
 </body>
 </html>

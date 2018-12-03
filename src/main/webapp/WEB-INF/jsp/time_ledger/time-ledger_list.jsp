@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
@@ -57,31 +57,87 @@ fieldset {
 					<th scope="col">balanceValue</th>
 				</tr>
 			</thead>
-			<tbody>
-				<c:forEach items="${timeLedgers}" var="timeLedger">
-					<tr>
-						<td>
-							<button
-								onclick="javascript:document.location.href='/time-ledger/edit?id=${timeLedger.id}'"
-								class="btn btn-outline-secondary">Edit</button>
-							<button
-								onclick="javascript:document.location.href='/time-ledger/delete?id=${timeLedger.id}'"
-								class="btn btn-outline-secondary">Delete</button>
-						</td>
-						<td>${timeLedger.id}</td>
-						<td>${timeLedger.memberId}</td>
-						<td>${timeLedger.transactionTime}</td>
-						<td>${timeLedger.description}</td>
-						<td>${timeLedger.depositValue}</td>
-						<td>${timeLedger.withdrawalValue}</td>
-						<td>${timeLedger.balanceValue}</td>
-					</tr>
-				</c:forEach>
+			<tbody id="timeLedgerTbody">
 			</tbody>
 		</table>
 		<div>
 			<a href='/'><i class="fas fa-home"></i>back to HOME</a>
 		</div>
 	</fieldset>
+	<script>
+		function listTimeLedger() {
+			$("#timeLedgerTbody").text("");
+			$
+					.getJSON(
+							"/time-ledger/query",
+							function(data) {
+								$
+										.each(
+												data,
+												function(index, timeLedger) {
+													var editButton = "<input type='button' class=\"btn btn-outline-secondary\"  onclick=\"javascript:document.location.href='/time-ledger/edit?id="
+															+ timeLedger.id
+															+ "'\" value='Edit'  />";
+													var deleteButton = "<input type='button' class=\"btn btn-outline-secondary\"  onclick=\"deleteTimeLedger("
+															+ timeLedger.id
+															+ ")\" value='Delete'  />";
+													$("#timeLedgerTbody")
+															.append(
+																	"<tr id='row"+ timeLedger.id +"'><td>"
+																			+ editButton
+																			+ deleteButton
+																			+ "</td></tr>");
+													var timeLedgerRow = $("#row"
+															+ timeLedger.id);
+													timeLedgerRow
+															.append("<td >"
+																	+ timeLedger.id
+																	+ "</td>");
+													timeLedgerRow
+															.append("<td >"
+																	+ timeLedger.memberId
+																	+ "</td>");
+													timeLedgerRow
+															.append("<td >"
+																	+ timeLedger.transactionTime
+																	+ "</td>");
+													timeLedgerRow
+															.append("<td >"
+																	+ timeLedger.description
+																	+ "</td>");
+													timeLedgerRow
+															.append("<td >"
+																	+ timeLedger.depositValue
+																	+ "</td>");
+													timeLedgerRow
+															.append("<td >"
+																	+ timeLedger.withdrawalValue
+																	+ "</td>");
+													timeLedgerRow
+															.append("<td >"
+																	+ timeLedger.balanceValue
+																	+ "</td>");
+												})
+							})
+		}
+
+		function deleteTimeLedger(id) {
+			$.ajax({
+				url : '/time-ledger/delete?id=' + id,
+				type : 'delete',
+				dataType : 'text',
+				success : function(deleteResult) {
+					alert(deleteResult);
+					listTimeLedger();
+				},
+			})
+		}
+
+		$(document).ready(function() {
+
+			listTimeLedger();
+
+		})
+	</script>
 </body>
 </html>

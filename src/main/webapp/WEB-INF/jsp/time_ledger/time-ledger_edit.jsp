@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
@@ -44,14 +44,17 @@ fieldset {
 
 	<form action="/time-ledger/update" method="post">
 		<fieldset>
-			<!-- id:<input type="text" value="" id="id" name="id"/> -->
+			<div class="form-group">
+				<input type="hidden" value="${timeLedger.id}" id="id" name="id"
+					class="form-control" />
+			</div>
 			<div class="form-group">
 				memberId: <input type="text" value="${timeLedger.memberId}"
-					id="memberId" name="memberId" class="form-control" disabled />
+					id="memberId" name="memberId" class="form-control" />
 			</div>
 			<!-- 			<div class="form-group"> transactionTime:-->
-			<input type="hidden" value="${timeLedger.transactionTime}"
-				id="transactionTime" name="transactionTime" class="form-control" />
+			<%-- 			<input type="hidden" value="${timeLedger.transactionTime}" --%>
+			<!-- 				id="transactionTime" name="transactionTime" class="form-control" /> -->
 			<!-- 			</div> -->
 			<!-- 			<div class="form-group"> description:-->
 			<input type="hidden" value="${timeLedger.description}"
@@ -71,8 +74,9 @@ fieldset {
 				id="balanceValue" name="balanceValue" class="form-control" />
 			<!-- 			</div> -->
 			<div class="form-group">
-				<input type="submit" class="btn btn-outline-secondary" /> <input
-					type="reset" class="btn btn-outline-secondary" />
+				<button type="button" onclick="updateTimeLedger()"
+					class="btn btn-outline-secondary">Update</button>
+				<input type="reset" class="btn btn-outline-secondary" />
 			</div>
 			<div>
 				<a href='/time-ledger/list'><i
@@ -80,5 +84,19 @@ fieldset {
 			</div>
 		</fieldset>
 	</form>
+	<script>
+		function updateTimeLedger() {
+			$.ajax({
+				url : '/time-ledger/update',
+				type : 'put',
+				data : $('form').serialize(),
+				dataType : 'text',
+				success : function(editResult) {
+					alert(editResult);
+					document.location.href = "/time-ledger/list";
+				},
+			})
+		}
+	</script>
 </body>
 </html>

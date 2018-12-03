@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.TimeLedger;
 import team.lala.timebank.service.TimeLedgerService;
 
@@ -39,30 +39,54 @@ public class TimeLedgerRecordController {
 	}
 
 	@RequestMapping("/insert")
+	@ResponseBody
 	public String insert(TimeLedger timeLedger) {
-		timeLedgerService.save(timeLedger);
-		return "redirect:/time-ledger/add";
+		try {
+			timeLedgerService.save(timeLedger);
+			return "Success to insert [id= " + timeLedger.getId() + " timeledger]";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Failed to insert [id= " + timeLedger.getId() + " timeledger]";
+		}
 	}
 
 	@RequestMapping("/update")
+	@ResponseBody
 	public String update(TimeLedger timeLedger, Model model) {
-//		TimeLedger dbTimeLedger = timeLedgerService.findById(timeLedger.getId());
-//		dbTimeLedger.setBalanceValue(timeLedger.getBalanceValue());
-//		dbTimeLedger.setDepositValue(timeLedger.getDepositValue());
-//		dbTimeLedger.setDescription(timeLedger.getDescription());
-//		dbTimeLedger.setMemberId(timeLedger.getMemberId());
-//		dbTimeLedger.setTransactionTime(timeLedger.getTransactionTime());
-//		dbTimeLedger.setWithdrawalValue(timeLedger.getWithdrawalValue());
-//		timeLedgerService.save(dbTimeLedger);
-		
-		timeLedgerService.save(timeLedger);
-		return editPage(timeLedger.getId(), model);
+		try {
+			TimeLedger dbTimeLedger = timeLedgerService.findById(timeLedger.getId());
+			dbTimeLedger.setBalanceValue(timeLedger.getBalanceValue());
+			dbTimeLedger.setDepositValue(timeLedger.getDepositValue());
+			dbTimeLedger.setDescription(timeLedger.getDescription());
+			dbTimeLedger.setMemberId(timeLedger.getMemberId());
+			dbTimeLedger.setTransactionTime(timeLedger.getTransactionTime());
+			dbTimeLedger.setWithdrawalValue(timeLedger.getWithdrawalValue());
+			timeLedgerService.save(dbTimeLedger);
+			return "Success to update [id= " + timeLedger.getId() + " timeledger]";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Failed to update [id= " + timeLedger.getId() + " timeledger]";
+		}
+		// timeLedgerService.save(timeLedger);
+		// return editPage(timeLedger.getId(), model);
 	}
 
 	@RequestMapping("/delete")
+	@ResponseBody
 	public String delete(@RequestParam("id") Long id, Model model) {
-		timeLedgerService.delete(id);
-		return "redirect:/time-ledger/list";
+		try {
+			timeLedgerService.delete(id);
+			return "Success to delete [id= " + id + " timeledger]";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Failed to delete [id= " + id + " timeledger]";
+		}
 	}
 
+	@RequestMapping("/query")
+	@ResponseBody
+	public List<TimeLedger> query(Model model) {
+		List<TimeLedger> timeLedgers = timeLedgerService.findAll();
+		return timeLedgers;
+	}
 }
