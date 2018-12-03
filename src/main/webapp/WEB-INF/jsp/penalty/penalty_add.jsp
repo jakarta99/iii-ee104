@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,9 +22,9 @@
 <title>Penalty Add</title>
 </head>
 <body>
-<%@ include file="nav.jsp" %>
+	<c:import url="/html/nav.html"></c:import>
 	<h1 style="padding-top:2cm">Penalty Add</h1>
-	<form action="/penalty/insert" method="post">
+	<form>
 		<div class="form-group row">
 			<label for="orderListId" class="col-sm-1 col-form-label">orderListId</label>
 			<div class="col-sm-2">
@@ -62,5 +63,19 @@
 			<input type="submit" class="btn btn-primary mb-2" />
 	</form>
 	<a href="/penalty/list">back to penalty_list</a>
+	<script type="text/javascript">
+	$('input[type="submit"]').click(function(){
+		$.ajax({
+			url:"/penalty/insert",
+			method:"post",
+			dataType:"text",
+			data:$('form').serialize()
+		}).done(function(data){
+			alert(data.msg);
+			window.location.replace("/penalty/list");
+		})
+	})
+	
+	</script>
 </body>
 </html>

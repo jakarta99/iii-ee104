@@ -23,17 +23,10 @@ public class PenaltyController {
 
 	@RequestMapping("/add")
 	public String add() {
-
-		return "/penalty/penalty_add";
+	return "/penalty/penalty_add";
 
 	}
 	
-	@RequestMapping("/insert")
-	public String insert(Penalty penalty) {		
-		penaltyService.save(penalty);		
-		return "redirect:/penalty/add";
-	}
-
 	@RequestMapping("/edit")
 	public String edit(@RequestParam("id") Long id, Model model) {
 		Penalty penalty = penaltyService.getOne(id);
@@ -43,17 +36,39 @@ public class PenaltyController {
 	}
 	
 	@RequestMapping("/update")
-	public String update(Penalty penalty, Model model) {
-		Penalty penalty1 = penaltyService.getOne(penalty.getId());
-		penalty1.setPenaltyTimeValue(penalty.getPenaltyTimeValue());
-		penalty1.setStatus(penalty.getStatus());
-		penaltyService.save(penalty1);
-		return "redirect:/penalty/list";
+	@ResponseBody
+	public Map<String, String> update(Penalty penalty, Model model) {
+		Map<String, String> msg = new HashMap<>();
+		try {
+			Penalty penalty1 = penaltyService.getOne(penalty.getId());
+			penalty1.setPenaltyTimeValue(penalty.getPenaltyTimeValue());
+			penalty1.setStatus(penalty.getStatus());
+			penaltyService.save(penalty1);
+			msg.put("msg", "新增成功");
+		} catch (Exception e) {
+			msg.put("msg", "新增失敗");
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
+	@RequestMapping("/insert")
+	@ResponseBody
+	public Map<String, String> insert(Penalty penalty) {
+		Map<String, String> msg = new HashMap<>();
+		try {
+			penaltyService.save(penalty);
+			msg.put("msg", "新增成功");
+		} catch (Exception e) {
+			msg.put("msg", "新增失敗");
+			e.printStackTrace();
+		}	
+		return msg;
 	}
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public Map<String, String> delete(@RequestParam("id") Long id, Model model) {
+	public Map<String, String> delete(@RequestParam("id") Long id) {
 		Map<String, String> msg = new HashMap<>();	
 		try {
 			penaltyService.delete(id);
@@ -63,16 +78,11 @@ public class PenaltyController {
 			e.printStackTrace();
 		} 
 			return msg;			
-		
-
 	}
 	
 	@RequestMapping("/list")
-	public String list(Model model) {
-		List<Penalty> penalties = penaltyService.findAll();
-		model.addAttribute("penalties", penalties);
+	public String list() {
 		return "/penalty/penalty_list";
-
 	}
 	
 	@ResponseBody

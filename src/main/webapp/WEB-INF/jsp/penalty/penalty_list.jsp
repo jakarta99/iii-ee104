@@ -24,7 +24,6 @@
 
 	<!-- 加入nav.html(放在static/html) -->
 	<c:import url="/html/nav.html"></c:import>
-<%-- 	<c:include  page="/html/nav.html" /> --%>
 	<h1 style="padding-top: 2cm">Penalty List</h1>
 	<button onclick="javascript:document.location.href='/penalty/add'"
 		class="btn btn-primary">Add</button>
