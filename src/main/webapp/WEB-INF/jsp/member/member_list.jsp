@@ -38,36 +38,40 @@
 </style>
 </head>
 <body>
-	<input type="button" onclick="javascript:document.location.href='/'" value="回首頁" />
-	<h2>Member List</h2>
-	<table  class="table table-striped table-bordered">
-		<tr>
-			<button class="btn btn-primary btn-sm"
-				onclick="javascript:document.location.href='/member/add?memberType=P'">新增一般會員</button>
-			<button class="btn btn-primary btn-sm"
-				onclick="javascript:document.location.href='/member/add?memberType=O'">新增公益團體</button>
-		</tr>
 
-		<thead>
+<!-- 	<div id="navBar"></div> -->
+<c:import url="/html/nav.html"/>
+	<article>
+		<input type="button" onclick="javascript:document.location.href='/'" value="回首頁"  style="padding-top: 2cm"/>
+		<h2>Member List</h2>
+		<table  class="table table-striped table-bordered">
 			<tr>
-				<th scope="col">會員編號</th>
-				<th scope="col">會員帳號</th>
-				<th scope="col">會員姓名</th>
-				<th scope="col">會員型態</th>
-				<th scope="col">會員信箱</th>
-				<th scope="col">會員手機</th>
-				<th scope="col">會員居住地址</th>
-				<th scope="col">註冊日期</th>
-<!-- 				<th>驗證信確認</th> -->
-			
+				<button class="btn btn-primary btn-sm"
+					onclick="javascript:document.location.href='/member/add?memberType=P'">新增一般會員</button>
+				<button class="btn btn-primary btn-sm"
+					onclick="javascript:document.location.href='/member/add?memberType=O'">新增公益團體</button>
 			</tr>
-		</thead>
-		<tbody id="memberTableBody">
-			<!-- 由程式產生出的member清單 -->
-			
-		</tbody>
-	</table>
 	
+			<thead>
+				<tr>
+					<th scope="col">會員編號</th>
+					<th scope="col">會員帳號</th>
+					<th scope="col">會員姓名</th>
+					<th scope="col">會員型態</th>
+					<th scope="col">會員信箱</th>
+					<th scope="col">會員手機</th>
+					<th scope="col">會員居住地址</th>
+					<th scope="col">註冊日期</th>
+	<!-- 				<th>驗證信確認</th> -->
+				
+				</tr>
+			</thead>
+			<tbody id="memberTableBody">
+				<!-- 由程式產生出的member清單 -->
+				
+			</tbody>
+		</table>
+	</article>
 	
 
 	<script>
@@ -96,6 +100,12 @@
 	
 		
 		$(document).ready(function(){
+			//add nav.html
+// 			$.get("/html/nav.html",function(data){
+// 				$("#navBar").html(data);
+// 			});
+		
+			
 			listMember();
 			
 			//將deleteButt綁定click事件

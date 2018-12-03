@@ -37,6 +37,7 @@
 
 </head>
 <body>
+	<div id="navBar"></div>
 	<h2>Member Add</h2>
 	<form action="" method="post">	
 		<input type="hidden" value="" id="id" name="id"/>
@@ -74,6 +75,12 @@
 	
 	<script>
 		$(document).ready(function(){
+			//add nav.html
+			$.get("/html/nav.html",function(data){
+				$("#navBar").html(data);
+			});
+			
+			
 			new TwCitySelector();	
 			
 // 			insert new member

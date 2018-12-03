@@ -41,7 +41,7 @@
 </head>
 <body>
 <!-- 使用AJAX -->
-
+	<div id="navBar"></div>
 	<h2>Member Edit</h2>
 	<h4>Member ${member.id}</h4>
 	<form action="#" method="post" >
@@ -91,6 +91,12 @@
 	
 	<script>
 		$(document).ready(function(){
+			//add nav.html
+			$.get("/html/nav.html",function(data){
+				$("#navBar").html(data);
+			});
+			
+			
 			new TwCitySelector();				
 			$("div[role='tw-city-selector']").attr("data-county-value",'${member.county}');	
 			$("div[role='tw-city-selector']").attr("data-district-value",'${member.district}');	
