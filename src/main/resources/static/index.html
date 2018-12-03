@@ -174,7 +174,7 @@
 				event.preventDefault();
 				toBackStage("/request/div");
 			});
-			
+			//by jasmine
 			//有套bootstrap樣式的頁面(donation、timeledger、penalty、request)，透過nav連結進入後，無法再透過nav下拉選單連到其他人的頁面
 			//Sol:只要把CDN的版本從jquery-3.2.1.slim.min.js中的"slim"刪掉即可
 			//slim版本:  $.ajax is not a function
@@ -185,7 +185,8 @@
 			//by sheila
 			//在這邊用ajax挑轉，url不會改變(重新整理時會在index.html頁面)
 			
-			
+			//by jasmine
+			//或者試試看把<nav>與<footer>寫成js，讓每個網頁引用(至少比整串HTML短)?
 			
 // 			$("#backStage-donation").click(function(event){
 // 				event.preventDefault(); 
