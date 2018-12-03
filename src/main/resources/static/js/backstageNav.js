@@ -9,7 +9,7 @@ document.write( '		</button>\n' );
 document.write( '\n' );
 document.write( '		<div class=\"collapse navbar-collapse\" id=\"navbarsExampleDefault\">\n' );
 document.write( '			<ul class=\"navbar-nav mr-auto\">\n' );
-document.write( '				<li class=\"nav-item active\"><a class=\"nav-link\" href=\"#\">Home\n' );
+document.write( '				<li class=\"nav-item active\"><a class=\"nav-link\" href=\"/\">Home\n' );
 document.write( '						<span class=\"sr-only\">(current)</span>\n' );
 document.write( '				</a></li>\n' );
 document.write( '				<li class=\"nav-item\"><a class=\"nav-link\" href=\"#\">Link</a></li>\n' );
