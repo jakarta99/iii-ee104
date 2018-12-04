@@ -24,6 +24,9 @@
 
 
 <style>
+	 article{
+	 	margin-top:70px;
+	 }
 
 	 td{
 	 	text-align:center;
@@ -39,10 +42,10 @@
 </head>
 <body>
 
-<!-- 	<div id="navBar"></div> -->
-<c:import url="/html/nav.html"/>
+	<div id="navBar"></div>
+<%-- <c:import url="/html/nav.html"/> --%>
 	<article>
-		<input type="button" onclick="javascript:document.location.href='/'" value="回首頁"  style="padding-top: 2cm"/>
+		<input type="button" onclick="javascript:document.location.href='/'" value="回首頁"  />
 		<h2>Member List</h2>
 		<table  class="table table-striped table-bordered">
 			<tr>
@@ -101,9 +104,9 @@
 		
 		$(document).ready(function(){
 			//add nav.html
-// 			$.get("/html/nav.html",function(data){
-// 				$("#navBar").html(data);
-// 			});
+			$.get("/html/nav.html",function(data){
+				$("#navBar").html(data);
+			});
 		
 			
 			listMember();

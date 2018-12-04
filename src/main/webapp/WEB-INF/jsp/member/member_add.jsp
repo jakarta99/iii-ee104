@@ -28,6 +28,9 @@
 
 
 <style>
+	 article{
+	 	margin-top:70px;
+	 }
 	input,select,label{ 
  		margin-bottom:20px;
  		margin-left:15px; 
@@ -38,40 +41,41 @@
 </head>
 <body>
 	<div id="navBar"></div>
-	<h2>Member Add</h2>
-	<form action="" method="post">	
-		<input type="hidden" value="" id="id" name="id"/>
-		<input type="hidden" value="${memberType}" id="memberType" name="memberType"/><br>
-		<label>帳號 :</label> 
-		<input type="text" value="${param.account }" id="account" name="account" ><br> 
-		<label>密碼 :</label> 
-		<input type="text" value="${param.password }" id="password" name="password"><br>
-		<label>名字 :</label> 
-		<input type="text" value="${param.name }" id="name" name="name"><br>
-		<label>email:</label> 
-		<input type="text" value="${param.email }" id="email" name="email"><br>
-		<label>住家電話:</label> 
-		<input type="text" value="${param.telephone }" id="telephone" name="telephone"><br>
-		<label>手機:</label> 
-		<input type="text" value="${param.mobile }" id="mobile" name="mobile"><br>
-		<label>住址:</label>
-		<div role="tw-city-selector">
-		</div>
-		<input type='text' value='${param.address}' id='address' name='address' /><br>
-	
-		<c:if test="${memberType eq 'O' }">
-			<label>創辦人:</label> 
-			<input type="text" value="${param.orgFounder }" id="orgFounder" name="orgFounder"><br>
-			<label>執行長:</label> 
-			<input type="text" value="${param.orgCeo }" id="orgCeo" name="orgCeo"><br>
-		</c:if>
+	<article>
+		<h2>Member Add</h2>
+		<form action="" method="post">	
+			<input type="hidden" value="" id="id" name="id"/>
+			<input type="hidden" value="${memberType}" id="memberType" name="memberType"/><br>
+			<label>帳號 :</label> 
+			<input type="text" value="${param.account }" id="account" name="account" ><br> 
+			<label>密碼 :</label> 
+			<input type="text" value="${param.password }" id="password" name="password"><br>
+			<label>名字 :</label> 
+			<input type="text" value="${param.name }" id="name" name="name"><br>
+			<label>email:</label> 
+			<input type="text" value="${param.email }" id="email" name="email"><br>
+			<label>住家電話:</label> 
+			<input type="text" value="${param.telephone }" id="telephone" name="telephone"><br>
+			<label>手機:</label> 
+			<input type="text" value="${param.mobile }" id="mobile" name="mobile"><br>
+			<label>住址:</label>
+			<div role="tw-city-selector">
+			</div>
+			<input type='text' value='${param.address}' id='address' name='address' /><br>
 		
-		<input type="button" class="btn btn-primary btn-sm" value="確定送出" />
-		<input type="reset" class="btn btn-primary btn-sm" value="清除重填" />
-		
-	</form>
+			<c:if test="${memberType eq 'O' }">
+				<label>創辦人:</label> 
+				<input type="text" value="${param.orgFounder }" id="orgFounder" name="orgFounder"><br>
+				<label>執行長:</label> 
+				<input type="text" value="${param.orgCeo }" id="orgCeo" name="orgCeo"><br>
+			</c:if>
+			
+			<input type="button" class="btn btn-primary btn-sm" value="確定送出" />
+			<input type="reset" class="btn btn-primary btn-sm" value="清除重填" />
+			
+		</form>
 	
-
+	</article>
 	
 	<script>
 		$(document).ready(function(){
