@@ -71,6 +71,7 @@ public class TimeLedgerService {
 
 	// 更新一筆資料
 	public TimeLedger save(TimeLedger timeLedger) {
+		timeLedger.setTransactionTime(LocalDateTime.now());
 		timeLedgerDao.save(timeLedger);
 		return timeLedger;
 	}

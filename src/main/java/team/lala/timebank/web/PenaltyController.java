@@ -44,9 +44,9 @@ public class PenaltyController {
 			penalty1.setPenaltyTimeValue(penalty.getPenaltyTimeValue());
 			penalty1.setStatus(penalty.getStatus());
 			penaltyService.save(penalty1);
-			msg.put("msg", "新增成功");
+			msg.put("msg", "修改成功");
 		} catch (Exception e) {
-			msg.put("msg", "新增失敗");
+			msg.put("msg", "修改失敗");
 			e.printStackTrace();
 		}
 		return msg;
