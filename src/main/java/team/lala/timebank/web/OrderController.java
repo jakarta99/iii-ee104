@@ -20,7 +20,6 @@ public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
-	private RequestsService requestsService;
 
 	@RequestMapping("/list")
 	public String listPage() {
