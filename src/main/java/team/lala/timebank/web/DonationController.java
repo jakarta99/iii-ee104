@@ -1,6 +1,5 @@
 package team.lala.timebank.web;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.lala.timebank.entity.Donation;
 import team.lala.timebank.service.DonationService;
@@ -53,22 +53,35 @@ public class DonationController {
 	}
 
 	@RequestMapping("/delete")
-	public String deleteDonation(@RequestParam("id") Long id, Model model) {
+	@ResponseBody
+	public String deleteDonation(@RequestParam("id") Long id) {
+		try {
+			donationService.deleteById(id);
+			return "delete id " + id + " success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "delete fail";
+		}
 
-		donationService.deleteById(id);
-
-		return listDonation(model);
 	}
 
 	@RequestMapping("/update")
 	public String updateDonation(Donation donation) {
 
 		Donation dbDonation = donationService.getOne(donation.getId());
-		
+
 		dbDonation.setValue(donation.getValue());
 		donationService.save(dbDonation);
 
 		return "redirect:/donation/list";
+	}
+
+	@RequestMapping("/query")
+	@ResponseBody
+	public List<Donation> queryDonation() {
+
+		List<Donation> donations = donationService.findAll();
+		return donations;
 	}
 
 }
