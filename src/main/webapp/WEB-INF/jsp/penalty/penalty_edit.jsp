@@ -43,7 +43,7 @@
 				<div class="form-group row">
 			<label for="status" class="col-sm-1 col-form-label">status</label> 
 			<div class="col-sm-2">
-			<select class="form-control" id="status" name="status" value="${penalty.status}">
+			<select class="form-control" id="status" name="status" >
 				<option value=1>審核中</option>
 				<option value=2>有罪</option>
 				<option value=3>無罪</option>
@@ -61,15 +61,16 @@
 
 <a href="/penalty/list">back to penalty_list</a>
 	<script type="text/javascript">
+	$('#status').val('${penalty.status}');
+	
 	$('input[type="submit"]').click(function(){
 		$.ajax({
 			url:"/penalty/update",
 			method:"post",
-			dataType:"text",
+			dataType:"json",
 			data:$('form').serialize()
 		}).done(function(data){
 			alert(data.msg);
-			window.location.replace("/penalty/list");
 		})
 	})
 	

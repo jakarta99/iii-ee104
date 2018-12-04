@@ -68,7 +68,7 @@
 		$.ajax({
 			url:"/penalty/insert",
 			method:"post",
-			dataType:"text",
+			dataType:"json",
 			data:$('form').serialize()
 		}).done(function(data){
 			alert(data.msg);
