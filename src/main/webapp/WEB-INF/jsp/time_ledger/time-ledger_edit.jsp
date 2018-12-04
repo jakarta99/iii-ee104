@@ -98,7 +98,7 @@ fieldset {
 				dataType : 'text',
 				success : function(editResult) {
 					alert(editResult);
-					document.location.href = "/time-ledger/list";
+// 					document.location.href = "/time-ledger/list";
 				},
 			})
 		}
