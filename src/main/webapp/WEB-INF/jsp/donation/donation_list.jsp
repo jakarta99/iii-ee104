@@ -64,8 +64,8 @@
 			type : "post",
 			dataType : 'json',
 			success : function(donations) {
-				$("tbody").text("");  //delete 轉回原本頁面先清空資料
 				$.each(donations,function(index, donation){
+					$("tbody").text(""); //delete 轉回原本頁面先清空資料
 					$("tbody").append(
 							[$("<tr>"),
 							$("<td><button onclick=\"javascript:document.location.href='/donation/edit?id="+ donation.id +"'\">Edit</button></td>"),

@@ -36,10 +36,15 @@ fieldset {
 .center {
 	text-align: center
 }
+
+.margintop{
+	 margin-top:70px;
+}
 </style>
 </head>
 <body>
-
+	<div id="navBar"></div>
+	<div class="margintop"></div>
 	<h1 class="center">TimeLedger List</h1>
 	<fieldset>
 		<button onclick="javascript:document.location.href='/time-ledger/add'"
@@ -99,7 +104,10 @@ fieldset {
 		}
 
 		$(document).ready(function() {
-
+			$.get("/html/nav.html",function(data){
+				$("#navBar").html(data);
+			});
+			
 			listTimeLedger();
 
 		})

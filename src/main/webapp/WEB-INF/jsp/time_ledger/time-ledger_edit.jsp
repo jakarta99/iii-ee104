@@ -36,10 +36,15 @@ fieldset {
 .center {
 	text-align: center
 }
+
+.margintop{
+	 margin-top:70px;
+}
 </style>
 </head>
 <body>
-
+	<div id="navBar"></div>
+	<div class="margintop"></div>
 	<h1 class="center">TimeLedger Edit</h1>
 
 	<form action="/time-ledger/update" method="post">
@@ -50,7 +55,7 @@ fieldset {
 			</div>
 			<div class="form-group">
 				memberId: <input type="text" value="${timeLedger.memberId}"
-					id="memberId" name="memberId" class="form-control" />
+					id="memberId" name="memberId" class="form-control" readonly/>
 			</div>
 			<!-- 			<div class="form-group"> transactionTime:-->
 			<%-- 			<input type="hidden" value="${timeLedger.transactionTime}" --%>
@@ -93,10 +98,16 @@ fieldset {
 				dataType : 'text',
 				success : function(editResult) {
 					alert(editResult);
-					document.location.href = "/time-ledger/list";
+// 					document.location.href = "/time-ledger/list";
 				},
 			})
 		}
+		
+		$(document).ready(function() {
+			$.get("/html/nav.html",function(data){
+				$("#navBar").html(data);
+			});
+		})
 	</script>
 </body>
 </html>

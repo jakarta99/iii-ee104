@@ -5,14 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <title> edit donation </title>
 </head>
 <body>
-<script src="/js/backstageNav.js"></script>
-<br>
-<br>
-<br>
 <h1> edit memberId = ${donation.memberId} donation</h1>
 <form action="/donation/update" method="post">
 	<input type="hidden" value="${donation.id}" id="id" name="id"/>
