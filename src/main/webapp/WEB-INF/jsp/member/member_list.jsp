@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -28,13 +28,13 @@
 	 	margin-top:70px;
 	 }
 
-	 td{
+	 article td{
 	 	text-align:center;
 	 }
-	 .btn{
+	 article .btn{
 	 	margin-left:10px;
 	 }
-	 button{
+	 article button{
 		 margin:15px;
 	 }
  
@@ -42,10 +42,11 @@
 </head>
 <body>
 
-	<div id="navBar"></div>
-<%-- <c:import url="/html/nav.html"/> --%>
+<!-- 	<div id="navBar"></div> -->
+<c:import url="/html/nav.html"/>
+
 	<article>
-		<input type="button" onclick="javascript:document.location.href='/'" value="回首頁"  />
+		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
 		<h2>Member List</h2>
 		<table  class="table table-striped table-bordered">
 			<tr>
@@ -104,10 +105,10 @@
 		
 		$(document).ready(function(){
 			//add nav.html
-			$.get("/html/nav.html",function(data){
-				$("#navBar").html(data);
-			});
-		
+// 			$.get("/html/nav.html",function(data){
+// 				$("#navBar").html(data);
+// 			});
+			
 			
 			listMember();
 			

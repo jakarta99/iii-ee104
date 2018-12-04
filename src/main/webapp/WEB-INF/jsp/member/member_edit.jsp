@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,10 +33,10 @@
  	article{
 	 	margin-top:70px;
 	 }
- 	input,select,label{ 
- 		margin-bottom:20px;
- 		margin-left:15px; 
-	} 
+ 	article input,select,label{  
+  		margin-bottom:20px; 
+  		margin-left:15px;  
+ 	}  
 	
 </style>
 
@@ -44,7 +44,8 @@
 </head>
 <body>
 <!-- 使用AJAX -->
-	<div id="navBar"></div>
+<!-- 	<div id="navBar"></div> -->
+	<c:import url="/html/nav.html"/>
 	<article>
 		<h2>Member Edit</h2>
 		<h4>Member ${member.id}</h4>
@@ -52,11 +53,29 @@
 			<input type="hidden" value="${member.id}" id="id" name="id"/>
 			<input type="hidden" value="${member.memberType}" id="memberType" name="memberType"/><br>
 			<label>帳號 :</label>
-			<input type="text" value="${member.account }" id="account" name="account" disabled><br> 
+			<input type="text" value="${member.account }" id="account" name="account" readonly><br> 
 			<label>密碼 :</label>
 			<input type="text" value="${member.password }" id="password" name="password"><br>
 			<label>名字 :</label>
 			<input type="text" value="${member.name }" id="name" name="name"><br>
+			
+			<c:choose>
+				<c:when test="${member.memberType eq 'P'}">					
+					<label>身分證字號 :</label> 
+					<input type="text" value="${member.certificateIdNumber }" id="certificateIdNumber" name="certificateIdNumber"><br>
+<!-- 					<label>出生日期:</label>  --> -->
+<%-- 					<input type="text" value="${member.birthDate }" id="birthDate" name="birthDate"><br>   --%>
+							
+				</c:when>
+				<c:when test="${member.memberType eq 'O'}">
+					<label>統一編號 :</label> 
+					<input type="text" value="${member.certificateIdNumber }" id="certificateIdNumber" name="certificateIdNumber"><br>
+<!--  					<label>創立日期:</label>  -member> -->
+<%--  					<input type="date" value="${member.birthDate }" id="birthDate" name="birthDate"><br>  --%>
+							
+				</c:when>
+			</c:choose>	
+			
 			<label>email:</label>
 			<input type="text" value="${member.email }" id="email" name="email"><br>
 			<label>住家電話:</label>
@@ -80,6 +99,21 @@
 				<input type="text" value="${member.orgFounder}" id="orgFounder" name="orgFounder"><br>
 				<label>執行長: </label>
 				<input type="text" value="${member.orgCeo}" id="orgCeo" name="orgCeo"><br>
+				<label>聯絡人:</label> 
+				<input type="text" value="${member.orgContactPerson }" id="orgContactPerson" name="orgContactPerson"><br>
+				<label>聯絡人電話:</label> 
+				<input type="text" value="${member.orgContactPersonTel }" id="orgContactPersonTel" name="orgContactPersonTel"><br>
+				<label>聯絡人手機:</label> 
+				<input type="text" value="${member.orgContactPersonMobile }" id="orgContactPersonMobile" name="orgContactPersonMobile"><br>
+				
+				<label>網址:</label> 
+				<input type="url" size='50px' value="${member.orgWebsiteLink }" id="orgWebsiteLink" name="orgWebsiteLink"><br>
+				<label>創立宗旨:</label> 
+				<textarea  rows="4" cols="30"  id="orgFoundPurpose" name="orgFoundPurpose">${member.orgFoundPurpose}</textarea><br>
+				
+				
+				
+				
 				<label>機構身分驗證 (Y/N): </label>
 				<label>Y</label> 
 				<input type="radio" value="Y" name="orgIDConfirmation" />
@@ -147,14 +181,10 @@
 			})
 			
 			
-			
-			
-			
-			
-			
-			
 		})
 	
 	</script>
+	
+	
 </body>
 </html>

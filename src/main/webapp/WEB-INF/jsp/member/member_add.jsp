@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -31,7 +31,7 @@
 	 article{
 	 	margin-top:70px;
 	 }
-	input,select,label{ 
+	article input,select,label{ 
  		margin-bottom:20px;
  		margin-left:15px; 
 	} 
@@ -40,8 +40,10 @@
 
 </head>
 <body>
-	<div id="navBar"></div>
+<!-- 	<div id="navBar"></div> -->
+	<c:import url="/html/nav.html"/>
 	<article>
+		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/member/list'" value="回會員列表"  />
 		<h2>Member Add</h2>
 		<form action="" method="post">	
 			<input type="hidden" value="" id="id" name="id"/>
@@ -49,11 +51,29 @@
 			<label>帳號 :</label> 
 			<input type="text" value="${param.account }" id="account" name="account" ><br> 
 			<label>密碼 :</label> 
-			<input type="text" value="${param.password }" id="password" name="password"><br>
+			<input type="password" value="${param.password }" id="password" name="password"><br>
 			<label>名字 :</label> 
 			<input type="text" value="${param.name }" id="name" name="name"><br>
+			<c:choose>
+				<c:when test="${memberType eq 'P'}">					
+					<label>身分證字號 :</label> 
+					<input type="text" value="${param.certificateIdNumber }" id="certificateIdNumber" name="certificateIdNumber"><br>
+<!-- 					<label>出生日期:</label>  -->
+<%-- 					<input type="text" value="${param.birthDate }" id="birthDate" name="birthDate"><br>  --%>
+							
+				</c:when>
+				<c:when test="${memberType eq 'O'}">
+					<label>統一編號 :</label> 
+					<input type="text" value="${param.certificateIdNumber }" id="certificateIdNumber" name="certificateIdNumber"><br>
+<!-- 					<label>創立日期:</label>  -->
+<%-- 					<input type="date" value="${param.birthDate }" id="birthDate" name="birthDate"><br> --%>
+							
+				</c:when>
+			</c:choose>
+			
+			
 			<label>email:</label> 
-			<input type="text" value="${param.email }" id="email" name="email"><br>
+			<input type="email" value="${param.email }" id="email" name="email"><br>
 			<label>住家電話:</label> 
 			<input type="text" value="${param.telephone }" id="telephone" name="telephone"><br>
 			<label>手機:</label> 
@@ -68,6 +88,19 @@
 				<input type="text" value="${param.orgFounder }" id="orgFounder" name="orgFounder"><br>
 				<label>執行長:</label> 
 				<input type="text" value="${param.orgCeo }" id="orgCeo" name="orgCeo"><br>
+				<label>聯絡人:</label> 
+				<input type="text" value="${param.orgContactPerson }" id="orgContactPerson" name="orgContactPerson"><br>
+				<label>聯絡人電話:</label> 
+				<input type="text" value="${param.orgContactPersonTel }" id="orgContactPersonTel" name="orgContactPersonTel"><br>
+				<label>聯絡人手機:</label> 
+				<input type="text" value="${param.orgContactPersonMobile }" id="orgContactPersonMobile" name="orgContactPersonMobile"><br>
+				
+				<label>網址:</label> 
+				<input type="url" value="${param.orgWebsiteLink }" id="orgWebsiteLink" name="orgWebsiteLink"><br>
+				<label>創立宗旨:</label> 
+				<textarea  rows="4" cols="30"  id="orgFoundPurpose" name="orgFoundPurpose">${param.orgFoundPurpose}</textarea><br>
+				
+				
 			</c:if>
 			
 			<input type="button" class="btn btn-primary btn-sm" value="確定送出" />
@@ -80,15 +113,15 @@
 	<script>
 		$(document).ready(function(){
 			//add nav.html
-			$.get("/html/nav.html",function(data){
-				$("#navBar").html(data);
-			});
+// 			$.get("/html/nav.html",function(data){
+// 				$("#navBar").html(data);
+// 			});
 			
 			
 			new TwCitySelector();	
 			
 // 			insert new member
-			$("input[type='button']").click(function(){
+			$("input[type='button'][value='確定送出']").click(function(){
 				$.ajax({
 					method:"post",
 					dataType: "json",        

@@ -41,6 +41,12 @@ public class Member {
 	@Column(name = "TYPE")
 	private MemberType memberType; // P: Person; O: Organization
 
+	@Column(name="CERTIFICATE_ID_NUMBER")
+	private String certificateIdNumber;
+	
+	@Column(name="BIRTH_DATE")
+	private Date birthDate;
+	
 	@Column(name = "EMAIL")
 	private String email;
 
@@ -49,30 +55,6 @@ public class Member {
 
 	@Column(name = "MOBILE")
 	private String mobile;
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getCounty() {
-		return county;
-	}
-
-	public void setCounty(String county) {
-		this.county = county;
-	}
-
-	public String getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(String district) {
-		this.district = district;
-	}
 
 	@Column(name = "COUNTY")
 	private String county;
@@ -95,7 +77,22 @@ public class Member {
 
 	@Column(name = "ORG_CEO")
 	private String orgCeo;
-
+	
+	@Column(name="ORG_CONTACT_PERSON")
+	private String orgContactPerson;
+	
+	@Column(name="ORG_CONTACT_PERSON_TEL")
+	private String orgContactPersonTel;
+	
+	@Column(name="ORG_CONTACT_PERSON_MOBILE")
+	private String orgContactPersonMobile;
+	
+	@Column(name="ORG_WEBSITE_LINK")
+	private String orgWebsiteLink;
+	
+	@Column(name="ORG_FOUND_PURPOSE")
+	private String orgFoundPurpose;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "ORG_IDENTITY_CONFIRMATION")
 	private YesNo orgIdConfirmation = YesNo.N;
@@ -140,6 +137,22 @@ public class Member {
 		this.memberType = memberType;
 	}
 
+	public String getCertificateIdNumber() {
+		return certificateIdNumber;
+	}
+
+	public void setCertificateIdNumber(String certificateIdNumber) {
+		this.certificateIdNumber = certificateIdNumber;
+	}
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -162,6 +175,30 @@ public class Member {
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+
+	public String getCounty() {
+		return county;
+	}
+
+	public void setCounty(String county) {
+		this.county = county;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public YesNo getEmailVerification() {
@@ -196,6 +233,46 @@ public class Member {
 		this.orgCeo = orgCeo;
 	}
 
+	public String getOrgContactPerson() {
+		return orgContactPerson;
+	}
+
+	public void setOrgContactPerson(String orgContactPerson) {
+		this.orgContactPerson = orgContactPerson;
+	}
+
+	public String getOrgContactPersonTel() {
+		return orgContactPersonTel;
+	}
+
+	public void setOrgContactPersonTel(String orgContactPersonTel) {
+		this.orgContactPersonTel = orgContactPersonTel;
+	}
+
+	public String getOrgContactPersonMobile() {
+		return orgContactPersonMobile;
+	}
+
+	public void setOrgContactPersonMobile(String orgContactPersonMobile) {
+		this.orgContactPersonMobile = orgContactPersonMobile;
+	}
+
+	public String getOrgWebsiteLink() {
+		return orgWebsiteLink;
+	}
+
+	public void setOrgWebsiteLink(String orgWebsiteLink) {
+		this.orgWebsiteLink = orgWebsiteLink;
+	}
+
+	public String getOrgFoundPurpose() {
+		return orgFoundPurpose;
+	}
+
+	public void setOrgFoundPurpose(String orgFoundPurpose) {
+		this.orgFoundPurpose = orgFoundPurpose;
+	}
+
 	public YesNo getOrgIdConfirmation() {
 		return orgIdConfirmation;
 	}
@@ -207,10 +284,15 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [id=" + id + ", account=" + account + ", password=" + password + ", name=" + name
-				+ ", memberType=" + memberType + ", email=" + email + ", telephone=" + telephone + ", mobile=" + mobile
-				+ ", county=" + county + ", district=" + district + ", address=" + address + ", emailVerification="
+				+ ", memberType=" + memberType + ", certificateIdNumber=" + certificateIdNumber + ", birthDate="
+				+ birthDate + ", email=" + email + ", telephone=" + telephone + ", mobile=" + mobile + ", county="
+				+ county + ", district=" + district + ", address=" + address + ", emailVerification="
 				+ emailVerification + ", signUpDate=" + signUpDate + ", orgFounder=" + orgFounder + ", orgCeo=" + orgCeo
-				+ ", orgIdConfirmation=" + orgIdConfirmation + "]";
+				+ ", orgContactPerson=" + orgContactPerson + ", orgContactPersonTel=" + orgContactPersonTel
+				+ ", orgContactPersonMobile=" + orgContactPersonMobile + ", orgWebsiteLink=" + orgWebsiteLink
+				+ ", orgFoundPurpose=" + orgFoundPurpose + ", orgIdConfirmation=" + orgIdConfirmation + "]";
 	}
+
+	
 
 }
