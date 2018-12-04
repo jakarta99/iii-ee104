@@ -36,10 +36,15 @@ fieldset {
 .center {
 	text-align: center
 }
+
+.margintop{
+	 margin-top:70px;
+}
 </style>
 </head>
 <body>
-
+	<div id="navBar"></div>
+	<div class="margintop"></div>
 	<h1 class="center">TimeLedger Add</h1>
 
 	<form action="/time-ledger/insert" method="post">
@@ -93,6 +98,12 @@ fieldset {
 				},
 			})
 		}
+		
+		$(document).ready(function() {
+			$.get("/html/nav.html",function(data){
+				$("#navBar").html(data);
+			});
+		})
 	</script>
 </body>
 </html>
