@@ -7,6 +7,10 @@
 <title>add donation</title>
 </head>
 <body>
+<script src="/js/backstageNav.js"></script>
+<br>
+<br>
+<br>
 <h1>add donation</h1>
 <form action="/donation/insert" method="post">
 
