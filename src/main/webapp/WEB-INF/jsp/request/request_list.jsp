@@ -25,9 +25,8 @@
 <script defer
 	src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
-<!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script> -->
-<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">   -->
-		
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
+				
 
 <meta charset="UTF-8">
 <title>request list</title>
@@ -75,15 +74,34 @@
 	
 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/'">回列表頁</button>
 	</fieldset>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 	
 	
 	<script>
 	$(document).ready( function () {
+		
+//  $('#table').DataTable({
+			 
+// 	         ajax:"../request/query",
+// 	         columns: [
+// 	             { requests: "request.id" },
+// 	             { requests: "request.jobArea" },
+// 	             { requests: "request.jobTitle" },
+// 	             { requests: "request.memberId" }
+// 	             { requests: "request.serviceType" }
+// 	             { requests: "request.termType" }
+// 	             { requests: "request.timeValue" }
+// 	         ]
+//       	 });
+		
+		
+		
+		
+		
 		$.getJSON("/request/query",function(data){
 			var docFragment=$(document.createDocumentFragment());
 			var tb = $('#tbody');
  		    tb.empty();
- 		   
 			$.each(data,function(index,request){
 			    var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/edit?id="+request.id+"'\">Edit</button>";     
 			   	var deletebutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/delete?id="+request.id+"'\">Delete</button>"; 	
@@ -99,8 +117,9 @@
 		        docFragment.append(row);
 			});
 			tb.html(docFragment);
-		});		
-//       	$('#table').DataTable();
+		});			
+//  		   $('#table').DataTable();
+		
 	});
 	</script>
 	
