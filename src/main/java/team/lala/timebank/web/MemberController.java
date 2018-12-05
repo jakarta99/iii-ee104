@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import team.lala.timebank.entity.Area;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.enums.MemberType;
+import team.lala.timebank.enums.YesNo;
 import team.lala.timebank.service.AreaService;
 import team.lala.timebank.service.MemberService;
 
@@ -68,6 +69,8 @@ public class MemberController {
 			Member dbMember = memberService.getOne(member.getId());
 			dbMember.setPassword(member.getPassword());
 			dbMember.setName(member.getName());
+			dbMember.setCertificateIdNumber(member.getCertificateIdNumber());
+			dbMember.setBirthDate(member.getBirthDate());
 			dbMember.setEmail(member.getEmail());
 			dbMember.setTelephone(member.getTelephone());
 			dbMember.setMobile(member.getMobile());
@@ -78,6 +81,12 @@ public class MemberController {
 			if (member.getMemberType() == MemberType.O) {
 				dbMember.setOrgCeo(member.getOrgCeo());
 				dbMember.setOrgFounder(member.getOrgFounder());
+				dbMember.setOrgContactPerson(member.getOrgContactPerson());
+				dbMember.setOrgContactPersonMobile(member.getOrgContactPersonMobile());
+				dbMember.setOrgContactPersonTel(member.getOrgContactPersonTel());
+				dbMember.setOrgFoundPurpose(member.getOrgFoundPurpose());
+				dbMember.setOrgIdConfirmation(member.getOrgIdConfirmation());
+				dbMember.setOrgWebsiteLink(member.getOrgWebsiteLink());
 			}
 			 System.out.println("dbMember= " + dbMember);
 			try {
@@ -102,6 +111,8 @@ public class MemberController {
 		Map<String, String> msg = new HashMap<>();
 		// System.out.println("member = " + member);
 		member.setSignUpDate(new Date());
+		member.setEmailVerification(YesNo.N);
+		member.setOrgIdConfirmation(YesNo.N);
 		try {
 			memberService.save(member);
 			msg.put("msg", "新增成功");

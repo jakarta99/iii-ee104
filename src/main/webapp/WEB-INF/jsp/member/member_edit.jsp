@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>	
 <!doctype html>
 <html>
 <head>
@@ -24,10 +25,13 @@
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
 
-  
-      
+<!-- dataPicker -->
+<!-- <script src="/path/to//jquery.min.js"></script>  -->
+<!-- <script src="/js/bootstrap.min.js"></script> -->
 
-
+<script src="/js/bootstrap-datepicker.js"></script>
+<script src="/js/bootstrap-datepicker.zh-TW.js"></script>
+<link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" >
 
 <style>
  	article{
@@ -63,15 +67,15 @@
 				<c:when test="${member.memberType eq 'P'}">					
 					<label>身分證字號 :</label> 
 					<input type="text" value="${member.certificateIdNumber }" id="certificateIdNumber" name="certificateIdNumber"><br>
-<!-- 					<label>出生日期:</label>  --> -->
-<%-- 					<input type="text" value="${member.birthDate }" id="birthDate" name="birthDate"><br>   --%>
+					<label>出生日期:</label>  
+					<input type="date" value="${member.birthDate }" id="birthDate" name="birthDate"><br>  
 							
 				</c:when>
 				<c:when test="${member.memberType eq 'O'}">
 					<label>統一編號 :</label> 
 					<input type="text" value="${member.certificateIdNumber }" id="certificateIdNumber" name="certificateIdNumber"><br>
-<!--  					<label>創立日期:</label>  -member> -->
-<%--  					<input type="date" value="${member.birthDate }" id="birthDate" name="birthDate"><br>  --%>
+ 					<label>創立日期:</label> 
+ 					<input type="date" value="${member.birthDate }" id="birthDate" name="birthDate"><br> 
 							
 				</c:when>
 			</c:choose>	
@@ -93,7 +97,8 @@
 			<label>N</label> <input type="radio" value="N" name="emailVerification" /><br>
 	
 			<label>註冊日期:</label> 
-			<input type="text" value="${member.signUpDate}" id="signUpDate" name="signUpDate" disabled><br>
+			
+			<input type="text" value="${member.signUpDate}" id="signUpDate" name="signUpDate" ><br>
 			<c:if test="${member.memberType eq 'O' }">
 				<label>創辦人:</label> 
 				<input type="text" value="${member.orgFounder}" id="orgFounder" name="orgFounder"><br>
@@ -135,7 +140,18 @@
 			});
 			
 			
-			new TwCitySelector();				
+			new TwCitySelector();
+// 			$( "#signUpDate" ).datepicker();
+			$("#signUpDate").datepicker({
+			    format: "yyyy/mm/dd",
+			    autoclose: true,
+// 			    startDate: "today",
+			    clearBtn: true,
+			    calendarWeeks: true,
+			    todayHighlight: true,
+			    language: 'zh-TW'
+			});
+			
 			$("div[role='tw-city-selector']").attr("data-county-value",'${member.county}');	
 			$("div[role='tw-city-selector']").attr("data-district-value",'${member.district}');	
 

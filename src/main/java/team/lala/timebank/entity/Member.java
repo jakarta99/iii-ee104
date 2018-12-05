@@ -1,22 +1,17 @@
 package team.lala.timebank.entity;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import team.lala.timebank.enums.MemberType;
 import team.lala.timebank.enums.YesNo;
@@ -44,6 +39,7 @@ public class Member {
 	@Column(name="CERTIFICATE_ID_NUMBER")
 	private String certificateIdNumber;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name="BIRTH_DATE")
 	private Date birthDate;
 	
