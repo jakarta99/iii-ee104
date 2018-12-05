@@ -44,10 +44,14 @@
         .s2{
             text-align: center
         }
+        .margintop{
+	 margin-top:70px;
+}
  
     </style>
 </head>
 <body>
+<div id="navBar" class="margintop"></div>
 	
 	<h1 class="s2">request list</h1>
 	<fieldset>
@@ -94,7 +98,9 @@
 // 	         ]
 //       	 });
 		
-		
+		$.get("/html/nav.html",function(data){
+				$("#navBar").html(data);
+			});
 		
 		
 		

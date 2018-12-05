@@ -31,10 +31,14 @@
         .s2{
             text-align: center
         }
+        .margintop{
+	 margin-top:70px;
+}
     </style>
 
 </head>
 <body>
+<div id="navBar" class="margintop"></div>
 	
 	<h1 class="s2">request edit</h1>
 	
@@ -81,10 +85,13 @@
 	<button type="button" onclick="updateRequest()"
 					class="btn btn-outline-secondary">Update</button>
 	<input type="reset" class="btn btn-outline-secondary" />
+	
 	</div>
 	<div>
-	<a href='/request/list'>
-	<i class="fas fa-home"></i>回列表頁</a>
+	<input type="button" class="btn btn-outline-secondary" onclick="javascript:document.location.href='/request/list'" value="回列表頁"/>
+<!-- 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/request/list'">回列表頁</button> -->
+<!-- 	<a href='/request/list'> -->
+<!-- 	<i class="fas fa-home"></i>回列表頁</a> -->
 	
 	</div>
 					
@@ -96,7 +103,10 @@
 		$('#jobArea').val(${request.jobArea})
 		$('#termType').val(${request.termType})
 		$('#serviceType').val(${request.serviceType})
-		$('#termType').val(${request.termType})		
+		$('#termType').val(${request.termType})
+		$.get("/html/nav.html",function(data){
+			$("#navBar").html(data);
+		});
 	});
 	
 	function updateRequest() {

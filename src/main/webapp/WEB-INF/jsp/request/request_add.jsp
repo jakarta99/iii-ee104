@@ -30,9 +30,13 @@
         .s2{
             text-align: center
         }
+         .margintop{
+	 margin-top:70px;
+}
     </style>
 </head>
 <body>
+<div id="navBar" class="margintop"></div>
 	<h1 class="s2">request add</h1>
 	<fieldset>
 	<form action="/request/insert" method="post">
@@ -95,6 +99,14 @@ function addRequest() {
 		},
 	})
 }
+$(document).ready(function() {
+	$.get("/html/nav.html",function(data){
+		$("#navBar").html(data);
+	});
+	
+	listTimeLedger();
+
+})
 
 
 
