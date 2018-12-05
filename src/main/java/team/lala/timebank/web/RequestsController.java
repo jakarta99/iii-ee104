@@ -1,6 +1,8 @@
 package team.lala.timebank.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,27 +62,46 @@ public class RequestsController {
 	}
 
 	@RequestMapping("/update")
-	public String update(Requests requests, Model model) {
-
+	@ResponseBody
+	public Map<String, Object> update(Requests requests, Model model) {
+		Map<String, Object> msg = new HashMap<>();
 		// Requests r =requestsService.getOne(requests.getId());
-
 		// r.setJobArea(requests.getJobArea());
 		// r.setJobTitle(requests.getJobTitle());
 		// r.setServiceType(requests.getServiceType());
 		// r.setTermType(requests.getTermType());
 		// r.setTimeValue(requests.getTimeValue());
-
-		requestsService.save(requests);
-
-		return "redirect:/request/list";
+		
+		try {
+			requestsService.save(requests);
+			msg.put("memberInfo", requests);
+			msg.put("msg", "資料更新成功");
+			System.out.println("資料更新成功");
+		} catch (Exception e) {
+			msg.put("memberInfo", requests);
+			msg.put("msg", "資料更新失敗");
+			System.out.println("資料更新失敗");
+			e.printStackTrace();
+		}
+		
+		return msg;
 	}
 
 	@RequestMapping("/insert")
-	public String insert(Requests requests) {
-
-		requestsService.save(requests);
-
-		return "redirect:/request/list";
+	@ResponseBody
+	public Map<String, String> insert(Requests requests, Model model) {
+		Map<String, String> msg = new HashMap<>();
+		
+		try {
+			requestsService.save(requests);
+			msg.put("msg", "新增成功");
+			System.out.println("新增成功");
+		} catch (Exception e) {
+			msg.put("msg", "新增失敗");
+			System.out.println("新增失敗");
+			e.printStackTrace();
+		}
+		return msg;
 	}
 
 	@RequestMapping("/query")
