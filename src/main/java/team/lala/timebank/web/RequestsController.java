@@ -84,11 +84,11 @@ public class RequestsController {
 
 		try {
 			requestsService.save(requests);
-			msg.put("memberInfo", requests);
+			msg.put("requestinfo", requests);
 			msg.put("msg", "資料更新成功");
 			System.out.println("資料更新成功");
 		} catch (Exception e) {
-			msg.put("memberInfo", requests);
+			msg.put("requestinfo", requests);
 			msg.put("msg", "資料更新失敗");
 			System.out.println("資料更新失敗");
 			e.printStackTrace();

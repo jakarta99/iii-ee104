@@ -82,7 +82,6 @@
 	
 	
 	<script>
-
 	function deleteRequest(id) {
 		$.ajax({
 			url : '/request/delete?id=' + id,
@@ -91,6 +90,7 @@
 			success : function(deleteResult) {
 				alert(deleteResult.msg);
 				list();
+				$('#table').DataTable();
 			},
 		})
 	}
@@ -115,40 +115,15 @@
 		        docFragment.append(row);
 			});
 			tb.html(docFragment);
-		});			
-		
-		
-		
-		
-		
-		
+			$('#table').DataTable();
+		});				
 	}
 	
 	$(document).ready( function () {
-		
-//  $('#table').DataTable({
-			 
-// 	         ajax:"../request/query",
-// 	         columns: [
-// 	             { requests: "request.id" },
-// 	             { requests: "request.jobArea" },
-// 	             { requests: "request.jobTitle" },
-// 	             { requests: "request.memberId" }
-// 	             { requests: "request.serviceType" }
-// 	             { requests: "request.termType" }
-// 	             { requests: "request.timeValue" }
-// 	         ]
-//       	 });
-		
 		$.get("/html/nav.html",function(data){
 				$("#navBar").html(data);
-			});
-		
-		
-		list();
-		
-//  		   $('#table').DataTable();
-		
+			});	
+		list();		 				
 	});
 	</script>
 	

@@ -117,16 +117,12 @@
 			dataType : 'JSON',
 			success : function(editResult) {
 				alert(editResult.msg);
+						//editResult.requestinfo
 //					document.location.href = "/time-ledger/list";
 			},
 		})
 	}
 	</script>
-
-
-	
-	
-	
 
 </body>
 </html>
