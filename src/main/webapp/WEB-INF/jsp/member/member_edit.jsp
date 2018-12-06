@@ -40,19 +40,21 @@
 		margin-top: 70px;
 		padding: 10px;
 	}
-	fieldset {
-		width: 800px;
+	article fieldset {
+		width: 500px;
 		border-radius: 20px;
-		padding: 20px;
-		margin: 20px;
+		padding: 20px 20px 0px 20px; 
 		border: 3px double #bebebe;
-		margin: auto
+		margin: auto;
+		margin-top: 10px; 
+		margin-bottom: 20px; 
 	}
 	
 	article input, select, label {
  		padding-left: 10px;  		
-		margin:0px 15px 20px 15px; 
+ 		margin:0px 10px 10px 10px;   
 	}
+	
 	
 
 /* 	設定縣市地區選擇器的css樣式 */
@@ -86,73 +88,86 @@
 			<fieldset>
 				<input type="hidden" value="${member.id}" id="id" name="id" /> 
 				<input type="hidden" value="${member.memberType}" id="memberType" name="memberType" />
-				<div class="form_group row">
-					<label>帳號 :</label> <input type="text" class="form-control"
+				<legend>登入資訊</legend>
+				<div >
+					<label>帳號 :</label> <input type="text" 
 					value="${member.account }" id="account" name="account" readonly><br>
 				</div>
-				<div class="form_group row">
-					<label>密碼 :</label> <input type="text" class="form-control"
+				<div >
+					<label>密碼 :</label> <input type="text" 
 						value="${member.password }" id="password" name="password"><br>
 				</div>
-				<div class="form_group row">
-					<label>名字 :</label> <input type="text" class="form-control"
+			</fieldset>
+			<fieldset>
+			<legend>個人資訊</legend>
+				<div >
+					<label>名字 :</label> <input type="text" 
 						value="${member.name }" id="name" name="name"><br>
 				</div>
 				<fmt:formatDate value="${member.birthDate }" pattern="yyyy/MM/dd" var="birthDate" />
 				<c:choose>
 					<c:when test="${member.memberType eq 'P'}">
-						<div class="form_group row">
-							<label>身分證字號 :</label> <input type="text" class="form-control"
+						<div >
+							<label>身分證字號 :</label> <input type="text" 
 								value="${member.certificateIdNumber }" id="certificateIdNumber"	name="certificateIdNumber"><br>
 						</div>
-						<div class="form_group row">
-							<label>出生日期:</label> <input type="text" class="form-control"
+						<div >
+							<label>出生日期:</label> <input type="text" 
 								value="${birthDate}" id="birthDate" name="birthDate"><br>
 						</div>
 
 					</c:when>
 					<c:when test="${member.memberType eq 'O'}">
-						<div class="form_group row">
+						<div >
 							<label>統一編號 :</label> 
-							<input type="text" class="form-control"	value="${member.certificateIdNumber }" 
+							<input type="text" 	value="${member.certificateIdNumber }" 
 							id="certificateIdNumber" name="certificateIdNumber"><br>
 						</div>
-						<div class="form_group row">
+						<div >
 							<label>創立日期:</label> 
-							<input type="text" class="form-control"
+							<input type="text" 
 								value="${birthDate}" id="birthDate" name="birthDate"><br>
 						</div>
 
 					</c:when>
 				</c:choose>
-				<div class="form_group row">
+				<div >
 
 					<label>email:</label> 
-					<input type="text" class="form-control"
+					<input type="text" 
 						value="${member.email }" id="email" name="email"><br>
 
 				</div>
-				<div class="form_group row">
+				<div >
 
 					<label>住家電話:</label> 
-					<input type="text" class="form-control"
+					<input type="text" 
 						value="${member.telephone }" id="telephone" name="telephone"><br>
 
 				</div>
-				<div class="form_group row">
+				<div >
 
 					<label>手機:</label> 
-					<input type="text" class="form-control"
+					<input type="text" 
 						value="${member.mobile }" id="mobile" name="mobile"><br>
 
 				</div>
-				<div class="form_group row">			
+				<div >			
 					<label>住址:</label> <br>
 					<div role="tw-city-selector" ></div>
-					<input type='text' class="form-control" value='${member.address }'
+					<input type='text'  value='${member.address }'
 						id='address' name='address' /><br>
 				</div>
-				<div class="form_group row">
+				<div >
+					<fmt:formatDate value="${member.signUpDate }" pattern="yyyy/MM/dd"	var="signUpDate" />
+					<label>註冊日期:</label> 
+					<input type="text" 
+						value="${signUpDate}" id="signUpDate" name="signUpDate"><br>
+				</div>
+			</fieldset>
+			<fieldset>
+			<legend>驗證資訊</legend>
+				<div >
 					<label>Email驗證信確認(Y/N):</label>
 					<div>
 						<label>Y</label> 
@@ -163,47 +178,8 @@
 						<input type="radio" value="N" name="emailVerification" /><br>
 					</div>
 				</div>
-				<div class="form_group row">
-					<fmt:formatDate value="${member.signUpDate }" pattern="yyyy/MM/dd"	var="signUpDate" />
-					<label>註冊日期:</label> 
-					<input type="text" class="form-control"
-						value="${signUpDate}" id="signUpDate" name="signUpDate"><br>
-				</div>
 				<c:if test="${member.memberType eq 'O' }">
-					<div class="form_group row">
-
-						<label>創辦人:</label> 
-						<input type="text" class="form-control"
-							value="${member.orgFounder}" id="orgFounder" name="orgFounder"><br>
-
-					</div>
-					<div class="form_group row">
-						<label>執行長: </label> <input type="text" class="form-control"
-							value="${member.orgCeo}" id="orgCeo" name="orgCeo"><br>
-					</div>
-					<div class="form_group row">
-						<label>聯絡人:</label> <input type="text" class="form-control" value="${member.orgContactPerson }" 
-							id="orgContactPerson" name="orgContactPerson"><br>
-					</div>
-					<div class="form_group row">
-						<label>聯絡人電話:</label> 
-						<input type="text" class="form-control" value="${member.orgContactPersonTel }" 
-							id="orgContactPersonTel" name="orgContactPersonTel"><br>
-					</div>
-					<div class="form_group row">
-						<label>聯絡人手機:</label> <input type="text" class="form-control"
-							value="${member.orgContactPersonMobile }" id="orgContactPersonMobile" name="orgContactPersonMobile"><br>
-					</div>
-					<div class="form_group row">
-						<label>網址:</label> <input type="url" class="form-control"	size='50px' 
-							value="${member.orgWebsiteLink }" id="orgWebsiteLink" name="orgWebsiteLink"><br>
-					</div>
-					<div class="form_group row">
-						<label>創立宗旨:</label>
-						<textarea rows="4" column="10" class="form-control" cols="30" id="orgFoundPurpose"
-							 name="orgFoundPurpose">${member.orgFoundPurpose}</textarea>	<br>
-					</div>
-					<div class="form_group row">
+					<div>
 						<label>機構身分驗證 (Y/N): </label>
 						<div>
 							<label>Y</label> 
@@ -214,13 +190,54 @@
 							<input type="radio" value="N" name="orgIdConfirmation" /><br>								
 						</div>
 					</div>
-				</c:if>
-				<div>
-					<input type="button" class="btn btn-primary btn-sm" id="updateButt" value="儲存" /> 
-					<input type="button" class="btn btn-primary btn-sm"
-						onclick="javascript:document.location.href='/member/list'" value="回上一頁" />
-				</div>
+				</c:if>	
 			</fieldset>
+				<c:if test="${member.memberType eq 'O' }">
+				<fieldset>	
+				<legend>其他資訊</legend>
+					<div >
+
+						<label>創辦人:</label> 
+						<input type="text" 
+							value="${member.orgFounder}" id="orgFounder" name="orgFounder"><br>
+
+					</div>
+					<div >
+						<label>執行長: </label> <input type="text" 
+							value="${member.orgCeo}" id="orgCeo" name="orgCeo"><br>
+					</div>
+					<div >
+						<label>聯絡人:</label> <input type="text"  value="${member.orgContactPerson }" 
+							id="orgContactPerson" name="orgContactPerson"><br>
+					</div>
+					<div >
+						<label>聯絡人電話:</label> 
+						<input type="text"  value="${member.orgContactPersonTel }" 
+							id="orgContactPersonTel" name="orgContactPersonTel"><br>
+					</div>
+					<div >
+						<label>聯絡人手機:</label> <input type="text" 
+							value="${member.orgContactPersonMobile }" id="orgContactPersonMobile" name="orgContactPersonMobile"><br>
+					</div>
+					<div >
+						<label>網址:</label> <input type="url" 	size='50px' 
+							value="${member.orgWebsiteLink }" id="orgWebsiteLink" name="orgWebsiteLink"><br>
+					</div>
+					<div >
+						<label>創立宗旨:</label>
+						<textarea rows="5" cols="50"    id="orgFoundPurpose"
+							 name="orgFoundPurpose">${member.orgFoundPurpose}</textarea>	<br>
+					</div>
+					
+					</fieldset>
+				</c:if>
+				<fieldset style="border:none">
+					<div>
+						<input type="button" class="btn btn-primary btn-sm" id="updateButt" value="儲存" /> 
+						<input type="button" class="btn btn-primary btn-sm"
+							onclick="javascript:document.location.href='/member/list'" value="回上一頁" />
+					</div>
+				</fieldset>
 		</form>
 
 	</article>
@@ -233,6 +250,9 @@
 					// 				$("#navBar").html(data);
 					// 			});
 
+					$("form>div").addClass("form-group");
+					$("form>input").addClass("form-control");
+					$("form>textarea").addClass("form-control");
 					new TwCitySelector();
 
 					$('#birthDate').datepicker({

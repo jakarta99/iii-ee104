@@ -185,16 +185,18 @@
 					</div>
 					<div  >
 						<label>創立宗旨:</label>
-						<textarea rows="4" cols="10"  cols="30" id="orgFoundPurpose"
+						<textarea rows="5" cols="50"   id="orgFoundPurpose"
 							 name="orgFoundPurpose">${member.orgFoundPurpose}</textarea>	<br>
 					</div>
 					
 				</fieldset>
 				</c:if>
-				<div>
-					<input type="button" class="btn btn-primary btn-sm" value="確定送出" />
-			        <input type="reset" class="btn btn-primary btn-sm" value="清除重填" />
-				</div>
+				<fieldset style="border:none">
+					<div>
+						<input type="button" class="btn btn-primary btn-sm" value="確定送出" />
+				        <input type="reset" class="btn btn-primary btn-sm" value="清除重填" />
+					</div>
+				</fieldset>
 		</form>
 
 	
@@ -208,6 +210,7 @@
 // 			});
 			$("form>div").addClass("form-group");
 			$("form>input").addClass("form-control");
+			$("form>textarea").addClass("form-control");
 			
 			
 			new TwCitySelector();	
