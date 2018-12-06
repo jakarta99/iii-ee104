@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Requests;
 import team.lala.timebank.service.RequestsService;
+import team.lala.timebank.spec.MemberSpecification;
+import team.lala.timebank.spec.RequestSpecification;
 
 @Controller
 @RequestMapping("/request")
@@ -116,9 +119,17 @@ public class RequestsController {
 
 	@RequestMapping("/query")
 	@ResponseBody
-	public List<Requests> query(Model model) {
-		List<Requests> requests = requestsService.findAll();
+	public List<Requests> query(Requests inputRequests) {
+		RequestSpecification requestSpecification=new RequestSpecification(inputRequests);
+		List<Requests> requests = requestsService.findBySpecification(requestSpecification);
 		return requests;
 	}
+	
+
+		
+		
+		
+		
+	
 
 }

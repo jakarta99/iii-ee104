@@ -55,22 +55,9 @@
 	
 	<h1 class="s2">request list</h1>
 	
-	<fieldset>
-	<form action="/request/query">
-			<label>Id :</label> 
-			<input type="text" value="" placeholder="Id" id="Id" name="Id"/>
-			<label>jobArea :</label> 
-			<input type="text" value="" placeholder="jobArea" id="jobArea" name="jobArea"/>
-			<label>serviceType</label> 
-			<input type="text" value="" placeholder="serviceType" id="serviceType" name="serviceType"/>
-			<label>jobTitle :</label> 
-			<input type="text" value="" placeholder="jobTitle" id="jobTitle" name="jobTitle"/>
-			<label>termType :</label> 
-			<input type="text" value="" placeholder="termType" id="termType" name="termType"/>
-		
-			<input type="submit" value="搜尋" id="searchButton" />
-		</form>
-	</fieldset>
+	
+	
+	
 	
 	<fieldset>
 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/request/add'">add</button>

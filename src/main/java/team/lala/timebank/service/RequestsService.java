@@ -3,10 +3,12 @@ package team.lala.timebank.service;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.RequestsDao;
 import team.lala.timebank.dao.TimeLedgerDao;
+import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Requests;
 
 /**
@@ -20,6 +22,11 @@ public class RequestsService {
 
 	@Autowired
 	private RequestsDao requestsDao;
+	
+	
+	public List<Requests> findBySpecification(Specification<Requests> specification) {
+		return requestsDao.findAll(specification);
+	}
 
 	// update
 	public Requests save(Requests request) {

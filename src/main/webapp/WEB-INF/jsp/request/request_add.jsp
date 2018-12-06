@@ -31,8 +31,8 @@
             text-align: center
         }
          .margintop{
-	 margin-top:70px;
-}
+			 margin-top:70px;
+		}
     </style>
 </head>
 <body>
@@ -87,26 +87,26 @@
 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/request/list'">回列表頁</button>
 	</fieldset>
 	<script>
-function addRequest() {
-	$.ajax({
-		url : '/request/insert',
-		type : 'post',
-		data : $('form').serialize(),
-		dataType : 'JSON',
-		success : function(addResult) {
-			alert(addResult.msg);
-			document.location.href = "/request/add";
-		},
-	})
-}
-$(document).ready(function() {
-	$.get("/html/nav.html",function(data){
-		$("#navBar").html(data);
-	});
-	
-	listTimeLedger();
-
-})
+		function addRequest() {
+			$.ajax({
+				url : '/request/insert',
+				type : 'post',
+				data : $('form').serialize(),
+				dataType : 'JSON',
+				success : function(addResult) {
+					alert(addResult.msg);
+					document.location.href = "/request/add";
+				},
+			})
+		}
+		$(document).ready(function() {
+			$.get("/html/nav.html",function(data){
+				$("#navBar").html(data);
+			});
+			
+			listTimeLedger();
+		
+		})
 
 
 
