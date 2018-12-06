@@ -196,18 +196,18 @@
 				<div class="form_group row">
 					
 						<label >創立宗旨:</label> 
-						<textarea  rows="4" class="form-control" cols="30"  id="orgFoundPurpose" name="orgFoundPurpose">${member.orgFoundPurpose}</textarea><br>		
+						<textarea  rows="4" column="10" class="form-control" cols="30"  id="orgFoundPurpose" name="orgFoundPurpose">${member.orgFoundPurpose}</textarea><br>		
 					
 				</div>					
 				<div class="form_group row">
 					<label>機構身分驗證 (Y/N): </label>
 					<div>					
 						<label>Y</label>
-						<input type="radio"  value="Y" name="orgIDConfirmation" />
+						<input type="radio"  value="Y" name="orgIdConfirmation" />
 					</div>
 					<div>
 						<label>N</label>
-						<input type="radio" value="N" name="orgIDConfirmation" /><br>								
+						<input type="radio" value="N" name="orgIdConfirmation" /><br>								
 					</div>
 				</div>	
 			</c:if>
@@ -247,7 +247,7 @@
 
 			$("div[role='tw-city-selector']").attr("data-county-value",'${member.county}');
 			$("div[role='tw-city-selector']").attr("data-district-value",'${member.district}');
-			$("div[role='tw-city-selector']>select").addClass(".form-control");
+// 			$("div[role='tw-city-selector']>select").addClass(".form-control");
 
 			$("input[name='emailVerification'][value="+ '${member.emailVerification}' +"]").prop("checked",true);
 			if ('${member.memberType }'=='O'){
