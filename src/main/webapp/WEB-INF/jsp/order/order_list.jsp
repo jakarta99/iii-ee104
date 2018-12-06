@@ -39,22 +39,22 @@
 <div>
 	<form>
 		id:
-		<input type="text" value="" id="id" name="id"/><p>
+		<input type="text" value="" id="id" name="id"/><br>
 		
 		supplierId:
-		<input type="text" value="" id="supplierId" name="supplierId"/><p>
+		<input type="text" value="" id="supplierId" name="supplierId"/><br>
 		
 		requesterId:
-		<input type="text" value="" id="requesterId" name="requesterId"/><p>
+		<input type="text" value="" id="requesterId" name="requesterId"/><br>
 		
 		supplierAcception(Y/N):
-		<input type="text" value="" id="supplierAcception" name="supplierAcception"><p>
+		<input type="text" value="" id="supplierAcception" name="supplierAcception"/><br>
 		
 		confirmation(Y/N):
-		<input type="text" value="" id="confirmation" name="confirmation"><p>
+		<input type="text" value="" id="confirmation" name="confirmation"/><br>
 		
 		status:
-		<input type="text" value="" id="status" name="status"><p>
+		<input type="text" value="" id="status" name="status"/><br>
 		
 		<button type="button" onclick="findOrders()" class="btn btn-outline-primary">find</button>
 	</form>
@@ -82,7 +82,6 @@
 	</tbody>
 </table>
 
-<div class="modifyResult"></div>
 
 <script>
 	$(document).ready(function(){
@@ -90,10 +89,8 @@
 	})
 	
 	
-	
-	
 	function findAllOrders(){
-		$("#id").val("");  //如要查全部資料，需先將confirmation的值清空，再呼叫findByConfirmation()
+		$("#id").val("");  
 		$("#supplierId").val("");
 		$("#requesterId").val("");
 		$("#supplierAcception").val("");
@@ -106,7 +103,6 @@
 		$.ajax({
 			url:'/order/query',  
 			type:'post',
-// 			data:'confirmation=' + $("#confirmation").val(), //如未傳入parameter(?confirmation=XXX)，該controller會傳回所有資料
 			data:$('form').serialize(),
 			dataType:'json',
 			success:function(orders){
