@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.MemberDao;
@@ -39,6 +40,10 @@ public class MemberService {
 	public List<Member> findAll() {
 		List<Member> members = memberDao.findAll();
 		return members;
+	}
+	
+	public List<Member> findBySpecification(Specification<Member> specification) {
+		return memberDao.findAll(specification);
 	}
 
 	public Member login(String account, String password) {
