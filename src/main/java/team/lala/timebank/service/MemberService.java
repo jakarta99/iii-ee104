@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +47,14 @@ public class MemberService {
 	public List<Member> findBySpecification(Specification<Member> specification) {
 		return memberDao.findAll(specification);
 	}
+	
+	public Page<Member> findBySpecification(Specification<Member> specification, PageRequest pageRequest) {
+		
+		PageRequest thisPage = new PageRequest(1, 10);
+		
+		return memberDao.findAll(specification, thisPage);
+	}
+	
 
 	public Member login(String account, String password) {
 		Member member = memberDao.findByAccount(account);
