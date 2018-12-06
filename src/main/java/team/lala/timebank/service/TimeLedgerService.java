@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.TimeLedgerDao;
+import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.TimeLedger;
 
 @Service
@@ -109,6 +111,8 @@ public class TimeLedgerService {
 		return timeLedger;
 	}
 	
-	
+	public List<TimeLedger> findBySpecification(Specification<TimeLedger> specification) {
+		return timeLedgerDao.findAll(specification);
+	}
 
 }

@@ -1,14 +1,14 @@
 package team.lala.timebank.dao;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import team.lala.timebank.entity.TimeLedger;
 
-public interface TimeLedgerDao extends JpaRepository<TimeLedger, Long> {
+public interface TimeLedgerDao extends JpaRepository<TimeLedger, Long>, JpaSpecificationExecutor<TimeLedger>  {
 	// 查詢特定會員最近一筆交易紀錄(jasmine)
 	public TimeLedger findTop1ByMemberIdOrderByTransactionTimeDesc(Long memberId);
 

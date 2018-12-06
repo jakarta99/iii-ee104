@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.lala.timebank.entity.TimeLedger;
 import team.lala.timebank.service.TimeLedgerService;
+import team.lala.timebank.spec.TimeLedgerSpecification;
 
 @Controller
 @RequestMapping("/time-ledger")
@@ -21,8 +22,8 @@ public class TimeLedgerRecordController {
 
 	@RequestMapping("/list")
 	public String listPage(Model model) {
-		List<TimeLedger> timeLedgers = timeLedgerService.findAll();
-		model.addAttribute("timeLedgers", timeLedgers);
+//		List<TimeLedger> timeLedgers = timeLedgerService.findAll();
+//		model.addAttribute("timeLedgers", timeLedgers);
 		return "/time_ledger/time-ledger_list";
 	}
 
@@ -85,8 +86,10 @@ public class TimeLedgerRecordController {
 
 	@RequestMapping("/query")
 	@ResponseBody
-	public List<TimeLedger> query(Model model) {
-		List<TimeLedger> timeLedgers = timeLedgerService.findAll();
+	public List<TimeLedger> query(TimeLedger inputTimeLedger) {
+		TimeLedgerSpecification timeLedgerSpecification = new TimeLedgerSpecification(inputTimeLedger);
+		List<TimeLedger> timeLedgers = timeLedgerService.findBySpecification(timeLedgerSpecification);
+		System.out.println("queryTimeLedger=" +timeLedgers);
 		return timeLedgers;
 	}
 }

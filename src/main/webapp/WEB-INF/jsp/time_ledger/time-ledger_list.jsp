@@ -49,6 +49,24 @@ fieldset {
 	<fieldset>
 		<button onclick="javascript:document.location.href='/time-ledger/add'"
 			class="btn btn-outline-secondary">Add</button>
+		<button onclick="findAll()" class="btn btn-outline-secondary">findAll</button>
+		<form>
+			id :
+			<input type="text" value="" placeholder="id" id="id" name="id"/>
+			memberId :
+			<input type="text" value="" placeholder="memberId" id="memberId" name="memberId"/>
+			transactionTime :
+			<input type="text" value="" id="transactionTime" name="transactionTime"/>
+			description:
+			<input type="text" value="" id="description" name="description"/><p>
+			depositValue :
+			<input type="text" value="" id="depositValue" name="depositValue"/>
+			withdrawalValue: 
+			<input type="text" value=""  id="withdrawalValue" name="withdrawalValue"/>
+			balanceValue:
+			<input type="text" value="" id="balanceValue" name="balanceValue"/>
+			<button type="button" onclick="findTimeLedger()" class="btn btn-outline-secondary">search</button>
+		</form>
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -69,26 +87,65 @@ fieldset {
 			<a href='/'><i class="fas fa-home"></i>back to HOME</a>
 		</div>
 	</fieldset>
+	
 	<script>
-		function listTimeLedger() {
-			$("#timeLedgerTbody").text("");
-			$.getJSON("/time-ledger/query", function(data) {
-				$.each(data, function(index, timeLedger) {
-					var editButton = "<input type='button' class=\"btn btn-outline-secondary\"  onclick=\"javascript:document.location.href='/time-ledger/edit?id="
-						+ timeLedger.id	+ "'\" value='Edit'  />";
-					var deleteButton = "<input type='button' class=\"btn btn-outline-secondary\"  onclick=\"deleteTimeLedger("
-						+ timeLedger.id	+ ")\" value='Delete'  />";
-					$("#timeLedgerTbody").append("<tr id='row"+ timeLedger.id +"'><td>"	+ editButton + deleteButton	+ "</td></tr>");
-					var timeLedgerRow = $("#row"+ timeLedger.id);
-					timeLedgerRow.append("<td >"+ timeLedger.id	+ "</td>");
-					timeLedgerRow.append("<td >"+ timeLedger.memberId + "</td>");
-					timeLedgerRow.append("<td >"+ timeLedger.transactionTime + "</td>");
-					timeLedgerRow.append("<td >"+ timeLedger.description + "</td>");
-					timeLedgerRow.append("<td >"+ timeLedger.depositValue + "</td>");
-					timeLedgerRow.append("<td >"+ timeLedger.withdrawalValue + "</td>");
-					timeLedgerRow.append("<td >"+ timeLedger.balanceValue + "</td>");
-				})
+		function findTimeLedger() {
+// 			$("#timeLedgerTbody").text("");
+// 			$.getJSON("/time-ledger/query", $("form").serialize(), function(data) {
+// 				$.each(data, function(index, timeLedger) {
+// 					var editButton = "<button class=\"btn btn-outline-secondary\" onclick=\"javascript:document.location.href='/time-ledger/edit?id="
+// 						+ timeLedger.id	+ "'\">Edit</button>";
+// 					var deleteButton = "<button class=\"btn btn-outline-secondary\" onclick=\"deleteTimeLedger("
+// 						+ timeLedger.id	+ ")\">Delete</button>";
+// 					$("#timeLedgerTbody").append("<tr id='row"+ timeLedger.id +"'><td>"	+ editButton + deleteButton	+ "</td></tr>");
+// 					var timeLedgerRow = $("#row"+ timeLedger.id);
+// 					timeLedgerRow.append("<td >"+ timeLedger.id	+ "</td>");
+// 					timeLedgerRow.append("<td >"+ timeLedger.memberId + "</td>");
+// 					timeLedgerRow.append("<td >"+ timeLedger.transactionTime + "</td>");
+// 					timeLedgerRow.append("<td >"+ timeLedger.description + "</td>");
+// 					timeLedgerRow.append("<td >"+ timeLedger.depositValue + "</td>");
+// 					timeLedgerRow.append("<td >"+ timeLedger.withdrawalValue + "</td>");
+// 					timeLedgerRow.append("<td >"+ timeLedger.balanceValue + "</td>");
+// 				})
+// 			})
+			$.ajax({
+				url:'/time-ledger/query',  
+				type:'post',
+				data:$('form').serialize(),
+				dataType:'json',
+				success:function(data){
+					$("#timeLedgerTbody").text(""); 
+					$.each(data, function(index, timeLedger){
+						var editButton = $("<button class=\"btn btn-outline-secondary\" onclick=\"javascript:document.location.href='/time-ledger/edit?id="
+		 						+ timeLedger.id	+ "'\">Edit</button>");
+						var deleteButton = $("<button class=\"btn btn-outline-secondary\" onclick=\"deleteTimeLedger("
+		 						+ timeLedger.id	+ ")\">Delete</button>");						
+						var button =$("<td></td>").append([editButton, deleteButton]); 
+						
+						var id = $("<td></td>").text(timeLedger.id);					
+						var memberId = $("<td></td>").text(timeLedger.memberId);
+						var transactionTime = $("<td></td>").text(timeLedger.transactionTime);
+						var description = $("<td></td>").text(timeLedger.description);
+						var depositValue = $("<td></td>").text(timeLedger.depositValue);
+						var withdrawalValue = $("<td></td>").text(timeLedger.withdrawalValue);
+						var balanceValue = $("<td></td>").text(timeLedger.balanceValue);
+	
+						var row = $("<tr></tr>").append([button, id, memberId, transactionTime, description, depositValue, withdrawalValue, balanceValue]);
+						$("#timeLedgerTbody").append(row);
+					})
+				}
 			})
+		}
+
+		function findAll(){
+			$("#id").val("");
+			$("#memberId").val("");
+			$("#transactionTime").val("");
+			$("#description").val("");
+			$("#depositValue").val("");
+			$("#withdrawalValue").val("");
+			$("#balanceValue").val("");
+			findTimeLedger();
 		}
 
 		function deleteTimeLedger(id) {
@@ -98,7 +155,7 @@ fieldset {
 				dataType : 'text',
 				success : function(deleteResult) {
 					alert(deleteResult);
-					listTimeLedger();
+					findAll();
 				},
 			})
 		}
@@ -108,8 +165,8 @@ fieldset {
 				$("#navBar").html(data);
 			});
 			
-			listTimeLedger();
-
+			findAll();
+			
 		})
 	</script>
 </body>
