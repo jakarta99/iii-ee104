@@ -55,8 +55,8 @@ fieldset {
 			<input type="text" value="" placeholder="id" id="id" name="id"/>
 			memberId :
 			<input type="text" value="" placeholder="memberId" id="memberId" name="memberId"/>
-			transactionTime :
-			<input type="text" value="" id="transactionTime" name="transactionTime"/>
+<!-- 			transactionTime : -->
+<!-- 			<input type="text" value="" id="transactionTime" name="transactionTime"/> -->
 			description:
 			<input type="text" value="" id="description" name="description"/><p>
 			depositValue :
