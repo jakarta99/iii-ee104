@@ -102,7 +102,7 @@
 			$('#serviceType').val(${request.serviceType})
 			$('#termType').val(${request.termType})
 			$.get("/html/nav.html",function(data){
-				$("#navBar").html(data);
+			$("#navBar").html(data);
 			});
 		});
 		
@@ -113,7 +113,7 @@
 				data : $('form').serialize(),
 				dataType : 'JSON',
 				success : function(editResult) {
-					alert(editResult.msg);
+				alert(editResult.msg);
 				},
 			})
 		}

@@ -94,8 +94,8 @@
 				data : $('form').serialize(),
 				dataType : 'JSON',
 				success : function(addResult) {
-					alert(addResult.msg);
-					document.location.href = "/request/add";
+				alert(addResult.msg);
+				document.location.href = "/request/add";
 				},
 			})
 		}

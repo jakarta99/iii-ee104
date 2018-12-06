@@ -56,7 +56,7 @@
 	<h1 class="s2">request list</h1>
 	
 	<fieldset>
-	<form action="/request/query">
+	<form  action="/request/query" method="post">
 			<label>Id :</label> 
 			<input type="text" value="" placeholder="Id" id="Id" name="Id"/>
 			<label>jobArea :</label> 
@@ -67,8 +67,8 @@
 			<input type="text" value="" placeholder="jobTitle" id="jobTitle" name="jobTitle"/>
 			<label>termType :</label> 
 			<input type="text" value="" placeholder="termType" id="termType" name="termType"/>
-		
-			<input type="submit" value="搜尋" id="searchButton" />
+			<input type="submit" value="搜尋" id="searchButton" onclick="search()"/>
+			
 		</form>
 	</fieldset>
 	
@@ -96,14 +96,27 @@
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 		
 	<script>
+	function search() {
+		$.ajax({
+			url :'/request/query',
+			type : 'post',
+			dataType :'JSON',
+			success : function() {			
+ 			list();
+			},
+		})	
+	}
+	
+	
+	
 	function deleteRequest(id) {
 		$.ajax({
 			url : '/request/delete?id=' + id,
 			type : 'delete',
 			dataType : 'JSON',
 			success : function(deleteResult) {
-				alert(deleteResult.msg);
-				list();
+			alert(deleteResult.msg);
+			list();
 			},
 		})
 	}
