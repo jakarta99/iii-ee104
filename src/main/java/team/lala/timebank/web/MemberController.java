@@ -30,7 +30,7 @@ public class MemberController {
 	private AreaService areaService;
 
 	@RequestMapping("/list")
-	public String listMember(Model model) {
+	public String listPage(Model model) {
 		List<Member> members = memberService.findAll();
 		model.addAttribute("members", members);
 		return "/member/member_list";
@@ -38,14 +38,14 @@ public class MemberController {
 	}
 
 	@RequestMapping("/add")
-	public String addMember(@RequestParam("memberType") MemberType memberType, Model model) {
+	public String addPage(@RequestParam("memberType") MemberType memberType, Model model) {
 		model.addAttribute("memberType", memberType);
 		return "/member/member_add";
 
 	}
 
 	@RequestMapping("/edit")
-	public String editMember(@RequestParam("id") Long id, Model model) {
+	public String editPage(@RequestParam("id") Long id, Model model) {
 		Member member = memberService.getOne(id);
 		model.addAttribute("member", member);
 		return "/member/member_edit";
@@ -54,7 +54,7 @@ public class MemberController {
 	
 	@RequestMapping("/query")
 	@ResponseBody
-	public List<Member> queryMember(){
+	public List<Member> queryPage(){
 		List<Member> members = memberService.findAll();
 		return members;
 	}
