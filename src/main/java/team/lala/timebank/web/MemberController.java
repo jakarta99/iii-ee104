@@ -54,6 +54,7 @@ public class MemberController {
 	@RequestMapping("/query")
 	@ResponseBody
 	public List<Member> queryMember(Member inputMember){
+		System.out.println("inputmember" + inputMember);
 		MemberSpecification memberSpec = new MemberSpecification(inputMember);
 		List<Member> members = memberService.findBySpecification(memberSpec);
 		System.out.println("queryMember=" +members);
