@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import team.lala.timebank.entity.Area;
+import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.enums.MemberType;
 import team.lala.timebank.enums.YesNo;
@@ -110,22 +110,26 @@ public class MemberController {
 
 	@RequestMapping("/insert")
 	@ResponseBody
-	public Map<String, String> insertMember(Member member, Model model) {
-		Map<String, String> msg = new HashMap<>();
-		 System.out.println("member = " + member);
+	public AjaxResponse<Member> insertMember(Member member, Model model) {
+		
+		System.out.println("member = " + member);
+		AjaxResponse<Member> response = new AjaxResponse<Member>();
+		
 		member.setSignUpDate(new Date());
 		member.setEmailVerification(YesNo.N);
 		member.setOrgIdConfirmation(YesNo.N);
+		
+		
 		try {
 			memberService.save(member);
-			msg.put("msg", "新增成功");
+			
 			System.out.println("新增成功");
 		} catch (Exception e) {
-			msg.put("msg", "新增失敗");
+			response.addMessage("新增失敗" + e.getMessage());
 			System.out.println("新增失敗");
 			e.printStackTrace();
 		}
-		return msg;
+		return response;
 	}
 
 	@RequestMapping("/delete")

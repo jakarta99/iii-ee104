@@ -231,8 +231,16 @@
 					dataType: "json",        
 					url:"/member/insert",
 					data: $("form").serialize()
-				}).done(function(data){
-					alert(data.msg);
+				}).done(function(response){
+					alert(response.obj);
+					if(response.status == "SUCCESS") {
+						alert("Insert Success.....");
+					} else {
+						$.each(response.messages, function(idx, message) {
+							alert("the "+idx+"th ERROR, because "+message);
+						});
+					}
+					
 					window.location.replace("/member/list");
 				})
 			})
