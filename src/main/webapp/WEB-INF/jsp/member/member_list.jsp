@@ -96,6 +96,7 @@
 					memberRow.append("<td >"+member.mobile+"</td>");
 					memberRow.append("<td >"+ member.county + member.district + member.address +"</td>");		
 					memberRow.append("<td >"+ new Date(member.signUpDate).toLocaleDateString()+"</td>");
+// 					memberRow.append("<td >"+ member.signUpDate +"</td>");
 											
 				})
 			})

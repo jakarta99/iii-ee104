@@ -112,7 +112,7 @@ public class MemberController {
 	@ResponseBody
 	public Map<String, String> insertMember(Member member, Model model) {
 		Map<String, String> msg = new HashMap<>();
-		// System.out.println("member = " + member);
+		 System.out.println("member = " + member);
 		member.setSignUpDate(new Date());
 		member.setEmailVerification(YesNo.N);
 		member.setOrgIdConfirmation(YesNo.N);

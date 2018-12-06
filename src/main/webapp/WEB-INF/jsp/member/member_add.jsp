@@ -34,13 +34,42 @@
 
 
 <style>
-	 article{
-	 	margin-top:70px;
-	 }
-	article input,select,label{ 
- 		margin-bottom:20px;
- 		margin-left:15px; 
-	} 
+	article {
+		margin-top: 70px;
+		padding: 10px;
+	}
+	
+	article fieldset {
+		width: 500px;
+		border-radius: 20px;
+		padding: 20px 20px 0px 20px; 
+		border: 3px double #bebebe;
+		margin: auto;
+		margin-top: 10px; 
+		margin-bottom: 20px; 
+	}
+	
+	article input, select, label {
+ 		padding-left: 10px;  		
+ 		margin:0px 10px 10px 10px;   
+	}
+	
+
+/* 	設定縣市地區選擇器的css樣式 */
+	.county,.district {
+	  padding: 0.375rem 0.75rem;
+	  font-size: 1rem;
+	  line-height: 1.5;
+	  color: #495057;
+	  background-color: #fff;
+	  background-image: none;
+	  background-clip: padding-box;
+	  border: 1px solid #ced4da;
+	  border-radius: 0.25rem;
+	  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	}
+	
+	
 	
 </style>
 
@@ -51,68 +80,123 @@
 	<article>
 		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/member/list'" value="回會員列表"  />
 		<h2>Member Add</h2>
-		<form action="" method="post">	
-			<input type="hidden" value="" id="id" name="id"/>
-			<input type="hidden" value="${memberType}" id="memberType" name="memberType"/><br>
-			<label>帳號 :</label> 
-			<input type="text" value="${param.account }" id="account" name="account" ><br> 
-			<label>密碼 :</label> 
-			<input type="password" value="${param.password }" id="password" name="password"><br>
-			<label>名字 :</label> 
-			<input type="text" value="${param.name }" id="name" name="name"><br>
-			
-			<c:choose>
-				<c:when test="${memberType eq 'P'}">					
-					<label>身分證字號 :</label> 
-					<input type="text" value="${param.certificateIdNumber }" id="certificateIdNumber" name="certificateIdNumber"><br>
-					<label>出生日期:</label> 
-					<input type="text" value="${param.birthDate }" id="birthDate" name="birthDate"><br> 			
-				</c:when>
-				<c:when test="${memberType eq 'O'}">
-					<label>統一編號 :</label> 
-					<input type="text" value="${param.certificateIdNumber }" id="certificateIdNumber" name="certificateIdNumber"><br>
-					<label>創立日期:</label> 
-					<input type="text" value="${param.birthDate }" id="birthDate" name="birthDate"><br>
-							
-				</c:when>
-			</c:choose>
-			
-			
-			<label>email:</label> 
-			<input type="email" value="${param.email }" id="email" name="email"><br>
-			<label>住家電話:</label> 
-			<input type="text" value="${param.telephone }" id="telephone" name="telephone"><br>
-			<label>手機:</label> 
-			<input type="text" value="${param.mobile }" id="mobile" name="mobile"><br>
-			<label>住址:</label>
-			<div role="tw-city-selector">
-			</div>
-			<input type='text' value='${param.address}' id='address' name='address' /><br>
-		
-			<c:if test="${memberType eq 'O' }">
-				<label>創辦人:</label> 
-				<input type="text" value="${param.orgFounder }" id="orgFounder" name="orgFounder"><br>
-				<label>執行長:</label> 
-				<input type="text" value="${param.orgCeo }" id="orgCeo" name="orgCeo"><br>
-				<label>聯絡人:</label> 
-				<input type="text" value="${param.orgContactPerson }" id="orgContactPerson" name="orgContactPerson"><br>
-				<label>聯絡人電話:</label> 
-				<input type="text" value="${param.orgContactPersonTel }" id="orgContactPersonTel" name="orgContactPersonTel"><br>
-				<label>聯絡人手機:</label> 
-				<input type="text" value="${param.orgContactPersonMobile }" id="orgContactPersonMobile" name="orgContactPersonMobile"><br>
+		<form action="#" method="post" >
+			<fieldset>
+				<legend>登入資訊</legend>
+				<input type="hidden" value="" id="id" name="id" /> 
+				<input type="hidden" value="${memberType}" id="memberType" name="memberType" />
+				<div >
+					<label>帳號 :</label> <input type="text" 
+					value="${param.account }" id="account" name="account" ><br>
+				</div>
+				<div >
+					<label>密碼 :</label> <input type="text" 
+						value="${param.password }" id="password" name="password"><br>
+				</div>
+			</fieldset>
+			<fieldset>	
+				<legend>個人資訊</legend>
+				<div  >
+					<label>名字 :</label> <input type="text" 
+						value="${param.name }" id="name" name="name"><br>
+				</div>
 				
-				<label>網址:</label> 
-				<input type="url" value="${param.orgWebsiteLink }" id="orgWebsiteLink" name="orgWebsiteLink"><br>
-				<label>創立宗旨:</label> 
-				<textarea  rows="4" cols="30"  id="orgFoundPurpose" name="orgFoundPurpose">${param.orgFoundPurpose}</textarea><br>
-				
-				
-			</c:if>
-			
-			<input type="button" class="btn btn-primary btn-sm" value="確定送出" />
-			<input type="reset" class="btn btn-primary btn-sm" value="清除重填" />
-			
+				<c:choose>
+					<c:when test="${memberType eq 'P'}">
+						<div  >
+							<label>身分證字號 :</label> <input type="text" 
+								value="${param.certificateIdNumber }" id="certificateIdNumber"	name="certificateIdNumber"><br>
+						</div>
+						<div  >
+							<label>出生日期:</label> <input type="text" 
+								value="${param.birthDate}" id="birthDate" name="birthDate"><br>
+						</div>
+
+					</c:when>
+					<c:when test="${memberType eq 'O'}">
+						<div  >
+							<label>統一編號 :</label> 
+							<input type="text" 	value="${param.certificateIdNumber }" 
+							id="certificateIdNumber" name="certificateIdNumber"><br>
+						</div>
+						<div  >
+							<label>創立日期:</label> 
+							<input type="text" 
+								value="${param.birthDate}" id="birthDate" name="birthDate"><br>
+						</div>
+
+					</c:when>
+				</c:choose>
+				<div  >
+
+					<label>email:</label> 
+					<input type="text" 
+						value="${param.email }" id="email" name="email"><br>
+
+				</div>
+				<div  >
+
+					<label>住家電話:</label> 
+					<input type="text" 
+						value="${param.telephone }" id="telephone" name="telephone"><br>
+
+				</div>
+				<div  >
+
+					<label>手機:</label> 
+					<input type="text" 
+						value="${param.mobile }" id="mobile" name="mobile"><br>
+
+				</div>
+				<div  >			
+					<label>住址:</label> <br>
+					<div role="tw-city-selector" ></div>
+					<input type='text'  value='${param.address }'
+						id='address' name='address' /><br>
+				</div>
+			</fieldset>
+				<c:if test="${memberType eq 'O' }">
+				<fieldset>
+					<div  >
+						<label>創辦人:</label> 
+						<input type="text" 
+							value="${param.orgFounder}" id="orgFounder" name="orgFounder"><br>
+					</div>
+					<div  >
+						<label>執行長: </label> <input type="text" 
+							value="${param.orgCeo}" id="orgCeo" name="orgCeo"><br>
+					</div>
+					<div  >
+						<label>聯絡人:</label> <input type="text"  value="${param.orgContactPerson }" 
+							id="orgContactPerson" name="orgContactPerson"><br>
+					</div>
+					<div  >
+						<label>聯絡人電話:</label> 
+						<input type="text"  value="${param.orgContactPersonTel }" 
+							id="orgContactPersonTel" name="orgContactPersonTel"><br>
+					</div>
+					<div  >
+						<label>聯絡人手機:</label> <input type="text" 
+							value="${param.orgContactPersonMobile }" id="orgContactPersonMobile" name="orgContactPersonMobile"><br>
+					</div>
+					<div  >
+						<label>網址:</label> <input type="url" 	size='50px' 
+							value="${param.orgWebsiteLink }" id="orgWebsiteLink" name="orgWebsiteLink"><br>
+					</div>
+					<div  >
+						<label>創立宗旨:</label>
+						<textarea rows="4" cols="10"  cols="30" id="orgFoundPurpose"
+							 name="orgFoundPurpose">${member.orgFoundPurpose}</textarea>	<br>
+					</div>
+					
+				</fieldset>
+				</c:if>
+				<div>
+					<input type="button" class="btn btn-primary btn-sm" value="確定送出" />
+			        <input type="reset" class="btn btn-primary btn-sm" value="清除重填" />
+				</div>
 		</form>
+
 	
 	</article>
 	
@@ -122,6 +206,8 @@
 // 			$.get("/html/nav.html",function(data){
 // 				$("#navBar").html(data);
 // 			});
+			$("form>div").addClass("form-group");
+			$("form>input").addClass("form-control");
 			
 			
 			new TwCitySelector();	

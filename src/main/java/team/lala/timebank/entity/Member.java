@@ -39,7 +39,7 @@ public class Member {
 	@Column(name="CERTIFICATE_ID_NUMBER")
 	private String certificateIdNumber;
 	
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+//	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@Column(name="BIRTH_DATE")
 	private Date birthDate;
 	
