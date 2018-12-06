@@ -10,8 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.persistence.Transient;
 
 import team.lala.timebank.enums.MemberType;
 import team.lala.timebank.enums.YesNo;
@@ -67,7 +66,12 @@ public class Member {
 
 	@Column(name = "SIGN_UP_DATE")
 	private Date signUpDate;
-
+	@Transient
+	private Date signUpDateStart;
+	@Transient
+	private Date signUpDateEnd;
+	
+	
 	@Column(name = "ORG_FOUNDER")
 	private String orgFounder;
 
@@ -207,6 +211,22 @@ public class Member {
 
 	public Date getSignUpDate() {
 		return signUpDate;
+	}
+
+	public Date getSignUpDateStart() {
+		return signUpDateStart;
+	}
+
+	public void setSignUpDateStart(Date signUpDateStart) {
+		this.signUpDateStart = signUpDateStart;
+	}
+
+	public Date getSignUpDateEnd() {
+		return signUpDateEnd;
+	}
+
+	public void setSignUpDateEnd(Date signUpDateEnd) {
+		this.signUpDateEnd = signUpDateEnd;
 	}
 
 	public void setSignUpDate(Date signUpDate) {

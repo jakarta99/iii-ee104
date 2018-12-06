@@ -18,6 +18,7 @@ import team.lala.timebank.enums.MemberType;
 import team.lala.timebank.enums.YesNo;
 import team.lala.timebank.service.AreaService;
 import team.lala.timebank.service.MemberService;
+import team.lala.timebank.spec.MemberSpecification;
 
 @Controller
 @RequestMapping("/member")
@@ -26,9 +27,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-	@Autowired
-	private AreaService areaService;
-
+	
 	@RequestMapping("/list")
 	public String listPage(Model model) {
 		List<Member> members = memberService.findAll();
@@ -54,8 +53,10 @@ public class MemberController {
 	
 	@RequestMapping("/query")
 	@ResponseBody
-	public List<Member> queryPage(){
-		List<Member> members = memberService.findAll();
+	public List<Member> queryMember(Member inputMember){
+		MemberSpecification memberSpec = new MemberSpecification(inputMember);
+		List<Member> members = memberService.findBySpecification(memberSpec);
+		System.out.println("queryMember=" +members);
 		return members;
 	}
 	

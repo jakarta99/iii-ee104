@@ -21,6 +21,11 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous">
+<!-- date picker -->
+<script type="text/javascript" src="/js/moment.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
+<script src="/js/locales/bootstrap-datepicker.zh-TW.js"></script>
+<link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 
 
 <style>
@@ -48,6 +53,18 @@
 	<article>
 		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
 		<h2>Member List</h2>
+		
+		<form action="#">
+			<label>名字 :</label> 
+			<input type="text" value="" placeholder="名字" id="name" name="name"/>
+			<label>帳號 :</label> 
+			<input type="text" value="" placeholder="帳號" id="account" name="account"/>
+			<label>註冊起始日期 :</label> 
+			<input type="text" value=""  id="signUpDateStart" name="signUpDateStart"/>
+			<input type="text" value="" id="signUpDateEnd" name="signUpDateEnd"/>
+			<input type="submit" value="搜尋" id="searchButt" />
+		</form>
+		
 		<table  class="table table-striped table-bordered">
 			<tr>
 				<button class="btn btn-primary btn-sm"
@@ -105,13 +122,22 @@
 	
 		
 		$(document).ready(function(){
-			//add nav.html
-// 			$.get("/html/nav.html",function(data){
-// 				$("#navBar").html(data);
-// 			});
+			$('#signUpDateStart').datepicker({
+				format : "yyyy/mm/dd",
+				autoclose : true,
+				calendarWeeks : true,
+				todayHighlight : true,
+				language : 'zh-TW'
+			})
+			$('#signUpDateEnd').datepicker({
+						format : "yyyy/mm/dd",
+						autoclose : true,
+						calendarWeeks : true,
+						todayHighlight : true,
+						language : 'zh-TW'
+					})
 			
-			
-			listMember();
+// 			listMember();
 			
 			//將deleteButt綁定click事件
 			$("#memberTableBody").on("click", "input[value='刪除']", function(){
@@ -129,8 +155,31 @@
 				
 				
 			})
+			
+			$("#searchButt").on("click", function(){
+				var memberId = $(this).attr("id").substring(10);
+				$.getJSON("/member/query", $("form").serialize(),function(data){
+					$.each(data, function(idx, member){
+						var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/member/edit?id="+member.id+"'\" value='修改'  />";
+						var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" id='deleteButt"+ member.id +"' value='刪除' />"
+						$("#memberTableBody").append("<tr id='row"+ member.id +"'><td>"+editButt + deleteButt+"</td></tr>");					
+						var memberRow = $("#row"+member.id);
+						memberRow.append("<td >"+member.account+"</td>");
+						memberRow.append("<td >"+member.name+"</td>");
+						memberRow.append("<td >"+member.memberType+"</td>");
+						memberRow.append("<td >"+member.email+"</td>");
+						memberRow.append("<td >"+member.mobile+"</td>");
+						memberRow.append("<td >"+ member.county + member.district + member.address +"</td>");		
+						memberRow.append("<td >"+ new Date(member.signUpDate).toLocaleDateString()+"</td>");
+//	 					memberRow.append("<td >"+ member.signUpDate +"</td>");
+												
+					})
+				})
+				
+				
+			})
 
-
+		
 			
 			
 			
