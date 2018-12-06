@@ -3,12 +3,14 @@ package team.lala.timebank.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
+import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.enums.YesNo;
 
-public interface OrderDao extends JpaRepository<Order,Long>{
+public interface OrderDao extends JpaRepository<Order,Long>, JpaSpecificationExecutor<Order>{
 	//Jasmine
 	//透過志工會員id查詢所有申請及目前審核狀態 (流程：志工申請提供服務的紀錄)
 	public List<Order> findBySupplierId(Long supplierId);

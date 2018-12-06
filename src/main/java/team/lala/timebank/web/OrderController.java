@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.lala.timebank.entity.Order;
-import team.lala.timebank.enums.YesNo;
 import team.lala.timebank.service.OrderService;
-import team.lala.timebank.service.RequestsService;
+import team.lala.timebank.spec.OrderSpecification;
 
 @Controller
 @RequestMapping("/order")
@@ -31,17 +30,32 @@ public class OrderController {
 	
 	@RequestMapping("/query")
 	@ResponseBody
-	public List<Order> queryOrder(@RequestParam("confirmation") YesNo confirmation){
-//		System.out.println("confirmation=" + confirmation);
-		
-		if(confirmation != null) {
-			List<Order> orders = orderService.findByConfirmation(confirmation);
-			return orders;
+	public List<Order> queryOrder(Order order){
+		if(order != null) {
+			System.out.println("order not null");
+		}else {
+			System.out.println("NULL");
 		}
-		
-		List<Order> orders = orderService.findAll();
-		return orders;  //回傳json
+		OrderSpecification orderSpecification = new OrderSpecification(order);
+		List<Order> orders = orderService.findBySpecification(orderSpecification);
+		return orders;
+
 	}
+	
+	
+//	@RequestMapping("/query")
+//	@ResponseBody
+//	public List<Order> queryOrder(@RequestParam("confirmation") YesNo confirmation){
+////		System.out.println("confirmation=" + confirmation);
+//		
+//		if(confirmation != null) {
+//			List<Order> orders = orderService.findByConfirmation(confirmation);
+//			return orders;
+//		}
+//		
+//		List<Order> orders = orderService.findAll();
+//		return orders;  //回傳json
+//	}
 	
 
 

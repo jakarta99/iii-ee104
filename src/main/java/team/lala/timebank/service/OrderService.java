@@ -1,10 +1,10 @@
 package team.lala.timebank.service;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.OrderDao;
@@ -16,6 +16,12 @@ public class OrderService {
 	
 	@Autowired
 	private OrderDao orderDao;
+	
+	
+	
+	public List<Order> findBySpecification(Specification<Order> specification){
+		return orderDao.findAll(specification);
+	}
 	
 	public List<Order> findAll() {
 		List<Order> orders = orderDao.findAll();

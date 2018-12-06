@@ -35,17 +35,31 @@
 	find all orders:
 	<button onclick="findAllOrders()">findAllOrders</button>
 </div>
+<hr>
 <div>
-	find by confirmation(Y/N):
-
-		<select id="confirmation">
-			<option value=""></option>　
-			<option value="Y">Y</option>
-			<option value="N">N</option>
-		</select>
-
-	<button onclick="findByConfirmation()">find</button>
+	<form>
+		id:
+		<input type="text" value="" id="id" name="id"/><p>
+		
+		supplierId:
+		<input type="text" value="" id="supplierId" name="supplierId"/><p>
+		
+		requesterId:
+		<input type="text" value="" id="requesterId" name="requesterId"/><p>
+		
+		supplierAcception(Y/N):
+		<input type="text" value="" id="supplierAcception" name="supplierAcception"><p>
+		
+		confirmation(Y/N):
+		<input type="text" value="" id="confirmation" name="confirmation"><p>
+		
+		status:
+		<input type="text" value="" id="status" name="status"><p>
+		
+		<button type="button" onclick="findOrders()" class="btn btn-outline-primary">find</button>
+	</form>
 </div>
+
 <hr>
 
 
@@ -75,16 +89,25 @@
 		findAllOrders();
 	})
 	
+	
+	
+	
 	function findAllOrders(){
-		$("#confirmation").val("");  //如要查全部資料，需先將confirmation的值清空，再呼叫findByConfirmation()
-		findByConfirmation();
+		$("#id").val("");  //如要查全部資料，需先將confirmation的值清空，再呼叫findByConfirmation()
+		$("#supplierId").val("");
+		$("#requesterId").val("");
+		$("#supplierAcception").val("");
+		$("#confirmation").val("");
+		$("#status").val("");
+		findOrders();
 	}
 	
-	function findByConfirmation(){
+	function findOrders(){
 		$.ajax({
 			url:'/order/query',  
-			type:'get',
-			data:'confirmation=' + $("#confirmation").val(), //如未傳入parameter(?confirmation=XXX)，該controller會傳回所有資料
+			type:'post',
+// 			data:'confirmation=' + $("#confirmation").val(), //如未傳入parameter(?confirmation=XXX)，該controller會傳回所有資料
+			data:$('form').serialize(),
 			dataType:'json',
 			success:function(orders){
 				$("tbody").text(""); 
@@ -111,7 +134,7 @@
 	}
 	
 	
-	function deleteOrder(orderId){  //delBtn的onclick會呼叫此方法，並傳入參數
+	function deleteOrders(orderId){  //delBtn的onclick會呼叫此方法，並傳入參數
 		$.ajax({
 			url:'/order/delete?id=' + orderId,
 			type:'delete',
@@ -122,6 +145,10 @@
 			},
 		})
 	}
+	
+	
+
+	
 
 </script>
 
