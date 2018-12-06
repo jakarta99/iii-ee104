@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.service.PenaltyService;
+import team.lala.timebank.spec.PenaltySpecification;
 
 @Controller
 @RequestMapping("/penalty")
@@ -23,10 +24,10 @@ public class PenaltyController {
 
 	@RequestMapping("/add")
 	public String add() {
-	return "/penalty/penalty_add";
+		return "/penalty/penalty_add";
 
 	}
-	
+
 	@RequestMapping("/edit")
 	public String edit(@RequestParam("id") Long id, Model model) {
 		Penalty penalty = penaltyService.getOne(id);
@@ -34,7 +35,7 @@ public class PenaltyController {
 		return "/penalty/penalty_edit";
 
 	}
-	
+
 	@RequestMapping("/update")
 	@ResponseBody
 	public Map<String, String> update(Penalty penalty, Model model) {
@@ -51,7 +52,7 @@ public class PenaltyController {
 		}
 		return msg;
 	}
-	
+
 	@RequestMapping("/insert")
 	@ResponseBody
 	public Map<String, String> insert(Penalty penalty) {
@@ -62,33 +63,35 @@ public class PenaltyController {
 		} catch (Exception e) {
 			msg.put("msg", "新增失敗");
 			e.printStackTrace();
-		}	
+		}
 		return msg;
 	}
 
 	@RequestMapping("/delete")
 	@ResponseBody
 	public Map<String, String> delete(@RequestParam("id") Long id) {
-		Map<String, String> msg = new HashMap<>();	
+		Map<String, String> msg = new HashMap<>();
 		try {
 			penaltyService.delete(id);
 			msg.put("msg", "刪除成功");
 		} catch (Exception e) {
 			msg.put("msg", "刪除失敗");
 			e.printStackTrace();
-		} 
-			return msg;			
+		}
+		return msg;
 	}
-	
+
 	@RequestMapping("/list")
 	public String list() {
 		return "/penalty/penalty_list";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/getList")
-	public List<Penalty> getList() {
-		List<Penalty> penalties = penaltyService.findAll();
+	public List<Penalty> getList(Penalty inputPenalty) {
+		PenaltySpecification penaltySpec = new PenaltySpecification(inputPenalty);
+		List<Penalty> penalties = penaltyService.findBySpecification(penaltySpec);
+		System.out.println(penalties);
 		return penalties;
 
 	}

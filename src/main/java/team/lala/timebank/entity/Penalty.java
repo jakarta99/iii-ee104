@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "PENALTY")
@@ -35,6 +36,12 @@ public class Penalty {
 
 	@Column(name = "penalty_time_value")
 	private Integer penaltyTimeValue;
+	
+	@Transient
+	private LocalDateTime dateBefore;
+
+	@Transient
+	private LocalDateTime dateAfter;
 
 	public String toString() {
 		return "Penalty [id=" + id + ", orderListId=" + orderListId + ", memberId=" + memberId + ", updateDate="
@@ -96,6 +103,22 @@ public class Penalty {
 
 	public void setPenaltyTimeValue(Integer penaltyTimeValue) {
 		this.penaltyTimeValue = penaltyTimeValue;
+	}
+	
+	public LocalDateTime getDateBefore() {
+		return dateBefore;
+	}
+	
+	public void setDateBefore(LocalDateTime dateBefore) {
+		this.dateBefore = dateBefore;
+	}
+	
+	public LocalDateTime getDateAfter() {
+		return dateAfter;
+	}
+	
+	public void setDateAfter(LocalDateTime dateAfter) {
+		this.dateAfter = dateAfter;
 	}
 
 }
