@@ -56,12 +56,12 @@
 		
 		<form action="#">
 			<label>名字 :</label> 
-			<input type="text" value="" placeholder="名字" id="name" name="name"/>
+			<input type="text" value="${param.name }" placeholder="名字" id="name" name="name"/>
 			<label>帳號 :</label> 
-			<input type="text" value="" placeholder="帳號" id="account" name="account"/>
+			<input type="text" value="${param.account }" placeholder="帳號" id="account" name="account"/>
 			<label>註冊起始日期 :</label> 
-			<input type="text" value=""  id="signUpDateStart" name="signUpDateStart"/>
-			<input type="text" value="" id="signUpDateEnd" name="signUpDateEnd"/>
+			<input type="text" value="${param.signUpDateStart }"  id="signUpDateStart" name="signUpDateStart"/>
+			<input type="text" value="${param.signUpDateEnd }" id="signUpDateEnd" name="signUpDateEnd"/>
 			<input type="submit" value="搜尋" id="searchButt" />
 		</form>
 		
@@ -127,14 +127,16 @@
 				autoclose : true,
 				calendarWeeks : true,
 				todayHighlight : true,
-				language : 'zh-TW'
+				language : 'zh-TW',
+				clearBtn:true
 			})
 			$('#signUpDateEnd').datepicker({
 						format : "yyyy/mm/dd",
 						autoclose : true,
 						calendarWeeks : true,
 						todayHighlight : true,
-						language : 'zh-TW'
+						language : 'zh-TW',
+						clearBtn:true
 					})
 			
 // 			listMember();
@@ -151,13 +153,11 @@
 				.done(function(data){
 					alert(data.msg);
 					listMember();
-				})
-				
-				
+				})			
 			})
 			
-			$("#searchButt").on("click", function(){
-				var memberId = $(this).attr("id").substring(10);
+			$("#searchButt").click(function() {
+				$("#memberTableBody").text("");
 				$.getJSON("/member/query", $("form").serialize(),function(data){
 					$.each(data, function(idx, member){
 						var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/member/edit?id="+member.id+"'\" value='修改'  />";
@@ -171,14 +171,13 @@
 						memberRow.append("<td >"+member.mobile+"</td>");
 						memberRow.append("<td >"+ member.county + member.district + member.address +"</td>");		
 						memberRow.append("<td >"+ new Date(member.signUpDate).toLocaleDateString()+"</td>");
-//	 					memberRow.append("<td >"+ member.signUpDate +"</td>");
-												
+//	 					memberRow.append("<td >"+ member.signUpDate +"</td>");												
 					})
 				})
-				
-				
 			})
 
+			
+		
 		
 			
 			

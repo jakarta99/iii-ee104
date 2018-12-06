@@ -37,10 +37,16 @@ public class MemberSpecification implements Specification<Member> {
 			list.add(cb.equal(root.get("account").as(String.class), inputMember.getAccount()));
 		}
 		
-		if (!StringUtils.isEmpty(inputMember.getSignUpDateStart()) && !StringUtils.isEmpty(inputMember.getSignUpDateEnd())) {
-			list.add(cb.between(root.get("signUpDateStart").as(Date.class),root.get("signUpDateStart").as(Date.class),
-					root.get("signUpDateEnd").as(Date.class)));
+		if (inputMember.getSignUpDateStart()!= null ) {
+			list.add(cb.greaterThanOrEqualTo(root.get("signUpDate").as(Date.class), inputMember.getSignUpDateStart()));
 		}
+		if (inputMember.getSignUpDateEnd()!= null) {
+			list.add(cb.lessThanOrEqualTo(root.get("signUpDate").as(Date.class), inputMember.getSignUpDateEnd()));					
+		}
+		
+		
+		
+		
         Predicate[] p = new Predicate[list.size()];  
 
         return cb.and(list.toArray(p));  
