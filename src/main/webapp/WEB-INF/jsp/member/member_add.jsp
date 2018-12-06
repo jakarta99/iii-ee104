@@ -23,6 +23,12 @@
 	crossorigin="anonymous">
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
+<!-- date picker -->
+<script type="text/javascript" src="/js/moment.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
+<script src="/js/locales/bootstrap-datepicker.zh-TW.js"></script>
+<link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />      
+
 
 
 
@@ -54,19 +60,19 @@
 			<input type="password" value="${param.password }" id="password" name="password"><br>
 			<label>名字 :</label> 
 			<input type="text" value="${param.name }" id="name" name="name"><br>
+			
 			<c:choose>
 				<c:when test="${memberType eq 'P'}">					
 					<label>身分證字號 :</label> 
 					<input type="text" value="${param.certificateIdNumber }" id="certificateIdNumber" name="certificateIdNumber"><br>
-<!-- 					<label>出生日期:</label>  -->
-<%-- 					<input type="text" value="${param.birthDate }" id="birthDate" name="birthDate"><br>  --%>
-							
+					<label>出生日期:</label> 
+					<input type="text" value="${param.birthDate }" id="birthDate" name="birthDate"><br> 			
 				</c:when>
 				<c:when test="${memberType eq 'O'}">
 					<label>統一編號 :</label> 
 					<input type="text" value="${param.certificateIdNumber }" id="certificateIdNumber" name="certificateIdNumber"><br>
-<!-- 					<label>創立日期:</label>  -->
-<%-- 					<input type="date" value="${param.birthDate }" id="birthDate" name="birthDate"><br> --%>
+					<label>創立日期:</label> 
+					<input type="text" value="${param.birthDate }" id="birthDate" name="birthDate"><br>
 							
 				</c:when>
 			</c:choose>
@@ -119,6 +125,15 @@
 			
 			
 			new TwCitySelector();	
+
+			$('#birthDate').datepicker({
+			    format: "yyyy/mm/dd",
+			    autoclose: true,
+			    calendarWeeks: true,
+			    todayHighlight: true,
+			    language: 'zh-TW'
+			})
+			
 			
 // 			insert new member
 			$("input[type='button'][value='確定送出']").click(function(){

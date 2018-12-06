@@ -78,6 +78,9 @@ public class MemberController {
 			dbMember.setDistrict(member.getDistrict());
 			dbMember.setAddress(member.getAddress());
 			dbMember.setEmailVerification(member.getEmailVerification());
+			dbMember.setBirthDate(member.getBirthDate());
+			dbMember.setCertificateIdNumber(member.getCertificateIdNumber());
+			
 			if (member.getMemberType() == MemberType.O) {
 				dbMember.setOrgCeo(member.getOrgCeo());
 				dbMember.setOrgFounder(member.getOrgFounder());

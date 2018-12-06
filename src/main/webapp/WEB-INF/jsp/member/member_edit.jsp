@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!doctype html>
 <html>
 <head>
@@ -22,25 +22,41 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous">
+
+
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
+<!-- date picker -->
+<script type="text/javascript" src="/js/moment.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
+<script src="/js/locales/bootstrap-datepicker.zh-TW.js"></script>
+<link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />      
 
-<!-- dataPicker -->
-<!-- <script src="/path/to//jquery.min.js"></script>  -->
-<!-- <script src="/js/bootstrap.min.js"></script> -->
 
-<script src="/js/bootstrap-datepicker.js"></script>
-<script src="/js/bootstrap-datepicker.zh-TW.js"></script>
-<link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" >
 
 <style>
  	article{
 	 	margin-top:70px;
+	 	padding:10px;
 	 }
- 	article input,select,label{  
-  		margin-bottom:20px; 
-  		margin-left:15px;  
- 	}  
+	 
+  	article input,select,label{  
+  		padding-left:10px;
+ 		margin-bottom:20px;  
+    	margin-left:15px;  
+ 	}   
+ 	 fieldset {
+            width: 800px;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px;
+            border: 3px double #bebebe;
+            margin: auto
+        }
+        .s2{ 
+            text-align: center 
+        } 
+ 	
 	
 </style>
 
@@ -53,81 +69,153 @@
 	<article>
 		<h2>Member Edit</h2>
 		<h4>Member ${member.id}</h4>
+		
 		<form action="#" method="post" >
+		<fieldset>
 			<input type="hidden" value="${member.id}" id="id" name="id"/>
 			<input type="hidden" value="${member.memberType}" id="memberType" name="memberType"/><br>
-			<label>帳號 :</label>
-			<input type="text" value="${member.account }" id="account" name="account" readonly><br> 
-			<label>密碼 :</label>
-			<input type="text" value="${member.password }" id="password" name="password"><br>
-			<label>名字 :</label>
-			<input type="text" value="${member.name }" id="name" name="name"><br>
-			
-			<c:choose>
-				<c:when test="${member.memberType eq 'P'}">					
-					<label>身分證字號 :</label> 
-					<input type="text" value="${member.certificateIdNumber }" id="certificateIdNumber" name="certificateIdNumber"><br>
-					<label>出生日期:</label>  
-					<input type="date" value="${member.birthDate }" id="birthDate" name="birthDate"><br>  
-							
-				</c:when>
-				<c:when test="${member.memberType eq 'O'}">
-					<label>統一編號 :</label> 
-					<input type="text" value="${member.certificateIdNumber }" id="certificateIdNumber" name="certificateIdNumber"><br>
- 					<label>創立日期:</label> 
- 					<input type="date" value="${member.birthDate }" id="birthDate" name="birthDate"><br> 
-							
-				</c:when>
-			</c:choose>	
-			
-			<label>email:</label>
-			<input type="text" value="${member.email }" id="email" name="email"><br>
-			<label>住家電話:</label>
-			<input type="text" value="${member.telephone }" id="telephone" name="telephone"><br>
-			<label>手機:</label> 
-			<input type="text" value="${member.mobile }" id="mobile" name="mobile"><br>
-			
-			<label>住址:</label>
-			<div role="tw-city-selector">
+			<div class="form_group row">
+					<label>帳號 :</label>
+					<input type="text" class="form-control" value="${member.account }" id="account" name="account" readonly><br> 	
 			</div>
-			<input type='text' value='${member.address }' id='address' name='address' /><br>
-		
-			<label>Email驗證信確認(Y/N):</label> 
-			<label>Y</label> <input type="radio" value="Y" name="emailVerification" />
-			<label>N</label> <input type="radio" value="N" name="emailVerification" /><br>
-	
-			<label>註冊日期:</label> 
+			<div class="form_group row">
+					<label>密碼 :</label>
+					<input type="text" class="form-control" value="${member.password }" id="password" name="password"><br>
+			</div>
+			<div class="form_group row">
+					<label>名字 :</label>
+					<input type="text" class="form-control" value="${member.name }" id="name" name="name"><br>			
+			</div>
+				<fmt:formatDate  value="${member.birthDate }" pattern="yyyy/MM/dd" var="birthDate"/>
+					<c:choose>
+						<c:when test="${member.memberType eq 'P'}">					
+							<div class="form_group row">
+								
+									<label>身分證字號 :</label> 
+									<input type="text" class="form-control" value="${member.certificateIdNumber }" id="certificateIdNumber" name="certificateIdNumber"><br>
+								
+							</div>
+							<div class="form_group row">
+								
+									<label>出生日期:</label> 
+									<input type="text" class="form-control" value="${birthDate}" id="birthDate" name="birthDate"><br>  
+								
+							</div>
+									
+						</c:when>
+						<c:when test="${member.memberType eq 'O'}">
+							<div class="form_group row">
+							
+									<label>統一編號 :</label> 
+									<input type="text" class="form-control" value="${member.certificateIdNumber }" id="certificateIdNumber" name="certificateIdNumber"><br>
+								
+							</div>
+							<div class="form_group row">
+					
+									<label>創立日期:</label> 
+				 					<input type="text" class="form-control" value="${birthDate}" id="birthDate" name="birthDate"><br> 
+								
+							</div>
+									
+						</c:when>
+					</c:choose>	
+			<div class="form_group row">
 			
-			<input type="text" value="${member.signUpDate}" id="signUpDate" name="signUpDate" ><br>
+					<label>email:</label>
+					<input type="text" class="form-control" value="${member.email }" id="email" name="email"><br>
+				
+			</div>
+			<div class="form_group row">
+				
+					<label>住家電話:</label>
+					<input type="text" class="form-control" value="${member.telephone }" id="telephone" name="telephone"><br>
+				
+			</div>
+			<div class="form_group row">
+				
+					<label>手機:</label> 
+					<input type="text" class="form-control" value="${member.mobile }" id="mobile" name="mobile"><br>
+				
+			</div>
+			<div class="form_group row">
+					<label>住址:</label>
+					<div role="tw-city-selector"></div>
+					<input type='text' class="form-control"  value='${member.address }' id='address' name='address' /><br>
+			</div>			
+			<div class="form_group row" >
+					<label>Email驗證信確認(Y/N):</label> 
+					<div>
+						<label>Y</label> 
+						<input type="radio"  value="Y" name="emailVerification" />
+					</div>
+					<div>
+						<label>N</label> 
+						<input type="radio"  value="N" name="emailVerification" /><br>		
+					</div>
+			</div>			
+			<div class="form_group row">
+			
+					<fmt:formatDate value="${member.signUpDate }" pattern="yyyy/MM/dd" var="signUpDate"/>
+					<label>註冊日期:</label> 
+					<input type="text" class="form-control" value="${signUpDate}" id="signUpDate" name="signUpDate" ><br>
+				
+			</div>
 			<c:if test="${member.memberType eq 'O' }">
-				<label>創辦人:</label> 
-				<input type="text" value="${member.orgFounder}" id="orgFounder" name="orgFounder"><br>
-				<label>執行長: </label>
-				<input type="text" value="${member.orgCeo}" id="orgCeo" name="orgCeo"><br>
-				<label>聯絡人:</label> 
-				<input type="text" value="${member.orgContactPerson }" id="orgContactPerson" name="orgContactPerson"><br>
-				<label>聯絡人電話:</label> 
-				<input type="text" value="${member.orgContactPersonTel }" id="orgContactPersonTel" name="orgContactPersonTel"><br>
-				<label>聯絡人手機:</label> 
-				<input type="text" value="${member.orgContactPersonMobile }" id="orgContactPersonMobile" name="orgContactPersonMobile"><br>
+				<div class="form_group row">
 				
-				<label>網址:</label> 
-				<input type="url" size='50px' value="${member.orgWebsiteLink }" id="orgWebsiteLink" name="orgWebsiteLink"><br>
-				<label>創立宗旨:</label> 
-				<textarea  rows="4" cols="30"  id="orgFoundPurpose" name="orgFoundPurpose">${member.orgFoundPurpose}</textarea><br>
+						<label>創辦人:</label> 
+						<input type="text" class="form-control" value="${member.orgFounder}" id="orgFounder" name="orgFounder"><br>
 				
-				
-				
-				
-				<label>機構身分驗證 (Y/N): </label>
-				<label>Y</label> 
-				<input type="radio" value="Y" name="orgIDConfirmation" />
-				<label>N</label>
-				<input type="radio" value="N" name="orgIDConfirmation" /><br>
-	
+				</div>
+				<div class="form_group row">
+						<label>執行長: </label>
+						<input type="text" class="form-control" value="${member.orgCeo}" id="orgCeo" name="orgCeo"><br>
+				</div>
+				<div class="form_group row">
+						<label>聯絡人:</label> 
+						<input type="text" class="form-control" value="${member.orgContactPerson }" id="orgContactPerson" name="orgContactPerson"><br>
+				</div>		
+				<div class="form_group row">
+					
+						<label>聯絡人電話:</label> 
+						<input type="text" class="form-control" value="${member.orgContactPersonTel }" id="orgContactPersonTel" name="orgContactPersonTel"><br>
+					
+				</div>					
+				<div class="form_group row">
+					
+						<label>聯絡人手機:</label> 
+						<input type="text" class="form-control" value="${member.orgContactPersonMobile }" id="orgContactPersonMobile" name="orgContactPersonMobile"><br>
+					
+				</div>					
+				<div class="form_group row">
+					
+						<label>網址:</label> 
+						<input type="url" class="form-control" size='50px' value="${member.orgWebsiteLink }" id="orgWebsiteLink" name="orgWebsiteLink"><br>
+					
+				</div>	
+				<div class="form_group row">
+					
+						<label >創立宗旨:</label> 
+						<textarea  rows="4" class="form-control" cols="30"  id="orgFoundPurpose" name="orgFoundPurpose">${member.orgFoundPurpose}</textarea><br>		
+					
+				</div>					
+				<div class="form_group row">
+					<label>機構身分驗證 (Y/N): </label>
+					<div>					
+						<label>Y</label>
+						<input type="radio"  value="Y" name="orgIDConfirmation" />
+					</div>
+					<div>
+						<label>N</label>
+						<input type="radio" value="N" name="orgIDConfirmation" /><br>								
+					</div>
+				</div>	
 			</c:if>
-			<input type="button" class="btn btn-primary btn-sm" id="updateButt" value="儲存" />
-			<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/member/list'" value="回上一頁" />
+			<div>
+				<input type="button" class="btn btn-primary btn-sm" id="updateButt" value="儲存" />
+				<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/member/list'" value="回上一頁" />
+			</div>
+			</fieldset>
 		</form>
 		
 	</article>
@@ -135,25 +223,31 @@
 	<script>
 		$(document).ready(function(){
 			//add nav.html
-			$.get("/html/nav.html",function(data){
-				$("#navBar").html(data);
-			});
+// 			$.get("/html/nav.html",function(data){
+// 				$("#navBar").html(data);
+// 			});
 			
 			
-			new TwCitySelector();
-// 			$( "#signUpDate" ).datepicker();
-			$("#signUpDate").datepicker({
-			    format: "yyyy/mm/dd",
-			    autoclose: true,
-// 			    startDate: "today",
-			    clearBtn: true,
-			    calendarWeeks: true,
-			    todayHighlight: true,
-			    language: 'zh-TW'
-			});
+			new TwCitySelector();	
 			
-			$("div[role='tw-city-selector']").attr("data-county-value",'${member.county}');	
-			$("div[role='tw-city-selector']").attr("data-district-value",'${member.district}');	
+			$('#birthDate').datepicker({
+			    format: "yyyy/mm/dd",
+			    autoclose: true,
+			    calendarWeeks: true,
+			    todayHighlight: true,
+			    language: 'zh-TW'
+			})
+			$('#signUpDate').datepicker({
+			    format: "yyyy/mm/dd",
+			    autoclose: true,
+			    calendarWeeks: true,
+			    todayHighlight: true,
+			    language: 'zh-TW'
+			})
+
+			$("div[role='tw-city-selector']").attr("data-county-value",'${member.county}');
+			$("div[role='tw-city-selector']").attr("data-district-value",'${member.district}');
+			$("div[role='tw-city-selector']>select").addClass(".form-control");
 
 			$("input[name='emailVerification'][value="+ '${member.emailVerification}' +"]").prop("checked",true);
 			if ('${member.memberType }'=='O'){
@@ -178,21 +272,7 @@
 					  });	
 				
 				
-// 				$.getJSON("/member/update",$("form").serialize(),function(data){
-//					$.each(data, function(key, value){
-//						if (key == 'msg'){
-//							alert(value);							
-//						}else if (key == 'memberInfo'){
-// 							$("input[name='id']").val(value.id);
-// 							$("input[name='memberType']").val(value.memberType);
-// 							$("input[name='loginAccount']").val(value.loginAccount);
-// 							$("input[name='password']").val(value.password);
-// 							$("input[name='name']").val(value.name);
-// 							$("input[name='email']").val(value.email);
-// 							$("input[name='telephone']").val(value.telephone);
-// 							$("input[name='mobile']").val(value.mobile);	
-//					})
-//				})
+
 		
 			})
 			
