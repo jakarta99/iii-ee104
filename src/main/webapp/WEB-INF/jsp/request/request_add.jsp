@@ -5,11 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" 
+		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" 
+		crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" 
+		integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" 
+		crossorigin="anonymous"></script>
+<link rel="stylesheet" 
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" 
+		integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" 
+		crossorigin="anonymous">
 <title>request add</title>
 <style>
         fieldset {
@@ -23,9 +30,13 @@
         .s2{
             text-align: center
         }
+         .margintop{
+	 margin-top:70px;
+}
     </style>
 </head>
 <body>
+<div id="navBar" class="margintop"></div>
 	<h1 class="s2">request add</h1>
 	<fieldset>
 	<form action="/request/insert" method="post">
@@ -68,11 +79,38 @@
      </div>
      
      <div class="form-group">
-	<input type="submit" class="btn btn-outline-secondary"/>
+	<button type="button" onclick="addRequest()"
+					class="btn btn-outline-secondary">提交</button>
 	<input type="reset"  class="btn btn-outline-secondary"/>
 	</div>
 	</form>
 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/request/list'">回列表頁</button>
 	</fieldset>
+	<script>
+function addRequest() {
+	$.ajax({
+		url : '/request/insert',
+		type : 'post',
+		data : $('form').serialize(),
+		dataType : 'JSON',
+		success : function(addResult) {
+			alert(addResult.msg);
+			document.location.href = "/request/add";
+		},
+	})
+}
+$(document).ready(function() {
+	$.get("/html/nav.html",function(data){
+		$("#navBar").html(data);
+	});
+	
+	listTimeLedger();
+
+})
+
+
+
+</script>
 </body>
+
 </html>

@@ -44,10 +44,14 @@
         .s2{
             text-align: center
         }
+        .margintop{
+	 margin-top:70px;
+}
  
     </style>
 </head>
 <body>
+<div id="navBar" class="margintop"></div>
 	
 	<h1 class="s2">request list</h1>
 	<fieldset>
@@ -78,6 +82,48 @@
 	
 	
 	<script>
+
+	function deleteRequest(id) {
+		$.ajax({
+			url : '/request/delete?id=' + id,
+			type : 'delete',
+			dataType : 'JSON',
+			success : function(deleteResult) {
+				alert(deleteResult.msg);
+				list();
+			},
+		})
+	}
+	
+	function list(){
+		$.getJSON("/request/query",function(data){
+			var docFragment=$(document.createDocumentFragment());
+			var tb = $('#tbody');
+ 		    tb.empty();
+			$.each(data,function(index,request){
+			    var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/edit?id="+request.id+"'\">Edit</button>";     
+			   	var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteRequest("+request.id+")\">Delete</button>"; 	
+			   	var cell1 = $('<td></td>').html(editbutton+deletebutton);
+				var cell2 = $('<td></td>').text(request.id);
+		        var cell3 = $('<td></td>').text(request.jobArea);
+		        var cell4 = $('<td></td>').text(request.jobTitle);
+		        var cell5 = $('<td></td>').text(request.memberId);
+		        var cell6 = $('<td></td>').text(request.serviceType);
+		        var cell7 = $('<td></td>').text(request.termType);
+		        var cell8 = $('<td></td>').text(request.timeValue);
+				var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4,cell5,cell6,cell7,cell8]);
+		        docFragment.append(row);
+			});
+			tb.html(docFragment);
+		});			
+		
+		
+		
+		
+		
+		
+	}
+	
 	$(document).ready( function () {
 		
 //  $('#table').DataTable({
@@ -94,30 +140,13 @@
 // 	         ]
 //       	 });
 		
-		
-		
-		
-		
-		$.getJSON("/request/query",function(data){
-			var docFragment=$(document.createDocumentFragment());
-			var tb = $('#tbody');
- 		    tb.empty();
-			$.each(data,function(index,request){
-			    var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/edit?id="+request.id+"'\">Edit</button>";     
-			   	var deletebutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/delete?id="+request.id+"'\">Delete</button>"; 	
-				var cell1 = $('<td></td>').html(editbutton+deletebutton);
-				var cell2 = $('<td></td>').text(request.id);
-		        var cell3 = $('<td></td>').text(request.jobArea);
-		        var cell4 = $('<td></td>').text(request.jobTitle);
-		        var cell5 = $('<td></td>').text(request.memberId);
-		        var cell6 = $('<td></td>').text(request.serviceType);
-		        var cell7 = $('<td></td>').text(request.termType);
-		        var cell8 = $('<td></td>').text(request.timeValue);
-				var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4,cell5,cell6,cell7,cell8]);
-		        docFragment.append(row);
+		$.get("/html/nav.html",function(data){
+				$("#navBar").html(data);
 			});
-			tb.html(docFragment);
-		});			
+		
+		
+		list();
+		
 //  		   $('#table').DataTable();
 		
 	});
