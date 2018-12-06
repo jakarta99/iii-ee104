@@ -1,5 +1,6 @@
 package team.lala.timebank.service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,8 @@ public class DonationService {
 	private DonationDao donationDao;
 
 	public Donation save(Donation d) {
-		Donation donation =donationDao.save(d);
+		d.setDonateTime(LocalDateTime.now());
+		Donation donation = donationDao.save(d);
 		return donation;
 	}
 
