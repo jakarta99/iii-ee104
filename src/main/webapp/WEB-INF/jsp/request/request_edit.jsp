@@ -32,8 +32,8 @@
             text-align: center
         }
         .margintop{
-	 margin-top:70px;
-}
+	 		margin-top:70px;
+		}
     </style>
 
 </head>
@@ -89,39 +89,34 @@
 	</div>
 	<div>
 	<input type="button" class="btn btn-outline-secondary" onclick="javascript:document.location.href='/request/list'" value="回列表頁"/>
-<!-- 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/request/list'">回列表頁</button> -->
-<!-- 	<a href='/request/list'> -->
-<!-- 	<i class="fas fa-home"></i>回列表頁</a> -->
-	
+
 	</div>
 					
 	</fieldset>
 	</form>
 	
-		<script>
-	jQuery(document).ready(function(){
-		$('#jobArea').val(${request.jobArea})
-		$('#termType').val(${request.termType})
-		$('#serviceType').val(${request.serviceType})
-		$('#termType').val(${request.termType})
-		$.get("/html/nav.html",function(data){
-			$("#navBar").html(data);
+	<script>
+		jQuery(document).ready(function(){
+			$('#jobArea').val(${request.jobArea})
+			$('#termType').val(${request.termType})
+			$('#serviceType').val(${request.serviceType})
+			$('#termType').val(${request.termType})
+			$.get("/html/nav.html",function(data){
+				$("#navBar").html(data);
+			});
 		});
-	});
-	
-	function updateRequest() {
-		$.ajax({
-			url : '/request/update',
-			type : 'put',
-			data : $('form').serialize(),
-			dataType : 'JSON',
-			success : function(editResult) {
-				alert(editResult.msg);
-						//editResult.requestinfo
-//					document.location.href = "/time-ledger/list";
-			},
-		})
-	}
+		
+		function updateRequest() {
+			$.ajax({
+				url : '/request/update',
+				type : 'put',
+				data : $('form').serialize(),
+				dataType : 'JSON',
+				success : function(editResult) {
+					alert(editResult.msg);
+				},
+			})
+		}
 	</script>
 
 </body>
