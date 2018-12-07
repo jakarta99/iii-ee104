@@ -60,7 +60,7 @@
 					class="form-control" value="${penalty.penaltyTimeValue}" />
 			</div>
 		</div>
-		<input type="submit" class="btn btn-primary">
+		<input type="button" class="btn btn-primary" id="update">
 	</form>
 
 	<a href="/penalty/list">back to penalty_list</a>
@@ -70,7 +70,7 @@
 
 			$('#status').val('${penalty.status}');
 
-			$('input[type="submit"]').click(function() {
+			$('#update').click(function() {
 				$.ajax({
 					url : "/penalty/update",
 					method : "post",
