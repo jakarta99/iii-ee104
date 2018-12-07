@@ -165,7 +165,7 @@
 // 		列出會員清單函式
 		function listMember(){
 			$("#memberTableBody").text("");
-			$.getJSON("/member/query",function(data){
+			$.getJSON("/member/query",$("form").serialize(),function(data){
 				$.each(data, function(idx, member){
 					var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/member/edit?id="+member.id+"'\" value='修改'  />";
 					var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" id='deleteButt"+ member.id +"' value='刪除' />"
@@ -187,7 +187,7 @@
 	
 		
 		$(document).ready(function(){
-			alert("jjj")
+// 			alert("jjj")
 			listMember();
 			new TwCitySelector();
 // 			$("form div").addClass("form-group");
@@ -200,7 +200,7 @@
 				todayHighlight : true,
 				language : 'zh-TW',
 				clearBtn:true,
-				startView:2
+				startView:"year",
 			};
 			
 			$('#birthDateStart').datepicker({datePickerSetting});
@@ -225,26 +225,8 @@
 				})			
 			})
 
-			$("#searchButt").click(function() {				
-				$("#memberTableBody").html("");
-				$.getJSON("/member/query", $("form").serialize(),function(data){
-					$.each(data, function(idx, member){
-						var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/member/edit?id="+member.id+"'\" value='修改'  />";
-						var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\"  id='deleteButt"+ member.id +"' value='刪除' />"
-						$("#memberTableBody").append("<tr id='row"+ member.id +"'><td>"+editButt + deleteButt+"</td></tr>");					
-						var memberRow = $("#row"+member.id);
-						memberRow.append("<td >"+member.account+"</td>");
-						memberRow.append("<td >"+member.name+"</td>");
-						memberRow.append("<td >"+member.memberType+"</td>");
-						memberRow.append("<td >"+member.email+"</td>");
-						memberRow.append("<td >"+member.mobile+"</td>");
-						memberRow.append("<td >"+ member.county + member.district + member.address +"</td>");		
-						memberRow.append("<td >"+ new Date(member.signUpDate).toLocaleDateString()+"</td>");												
-					})
-					
-				})
-		
-			
+			$("#searchButt").click(function() {		
+				listMember()			
 			})
 			
 		
