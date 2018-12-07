@@ -13,6 +13,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
 import team.lala.timebank.entity.Member;
+import team.lala.timebank.enums.MemberType;
+import team.lala.timebank.enums.YesNo;
 
 @SuppressWarnings("serial")
 public class MemberSpecification implements Specification<Member> {
@@ -31,27 +33,49 @@ public class MemberSpecification implements Specification<Member> {
 		
 		if(!StringUtils.isEmpty(inputMember.getName())) {
 			list.add(cb.like(root.get("name").as(String.class), "%"+inputMember.getName()+"%"));
-		}  
-		
+		}  	
 		if(!StringUtils.isEmpty(inputMember.getAccount())) {
 			list.add(cb.equal(root.get("account").as(String.class), inputMember.getAccount()));
 		}
+		if(!StringUtils.isEmpty(inputMember.getMemberType())) {
+			list.add(cb.equal(root.get("memberType").as(MemberType.class), inputMember.getMemberType()));
+		}
 		
-		if (inputMember.getSignUpDateStart()!= null ) {
+		if (!StringUtils.isEmpty(inputMember.getBirthDateStart()) ) {
+			list.add(cb.greaterThanOrEqualTo(root.get("birthDate").as(Date.class), inputMember.getBirthDateStart()));
+		}
+		if (!StringUtils.isEmpty(inputMember.getBirthDateEnd())) {
+			list.add(cb.lessThanOrEqualTo(root.get("birthDate").as(Date.class), inputMember.getBirthDateEnd()));					
+		}
+		if(!StringUtils.isEmpty(inputMember.getEmail())) {
+			list.add(cb.like(root.get("email").as(String.class), "%"+inputMember.getEmail()+"%"));
+		} 
+		if(!StringUtils.isEmpty(inputMember.getEmailVerification())) {
+			list.add(cb.equal(root.get("emailVerification").as(YesNo.class), inputMember.getEmailVerification()));
+		}
+		if(!StringUtils.isEmpty(inputMember.getMobile())) {
+			list.add(cb.equal(root.get("mobile").as(String.class), inputMember.getMobile()));
+		}
+		
+		if(!StringUtils.isEmpty(inputMember.getCounty())) {
+			list.add(cb.equal(root.get("county").as(String.class), inputMember.getCounty()));
+		}
+		if(!StringUtils.isEmpty(inputMember.getDistrict())) {
+			list.add(cb.equal(root.get("district").as(String.class), inputMember.getDistrict()));
+		}
+		
+		
+		if (!StringUtils.isEmpty(inputMember.getSignUpDateStart()) ) {
 			list.add(cb.greaterThanOrEqualTo(root.get("signUpDate").as(Date.class), inputMember.getSignUpDateStart()));
 		}
-		if (inputMember.getSignUpDateEnd()!= null) {
+		if (!StringUtils.isEmpty(inputMember.getSignUpDateEnd())) {
 			list.add(cb.lessThanOrEqualTo(root.get("signUpDate").as(Date.class), inputMember.getSignUpDateEnd()));					
 		}
-		
-		
-		
-		
+			
         Predicate[] p = new Predicate[list.size()];  
 
         return cb.and(list.toArray(p));  
-		
-		
+			
 	}
 
 }

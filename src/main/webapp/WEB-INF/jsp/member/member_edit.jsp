@@ -52,8 +52,10 @@
 	
 	article input, select, label {
  		padding-left: 10px;  		
- 		margin:0px 10px 10px 10px;   
+ 		margin:auto;   
+ 		margin-bottom:20px;
 	}
+	
 	
 	
 
@@ -113,7 +115,7 @@
 						</div>
 						<div >
 							<label>出生日期:</label> <input type="text" 
-								value="${birthDate}" id="birthDate" name="birthDate"><br>
+								value="${birthDate}" id="birthDate" name="birthDate" autocomplete="off"><br>
 						</div>
 
 					</c:when>
@@ -126,7 +128,7 @@
 						<div >
 							<label>創立日期:</label> 
 							<input type="text" 
-								value="${birthDate}" id="birthDate" name="birthDate"><br>
+								value="${birthDate}" id="birthDate" name="birthDate" autocomplete="off"><br>
 						</div>
 
 					</c:when>
@@ -162,21 +164,17 @@
 					<fmt:formatDate value="${member.signUpDate }" pattern="yyyy/MM/dd"	var="signUpDate" />
 					<label>註冊日期:</label> 
 					<input type="text" 
-						value="${signUpDate}" id="signUpDate" name="signUpDate"><br>
+						value="${signUpDate}" id="signUpDate" name="signUpDate" autocomplete="off"><br>
 				</div>
 			</fieldset>
 			<fieldset>
 			<legend>驗證資訊</legend>
 				<div >
 					<label>Email驗證信確認(Y/N):</label>
-					<div>
-						<label>Y</label> 
-						<input type="radio" value="Y" name="emailVerification" />
-					</div>
-					<div>
-						<label>N</label> 
-						<input type="radio" value="N" name="emailVerification" /><br>
-					</div>
+					<label>Y</label> 
+					<input type="radio" value="Y" name="emailVerification" />
+					<label>N</label> 
+					<input type="radio" value="N" name="emailVerification" /><br>
 				</div>
 				<c:if test="${member.memberType eq 'O' }">
 					<div>
@@ -243,33 +241,20 @@
 	</article>
 
 	<script>
-		$(document).ready(
-				function() {
-					//add nav.html
-					// 			$.get("/html/nav.html",function(data){
-					// 				$("#navBar").html(data);
-					// 			});
-
-					$("form>div").addClass("form-group");
-					$("form>input").addClass("form-control");
-					$("form>textarea").addClass("form-control");
+		$(document).ready(function() {
+// 					$("form div").addClass("form-group");
+// 					$("form input").addClass("form-control");
+// 					$("form textarea").addClass("form-control");
 					new TwCitySelector();
 
-					$('#birthDate').datepicker({
+					var datePickerSetting = {
 						format : "yyyy/mm/dd",
 						autoclose : true,
-						calendarWeeks : true,
 						todayHighlight : true,
-						language : 'zh-TW'
-					})
-
-					$('#signUpDate').datepicker({
-						format : "yyyy/mm/dd",
-						autoclose : true,
-						calendarWeeks : true,
-						todayHighlight : true,
-						language : 'zh-TW'
-					})
+						language : 'zh-TW',						
+					};
+					$('#birthDate').datepicker({datePickerSetting});
+					$('#signUpDate').datepicker({datePickerSetting});
 
 					$("div[role='tw-city-selector']").attr("data-county-value",'${member.county}');
 					$("div[role='tw-city-selector']").attr("data-district-value", '${member.district}');
