@@ -50,7 +50,7 @@ public class MemberService {
 	
 	public Page<Member> findBySpecification(Specification<Member> specification, PageRequest pageRequest) {
 		
-		PageRequest thisPage = new PageRequest(1, 10);
+		PageRequest thisPage = PageRequest.of(1, 10);
 		
 		return memberDao.findAll(specification, thisPage);
 	}

@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import team.lala.timebank.enums.MemberType;
 import team.lala.timebank.enums.YesNo;
 
@@ -38,9 +40,17 @@ public class Member {
 	@Column(name="CERTIFICATE_ID_NUMBER")
 	private String certificateIdNumber;
 	
-//	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@Column(name="BIRTH_DATE")
 	private Date birthDate;
+	
+	@Transient
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date birthDateStart;
+	
+	@Transient
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date birthDateEnd;
 	
 	@Column(name = "EMAIL")
 	private String email;
@@ -62,13 +72,18 @@ public class Member {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "EMAIL_VERTIFICATION")
-	private YesNo emailVerification = YesNo.N;
+	private YesNo emailVerification;
 
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@Column(name = "SIGN_UP_DATE")
 	private Date signUpDate;
+	
 	@Transient
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date signUpDateStart;
+	
 	@Transient
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date signUpDateEnd;
 	
 	
@@ -95,7 +110,7 @@ public class Member {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "ORG_IDENTITY_CONFIRMATION")
-	private YesNo orgIdConfirmation = YesNo.N;
+	private YesNo orgIdConfirmation;
 
 	public Long getId() {
 		return id;
@@ -151,6 +166,22 @@ public class Member {
 
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+
+	public Date getBirthDateStart() {
+		return birthDateStart;
+	}
+
+	public void setBirthDateStart(Date birthDateStart) {
+		this.birthDateStart = birthDateStart;
+	}
+
+	public Date getBirthDateEnd() {
+		return birthDateEnd;
+	}
+
+	public void setBirthDateEnd(Date birthDateEnd) {
+		this.birthDateEnd = birthDateEnd;
 	}
 
 	public String getEmail() {
@@ -213,6 +244,10 @@ public class Member {
 		return signUpDate;
 	}
 
+	public void setSignUpDate(Date signUpDate) {
+		this.signUpDate = signUpDate;
+	}
+
 	public Date getSignUpDateStart() {
 		return signUpDateStart;
 	}
@@ -227,10 +262,6 @@ public class Member {
 
 	public void setSignUpDateEnd(Date signUpDateEnd) {
 		this.signUpDateEnd = signUpDateEnd;
-	}
-
-	public void setSignUpDate(Date signUpDate) {
-		this.signUpDate = signUpDate;
 	}
 
 	public String getOrgFounder() {
@@ -301,14 +332,17 @@ public class Member {
 	public String toString() {
 		return "Member [id=" + id + ", account=" + account + ", password=" + password + ", name=" + name
 				+ ", memberType=" + memberType + ", certificateIdNumber=" + certificateIdNumber + ", birthDate="
-				+ birthDate + ", email=" + email + ", telephone=" + telephone + ", mobile=" + mobile + ", county="
-				+ county + ", district=" + district + ", address=" + address + ", emailVerification="
-				+ emailVerification + ", signUpDate=" + signUpDate + ", orgFounder=" + orgFounder + ", orgCeo=" + orgCeo
-				+ ", orgContactPerson=" + orgContactPerson + ", orgContactPersonTel=" + orgContactPersonTel
-				+ ", orgContactPersonMobile=" + orgContactPersonMobile + ", orgWebsiteLink=" + orgWebsiteLink
-				+ ", orgFoundPurpose=" + orgFoundPurpose + ", orgIdConfirmation=" + orgIdConfirmation + "]";
+				+ birthDate + ", birthDateStart=" + birthDateStart + ", birthDateEnd=" + birthDateEnd + ", email="
+				+ email + ", telephone=" + telephone + ", mobile=" + mobile + ", county=" + county + ", district="
+				+ district + ", address=" + address + ", emailVerification=" + emailVerification + ", signUpDate="
+				+ signUpDate + ", signUpDateStart=" + signUpDateStart + ", signUpDateEnd=" + signUpDateEnd
+				+ ", orgFounder=" + orgFounder + ", orgCeo=" + orgCeo + ", orgContactPerson=" + orgContactPerson
+				+ ", orgContactPersonTel=" + orgContactPersonTel + ", orgContactPersonMobile=" + orgContactPersonMobile
+				+ ", orgWebsiteLink=" + orgWebsiteLink + ", orgFoundPurpose=" + orgFoundPurpose + ", orgIdConfirmation="
+				+ orgIdConfirmation + "]";
 	}
 
-	
+
+		
 
 }

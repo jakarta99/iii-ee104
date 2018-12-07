@@ -64,12 +64,12 @@
 					class="form-control" />
 			</div>
 		</div>
-		<input type="submit" class="btn btn-primary mb-2" />
+		<input type="button" id="submit" value="submit" class="btn btn-primary mb-2" />
 	</form>
 	<a href="/penalty/list">back to penalty_list</a>
 	<script type="text/javascript">
 	
-		$('input[type="submit"]').click(function(){
+		$('#submit').click(function(){
 			$.ajax({
 				url:"/penalty/insert",
 				method:"post",

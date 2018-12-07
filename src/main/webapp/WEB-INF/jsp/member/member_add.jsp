@@ -109,7 +109,7 @@
 						</div>
 						<div  >
 							<label>出生日期:</label> <input type="text" 
-								value="${param.birthDate}" id="birthDate" name="birthDate"><br>
+								value="${param.birthDate}" id="birthDate" name="birthDate" autocomplete="off"><br>
 						</div>
 
 					</c:when>
@@ -122,7 +122,7 @@
 						<div  >
 							<label>創立日期:</label> 
 							<input type="text" 
-								value="${param.birthDate}" id="birthDate" name="birthDate"><br>
+								value="${param.birthDate}" id="birthDate" name="birthDate" autocomplete="off"><br>
 						</div>
 
 					</c:when>
@@ -193,7 +193,7 @@
 				</c:if>
 				<fieldset style="border:none">
 					<div>
-						<input type="button" class="btn btn-primary btn-sm" value="確定送出" />
+						<input type="button" class="btn btn-primary btn-sm" id='submit' value="確定送出" />
 				        <input type="reset" class="btn btn-primary btn-sm" value="清除重填" />
 					</div>
 				</fieldset>
@@ -208,9 +208,9 @@
 // 			$.get("/html/nav.html",function(data){
 // 				$("#navBar").html(data);
 // 			});
-			$("form>div").addClass("form-group");
-			$("form>input").addClass("form-control");
-			$("form>textarea").addClass("form-control");
+// 			$("form div").addClass("form-group");
+// 			$("form input").addClass("form-control");
+// 			$("form textarea").addClass("form-control");
 			
 			
 			new TwCitySelector();	
@@ -218,14 +218,14 @@
 			$('#birthDate').datepicker({
 			    format: "yyyy/mm/dd",
 			    autoclose: true,
-			    calendarWeeks: true,
 			    todayHighlight: true,
-			    language: 'zh-TW'
+			    language: 'zh-TW',
+			    startView:"years"
 			})
 			
 			
 // 			insert new member
-			$("input[type='button'][value='確定送出']").click(function(){
+			$("#submit").click(function(){
 				$.ajax({
 					method:"post",
 					dataType: "json",        
