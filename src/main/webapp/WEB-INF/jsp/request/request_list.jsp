@@ -56,19 +56,28 @@
 	<h1 class="s2">request list</h1>
 	
 	<fieldset>
-	<form  action="/request/query" method="post">
+	<form id="form">
+			<div>
+			基本查詢:
+			</div>
 			<label>Id :</label> 
 			<input type="text" value="" placeholder="Id" id="Id" name="Id"/>
 			<label>jobArea :</label> 
 			<input type="text" value="" placeholder="jobArea" id="jobArea" name="jobArea"/>
-			<label>serviceType</label> 
+			<div></div>
+			<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+			進階查詢:
+  			</a>
+  			</div> 
+			<div class="collapse" id="collapse">
+			<label>serviceType</label>
 			<input type="text" value="" placeholder="serviceType" id="serviceType" name="serviceType"/>
 			<label>jobTitle :</label> 
 			<input type="text" value="" placeholder="jobTitle" id="jobTitle" name="jobTitle"/>
 			<label>termType :</label> 
 			<input type="text" value="" placeholder="termType" id="termType" name="termType"/>
-			<input type="submit" value="搜尋" id="searchButton" onclick="search()"/>
-			
+			<input type="button" value="搜尋" id="searchButton" onclick="search()"/>
+			</div>
 		</form>
 	</fieldset>
 	
@@ -96,15 +105,8 @@
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 		
 	<script>
-	function search() {
-		$.ajax({
-			url :'/request/query',
-			type : 'post',
-			dataType :'JSON',
-			success : function() {			
- 			list();
-			},
-		})	
+	function search() {	
+	list()
 	}
 	
 	
@@ -116,13 +118,14 @@
 			dataType : 'JSON',
 			success : function(deleteResult) {
 			alert(deleteResult.msg);
+			 
 			list();
 			},
 		})
 	}
 	
 	function list(){
-		$.getJSON("/request/query",function(data){
+		$.getJSON("/request/query",$('#form').serialize(),function(data){
 			var docFragment=$(document.createDocumentFragment());
 			var tb = $('#tbody');
  		    tb.empty();
