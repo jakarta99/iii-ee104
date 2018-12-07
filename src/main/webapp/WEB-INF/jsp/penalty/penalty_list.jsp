@@ -66,7 +66,7 @@
 					class="form-control" />
 			</div>
 		</div>
-		<input type="button" class="btn btn-primary mb-2" id="serach" />
+		<input type="button" class="btn btn-primary mb-2" id="serach" value="搜尋"/>
 	</form>
 
 
