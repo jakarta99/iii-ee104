@@ -1,8 +1,8 @@
 package team.lala.timebank.web;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,14 +30,13 @@ public class OrderController {
 	
 	@RequestMapping("/query")
 	@ResponseBody
-	public List<Order> queryOrder(Order order){
-		if(order != null) {
-			System.out.println("order not null");
-		}else {
-			System.out.println("NULL");
-		}
+	public Page<Order> queryOrder(Order order, @RequestParam("pageNumber") Integer pageNumber,
+												@RequestParam("pageSize") Integer pageSize){
+
 		OrderSpecification orderSpecification = new OrderSpecification(order);
-		List<Order> orders = orderService.findBySpecification(orderSpecification);
+		PageRequest thisPage = PageRequest.of(pageNumber, pageSize);
+		Page<Order> orders = orderService.findBySpecification(orderSpecification, thisPage);
+
 		return orders;
 
 	}
