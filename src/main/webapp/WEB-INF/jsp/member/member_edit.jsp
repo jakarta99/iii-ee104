@@ -28,9 +28,9 @@
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
 <!-- date picker -->
-<script type="text/javascript" src="/js/moment.min.js"></script>
-<script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
-<script src="/js/locales/bootstrap-datepicker.zh-TW.js"></script>
+<script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
+<script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
+<script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 
 

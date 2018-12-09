@@ -1,9 +1,6 @@
 package team.lala.timebank.web;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.enums.MemberType;
-import team.lala.timebank.enums.YesNo;
 import team.lala.timebank.service.MemberService;
 import team.lala.timebank.spec.MemberSpecification;
 
@@ -35,8 +32,8 @@ public class MemberController {
 		List<Member> members = memberService.findAll();
 		model.addAttribute("members", members);
 		
-		return "/member/member_list4";
-//		return "/member/member_list";
+//		return "/member/member_list4";
+		return "/member/member_list3";
 
 	}
 
@@ -69,17 +66,22 @@ public class MemberController {
 	
 	@RequestMapping("/queryPageRequest")
 	@ResponseBody
-	public Page<Member> queryMember(Member inputMember,	@RequestParam(value="start",required=false) Optional<Integer> start, 
-			@RequestParam(value="length",required=false) Optional<Integer> length,Model model){
+	public Page<Member> queryMember(Member inputMember, @RequestParam(value="start",required=false) Optional<Integer> start, 
+			@RequestParam(value="length",required=false) Optional<Integer> length){
 		int page = start.orElse(0)/10;
+		
 		System.out.println("queryPageRequest");
 		System.out.println("inputmember=" + inputMember);
 		System.out.println("start=" + start + ", page"+ page+", length=" +length);
-		
-		MemberSpecification memberSpec = new MemberSpecification(inputMember);		
-		Page<Member> members = memberService.findBySpecification(memberSpec,PageRequest.of(page, length.orElse(10)));
 
-		System.out.println("queryMember=" +members);
+		MemberSpecification memberSpec = new MemberSpecification(inputMember);	
+		PageRequest pageRequest = PageRequest.of(page, length.orElse(10));
+		Page<Member> members = memberService.findBySpecification(memberSpec,pageRequest);
+		
+		System.out.println("PageRequest=" +pageRequest);		
+		System.out.println("queryMember=" +members.getContent());
+		System.out.println("TotalList=" +members.getTotalElements());
+		System.out.println("total page=" + members.getTotalPages());
 		return members;
 	}
 	

@@ -24,35 +24,43 @@
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
 <!-- date picker -->
-<script type="text/javascript" src="/js/moment.min.js"></script>
-<script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
-<script src="/js/locales/bootstrap-datepicker.zh-TW.js"></script>
+<script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
+<script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
+<script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 <!-- data table -->
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/js/dataTable_full_numbers_no_ellipses.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
-		
+<script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
+<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>	
+
+
 <style>
 	 article{
 	 	margin-top:70px;
 	 }
 	 
 	 article fieldset {
-/* 		width: 500px; */
-		border-radius: 20px;
-		padding: 20px 20px 0px 20px; 
-		border: 3px double #bebebe;
-		margin: auto;
-		margin-top: 10px; 
-		margin-bottom: 20px; 
+/*  		width: 500px;  */
+ 		border-radius: 20px; 
+ 		padding: 20px 20px 0px 20px;  
+ 		border: 3px double #bebebe; 
+		margin: auto; 
+ 		margin-top: 10px;  
+ 		margin-bottom: 20px;  
 	}
 
-	 article td{
+	 table tr td, button{
 	 	text-align:center;
+	 	line-height:center; 
 	 }
 	 article .btn{
-	 	margin-left:10px;
+	 	margin-left:3px;
+	 	margin-right:3px
 	 }
+	 
+
 
 	 
 	 /* 	設定縣市地區選擇器的css樣式 */
@@ -78,9 +86,9 @@
 
 	<article>
 		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
-		<h2>Member List 2</h2>
+		<h2>Member List</h2>
 		
-		<div>
+		<div >
 			<input type="button" class="btn btn-primary btn-sm"	
 				onclick="javascript:document.location.href='/member/add?memberType=P'" value="新增一般會員" />
 			<input type="button" class="btn btn-primary btn-sm"
@@ -88,69 +96,78 @@
 		</div>
 		
 <!-- 		條件搜尋表單 -->
-		<form>
-			<fieldset>
-			<legend>Search</legend>
-			<div >
-				<label>帳號 :</label> 
-				<input type="text" value="${param.account }" placeholder="帳號" id="account" name="account"/>
-				<label>名字 :</label> 
-				<input type="text" value="${param.name }" placeholder="名字" id="name" name="name"/>
-				<label>會員類型 :</label> 
-				<select  id="memberType" name="memberType">
-					<option value="">選擇會員類型</option>
-					<option value="P">一般會員</option>
-					<option value="O">機構會員</option>
-				</select>
+		<div id="sideBar" >		
+			<form>
+				<fieldset>
+				<legend>Search</legend>
+				<div >
+					<label>帳號 :</label> 
+					<input type="text" value="${param.account }" placeholder="帳號" id="account" name="account"/>
+					<label>名字 :</label> 
+					<input type="text" value="${param.name }" placeholder="名字" id="name" name="name"/>
+					<label>會員類型 :</label> 
+					<select  id="memberType" name="memberType">
+						<option value="">選擇會員類型</option>
+						<option value="P">一般會員</option>
+						<option value="O">機構會員</option>
+					</select>
+					<input type="button"  value="搜尋" id="searchButt" style="margin:10px"/>
+					<input type="reset"  value="重設"  id="resetButt" style="margin:10px"/>
+				<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
+				進階查詢:</a>
+				</div>
+			<div class="collapse" id="collapse">
+				<div >
+					<label>出生起始日期:</label> 
+					<input type="text" value="${param.birthDateStart }"  id="birthDateStart" name="birthDateStart" autocomplete="off" />
+					<input type="text" value="${param.birthDateEnd }" id="birthDateEnd" name="birthDateEnd" autocomplete="off"/>	
+				</div>
+				<div >
+					<label>email:</label> 
+					<input type="text" 
+							value="${param.email }" id="email" name="email">
+					<label>Email驗證信確認(Y/N):</label>
+					<label>Y</label> 
+					<input type="radio" value="Y" name="emailVerification" />
+					<label>N</label> 
+					<input type="radio" value="N" name="emailVerification" />
+				</div>
+				<div >	
+					<label>手機:</label> 
+					<input type="text" 
+							value="${param.mobile }" id="mobile" name="mobile">
+				</div>
+				<div >
+					<label>縣市:</label> 
+					<div style='display:inline' role="tw-city-selector" ></div>
+				</div>
+				
+				<div >	
+					<label>註冊起始日期 :</label> 			
+					<input type="text" value="${param.signUpDateStart }"  id="signUpDateStart" name="signUpDateStart" autocomplete="off"/>
+					<input type="text" value="${param.signUpDateEnd }" id="signUpDateEnd" name="signUpDateEnd" autocomplete="off"/>
+				</div>
 			</div>
+				
+		</fieldset>
+			</form>
+		</div>
 		
-			<div >
-				<label>出生起始日期:</label> 
-				<input type="text" value="${param.birthDateStart }"  id="birthDateStart" name="signUpDateStart" autocomplete="off" />
-				<input type="text" value="${param.birthDateEnd }" id="birthDateEnd" name="signUpDateEnd" autocomplete="off"/>	
-			</div>
-			<div >
-				<label>email:</label> 
-				<input type="text" 
-						value="${param.email }" id="email" name="email">
-				<label>Email驗證信確認(Y/N):</label>
-				<label>Y</label> 
-				<input type="radio" value="Y" name="emailVerification" />
-				<label>N</label> 
-				<input type="radio" value="N" name="emailVerification" />
-			</div>
-			<div >	
-				<label>手機:</label> 
-				<input type="text" 
-						value="${param.mobile }" id="mobile" name="mobile">
-			</div>
-			<div >
-				<label>縣市:</label> 
-				<div style='display:inline' role="tw-city-selector" ></div>
-			</div>
-			
-			<div >	
-				<label>註冊起始日期 :</label> 			
-				<input type="text" value="${param.signUpDateStart }"  id="signUpDateStart" name="signUpDateStart" autocomplete="off"/>
-				<input type="text" value="${param.signUpDateEnd }" id="signUpDateEnd" name="signUpDateEnd" autocomplete="off"/>
-			</div>
 		
-			<input type="button"  value="搜尋" id="searchButt" style="margin:10px"/>
-			</fieldset>
-			
-		</form>
 		<fieldset style="width:1200px">
 		<table  id=table class="table table-striped table-bordered">				
 			<thead>
 				<tr>
-					<th scope="col">會員編號</th>
+<!-- 					<th scope="col"></th> -->
+					<th scope="col">id</th>
+					<th scope="col" width="100px"></th>
 					<th scope="col">會員帳號</th>
 					<th scope="col">會員姓名</th>
 					<th scope="col">會員型態</th>
 					<th scope="col">會員信箱</th>
-					<th scope="col">會員手機</th>
+					<th scope="col">會員手機</th>					
 					<th scope="col">會員居住地址</th>
-					<th scope="col">註冊日期</th>
+					<th scope="col">註冊日期</th>				
 	<!-- 				<th>驗證信確認</th> -->
 				
 				</tr>
@@ -161,131 +178,110 @@
 			</tbody>
 		</table>
 		</fieldset>
+			
 	</article>
 	
 
 	<script>
 	
-		function list(){
-			$("#memberTableBody").text("");
-			$.getJSON("/member/queryPage",$("form").serialize(),function(data){
-				$.each(data, function(idx, member){
-					var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/member/edit?id="+member.id+"'\" value='修改'  />";
-					var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" id='deleteButt"+ member.id +"' value='刪除' />"
-					$("#memberTableBody").append("<tr id='row"+ member.id +"'><td>"+editButt + deleteButt+"</td></tr>");					
-					var memberRow = $("#row"+member.id);
-					memberRow.append("<td >"+member.account+"</td>");
-					memberRow.append("<td >"+member.name+"</td>");
-					memberRow.append("<td >"+member.memberType+"</td>");
-					memberRow.append("<td >"+member.email+"</td>");
-					memberRow.append("<td >"+member.mobile+"</td>");
-					memberRow.append("<td >"+ member.county + member.district + member.address +"</td>");		
-					memberRow.append("<td >"+ new Date(member.signUpDate).toLocaleDateString()+"</td>");
-				})
-				
-				
-// 				var table = $('#table').DataTable({
-// 					"searching": false,
-// 					 "processing": true,
-// 				     "serverSide": true,
-// 				     "ajax": "/member/queryPage"
-// 				});
-// 				$('#table').on( 'page.dt', function () {
-// 				    var info = table.page.info();
-// 				    $('#pageInfo').html( 'Showing page: '+info.page+' of '+info.pages );
-// 				    $.each(info, function(idx, value){  	
-// 					    console.log("idx=" + idx + ", value=" + value);
-// 				    })
-// 				    var pageRequest = {
-// 				    	"currentPage":info.page,
-// 				    	"totalPage":info.pages,
-// 				    	"size":info.length
-// 				    }
-				    				    	
-// 				});
-				
-						
+		var dataTable;
+
+		function deleteRow(memberId){
+// 			alert( memberId);
+			$.ajax({
+				type: "get",
+				dataType: "json",         
+				url: "/member/delete",
+				data: {"id":memberId}					
 			})
-			
-		
+			.done(function(response){
+				
+				if (response.status =="SUCCESS"){
+					alert("刪除成功");
+				} else {
+					$.each(response.messages, function(idx, message) {
+						alert("the "+idx+"th ERROR, because "+message);
+					});
+				}			
+ 				dataTable.draw( 'page' );
+			})	
 		}
+
 	
 	
-		
-		$(document).ready(function(){
+		$(document).ready(function(){	
+			new TwCitySelector();
+			$("form").addClass("form-inline");
+			$("form div[id!='collapse']").addClass("form-group mx-sm-3 mb-3");
+			$("form input, select").addClass("form-control mx-3");
+			$("#searchButt, #resetButt").addClass("btn btn-primary");
 			
-			
-// 			$('#table').dataTable( {
-// 			   "aoColumns": [
-// 			       { "mData": "engine" },
-// 			       { "mData": "browser" },
-// 			       { "mData": "platform.inner" },
-// 			       { "mData": "platform.details.0" },
-// 			       { "mData": "platform.details.1" }
-// 			     ]
-// 			   }),
-// 			   "bProcessing": true,
-// 			   "bServerSide": true,
-// 			   "sAjaxSource": url,
-// 			   "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
-// 			     oSettings.jqXHR = $.ajax( {
-// 			       "dataType": 'json',
-// 			       "type": "POST",
-// 			       "url": sSource,
-// 			       "data": aoData,
-// 			       "success": fnCallback,
-// 			       "error": function (e) {
-// 			           console.log(e.message);
-// 			       }
-// 			     });
-// 			   }
-// 			 });
-		
-			
-			
-			
-			$('#table').DataTable( {
-		        processing: true,
+
+			dataTable =  $('#table').DataTable( {
+				pageResize: true, 
+				fixedHeader: true,
+				pagingType: 'full_numbers',
+				searching: false,
+				
+			 	processing: true,
 		        serverSide: true,
-		 
+		   
 		        ajax: {
 		            url: "/member/queryPageRequest",
 		            type: "get",
 		            dataType : "json",
-		            data: $("form").serialize(),
-            		
-		           	columns: [
-			           { data: "id" },
-			           { data: "account" },
-			           { data: "name" },
-			           { data: "memberType" },
-			           { data: "mobile" },
-			           { data: null, render: function ( data, type, row ) {
-			                // Combine the first and last names into a single table field
-			                return data.county + data.district+ data.address;
-			            } },
-			           { data: "signUpDate" },
-			       ],
-			       
-		            
-		        }
-			
-			
-		    } );	
-			    
-		
+		            data: function(d){
+		            	var start = d.start;
+						var length = d.length;
+						var request = $("form").serialize()+"&start="+start+"&length="+length;
+		            	return request;
+		            },
+		            dataFilter: function(resp){
+// 		            	console.log(resp)
+		                var json = jQuery.parseJSON( resp );
+		                json.recordsTotal = json.totalElements;
+		                json.recordsFiltered = json.totalElements;
+		                json.data = json.content;		     			
+// 		     			console.log(JSON.stringify( json ))
+		                return JSON.stringify( json ); 
+		            },
+		            	
 
+		        },
+		        drawCallback: function (d) {
+// 		        	console.log(d)
+		        	  var api = this.api();
+		        	  var pageNum = parseInt(d.json.pageable.pageNumber) ;
+		        	  var totalPages = d.json.totalPages;
+		        	  $('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
+		       },
+
+		     	columns: [
+		           {data: "id" },
+		           {data: function (source, type, val) {
+		        	   	var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/member/edit?id="+source.id+"'\" value='修改'  />";
+						var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+source.id+")\" id='deleteButt"+ source.id +"' value='刪除' />"  
+		               	return editButt + deleteButt;			        	   
+		           	}
+		        	   
+		           },
+		           { data: "account" },
+		           { data: "name" },
+		           { data: "memberType" },
+				   { data: "email" },
+		           { data: "mobile" },
+		           { data: null, render: function ( data, type, row ) {
+		                return data.county + data.district+ data.address;
+		            } },
+		           { data: null, render: function ( data, type, row ) {
+		                return new Date(data.signUpDate).toLocaleDateString();
+		            } },
+		       ],
+				    
+			        
+			 } );
 			
-			
-			
-			
-	
-			new TwCitySelector();
-			$("form").addClass("form-inline");
-			$("form div").addClass("form-group mx-sm-3 mb-3");
-			$("form input").addClass("form-control mx-3");
-			$("form select").addClass("form-control mx-3");
-			$("#searchButt").addClass("btn btn-info");
+
 			
 			
 			var datePickerSetting = {
@@ -295,33 +291,17 @@
 				language : 'zh-TW',
 				clearBtn:true,
 				startView:"2",
-				 endDate:"0d",
-			};
-			
+				endDate:"0d",
+			};			
 			$('#birthDateStart').datepicker(datePickerSetting);
 			$('#birthDateEnd').datepicker(datePickerSetting);
 			$('#signUpDateStart').datepicker(datePickerSetting);
 			$('#signUpDateEnd').datepicker(datePickerSetting)
 			
-		
-			
-			//將deleteButt綁定click事件
-			$("#memberTableBody").on("click", "input[value='刪除']", function(){
-				var memberId = $(this).attr("id").substring(10);
-				$.ajax({
-					type: "post",
-					dataType: "json",         
-					url: "/member/delete",
-					data: {"id":memberId}					
-				})
-				.done(function(data){
-					alert(data.msg);
-					list();
-				})			
-			})
 
-			$("#searchButt").click(function() {		
-				list();		
+			$("#searchButt").click(	function(){
+				dataTable.ajax.reload();
+
 			})
 			
 		
