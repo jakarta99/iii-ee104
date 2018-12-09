@@ -113,7 +113,14 @@
 				data : $('form').serialize(),
 				dataType : 'JSON',
 				success : function(editResult) {
-				alert(editResult.msg);
+					if(editResult.status == "SUCCESS"){
+						alert("更新編號" + editResult.obj.id + " " + editResult.status);
+						document.location.href="/request/list";
+					}else{
+						alert("更新編號" + editResult.obj.id + " " + editResult.status);
+						alert("失敗原因" + editResult.messages);
+					}
+	
 				},
 			})
 		}

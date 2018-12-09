@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +24,7 @@ public class PenaltyService {
 		Penalty penalty=penaltyDao.save(p);
 		return penalty;
 	}
-
-	 
+ 
 	public Penalty getOne(Long id) {
 		Penalty penalty = penaltyDao.getOne(id);
 		return penalty;
@@ -34,8 +35,6 @@ public class PenaltyService {
 		return penalty;
 	}
 	
-
-
 	public List<Penalty> findAll() {
 		List<Penalty> penalty = penaltyDao.findAll();
 		return penalty;
@@ -43,20 +42,16 @@ public class PenaltyService {
 
 	public void delete(Long penaltyListId) {
 		penaltyDao.deleteById(penaltyListId);
+	}
 
+	public Page<Penalty> findBySpecification(Specification<Penalty> specification, PageRequest pageRequest){
+		return penaltyDao.findAll(specification, pageRequest);
 	}
 	
-	public List<Penalty> findBySpecification(Specification<Penalty> specification) {
-		return penaltyDao.findAll(specification);
-	}
-
 	// 查詢某人的所有Penalty (更改by Brian)
 	public List<Penalty> findByMemberId(Long memberId) {
-
 		List<Penalty> penaltys = penaltyDao.findByMemberId(memberId);
-
 		return penaltys;
-
 	}
 
 }

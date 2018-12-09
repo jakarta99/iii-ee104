@@ -117,9 +117,14 @@
 			type : 'delete',
 			dataType : 'JSON',
 			success : function(deleteResult) {
-			alert(deleteResult.msg);
-			 
-			list();
+// 				alert(deleteResult.obj);
+				if(deleteResult.status == "SUCCESS"){
+					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);
+					list();		
+				}else{
+					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);
+					alert("FAIL reason:" + deleteResult.messages);
+				}			
 			},
 		})
 	}
@@ -142,12 +147,42 @@
 		        var cell8 = $('<td></td>').text(request.timeValue);
 				var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4,cell5,cell6,cell7,cell8]);
 		        docFragment.append(row);
+				
 			});
 			tb.html(docFragment);
 			$('#table').DataTable();
 		});				
 	}
 	
+	
+// 	function list2(){
+// 		$('#table').DataTable({
+// 			"processing":true,
+// 			"searching":true,
+// 			"serverside":true,
+// 			"infoCallback": function( settings, start, end, max, total, pre ) {
+// 			    var api = this.api();
+// 			    var pageInfo = api.page.info();
+// 			    return 'Page '+ (pageInfo.page+1) +' of '+ pageInfo.pages;
+// 			  },
+// 			"ajax":{
+// 				"url":"/request/query",
+				
+// 			},
+// 			"columns":[
+// 				{"data":"id"},
+// 				{"data":"memberId"},
+// 				{"data":"jobTitle"},
+// 				{"data":"timeValue"},
+// 				{"data":"jobArea"},
+// 				{"data":"termType"},
+// 				{"data":"serviceType"},
+				
+// 			]
+// 		});		
+// 	}
+	
+
 	$(document).ready( function () {
 		$.get("/html/nav.html",function(data){
 			$("#navBar").html(data);
