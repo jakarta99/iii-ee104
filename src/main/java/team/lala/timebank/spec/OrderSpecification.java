@@ -50,17 +50,14 @@ public class OrderSpecification implements Specification<Order>  {
 		}
 		
 		//排序(暫時寫死)，如何從前端傳排序資料
-		//如何同時針對兩個欄位排序(同樣有排列組合問題)
-		//JpaSpecificationExecutor>>>dao.findAll(Specification<T> spec, Sort sort)回傳List<T>
+		//同時針對兩個欄位排序
+//		List<javax.persistence.criteria.Order> orderList = new ArrayList();
 //		javax.persistence.criteria.Order orderByConfirm = criteriaBuilder.desc(root.get("confirmation"));
 //		javax.persistence.criteria.Order orderBySupplierId = criteriaBuilder.desc(root.get("supplierId"));
-//
-//		query.orderBy(orderByConfirm);
-//		query.orderBy(orderBySupplierId);
-		
-		//*****針對兩個欄位排序(and只作用在Predicate--where條件，無法在order by子句中發生作用)*****
-		//criteriaBuilder.and(root.get("confirmation"), root.get("supplierId"));
-		//query.orderBy(criteriaBuilder.desc(criteriaBuilder.and(root.get("confirmation"), root.get("supplierId"))));
+//		orderList.add(orderByConfirm);
+//		orderList.add(orderBySupplierId);
+//		query.orderBy(orderList);
+
 		
 		Predicate[] p = new Predicate[list.size()];
 		return criteriaBuilder.and(list.toArray(p));
