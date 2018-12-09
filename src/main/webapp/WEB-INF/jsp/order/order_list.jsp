@@ -176,19 +176,20 @@
 			data:$('form').serialize(),
 			dataType:'json',
 			success:function(orders){
+				//alert(orders.status)
 				//1.讀取分頁各項資訊，初始化全域變數
 					//本頁第一筆資料的index
-					indexOfThisPageFirstData = orders.pageable.offset;
+					indexOfThisPageFirstData = orders.page.pageable.offset;
 					
 					//第index頁******待處理:頁數過多時要切割........
-					thisPage = orders.pageable.pageNumber; 
+					thisPage = orders.page.pageable.pageNumber; 
 		
 					//orders.totalPages 共幾頁
-					totalPages = orders.totalPages;
+					totalPages = orders.page.totalPages;
 				//A.顯示分頁資訊:Showing XXX to XXX of XXX entries
 				var totalEntries = "Showing "+ (indexOfThisPageFirstData + 1)
-								+ " to " + (indexOfThisPageFirstData + orders.numberOfElements)  //orders.numberOfElements本頁共幾筆資料
-								+ " of " + orders.totalElements + " entries";  //orders.totalElements  所有資料共幾筆
+								+ " to " + (indexOfThisPageFirstData + orders.page.numberOfElements)  //orders.numberOfElements本頁共幾筆資料
+								+ " of " + orders.page.totalElements + " entries";  //orders.totalElements  所有資料共幾筆
 				$("#myTable_info").text(totalEntries);
 				
 				//B.顯示每頁超連結
@@ -205,7 +206,7 @@
 				//------------------------------------------------------------------------------------------
 				//2.產生表格
 				$("tbody").text(""); 
-				$.each(orders.content, function(index, order){ //讀陣列資料(每筆資料為物件order)
+				$.each(orders.page.content, function(index, order){ //讀陣列資料(每筆資料為物件order)
 					//產生首欄按鈕(edit、delete)
 					var editBtn = $("<button onclick=\"javascript:document.location.href='/order/edit?id="+order.id+"'\">Edit</button>");
 					var delBtn = $("<button onclick=\"deleteOrder("+order.id+")\">Delete</button>");						

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.lala.timebank.commons.ajax.AjaxResponse;
+import team.lala.timebank.commons.ajax.PageResponse;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.service.OrderService;
@@ -32,14 +33,21 @@ public class OrderController {
 	
 	@RequestMapping("/query")
 	@ResponseBody
-	public Page<Order> queryOrder(Order order, @RequestParam("pageNumber") Integer pageNumber,
+	public PageResponse<Order> queryOrder(Order order, @RequestParam("pageNumber") Integer pageNumber,
 												@RequestParam("pageSize") Integer pageSize){
+		PageResponse<Order> response = new PageResponse<Order>();
+		
+		try {
+			OrderSpecification orderSpecification = new OrderSpecification(order);
+			PageRequest thisPage = PageRequest.of(pageNumber, pageSize);
+			Page<Order> orders = orderService.findBySpecification(orderSpecification, thisPage);
+			response.setPage(orders);
+		} catch (Exception e) {
+			response.addMessage("查詢失敗，" + e.getMessage());
+			e.printStackTrace();
+		}
 
-		OrderSpecification orderSpecification = new OrderSpecification(order);
-		PageRequest thisPage = PageRequest.of(pageNumber, pageSize);
-		Page<Order> orders = orderService.findBySpecification(orderSpecification, thisPage);
-
-		return orders;
+		return response;
 
 	}
 	
