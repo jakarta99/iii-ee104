@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -49,6 +48,16 @@ public class OrderSpecification implements Specification<Order>  {
 		if(!StringUtils.isEmpty(inputOrder.getStatus())) {
 			list.add(criteriaBuilder.equal(root.get("status").as(String.class), inputOrder.getStatus()));
 		}
+		
+		//排序(暫時寫死)，如何從前端傳排序資料
+		//同時針對兩個欄位排序
+//		List<javax.persistence.criteria.Order> orderList = new ArrayList();
+//		javax.persistence.criteria.Order orderByConfirm = criteriaBuilder.desc(root.get("confirmation"));
+//		javax.persistence.criteria.Order orderBySupplierId = criteriaBuilder.desc(root.get("supplierId"));
+//		orderList.add(orderByConfirm);
+//		orderList.add(orderBySupplierId);
+//		query.orderBy(orderList);
+
 		
 		Predicate[] p = new Predicate[list.size()];
 		return criteriaBuilder.and(list.toArray(p));

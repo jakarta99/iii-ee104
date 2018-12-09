@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.OrderDao;
+import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.enums.YesNo;
 
@@ -21,6 +24,11 @@ public class OrderService {
 	
 	public List<Order> findBySpecification(Specification<Order> specification){
 		return orderDao.findAll(specification);
+	}
+	
+	public Page<Order> findBySpecification(Specification<Order> specification, PageRequest pageRequest) {
+//		PageRequest thisPage = PageRequest.of(0, 5);
+		return orderDao.findAll(specification, pageRequest);
 	}
 	
 	public List<Order> findAll() {

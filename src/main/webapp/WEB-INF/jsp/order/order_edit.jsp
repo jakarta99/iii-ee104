@@ -31,7 +31,7 @@
 <br>
 <br>
 <h1> Order Edit </h1>
-<h4>edit no.${order.supplierId} supplier's  Order</h4>
+<h4>edit no.${order.id}  Order</h4>
 
 <form>
 	<input type="hidden" value="${order.id}" id="id" name="id"/>
@@ -49,10 +49,17 @@ function updateOrder(){
 		url:'/order/update',
 		type:'put',
 		data:$('form').serialize(),
-		dataType:'text',
+		dataType:'json',
 		success:function(editResult){
-			alert(editResult);
-			document.location.href="/order/list";
+			if(editResult.status == "SUCCESS"){
+				alert("edit no." + editResult.obj.id + " order - STATUS:" + editResult.status);
+				document.location.href="/order/list";
+			}else{
+				alert("edit no." + editResult.obj.id + " order - STATUS:" + editResult.status);
+				alert("FAIL reason:" + editResult.messages);
+			}
+			
+			
 		}
 	})
 }

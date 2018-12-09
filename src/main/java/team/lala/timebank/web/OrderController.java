@@ -1,14 +1,17 @@
 package team.lala.timebank.web;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import team.lala.timebank.commons.ajax.AjaxResponse;
+import team.lala.timebank.commons.ajax.PageResponse;
+import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.service.OrderService;
 import team.lala.timebank.spec.OrderSpecification;
@@ -30,15 +33,21 @@ public class OrderController {
 	
 	@RequestMapping("/query")
 	@ResponseBody
-	public List<Order> queryOrder(Order order){
-		if(order != null) {
-			System.out.println("order not null");
-		}else {
-			System.out.println("NULL");
+	public PageResponse<Order> queryOrder(Order order, @RequestParam("pageNumber") Integer pageNumber,
+												@RequestParam("pageSize") Integer pageSize){
+		PageResponse<Order> response = new PageResponse<Order>();
+		
+		try {
+			OrderSpecification orderSpecification = new OrderSpecification(order);
+			PageRequest thisPage = PageRequest.of(pageNumber, pageSize);
+			Page<Order> orders = orderService.findBySpecification(orderSpecification, thisPage);
+			response.setPage(orders);
+		} catch (Exception e) {
+			response.addMessage("查詢失敗，" + e.getMessage());
+			e.printStackTrace();
 		}
-		OrderSpecification orderSpecification = new OrderSpecification(order);
-		List<Order> orders = orderService.findBySpecification(orderSpecification);
-		return orders;
+
+		return response;
 
 	}
 	
@@ -67,14 +76,16 @@ public class OrderController {
 	
 	@RequestMapping("/insert")
 	@ResponseBody
-	public String insert(Order order) {
+	public AjaxResponse<Order> insert(Order order) {
+		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		try {
 			orderService.save(order);
-			return "【no." + order.getId() + " order】 has been inserted";
 		} catch (Exception e) {
+			response.addMessage("新增失敗，" + e.getMessage());
 			e.printStackTrace();
-			return "Failed to insert 【no." + order.getId() + "order】";
 		}
+		response.setObj(order);
+		return response;
 	}
 
 	@RequestMapping("/edit")
@@ -90,7 +101,8 @@ public class OrderController {
 	
 	@RequestMapping("/update")
 	@ResponseBody
-	public String update(Order order, Model model) {
+	public AjaxResponse<Order> update(Order order) {
+		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		try {
 			Order dbOrder = orderService.getById(order.getId());
 			dbOrder.setSupplierAcception(order.getSupplierAcception());
@@ -99,26 +111,27 @@ public class OrderController {
 			
 			orderService.save(dbOrder);
 			
-			return "【no." + order.getId() + " order】 has been updated";
-			
 		} catch (Exception e) {
+			response.addMessage("修改失敗，" + e.getMessage());
 			e.printStackTrace();
-			return "Failed to update 【no." + order.getId() + "order】";
 		}
-		
+		response.setObj(order);
+		return response;
 	}
 
 	
 	@RequestMapping("/delete")
 	@ResponseBody
-	public String delete(@RequestParam("id") Long id) {
+	public AjaxResponse<Order> delete(@RequestParam("id") Long id) {
+		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		try {
+			response.setObj(orderService.getById(id));
 			orderService.deleteById(id);
-			return "【no." + id + " order】 has been deleted";
 		} catch (Exception e) {
+			response.addMessage("刪除失敗，" + e.getMessage());
 			e.printStackTrace();
-			return "Failed to delete 【no." + id + "order】";
 		}
+		return response;
 	}
 	
 	

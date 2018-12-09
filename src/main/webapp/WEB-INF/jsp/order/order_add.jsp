@@ -64,10 +64,16 @@ function addOrder(){
 		url:'/order/insert',
 		type:'post',
 		data:$('form').serialize(),
-		dataType:'text',
+		dataType:'json',
 		success:function(addResult){
-			alert(addResult);
-			document.location.href="/order/add";
+			if(addResult.status == "SUCCESS"){
+				alert("add no." + addResult.obj.id + " order - STATUS:" + addResult.status);
+				document.location.href="/order/add";
+			}else{
+				alert("add no." + addResult.obj.id + " order - STATUS:" + addResult.status);
+				alert("FAIL reason:" + addResult.messages);
+			}
+			
 		},
 	})
 }
