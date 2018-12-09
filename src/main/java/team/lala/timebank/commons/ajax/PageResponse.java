@@ -1,5 +1,6 @@
 package team.lala.timebank.commons.ajax;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -19,7 +20,12 @@ public class PageResponse<T> {
 	}
 
 	public String getStatus() {
-		return status;
+		// when messages is empty, return success
+		if(messages == null || messages.size() == 0) {
+			return "SUCCESS";
+		}
+		
+		return "ERROR";
 	}
 
 	public void setStatus(String status) {
@@ -32,6 +38,13 @@ public class PageResponse<T> {
 
 	public void setMessages(List<String> messages) {
 		this.messages = messages;
+	}
+	
+	public void addMessage(String message) {
+		if(messages == null) {
+			messages = new ArrayList<String>();
+		}
+		messages.add(message);
 	}
 
 	public Page<T> getPage() {
