@@ -24,9 +24,9 @@
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
 <!-- date picker -->
-<script type="text/javascript" src="/js/moment.min.js"></script>
-<script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
-<script src="/js/locales/bootstrap-datepicker.zh-TW.js"></script>
+<script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
+<script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
+<script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />      
 
 
@@ -82,7 +82,7 @@
 		<h2>Member Add</h2>
 		<form action="#" method="post" >
 			<fieldset>
-				<legend>登入資訊</legend>
+				<legend>帳號資訊</legend>
 				<input type="hidden" value="" id="id" name="id" /> 
 				<input type="hidden" value="${memberType}" id="memberType" name="memberType" />
 				<div >
@@ -220,7 +220,8 @@
 			    autoclose: true,
 			    todayHighlight: true,
 			    language: 'zh-TW',
-			    startView:"years"
+			    startView:"years",
+			    endDate:"0d"
 			})
 			
 			
@@ -233,14 +234,16 @@
 					data: $("form").serialize()
 				}).done(function(response){
 					alert(response.obj);
+// 					console.log("status="+response.status);
+// 					console.log("message="+response.message);
+					
 					if(response.status == "SUCCESS") {
-						alert("Insert Success.....");
+						alert("會員新增成功");
 					} else {
 						$.each(response.messages, function(idx, message) {
 							alert("the "+idx+"th ERROR, because "+message);
 						});
-					}
-					
+					}					
 					window.location.replace("/member/list");
 				})
 			})

@@ -21,10 +21,8 @@ public class AjaxResponse<T> {
 		// when messages is empty, return success
 		if(messages == null || messages.size() == 0) {
 			return "SUCCESS";
-		}
-		
-		return "ERROR";
-		
+		}		
+		return "ERROR";		
 	}
 
 	public void setStatus(String status) {

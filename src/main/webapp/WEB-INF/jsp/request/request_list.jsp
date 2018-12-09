@@ -106,6 +106,7 @@
 		
 	<script>
 	function search() {	
+ 	$('#table').DataTable().destroy();
 	list()
 	}
 	
@@ -117,37 +118,117 @@
 			type : 'delete',
 			dataType : 'JSON',
 			success : function(deleteResult) {
-			alert(deleteResult.msg);
-			 
-			list();
+// 				alert(deleteResult.obj);
+				if(deleteResult.status == "SUCCESS"){
+					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);
+					$('#table').DataTable().destroy();
+					list();
+
+				}else{
+					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);
+					alert("FAIL reason:" + deleteResult.messages);
+				}			
 			},
 		})
 	}
 	
-	function list(){
-		$.getJSON("/request/query",$('#form').serialize(),function(data){
-			var docFragment=$(document.createDocumentFragment());
-			var tb = $('#tbody');
- 		    tb.empty();
-			$.each(data,function(index,request){
-			    var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/edit?id="+request.id+"'\">Edit</button>";     
-			   	var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteRequest("+request.id+")\">Delete</button>"; 	
-			   	var cell1 = $('<td></td>').html(editbutton+deletebutton);
-				var cell2 = $('<td></td>').text(request.id);
-		        var cell3 = $('<td></td>').text(request.jobArea);
-		        var cell4 = $('<td></td>').text(request.jobTitle);
-		        var cell5 = $('<td></td>').text(request.memberId);
-		        var cell6 = $('<td></td>').text(request.serviceType);
-		        var cell7 = $('<td></td>').text(request.termType);
-		        var cell8 = $('<td></td>').text(request.timeValue);
-				var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4,cell5,cell6,cell7,cell8]);
-		        docFragment.append(row);
-			});
-			tb.html(docFragment);
-			$('#table').DataTable();
-		});				
-	}
 	
+	
+	function list(){
+		$.ajax({
+			  dataType: "json",
+			  url: "/request/query",
+			  data: $('#form').serialize(),
+			  success:function(data){
+					var docFragment=$(document.createDocumentFragment());
+					var tb = $('#tbody');
+ 		   			tb.empty();
+					$.each(data,function(index,request){
+					    var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/edit?id="+request.id+"'\">Edit</button>";     
+					   	var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteRequest("+request.id+")\">Delete</button>"; 	
+					   	var cell1 = $('<td></td>').html(editbutton+deletebutton);
+						var cell2 = $('<td></td>').text(request.id);
+				        var cell3 = $('<td></td>').text(request.jobArea);
+				        var cell4 = $('<td></td>').text(request.jobTitle);
+				        var cell5 = $('<td></td>').text(request.memberId);
+				        var cell6 = $('<td></td>').text(request.serviceType);
+				        var cell7 = $('<td></td>').text(request.termType);
+				        var cell8 = $('<td></td>').text(request.timeValue);
+						var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4,cell5,cell6,cell7,cell8]);
+				        docFragment.append(row);						
+						});
+						tb.html(docFragment);
+						$('#table').DataTable({
+							 "lengthMenu": [ 5, 10, 15, 20, ],
+// 						    "drawCallback": function( settings ) {
+// 						        var api = this.api();
+						 
+// 						        // Output the data for the visible rows to the browser's console
+// 						        console.log( api.rows( {page:'current'} ).data() );
+// 						    },
+// 						    "infoCallback": function( settings, start, end, max, total, pre ) {
+// 				 			    var api = this.api();
+// 				 			    var pageInfo = api.page.info();
+// 				 			    return 'Page '+ (pageInfo.page+1) +' of '+ pageInfo.pages;
+// 				 			  },
+ 						}
+								);
+					}				
+			});
+		
+// 		$.getJSON("/request/query",$('#form').serialize(),
+// 				function(data){
+// 					var docFragment=$(document.createDocumentFragment());
+// 					var tb = $('#tbody');
+//  		   			tb.empty();
+// 					$.each(data,function(index,request){
+// 					    var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/edit?id="+request.id+"'\">Edit</button>";     
+// 					   	var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteRequest("+request.id+")\">Delete</button>"; 	
+// 					   	var cell1 = $('<td></td>').html(editbutton+deletebutton);
+// 						var cell2 = $('<td></td>').text(request.id);
+// 				        var cell3 = $('<td></td>').text(request.jobArea);
+// 				        var cell4 = $('<td></td>').text(request.jobTitle);
+// 				        var cell5 = $('<td></td>').text(request.memberId);
+// 				        var cell6 = $('<td></td>').text(request.serviceType);
+// 				        var cell7 = $('<td></td>').text(request.termType);
+// 				        var cell8 = $('<td></td>').text(request.timeValue);
+// 						var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4,cell5,cell6,cell7,cell8]);
+// 				        docFragment.append(row);						
+// 						});
+// 						tb.html(docFragment);
+// 						$('#table').DataTable();
+// 				});				
+		}
+	
+	
+// 	function list2(){
+// 		$('#table').DataTable({
+// 			"processing":true,
+// 			"searching":true,
+// 			"serverside":true,
+// 			"infoCallback": function( settings, start, end, max, total, pre ) {
+// 			    var api = this.api();
+// 			    var pageInfo = api.page.info();
+// 			    return 'Page '+ (pageInfo.page+1) +' of '+ pageInfo.pages;
+// 			  },
+// 			"ajax":{
+// 				"url":"/request/query",
+				
+// 			},
+// 			"columns":[
+// 				{"data":"id"},
+// 				{"data":"memberId"},
+// 				{"data":"jobTitle"},
+// 				{"data":"timeValue"},
+// 				{"data":"jobArea"},
+// 				{"data":"termType"},
+// 				{"data":"serviceType"},
+				
+// 			]
+// 		});		
+// 	}
+	
+
 	$(document).ready( function () {
 		$.get("/html/nav.html",function(data){
 			$("#navBar").html(data);

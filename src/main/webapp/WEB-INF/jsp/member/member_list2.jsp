@@ -30,11 +30,10 @@
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 <!-- data table -->
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/js/dataTable_full_numbers_no_ellipses.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
 <script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
 <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>	
-
-
 
 
 <style>
@@ -43,13 +42,13 @@
 	 }
 	 
 	 article fieldset {
-/* 		width: 500px; */
-		border-radius: 20px;
-		padding: 20px 20px 0px 20px; 
-		border: 3px double #bebebe;
-		margin: auto;
-		margin-top: 10px; 
-		margin-bottom: 20px; 
+/*  		width: 500px;  */
+ 		border-radius: 20px; 
+ 		padding: 20px 20px 0px 20px;  
+ 		border: 3px double #bebebe; 
+		margin: auto; 
+ 		margin-top: 10px;  
+ 		margin-bottom: 20px;  
 	}
 
 	 table tr td, button{
@@ -89,7 +88,7 @@
 		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
 		<h2>Member List</h2>
 		
-		<div>
+		<div >
 			<input type="button" class="btn btn-primary btn-sm"	
 				onclick="javascript:document.location.href='/member/add?memberType=P'" value="新增一般會員" />
 			<input type="button" class="btn btn-primary btn-sm"
@@ -97,7 +96,7 @@
 		</div>
 		
 <!-- 		條件搜尋表單 -->
-		<div id="sideBar">		
+		<div id="sideBar" >		
 			<form>
 				<fieldset>
 				<legend>Search</legend>
@@ -150,7 +149,7 @@
 				</div>
 			</div>
 				
-			</fieldset>			
+		</fieldset>
 			</form>
 		</div>
 		
@@ -161,7 +160,7 @@
 				<tr>
 <!-- 					<th scope="col"></th> -->
 					<th scope="col">id</th>
-					<th scope="col" width="150px"></th>
+					<th scope="col" width="100px"></th>
 					<th scope="col">會員帳號</th>
 					<th scope="col">會員姓名</th>
 					<th scope="col">會員型態</th>
@@ -188,7 +187,7 @@
 		var dataTable;
 
 		function deleteRow(memberId){
-			alert( memberId);
+// 			alert( memberId);
 			$.ajax({
 				type: "get",
 				dataType: "json",         
@@ -199,40 +198,64 @@
 				
 				if (response.status =="SUCCESS"){
 					alert("刪除成功");
-
 				} else {
 					$.each(response.messages, function(idx, message) {
-						alert("the "+idx+"th ERROR,"+ message);
+						alert("the "+idx+"th ERROR, because "+message);
 					});
-				}				
-// 				dataTable.draw( 'page' );  //無法使用??
-				dataTable.ajax.reload(); //會回到第一頁
+				}			
+ 				dataTable.draw( 'page' );
 			})	
 		}
 
 	
 	
-		$(document).ready(function(){						
+		$(document).ready(function(){	
 			new TwCitySelector();
 			$("form").addClass("form-inline");
 			$("form div[id!='collapse']").addClass("form-group mx-sm-3 mb-3");
 			$("form input, select").addClass("form-control mx-3");
 			$("#searchButt, #resetButt").addClass("btn btn-primary");
 			
-			
+
 			dataTable =  $('#table').DataTable( {
 				pageResize: true, 
 				fixedHeader: true,
 				pagingType: 'full_numbers',
 				searching: false,
+				
+			 	processing: true,
+		        serverSide: true,
+		   
 		        ajax: {
-		            url: "/member/query",
+		            url: "/member/queryPageRequest",
 		            type: "get",
 		            dataType : "json",
-		            data:$("form").serialize(),
-		            dataSrc:"",
+		            data: function(d){
+		            	var start = d.start;
+						var length = d.length;
+						var request = $("form").serialize()+"&start="+start+"&length="+length;
+		            	return request;
+		            },
+		            dataFilter: function(resp){
+// 		            	console.log(resp)
+		                var json = jQuery.parseJSON( resp );
+		                json.recordsTotal = json.totalElements;
+		                json.recordsFiltered = json.totalElements;
+		                json.data = json.content;		     			
+// 		     			console.log(JSON.stringify( json ))
+		                return JSON.stringify( json ); 
+		            },
+		            	
+
 		        },
-		        
+		        drawCallback: function (d) {
+// 		        	console.log(d)
+		        	  var api = this.api();
+		        	  var pageNum = parseInt(d.json.pageable.pageNumber) ;
+		        	  var totalPages = d.json.totalPages;
+		        	  $('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
+		       },
+
 		     	columns: [
 		           {data: "id" },
 		           {data: function (source, type, val) {
@@ -254,12 +277,11 @@
 		                return new Date(data.signUpDate).toLocaleDateString();
 		            } },
 		       ],
-				
+				    
 			        
 			 } );
 			
-			
-			
+
 			
 			
 			var datePickerSetting = {
@@ -278,10 +300,8 @@
 			
 
 			$("#searchButt").click(	function(){
-				$.getJSON("/member/query",$("form").serialize(),function(resp){
-					dataTable.clear();
-					dataTable.rows.add(resp).draw();	
-				})
+				dataTable.ajax.reload();
+
 			})
 			
 		

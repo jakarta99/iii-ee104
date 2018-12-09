@@ -24,10 +24,11 @@
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
 <!-- date picker -->
-<script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
-<script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
-<script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
+<script type="text/javascript" src="/js/moment.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
+<script src="/js/locales/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
+
 <!-- data table -->
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
@@ -57,8 +58,7 @@
 	 	line-height:center; 
 	 }
 	 article .btn{
-	 	margin-left:3px;
-	 	margin-right:3px
+	 	margin-left:10px;
 	 }
 	 
 
@@ -112,16 +112,12 @@
 						<option value="P">一般會員</option>
 						<option value="O">機構會員</option>
 					</select>
-					<input type="button"  value="搜尋" id="searchButt" style="margin:10px"/>
-					<input type="reset"  value="重設"  id="resetButt" style="margin:10px"/>
-				<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
-				進階查詢:</a>
 				</div>
-			<div class="collapse" id="collapse">
+			
 				<div >
 					<label>出生起始日期:</label> 
-					<input type="text" value="${param.birthDateStart }"  id="birthDateStart" name="birthDateStart" autocomplete="off" />
-					<input type="text" value="${param.birthDateEnd }" id="birthDateEnd" name="birthDateEnd" autocomplete="off"/>	
+					<input type="text" value="${param.birthDateStart }"  id="birthDateStart" name="signUpDateStart" autocomplete="off" />
+					<input type="text" value="${param.birthDateEnd }" id="birthDateEnd" name="signUpDateEnd" autocomplete="off"/>	
 				</div>
 				<div >
 					<label>email:</label> 
@@ -148,9 +144,11 @@
 					<input type="text" value="${param.signUpDateStart }"  id="signUpDateStart" name="signUpDateStart" autocomplete="off"/>
 					<input type="text" value="${param.signUpDateEnd }" id="signUpDateEnd" name="signUpDateEnd" autocomplete="off"/>
 				</div>
-			</div>
+			
+				<input type="button"  value="搜尋" id="searchButt" style="margin:10px"/>
+				<input type="reset"  value="重設"  id="resetButt" style="margin:10px"/>
+				</fieldset>
 				
-			</fieldset>			
 			</form>
 		</div>
 		
@@ -186,7 +184,14 @@
 	<script>
 	
 		var dataTable;
-
+		
+// 		function filteredQuery() {			
+// 			$.getJSON("/member/query",$("form").serialize(),function(resp){
+// 				dataTable.clear();
+// 				dataTable.rows.add(resp).draw();	
+// 			})
+		
+// 		}
 		function deleteRow(memberId){
 			alert( memberId);
 			$.ajax({
@@ -199,38 +204,31 @@
 				
 				if (response.status =="SUCCESS"){
 					alert("刪除成功");
-
+// 					filteredQuery();
 				} else {
 					$.each(response.messages, function(idx, message) {
-						alert("the "+idx+"th ERROR,"+ message);
+						alert("the "+idx+"th ERROR, because "+message);
 					});
 				}				
-// 				dataTable.draw( 'page' );  //無法使用??
-				dataTable.ajax.reload(); //會回到第一頁
+				dataTable.ajax.reload();
+				
 			})	
 		}
 
 	
 	
 		$(document).ready(function(){						
-			new TwCitySelector();
-			$("form").addClass("form-inline");
-			$("form div[id!='collapse']").addClass("form-group mx-sm-3 mb-3");
-			$("form input, select").addClass("form-control mx-3");
-			$("#searchButt, #resetButt").addClass("btn btn-primary");
-			
-			
 			dataTable =  $('#table').DataTable( {
-				pageResize: true, 
-				fixedHeader: true,
-				pagingType: 'full_numbers',
-				searching: false,
+				fixedHeader:true,
+// 			 	processing: true,
+// 		        serverSide: true,
+// 				data:$("form").serialize(),
 		        ajax: {
 		            url: "/member/query",
 		            type: "get",
 		            dataType : "json",
-		            data:$("form").serialize(),
 		            dataSrc:"",
+		            data:$("form").serialize(),
 		        },
 		        
 		     	columns: [
@@ -248,6 +246,7 @@
 				   { data: "email" },
 		           { data: "mobile" },
 		           { data: null, render: function ( data, type, row ) {
+		                // Combine the first and last names into a single table field
 		                return data.county + data.district+ data.address;
 		            } },
 		           { data: null, render: function ( data, type, row ) {
@@ -255,11 +254,21 @@
 		            } },
 		       ],
 				
+					
+			        
 			        
 			 } );
 			
 			
 			
+			
+			new TwCitySelector();
+			$("form").addClass("form-inline");
+			$("form div").addClass("form-group mx-sm-3 mb-3");
+			$("form input").addClass("form-control mx-3");
+			$("form select").addClass("form-control mx-3");
+			$("#searchButt").addClass("btn btn-info");
+			$("#resetButt").addClass("btn btn-info");
 			
 			
 			var datePickerSetting = {
@@ -282,7 +291,8 @@
 					dataTable.clear();
 					dataTable.rows.add(resp).draw();	
 				})
-			})
+			}				
+			)
 			
 		
 			

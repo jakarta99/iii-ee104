@@ -94,8 +94,13 @@
 				data : $('form').serialize(),
 				dataType : 'JSON',
 				success : function(addResult) {
-				alert(addResult.msg);
-				document.location.href = "/request/add";
+					if(addResult.status == "SUCCESS"){
+						alert("新增編號" + addResult.obj.id + " "+ addResult.status);
+						document.location.href = "/request/add"
+					}else{
+						alert("新增編號" + addResult.obj.id + " " + addResult.status);
+						alert("FAIL reason:" + addResult.messages);
+					}
 				},
 			})
 		}
