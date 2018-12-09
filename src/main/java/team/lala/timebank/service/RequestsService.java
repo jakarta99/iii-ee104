@@ -3,6 +3,8 @@ package team.lala.timebank.service;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,10 @@ public class RequestsService {
 	
 	public List<Requests> findBySpecification(Specification<Requests> specification) {
 		return requestsDao.findAll(specification);
+	}
+
+	public Page<Requests> findBySpecification(Specification<Requests> specification, PageRequest pageRequest) {
+		return requestsDao.findAll(specification, pageRequest);
 	}
 
 	// update

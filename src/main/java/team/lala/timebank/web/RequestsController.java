@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import team.lala.timebank.commons.ajax.AjaxResponse;
+import team.lala.timebank.commons.ajax.PageResponse;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Requests;
@@ -25,6 +29,8 @@ public class RequestsController {
 
 	@Autowired
 	private RequestsService requestsService;
+	
+	
 
 	@RequestMapping("/list")
 	public String listPage(Model model) {
@@ -119,10 +125,11 @@ public class RequestsController {
 
 	@RequestMapping("/query")
 	@ResponseBody
-	public List<Requests> query(Requests inputRequests) {
-		System.out.println("inputRequests="+inputRequests);
+	public Page<Requests> query(Requests inputRequests,PageRequest pageRequest) {
+		System.out.println("inputRequests="+inputRequests+"pageRequest="+pageRequest);
 		RequestSpecification requestSpecification=new RequestSpecification(inputRequests);
-		List<Requests> requests = requestsService.findBySpecification(requestSpecification);
+		
+		Page<Requests> requests = requestsService.findBySpecification(requestSpecification,pageRequest);
 		System.out.println(requests);
 		return requests;
 	}
