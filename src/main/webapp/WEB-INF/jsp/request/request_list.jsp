@@ -105,6 +105,9 @@
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 		
 	<script>
+	
+	var datatable;
+	
 	function search() {	
  	$('#table').DataTable().destroy();
 	list()
@@ -121,9 +124,9 @@
 // 				alert(deleteResult.obj);
 				if(deleteResult.status == "SUCCESS"){
 					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);
-					$('#table').DataTable().destroy();
-					list();
-
+// 					$('#table').DataTable().destroy();
+// 					list();
+					datatable.ajax.reload();
 				}else{
 					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);
 					alert("FAIL reason:" + deleteResult.messages);
@@ -199,41 +202,46 @@
 // 						$('#table').DataTable();
 // 				});				
 		}
-	
-	
-// 	function list2(){
-// 		$('#table').DataTable({
-// 			"processing":true,
-// 			"searching":true,
-// 			"serverside":true,
-// 			"infoCallback": function( settings, start, end, max, total, pre ) {
-// 			    var api = this.api();
-// 			    var pageInfo = api.page.info();
-// 			    return 'Page '+ (pageInfo.page+1) +' of '+ pageInfo.pages;
-// 			  },
-// 			"ajax":{
-// 				"url":"/request/query",
-				
-// 			},
-// 			"columns":[
-// 				{"data":"id"},
-// 				{"data":"memberId"},
-// 				{"data":"jobTitle"},
-// 				{"data":"timeValue"},
-// 				{"data":"jobArea"},
-// 				{"data":"termType"},
-// 				{"data":"serviceType"},
-				
-// 			]
-// 		});		
-// 	}
-	
+
 
 	$(document).ready( function () {
 		$.get("/html/nav.html",function(data){
 			$("#navBar").html(data);
 		});	
-		list();		 				
+		datatable=
+			$('#table').DataTable({
+				"processing":true,
+				"searching":true,
+				"serverside":true,				
+				"ajax":{
+					"url":"/request/query",
+						"type": "get",
+			            "dataType" : "json",
+			            "data":$("form").serialize(),
+			            "dataSrc":"",					
+				},
+				"columns":[
+					
+					{"data": function (source, type, val) {
+						 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/edit?id="+source.id+"'\">Edit</button>";     
+						 var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteRequest("+source.id+")\">Delete</button>"; 	
+						 return editbutton + deletebutton;},
+					 },
+					 
+					{"data":"id"},
+					{"data":"jobArea"},
+					{"data":"jobTitle"},
+					{"data":"memberId"},
+					{"data":"serviceType"},
+					{"data":"termType"},
+					{"data":"timeValue"},
+				]
+			});		
+		
+		
+		
+		
+		
 	});
 	</script>	
 </body>
