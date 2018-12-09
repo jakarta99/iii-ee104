@@ -68,7 +68,20 @@
 		</div>
 		<input type="button" class="btn btn-primary mb-2" id="serach" value="搜尋"/>
 	</form>
-
+	
+	<div>show
+		<select id="pageSize">
+			<option>3</option>
+			<option>5</option>
+		</select>
+	entires</div>
+	<div>
+		<button type="button" id="previous">上一頁</button>
+		<span id="allPage"></span>
+		<button type="button" id="next">下一頁</button>
+	</div>
+	
+	<div id="pageInfo">Showing 0 to 0 of 0 entiries</div>
 
 	<button onclick="javascript:document.location.href='/penalty/add'"
 		class="btn btn-primary">Add</button>
@@ -90,14 +103,28 @@
 		</tbody>
 	</table>
 	<script type="text/javascript">
+		//一頁幾筆
+		var pageSize = $('#pageSize').val();
+		//目前頁數
+		var onPage;
+		//總頁數
+		var totalPage;
+		//方法回傳的物件
+		var pageIndex;
 		//列清單方法
-		function listPenalty(Form) {
+		function listPenalty(form, pageNumber, pageSize) {
 			$("#dataTable").text("");
-			$.getJSON("/penalty/getList",
-					Form,
+			$.getJSON("/penalty/query?pageNumber=" + pageNumber + "&pageSize=" + pageSize,
+					form,
 					function(penalties) {
+							pageIndex = penalties.page;
+							onPage = penalties.page.pageable.pageNumber;
+							totalPage = penalties.page.totalPages;
+							
+							console.log(pageIndex);
+							//table
 							var docFrag = $(document.createDocumentFragment());
-							$.each(penalties,function(idx, penalty) {
+							$.each(penalties.page.content, function(idx, penalty) {
 							var editButt = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/penalty/edit?id="
 											+ penalty.id+ "'\" value='修改'  />";
 							var deleteButt = "<input type='button' class=\"btn btn-primary btn-sm\" id='deleteButt"+ penalty.id +"' value='刪除' />";
@@ -112,16 +139,44 @@
 							docFrag.append(row);
 							})
 							$('#dataTable').append(docFrag);
+							//pageInfo
+							var pageInfo = "第" + (onPage + 1) + "頁，共" + totalPage +"頁，收尋到" + pageIndex.totalElements + "筆資料";
+							$('#pageInfo').html(pageInfo);
+							//頁數按鈕
+							var pageUrl = "";
+							for(var i = 1 ; i <= totalPage ; i++){
+								pageUrl += "<button type='button' name='pageLink'>" + i + "</button>";
+							}
+							$('#allPage').html(pageUrl);
 					})
 		}
 		//綁定Serach
 		$('#serach').click(function(){
-			listPenalty($("#serachForm").serialize());
+			listPenalty($("#serachForm").serialize(), 0 ,pageSize);
 		})
-
+		//上一頁下一頁
+		$('#previous').click(function(){
+			if(pageIndex.first != true){
+				listPenalty($("#serachForm").serialize(), onPage - 1, pageSize);				
+			}
+		})
+		$('#next').click(function(){
+			if(pageIndex.last != true){
+				listPenalty($("#serachForm").serialize(), onPage + 1, pageSize);
+			}
+		})
+		//切換每頁筆數
+		$('#pageSize').change(function(){
+			pageSize = $('#pageSize').val();
+			listPenalty($("#serachForm").serialize(), onPage, pageSize);
+		})
 		$(document).ready(function() {
-			listPenalty();
-
+			listPenalty(null, 0, pageSize);
+	
+			//點選頁數超連結
+			$('#allPage').on('click', 'button',function(){
+				listPenalty($("#serachForm").serialize(), $(this).text() - 1, pageSize);
+			})
 			//綁定delete事件
 			$('#dataTable').on('click', 'input[value="刪除"]', function() {
 				var penaltyId = $(this).attr("id").substring(10);
