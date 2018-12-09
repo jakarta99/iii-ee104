@@ -231,14 +231,6 @@
 	}
 	
 	
-//controller回傳資料格式
-//		{
-// 		"content":[資料的JSON底家啦],
-//      "pageable":{"sort":{"sorted":false,"unsorted":true},
-//							"offset":10,"pageNumber":2,"pageSize":5,"unpaged":false,"paged":true},
-//		"totalPages":4,"last":false,"totalElements":16,"number":2,"size":5,
-//		"sort":{"sorted":false,"unsorted":true},"numberOfElements":5,"first":false}
-//		}	
 	
 	function deleteOrder(orderId){  //delBtn的onclick會呼叫此方法，並傳入參數
 		$.ajax({
