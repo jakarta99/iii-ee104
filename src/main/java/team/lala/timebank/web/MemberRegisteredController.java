@@ -68,7 +68,7 @@ public class MemberRegisteredController {
 		// 檢查帳號是否重複，如果沒重複則insert資料庫
 		// findByLoginAccount回傳直如果是null，代表資料庫沒相同的帳號，可以註冊
 		if (memberService.findByLoginAccount(member) == null) {
-			member = memberService.save(member);
+			member = memberService.insert(member);
 		}
 		return member;
 	}

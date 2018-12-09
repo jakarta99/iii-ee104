@@ -28,9 +28,9 @@
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
 <!-- date picker -->
-<script type="text/javascript" src="/js/moment.min.js"></script>
-<script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
-<script src="/js/locales/bootstrap-datepicker.zh-TW.js"></script>
+<script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
+<script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
+<script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 
 
@@ -54,6 +54,7 @@
  		padding-left: 10px;  		
  		margin:auto;   
  		margin-bottom:20px;
+  		line-height:center; 
 	}
 	
 	
@@ -83,8 +84,10 @@
 	<!-- 	<div id="navBar"></div> -->
 	<c:import url="/html/nav.html" />
 	<article>
+		<input type="button" class="btn btn-primary btn-sm"
+							onclick="javascript:document.location.href='/member/list'" value="回上一頁" />
 		<h2>Member Edit</h2>
-		<h4>Member ${member.id}</h4>
+		<h4>Member Id ${member.id}</h4>
 
 		<form action="#" method="post">
 			<fieldset>
@@ -232,8 +235,7 @@
 				<fieldset style="border:none">
 					<div>
 						<input type="button" class="btn btn-primary btn-sm" id="updateButt" value="儲存" /> 
-						<input type="button" class="btn btn-primary btn-sm"
-							onclick="javascript:document.location.href='/member/list'" value="回上一頁" />
+						
 					</div>
 				</fieldset>
 		</form>
@@ -251,10 +253,11 @@
 						format : "yyyy/mm/dd",
 						autoclose : true,
 						todayHighlight : true,
-						language : 'zh-TW',						
+						language : 'zh-TW',	
+						endDate:"0d",
 					};
-					$('#birthDate').datepicker({datePickerSetting});
-					$('#signUpDate').datepicker({datePickerSetting});
+					$('#birthDate').datepicker(datePickerSetting);
+					$('#signUpDate').datepicker(datePickerSetting);
 
 					$("div[role='tw-city-selector']").attr("data-county-value",'${member.county}');
 					$("div[role='tw-city-selector']").attr("data-district-value", '${member.district}');
@@ -263,19 +266,31 @@
 					if ('${member.memberType }' == 'O') {
 						$("input[name='orgIdConfirmation'][value="+ '${member.orgIdConfirmation}' + "]").prop("checked", true);			
 					}
-
+					
+					
+					
+					//update member info. event
 					$("#updateButt").click(function() {
 						$.ajax({
 							method : "put",
 							dataType : "json",
 							url : "/member/update",
 							data : $("form").serialize(),
-						}).done(function(data) {
-							$.each(data, function(key, value) {
-								if (key == 'msg') {
-									alert(value);
-								}
-							})
+						}).done(function(response) {
+							alert(response.obj);
+							
+							if (response.status =='SUCCESS'){
+								alert("資料更新成功");
+							} else{
+								$.each(response.messages, function(idx, message) {
+									alert("the "+idx+"th ERROR, because "+message);
+								});
+							}
+// 							$.each(data, function(key, value) {
+// 								if (key == 'msg') {
+// 									alert(value);
+// 								}
+// 							})
 						});
 
 					})
