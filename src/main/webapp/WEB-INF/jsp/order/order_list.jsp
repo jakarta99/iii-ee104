@@ -239,14 +239,19 @@
 //		"sort":{"sorted":false,"unsorted":true},"numberOfElements":5,"first":false}
 //		}	
 	
-	function deleteOrders(orderId){  //delBtn的onclick會呼叫此方法，並傳入參數
+	function deleteOrder(orderId){  //delBtn的onclick會呼叫此方法，並傳入參數
 		$.ajax({
 			url:'/order/delete?id=' + orderId,
 			type:'delete',
-			dataType:'text',
+			dataType:'json',
 			success:function(deleteResult){
-				alert(deleteResult);
-				findAllOrders();
+				if(deleteResult.status == "SUCCESS"){
+					alert("delete no." + deleteResult.obj.id + " order - STATUS:" + deleteResult.status);
+					findAllOrders(thisPage, thisPageSize);
+				}else{
+					alert("delete no." + deleteResult.obj.id + " order - STATUS:" + deleteResult.status);
+					alert("FAIL reason:" + deleteResult.messages);
+				}
 			},
 		})
 	}
