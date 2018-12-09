@@ -28,8 +28,10 @@
 <script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
 <script src="/js/locales/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
-
-
+<!-- data table -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
+		
 <style>
 	 article{
 	 	margin-top:70px;
@@ -51,9 +53,8 @@
 	 article .btn{
 	 	margin-left:10px;
 	 }
-	 article button{
-		 margin:15px;
-	 }
+
+	 
 	 /* 	設定縣市地區選擇器的css樣式 */
 	.county,.district {
 	  padding: 0.375rem 0.75rem;
@@ -77,11 +78,19 @@
 
 	<article>
 		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
-		<h2>Member List</h2>
+		<h2>Member List 2</h2>
 		
-		<form action="#" >
-		<fieldset>
-		<legend>Search</legend>
+		<div>
+			<input type="button" class="btn btn-primary btn-sm"	
+				onclick="javascript:document.location.href='/member/add?memberType=P'" value="新增一般會員" />
+			<input type="button" class="btn btn-primary btn-sm"
+					onclick="javascript:document.location.href='/member/add?memberType=O'" value="新增公益團體" />
+		</div>
+		
+<!-- 		條件搜尋表單 -->
+		<form>
+			<fieldset>
+			<legend>Search</legend>
 			<div >
 				<label>帳號 :</label> 
 				<input type="text" value="${param.account }" placeholder="帳號" id="account" name="account"/>
@@ -89,9 +98,9 @@
 				<input type="text" value="${param.name }" placeholder="名字" id="name" name="name"/>
 				<label>會員類型 :</label> 
 				<select  id="memberType" name="memberType">
-					<option  value=""></option>
-					<option  value="P">一般會員</option>
-					<option  value="O">機構會員</option>
+					<option value="">選擇會員類型</option>
+					<option value="P">一般會員</option>
+					<option value="O">機構會員</option>
 				</select>
 			</div>
 		
@@ -125,19 +134,13 @@
 				<input type="text" value="${param.signUpDateStart }"  id="signUpDateStart" name="signUpDateStart" autocomplete="off"/>
 				<input type="text" value="${param.signUpDateEnd }" id="signUpDateEnd" name="signUpDateEnd" autocomplete="off"/>
 			</div>
-			
-			<input type="button"  value="搜尋" id="searchButt" />
-			</fieldset>
-		</form>
 		
-		<table  class="table table-striped table-bordered">
-			<tr>
-				<button class="btn btn-primary btn-sm"
-					onclick="javascript:document.location.href='/member/add?memberType=P'">新增一般會員</button>
-				<button class="btn btn-primary btn-sm"
-					onclick="javascript:document.location.href='/member/add?memberType=O'">新增公益團體</button>
-			</tr>
-	
+			<input type="button"  value="搜尋" id="searchButt" style="margin:10px"/>
+			</fieldset>
+			
+		</form>
+		<fieldset style="width:1200px">
+		<table  id=table class="table table-striped table-bordered">				
 			<thead>
 				<tr>
 					<th scope="col">會員編號</th>
@@ -157,15 +160,15 @@
 				
 			</tbody>
 		</table>
+		</fieldset>
 	</article>
 	
 
 	<script>
 	
-// 		列出會員清單函式
-		function listMember(){
+		function list(){
 			$("#memberTableBody").text("");
-			$.getJSON("/member/query",$("form").serialize(),function(data){
+			$.getJSON("/member/queryPage",$("form").serialize(),function(data){
 				$.each(data, function(idx, member){
 					var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/member/edit?id="+member.id+"'\" value='修改'  />";
 					var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" id='deleteButt"+ member.id +"' value='刪除' />"
@@ -178,20 +181,111 @@
 					memberRow.append("<td >"+member.mobile+"</td>");
 					memberRow.append("<td >"+ member.county + member.district + member.address +"</td>");		
 					memberRow.append("<td >"+ new Date(member.signUpDate).toLocaleDateString()+"</td>");
-// 					memberRow.append("<td >"+ member.signUpDate +"</td>");
-											
 				})
+				
+				
+// 				var table = $('#table').DataTable({
+// 					"searching": false,
+// 					 "processing": true,
+// 				     "serverSide": true,
+// 				     "ajax": "/member/queryPage"
+// 				});
+// 				$('#table').on( 'page.dt', function () {
+// 				    var info = table.page.info();
+// 				    $('#pageInfo').html( 'Showing page: '+info.page+' of '+info.pages );
+// 				    $.each(info, function(idx, value){  	
+// 					    console.log("idx=" + idx + ", value=" + value);
+// 				    })
+// 				    var pageRequest = {
+// 				    	"currentPage":info.page,
+// 				    	"totalPage":info.pages,
+// 				    	"size":info.length
+// 				    }
+				    				    	
+// 				});
+				
+						
 			})
+			
+		
 		}
 	
 	
 		
 		$(document).ready(function(){
-// 			alert("jjj")
-			listMember();
+			
+			
+// 			$('#table').dataTable( {
+// 			   "aoColumns": [
+// 			       { "mData": "engine" },
+// 			       { "mData": "browser" },
+// 			       { "mData": "platform.inner" },
+// 			       { "mData": "platform.details.0" },
+// 			       { "mData": "platform.details.1" }
+// 			     ]
+// 			   }),
+// 			   "bProcessing": true,
+// 			   "bServerSide": true,
+// 			   "sAjaxSource": url,
+// 			   "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
+// 			     oSettings.jqXHR = $.ajax( {
+// 			       "dataType": 'json',
+// 			       "type": "POST",
+// 			       "url": sSource,
+// 			       "data": aoData,
+// 			       "success": fnCallback,
+// 			       "error": function (e) {
+// 			           console.log(e.message);
+// 			       }
+// 			     });
+// 			   }
+// 			 });
+		
+			
+			
+			
+			$('#table').DataTable( {
+		        processing: true,
+		        serverSide: true,
+		 
+		        ajax: {
+		            url: "/member/queryPageRequest",
+		            type: "get",
+		            dataType : "json",
+		            data: $("form").serialize(),
+            		
+		           	columns: [
+			           { data: "id" },
+			           { data: "account" },
+			           { data: "name" },
+			           { data: "memberType" },
+			           { data: "mobile" },
+			           { data: null, render: function ( data, type, row ) {
+			                // Combine the first and last names into a single table field
+			                return data.county + data.district+ data.address;
+			            } },
+			           { data: "signUpDate" },
+			       ],
+			       
+		            
+		        }
+			
+			
+		    } );	
+			    
+		
+
+			
+			
+			
+			
+	
 			new TwCitySelector();
-// 			$("form div").addClass("form-group");
-// 			$("form input").addClass("form-control");
+			$("form").addClass("form-inline");
+			$("form div").addClass("form-group mx-sm-3 mb-3");
+			$("form input").addClass("form-control mx-3");
+			$("form select").addClass("form-control mx-3");
+			$("#searchButt").addClass("btn btn-info");
 			
 			
 			var datePickerSetting = {
@@ -200,13 +294,14 @@
 				todayHighlight : true,
 				language : 'zh-TW',
 				clearBtn:true,
-				startView:"year",
+				startView:"2",
+				 endDate:"0d",
 			};
 			
-			$('#birthDateStart').datepicker({datePickerSetting});
-			$('#birthDateEnd').datepicker({datePickerSetting});
-			$('#signUpDateStart').datepicker({datePickerSetting});
-			$('#signUpDateEnd').datepicker({datePickerSetting})
+			$('#birthDateStart').datepicker(datePickerSetting);
+			$('#birthDateEnd').datepicker(datePickerSetting);
+			$('#signUpDateStart').datepicker(datePickerSetting);
+			$('#signUpDateEnd').datepicker(datePickerSetting)
 			
 		
 			
@@ -221,12 +316,12 @@
 				})
 				.done(function(data){
 					alert(data.msg);
-					listMember();
+					list();
 				})			
 			})
 
 			$("#searchButt").click(function() {		
-				listMember()			
+				list();		
 			})
 			
 		

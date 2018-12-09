@@ -1,27 +1,75 @@
 package team.lala.timebank.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.entity.Member;
+import team.lala.timebank.enums.MemberType;
+import team.lala.timebank.enums.YesNo;
 
 @Service
 public class MemberService {
 
 	@Autowired
 	private MemberDao memberDao;
-
-	public Member save(Member m) {
-		Member member = memberDao.save(m);
-		return member;
+	
+	
+	public Member insert(Member newMember) {
+		newMember.setSignUpDate(new Date());
+		newMember.setEmailVerification(YesNo.N);
+		newMember.setOrgIdConfirmation(YesNo.N);
+		Member member = memberDao.save(newMember);
+		return member;		
 	}
+	
+	
+	public Member update(Member member) {
+		Member dbMember = null;
+		if (member.getId() != null) {
+			dbMember = memberDao.getOne(member.getId());
+			dbMember.setAccount(member.getAccount());
+			dbMember.setPassword(member.getPassword());
+			dbMember.setName(member.getName());
+			dbMember.setCertificateIdNumber(member.getCertificateIdNumber());
+			dbMember.setBirthDate(member.getBirthDate());
+			dbMember.setEmail(member.getEmail());
+			dbMember.setTelephone(member.getTelephone());
+			dbMember.setMobile(member.getMobile());
+			dbMember.setCounty(member.getCounty());
+			dbMember.setDistrict(member.getDistrict());
+			dbMember.setAddress(member.getAddress());
+			dbMember.setEmailVerification(member.getEmailVerification());
+			dbMember.setBirthDate(member.getBirthDate());
+			dbMember.setCertificateIdNumber(member.getCertificateIdNumber());
+			
+			if (dbMember.getMemberType() == MemberType.O) {
+				dbMember.setOrgCeo(member.getOrgCeo());
+				dbMember.setOrgFounder(member.getOrgFounder());
+				dbMember.setOrgContactPerson(member.getOrgContactPerson());
+				dbMember.setOrgContactPersonMobile(member.getOrgContactPersonMobile());
+				dbMember.setOrgContactPersonTel(member.getOrgContactPersonTel());
+				dbMember.setOrgFoundPurpose(member.getOrgFoundPurpose());
+				dbMember.setOrgIdConfirmation(member.getOrgIdConfirmation());
+				dbMember.setOrgWebsiteLink(member.getOrgWebsiteLink());
+			}
+			dbMember = memberDao.save(dbMember);			
+		}		
+		return dbMember;
+	}
+
+//	public Member save(Member m) {
+//		Member member = memberDao.save(m);
+//		return member;
+//	}
 
 	public void deleteById(Long id) {
 		memberDao.deleteById(id);
@@ -48,10 +96,8 @@ public class MemberService {
 		return memberDao.findAll(specification);
 	}
 	
-	public Page<Member> findBySpecification(Specification<Member> specification, PageRequest pageRequest) {
-		
-		PageRequest thisPage = PageRequest.of(1, 10);
-		
+	public Page<Member> findBySpecification(Specification<Member> specification, PageRequest pageRequest) {		
+		Pageable thisPage = pageRequest;		
 		return memberDao.findAll(specification, thisPage);
 	}
 	
