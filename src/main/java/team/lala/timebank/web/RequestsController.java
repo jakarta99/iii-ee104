@@ -28,9 +28,7 @@ import team.lala.timebank.spec.RequestSpecification;
 public class RequestsController {
 
 	@Autowired
-	private RequestsService requestsService;
-	
-	
+	private RequestsService requestsService;		
 
 	@RequestMapping("/list")
 	public String listPage(Model model) {
@@ -65,74 +63,76 @@ public class RequestsController {
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public Map<String, String> deletePage(@RequestParam("id") Long id, Model model) {
-		Map<String, String> msg = new HashMap<>();
+	public AjaxResponse<Requests> deletePage(@RequestParam("id") Long id, Model model) {
+		AjaxResponse<Requests> response = new AjaxResponse<Requests>();
 
 		try {
+			response.setObj(requestsService.getOne(id));
 			requestsService.delete(id);
-			msg.put("msg", "刪除成功");
+			
 
 		} catch (Exception e) {
-			msg.put("msg", "刪除失敗");
+			response.addMessage("刪除失敗，" + e.getMessage());
 
 			e.printStackTrace();
 		}
-		return msg;
+		return response;
 	}
 
 	@RequestMapping("/update")
 	@ResponseBody
-	public Map<String, Object> update(Requests requests, Model model) {
-		Map<String, Object> msg = new HashMap<>();
+	public AjaxResponse<Requests> update(Requests requests) {
+		AjaxResponse<Requests> response = new AjaxResponse<Requests>();
 		// Requests r =requestsService.getOne(requests.getId());
 		// r.setJobArea(requests.getJobArea());
 		// r.setJobTitle(requests.getJobTitle());
 		// r.setServiceType(requests.getServiceType());
 		// r.setTermType(requests.getTermType());
 		// r.setTimeValue(requests.getTimeValue());
-
 		try {
 			requestsService.save(requests);
-			msg.put("requestinfo", requests);
-			msg.put("msg", "資料更新成功");
-			System.out.println("資料更新成功");
+			response.setObj(requests);
 		} catch (Exception e) {
-			msg.put("requestinfo", requests);
-			msg.put("msg", "資料更新失敗");
-			System.out.println("資料更新失敗");
+			response.addMessage("修改失敗，" + e.getMessage());
 			e.printStackTrace();
 		}
 
-		return msg;
+		return response;
 	}
 
 	@RequestMapping("/insert")
 	@ResponseBody
-	public Map<String, String> insert(Requests requests, Model model) {
-		Map<String, String> msg = new HashMap<>();
+	public AjaxResponse<Requests> insert(Requests requests) {
+		AjaxResponse<Requests> response = new AjaxResponse<Requests>();
 
 		try {
 			requestsService.save(requests);
-			msg.put("msg", "新增成功");
-			System.out.println("新增成功");
+			response.setObj(requests);
 		} catch (Exception e) {
-			msg.put("msg", "新增失敗");
-			System.out.println("新增失敗");
+			response.addMessage("新增失敗，" + e.getMessage());
 			e.printStackTrace();
 		}
-		return msg;
+		return response;
 	}
 
 	@RequestMapping("/query")
 	@ResponseBody
-	public Page<Requests> query(Requests inputRequests,PageRequest pageRequest) {
-		System.out.println("inputRequests="+inputRequests+"pageRequest="+pageRequest);
+	public List<Requests> query(Requests inputRequests) {
+		System.out.println("inputRequests="+inputRequests);
 		RequestSpecification requestSpecification=new RequestSpecification(inputRequests);
 		
-		Page<Requests> requests = requestsService.findBySpecification(requestSpecification,pageRequest);
+		List<Requests> requests = requestsService.findBySpecification(requestSpecification);
 		System.out.println(requests);
 		return requests;
 	}
+//	public Page<Requests> query(Requests inputRequests,PageRequest pageRequest) {
+//		System.out.println("inputRequests="+inputRequests+"pageRequest="+pageRequest);
+//		RequestSpecification requestSpecification=new RequestSpecification(inputRequests);
+//		
+//		Page<Requests> requests = requestsService.findBySpecification(requestSpecification,pageRequest);
+//		System.out.println(requests);
+//		return requests;
+//	}
 	
 
 		

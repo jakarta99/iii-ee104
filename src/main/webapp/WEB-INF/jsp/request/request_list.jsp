@@ -117,8 +117,14 @@
 			type : 'delete',
 			dataType : 'JSON',
 			success : function(deleteResult) {
-			alert(deleteResult.msg);
-			list();			
+// 				alert(deleteResult.obj);
+				if(deleteResult.status == "SUCCESS"){
+					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);
+					list();		
+				}else{
+					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);
+					alert("FAIL reason:" + deleteResult.messages);
+				}			
 			},
 		})
 	}
