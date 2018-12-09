@@ -1,16 +1,18 @@
 package team.lala.timebank.web;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import team.lala.timebank.commons.ajax.PageResponse;
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.service.PenaltyService;
 import team.lala.timebank.spec.PenaltySpecification;
@@ -87,12 +89,15 @@ public class PenaltyController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/getList")
-	public List<Penalty> getList(Penalty inputPenalty) {
+	@RequestMapping("/query")
+	public PageResponse<Penalty> queryPenalty(Penalty inputPenalty, @RequestParam("pageNumber") Integer pageNumber, @RequestParam("pageSize") Integer pageSize) {
+		PageResponse<Penalty> response = new PageResponse<Penalty>();
+		
 		PenaltySpecification penaltySpec = new PenaltySpecification(inputPenalty);
-		List<Penalty> penalties = penaltyService.findBySpecification(penaltySpec);
-		System.out.println(penalties);
-		return penalties;
+		PageRequest thisPage = PageRequest.of(pageNumber, pageSize);
+		Page<Penalty> penalties = penaltyService.findBySpecification(penaltySpec, thisPage);
+		response.setPage(penalties);
+		return response;
 
 	}
 
