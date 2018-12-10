@@ -210,7 +210,7 @@ fieldset {
 				dataType : 'json',
 				success : function(deleteResult) {
 					if(deleteResult.status == "SUCCESS"){
-						alert("delete no." + deleteResult.obj.id + " timeLedger - STATUS:" + deleteResult.status);
+						alert("delete no." + deleteResult.obj.id + " timeLedger - STATUS : " + deleteResult.status);
 						if(thisPageElements == 1){ //如果刪了該頁最後一筆資料，則直接跳轉到上一頁(否則留在該頁會無資料可供顯示)
 							thisPage--;
 							findTimeLedger(thisPage, thisPageSize);
@@ -218,7 +218,7 @@ fieldset {
 							findTimeLedger(thisPage, thisPageSize);
 						}
 					}else{
-						alert("delete no." + deleteResult.obj.id + " timeLedger - STATUS:" + deleteResult.status);
+						alert("delete no." + deleteResult.obj.id + " timeLedger - STATUS : " + deleteResult.status);
 						alert("FAIL reason:" + deleteResult.messages);
 					}
 // 					alert(deleteResult);
