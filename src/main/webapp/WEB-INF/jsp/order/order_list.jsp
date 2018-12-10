@@ -243,9 +243,9 @@
 					alert("delete no." + deleteResult.obj.id + " order - STATUS:" + deleteResult.status);
 					if(thisPageElements == 1){ //如果刪了該頁最後一筆資料，則直接跳轉到上一頁(否則留在該頁會無資料可供顯示)
 						thisPage--;
-						findAllOrders(thisPage, thisPageSize);
+						findOrders(thisPage, thisPageSize);
 					}else{
-						findAllOrders(thisPage, thisPageSize);
+						findOrders(thisPage, thisPageSize);
 					}
 				}else{
 					alert("delete no." + deleteResult.obj.id + " order - STATUS:" + deleteResult.status);
