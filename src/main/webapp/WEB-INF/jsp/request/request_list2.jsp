@@ -109,11 +109,18 @@
 	var datatable;
 	
 	function search() {	
+		
+// 		$.ajax({
+// 			url : '/request/query',
+// 			type : 'post',
+// 			dataType : 'JSON',
+// 			success : function(deleteResult) {
 			
-	$('#table').DataTable().destroy();
-	list();
+ 			$('#table').DataTable().destroy();
+			list2();
+// 			}
+// 		})
 	}
-	
 	
 	function deleteRequest(id) {
 		$.ajax({
@@ -123,9 +130,9 @@
 			success : function(deleteResult) {
  				alert(deleteResult.obj.id);
 				if(deleteResult.status == "SUCCESS"){
-					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);									
+					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);					
 					$('#table').DataTable().destroy();
-					list();			
+ 					list2();
 				}else{
 					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);
 					alert("FAIL reason:" + deleteResult.messages);
@@ -133,52 +140,91 @@
 			},
 		})
 	}
+	
+	function list2(){
+		$('#table').DataTable({
+			 "infoCallback": function( settings, start, end, max, total, pre ) {
+	 			   var api = this.api();
+	 			   var pageInfo = api.page.info();
+	 			   return 'Showing '+(pageInfo.start+1)+' to '+(pageInfo.end)+' of '+ pageInfo.recordsTotal+' entries ';
+	 			  },
+			 "lengthMenu": [ 3, 6, 9, 12, ],
+// 				"processing":true,
+// 				"searching":true,
+// 				"serverside":true,
+ 				"stateSave": true,
+				"ajax":{
+					"url":"/request/query",
+						"type": "get",
+			            "dataType" : "json",
+ 			            "data":$("form").serialize(),			         
+			            "dataSrc":"",
+	   
+				},
+				"columns":[
+					
+					{"data": function (source, type, val) {
+						 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/edit?id="+source.id+"'\">Edit</button>";     
+						 var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteRequest("+source.id+")\">Delete</button>"; 	
+						 return editbutton + deletebutton;},
+					},
+				 
+					{"data":"id"},
+					{"data":"jobArea"},
+					{"data":"jobTitle"},
+					{"data":"memberId"},
+					{"data":"serviceType"},
+					{"data":"termType"},
+					{"data":"timeValue"},
+				]
+			});		
 		
-	
-	function list(){
-		$.ajax({
-			  dataType: "json",
-			  url: "/request/query",
-			  data: $('#form').serialize(),
-			  success:function(data){
-					var docFragment=$(document.createDocumentFragment());
-					var tb = $('#tbody');
- 		   			tb.empty();
-					$.each(data,function(index,request){
-					    var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/edit?id="+request.id+"'\">Edit</button>";     
-					   	var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteRequest("+request.id+")\">Delete</button>"; 	
-					   	var cell1 = $('<td></td>').html(editbutton+deletebutton);
-						var cell2 = $('<td></td>').text(request.id);
-				        var cell3 = $('<td></td>').text(request.jobArea);
-				        var cell4 = $('<td></td>').text(request.jobTitle);
-				        var cell5 = $('<td></td>').text(request.memberId);
-				        var cell6 = $('<td></td>').text(request.serviceType);
-				        var cell7 = $('<td></td>').text(request.termType);
-				        var cell8 = $('<td></td>').text(request.timeValue);
-						var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4,cell5,cell6,cell7,cell8]);
-				        docFragment.append(row);						
-						});
-						tb.html(docFragment);
-						$('#table').DataTable({
-							"stateSave": true,
-						    "infoCallback": function( settings, start, end, max, total, pre ) {
-				 			    var api = this.api();
-				 			    var pageInfo = api.page.info();
-				 			   	console.log(pageInfo);
-				 			    return 'Showing '+(pageInfo.start+1)+' to '+(pageInfo.end)+' of '+ pageInfo.recordsTotal+' entries ';
-				 			 },							
- 							"lengthMenu": [ 3, 6, 9, 12, ],
- 						});
-					}				
-			});			
-		}
-	
+	}
+
 
 	$(document).ready( function () {
 		$.get("/html/nav.html",function(data){
 			$("#navBar").html(data);
-		});		
-		list();		
+		});
+		list2();
+// 		datatable=
+// 			$('#table').DataTable({
+// 				"processing":true,
+// 				"searching":true,
+// 				"serverside":true,
+// 				"stateSave": true,
+// 				"ajax":{
+// 					"url":"/request/query",
+// 						"type": "get",
+// 			            "dataType" : "json",
+// 			            //"data":$("form").serialize(),
+// // 			            "data":function(d){
+// // 			            	var info=$('#table').DataTable().page.info();
+// // 			            	d.pageNo=info.page;
+			            	
+// // 			            	//var info =datatable.page.info();
+// // 							$('#tableInfo').html('Currently showing page '+(info.page+1)+' of '+info.pages+' pages.');
+// // 			            },
+			            
+// 			            "dataSrc":"",					
+// 				},
+// 				"columns":[
+					
+// 					{"data": function (source, type, val) {
+// 						 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/edit?id="+source.id+"'\">Edit</button>";     
+// 						 var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteRequest("+source.id+")\">Delete</button>"; 	
+// 						 return editbutton + deletebutton;},
+// 					 },
+					 
+// 					{"data":"id"},
+// 					{"data":"jobArea"},
+// 					{"data":"jobTitle"},
+// 					{"data":"memberId"},
+// 					{"data":"serviceType"},
+// 					{"data":"termType"},
+// 					{"data":"timeValue"},
+// 				]
+// 			});					
 	});
 	</script>	
 </body>

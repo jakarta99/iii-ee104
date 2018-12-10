@@ -31,13 +31,13 @@ public class RequestsController {
 	@Autowired
 	private RequestsService requestsService;
 
-	@RequestMapping("/list")
+	@RequestMapping("/list2")
 	public String listPage(Model model) {
 		List<Requests> requests = requestsService.findAll();
 
 		model.addAttribute("requests", requests);
 
-		return "/request/request_list";
+		return "/request/request_list2";
 	}
 
 	@RequestMapping("/div")
@@ -119,11 +119,8 @@ public class RequestsController {
 	@ResponseBody
 	 public List<Requests> query(Requests inputRequests) {
 	 System.out.println("inputRequests="+inputRequests);
-	 RequestSpecification requestSpecification=new
-	 RequestSpecification(inputRequests);
-	
-	 List<Requests> requests =
-	 requestsService.findBySpecification(requestSpecification);
+	 RequestSpecification requestSpecification=new RequestSpecification(inputRequests);
+	 List<Requests> requests =requestsService.findBySpecification(requestSpecification);
 	 System.out.println(requests);
 	 return requests;
 	 }
