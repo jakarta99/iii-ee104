@@ -11,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,56 +27,77 @@ public class Member {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@Size(min=6, max=30)
 	@Column(name = "ACCOUNT")
 	private String account;
-
+	
+	@NotNull
+	@Size(min=6, max=30)
 	@Column(name = "PASSWORD")
 	private String password;
 
+	@NotNull
+	@Size(min=4, max=10)
 	@Column(name = "NAME")
 	private String name;
 
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name = "TYPE")
 	private MemberType memberType; // P: Person; O: Organization
 
+	@NotNull
+	@Size(min=8, max=10)//統一編號8碼，身份證字號10碼
 	@Column(name="CERTIFICATE_ID_NUMBER")
 	private String certificateIdNumber;
 	
+	@NotNull
+	@Past
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@Column(name="BIRTH_DATE")
 	private Date birthDate;
 	
+	@Past
 	@Transient
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date birthDateStart;
 	
-	@Transient
+	@Past
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@Transient
 	private Date birthDateEnd;
 	
+	@NotNull
 	@Column(name = "EMAIL")
 	private String email;
 
+	@NotNull
 	@Column(name = "TEL")
 	private String telephone;
 
+	@NotNull
 	@Column(name = "MOBILE")
 	private String mobile;
 
+	@NotNull
 	@Column(name = "COUNTY")
 	private String county;
 	
+	@NotNull
 	@Column(name = "DISTRICT")
 	private String district;
 
+	@NotNull
 	@Column(name = "ADDRESS")
 	private String address;
 
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "EMAIL_VERTIFICATION")
 	private YesNo emailVerification;
 
+	
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@Column(name = "SIGN_UP_DATE")
 	private Date signUpDate;
