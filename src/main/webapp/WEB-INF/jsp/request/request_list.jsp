@@ -109,8 +109,7 @@
 	var datatable;
 	
 	function search() {	
-			
-	$('#table').DataTable().destroy();
+	datatable.destroy();
 	list();
 	}
 	
@@ -121,10 +120,10 @@
 			type : 'post',
 			dataType : 'JSON',
 			success : function(deleteResult) {
- 				alert(deleteResult.obj.id);
+ 				//alert(deleteResult.obj.id);
 				if(deleteResult.status == "SUCCESS"){
 					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);									
-					$('#table').DataTable().destroy();
+					datatable.destroy();
 					list();			
 				}else{
 					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);
@@ -159,13 +158,13 @@
 				        docFragment.append(row);						
 						});
 						tb.html(docFragment);
-						$('#table').DataTable({
+						datatable=$('#table').DataTable({
 							"stateSave": true,
 						    "infoCallback": function( settings, start, end, max, total, pre ) {
 				 			    var api = this.api();
 				 			    var pageInfo = api.page.info();
 				 			   	console.log(pageInfo);
-				 			    return 'Showing '+(pageInfo.start+1)+' to '+(pageInfo.end)+' of '+ pageInfo.recordsTotal+' entries ';
+				 			    return '顯示第 '+(pageInfo.start+1)+' 筆到第  '+(pageInfo.end)+' 筆 共 '+ pageInfo.recordsTotal+' 筆資料 ';
 				 			 },							
  							"lengthMenu": [ 3, 6, 9, 12, ],
  						});

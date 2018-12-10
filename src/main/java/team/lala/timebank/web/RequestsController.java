@@ -31,13 +31,13 @@ public class RequestsController {
 	@Autowired
 	private RequestsService requestsService;
 
-	@RequestMapping("/list2")
+	@RequestMapping("/list")
 	public String listPage(Model model) {
 		List<Requests> requests = requestsService.findAll();
 
 		model.addAttribute("requests", requests);
 
-		return "/request/request_list2";
+		return "/request/request_list";
 	}
 
 	@RequestMapping("/div")
@@ -64,7 +64,7 @@ public class RequestsController {
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public AjaxResponse<Requests> deletePage(@RequestParam("id") Long id, Model model) {
+	public AjaxResponse<Requests> deletePage(@RequestParam("id") Long id) {
 		AjaxResponse<Requests> response = new AjaxResponse<Requests>();
 
 		try {
