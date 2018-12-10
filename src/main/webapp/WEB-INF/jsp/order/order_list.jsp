@@ -80,7 +80,7 @@
 
 <div id="myTable_paginate">
 	<a id="myTable_previous" href="#">Previous</a>
-	<span id="myTable_pages">pagesHere</span>
+	<span id="myTable_pages">0</span>
 	<a id="myTable_next" href="#">Next</a>
 </div>
 
@@ -169,7 +169,7 @@
 			data:$('form').serialize(),
 			dataType:'json',
 			success:function(orders){
-				//if(orders.status == "SUCCESS"){}else{}
+// 				if(orders.status == "SUCCESS"){alert("");}else{}
 				//1.讀取分頁各項資訊，初始化全域變數
 					//本頁第一筆資料的index
 					indexOfThisPageFirstData = orders.page.pageable.offset;
@@ -183,7 +183,7 @@
 					//本頁共幾筆
 					thisPageElements = orders.page.numberOfElements
 				//A.顯示分頁資訊:Showing XXX to XXX of XXX entries
-				var totalEntries = "Showing "+ (indexOfThisPageFirstData + 1)
+				var totalEntries = "Showing "+ (orders.page.totalElements > 0? indexOfThisPageFirstData + 1: indexOfThisPageFirstData)  //(indexOfThisPageFirstData + 1)
 								+ " to " + (indexOfThisPageFirstData + thisPageElements)  //orders.numberOfElements本頁共幾筆資料
 								+ " of " + orders.page.totalElements + " entries";  //orders.totalElements  所有資料共幾筆
 				$("#myTable_info").text(totalEntries);
@@ -199,6 +199,8 @@
 						}
 					}
 					$("#myTable_pages").html(pageLinks);
+				}else{
+					$("#myTable_pages").text(" 0 "); //如查無資料，則顯示0頁
 				}
 				
 				
