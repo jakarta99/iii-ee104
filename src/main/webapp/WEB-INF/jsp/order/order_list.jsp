@@ -147,7 +147,9 @@
 		//4.更改每頁資料筆數
 		$("select[name='myTable_length']").change(function(){
 			thisPageSize = $(this).val();
-			findOrders(0, thisPageSize);
+			//根據換頁前第一筆資料位置，推算換頁後應留在第幾頁(index)
+			var changePageIndex = Math.floor((indexOfThisPageFirstData + 1) / thisPageSize);
+			findOrders(changePageIndex, thisPageSize);
 		})
 		
 	})
