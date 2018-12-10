@@ -80,7 +80,7 @@
 
 <div id="myTable_paginate">
 	<a id="myTable_previous" href="#">Previous</a>
-	<span id="myTable_pages">pagesHere</span>
+	<span id="myTable_pages">0</span>
 	<a id="myTable_next" href="#">Next</a>
 </div>
 
@@ -107,7 +107,8 @@
 
 
 <script>
-	var thisPageSize = $("select[name='myTable_length']").val();
+	var thisPageSize = $("select[name='myTable_length']").val(); //一頁顯示幾筆
+	var thisPageElements; //本頁幾筆資料
 	var thisPage; //本頁的index
 	var totalPages;
 	var indexOfThisPageFirstData;
@@ -124,7 +125,6 @@
 			findOrders(0, thisPageSize);
 		});
 
-		
 		//3.換頁功能
 		//A.點擊動態生成的頁數標籤後，跳頁重新呼叫controller
 		$("#myTable_pages").on("click",".pageNum",function(){
@@ -135,29 +135,24 @@
 		$("#myTable_previous").click(function(){
 			if(thisPage > 0){
 				findOrders(thisPage - 1, thisPageSize); //取得本頁頁數後減一(回前頁)
-			}else{
-				findOrders(thisPage, thisPageSize);
 			}
 		})
 		
 		$("#myTable_next").click(function(){
 			if(thisPage + 1 < totalPages){
 				findOrders(thisPage + 1, thisPageSize);
-			}else{
-				findOrders(thisPage, thisPageSize);
 			}
 		})
 		
 		//4.更改每頁資料筆數
 		$("select[name='myTable_length']").change(function(){
 			thisPageSize = $(this).val();
-			findOrders(0, thisPageSize);
+			//根據換頁前第一筆資料位置，推算換頁後應留在第幾頁(index)
+			var changePageIndex = Math.floor((indexOfThisPageFirstData + 1) / thisPageSize);
+			findOrders(changePageIndex, thisPageSize);
 		})
 		
-		
 	})
-	
-	
 	
 	function findAllOrders(pageNumber, pageSize){
 		$("#id").val("");  
@@ -176,7 +171,7 @@
 			data:$('form').serialize(),
 			dataType:'json',
 			success:function(orders){
-				//alert(orders.status)
+// 				if(orders.status == "SUCCESS"){alert("");}else{}
 				//1.讀取分頁各項資訊，初始化全域變數
 					//本頁第一筆資料的index
 					indexOfThisPageFirstData = orders.page.pageable.offset;
@@ -186,19 +181,28 @@
 		
 					//orders.totalPages 共幾頁
 					totalPages = orders.page.totalPages;
+					
+					//本頁共幾筆
+					thisPageElements = orders.page.numberOfElements
 				//A.顯示分頁資訊:Showing XXX to XXX of XXX entries
-				var totalEntries = "Showing "+ (indexOfThisPageFirstData + 1)
-								+ " to " + (indexOfThisPageFirstData + orders.page.numberOfElements)  //orders.numberOfElements本頁共幾筆資料
+				var totalEntries = "Showing "+ (orders.page.totalElements > 0? indexOfThisPageFirstData + 1: indexOfThisPageFirstData)  //(indexOfThisPageFirstData + 1)
+								+ " to " + (indexOfThisPageFirstData + thisPageElements)  //orders.numberOfElements本頁共幾筆資料
 								+ " of " + orders.page.totalElements + " entries";  //orders.totalElements  所有資料共幾筆
 				$("#myTable_info").text(totalEntries);
 				
 				//B.顯示每頁超連結
 				if(totalPages > 0){
 					var pageLinks = "";
-					for(var i = 1; i <= totalPages; i++){
-						pageLinks += "<a class='pageNum' href='#'>" + i +"</a>  ";
+					for(var i = 1; i <= totalPages; i++){ 
+						if(thisPage + 1 == i){  //標示當下頁數，顯示為粗體且無超連結
+							pageLinks += "<a class='pageNum' style='font-weight:bold'>" + i +"</a>  ";
+						}else{   //其他頁數顯示超連結
+							pageLinks += "<a class='pageNum' href='#'>" + i +"</a>  ";
+						}
 					}
 					$("#myTable_pages").html(pageLinks);
+				}else{
+					$("#myTable_pages").text(" 0 "); //如查無資料，則顯示0頁
 				}
 				
 				
@@ -231,8 +235,7 @@
 	}
 	
 	
-	
-	function deleteOrder(orderId){  //delBtn的onclick會呼叫此方法，並傳入參數
+	function deleteOrder(orderId){  //刪除資料的按鈕所觸發的方法(#delBtn的onclick)
 		$.ajax({
 			url:'/order/delete?id=' + orderId,
 			type:'delete',
@@ -240,7 +243,12 @@
 			success:function(deleteResult){
 				if(deleteResult.status == "SUCCESS"){
 					alert("delete no." + deleteResult.obj.id + " order - STATUS:" + deleteResult.status);
-					findAllOrders(thisPage, thisPageSize);
+					if(thisPageElements == 1){ //如果刪了該頁最後一筆資料，則直接跳轉到上一頁(否則留在該頁會無資料可供顯示)
+						thisPage--;
+						findOrders(thisPage, thisPageSize);
+					}else{
+						findOrders(thisPage, thisPageSize);
+					}
 				}else{
 					alert("delete no." + deleteResult.obj.id + " order - STATUS:" + deleteResult.status);
 					alert("FAIL reason:" + deleteResult.messages);

@@ -64,7 +64,7 @@ public class RequestsController {
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public AjaxResponse<Requests> deletePage(@RequestParam("id") Long id, Model model) {
+	public AjaxResponse<Requests> deletePage(@RequestParam("id") Long id) {
 		AjaxResponse<Requests> response = new AjaxResponse<Requests>();
 
 		try {
@@ -119,11 +119,8 @@ public class RequestsController {
 	@ResponseBody
 	 public List<Requests> query(Requests inputRequests) {
 	 System.out.println("inputRequests="+inputRequests);
-	 RequestSpecification requestSpecification=new
-	 RequestSpecification(inputRequests);
-	
-	 List<Requests> requests =
-	 requestsService.findBySpecification(requestSpecification);
+	 RequestSpecification requestSpecification=new RequestSpecification(inputRequests);
+	 List<Requests> requests =requestsService.findBySpecification(requestSpecification);
 	 System.out.println(requests);
 	 return requests;
 	 }

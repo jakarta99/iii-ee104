@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
 
 @Entity
 @Table(name = "Donation")
@@ -27,6 +29,28 @@ public class Donation {
 
 	@Column(name = "donate_time")
 	private LocalDateTime donateTime;
+	
+	@Transient
+	private LocalDateTime donateTimeBegin;
+	
+	@Transient
+	private LocalDateTime donateTimeEnd;
+
+	public LocalDateTime getDonateTimeBegin() {
+		return donateTimeBegin;
+	}
+
+	public void setDonateTimeBegin(LocalDateTime donateTimeBegin) {
+		this.donateTimeBegin = donateTimeBegin;
+	}
+
+	public LocalDateTime getDonateTimeEnd() {
+		return donateTimeEnd;
+	}
+
+	public void setDonateTimeEnd(LocalDateTime donateTimeEnd) {
+		this.donateTimeEnd = donateTimeEnd;
+	}
 
 	public Long getId() {
 		return id;
