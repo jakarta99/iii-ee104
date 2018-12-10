@@ -109,6 +109,7 @@
 	var datatable;
 	
 	function search() {	
+		
 	datatable.destroy();
 	list();
 	}
@@ -123,6 +124,9 @@
  				//alert(deleteResult.obj.id);
 				if(deleteResult.status == "SUCCESS"){
 					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);									
+					//datatable.row('.selected').remove().draw( false );
+					//datatable.page("next").draw(false);
+					//datatable.order().draw(false);
 					datatable.destroy();
 					list();			
 				}else{
@@ -160,10 +164,12 @@
 						tb.html(docFragment);
 						datatable=$('#table').DataTable({
 							"stateSave": true,
+							
 						    "infoCallback": function( settings, start, end, max, total, pre ) {
 				 			    var api = this.api();
 				 			    var pageInfo = api.page.info();
 				 			   	console.log(pageInfo);
+				 			   api.rows( {page:'current'} ).data()
 				 			    return '顯示第 '+(pageInfo.start+1)+' 筆到第  '+(pageInfo.end)+' 筆 共 '+ pageInfo.recordsTotal+' 筆資料 ';
 				 			 },							
  							"lengthMenu": [ 3, 6, 9, 12, ],
