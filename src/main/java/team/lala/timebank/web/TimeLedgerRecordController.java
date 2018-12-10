@@ -1,14 +1,16 @@
 package team.lala.timebank.web;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import team.lala.timebank.commons.ajax.AjaxResponse;
+import team.lala.timebank.commons.ajax.PageResponse;
 import team.lala.timebank.entity.TimeLedger;
 import team.lala.timebank.service.TimeLedgerService;
 import team.lala.timebank.spec.TimeLedgerSpecification;
@@ -41,19 +43,23 @@ public class TimeLedgerRecordController {
 
 	@RequestMapping("/insert")
 	@ResponseBody
-	public String insert(TimeLedger timeLedger) {
+	public AjaxResponse<TimeLedger> insert(TimeLedger timeLedger) {
+		AjaxResponse<TimeLedger> response = new AjaxResponse<TimeLedger>();
 		try {
 			timeLedgerService.save(timeLedger);
-			return "Success to insert [id= " + timeLedger.getId() + " timeledger]";
 		} catch (Exception e) {
+			response.addMessage("Failed to insert. " + e.getMessage());
 			e.printStackTrace();
-			return "Failed to insert [id= " + timeLedger.getId() + " timeledger]";
+		}finally {
+			response.setObj(timeLedger);
 		}
+		return response;
 	}
 
 	@RequestMapping("/update")
 	@ResponseBody
-	public String update(TimeLedger timeLedger, Model model) {
+	public AjaxResponse<TimeLedger> update(TimeLedger timeLedger, Model model) {
+		AjaxResponse<TimeLedger> response = new AjaxResponse<TimeLedger>();
 		try {
 			TimeLedger dbTimeLedger = timeLedgerService.findById(timeLedger.getId());
 			dbTimeLedger.setBalanceValue(timeLedger.getBalanceValue());
@@ -63,33 +69,54 @@ public class TimeLedgerRecordController {
 			dbTimeLedger.setTransactionTime(timeLedger.getTransactionTime());
 			dbTimeLedger.setWithdrawalValue(timeLedger.getWithdrawalValue());
 			timeLedgerService.save(dbTimeLedger);
-			return "Success to update [id= " + timeLedger.getId() + " timeledger]";
 		} catch (Exception e) {
+			response.addMessage("Failed to update. " + e.getMessage());
 			e.printStackTrace();
-			return "Failed to update [id= " + timeLedger.getId() + " timeledger]";
+		}finally {
+			response.setObj(timeLedger);
 		}
+		return response;
 		// timeLedgerService.save(timeLedger);
 		// return editPage(timeLedger.getId(), model);
 	}
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public String delete(@RequestParam("id") Long id, Model model) {
+	public AjaxResponse<TimeLedger> delete(@RequestParam("id") Long id, Model model) {
+		AjaxResponse<TimeLedger> response = new AjaxResponse<TimeLedger>();
 		try {
+			response.setObj(timeLedgerService.findById(id));
 			timeLedgerService.delete(id);
-			return "Success to delete [id= " + id + " timeledger]";
 		} catch (Exception e) {
+			response.addMessage("Failed to delete. " + e.getMessage());
 			e.printStackTrace();
-			return "Failed to delete [id= " + id + " timeledger]";
 		}
+		return response;
 	}
 
+//	@RequestMapping("/query")
+//	@ResponseBody
+//	public List<TimeLedger> query(TimeLedger inputTimeLedger) {
+//		TimeLedgerSpecification timeLedgerSpecification = new TimeLedgerSpecification(inputTimeLedger);
+//		List<TimeLedger> timeLedgers = timeLedgerService.findBySpecification(timeLedgerSpecification);
+//		System.out.println("queryTimeLedger=" +timeLedgers);
+//		return timeLedgers;
+//	}
+	
 	@RequestMapping("/query")
 	@ResponseBody
-	public List<TimeLedger> query(TimeLedger inputTimeLedger) {
-		TimeLedgerSpecification timeLedgerSpecification = new TimeLedgerSpecification(inputTimeLedger);
-		List<TimeLedger> timeLedgers = timeLedgerService.findBySpecification(timeLedgerSpecification);
-		System.out.println("queryTimeLedger=" +timeLedgers);
-		return timeLedgers;
+	public PageResponse<TimeLedger> queryTimeLedger(TimeLedger inputTimeLedger,
+			@RequestParam("pageNumber") Integer pageNumber, @RequestParam("pageSize") Integer pageSize){
+		PageResponse<TimeLedger> response = new PageResponse<TimeLedger>();
+		try {
+			TimeLedgerSpecification timeLedgerSpecification = new TimeLedgerSpecification(inputTimeLedger);
+			PageRequest thisPage = PageRequest.of(pageNumber, pageSize);
+			Page<TimeLedger> timeLedgers = timeLedgerService.findBySpecification(timeLedgerSpecification, thisPage);
+			response.setPage(timeLedgers);
+		} catch (Exception e) {
+			response.addMessage("Failed to search. " + e.getMessage());
+			e.printStackTrace();
+		}
+		return response;
 	}
 }
