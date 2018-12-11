@@ -194,8 +194,7 @@
 				url: "/member/delete",
 				data: {"id":memberId}					
 			})
-			.done(function(response){
-				
+			.done(function(response){			
 				if (response.status =="SUCCESS"){
 					alert("刪除成功");
 				} else {
@@ -203,7 +202,11 @@
 						alert("the "+idx+"th ERROR, because "+message);
 					});
 				}			
- 				dataTable.draw( 'page' );
+				dataTable.draw('page');
+				if ($("table tbody tr").length < 2){
+// 					alert($("table tbody tr").length +", no row exists");
+					dataTable.page( 'previous' ).draw('page');;
+				} 
 			})	
 		}
 
@@ -236,13 +239,14 @@
 						var request = $("form").serialize()+"&start="+start+"&length="+length;
 		            	return request;
 		            },
+		            dataSrc:"content",
 		            dataFilter: function(resp){
 // 		            	console.log(resp)
 		                var json = jQuery.parseJSON( resp );
 		                json.recordsTotal = json.totalElements;
 		                json.recordsFiltered = json.totalElements;
 		                json.data = json.content;		     			
-// 		     			console.log(JSON.stringify( json ))
+		     			console.log(JSON.stringify( json ))
 		                return JSON.stringify( json ); 
 		            },
 		            	
@@ -258,9 +262,10 @@
 
 		     	columns: [
 		           {data: "id" },
-		           {data: function (source, type, val) {
-		        	   	var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/member/edit?id="+source.id+"'\" value='修改'  />";
-						var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+source.id+")\" id='deleteButt"+ source.id +"' value='刪除' />"  
+		           {data: function (data, type, row ) {
+// 		        	   console.log(data)
+		        	   	var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/member/edit?id="+data.id+"'\" value='修改'  />";
+						var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='刪除' />"  
 		               	return editButt + deleteButt;			        	   
 		           	}
 		        	   

@@ -32,8 +32,8 @@ public class MemberController {
 		List<Member> members = memberService.findAll();
 		model.addAttribute("members", members);
 		
-//		return "/member/member_list4";
-		return "/member/member_list3";
+//		return "/member/member_list";
+		return "/member/member_list2";
 
 	}
 

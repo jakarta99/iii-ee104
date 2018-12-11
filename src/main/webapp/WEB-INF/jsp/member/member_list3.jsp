@@ -24,42 +24,49 @@
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
 <!-- date picker -->
-<script type="text/javascript" src="/js/moment.min.js"></script>
-<script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
-<script src="/js/locales/bootstrap-datepicker.zh-TW.js"></script>
+<script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
+<script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
+<script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
-
 <!-- data table -->
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/js/dataTable_full_numbers_no_ellipses.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
 <script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
 <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>	
 
 
-
-
 <style>
-	 article{
+	 article {
+	 	width:1300px; 
+	 	margin:auto; 
 	 	margin-top:70px;
+/* 	 	border: 1px solid black;   */
 	 }
 	 
 	 article fieldset {
-/* 		width: 500px; */
-		border-radius: 20px;
-		padding: 20px 20px 0px 20px; 
-		border: 3px double #bebebe;
-		margin: auto;
-		margin-top: 10px; 
-		margin-bottom: 20px; 
+ 		border-radius: 20px; 
+ 		padding: 20px 20px 0px 20px;  
+ 		border: 3px double #bebebe; 
+		margin: auto; 
+ 		margin-top: 10px;  
+ 		margin-bottom: 20px;  
 	}
+	
+	 article .btn{
+	 	margin-left:3px;
+	 	margin-right:3px
+	 }
 
 	 table tr td, button{
 	 	text-align:center;
 	 	line-height:center; 
 	 }
-	 article .btn{
-	 	margin-left:10px;
-	 }
+		 
+/* 	#table tbody tr.selected { */
+/*     	background-color: #B0BED9; */
+/*     	 blurable: true; */
+/* 	} */
 	 
 
 
@@ -79,17 +86,18 @@
 	}
  
 </style>
+
+
 </head>
 <body>
 
-<!-- 	<div id="navBar"></div> -->
-<c:import url="/html/nav.html"/>
+	<c:import url="/html/nav.html"/>
 
 	<article>
 		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
 		<h2>Member List</h2>
 		
-		<div>
+		<div >
 			<input type="button" class="btn btn-primary btn-sm"	
 				onclick="javascript:document.location.href='/member/add?memberType=P'" value="新增一般會員" />
 			<input type="button" class="btn btn-primary btn-sm"
@@ -97,7 +105,7 @@
 		</div>
 		
 <!-- 		條件搜尋表單 -->
-		<div id="sideBar">		
+		<div id="sideBar" >		
 			<form>
 				<fieldset>
 				<legend>Search</legend>
@@ -112,12 +120,16 @@
 						<option value="P">一般會員</option>
 						<option value="O">機構會員</option>
 					</select>
+					<input type="button"  value="搜尋" id="searchButt" style="margin:10px"/>
+					<input type="reset"  value="重設"  id="resetButt" style="margin:10px"/>
+				<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
+				進階查詢:</a>
 				</div>
-			
+			<div class="collapse" id="collapse">
 				<div >
 					<label>出生起始日期:</label> 
-					<input type="text" value="${param.birthDateStart }"  id="birthDateStart" name="signUpDateStart" autocomplete="off" />
-					<input type="text" value="${param.birthDateEnd }" id="birthDateEnd" name="signUpDateEnd" autocomplete="off"/>	
+					<input type="text" value="${param.birthDateStart }"  id="birthDateStart" name="birthDateStart" autocomplete="off" />
+					<input type="text" value="${param.birthDateEnd }" id="birthDateEnd" name="birthDateEnd" autocomplete="off"/>	
 				</div>
 				<div >
 					<label>email:</label> 
@@ -144,22 +156,50 @@
 					<input type="text" value="${param.signUpDateStart }"  id="signUpDateStart" name="signUpDateStart" autocomplete="off"/>
 					<input type="text" value="${param.signUpDateEnd }" id="signUpDateEnd" name="signUpDateEnd" autocomplete="off"/>
 				</div>
-			
-				<input type="button"  value="搜尋" id="searchButt" style="margin:10px"/>
-				<input type="reset"  value="重設"  id="resetButt" style="margin:10px"/>
-				</fieldset>
+			</div>
 				
+		</fieldset>
 			</form>
 		</div>
 		
 		
 		<fieldset style="width:1200px">
+		<input type='button' class="btn btn-primary btn-sm"  onclick="edit" value='修改'  />
+<!-- 		<input type='button' class="btn btn-primary btn-sm" onclick="delete()" id='deleteButt"+ source.id +"' value='刪除' />   -->
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="deleteToggleButt"> 刪除</button>
+		
+		<!-- Modal -->
+		<div class="modal fade" id=exampleModal tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        Are you sure you want to delete this Member?
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary" onclick='deleteRow()' >OK</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		
+		
+		
+		
 		<table  id=table class="table table-striped table-bordered">				
 			<thead>
 				<tr>
 <!-- 					<th scope="col"></th> -->
 					<th scope="col">id</th>
-					<th scope="col" width="150px"></th>
+					<th scope="col" width="100px"></th>
 					<th scope="col">會員帳號</th>
 					<th scope="col">會員姓名</th>
 					<th scope="col">會員型態</th>
@@ -182,58 +222,94 @@
 	
 
 	<script>
-	
-		var dataTable;
-		
-// 		function filteredQuery() {			
-// 			$.getJSON("/member/query",$("form").serialize(),function(resp){
-// 				dataTable.clear();
-// 				dataTable.rows.add(resp).draw();	
-// 			})
-		
-// 		}
-		function deleteRow(memberId){
-			alert( memberId);
+	var dataTable;
+	var selectedRowId = 0;
+
+
+	function deleteRow(){
+		if (selectedRowId != 0 ){
+			$('#exampleModal').modal('hide');					
 			$.ajax({
 				type: "get",
 				dataType: "json",         
 				url: "/member/delete",
-				data: {"id":memberId}					
+				data: {"id":selectedRowId}					
 			})
 			.done(function(response){
 				
 				if (response.status =="SUCCESS"){
-					alert("刪除成功");
-// 					filteredQuery();
+// 					alert("刪除成功");
 				} else {
 					$.each(response.messages, function(idx, message) {
 						alert("the "+idx+"th ERROR, because "+message);
 					});
-				}				
-				dataTable.ajax.reload();
+				}		
+
+				dataTable.draw('page');
+				if ($("table tbody tr").length < 2){
+					alert($("table tbody tr").length +", no row exists");
+					dataTable.page( 'previous' ).draw('page');;
+				} 
 				
 			})	
-		}
+		}			
+	}
+		
+	
+	
+		$(document).ready(function(){
+			$("form").addClass("form-inline");
+			$("form div[id!='collapse']").addClass("form-group mx-sm-3 mb-3");
+			$("form input, select").addClass("form-control mx-3");
+			$("#searchButt, #resetButt").addClass("btn btn-primary");									
+			new TwCitySelector();
+		
+			
 
-	
-	
-		$(document).ready(function(){						
 			dataTable =  $('#table').DataTable( {
-				fixedHeader:true,
-// 			 	processing: true,
-// 		        serverSide: true,
-// 				data:$("form").serialize(),
+				pageResize: true, 
+				fixedHeader: true,
+				pagingType: 'full_numbers',
+				searching: false,
+				
+			 	processing: true,
+		        serverSide: true,
+		        rowId: 'id',
 		        ajax: {
-		            url: "/member/query",
+		            url: "/member/queryPageRequest",
 		            type: "get",
 		            dataType : "json",
-		            dataSrc:"",
-		            data:$("form").serialize(),
+		            data: function(d){
+		            	var start = d.start;
+						var length = d.length;
+						var request = $("form").serialize()+"&start="+start+"&length="+length;
+		            	return request;
+		            },
+		            dataSrc:"content",
+		            dataFilter: function(resp){
+// 		            	console.log(resp)
+		                var json = jQuery.parseJSON( resp );
+		                json.recordsTotal = json.totalElements;
+		                json.recordsFiltered = json.totalElements;	     			
+// 		     			console.log(JSON.stringify( json ))
+		                return JSON.stringify( json ); 
+		            },
+		            	
+
 		        },
-		        
+		        drawCallback: function (d) {
+// 		        	console.log(d)
+		        	  var api = this.api();
+		        	  var pageNum = parseInt(d.json.pageable.pageNumber) ;
+		        	  var totalPages = d.json.totalPages;
+		        	  $('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
+		       },
+
 		     	columns: [
+// 		     		{data:  },
 		           {data: "id" },
 		           {data: function (source, type, val) {
+// 		        	   console.log(source) ; console.log("val="+val);
 		        	   	var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/member/edit?id="+source.id+"'\" value='修改'  />";
 						var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+source.id+")\" id='deleteButt"+ source.id +"' value='刪除' />"  
 		               	return editButt + deleteButt;			        	   
@@ -246,29 +322,60 @@
 				   { data: "email" },
 		           { data: "mobile" },
 		           { data: null, render: function ( data, type, row ) {
-		                // Combine the first and last names into a single table field
 		                return data.county + data.district+ data.address;
 		            } },
 		           { data: null, render: function ( data, type, row ) {
 		                return new Date(data.signUpDate).toLocaleDateString();
 		            } },
 		       ],
-				
-					
-			        
+		       
+// 		       select:{
+// 		    	   	select: 'single',
+// 					blurable: true; 
+// 		       }
+   
 			        
 			 } );
 			
+			$('#deleteToggleButt').prop("disabled", true);
+			 		
+			 $('#table tbody').on( 'click', 'tr', function () {
+			        if ( $(this).hasClass('selected')) {
+			            $(this).removeClass('selected');
+			            selectedRowId = 0;
+			            $('#deleteToggleButt').prop("disabled", true);
+			        }
+			        else {
+			        	$('tr.selected').removeClass('selected');
+			        	selectedRowId = this.id;
+			        	$(this).addClass('selected');
+			            $('#deleteToggleButt').prop("disabled", false);
+			        }
+			    } );
+			 
+
+
+
 			
 			
+// 			dataTable.on( 'select', function ( e, dt, type, indexes ) {
+// 			    if ( type === 'row' ) {		    	
+// 			    	selectedRow = dataTable.row(dt).data();
+// 			    	$('#deleteToggleButt').prop("disabled", false);
+// 			        console.log("row selected:"+selectedRow);
+// 			 		alert("select row")
+// 			    }
+// 			} );
+// 			dataTable.on( 'deselect', function ( e, dt, type, indexes ) {
+// 			    if ( type === 'row' ) {		    	
+// 			    	selectedRow = dataTable.row(dt).data();
+// // 			    	$('#deleteToggleButt').prop("disabled", true);
+// 			    	alert("row deselected:"+selectedRow);
+			 		
+// 			    }
+// 			} );
 			
-			new TwCitySelector();
-			$("form").addClass("form-inline");
-			$("form div").addClass("form-group mx-sm-3 mb-3");
-			$("form input").addClass("form-control mx-3");
-			$("form select").addClass("form-control mx-3");
-			$("#searchButt").addClass("btn btn-info");
-			$("#resetButt").addClass("btn btn-info");
+			
 			
 			
 			var datePickerSetting = {
@@ -287,12 +394,9 @@
 			
 
 			$("#searchButt").click(	function(){
-				$.getJSON("/member/query",$("form").serialize(),function(resp){
-					dataTable.clear();
-					dataTable.rows.add(resp).draw();	
-				})
-			}				
-			)
+				dataTable.ajax.reload();
+
+			})
 			
 		
 			
