@@ -64,6 +64,7 @@
 			<input type="text" value="" placeholder="Id" id="Id" name="Id"/>
 			<label>jobArea :</label> 
 			<input type="text" value="" placeholder="jobArea" id="jobArea" name="jobArea"/>
+			<input type="button" value="搜尋" id="searchButton" onclick="search()"/>
 			<div>
 			<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
 			進階查詢:
@@ -76,7 +77,6 @@
 			<input type="text" value="" placeholder="jobTitle" id="jobTitle" name="jobTitle"/>
 			<label>termType :</label> 
 			<input type="text" value="" placeholder="termType" id="termType" name="termType"/>
-			<input type="button" value="搜尋" id="searchButton" onclick="search()"/>
 			</div>
 		</form>
 	</fieldset>
@@ -127,11 +127,15 @@
 					//datatable.row('.selected').remove().draw( false );
 					//datatable.page("next").draw(false);
 					//datatable.order().draw(false);
-					datatable.destroy();
-					list();			
+					
+					
+					datatable.ajax.reload();
+// 					datatable.destroy();
+// 					list();			
 				}else{
 					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);
 					alert("FAIL reason:" + deleteResult.messages);
+					
 				}			
 			},
 		})
@@ -162,6 +166,8 @@
 				        docFragment.append(row);						
 						});
 						tb.html(docFragment);
+						
+						
 						datatable=$('#table').DataTable({
 							"stateSave": true,
 							

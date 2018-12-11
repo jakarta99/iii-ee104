@@ -131,8 +131,9 @@
  				alert(deleteResult.obj.id);
 				if(deleteResult.status == "SUCCESS"){
 					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);					
-					$('#table').DataTable().destroy();
- 					list2();
+// 					$('#table').DataTable().destroy();
+//  					list2();
+					datatable.ajax.reload();
 				}else{
 					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);
 					alert("FAIL reason:" + deleteResult.messages);
@@ -142,7 +143,7 @@
 	}
 	
 	function list2(){
-		$('#table').DataTable({
+		datatable=$('#table').DataTable({
 			 "infoCallback": function( settings, start, end, max, total, pre ) {
 	 			   var api = this.api();
 	 			   var pageInfo = api.page.info();
