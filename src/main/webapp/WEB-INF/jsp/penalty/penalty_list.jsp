@@ -187,9 +187,9 @@
 					data : {
 						"id" : penaltyId
 					}
-				}).done(function(data) {
-					alert(data.msg);
-					listPenalty();
+				}).done(function(result) {
+					alert(result.status);
+					listPenalty($("#serachForm").serialize(), onPage, pageSize);
 				})
 			})
 		})

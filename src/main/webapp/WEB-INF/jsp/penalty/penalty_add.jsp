@@ -75,8 +75,8 @@
 				method:"post",
 				dataType:"json",
 				data:$('form').serialize()
-			}).done(function(data){
-				alert(data.msg);
+			}).done(function(result){
+				alert(result.status);
 				window.location.replace("/penalty/list");
 			})
 		})
