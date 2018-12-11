@@ -129,9 +129,9 @@
 					//datatable.order().draw(false);
 					
 					
-					datatable.ajax.reload();
-// 					datatable.destroy();
-// 					list();			
+// 					datatable.ajax.reload();
+					datatable.destroy();
+					list();			
 				}else{
 					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);
 					alert("FAIL reason:" + deleteResult.messages);
