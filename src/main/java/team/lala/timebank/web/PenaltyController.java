@@ -88,8 +88,8 @@ public class PenaltyController {
 	public PageResponse<Penalty> queryPenalty(Penalty inputPenalty, @RequestParam("pageNumber") Integer pageNumber,
 			@RequestParam("pageSize") Integer pageSize) {
 		PageResponse<Penalty> response = new PageResponse<Penalty>();
-
 		PenaltySpecification penaltySpec = new PenaltySpecification(inputPenalty);
+		
 		PageRequest thisPage = PageRequest.of(pageNumber, pageSize);
 		Page<Penalty> penalties = penaltyService.findBySpecification(penaltySpec, thisPage);
 		response.setPage(penalties);
