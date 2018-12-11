@@ -109,7 +109,7 @@
 				$("#navBar").html(data);
 			});
 			
-			listTimeLedger();
+// 			listTimeLedger();
 		
 		})
 

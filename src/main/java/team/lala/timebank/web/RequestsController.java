@@ -21,6 +21,7 @@ import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Requests;
 import team.lala.timebank.service.RequestsService;
 import team.lala.timebank.spec.MemberSpecification;
+import team.lala.timebank.spec.OrderSpecification;
 import team.lala.timebank.spec.RequestSpecification;
 
 @Controller
@@ -28,7 +29,7 @@ import team.lala.timebank.spec.RequestSpecification;
 public class RequestsController {
 
 	@Autowired
-	private RequestsService requestsService;		
+	private RequestsService requestsService;
 
 	@RequestMapping("/list")
 	public String listPage(Model model) {
@@ -63,13 +64,12 @@ public class RequestsController {
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public AjaxResponse<Requests> deletePage(@RequestParam("id") Long id, Model model) {
+	public AjaxResponse<Requests> deletePage(@RequestParam("id") Long id) {
 		AjaxResponse<Requests> response = new AjaxResponse<Requests>();
 
 		try {
 			response.setObj(requestsService.getOne(id));
 			requestsService.delete(id);
-			
 
 		} catch (Exception e) {
 			response.addMessage("刪除失敗，" + e.getMessage());
@@ -117,28 +117,28 @@ public class RequestsController {
 
 	@RequestMapping("/query")
 	@ResponseBody
-	public List<Requests> query(Requests inputRequests) {
-		System.out.println("inputRequests="+inputRequests);
-		RequestSpecification requestSpecification=new RequestSpecification(inputRequests);
-		
-		List<Requests> requests = requestsService.findBySpecification(requestSpecification);
-		System.out.println(requests);
-		return requests;
-	}
-//	public Page<Requests> query(Requests inputRequests,PageRequest pageRequest) {
-//		System.out.println("inputRequests="+inputRequests+"pageRequest="+pageRequest);
-//		RequestSpecification requestSpecification=new RequestSpecification(inputRequests);
-//		
-//		Page<Requests> requests = requestsService.findBySpecification(requestSpecification,pageRequest);
-//		System.out.println(requests);
-//		return requests;
+	 public List<Requests> query(Requests inputRequests) {
+	 System.out.println("inputRequests="+inputRequests);
+	 RequestSpecification requestSpecification=new RequestSpecification(inputRequests);
+	 List<Requests> requests =requestsService.findBySpecification(requestSpecification);
+	 System.out.println(requests);
+	 return requests;
+	 }
+//	public PageResponse<Requests> query(Requests requests, @RequestParam("pageNumber") Integer pageNumber,
+//			@RequestParam("pageSize") Integer pageSize) {
+//		PageResponse<Requests> response = new PageResponse<Requests>();
+//
+//		try {
+//			RequestSpecification requestSpecification = new RequestSpecification(requests);
+//			PageRequest thisPage = PageRequest.of(pageNumber, pageSize);
+//			Page<Requests> requestPage = requestsService.findBySpecification(requestSpecification, thisPage);
+//			response.setPage(requestPage);
+//		} catch (Exception e) {
+//			response.addMessage("查詢失敗，" + e.getMessage());
+//			e.printStackTrace();
+//		}
+//
+//		return response;
 //	}
-	
-
-		
-		
-		
-		
-	
 
 }

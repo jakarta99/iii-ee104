@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDateTime"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -32,6 +33,25 @@
 	<br>
 	<br>
 	<h1>donation list</h1>
+	
+	<form action="#">
+	  <fieldset>
+	    <legend>search</legend>
+	    <label>id:</label>
+	    <input type="text" value="${param.id}" id="id" name="id"/>
+	    <label>memberId:</label>
+	    <input type="text" value="${param.memberId}" id="memberId" name="memberId"/>
+	    <label>起始日期</label>
+	    <input type="text" value="${param.donateTimeBegin}" id="donateTimeBegin" name="donateTimeBegin"/>
+	    <label>結束日期</label>
+	    <input type="text" value="${param.donateTimeEnd}" id="donateTimeEnd" name="donateTimeEnd"/>
+	  	<input type="button" onclick="getData()" value="搜尋" id="searchButt" />
+	  </fieldset>
+	</form>
+
+	
+	
+
 	<fieldset>
 		<table id="dataTable" class="table table-hover">
 			<thead>
@@ -59,12 +79,13 @@
 	})
 
 	function getData() {
+		$("tbody").text("");// 先清空資料
 		$.ajax({
 			url : "/donation/query",
 			type : "post",
+			data : $("form").serialize(),
 			dataType : 'json',
 			success : function(donations) {
-				$("tbody").text(""); //delete 轉回原本頁面先清空資料
 				$.each(donations,function(index, donation){
 					$("tbody").append(
 							[$("<tr>"),

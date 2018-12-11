@@ -91,10 +91,17 @@ fieldset {
 				url : '/time-ledger/insert',
 				type : 'post',
 				data : $('form').serialize(),
-				dataType : 'text',
+				dataType : 'json',
 				success : function(addResult) {
-					alert(addResult);
-					document.location.href = "/time-ledger/add";
+// 					alert(addResult);
+// 					document.location.href = "/time-ledger/add";
+					if(addResult.status == "SUCCESS"){
+						alert("add no." + addResult.obj.id + " timeLedger - STATUS : " + addResult.status);
+						document.location.href="/time-ledger/add";
+					}else{
+						alert("add no." + addResult.obj.id + " timeLedger - STATUS : " + addResult.status);
+						alert("FAIL reason:" + addResult.messages);
+					}
 				},
 			})
 		}

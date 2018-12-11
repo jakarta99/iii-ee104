@@ -95,10 +95,17 @@ fieldset {
 				url : '/time-ledger/update',
 				type : 'put',
 				data : $('form').serialize(),
-				dataType : 'text',
+				dataType : 'json',
 				success : function(editResult) {
-					alert(editResult);
+// 					alert(editResult);
 // 					document.location.href = "/time-ledger/list";
+					if(editResult.status == "SUCCESS"){
+						alert("edit no." + editResult.obj.id + " timeLedger - STATUS : " + editResult.status);
+						document.location.href="/time-ledger/list";
+					}else{
+						alert("edit no." + editResult.obj.id + " timeLedger - STATUS : " + editResult.status);
+						alert("FAIL reason:" + editResult.messages);
+					}
 				},
 			})
 		}

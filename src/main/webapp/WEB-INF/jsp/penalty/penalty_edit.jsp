@@ -60,7 +60,7 @@
 					class="form-control" value="${penalty.penaltyTimeValue}" />
 			</div>
 		</div>
-		<input type="button" class="btn btn-primary" id="update">
+		<input type="button" class="btn btn-primary" id="update" value="修改">
 	</form>
 
 	<a href="/penalty/list">back to penalty_list</a>
@@ -76,8 +76,8 @@
 					method : "post",
 					dataType : "json",
 					data : $('form').serialize()
-				}).done(function(data) {
-					alert(data.msg);
+				}).done(function(result) {
+					alert(result.status);
 				})
 			})
 

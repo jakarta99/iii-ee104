@@ -1,8 +1,5 @@
 package team.lala.timebank.web;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.commons.ajax.PageResponse;
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.service.PenaltyService;
@@ -40,47 +38,44 @@ public class PenaltyController {
 
 	@RequestMapping("/update")
 	@ResponseBody
-	public Map<String, String> update(Penalty penalty, Model model) {
-		Map<String, String> msg = new HashMap<>();
+	public AjaxResponse<Penalty> update(Penalty penalty, Model model) {
+		AjaxResponse<Penalty> ajaxResponse = new AjaxResponse<Penalty>();
 		try {
-			Penalty penalty1 = penaltyService.getOne(penalty.getId());
-			penalty1.setPenaltyTimeValue(penalty.getPenaltyTimeValue());
-			penalty1.setStatus(penalty.getStatus());
-			penaltyService.save(penalty1);
-			msg.put("msg", "修改成功");
+			Penalty penaltyDatabace = penaltyService.getOne(penalty.getId());
+			penaltyDatabace.setPenaltyTimeValue(penalty.getPenaltyTimeValue());
+			penaltyDatabace.setStatus(penalty.getStatus());
+			ajaxResponse.setObj(penaltyService.save(penaltyDatabace));
 		} catch (Exception e) {
-			msg.put("msg", "修改失敗");
+			ajaxResponse.addMessage(e.getMessage());
 			e.printStackTrace();
 		}
-		return msg;
+		return ajaxResponse;
 	}
 
 	@RequestMapping("/insert")
 	@ResponseBody
-	public Map<String, String> insert(Penalty penalty) {
-		Map<String, String> msg = new HashMap<>();
+	public AjaxResponse<Penalty> insert(Penalty penalty) {
+		AjaxResponse<Penalty> ajaxResponse = new AjaxResponse<Penalty>();
 		try {
-			penaltyService.save(penalty);
-			msg.put("msg", "新增成功");
+			ajaxResponse.setObj(penaltyService.save(penalty));
 		} catch (Exception e) {
-			msg.put("msg", "新增失敗");
+			ajaxResponse.addMessage(e.getMessage());
 			e.printStackTrace();
 		}
-		return msg;
+		return ajaxResponse;
 	}
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public Map<String, String> delete(@RequestParam("id") Long id) {
-		Map<String, String> msg = new HashMap<>();
+	public AjaxResponse<Penalty> delete(@RequestParam("id") Long id) {
+		AjaxResponse<Penalty> ajaxResponse = new AjaxResponse<Penalty>();
 		try {
 			penaltyService.delete(id);
-			msg.put("msg", "刪除成功");
 		} catch (Exception e) {
-			msg.put("msg", "刪除失敗");
+			ajaxResponse.addMessage(e.getMessage());
 			e.printStackTrace();
 		}
-		return msg;
+		return ajaxResponse;
 	}
 
 	@RequestMapping("/list")
@@ -90,10 +85,11 @@ public class PenaltyController {
 
 	@ResponseBody
 	@RequestMapping("/query")
-	public PageResponse<Penalty> queryPenalty(Penalty inputPenalty, @RequestParam("pageNumber") Integer pageNumber, @RequestParam("pageSize") Integer pageSize) {
+	public PageResponse<Penalty> queryPenalty(Penalty inputPenalty, @RequestParam("pageNumber") Integer pageNumber,
+			@RequestParam("pageSize") Integer pageSize) {
 		PageResponse<Penalty> response = new PageResponse<Penalty>();
-		
 		PenaltySpecification penaltySpec = new PenaltySpecification(inputPenalty);
+		
 		PageRequest thisPage = PageRequest.of(pageNumber, pageSize);
 		Page<Penalty> penalties = penaltyService.findBySpecification(penaltySpec, thisPage);
 		response.setPage(penalties);

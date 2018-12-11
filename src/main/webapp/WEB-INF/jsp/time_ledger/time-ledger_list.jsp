@@ -49,7 +49,8 @@ fieldset {
 	<fieldset>
 		<button onclick="javascript:document.location.href='/time-ledger/add'"
 			class="btn btn-outline-secondary">Add</button>
-		<button onclick="findAll()" class="btn btn-outline-secondary">findAll</button>
+		<button id="findAll" onclick="findAll()" class="btn btn-outline-secondary">findAll</button>
+		<hr>
 		<form>
 			id :
 			<input type="text" value="" placeholder="id" id="id" name="id"/>
@@ -65,9 +66,22 @@ fieldset {
 			<input type="text" value=""  id="withdrawalValue" name="withdrawalValue"/>
 			balanceValue:
 			<input type="text" value="" id="balanceValue" name="balanceValue"/>
-			<button type="button" onclick="findTimeLedger()" class="btn btn-outline-secondary">search</button>
+			<button type="button" id="search" onclick="findTimeLedger()" class="btn btn-outline-secondary">search</button>
 		</form>
+		<hr>
 		<table class="table table-hover">
+			<div id="numOfPage">
+				<label>
+					Show 
+					<select name="numOfPage">
+						<option value="3">3</option>
+						<option value="6">6</option>
+						<option value="10">10</option>
+						<option value="15">15</option>
+					</select>
+					entries
+				</label>
+			</div>	
 			<thead>
 				<tr>
 					<th>選項</th>
@@ -83,13 +97,25 @@ fieldset {
 			<tbody id="timeLedgerTbody">
 			</tbody>
 		</table>
+		<div id="information">Showing 0 to 0 of 0 entries</div>		
+		<div id="paginate" class="center">
+			<a id="previous" href="#">Previous</a>
+			<span id="pages">pagesHere</span>
+			<a id="next" href="#">Next</a>
+		</div>
 		<div>
 			<a href='/'><i class="fas fa-home"></i>back to HOME</a>
 		</div>
 	</fieldset>
 	
 	<script>
-		function findTimeLedger() {
+		var thisPageSize = $("select[name='numOfPage']").val();
+		var thisPageElements;	//此頁幾筆資料
+		var thisPage;			//此頁的index
+		var totalPages;
+		var indexOfThisPageFirstData;
+		
+		function findTimeLedger(pageNumber, pageSize) {
 // 			$("#timeLedgerTbody").text("");
 // 			$.getJSON("/time-ledger/query", $("form").serialize(), function(data) {
 // 				$.each(data, function(index, timeLedger) {
@@ -109,13 +135,42 @@ fieldset {
 // 				})
 // 			})
 			$.ajax({
-				url:'/time-ledger/query',  
+				url:'/time-ledger/query?pageNumber=' + pageNumber + '&pageSize=' + pageSize,  
 				type:'post',
 				data:$('form').serialize(),
 				dataType:'json',
 				success:function(data){
+					//讀取分頁各項資訊，初始化全域變數
+						//此頁第一筆資料的index
+						indexOfThisPageFirstData = data.page.pageable.offset;
+						//第index頁
+						thisPage = data.page.pageable.pageNumber; 
+						//共幾頁
+						totalPages = data.page.totalPages;
+						//此頁共幾筆資料
+						thisPageElements = data.page.numberOfElements
+					//A.顯示分頁資訊:Showing XXX to XXX of XXX entries
+					var totalEntries = "Showing "+ (data.page.totalElements > 0 ? indexOfThisPageFirstData + 1 : indexOfThisPageFirstData)  //(indexOfThisPageFirstData + 1)
+										+ " to " + (indexOfThisPageFirstData + thisPageElements)  //此頁共幾筆資料
+										+ " of " + data.page.totalElements + " entries";  //所有資料共幾筆
+					$("#information").text(totalEntries);
+					//B.顯示每頁超連結
+					if(totalPages > 0){
+						var pageLinks = "";
+						for(var i = 1; i <= totalPages; i++){
+							if(thisPage + 1 == i){  //標示當下頁數，粗體且無超連結
+								pageLinks += "<a class='pageNum' style='font-weight:bold'>" + i +"</a>  ";
+							}else{   				//其他頁數顯示超連結
+								pageLinks += "<a class='pageNum' href='#'>" + i +"</a>  ";
+							}
+						}
+						$("#pages").html(pageLinks);
+					}else{
+						$("#pages").text(" 0 "); //如查無資料，則顯示0頁
+					}
+					
 					$("#timeLedgerTbody").text(""); 
-					$.each(data, function(index, timeLedger){
+					$.each(data.page.content, function(index, timeLedger){
 						var editButton = $("<button class=\"btn btn-outline-secondary\" onclick=\"javascript:document.location.href='/time-ledger/edit?id="
 		 						+ timeLedger.id	+ "'\">Edit</button>");
 						var deleteButton = $("<button class=\"btn btn-outline-secondary\" onclick=\"deleteTimeLedger("
@@ -137,7 +192,7 @@ fieldset {
 			})
 		}
 
-		function findAll(){
+		function findAll(pageNumber, pageSize){
 			$("#id").val("");
 			$("#memberId").val("");
 			$("#transactionTime").val("");
@@ -145,17 +200,29 @@ fieldset {
 			$("#depositValue").val("");
 			$("#withdrawalValue").val("");
 			$("#balanceValue").val("");
-			findTimeLedger();
+			findTimeLedger(pageNumber, pageSize);
 		}
 
 		function deleteTimeLedger(id) {
 			$.ajax({
 				url : '/time-ledger/delete?id=' + id,
 				type : 'delete',
-				dataType : 'text',
+				dataType : 'json',
 				success : function(deleteResult) {
-					alert(deleteResult);
-					findAll();
+					if(deleteResult.status == "SUCCESS"){
+						alert("delete no." + deleteResult.obj.id + " timeLedger - STATUS : " + deleteResult.status);
+						if(thisPageElements == 1){ //如果刪了該頁最後一筆資料，則直接跳轉到上一頁(否則留在該頁會無資料可供顯示)
+							thisPage--;
+							findTimeLedger(thisPage, thisPageSize);
+						}else{
+							findTimeLedger(thisPage, thisPageSize);
+						}
+					}else{
+						alert("delete no." + deleteResult.obj.id + " timeLedger - STATUS : " + deleteResult.status);
+						alert("FAIL reason:" + deleteResult.messages);
+					}
+// 					alert(deleteResult);
+// 					findAll();
 				},
 			})
 		}
@@ -165,8 +232,40 @@ fieldset {
 				$("#navBar").html(data);
 			});
 			
-			findAll();
+			findAll(0,thisPageSize);
 			
+			$("#findAll").click(function(){
+				findAll(0, thisPageSize);
+			});
+			
+			$("#search").click(function(){
+				findTimeLedger(0, thisPageSize);
+			});
+
+			//點選頁數後，跳頁重新呼叫controller
+			$("#pages").on("click",".pageNum",function(){	//index值，取得頁數值後減一
+				var changePage = parseInt($(this).text()) - 1; 
+				findTimeLedger(changePage, thisPageSize);
+			});
+
+			$("#previous").click(function(){				//上一頁，取得此頁頁數後減一
+				if(thisPage > 0){
+					findTimeLedger(thisPage - 1, thisPageSize); 
+				}
+			})
+			
+			$("#next").click(function(){					//下一頁，取得此頁頁數後加一
+				if(thisPage + 1 < totalPages){
+					findTimeLedger(thisPage + 1, thisPageSize);
+				}
+			})
+			
+			$("select[name='numOfPage']").change(function(){//更改每頁資料筆數
+				thisPageSize = $(this).val();
+				//根據換頁前第一筆資料位置，推算換頁後應留在第幾頁(index)
+				var changePageIndex = Math.floor((indexOfThisPageFirstData + 1) / thisPageSize);
+				findTimeLedger(changePageIndex, thisPageSize);
+			})	
 		})
 	</script>
 </body>
