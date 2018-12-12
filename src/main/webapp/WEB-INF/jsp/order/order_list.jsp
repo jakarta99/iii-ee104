@@ -79,12 +79,15 @@
 </div>
 
 <div id="myTable_paginate">
-	<a id="myTable_previous" href="#">Previous</a>
-	<span id="myTable_pages">0</span>
-	<a id="myTable_next" href="#">Next</a>
+<!-- 	<a id="myTable_previous" href="#">Previous</a> -->
+	<button id="myTable_previous">Previous</button>
+	<span id="myTable_pages" style="font-size:18px">0</span>
+	<button id="myTable_next">Next</button>
+<!-- 	<a id="myTable_next" href="#">Next</a> -->
+
 </div>
 
-<div id="myTable_info">Showing 0 to 0 of 0 entries</div>
+<div id="myTable_info" style="font-size:18px">Showing 0 to 0 of 0 entries</div>
 
 <table border="1" id="myTable"> 
 	<thead>
@@ -151,7 +154,7 @@
 			var changePageIndex = Math.floor((indexOfThisPageFirstData + 1) / thisPageSize);
 			findOrders(changePageIndex, thisPageSize);
 		})
-		
+				
 	})
 	
 	function findAllOrders(pageNumber, pageSize){
