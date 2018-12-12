@@ -224,28 +224,29 @@
 				pageResize: true, 
 				fixedHeader: true,
 				pagingType: 'full_numbers',
-				searching: false,
-				
+				searching: false,				
 			 	processing: true,
+			 	//分頁、排序都交由伺服器處理
 		        serverSide: true,
-		   
 		        ajax: {
 		            url: "/member/queryPageRequest",
 		            type: "get",
 		            dataType : "json",
+					//傳送給伺服器的資料(datatable預設會傳送d的資料)
 		            data: function(d){
 		            	var start = d.start;
 						var length = d.length;
 						var request = $("form").serialize()+"&start="+start+"&length="+length;
 		            	return request;
 		            },
+		            //dataTable需顯示表格的資料標籤(預設標籤為data:)
 		            dataSrc:"content",
+		            //對伺服器送來的資料進行修改
 		            dataFilter: function(resp){
 // 		            	console.log(resp)
 		                var json = jQuery.parseJSON( resp );
 		                json.recordsTotal = json.totalElements;
-		                json.recordsFiltered = json.totalElements;
-		                json.data = json.content;		     			
+		                json.recordsFiltered = json.totalElements;	     			
 		     			console.log(JSON.stringify( json ))
 		                return JSON.stringify( json ); 
 		            },
@@ -259,7 +260,7 @@
 		        	  var totalPages = d.json.totalPages;
 		        	  $('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
 		       },
-
+				//設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
 		     	columns: [
 		           {data: "id" },
 		           {data: function (data, type, row ) {
