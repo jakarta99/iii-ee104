@@ -19,12 +19,18 @@ public class PenaltyService {
 	@Autowired
 	private PenaltyDao penaltyDao;
 
-	public Penalty save(Penalty p) {
-		p.setUpdateDate(LocalDateTime.now());
-		Penalty penalty=penaltyDao.save(p);
-		return penalty;
+	public Penalty save(Penalty penalty) {
+		penalty.setUpdateDate(LocalDateTime.now());
+		return penaltyDao.save(penalty);
 	}
  
+	public Penalty update(Penalty penalty) {
+		Penalty dbPenalty = penaltyDao.getOne(penalty.getId());
+		dbPenalty.setPenaltyTimeValue(penalty.getPenaltyTimeValue());
+		dbPenalty.setStatus(penalty.getStatus());
+		return penaltyDao.save(dbPenalty);
+	}
+	
 	public Penalty getOne(Long id) {
 		Penalty penalty = penaltyDao.getOne(id);
 		return penalty;

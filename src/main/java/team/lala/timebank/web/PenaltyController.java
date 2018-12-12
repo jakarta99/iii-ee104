@@ -41,10 +41,7 @@ public class PenaltyController {
 	public AjaxResponse<Penalty> update(Penalty penalty, Model model) {
 		AjaxResponse<Penalty> ajaxResponse = new AjaxResponse<Penalty>();
 		try {
-			Penalty penaltyDatabace = penaltyService.getOne(penalty.getId());
-			penaltyDatabace.setPenaltyTimeValue(penalty.getPenaltyTimeValue());
-			penaltyDatabace.setStatus(penalty.getStatus());
-			ajaxResponse.setObj(penaltyService.save(penaltyDatabace));
+			ajaxResponse.setObj(penaltyService.update(penalty));
 		} catch (Exception e) {
 			ajaxResponse.addMessage(e.getMessage());
 			e.printStackTrace();
@@ -89,7 +86,7 @@ public class PenaltyController {
 			@RequestParam("pageSize") Integer pageSize) {
 		PageResponse<Penalty> response = new PageResponse<Penalty>();
 		PenaltySpecification penaltySpec = new PenaltySpecification(inputPenalty);
-		
+
 		PageRequest thisPage = PageRequest.of(pageNumber, pageSize);
 		Page<Penalty> penalties = penaltyService.findBySpecification(penaltySpec, thisPage);
 		response.setPage(penalties);
