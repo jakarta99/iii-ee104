@@ -18,6 +18,11 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous">
+<!-- date picker -->
+<script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
+<script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
+<script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
+<link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 <meta charset="UTF-8">
 <title>Penalty List</title>
 </head>
@@ -66,7 +71,15 @@
 					class="form-control" />
 			</div>
 		</div>
+		<div class="form_group row">
+			<label class="col-sm-1 col-form-label">起始日期</label>
+			<div class="col-sm-2">
+				<input type="text" id="dateBefore" name="dateBefore" class="form-control" />
+				<input type="text" id="dateAfter" name="dateAfter" class="form-control" />
+			</div>
+		</div>
 		<input type="button" class="btn btn-primary mb-2" id="serach" value="搜尋"/>
+		<input type="reset"  class="btn btn-primary mb-2" value="重設" />
 	</form>
 	
 	<div>show
@@ -189,9 +202,24 @@
 					}
 				}).done(function(result) {
 					alert(result.status);
+					if ($("table tbody > tr").length < 2){
+						listPenalty($("#serachForm").serialize(), onPage - 1, pageSize);
+					} 
 					listPenalty($("#serachForm").serialize(), onPage, pageSize);
 				})
 			})
+			//日期選擇器
+			var datePickerSetting = {
+				format : "yyyy-mm-dd",
+				autoclose : true,
+				todayHighlight : true,
+				language : 'zh-TW',
+				clearBtn:true,
+				startView:"2",
+				endDate:"0d",
+			};
+			$("#dateBefore").datepicker(datePickerSetting);
+			$("#dateAfter").datepicker(datePickerSetting);
 		})
 	</script>
 

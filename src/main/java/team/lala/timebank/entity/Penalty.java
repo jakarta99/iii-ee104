@@ -1,6 +1,7 @@
 package team.lala.timebank.entity;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "PENALTY")
@@ -104,21 +107,23 @@ public class Penalty {
 	public void setPenaltyTimeValue(Integer penaltyTimeValue) {
 		this.penaltyTimeValue = penaltyTimeValue;
 	}
-	
+
 	public LocalDateTime getDateBefore() {
 		return dateBefore;
 	}
-	
+
 	public void setDateBefore(LocalDateTime dateBefore) {
 		this.dateBefore = dateBefore;
 	}
-	
+
 	public LocalDateTime getDateAfter() {
 		return dateAfter;
 	}
-	
+
 	public void setDateAfter(LocalDateTime dateAfter) {
 		this.dateAfter = dateAfter;
 	}
+
+	
 
 }
