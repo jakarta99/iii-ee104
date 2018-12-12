@@ -67,9 +67,21 @@ public class OrderService {
 		return order;
 	}
 	
-	public Order save(Order order) {
+	public Order insert(Order order) {
 		Order o = orderDao.save(order);
 		return o;
+	}
+	
+	public Order update(Order order) {
+		Order dbOrder = null;
+		if(order.getId() != null) {
+			dbOrder = getById(order.getId());
+			dbOrder.setSupplierAcception(order.getSupplierAcception());
+			dbOrder.setConfirmation(order.getConfirmation());
+			dbOrder.setStatus(order.getStatus());
+			dbOrder = orderDao.save(dbOrder);
+		}
+		return dbOrder;
 	}
 	
 	public void deleteById(Long id) { //spring jpa預設void

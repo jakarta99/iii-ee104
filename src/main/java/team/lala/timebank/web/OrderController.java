@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.commons.ajax.PageResponse;
-import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.service.OrderService;
 import team.lala.timebank.spec.OrderSpecification;
@@ -51,22 +50,6 @@ public class OrderController {
 
 	}
 	
-	
-//	@RequestMapping("/query")
-//	@ResponseBody
-//	public List<Order> queryOrder(@RequestParam("confirmation") YesNo confirmation){
-////		System.out.println("confirmation=" + confirmation);
-//		
-//		if(confirmation != null) {
-//			List<Order> orders = orderService.findByConfirmation(confirmation);
-//			return orders;
-//		}
-//		
-//		List<Order> orders = orderService.findAll();
-//		return orders;  //回傳json
-//	}
-	
-
 
 	@RequestMapping("/add")
 	public String addPage() {
@@ -79,7 +62,7 @@ public class OrderController {
 	public AjaxResponse<Order> insert(Order order) {
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		try {
-			orderService.save(order);
+			orderService.insert(order);
 		} catch (Exception e) {
 			response.addMessage("新增失敗，" + e.getMessage());
 			e.printStackTrace();
@@ -104,13 +87,7 @@ public class OrderController {
 	public AjaxResponse<Order> update(Order order) {
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		try {
-			Order dbOrder = orderService.getById(order.getId());
-			dbOrder.setSupplierAcception(order.getSupplierAcception());
-			dbOrder.setConfirmation(order.getConfirmation());
-			dbOrder.setStatus(order.getStatus());
-			
-			orderService.save(dbOrder);
-			
+			orderService.update(order);
 		} catch (Exception e) {
 			response.addMessage("修改失敗，" + e.getMessage());
 			e.printStackTrace();
