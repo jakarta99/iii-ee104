@@ -96,9 +96,8 @@ public class MemberService {
 		return memberDao.findAll(specification);
 	}
 	
-	public Page<Member> findBySpecification(Specification<Member> specification, PageRequest pageRequest) {		
-		Pageable thisPage = pageRequest;		
-		return memberDao.findAll(specification, thisPage);
+	public Page<Member> findBySpecification(Specification<Member> specification, Pageable page) {			
+		return memberDao.findAll(specification, page);
 	}
 	
 

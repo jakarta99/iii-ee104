@@ -69,15 +69,15 @@ public class MemberController {
 	public Page<Member> queryMember(Member inputMember, @RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length){
 		int page = start.orElse(0)/length.orElse(10);
-		System.out.println("start=" + start + ", page"+ page+", length=" +length);
-		System.out.println("inputmember=" + inputMember);
+//		System.out.println("start=" + start + ", page"+ page+", length=" +length);
+//		System.out.println("inputmember=" + inputMember);
 
 		MemberSpecification memberSpec = new MemberSpecification(inputMember);	
 		Page<Member> members = memberService.findBySpecification(memberSpec,PageRequest.of(page, length.orElse(10)));
 		
-		System.out.println("PageRequest=" +PageRequest.of(page, length.orElse(10)));		
-		System.out.println("queryMember=" +members.getContent());
-		System.out.println("Total Element Number=" +members.getTotalElements()+", total page=" + members.getTotalPages());
+//		System.out.println("PageRequest=" +PageRequest.of(page, length.orElse(10)));		
+//		System.out.println("queryMember=" +members.getContent());
+//		System.out.println("Total Element Number=" +members.getTotalElements()+", total page=" + members.getTotalPages());
 		return members;
 	}
 	

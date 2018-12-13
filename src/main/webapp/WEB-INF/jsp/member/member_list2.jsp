@@ -82,7 +82,7 @@
 <body>
 
 <!-- 	<div id="navBar"></div> -->
-<c:import url="/html/nav.html"/>
+<jsp:include page="/admin_layout/nav.html"/>
 
 	<article>
 		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
@@ -234,6 +234,7 @@
 		            dataType : "json",
 					//傳送給伺服器的資料(datatable預設會傳送d的資料)
 		            data: function(d){
+		            	console.log(d);
 		            	var start = d.start;
 						var length = d.length;
 						var request = $("form").serialize()+"&start="+start+"&length="+length;
@@ -284,7 +285,7 @@
 		                return new Date(data.signUpDate).toLocaleDateString();
 		            } },
 		       ],
-		       //禁用第012列的搜索和排序
+		       //禁用第0123列的搜索和排序
 		       columnDefs: [{
 	                "searchable": false,
 	                "orderable": false,
