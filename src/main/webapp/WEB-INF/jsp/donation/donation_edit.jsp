@@ -26,14 +26,45 @@
 <br>
 <br>
 <br>
-<h1> edit memberId = ${donation.memberId} donation</h1>
-<form action="/donation/update" method="post">
-	id<input type="text" value="${donation.id}" id="id" name="id" readonly/><p>
-	memberId<input type="text" value="${donation.memberId}" id="memberId" name="memberId" readonly/><p>
-	organizationId<input type="text" value="${donation.organizationId}" id="memberId" name="memberId" readonly/><p>
-	donateTime<input type="text" value="${donation.donateTime}" id="memberId" name="memberId" readonly/><p>
-	donateValue:<input type="text" value="${donation.value}" id="value" name="value"/><p>
-	<input  type="submit"/>
-</form>
+<h1> edit id = ${donation.id} donation</h1>
+	<form>
+	  <fieldset>
+	    <legend>insert</legend>
+	    <label>id:</label>
+	    <input type="hidden" value="${donation.id}" id="id" name="id"/>
+	    <label>memberId:</label>
+	    <input type="text" disabled="disabled" value="${donation.memberId}" id="memberId" name="memberId"/>
+	    <label>organizationId:</label>
+	    <input type="text" disabled="disabled" value="${donation.organizationId}" id="organizationId" name="organizationId"/>
+	    <label>value:</label>
+	    <input type="text" value="${donation.value}" id="value" name="value"/>
+	  	<input type="button" onclick="editData()" value="更改" id="updateButt" />
+	  </fieldset>
+	</form>
+<script>
+	function editData(){
+		$.ajax({
+			method: "post",
+			dataType: "json",
+			url: "/donation/update",
+			data: $("form").serialize(),
+			success: function(response){
+				
+				if(response.status == "SUCCESS"){
+					alert("更改成功");
+				}else{
+					$.each(response.message, function(idx, message){
+						alert(message);
+					});
+				}
+				window.location.replace("/donation/list");
+			}
+		})
+	}
+</script>	
+	
+
+
+
 </body>
 </html>

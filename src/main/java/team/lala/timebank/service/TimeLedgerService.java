@@ -1,6 +1,7 @@
 package team.lala.timebank.service;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import team.lala.timebank.dao.TimeLedgerDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.TimeLedger;
+import team.lala.timebank.enums.YesNo;
 
 @Service
 public class TimeLedgerService {
@@ -80,6 +82,27 @@ public class TimeLedgerService {
 		timeLedgerDao.save(timeLedger);
 		return timeLedger;
 	}
+	
+//	public TimeLedger insert(TimeLedger newTimeLedger) {
+//		newTimeLedger.setTransactionTime(LocalDateTime.now());
+//		TimeLedger timeLedger = timeLedgerDao.save(newTimeLedger);
+//		return timeLedger;		
+//	}
+	
+//	public TimeLedger update(TimeLedger timeLedger) {
+//		TimeLedger dbTimeLedger = null;
+//		if(timeLedger.getId() != null) {
+//			dbTimeLedger = timeLedgerDao.getOne(timeLedger.getId());
+//			dbTimeLedger.setBalanceValue(timeLedger.getBalanceValue());
+//			dbTimeLedger.setDepositValue(timeLedger.getDepositValue());
+//			dbTimeLedger.setDescription(timeLedger.getDescription());
+//			dbTimeLedger.setMemberId(timeLedger.getMemberId());
+//			dbTimeLedger.setTransactionTime(timeLedger.getTransactionTime());
+//			dbTimeLedger.setWithdrawalValue(timeLedger.getWithdrawalValue());
+//			dbTimeLedger = timeLedgerDao.save(dbTimeLedger);
+//		}
+//		return timeLedger;
+//	}
 
 	// 刪除一筆資料
 	public void delete(Long id) {

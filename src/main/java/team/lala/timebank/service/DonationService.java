@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.DonationDao;
 import team.lala.timebank.entity.Donation;
-import team.lala.timebank.entity.Member;
 
 @Service
 public class DonationService {
@@ -27,7 +26,17 @@ public class DonationService {
 		Donation donation = donationDao.getOne(id);
 		return donation;
 	}
-
+	
+	public Donation update(Donation donation) {
+		Donation dbDonation = null;
+		if(donation.getId() != null) {
+			dbDonation = donationDao.getOne(donation.getId());
+			dbDonation.setValue(donation.getValue());
+			dbDonation = donationDao.save(dbDonation);
+		}
+		return dbDonation;
+	}
+	
 	public List<Donation> findAll() {
 		List<Donation> donations = donationDao.findAll();
 		return donations;

@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Donation;
+import team.lala.timebank.entity.Member;
 import team.lala.timebank.service.DonationService;
 import team.lala.timebank.spec.DonationSpecification;
 
@@ -42,35 +44,44 @@ public class DonationController {
 	}
 
 	@RequestMapping("/insert")
-	public String insertDonation(Donation donation) {
-
-		donationService.save(donation);
-
-		return "redirect:/donation/add";
+	@ResponseBody
+	public AjaxResponse<Donation> insertDonation(Donation donation) {
+		AjaxResponse<Donation> response = new AjaxResponse<Donation>();
+		try{
+			Donation insertDonation = donationService.save(donation);
+			response.setObj(insertDonation);
+		}catch(Exception e) {
+			response.addMessage("新增失敗");
+			e.printStackTrace();
+		}
+		return response;
 	}
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public String deleteDonation(@RequestParam("id") Long id) {
+	public AjaxResponse<Donation> deleteDonation(@RequestParam("id") Long id) {
+		AjaxResponse<Donation> response = new AjaxResponse<Donation>();
 		try {
 			donationService.deleteById(id);
-			return "delete id " + id + " success";
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "delete fail";
+			response.addMessage("刪除失敗");
 		}
-
+		return response;
 	}
 
 	@RequestMapping("/update")
-	public String updateDonation(Donation donation) {
-
-		Donation dbDonation = donationService.getOne(donation.getId());
-
-		dbDonation.setValue(donation.getValue());
-		donationService.save(dbDonation);
-
-		return "redirect:/donation/list";
+	@ResponseBody
+	public AjaxResponse<Donation> updateDonation(Donation donation) {
+		AjaxResponse<Donation> response = new AjaxResponse<Donation>();
+		try {
+			Donation updateDonation = donationService.update(donation);
+			response.setObj(updateDonation);
+		}catch(Exception e) {
+			response.addMessage("更新失敗");
+		}
+		return response;
 	}
 
 	@RequestMapping("/query")

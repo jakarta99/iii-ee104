@@ -25,6 +25,17 @@
 	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous">
 
+<!-- date picker -->
+<script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
+<script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
+<script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
+<link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
+<!-- data table -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
+<script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
+<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>	
+
 
 </head>
 <body>
@@ -106,9 +117,16 @@
 		$.ajax({
 			url : "/donation/delete?id=" + donationId,
 			type : "delete",
-			dataType : 'text',
-			success : function(result){
-				alert(result);
+			dataType : 'json',
+			success : function(response){
+				if(response.status == "SUCCESS"){
+					alert("刪除成功");
+				}
+				else{
+					$.each(response.message, function(idx, message){
+						alert(message);
+					});
+				}
 				getData();
 			}
 		})
