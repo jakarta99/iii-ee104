@@ -43,11 +43,12 @@ fieldset {
 </style>
 </head>
 <body>
-	<div id="navBar"></div>
+	<jsp:include page="../admin_layout/nav.jsp" />
+<!-- 	<div id="navBar"></div> -->
 	<div class="margintop"></div>
 	<h1 class="center">TimeLedger List</h1>
 	<fieldset>
-		<button onclick="javascript:document.location.href='/time-ledger/add'"
+		<button onclick="javascript:document.location.href='/admin/time-ledger/add'"
 			class="btn btn-outline-secondary">Add</button>
 		<button id="findAll" onclick="findAll()" class="btn btn-outline-secondary">findAll</button>
 		<hr>
@@ -135,7 +136,7 @@ fieldset {
 // 				})
 // 			})
 			$.ajax({
-				url:'/time-ledger/query?pageNumber=' + pageNumber + '&pageSize=' + pageSize,  
+				url:'/admin/time-ledger/query?pageNumber=' + pageNumber + '&pageSize=' + pageSize,  
 				type:'post',
 				data:$('form').serialize(),
 				dataType:'json',
@@ -171,7 +172,7 @@ fieldset {
 					
 					$("#timeLedgerTbody").text(""); 
 					$.each(data.page.content, function(index, timeLedger){
-						var editButton = $("<button class=\"btn btn-outline-secondary\" onclick=\"javascript:document.location.href='/time-ledger/edit?id="
+						var editButton = $("<button class=\"btn btn-outline-secondary\" onclick=\"javascript:document.location.href='/admin/time-ledger/edit?id="
 		 						+ timeLedger.id	+ "'\">Edit</button>");
 						var deleteButton = $("<button class=\"btn btn-outline-secondary\" onclick=\"deleteTimeLedger("
 		 						+ timeLedger.id	+ ")\">Delete</button>");						
@@ -205,7 +206,7 @@ fieldset {
 
 		function deleteTimeLedger(id) {
 			$.ajax({
-				url : '/time-ledger/delete?id=' + id,
+				url : '/admin/time-ledger/delete?id=' + id,
 				type : 'delete',
 				dataType : 'json',
 				success : function(deleteResult) {
@@ -228,9 +229,9 @@ fieldset {
 		}
 
 		$(document).ready(function() {
-			$.get("/html/nav.html",function(data){
-				$("#navBar").html(data);
-			});
+// 			$.get("/html/nav.html",function(data){
+// 				$("#navBar").html(data);
+// 			});
 			
 			findAll(0,thisPageSize);
 			

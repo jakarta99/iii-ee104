@@ -1,4 +1,4 @@
-package team.lala.timebank.web;
+package team.lala.timebank.web.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,8 +16,8 @@ import team.lala.timebank.service.TimeLedgerService;
 import team.lala.timebank.spec.TimeLedgerSpecification;
 
 @Controller
-@RequestMapping("/time-ledger")
-public class TimeLedgerRecordController {
+@RequestMapping("/admin/time-ledger")
+public class AdminTimeLedgerRecordController {
 
 	@Autowired
 	private TimeLedgerService timeLedgerService;
@@ -26,19 +26,19 @@ public class TimeLedgerRecordController {
 	public String listPage(Model model) {
 //		List<TimeLedger> timeLedgers = timeLedgerService.findAll();
 //		model.addAttribute("timeLedgers", timeLedgers);
-		return "/time_ledger/time-ledger_list";
+		return "/admin/time_ledger/time-ledger_list";
 	}
 
 	@RequestMapping("/add")
 	public String addPage() {
-		return "/time_ledger/time-ledger_add";
+		return "/admin/time_ledger/time-ledger_add";
 	}
 
 	@RequestMapping("/edit")
 	public String editPage(@RequestParam("id") Long id, Model model) {
 		TimeLedger timeLedger = timeLedgerService.findById(id);
 		model.addAttribute("timeLedger", timeLedger);
-		return "/time_ledger/time-ledger_edit";
+		return "/admin/time_ledger/time-ledger_edit";
 	}
 
 	@RequestMapping("/insert")

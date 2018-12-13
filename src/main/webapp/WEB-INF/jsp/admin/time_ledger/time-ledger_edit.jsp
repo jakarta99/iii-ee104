@@ -43,11 +43,12 @@ fieldset {
 </style>
 </head>
 <body>
-	<div id="navBar"></div>
+	<jsp:include page="../admin_layout/nav.jsp" />
+<!-- 	<div id="navBar"></div> -->
 	<div class="margintop"></div>
 	<h1 class="center">TimeLedger Edit</h1>
 
-	<form action="/time-ledger/update" method="post">
+	<form action="/admin/time-ledger/update" method="post">
 		<fieldset>
 			<div class="form-group">
 				<input type="hidden" value="${timeLedger.id}" id="id" name="id"
@@ -84,7 +85,7 @@ fieldset {
 				<input type="reset" class="btn btn-outline-secondary" />
 			</div>
 			<div>
-				<a href='/time-ledger/list'><i
+				<a href='/admin/time-ledger/list'><i
 					class="fas fa-arrow-alt-circle-left"></i>back to TimeLedger List</a>
 			</div>
 		</fieldset>
@@ -92,7 +93,7 @@ fieldset {
 	<script>
 		function updateTimeLedger() {
 			$.ajax({
-				url : '/time-ledger/update',
+				url : '/admin/time-ledger/update',
 				type : 'put',
 				data : $('form').serialize(),
 				dataType : 'json',
@@ -101,7 +102,7 @@ fieldset {
 // 					document.location.href = "/time-ledger/list";
 					if(editResult.status == "SUCCESS"){
 						alert("edit no." + editResult.obj.id + " timeLedger - STATUS : " + editResult.status);
-						document.location.href="/time-ledger/list";
+						document.location.href="/admin/time-ledger/list";
 					}else{
 						alert("edit no." + editResult.obj.id + " timeLedger - STATUS : " + editResult.status);
 						alert("FAIL reason:" + editResult.messages);
@@ -111,9 +112,9 @@ fieldset {
 		}
 		
 		$(document).ready(function() {
-			$.get("/html/nav.html",function(data){
-				$("#navBar").html(data);
-			});
+// 			$.get("/html/nav.html",function(data){
+// 				$("#navBar").html(data);
+// 			});
 		})
 	</script>
 </body>

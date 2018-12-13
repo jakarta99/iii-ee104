@@ -77,32 +77,32 @@ public class TimeLedgerService {
 	}
 
 	// 更新一筆資料
-	public TimeLedger save(TimeLedger timeLedger) {
-		timeLedger.setTransactionTime(LocalDateTime.now());
-		timeLedgerDao.save(timeLedger);
-		return timeLedger;
-	}
-	
-//	public TimeLedger insert(TimeLedger newTimeLedger) {
-//		newTimeLedger.setTransactionTime(LocalDateTime.now());
-//		TimeLedger timeLedger = timeLedgerDao.save(newTimeLedger);
-//		return timeLedger;		
-//	}
-	
-//	public TimeLedger update(TimeLedger timeLedger) {
-//		TimeLedger dbTimeLedger = null;
-//		if(timeLedger.getId() != null) {
-//			dbTimeLedger = timeLedgerDao.getOne(timeLedger.getId());
-//			dbTimeLedger.setBalanceValue(timeLedger.getBalanceValue());
-//			dbTimeLedger.setDepositValue(timeLedger.getDepositValue());
-//			dbTimeLedger.setDescription(timeLedger.getDescription());
-//			dbTimeLedger.setMemberId(timeLedger.getMemberId());
-//			dbTimeLedger.setTransactionTime(timeLedger.getTransactionTime());
-//			dbTimeLedger.setWithdrawalValue(timeLedger.getWithdrawalValue());
-//			dbTimeLedger = timeLedgerDao.save(dbTimeLedger);
-//		}
+//	public TimeLedger save(TimeLedger timeLedger) {
+//		timeLedger.setTransactionTime(LocalDateTime.now());
+//		timeLedgerDao.save(timeLedger);
 //		return timeLedger;
 //	}
+	
+	public TimeLedger insert(TimeLedger newTimeLedger) {
+		newTimeLedger.setTransactionTime(LocalDateTime.now());
+		TimeLedger timeLedger = timeLedgerDao.save(newTimeLedger);
+		return timeLedger;		
+	}
+	
+	public TimeLedger update(TimeLedger timeLedger) {
+		TimeLedger dbTimeLedger = null;
+		if(timeLedger.getId() != null) {
+			dbTimeLedger = timeLedgerDao.getOne(timeLedger.getId());
+			dbTimeLedger.setBalanceValue(timeLedger.getBalanceValue());
+			dbTimeLedger.setDepositValue(timeLedger.getDepositValue());
+			dbTimeLedger.setDescription(timeLedger.getDescription());
+			dbTimeLedger.setMemberId(timeLedger.getMemberId());
+			dbTimeLedger.setTransactionTime(timeLedger.getTransactionTime());
+			dbTimeLedger.setWithdrawalValue(timeLedger.getWithdrawalValue());
+			dbTimeLedger = timeLedgerDao.save(dbTimeLedger);
+		}
+		return timeLedger;
+	}
 
 	// 刪除一筆資料
 	public void delete(Long id) {
