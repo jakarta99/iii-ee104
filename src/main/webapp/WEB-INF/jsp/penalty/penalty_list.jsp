@@ -28,7 +28,8 @@
 </head>
 <body>
 	<!-- 加入nav.html(放在static/html) -->
-	<c:import url="/html/nav.html"></c:import>
+	<jsp:include page="../admin_layout/nav.jsp" />
+	
 	<h1 style="padding-top: 2cm">Penalty List</h1>
 
 	<form id="serachForm">
@@ -202,6 +203,7 @@
 					}
 				}).done(function(result) {
 					alert(result.status);
+					//該頁沒資料
 					if ($("table tbody > tr").length < 2){
 						listPenalty($("#serachForm").serialize(), onPage - 1, pageSize);
 					} 
