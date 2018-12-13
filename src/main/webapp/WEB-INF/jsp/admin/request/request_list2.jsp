@@ -82,7 +82,7 @@
 	</fieldset>
 	
 	<fieldset>
-	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/request/add'">add</button>
+	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/admin/request/add'">add</button>
 	<table id="table" class="table table-hover">
 	<thead>
 	<tr>
@@ -111,7 +111,7 @@
 	function search() {	
 		
 // 		$.ajax({
-// 			url : '/request/query',
+// 			url : '/admin/request/query',
 // 			type : 'post',
 // 			dataType : 'JSON',
 // 			success : function(deleteResult) {
@@ -124,7 +124,7 @@
 	
 	function deleteRequest(id) {
 		$.ajax({
-			url : '/request/delete?id=' + id,
+			url : '/admin/request/delete?id=' + id,
 			type : 'post',
 			dataType : 'JSON',
 			success : function(deleteResult) {
@@ -155,7 +155,7 @@
 // 				"serverside":true,
  				"stateSave": true,
 				"ajax":{
-					"url":"/request/query",
+					"url":"/admin/request/query",
 						"type": "get",
 			            "dataType" : "json",
  			            "data":$("form").serialize(),			         
@@ -165,7 +165,7 @@
 				"columns":[
 					
 					{"data": function (source, type, val) {
-						 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/edit?id="+source.id+"'\">Edit</button>";     
+						 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/admin/request/edit?id="+source.id+"'\">Edit</button>";     
 						 var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteRequest("+source.id+")\">Delete</button>"; 	
 						 return editbutton + deletebutton;},
 					},
@@ -195,7 +195,7 @@
 // 				"serverside":true,
 // 				"stateSave": true,
 // 				"ajax":{
-// 					"url":"/request/query",
+// 					"url":"/admin/request/query",
 // 						"type": "get",
 // 			            "dataType" : "json",
 // 			            //"data":$("form").serialize(),
@@ -212,7 +212,7 @@
 // 				"columns":[
 					
 // 					{"data": function (source, type, val) {
-// 						 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/edit?id="+source.id+"'\">Edit</button>";     
+// 						 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/admin/request/edit?id="+source.id+"'\">Edit</button>";     
 // 						 var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteRequest("+source.id+")\">Delete</button>"; 	
 // 						 return editbutton + deletebutton;},
 // 					 },
