@@ -16,15 +16,15 @@ import team.lala.timebank.service.PenaltyService;
 import team.lala.timebank.spec.PenaltySpecification;
 
 @Controller
-@RequestMapping("/penalty")
-public class PenaltyController {
+@RequestMapping("/admin/penalty")
+public class AdminPenaltyController {
 
 	@Autowired
 	private PenaltyService penaltyService;
 
 	@RequestMapping("/add")
 	public String add() {
-		return "/penalty/penalty_add";
+		return "/admin/penalty/penalty_add";
 
 	}
 
@@ -32,7 +32,7 @@ public class PenaltyController {
 	public String edit(@RequestParam("id") Long id, Model model) {
 		Penalty penalty = penaltyService.getOne(id);
 		model.addAttribute("penalty", penalty);
-		return "/penalty/penalty_edit";
+		return "/admin/penalty/penalty_edit";
 
 	}
 
@@ -77,7 +77,7 @@ public class PenaltyController {
 
 	@RequestMapping("/list")
 	public String list() {
-		return "/penalty/penalty_list";
+		return "/admin/penalty/penalty_list";
 	}
 
 	@ResponseBody

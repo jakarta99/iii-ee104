@@ -97,7 +97,7 @@
 	
 	<div id="pageInfo">Showing 0 to 0 of 0 entiries</div>
 
-	<button onclick="javascript:document.location.href='/penalty/add'"
+	<button onclick="javascript:document.location.href='/admin/penalty/add'"
 		class="btn btn-primary">Add</button>
 	<table class="table table-light table-sm table-striped table-bordered">
 		<thead class="thead-dark">
@@ -128,7 +128,7 @@
 		//列清單方法
 		function listPenalty(form, pageNumber, pageSize) {
 			$("#dataTable").text("");
-			$.getJSON("/penalty/query?pageNumber=" + pageNumber + "&pageSize=" + pageSize,
+			$.getJSON("/admin/penalty/query?pageNumber=" + pageNumber + "&pageSize=" + pageSize,
 					form,
 					function(penalties) {
 							pageIndex = penalties.page;
@@ -139,7 +139,7 @@
 							//table
 							var docFrag = $(document.createDocumentFragment());
 							$.each(penalties.page.content, function(idx, penalty) {
-							var editButt = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/penalty/edit?id="
+							var editButt = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/penalty/edit?id="
 											+ penalty.id+ "'\" value='修改'  />";
 							var deleteButt = "<input type='button' class=\"btn btn-primary btn-sm\" id='deleteButt"+ penalty.id +"' value='刪除' />";
 							var p1 = $('<td></td>').text(penalty.id);
@@ -197,7 +197,7 @@
 				$.ajax({
 					type : 'post',
 					dataType : "json",
-					url : "/penalty/delete",
+					url : "/admin/penalty/delete",
 					data : {
 						"id" : penaltyId
 					}

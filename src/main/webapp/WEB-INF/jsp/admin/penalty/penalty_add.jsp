@@ -66,18 +66,18 @@
 		</div>
 		<input type="button" id="add" value="新增" class="btn btn-primary mb-2" />
 	</form>
-	<a href="/penalty/list">back to penalty_list</a>
+	<a href="/admin/penalty/list">back to penalty_list</a>
 	<script type="text/javascript">
 	
 		$('#add').click(function(){
 			$.ajax({
-				url:"/penalty/insert",
+				url:"/admin/penalty/insert",
 				method:"post",
 				dataType:"json",
 				data:$('form').serialize()
 			}).done(function(result){
 				alert(result.status);
-				window.location.replace("/penalty/list");
+				window.location.replace("/admin/penalty/list");
 			})
 		})
 		

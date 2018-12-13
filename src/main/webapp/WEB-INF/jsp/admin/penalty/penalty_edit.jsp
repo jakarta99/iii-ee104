@@ -63,7 +63,7 @@
 		<input type="button" class="btn btn-primary" id="update" value="修改">
 	</form>
 
-	<a href="/penalty/list">back to penalty_list</a>
+	<a href="/admin/penalty/list">back to penalty_list</a>
 
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -72,7 +72,7 @@
 
 			$('#update').click(function() {
 				$.ajax({
-					url : "/penalty/update",
+					url : "/admin/penalty/update",
 					method : "post",
 					dataType : "json",
 					data : $('form').serialize()
