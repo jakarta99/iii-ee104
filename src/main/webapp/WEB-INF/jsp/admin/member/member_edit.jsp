@@ -274,7 +274,7 @@
 						$.ajax({
 							method : "put",
 							dataType : "json",
-							url : "/member/update",
+							url : "/admin/member/update",
 							data : $("form").serialize(),
 						}).done(function(response) {
 							alert(response.obj);

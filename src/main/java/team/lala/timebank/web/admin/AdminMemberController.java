@@ -33,14 +33,14 @@ public class AdminMemberController {
 		model.addAttribute("members", members);
 		
 //		return "/member/member_list";
-		return "/member/member_list2";
+		return "/admin/member/member_list2";
 
 	}
 
 	@RequestMapping("/add")
 	public String addPage(@RequestParam("memberType") MemberType memberType, Model model) {
 		model.addAttribute("memberType", memberType);
-		return "/member/member_add";
+		return "/admin/member/member_add";
 
 	}
 
@@ -48,7 +48,7 @@ public class AdminMemberController {
 	public String editPage(@RequestParam("id") Long id, Model model) {
 		Member member = memberService.getOne(id);
 		model.addAttribute("member", member);
-		return "/member/member_edit";
+		return "/admin/member/member_edit";
 	}
 	
 

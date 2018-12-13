@@ -232,7 +232,7 @@
 			$.ajax({
 				type: "get",
 				dataType: "json",         
-				url: "/member/delete",
+				url: "/admin/member/delete",
 				data: {"id":selectedRowId}					
 			})
 			.done(function(response){
@@ -276,7 +276,7 @@
 		        serverSide: true,
 		        rowId: 'id',
 		        ajax: {
-		            url: "/member/queryPageRequest",
+		            url: "/admin/member/queryPageRequest",
 		            type: "get",
 		            dataType : "json",
 		            data: function(d){

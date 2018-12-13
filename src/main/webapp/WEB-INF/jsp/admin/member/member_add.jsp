@@ -230,7 +230,7 @@
 				$.ajax({
 					method:"post",
 					dataType: "json",        
-					url:"/member/insert",
+					url:"/admin/member/insert",
 					data: $("form").serialize()
 				}).done(function(response){
 					alert(response.obj);

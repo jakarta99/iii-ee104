@@ -189,7 +189,7 @@
 			$.ajax({
 				type: "get",
 				dataType: "json",         
-				url: "/member/delete",
+				url: "/admin/member/delete",
 				data: {"id":memberId}					
 			})
 			.done(function(response){			
@@ -227,7 +227,7 @@
 			 	//分頁、排序都交由伺服器處理
 		        serverSide: true,
 		        ajax: {
-		            url: "/member/queryPageRequest",
+		            url: "/admin/member/queryPageRequest",
 		            type: "get",
 		            dataType : "json",
 					//傳送給伺服器的資料(datatable預設會傳送d的資料)

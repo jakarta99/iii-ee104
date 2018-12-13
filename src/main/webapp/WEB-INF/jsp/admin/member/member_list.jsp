@@ -192,7 +192,7 @@
 			$.ajax({
 				type: "get",
 				dataType: "json",         
-				url: "/member/delete",
+				url: "/admin/member/delete",
 				data: {"id":memberId}					
 			})
 			.done(function(response){
@@ -226,7 +226,7 @@
 				pagingType: 'full_numbers',
 				searching: false,
 		        ajax: {
-		            url: "/member/query",
+		            url: "/admin/member/query",
 		            type: "get",
 		            dataType : "json",
 		            data:$("form").serialize(),
@@ -278,7 +278,7 @@
 			
 
 			$("#searchButt").click(	function(){
-				$.getJSON("/member/query",$("form").serialize(),function(resp){
+				$.getJSON("/admin/member/query",$("form").serialize(),function(resp){
 					dataTable.clear();
 					dataTable.rows.add(resp).draw();	
 				})
