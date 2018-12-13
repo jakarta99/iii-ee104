@@ -81,6 +81,13 @@
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<!-- <scope>provided</scope> -->
 		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>5.0.9.RELEASE</version>
+		</dependency>
 		<!--JSP -->
 
 

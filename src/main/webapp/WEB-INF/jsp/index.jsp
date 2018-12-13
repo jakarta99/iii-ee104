@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
   <head>
     <meta charset="utf-8">
@@ -52,7 +53,11 @@
                   <li class="list-inline-item"><a href="#"><i class="fa fa-phone"></i></a></li>
                   <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
                 </ul>
-                <div class="login"><a href="#" data-toggle="modal" data-target="#login-modal" class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">Sign In</span></a><a href="customer-register.html" class="signup-btn"><i class="fa fa-user"></i><span class="d-none d-md-inline-block">Sign Up</span></a></div>
+                <div class="login"><a href="#" data-toggle="modal" data-target="#login-modal" class="login-btn">
+                	<i class="fa fa-sign-in"></i>
+                		<span class="d-none d-md-inline-block">Sign In</span></a>
+                		<a href="customer-register.html" class="signup-btn">
+                		<i class="fa fa-user"></i><span class="d-none d-md-inline-block">Sign Up</span></a></div>
                 <ul class="social-custom list-inline">
                   <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
                   <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
@@ -74,12 +79,12 @@
               <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body">
-              <form action="customer-orders.html" method="get">
+              <form action="/login" method="post">
                 <div class="form-group">
-                  <input id="email_modal" type="text" placeholder="email" class="form-control">
+                  <input id="email_modal" type="text" name="username" placeholder="email" class="form-control">
                 </div>
                 <div class="form-group">
-                  <input id="password_modal" type="password" placeholder="password" class="form-control">
+                  <input id="password_modal" type="password" name="password"  placeholder="password" class="form-control">
                 </div>
                 <p class="text-center">
                   <button class="btn btn-template-outlined"><i class="fa fa-sign-in"></i> Log in</button>
