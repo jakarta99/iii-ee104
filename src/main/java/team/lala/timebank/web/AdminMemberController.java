@@ -20,8 +20,8 @@ import team.lala.timebank.service.MemberService;
 import team.lala.timebank.spec.MemberSpecification;
 
 @Controller
-@RequestMapping("/member")
-public class MemberController {
+@RequestMapping("/admin/member")
+public class AdminMemberController {
 
 	@Autowired
 	private MemberService memberService;
