@@ -39,7 +39,7 @@
 <div id="navBar" class="margintop"></div>
 	<h1 class="s2">request add</h1>
 	<fieldset>
-	<form action="/request/insert" method="post">
+	<form action="/admin/request/insert" method="post">
 	
 	<div class="form-group">
 	jobArea:<select id="jobArea" name="jobArea" class="form-control">
@@ -84,19 +84,19 @@
 	<input type="reset"  class="btn btn-outline-secondary"/>
 	</div>
 	</form>
-	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/request/list'">回列表頁</button>
+	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/admin/request/list'">回列表頁</button>
 	</fieldset>
 	<script>
 		function addRequest() {
 			$.ajax({
-				url : '/request/insert',
+				url : '/admin/request/insert',
 				type : 'post',
 				data : $('form').serialize(),
 				dataType : 'JSON',
 				success : function(addResult) {
 					if(addResult.status == "SUCCESS"){
 						alert("新增編號" + addResult.obj.id + " "+ addResult.status);
-						document.location.href = "/request/add"
+						document.location.href = "/admin/request/add"
 					}else{
 						alert("新增編號" + addResult.obj.id + " " + addResult.status);
 						alert("FAIL reason:" + addResult.messages);

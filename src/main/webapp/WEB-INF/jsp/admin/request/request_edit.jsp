@@ -42,7 +42,7 @@
 	
 	<h1 class="s2">request edit</h1>
 	
-	<form action="/request/update" method="post">
+	<form action="/admin/request/update" method="post">
 	<fieldset>
 	<input type="hidden" value="${request.id}" id="id" name="id"/>
 	
@@ -88,7 +88,7 @@
 	
 	</div>
 	<div>
-	<input type="button" class="btn btn-outline-secondary" onclick="javascript:document.location.href='/request/list'" value="回列表頁"/>
+	<input type="button" class="btn btn-outline-secondary" onclick="javascript:document.location.href='/admin/request/list'" value="回列表頁"/>
 
 	</div>
 					
@@ -108,14 +108,14 @@
 		
 		function updateRequest() {
 			$.ajax({
-				url : '/request/update',
+				url : '/admin/request/update',
 				type : 'put',
 				data : $('form').serialize(),
 				dataType : 'JSON',
 				success : function(editResult) {
 					if(editResult.status == "SUCCESS"){
 						alert("更新編號" + editResult.obj.id + " " + editResult.status);
-						document.location.href="/request/list";
+						document.location.href="/admin/request/list";
 					}else{
 						alert("更新編號" + editResult.obj.id + " " + editResult.status);
 						alert("失敗原因" + editResult.messages);

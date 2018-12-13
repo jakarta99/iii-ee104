@@ -54,7 +54,7 @@
 	
 	<fieldset>
 		<div class="container">
-	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/request/add'">add</button>
+	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/admin/request/add'">add</button>
 			<div class="row" id="body">
 				
 			</div>
@@ -63,14 +63,14 @@
 	</fieldset>
 	<script>
 	$(document).ready( function () {
-		$.getJSON("/request/query",function(data){
+		$.getJSON("/admin/request/query",function(data){
 			var docFragment=$(document.createDocumentFragment());
 			var tb = $('#body');
  		    tb.empty();
  		   
 			$.each(data,function(index,request){
-				var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/edit?id="+request.id+"'\">Edit</button>";     
-			   	var deletebutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/delete?id="+request.id+"'\">Delete</button>"; 	
+				var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/admin/request/edit?id="+request.id+"'\">Edit</button>";     
+			   	var deletebutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/admin/request/delete?id="+request.id+"'\">Delete</button>"; 	
 			   	var cell1 = $('<p></p>').html(editbutton+deletebutton);
 				var cell2 = $('<p></p>').text("id:"+request.id);
 		        var cell3 = $('<p></p>').text("jobArea:"+request.jobArea);

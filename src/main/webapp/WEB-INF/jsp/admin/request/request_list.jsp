@@ -82,7 +82,7 @@
 	</fieldset>
 	
 	<fieldset>
-	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/request/add'">add</button>
+	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/admin/request/add'">add</button>
 	<table id="table" class="table table-hover">
 	<thead>
 	<tr>
@@ -117,7 +117,7 @@
 	
 	function deleteRequest(id) {
 		$.ajax({
-			url : '/request/delete?id=' + id,
+			url : '/admin/request/delete?id=' + id,
 			type : 'post',
 			dataType : 'JSON',
 			success : function(deleteResult) {
@@ -145,14 +145,14 @@
 	function list(){
 		$.ajax({
 			  dataType: "json",
-			  url: "/request/query",
+			  url: "/admin/request/query",
 			  data: $('#form').serialize(),
 			  success:function(data){
 					var docFragment=$(document.createDocumentFragment());
 					var tb = $('#tbody');
  		   			tb.empty();
 					$.each(data,function(index,request){
-					    var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/request/edit?id="+request.id+"'\">Edit</button>";     
+					    var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/admin/request/edit?id="+request.id+"'\">Edit</button>";     
 					   	var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteRequest("+request.id+")\">Delete</button>"; 	
 					   	var cell1 = $('<td></td>').html(editbutton+deletebutton);
 						var cell2 = $('<td></td>').text(request.id);
