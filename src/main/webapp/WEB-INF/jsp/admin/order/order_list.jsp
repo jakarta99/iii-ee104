@@ -92,7 +92,7 @@
 <table border="1" id="myTable"> 
 	<thead>
 		<tr class="tableTitle">
-			<th><button onclick="javascript:document.location.href='/order/add'">Add</button></th>
+			<th><button onclick="javascript:document.location.href='/admin/order/add'">Add</button></th>
 			<th>id</th>
 			<th>supplierId</th>
 			<th>requesterId</th>
@@ -169,7 +169,7 @@
 	
 	function findOrders(pageNumber, pageSize){
 		$.ajax({
-			url:'/order/query?pageNumber=' + pageNumber + '&pageSize=' + pageSize,  
+			url:'/admin/order/query?pageNumber=' + pageNumber + '&pageSize=' + pageSize,  
 			type:'post',
 			data:$('form').serialize(),
 			dataType:'json',
@@ -215,7 +215,7 @@
 				$("tbody").text(""); 
 				$.each(orders.page.content, function(index, order){ //讀陣列資料(每筆資料為物件order)
 					//產生首欄按鈕(edit、delete)
-					var editBtn = $("<button onclick=\"javascript:document.location.href='/order/edit?id="+order.id+"'\">Edit</button>");
+					var editBtn = $("<button onclick=\"javascript:document.location.href='/admin/order/edit?id="+order.id+"'\">Edit</button>");
 					var delBtn = $("<button onclick=\"deleteOrder("+order.id+")\">Delete</button>");						
 					var btn =$("<td></td>").append([editBtn, delBtn]); 
 					//將order的每個屬性放入欄位
@@ -240,7 +240,7 @@
 	
 	function deleteOrder(orderId){  //刪除資料的按鈕所觸發的方法(#delBtn的onclick)
 		$.ajax({
-			url:'/order/delete?id=' + orderId,
+			url:'/admin/order/delete?id=' + orderId,
 			type:'delete',
 			dataType:'json',
 			success:function(deleteResult){
