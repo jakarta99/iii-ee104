@@ -154,11 +154,11 @@
 		</div>
 		
 		
-		<fieldset style="width:1200px">
+		<fieldset style="width:1300px">
 		<table  id=table class="table table-striped table-bordered">				
 			<thead>
 				<tr>
-<!-- 					<th scope="col"></th> -->
+					<th scope="col"></th>
 					<th scope="col">id</th>
 					<th scope="col" width="100px"></th>
 					<th scope="col">會員帳號</th>
@@ -247,7 +247,7 @@
 		                var json = jQuery.parseJSON( resp );
 		                json.recordsTotal = json.totalElements;
 		                json.recordsFiltered = json.totalElements;	     			
-		     			console.log(JSON.stringify( json ))
+// 		     			console.log(JSON.stringify( json ))
 		                return JSON.stringify( json ); 
 		            },
 		            	
@@ -262,33 +262,57 @@
 		       },
 				//設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
 		     	columns: [
-		           {data: "id" },
-		           {data: function (data, type, row ) {
+		     		{data:null},
+		           	{data: "id" },
+		           	{data: function (data, type, row ) {
 // 		        	   console.log(data)
 		        	   	var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/member/edit?id="+data.id+"'\" value='修改'  />";
 						var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='刪除' />"  
 		               	return editButt + deleteButt;			        	   
-		           	}
+		           		}
 		        	   
-		           },
-		           { data: "account" },
-		           { data: "name" },
-		           { data: "memberType" },
-				   { data: "email" },
-		           { data: "mobile" },
-		           { data: null, render: function ( data, type, row ) {
+		           	},
+		           	{ data: "account" },
+		           	{ data: "name" },
+		           	{ data: "memberType" },
+				   	{ data: "email" },
+		           	{ data: "mobile" },
+		           	{ data: null, render: function ( data, type, row ) {
 		                return data.county + data.district+ data.address;
 		            } },
-		           { data: null, render: function ( data, type, row ) {
+		           	{ data: null, render: function ( data, type, row ) {
 		                return new Date(data.signUpDate).toLocaleDateString();
 		            } },
 		       ],
+		       //禁用第012列的搜索和排序
+		       columnDefs: [{
+	                "searchable": false,
+	                "orderable": false,
+	                "targets": [0, 1, 2],
+	            }],
+	            order: [[1, 'asc']]
 				    
 			        
 			 } );
 			
-
-			
+			dataTable.on('draw.dt',function() {
+				dataTable.column(0, {
+	                search: 'applied',
+	                order: 'applied'
+	            }).nodes().each(function(cell, i) {
+	                //i從0開始，所以先加1
+	                i = i+1;
+	                //服務氣模式下，使用DT提供的API直接獲取分頁資訊
+	                var pageinfo = dataTable.page.info();
+	                //当前第几页，从0开始
+	                var pageno = pageinfo.page;
+	                //每页数据
+	                var length = pageinfo.length;
+	                //行号等于 页数*每页数据长度+行号
+	                var columnIndex = (i+pageno*length);
+	                cell.innerHTML = columnIndex;
+	            });
+	        });
 			
 			var datePickerSetting = {
 				format : "yyyy/mm/dd",
