@@ -56,7 +56,7 @@ public class TimeLedgerServiceTest {
 			timeLedger.setDepositValue(80);
 			
 			//3.更新
-			timeLedgerService.save(timeLedger);
+			timeLedgerService.update(timeLedger);
 			
 			//4.再次查詢1號會員資料，確認更新結果
 			timeLedger = timeLedgerService.getLastTransaction(1L);
