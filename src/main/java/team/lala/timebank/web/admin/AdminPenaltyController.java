@@ -1,4 +1,4 @@
-package team.lala.timebank.web;
+package team.lala.timebank.web.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
