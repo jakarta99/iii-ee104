@@ -375,7 +375,8 @@ public class Member implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> list = new ArrayList<>();
-		list.add(new SimpleGrantedAuthority("ADMIN"));
+		list.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+//		list.add(new SimpleGrantedAuthority("ADMIN"));
 		return list;
 	}
 
