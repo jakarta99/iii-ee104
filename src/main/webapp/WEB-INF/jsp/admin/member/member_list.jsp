@@ -82,8 +82,7 @@
 </head>
 <body>
 
-<!-- 	<div id="navBar"></div> -->
-<c:import url="/html/nav.html"/>
+	<jsp:include page="../admin_layout/nav.jsp" />
 
 	<article>
 		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />

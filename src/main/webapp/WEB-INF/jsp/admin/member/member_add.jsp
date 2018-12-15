@@ -75,8 +75,7 @@
 
 </head>
 <body>
-<!-- 	<div id="navBar"></div> -->
-	<c:import url="/html/nav.html"/>
+	<jsp:include page="../admin_layout/nav.jsp" />
 	<article>
 		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/member/list'" value="回會員列表"  />
 		<h2>Member Add</h2>

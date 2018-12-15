@@ -80,9 +80,7 @@
 
 </head>
 <body>
-	<!-- 使用AJAX -->
-	<!-- 	<div id="navBar"></div> -->
-	<c:import url="/html/nav.html" />
+	<jsp:include page="../admin_layout/nav.jsp" />
 	<article>
 		<input type="button" class="btn btn-primary btn-sm"
 							onclick="javascript:document.location.href='/member/list'" value="回上一頁" />
