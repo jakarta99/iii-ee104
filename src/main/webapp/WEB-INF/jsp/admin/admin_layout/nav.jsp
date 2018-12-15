@@ -22,12 +22,12 @@
 					id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">TIMEBANK BackStage</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown01">
-						<a class="dropdown-item" href="/member/list" id="backStage-member">member</a> 
-						<a	class="dropdown-item" href="/order/list" id="backStage-order">order</a> 
-						<a	class="dropdown-item" href="/donation/list" id="backStage-donation">donation</a>
-						<a	class="dropdown-item" href="/request/list" id="backStage-request">request</a>
-						<a	class="dropdown-item" href="/time-ledger/list" id="backStage-timeledger">time-ledger</a>
-						<a	class="dropdown-item" href="/penalty/list" id="backStage-penalty">penalty</a>
+						<a class="dropdown-item" href="/admin/member/list" id="backStage-member">member</a> 
+						<a	class="dropdown-item" href="/admin/order/list" id="backStage-order">order</a> 
+						<a	class="dropdown-item" href="/admin/donation/list" id="backStage-donation">donation</a>
+						<a	class="dropdown-item" href="/admin/request/list" id="backStage-request">request</a>
+						<a	class="dropdown-item" href="/admin/time-ledger/list" id="backStage-timeledger">time-ledger</a>
+						<a	class="dropdown-item" href="/admin/penalty/list" id="backStage-penalty">penalty</a>
 					</div></li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
