@@ -35,15 +35,25 @@
 
 <form>
 	<input type="hidden" value="${order.id}" id="id" name="id"/>
-	supplierAcception(Y/N):<input type="text" value="${order.supplierAcception}" id="supplierAcception" name="supplierAcception"><p>
-	confirmation(Y/N):<input type="text" value="${order.confirmation}" id="confirmation" name="confirmation"><p>
+	supplierAcception(Y/N):
+	<input type="radio" value="Y" name="supplierAcception" />Y  
+	<input type="radio" value="N" name="supplierAcception" />N<p>	
+	
+	confirmation(Y/N):
+	<input type="radio" value="Y" name="confirmation" />Y  
+	<input type="radio" value="N" name="confirmation" />N<p>
+	
 	status:<input type="text" value="${order.status}" id="status" name="status"><p>
 	<button type="button" onclick="updateOrder()" class="btn btn-outline-primary">update</button>
 </form>
-<a href="/order/list">back to order_list</a>
+<a href="/admin/order/list">back to order_list</a>
 
 
 <script>
+$("input[name='supplierAcception'][value="+'${order.supplierAcception}' + "]").prop("checked", true);
+$("input[name='confirmation'][value="+'${order.confirmation}' + "]").prop("checked", true);
+
+
 function updateOrder(){
 	$.ajax({
 		url:'/order/update',
@@ -53,7 +63,7 @@ function updateOrder(){
 		success:function(editResult){
 			if(editResult.status == "SUCCESS"){
 				alert("edit no." + editResult.obj.id + " order - STATUS:" + editResult.status);
-				document.location.href="/order/list";
+				document.location.href="/admin/order/list";
 			}else{
 				alert("edit no." + editResult.obj.id + " order - STATUS:" + editResult.status);
 				alert("FAIL reason:" + editResult.messages);
