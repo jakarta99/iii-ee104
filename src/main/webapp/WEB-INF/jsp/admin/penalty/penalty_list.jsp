@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Bootstrap core CSS -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
 	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
@@ -20,21 +21,42 @@
 	crossorigin="anonymous">
 <!-- date picker -->
 <script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
-<script type="text/javascript"
-	src="/js/datepicker/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 <!-- data table -->
-<script type="text/javascript" charset="utf8"
-	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-<script type="text/javascript"
-	src="/js/dataTable_full_numbers_no_ellipses.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-<script
-	src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>
-<script
-	src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/js/dataTable_full_numbers_no_ellipses.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
+<script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
+<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>	
+
+
+<style>
+	 article{
+	 	margin-top:70px;
+	 }
+	 
+	 article fieldset {
+/*  		width: 500px;  */
+ 		border-radius: 20px; 
+ 		padding: 20px 20px 0px 20px;  
+ 		border: 3px double #bebebe; 
+		margin: auto; 
+ 		margin-top: 10px;  
+ 		margin-bottom: 20px;  
+	}
+
+	 table tr td, button{
+	 	text-align:center;
+	 	line-height:center; 
+	 }
+	 article .btn{
+	 	margin-left:3px;
+	 	margin-right:3px
+	 } 
+
+</style>
 <meta charset="UTF-8">
 <title>Penalty List</title>
 </head>
@@ -52,16 +74,16 @@
 				<fieldset>
 				<legend>Serach</legend>
 				<div>
-					<label>memberId</label>
+					<label>memberId: </label>
 					<input type="text" value="${param.memberId}" id="memberId" name="memberId" placeholder="memberId" />
-					<label>status</label>
-					<select class="form-control" id="status" name="status">
+					<label>status: </label>
+					<select id="status" name="status">
 						<option value="">請選擇</option>
 						<option value=1>審核中</option>
 						<option value=2>有罪</option>
 						<option value=3>無罪</option>
 					</select>
-					<input type="button" value="搜尋"  id="serach" style="margin:10px"/> 
+					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
 					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
 					<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" 
 						role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a>
@@ -118,7 +140,7 @@
 				type:"get",
 				dataType:"json",
 				url:"/admin/penalty/delete",
-				data:{"id":memberId}
+				data:{"id":penaltyId}
 			}).done(function(respones){
 				if (response.status =="SUCCESS"){
 					alert("刪除成功");
@@ -170,7 +192,7 @@
 						var pageNum = parseInt(d.json.pageable.pageNumber) ;
 						var totalPages = d.json.totalPages;
 						$('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
-				}, columns[ 		//設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
+				}, columns: [ 		//設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
 		     		{data:null},
 		           	{data: "id" },
 		           	{data: function (data, type, row ) {
@@ -187,12 +209,12 @@
 					{data:null, render:function(data, type, row){
 						return new Date(data.updateDate).toLocaleDateString();
 						}
-					}		
+					},		
 				], columnDefs:[{		//禁用第0123列的搜索和排序
 					"searchable": false,
 	                "orderable": false,
-	                "targets": [0, 1, 2]
-				}], order: [[1, 'asc']]    
+	                "targets": [0, 1, 2],
+				}], order: [[1, 'asc']]   
 			 });
 			
 			dataTable.on('draw.dt',function() {
@@ -220,6 +242,7 @@
 			};
 			$("#dateBefore").datepicker(datePickerSetting);
 			$("#dateAfter").datepicker(datePickerSetting);
+			
 			//搜尋事件
 			$("#searchButt").click(	function(){
 				dataTable.ajax.reload();
