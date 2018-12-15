@@ -20,209 +20,214 @@
 	crossorigin="anonymous">
 <!-- date picker -->
 <script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
-<script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
+<script type="text/javascript"
+	src="/js/datepicker/bootstrap-datepicker.js"></script>
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
+<!-- data table -->
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script type="text/javascript"
+	src="/js/dataTable_full_numbers_no_ellipses.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script
+	src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>
+<script
+	src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
 <meta charset="UTF-8">
 <title>Penalty List</title>
 </head>
 <body>
 	<!-- 加入nav.html(放在static/html) -->
 	<jsp:include page="../admin_layout/nav.jsp" />
-	
-	<h1 style="padding-top: 2cm">Penalty List</h1>
+	<article>
+		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
+		<h1 style="padding-top: 2cm">Penalty List</h1>
+		<button onclick="javascript:document.location.href='/admin/penalty/add'" class="btn btn-primary btn-sm">Add</button>
 
-	<form id="serachForm">
-		<div class="form-group row">
-			<label for="orderListId" class="col-sm-1 col-form-label">orderListId</label>
-			<div class="col-sm-2">
-				<input type="text" id="orderListId" name="orderListId"
-					class="form-control" />
-			</div>
+		<!-- 條件搜尋表單 -->
+		<div id="sideBar">
+			<form>
+				<fieldset>
+				<legend>Serach</legend>
+				<div>
+					<label>memberId</label>
+					<input type="text" value="${param.memberId}" id="memberId" name="memberId" placeholder="memberId" />
+					<label>status</label>
+					<select class="form-control" id="status" name="status">
+						<option value="">請選擇</option>
+						<option value=1>審核中</option>
+						<option value=2>有罪</option>
+						<option value=3>無罪</option>
+					</select>
+					<input type="button" value="搜尋"  id="serach" style="margin:10px"/> 
+					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
+					<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" 
+						role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a>
+				</div>
+				<div class="collapse" id="collapse">
+					<div>
+						<label>orderListId</label>
+						<input type="text" value="${param.orderListId}" id="orderListId" name="orderListId" />
+					</div>
+					<div>
+						<label>description</label>
+						<input type="text" value="${param.description}" id="description" name="description" />
+					</div>
+					<div>
+						<label>penaltyTimeValue</label>
+						<input type="text" value="${param.penaltyTimeValue}" id="penaltyTimeValue" name="penaltyTimeValue"/>
+					</div>
+					<div>
+						<label>起始日期</label>
+						<input type="text" value="${param.dateBefore}" id="dateBefore" name="dateBefore" autocomplete="off" /> 
+						<input type="text" value="${param.dateAfter}" id="dateAfter" name="dateAfter" autocomplete="off" />
+					</div>
+				</div>
+				</fieldset>
+			</form>
 		</div>
-		<div class="form-group row">
-			<label for="memberId" class="col-sm-1 col-form-label">memberId</label>
-			<div class="col-sm-2">
-				<input type="text" id="memberId" name="memberId"
-					class="form-control" />
-			</div>
-		</div>
-		<div class="form-group row">
-			<label for="description" class="col-sm-1 col-form-label">description</label>
-			<div class="col-sm-2">
-				<input type="text" id="description" name="description"
-					class="form-control" />
-			</div>
-		</div>
-		<div class="form-group row">
-			<label for="status" class="col-sm-1 col-form-label">status</label>
-			<div class="col-sm-2">
-				<select class="form-control" id="status" name="status">
-					<option value="">請選擇</option>
-					<option value=1>審核中</option>
-					<option value=2>有罪</option>
-					<option value=3>無罪</option>
-				</select>
-			</div>
-		</div>
-		<div class="form_group row">
-			<label for="penaltyTimeValue" class="col-sm-1 col-form-label">penaltyTimeValue</label>
-			<div class="col-sm-2">
-				<input type="text" id="penaltyTimeValue" name="penaltyTimeValue"
-					class="form-control" />
-			</div>
-		</div>
-		<div class="form_group row">
-			<label class="col-sm-1 col-form-label">起始日期</label>
-			<div class="col-sm-2">
-				<input type="text" id="dateBefore" name="dateBefore" class="form-control" />
-				<input type="text" id="dateAfter" name="dateAfter" class="form-control" />
-			</div>
-		</div>
-		<input type="button" class="btn btn-primary mb-2" id="serach" value="搜尋"/>
-		<input type="reset"  class="btn btn-primary mb-2" value="重設" />
-	</form>
-	
-	<div>show
-		<select id="pageSize">
-			<option>3</option>
-			<option>5</option>
-		</select>
-	entires</div>
-	<div>
-		<button type="button" id="previous">上一頁</button>
-		<span id="allPage"></span>
-		<button type="button" id="next">下一頁</button>
-	</div>
-	
-	<div id="pageInfo">Showing 0 to 0 of 0 entiries</div>
+		<fieldset style="width:300">
+		<table id="table" class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th scope="col"></th>
+					<th scope="col">ID</th>
+					<th scope="col" width="100px"></th>
+					<th scope="col">雇主ID</th>
+					<th scope="col">被檢舉者ID</th>
+					<th scope="col">逞罰時間</th>
+					<th scope="col">處理進度</th>
+					<th scope="col">描述</th>
+					<th scope="col">被檢舉時間</th>
+				</tr>
+			</thead>
+			<tbody id="tableBody">
+				<!-- 會員資料 -->
+			</tbody>
+		</table>
+		</fieldset>
+	</article>
+	<script>
 
-	<button onclick="javascript:document.location.href='/admin/penalty/add'"
-		class="btn btn-primary">Add</button>
-	<table class="table table-light table-sm table-striped table-bordered">
-		<thead class="thead-dark">
-			<tr>
-				<th></th>
-				<th>ID</th>
-				<th>雇主ID</th>
-				<th>被檢舉者ID</th>
-				<th>逞罰時間</th>
-				<th>處理進度</th>
-				<th>描述</th>
-				<th>被檢舉時間</th>
-			</tr>
-		</thead>
-		<tbody id="dataTable">
-			<!-- 會員資料 -->
-		</tbody>
-	</table>
-	<script type="text/javascript">
-		//一頁幾筆
-		var pageSize = $('#pageSize').val();
-		//目前頁數
-		var onPage;
-		//總頁數
-		var totalPage;
-		//方法回傳的物件
-		var pageIndex;
-		//列清單方法
-		function listPenalty(form, pageNumber, pageSize) {
-			$("#dataTable").text("");
-			$.getJSON("/admin/penalty/query?pageNumber=" + pageNumber + "&pageSize=" + pageSize,
-					form,
-					function(penalties) {
-							pageIndex = penalties.page;
-							onPage = penalties.page.pageable.pageNumber;
-							totalPage = penalties.page.totalPages;
-							
-							console.log(pageIndex);
-							//table
-							var docFrag = $(document.createDocumentFragment());
-							$.each(penalties.page.content, function(idx, penalty) {
-							var editButt = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/penalty/edit?id="
-											+ penalty.id+ "'\" value='修改'  />";
-							var deleteButt = "<input type='button' class=\"btn btn-primary btn-sm\" id='deleteButt"+ penalty.id +"' value='刪除' />";
-							var p1 = $('<td></td>').text(penalty.id);
-							var p2 = $('<td></td>').text(penalty.orderListId);
-							var p3 = $('<td></td>').text(penalty.memberId);
-							var p4 = $('<td></td>').text(penalty.penaltyTimeValue);
-							var p5 = $('<td></td>').text(penalty.status);
-							var p6 = $('<td></td>').text(penalty.description);
-							var p7 = $('<td></td>').text(penalty.updateDate);
-							var row = $('<tr></tr>').append([editButt,deleteButt,p1,p2,p3,p4,p5,p6,p7 ]);
-							docFrag.append(row);
-							})
-							$('#dataTable').append(docFrag);
-							//pageInfo
-							var pageInfo = "第" + (onPage + 1) + "頁，共" + totalPage +"頁，收尋到" + pageIndex.totalElements + "筆資料";
-							$('#pageInfo').html(pageInfo);
-							//頁數按鈕
-							var pageUrl = "";
-							for(var i = 1 ; i <= totalPage ; i++){
-								pageUrl += "<button type='button' name='pageLink'>" + i + "</button>";
-							}
-							$('#allPage').html(pageUrl);
-					})
+		var dataTable;
+		
+		function deleteRow(penaltyId){
+			$.ajax({
+				type:"get",
+				dataType:"json",
+				url:"/admin/penalty/delete",
+				data:{"id":memberId}
+			}).done(function(respones){
+				if (response.status =="SUCCESS"){
+					alert("刪除成功");
+				} else {
+					$.each(response.messages, function(idx, message) {
+						alert("the "+idx+"th ERROR, because "+message);
+					});
+				}
+				dataTable.draw('page');
+				if($("table tbody tr").length < 2){
+					dataTable.page("previous").draw('page');
+				}
+			})
+			
 		}
-		//綁定Serach
-		$('#serach').click(function(){
-			listPenalty($("#serachForm").serialize(), 0 ,pageSize);
-		})
-		//上一頁下一頁
-		$('#previous').click(function(){
-			if(pageIndex.first != true){
-				listPenalty($("#serachForm").serialize(), onPage - 1, pageSize);				
-			}
-		})
-		$('#next').click(function(){
-			if(pageIndex.last != true){
-				listPenalty($("#serachForm").serialize(), onPage + 1, pageSize);
-			}
-		})
-		//切換每頁筆數
-		$('#pageSize').change(function(){
-			pageSize = $('#pageSize').val();
-			listPenalty($("#serachForm").serialize(), onPage, pageSize);
-		})
+
 		$(document).ready(function() {
-			listPenalty(null, 0, pageSize);
-	
-			//點選頁數超連結
-			$('#allPage').on('click', 'button',function(){
-				listPenalty($("#serachForm").serialize(), $(this).text() - 1, pageSize);
-			})
-			//綁定delete事件
-			$('#dataTable').on('click', 'input[value="刪除"]', function() {
-				var penaltyId = $(this).attr("id").substring(10);
-				$.ajax({
-					type : 'post',
-					dataType : "json",
-					url : "/admin/penalty/delete",
-					data : {
-						"id" : penaltyId
-					}
-				}).done(function(result) {
-					alert(result.status);
-					//該頁沒資料
-					if ($("table tbody > tr").length < 2){
-						listPenalty($("#serachForm").serialize(), onPage - 1, pageSize);
-					} 
-					listPenalty($("#serachForm").serialize(), onPage, pageSize);
-				})
-			})
+			$("form").addClass("form-inline");
+			$("form div[id!='collapse']").addClass("form-group mx-sm-3 mb-3");
+			$("form input, select").addClass("form-control mx-3");
+			$("#searchButt, #resetButt").addClass("btn btn-primary");
+
+			dataTable = $('#table').DataTable({
+				pageResize: true, 
+				fixedHeader: true,
+				pagingType: 'full_numbers',
+				searching: false,				
+			 	processing: true,
+				serverSide: true,  //分頁、排序都交由伺服器處理
+				ajax:{
+					url:"/admin/penalty/query",
+					type:"get",
+					dataType:"json",
+					data:function(d){ 				//傳送給伺服器的資料(datatable預設會傳送d的資料)
+						var start = d.start;
+						var length = d.length;
+						var request = $('from').serialize() + "&start=" + start + "&length=" + length;
+						return request;
+					},
+					dataSrc:"context",
+					dataFilter:function(resp){		//對伺服器送來的資料進行修改
+						 var json = jQuery.parseJSON( resp );
+			             json.recordsTotal = json.totalElements;
+			             json.recordsFiltered = json.totalElements;	     			
+			             return JSON.stringify( json ); 
+					},
+				}, drawCallback:function(d){
+						var api = this.api();
+						var pageNum = parseInt(d.json.pageable.pageNumber) ;
+						var totalPages = d.json.totalPages;
+						$('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
+				}, columns[ 		//設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
+		     		{data:null},
+		           	{data: "id" },
+		           	{data: function (data, type, row ) {
+						var editButt = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/penalty/edit?id="
+											+ penalty.id + "'\" value='修改'  />";
+						var deleteButt = "<input type='button' class=\"btn btn-primary btn-sm\" id='deleteButt"+ penalty.id +"' value='刪除' />";
+		               	return editButt + deleteButt;	}
+		           	},
+					{data:"orderListId"},
+					{data:"memberId"},
+					{data:"penaltyTimeValue"},
+					{data:"status"},
+					{data:"description"},
+					{data:null, render:function(data, type, row){
+						return new Date(data.updateDate).toLocaleDateString();
+						}
+					}		
+				], columnDefs:[{		//禁用第0123列的搜索和排序
+					"searchable": false,
+	                "orderable": false,
+	                "targets": [0, 1, 2]
+				}], order: [[1, 'asc']]    
+			 });
+			
+			dataTable.on('draw.dt',function() {
+				dataTable.column(0, {
+	                search:'applied',
+	                order:'applied'
+	            }).nodes().each(function(cell, i) {
+					 i = i+1;								//i從0開始，所以先加1
+	                var pageinfo = dataTable.page.info();	//服務氣模式下，使用DT提供的API直接獲取分頁資訊
+	                var pageno = pageinfo.page;				//当前第几页，从0开始
+	                var length = pageinfo.length;			//每页数据
+	                var columnIndex = (i+pageno*length);	//行号等于 页数*每页数据长度+行号
+	                cell.innerHTML = columnIndex;
+	            });
+	        });	
 			//日期選擇器
 			var datePickerSetting = {
 				format : "yyyy-mm-dd",
 				autoclose : true,
 				todayHighlight : true,
 				language : 'zh-TW',
-				clearBtn:true,
-				startView:"2",
-				endDate:"0d",
+				clearBtn : true,
+				startView : "2",
+				endDate : "0d",
 			};
 			$("#dateBefore").datepicker(datePickerSetting);
 			$("#dateAfter").datepicker(datePickerSetting);
+			//搜尋事件
+			$("#searchButt").click(	function(){
+				dataTable.ajax.reload();
+
+			})
 		})
+						
+
 	</script>
 
 </body>
