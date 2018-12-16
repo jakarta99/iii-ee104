@@ -1,6 +1,7 @@
 package team.lala.timebank.spec;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -25,9 +26,21 @@ public class TimeLedgerSpecification implements Specification<TimeLedger> {
 	public Predicate toPredicate(Root<TimeLedger> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 		List<Predicate> list = new ArrayList<Predicate>();
 		
-//		if (!StringUtils.isEmpty(inputTimeLedger.getTransactionTime())) {
-//            list.add(cb.equal(root.get("transactionTime").as(java.time.LocalDateTime.class), inputTimeLedger.getTransactionTime()));
-//        }
+		if (!StringUtils.isEmpty(inputTimeLedger.getTransactionTimeBegin())
+				&& StringUtils.isEmpty(inputTimeLedger.getTransactionTimeEnd())) {
+			list.add(cb.greaterThanOrEqualTo(root.get("transactionTime").as(Date.class),
+					inputTimeLedger.getTransactionTimeBegin()));
+		}
+		if (!StringUtils.isEmpty(inputTimeLedger.getTransactionTimeEnd())
+				&& StringUtils.isEmpty(inputTimeLedger.getTransactionTimeBegin())) {
+			list.add(cb.lessThanOrEqualTo(root.get("transactionTime").as(Date.class),
+					inputTimeLedger.getTransactionTimeEnd()));
+		}
+		if (!StringUtils.isEmpty(inputTimeLedger.getTransactionTimeBegin())
+				&& !StringUtils.isEmpty(inputTimeLedger.getTransactionTimeEnd())) {
+			list.add(cb.between(root.get("transactionTime").as(Date.class), inputTimeLedger.getTransactionTimeBegin(),
+					inputTimeLedger.getTransactionTimeEnd()));
+		}
 		
 		if(!StringUtils.isEmpty(inputTimeLedger.getId())) {
 			list.add(cb.equal(root.get("id").as(Long.class), inputTimeLedger.getId()));
