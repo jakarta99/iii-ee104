@@ -22,10 +22,8 @@
 <title> edit donation </title>
 </head>
 <body>
-<script src="/js/backstageNav.js"></script>
-<br>
-<br>
-<br>
+<jsp:include page="../admin_layout/nav.jsp" />
+
 <h1> edit id = ${donation.id} donation</h1>
 	<form>
 	  <fieldset>

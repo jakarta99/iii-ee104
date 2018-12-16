@@ -198,6 +198,7 @@ VALUES(2, 1, '2018-11-18', '缺席', 1 , 4);
 
 INSERT INTO PENALTY (order_list_id, member_id, update_date, description, status, penalty_time_value)
 VALUES(2, 1, '2018-11-19', '缺席', 1 , 4);
+
 --donation
 
 INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
@@ -208,3 +209,81 @@ VALUES(2,1253,15,'2018-05-6');
 
 INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
 VALUES(3,1243,3,'2018-10-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(1,123,10,'2018-11-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(2,1253,15,'2018-05-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(3,1243,3,'2018-10-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(4,12543,140,'2013-11-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(12,11223,102,'2015-11-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(10,23,210,'2018-1-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(12,11223,102,'2015-11-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(10,23,210,'2018-1-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(12,11223,102,'2015-11-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(10,23,210,'2018-1-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(12,11223,102,'2015-11-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(10,23,210,'2018-1-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(12,11223,102,'2015-11-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(10,23,210,'2018-1-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(12,11223,102,'2015-11-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(10,23,210,'2018-1-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(12,11223,102,'2015-11-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(10,23,210,'2018-1-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(19,11223,102,'2015-11-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(18,23,210,'2018-1-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(17,11223,102,'2015-11-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(15,23,210,'2013-1-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(16,11223,102,'2015-11-26');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(17,23,210,'2018-10-6');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(12,11223,102,'2015-12-16');
+
+INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+VALUES(10,23,210,'2018-1-6');

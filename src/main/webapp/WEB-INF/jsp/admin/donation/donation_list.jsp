@@ -1,16 +1,12 @@
-<%@page import="java.time.LocalDateTime"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 <title>donation list</title>
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
@@ -35,40 +31,64 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
 <script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
 <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>	
+<style>
+	 article{
+	 	margin-top:70px;
+	 }
+	 
+	 article fieldset {
+/*  		width: 500px;  */
+ 		border-radius: 20px; 
+ 		padding: 20px 20px 0px 20px;  
+ 		border: 3px double #bebebe; 
+		margin: auto; 
+ 		margin-top: 10px;  
+ 		margin-bottom: 20px;  
+	}
 
+	 table tr td, button{
+	 	text-align:center;
+	 	line-height:center; 
+	 }
+	 article .btn{
+	 	margin-left:3px;
+	 	margin-right:3px
+	 }
+ 
+ 
+</style>
 
 </head>
 <body>
-	<script src="/js/backstageNav.js"></script>
-	<br>
-	<br>
-	<br>
-	<h1>donation list</h1>
-	
-	<form action="#">
+<jsp:include page="../admin_layout/nav.jsp" />
+<article>
+	<h2>donation list</h2>
+	<div id="sideBar">
+
+	<form>
 	  <fieldset>
 	    <legend>search</legend>
 	    <label>id:</label>
 	    <input type="text" value="${param.id}" id="id" name="id"/>
 	    <label>memberId:</label>
 	    <input type="text" value="${param.memberId}" id="memberId" name="memberId"/>
+	    <label>organizationId:</label>
+	    <input type="text" value="${param.organizationId}" id="organizationId" name="organizationId"/>
 	    <label>起始日期</label>
-	    <input type="text" value="${param.donateTimeBegin}" id="donateTimeBegin" name="donateTimeBegin"/>
+	    <input type="text" value="${param.donateTimeBegin}" id="donateTimeBegin" name="donateTimeBegin" autocomplete="off"/>
 	    <label>結束日期</label>
-	    <input type="text" value="${param.donateTimeEnd}" id="donateTimeEnd" name="donateTimeEnd"/>
-	  	<input type="button" onclick="getData()" value="搜尋" id="searchButt" />
+	    <input type="text" value="${param.donateTimeEnd}" id="donateTimeEnd" name="donateTimeEnd" autocomplete="off"/>
+	  	<input type="button" onclick="dataTable.ajax.reload()" value="搜尋" id="searchButt" />
 	  </fieldset>
 	</form>
-
+	</div>
 	
 	
-
-	<fieldset>
-		<table id="dataTable" class="table table-hover">
+	<fieldset style=width:1300px>
+		<table id="table" class="table table-striped table-bordered">
 			<thead>
 			<tr>
-				<th></th>
-				<th></th>
+				<th scope="col" width="130px"></th>
 				<th scope="col">id</th>
 				<th scope="col">memberId</th>
 				<th scope="col">organizationId</th>
@@ -76,43 +96,117 @@
 				<th scope="col">donateTime</th>
 			</tr>
 			</thead>
-			<tbody>
+			<tbody id="DonationTableBody">
 			</tbody>
 
 		</table>
 	</fieldset>
-	<button class="btn btn-outline-secondary"
-		onclick="javascript:document.location.href='/donation/add'">Add</button>
-	<p>
+		<button class="btn btn-primary btn-sm" style=margin-left:45px
+		onclick="javascript:document.location.href='/admin/donation/add'">新增</button>
+	
+</article>
 	<script>
-	$(document).ready(function(){ 
-		getData();
-	})
-
-	function getData() {
-		$("tbody").text("");// 先清空資料
-		$.ajax({
-			url : "/admin/donation/query",
-			type : "post",
-			data : $("form").serialize(),
-			dataType : 'json',
-			success : function(donations) {
-				$.each(donations,function(index, donation){
-					$("tbody").append(
-							[$("<tr>"),
-							$("<td><button onclick=\"javascript:document.location.href='/donation/edit?id="+ donation.id +"'\">Edit</button></td>"),
-							$("<td><button onclick=\"deleteData(" + donation.id + ")\">Delete</button></td>"),
-							$("<td></td>").text(donation.id),
-							$("<td></td>").text(donation.memberId),
-							$("<td></td>").text(donation.organizationId),
-							$("<td></td>").text(donation.value),
-							$("<td></td>").text(donation.donateTime),
-							$("</tr>")]);
-				})
+	var dataTable;
+	
+	dataTable = $('#table').DataTable({
+		pageResize: true,
+		fixedHeader: true,
+		pageingType: 'full_numbers',
+		searching: false,
+		serverSide: true, //分頁、排序交給server端處理
+		ajax:{
+			url:'/admin/donation/queryPage',
+			type:'get',
+			dataType:'json',
+			//傳送給伺服器的資料(datatable預設傳送的資料)
+			data: function(d){
+				console.log(d);
+				return $("form").serialize() + "&start=" + d.start + "&length=" + d.length;
+			},
+			//dataTable需顯示表格的資料標籤(預設標籤為data:)
+			dataSrc:"content",
+			//對伺服器送來的資料進行修改
+			dataFilter: function(resp){
+// 				console.log(resp);
+// 				alert(console.log(resp));
+// 				alert("resp="+resp);
+				var respJson = $.parseJSON(resp);
+				respJson.recordsTotal = respJson.totalElements;
+				respJson.recordsFiltered = respJson.totalElements;
+// 				console.log(JSON.stringify(respJson));
+				return JSON.stringify(respJson);
 			}
+		},
+		drawCallback: function (d) {
+// 			console.log(d);
+			var api = this.api();
+			var pageNum = parseInt(d.json.pageable.pageNumber);
+			var totalPages = d.json.totalPages;
+			$('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
+		},
+		//設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
+		columns:[
+			{data:function(data, type, row){
+				var editButt = "<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"javascript:document.location.href='/admin/donation/edit?id=" + data.id + "'\" value='修改' />";
+				var deleteButt = "<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteData(" + data.id + ")\" value='刪除' />";
+				return editButt + deleteButt;
+			}},
+			{data:'id'},
+			{data:"memberId"},
+			{data:"organizationId"},
+			{data:"value"},
+			{data: null, render: function ( data, type, row ) {
+                return new Date(data.donateTime).toLocaleDateString();
+            }},
+		],
+		columnDefs: [{
+            "searchable": false,
+            "orderable": false,
+            "targets": [0],
+        }],
+        order:[[1, 'asc']]
+	});
+	var datePickerSetting = {
+			format : "yyyy/mm/dd",
+			autoclose : true,
+			todayHighlight : true,
+			language : 'zh-TW',
+			clearBtn:true,
+			startView:"2",
+			endDate:"0d",
+		};
+	$('#donateTimeBegin').datepicker(datePickerSetting);
+	$('#donateTimeEnd').datepicker(datePickerSetting);
+	
+	
+// 	$(document).ready(function(){ 
+// 		getData();
+// 	})
+
+// 	function getData() {
+// 		$("tbody").text("");// 先清空資料
+// 		$.ajax({
+// 			url : "/admin/donation/query",
+// 			type : "post",
+// 			data : $("form").serialize(),
+// 			dataType : 'json',
+// 			success : function(donations) {
+// 				$.each(donations,function(index, donation){
+// 					$("tbody").append(
+// 							[$("<tr>"),
+// 							$("<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"javascript:document.location.href='/admin/donation/edit?id="+ donation.id +"'\" value='修改'/>"),
+// 							$("<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteData(" + donation.id + ")\" value='刪除' />"),
+// 							$("<td></td>").text(donation.id),
+// 							$("<td></td>").text(donation.memberId),
+// 							$("<td></td>").text(donation.organizationId),
+// 							$("<td></td>").text(donation.value),
+// 							$("<td></td>").text(donation.donateTime),
+// 							$("</tr>")]);
+// 				})
+// 			}
 		
-		})
-	}
+// 		})
+// 	}
 	function deleteData(donationId){
 		$.ajax({
 			url : "/admin/donation/delete?id=" + donationId,
@@ -127,7 +221,7 @@
 						alert(message);
 					});
 				}
-				getData();
+				dataTable.ajax.reload();
 			}
 		})
 	}

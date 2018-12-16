@@ -1,9 +1,11 @@
 package team.lala.timebank.service;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +18,8 @@ public class DonationService {
 	@Autowired
 	private DonationDao donationDao;
 
-	public Donation save(Donation d) {
-		d.setDonateTime(LocalDateTime.now());
+	public Donation insert(Donation d) {
+		d.setDonateTime(new Date());
 		Donation donation = donationDao.save(d);
 		return donation;
 	}
@@ -45,6 +47,11 @@ public class DonationService {
 	public List<Donation> findBySpecification(Specification<Donation> specification) {
 		return donationDao.findAll(specification);
 	}
+	
+	public Page<Donation> findBySpecification(Specification<Donation> specification, Pageable page) {
+		return donationDao.findAll(specification, page);
+	}
+	
 	
 	public void deleteById(Long id) {
 		donationDao.deleteById(id);

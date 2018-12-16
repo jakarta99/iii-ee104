@@ -1,7 +1,7 @@
 package team.lala.timebank.spec;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -28,10 +28,26 @@ public class DonationSpecification implements Specification<Donation> {
 		List<Predicate> list = new ArrayList<Predicate>();
 
 		if (!StringUtils.isEmpty(inputDonation.getDonateTimeBegin())
-				&& !StringUtils.isEmpty(inputDonation.getDonateTimeEnd())) {
-			list.add(criteriaBuilder.between(root.get("donateTime").as(LocalDateTime.class),
-					inputDonation.getDonateTimeBegin(), inputDonation.getDonateTimeEnd()));
+				&& StringUtils.isEmpty(inputDonation.getDonateTimeEnd())) {
+			list.add(criteriaBuilder.greaterThanOrEqualTo(root.get("donateTime").as(Date.class),
+					inputDonation.getDonateTimeBegin()));
 		}
+		if (!StringUtils.isEmpty(inputDonation.getDonateTimeEnd())
+				&& StringUtils.isEmpty(inputDonation.getDonateTimeBegin())) {
+			list.add(criteriaBuilder.lessThanOrEqualTo(root.get("donateTime").as(Date.class),
+					inputDonation.getDonateTimeEnd()));
+		}
+		if (!StringUtils.isEmpty(inputDonation.getDonateTimeBegin())
+				&& !StringUtils.isEmpty(inputDonation.getDonateTimeEnd())) {
+			list.add(criteriaBuilder.between(root.get("donateTime").as(Date.class), inputDonation.getDonateTimeBegin(),
+					inputDonation.getDonateTimeEnd()));
+		}
+
+		if (!StringUtils.isEmpty(inputDonation.getOrganizationId())) {
+			list.add(criteriaBuilder.equal(root.get("organizationId").as(Long.class),
+					inputDonation.getOrganizationId()));
+		}
+
 		if (!StringUtils.isEmpty(inputDonation.getMemberId())) {
 			list.add(criteriaBuilder.equal(root.get("memberId").as(Long.class), inputDonation.getMemberId()));
 		}
