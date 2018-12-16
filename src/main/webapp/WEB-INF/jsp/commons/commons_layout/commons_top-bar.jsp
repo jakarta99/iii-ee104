@@ -23,10 +23,21 @@
 	                 </a>
 	                </sec:authorize>
 					<sec:authorize  access="isAuthenticated()">
-					 <a href="/logout" class="logout-btn">
+					
+<!-- 1. logout method:put -->
+<!-- 					<form id="form1" action="/logout" method="post"> 				 -->
+<!-- 						<a href="javascript:;" onclick="document.getElementById('form1').submit();" class="logout-btn"> -->
+<!-- 	                	<i class="fa fa-sign-in"></i> -->
+<!-- 	                	<span class="d-none d-md-inline-block">Sign Out</span> -->
+<!-- 		                 </a> -->
+<!-- 	                </form> -->
+
+<!-- 2. logout method:get -->
+						<a href="/logout" class="logout-btn">
 	                	<i class="fa fa-sign-in"></i>
 	                	<span class="d-none d-md-inline-block">Sign Out</span>
-	                 </a>
+		                </a>
+	        
 	                </sec:authorize>
 						
 <!--                 		<span class="d-none d-md-inline-block">Sign In</span></a> -->
