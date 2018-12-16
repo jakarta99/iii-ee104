@@ -46,7 +46,7 @@
 		$.ajax({
 			method: "post",
 			dataType: "json",
-			url: "/donation/update",
+			url: "/admin/donation/update",
 			data: $("form").serialize(),
 			success: function(response){
 				
@@ -57,7 +57,7 @@
 						alert(message);
 					});
 				}
-				window.location.replace("/donation/list");
+				window.location.replace("/admin/donation/list");
 			}
 		})
 	}
