@@ -4,24 +4,29 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import team.lala.timebank.enums.MemberType;
 import team.lala.timebank.enums.YesNo;
@@ -29,6 +34,9 @@ import team.lala.timebank.enums.YesNo;
 @Entity
 @Table(name = "MEMBER")
 public class Member implements UserDetails {
+	
+	private static final String rolePrefix = "ROLE_";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -42,8 +50,25 @@ public class Member implements UserDetails {
 //	@Size(min=6, max=30)
 	@Column(name = "PASSWORD")
 	private String password;
+	
+	@ManyToMany
+//	(fetch=FetchType.EAGER)
+	@JsonManagedReference
+	@JoinTable(
+			name="USER_ROLE",
+			joinColumns=@JoinColumn(name="USER_ID"),
+			inverseJoinColumns=@JoinColumn(name="ROLE_ID"))
+	private Set<Role> roles;
 
-//	@NotNull
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	//	@NotNull
 //	@Size(min=4, max=10)
 	@Column(name = "NAME")
 	private String name;
@@ -375,7 +400,11 @@ public class Member implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> list = new ArrayList<>();
-		list.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		Set<Role> roles = this.getRoles();
+		for (Role r : roles) {
+			list.add(new SimpleGrantedAuthority(rolePrefix+ r.getRoleName()));			
+		}
+		
 //		list.add(new SimpleGrantedAuthority("ADMIN"));
 		return list;
 	}
