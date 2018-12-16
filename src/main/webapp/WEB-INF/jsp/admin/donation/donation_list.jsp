@@ -62,23 +62,27 @@
 <body>
 <jsp:include page="../admin_layout/nav.jsp" />
 <article>
-	<h2>donation list</h2>
+	<h2 style=margin:30px>donation list</h2>
 	<div id="sideBar">
 
 	<form>
-	  <fieldset>
+	  <fieldset style=width:900px>
 	    <legend>search</legend>
-	    <label>id:</label>
-	    <input type="text" value="${param.id}" id="id" name="id"/>
-	    <label>memberId:</label>
-	    <input type="text" value="${param.memberId}" id="memberId" name="memberId"/>
-	    <label>organizationId:</label>
-	    <input type="text" value="${param.organizationId}" id="organizationId" name="organizationId"/>
-	    <label>起始日期</label>
-	    <input type="text" value="${param.donateTimeBegin}" id="donateTimeBegin" name="donateTimeBegin" autocomplete="off"/>
-	    <label>結束日期</label>
-	    <input type="text" value="${param.donateTimeEnd}" id="donateTimeEnd" name="donateTimeEnd" autocomplete="off"/>
-	  	<input type="button" onclick="dataTable.ajax.reload()" value="搜尋" id="searchButt" />
+	    <div style=margin:15px>
+		    <label>id:</label>
+		    <input type="text" value="${param.id}" id="id" name="id"/>
+		    <label>memberId:</label>
+		    <input type="text" value="${param.memberId}" id="memberId" name="memberId"/>
+		    <label>organizationId:</label>
+		    <input type="text" value="${param.organizationId}" id="organizationId" name="organizationId"/>
+	    </div>
+	    <div style=margin:15px>
+		    <label>起始日期</label>
+		    <input type="text" value="${param.donateTimeBegin}" id="donateTimeBegin" name="donateTimeBegin" autocomplete="off"/>
+		    <label>結束日期</label>
+		    <input type="text" value="${param.donateTimeEnd}" id="donateTimeEnd" name="donateTimeEnd" autocomplete="off"/>
+		  	<input type="button" class="btn btn-primary btn-sm" style=margin-left:45px onclick="dataTable.ajax.reload()" value="搜尋" id="searchButt" />
+	  	</div>
 	  </fieldset>
 	</form>
 	</div>
