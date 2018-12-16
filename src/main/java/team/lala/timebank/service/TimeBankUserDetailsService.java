@@ -5,10 +5,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import team.lala.timebank.config.SecurityUser;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.entity.Member;
 
+@Transactional
 @Service
 public class TimeBankUserDetailsService implements UserDetailsService {
 
@@ -25,7 +28,13 @@ public class TimeBankUserDetailsService implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException("UsernameNotFound");
 		}
-		return user;
+//		return user;
+		
+		//另建一SecurityUser繼承member，負責處理authority問題，
+		//可避免發生Lazy initializer exception		
+		UserDetails userDetail = new SecurityUser(user);
+		System.out.println("userDetail=" +userDetail);
+		return userDetail;
 		
 	}
 

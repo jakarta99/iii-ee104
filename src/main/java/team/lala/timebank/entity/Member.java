@@ -35,7 +35,6 @@ import team.lala.timebank.enums.YesNo;
 @Table(name = "MEMBER")
 public class Member implements UserDetails {
 	
-	private static final String rolePrefix = "ROLE_";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,8 +50,7 @@ public class Member implements UserDetails {
 	@Column(name = "PASSWORD")
 	private String password;
 	
-	@ManyToMany
-//	(fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JsonManagedReference
 	@JoinTable(
 			name="USER_ROLE",
@@ -68,7 +66,7 @@ public class Member implements UserDetails {
 		this.roles = roles;
 	}
 
-	//	@NotNull
+//	@NotNull
 //	@Size(min=4, max=10)
 	@Column(name = "NAME")
 	private String name;
@@ -396,17 +394,19 @@ public class Member implements UserDetails {
 				+ ", orgWebsiteLink=" + orgWebsiteLink + ", orgFoundPurpose=" + orgFoundPurpose + ", orgIdConfirmation="
 				+ orgIdConfirmation + "]";
 	}
+	
+	private static final String rolePrefix = "ROLE_";
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> list = new ArrayList<>();
-		Set<Role> roles = this.getRoles();
-		for (Role r : roles) {
-			list.add(new SimpleGrantedAuthority(rolePrefix+ r.getRoleName()));			
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		Set<Role> userRoles = this.getRoles();
+		for (Role role : userRoles) {
+			authorities.add(new SimpleGrantedAuthority(rolePrefix+ role.getRoleName()));			
 		}
 		
 //		list.add(new SimpleGrantedAuthority("ADMIN"));
-		return list;
+		return authorities;
 	}
 
 	@Override
