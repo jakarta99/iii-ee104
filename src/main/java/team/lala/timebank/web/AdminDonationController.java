@@ -17,8 +17,8 @@ import team.lala.timebank.service.DonationService;
 import team.lala.timebank.spec.DonationSpecification;
 
 @Controller
-@RequestMapping("/donation")
-public class DonationController {
+@RequestMapping("/admin/donation")
+public class AdminDonationController {
 
 	@Autowired
 	private DonationService donationService;
@@ -27,20 +27,20 @@ public class DonationController {
 	public String editPage(@RequestParam("id") Long id, Model model) {
 		Donation donation = donationService.getOne(id);
 		model.addAttribute("donation", donation);
-		return "/donation/donation_edit";
+		return "/admin/donation/donation_edit";
 	}
 
 	@RequestMapping("/add")
 	public String addPage() {
 		
-		return "/donation/donation_add";
+		return "/admin/donation/donation_add";
 	}
 
 	@RequestMapping("/list")
 	public String listPage(Model model) {
 		List<Donation> donations = donationService.findAll();
 		model.addAttribute("donations", donations);
-		return "/donation/donation_list";
+		return "/admin/donation/donation_list";
 	}
 
 	@RequestMapping("/insert")

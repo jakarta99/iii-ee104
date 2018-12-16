@@ -92,7 +92,7 @@
 	function getData() {
 		$("tbody").text("");// 先清空資料
 		$.ajax({
-			url : "/donation/query",
+			url : "/admin/donation/query",
 			type : "post",
 			data : $("form").serialize(),
 			dataType : 'json',
@@ -115,7 +115,7 @@
 	}
 	function deleteData(donationId){
 		$.ajax({
-			url : "/donation/delete?id=" + donationId,
+			url : "/admin/donation/delete?id=" + donationId,
 			type : "delete",
 			dataType : 'json',
 			success : function(response){

@@ -44,7 +44,7 @@
 		$.ajax({
 			method: "post",
 			dataType: "json",
-			url: "/donation/insert",
+			url: "/admin/donation/insert",
 			data: $("form").serialize(),
 			success: function(response){
 				
