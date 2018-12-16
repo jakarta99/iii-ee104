@@ -1,4 +1,4 @@
-package team.lala.timebank.web;
+package team.lala.timebank.web.admin;
 
 
 import java.util.List;
