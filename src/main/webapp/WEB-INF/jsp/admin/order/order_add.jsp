@@ -44,31 +44,33 @@ supplierId:
 requesterId:
 <input type="text" value="" id="requesterId" name="requesterId"/><p>
 
-supplierAcception(Y/N):
-<input type="text" value="" id="supplierAcception" name="supplierAcception"><p>
+<label>supplierAcception(Y/N):  </label>
+<input type="radio" value="Y" name="supplierAcception" />Y  
+<input type="radio" value="N" name="supplierAcception" />N<p>
 
-confirmation(Y/N):
-<input type="text" value="" id="confirmation" name="confirmation"><p>
+<label>confirmation(Y/N):  </label>
+<input type="radio" value="Y" name="confirmation" />Y  
+<input type="radio" value="N" name="confirmation" />N<p>
 
 status:
 <input type="text" value="" id="status" name="status"><p>
 
 <button type="button" onclick="addOrder()" class="btn btn-outline-primary">add</button>
 </form><p>
-<a href="/order/list">back to order_list</a>
+<a href="/admin/order/list">back to order_list</a>
 
 <script>
 
 function addOrder(){
 	$.ajax({
-		url:'/order/insert',
+		url:'/admin/order/insert',
 		type:'post',
 		data:$('form').serialize(),
 		dataType:'json',
 		success:function(addResult){
 			if(addResult.status == "SUCCESS"){
 				alert("add no." + addResult.obj.id + " order - STATUS:" + addResult.status);
-				document.location.href="/order/add";
+				document.location.href="/admin/order/add";
 			}else{
 				alert("add no." + addResult.obj.id + " order - STATUS:" + addResult.status);
 				alert("FAIL reason:" + addResult.messages);

@@ -58,56 +58,56 @@
 
 </style>
 <meta charset="UTF-8">
-<title>Penalty List</title>
+<title>Order List</title>
 </head>
 <body>
 	<!-- 加入nav.html(放在static/html) -->
 	<jsp:include page="../admin_layout/nav.jsp" />
 	<article>
 		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
-		<h1 style="padding-top: 2cm">Penalty List</h1>
-		<button onclick="javascript:document.location.href='/admin/penalty/add'" class="btn btn-primary btn-sm">Add</button>
+		<h1 style="padding-top: 2cm">Order List</h1>
+		<button onclick="javascript:document.location.href='/admin/order/add'" class="btn btn-primary btn-sm">Add</button>
 
 		<!-- 條件搜尋表單 -->
 		<div id="sideBar">
 			<form>
 				<fieldset>
-				<legend>Serach</legend>
+				<legend>Search</legend>
 				<div>
-					<label>memberId: </label>
-					<input type="text" value="${param.memberId}" id="memberId" name="memberId" placeholder="memberId" />
-					<label>status: </label>
-					<select id="status" name="status">
-						<option value="">請選擇</option>
-						<option value=1>審核中</option>
-						<option value=2>有罪</option>
-						<option value=3>無罪</option>
-					</select>
+					<div>
+						<label>id: </label>
+						<input type="text" value="${param.id}" id="id" name="id" placeholder="id" />
+					</div>
+					<div>
+						<label>supplierId:</label>
+						<input type="text" value="${param.supplierId}" id="supplierId" name="supplierId"/>
+					</div>
+					<div>
+						<label>requesterId:</label>
+						<input type="text" value="${param.requesterId}" id="requesterId" name="requesterId"/>
+					</div>
+				</div>
+				<div>
+					<div>
+						<label>supplierAcception(Y/N):</label>
+						<input type="radio" value="Y" name="supplierAcception" />Y
+						<input type="radio" value="N" name="supplierAcception" />N
+					</div>
+					<div>
+						<label>confirmation(Y/N):</label>
+						<input type="radio" value="Y" name="confirmation" />Y
+						<input type="radio" value="N" name="confirmation" />N
+					</div>
+					<div>	
+						<label>status:</label>
+						<input type="text" value="${param.status}" id="status" name="status"/>
+					</div>
+				</div>
 					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
+<!-- 					<button id="searchButt" style="margin:10px">搜尋</button> -->
 					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
-					<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" 
-						role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a>
-				</div>
-				<div class="collapse" id="collapse">
-					<div>
-						<label>orderListId</label>
-						<input type="text" value="${param.orderListId}" id="orderListId" name="orderListId" />
-					</div>
-					<div>
-						<label>description</label>
-						<input type="text" value="${param.description}" id="description" name="description" />
-					</div>
-					<div>
-						<label>penaltyTimeValue</label>
-						<input type="text" value="${param.penaltyTimeValue}" id="penaltyTimeValue" name="penaltyTimeValue"/>
-					</div>
-					<div>
-						<label>起始日期</label>
-						<input type="text" value="${param.dateBefore}" id="dateBefore" name="dateBefore" autocomplete="off" /> 
-						<input type="text" value="${param.dateAfter}" id="dateAfter" name="dateAfter" autocomplete="off" />
-					</div>
-				</div>
 				</fieldset>
+				
 			</form>
 		</div>
 		<fieldset style="width:300">
@@ -115,17 +115,18 @@
 			<thead>
 				<tr>
 					<th scope="col"></th>
-					<th scope="col">ID</th>
 					<th scope="col" width="100px"></th>
-					<th scope="col">雇主ID</th>
-					<th scope="col">被檢舉者ID</th>
-					<th scope="col">逞罰時間</th>
-					<th scope="col">處理進度</th>
-					<th scope="col">描述</th>
-					<th scope="col">被檢舉時間</th>
+					<th scope="col">ID</th>			
+					<th scope="col">supplierId</th>
+					<th scope="col">requesterId</th>
+					<th scope="col">supplierAcception(Y/N)</th>
+					<th scope="col">confirmation(Y/N)</th>
+					<th scope="col">status</th>
+					<th scope="col">requests.jobTitle</th>
+					<th scope="col">requests.timeValue</th>
 				</tr>
 			</thead>
-			<tbody id="tableBody">
+			<tbody id="TableBody">
 				<!-- 會員資料 -->
 			</tbody>
 		</table>
@@ -135,26 +136,26 @@
 
 		var dataTable;
 		
-		function deleteRow(penaltyId){
+		function deleteRow(orderId){
 			$.ajax({
-				type:"get",
-				dataType:"json",
-				url:"/admin/penalty/delete",
-				data:{"id":penaltyId}
-			}).done(function(respones){
+				type: "get",
+				dataType: "json",         
+				url: "/admin/order/delete",
+				data: {"id":orderId}					
+			})
+			.done(function(response){			
 				if (response.status =="SUCCESS"){
 					alert("刪除成功");
 				} else {
 					$.each(response.messages, function(idx, message) {
 						alert("the "+idx+"th ERROR, because "+message);
 					});
-				}
+				}			
 				dataTable.draw('page');
-				if($("table tbody tr").length < 2){
-					dataTable.page("previous").draw('page');
-				}
-			})
-			
+				if ($("table tbody tr").length < 2){
+					dataTable.page( 'previous' ).draw('page');;
+				} 
+			})	
 		}
 
 		$(document).ready(function() {
@@ -171,16 +172,16 @@
 			 	processing: true,
 				serverSide: true,  //分頁、排序都交由伺服器處理
 				ajax:{
-					url:"/admin/penalty/query",
+					url:"/admin/order/query",
 					type:"get",
 					dataType:"json",
 					data:function(d){ 				//傳送給伺服器的資料(datatable預設會傳送d的資料)
 						var start = d.start;
 						var length = d.length;
-						var request = $('from').serialize() + "&start=" + start + "&length=" + length;
+						var request = $("form").serialize()+"&start="+start+"&length="+length;
 						return request;
 					},
-					dataSrc:"context",
+					dataSrc:"content",
 					dataFilter:function(resp){		//對伺服器送來的資料進行修改
 						 var json = jQuery.parseJSON( resp );
 			             json.recordsTotal = json.totalElements;
@@ -194,22 +195,21 @@
 						$('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
 				}, columns: [ 		//設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
 		     		{data:null},
-		           	{data: "id" },
 		           	{data: function (data, type, row ) {
-						var editButt = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/penalty/edit?id="
-											+ penalty.id + "'\" value='修改'  />";
-						var deleteButt = "<input type='button' class=\"btn btn-primary btn-sm\" id='deleteButt"+ penalty.id +"' value='刪除' />";
+						var editButt = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/order/edit?id="
+											+ data.id + "'\" value='修改'  />";
+						var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='刪除' />"  
 		               	return editButt + deleteButt;	}
 		           	},
-					{data:"orderListId"},
-					{data:"memberId"},
-					{data:"penaltyTimeValue"},
+		           	{data:"id" },
+					{data:"supplierId"},
+					{data:"requesterId"},
+					{data:"supplierAcception"},
+					{data:"confirmation"},
 					{data:"status"},
-					{data:"description"},
-					{data:null, render:function(data, type, row){
-						return new Date(data.updateDate).toLocaleDateString();
-						}
-					},		
+					{data:"requests.jobTitle"},
+					{data:"requests.timeValue"},
+							
 				], columnDefs:[{		//禁用第0123列的搜索和排序
 					"searchable": false,
 	                "orderable": false,
@@ -230,18 +230,7 @@
 	                cell.innerHTML = columnIndex;
 	            });
 	        });	
-			//日期選擇器
-			var datePickerSetting = {
-				format : "yyyy-mm-dd",
-				autoclose : true,
-				todayHighlight : true,
-				language : 'zh-TW',
-				clearBtn : true,
-				startView : "2",
-				endDate : "0d",
-			};
-			$("#dateBefore").datepicker(datePickerSetting);
-			$("#dateAfter").datepicker(datePickerSetting);
+
 			
 			//搜尋事件
 			$("#searchButt").click(	function(){
