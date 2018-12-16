@@ -33,32 +33,32 @@ public class Member implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull
-	@Size(min=6, max=30)
+//	@NotNull
+//	@Size(min=6, max=30)
 	@Column(name = "ACCOUNT")
 	private String account;
 	
-	@NotNull
-	@Size(min=6, max=30)
+//	@NotNull
+//	@Size(min=6, max=30)
 	@Column(name = "PASSWORD")
 	private String password;
 
-	@NotNull
-	@Size(min=4, max=10)
+//	@NotNull
+//	@Size(min=4, max=10)
 	@Column(name = "NAME")
 	private String name;
 
-	@NotNull
+//	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name = "TYPE")
 	private MemberType memberType; // P: Person; O: Organization
 
-	@NotNull
-	@Size(min=8, max=10)//統一編號8碼，身份證字號10碼
+//	@NotNull
+//	@Size(min=8, max=10)//統一編號8碼，身份證字號10碼
 	@Column(name="CERTIFICATE_ID_NUMBER")
 	private String certificateIdNumber;
 	
-	@NotNull
+//	@NotNull
 	@Past
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@Column(name="BIRTH_DATE")
@@ -74,27 +74,27 @@ public class Member implements UserDetails {
 	@Transient
 	private Date birthDateEnd;
 	
-	@NotNull
+//	@NotNull
 	@Column(name = "EMAIL")
 	private String email;
 
-	@NotNull
+//	@NotNull
 	@Column(name = "TEL")
 	private String telephone;
 
-	@NotNull
+//	@NotNull
 	@Column(name = "MOBILE")
 	private String mobile;
 
-	@NotNull
+//	@NotNull
 	@Column(name = "COUNTY")
 	private String county;
 	
-	@NotNull
+//	@NotNull
 	@Column(name = "DISTRICT")
 	private String district;
 
-	@NotNull
+//	@NotNull
 	@Column(name = "ADDRESS")
 	private String address;
 
