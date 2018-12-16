@@ -1,12 +1,12 @@
 package team.lala.timebank.service;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -23,19 +23,23 @@ public class MemberService {
 	private MemberDao memberDao;
 	
 	
-	public Member insert(Member newMember) {
+	public Member insert(Member newMember) throws SQLException  {
+		if (newMember.getId() != null) {
+			throw new SQLException();
+		} 		
 		newMember.setSignUpDate(new Date());
 		newMember.setEmailVerification(YesNo.N);
 		newMember.setOrgIdConfirmation(YesNo.N);
-		Member member = memberDao.save(newMember);
-		return member;		
+		Member member = memberDao.save(newMember);			
+		return member;
 	}
 	
 	
 	public Member update(Member member) {
 		Member dbMember = null;
 		if (member.getId() != null) {
-			dbMember = memberDao.getOne(member.getId());
+			//id not exist throws exception
+			dbMember = memberDao.getOne(member.getId()); 
 			dbMember.setAccount(member.getAccount());
 			dbMember.setPassword(member.getPassword());
 			dbMember.setName(member.getName());
@@ -112,7 +116,7 @@ public class MemberService {
 	}
 
 	// louis
-	public Member findByLoginAccount(Member m) {
+	public Member findByAccount(Member m) {
 		// 根據帳號在資料庫中尋找
 		Member member = null;
 		member = memberDao.findByAccount(m.getAccount());

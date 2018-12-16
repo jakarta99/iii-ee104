@@ -47,7 +47,7 @@
                 <form action="/login" method="post">
                   <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" type="text" name="username" class="form-control">
+                    <input id="email" type="text" name="username" class="form-control" autofocus>
                   </div>
                   <div class="form-group">
                     <label for="password">Password</label>

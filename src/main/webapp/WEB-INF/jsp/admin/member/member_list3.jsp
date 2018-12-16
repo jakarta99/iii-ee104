@@ -280,7 +280,7 @@
 		        serverSide: true,
 		        rowId: 'id',
 		        ajax: {
-		            url: "/admin/member/queryPageRequest",
+		            url: "/admin/member/queryPage",
 		            type: "get",
 		            dataType : "json",
 		            data: function(d){

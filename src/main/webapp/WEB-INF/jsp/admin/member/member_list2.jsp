@@ -226,7 +226,7 @@
 			 	//分頁、排序都交由伺服器處理
 		        serverSide: true,
 		        ajax: {
-		            url: "/admin/member/queryPageRequest",
+		            url: "/admin/member/queryPage",
 		            type: "get",
 		            dataType : "json",
 					//傳送給伺服器的資料(datatable預設會傳送d的資料)
