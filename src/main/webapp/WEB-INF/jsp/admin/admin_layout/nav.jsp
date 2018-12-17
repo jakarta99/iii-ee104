@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>    
+    
 	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 		<a class="navbar-brand" href="#">Navbar</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -22,18 +25,23 @@
 					id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">TIMEBANK BackStage</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown01">
-						<a class="dropdown-item" href="/member/list" id="backStage-member">member</a> 
-						<a	class="dropdown-item" href="/order/list" id="backStage-order">order</a> 
-						<a	class="dropdown-item" href="/donation/list" id="backStage-donation">donation</a>
-						<a	class="dropdown-item" href="/request/list" id="backStage-request">request</a>
-						<a	class="dropdown-item" href="/time-ledger/list" id="backStage-timeledger">time-ledger</a>
-						<a	class="dropdown-item" href="/penalty/list" id="backStage-penalty">penalty</a>
+						<a class="dropdown-item" href="/admin/member/list" id="backStage-member">member</a> 
+						<a	class="dropdown-item" href="/admin/order/list" id="backStage-order">order</a> 
+						<a	class="dropdown-item" href="/admin/donation/list" id="backStage-donation">donation</a>
+						<a	class="dropdown-item" href="/admin/request/list" id="backStage-request">request</a>
+						<a	class="dropdown-item" href="/admin/time-ledger/list" id="backStage-timeledger">time-ledger</a>
+						<a	class="dropdown-item" href="/admin/penalty/list" id="backStage-penalty">penalty</a>
 					</div></li>
 			</ul>
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="text" placeholder="Search"
-					aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-			</form>
+			<a href='<c:url value="/logout"/>' class="nav-link">
+	             <i class="fa fa-sign-in"></i>
+	             <span class="d-none d-md-inline-block">登出</span>
+	        </a>
+
+<!-- 			<form class="form-inline my-2 my-lg-0"> -->
+<!-- 				<input class="form-control mr-sm-2" type="text" placeholder="Search" -->
+<!-- 					aria-label="Search"> -->
+<!-- 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+<!-- 			</form> -->
 		</div>
 	</nav>

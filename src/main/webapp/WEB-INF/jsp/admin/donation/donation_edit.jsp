@@ -22,10 +22,8 @@
 <title> edit donation </title>
 </head>
 <body>
-<script src="/js/backstageNav.js"></script>
-<br>
-<br>
-<br>
+<jsp:include page="../admin_layout/nav.jsp" />
+
 <h1> edit id = ${donation.id} donation</h1>
 	<form>
 	  <fieldset>
@@ -46,7 +44,7 @@
 		$.ajax({
 			method: "post",
 			dataType: "json",
-			url: "/donation/update",
+			url: "/admin/donation/update",
 			data: $("form").serialize(),
 			success: function(response){
 				
@@ -57,7 +55,7 @@
 						alert(message);
 					});
 				}
-				window.location.replace("/donation/list");
+				window.location.replace("/admin/donation/list");
 			}
 		})
 	}

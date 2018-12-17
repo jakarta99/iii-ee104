@@ -22,8 +22,9 @@
 <title>Penalty Edit</title>
 </head>
 <body>
-	<c:import url="/html/nav.html"></c:import>
-
+	<!-- 加入nav.html(放在static/html) -->
+	<jsp:include page="../admin_layout/nav.jsp" />
+	
 	<h1 style="padding-top: 2cm">Penalty Edit</h1>
 	<h4>edit no.${penalty.id} penalty list</h4>
 

@@ -64,7 +64,7 @@ public class AdminMemberController {
 		return members;
 	}
 	
-	@RequestMapping("/queryPageRequest")
+	@RequestMapping("/queryPage")
 	@ResponseBody
 	public Page<Member> queryMember(Member inputMember, @RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length){

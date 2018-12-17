@@ -23,7 +23,8 @@
 <title>Penalty Add</title>
 </head>
 <body>
-	<c:import url="/html/nav.html"></c:import>
+	<!-- 加入nav.html(放在static/html) -->
+	<jsp:include page="../admin_layout/nav.jsp" />
 	<h1 style="padding-top: 2cm">Penalty Add</h1>
 	<form>
 		<div class="form-group row">

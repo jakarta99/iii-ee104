@@ -1,5 +1,6 @@
 package team.lala.timebank.web;
 
+import java.sql.SQLException;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,8 +68,13 @@ public class MemberRegisteredController {
 		}
 		// 檢查帳號是否重複，如果沒重複則insert資料庫
 		// findByLoginAccount回傳直如果是null，代表資料庫沒相同的帳號，可以註冊
-		if (memberService.findByLoginAccount(member) == null) {
-			member = memberService.insert(member);
+		if (memberService.findByAccount(member) == null) {
+			try {
+				member = memberService.insert(member);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return member;
 	}

@@ -83,14 +83,13 @@
 
 	<jsp:include page="../admin_layout/nav.jsp" />
 	<article>
-		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
 		<h2>Member List</h2>
 		
 		<div >
 			<input type="button" class="btn btn-primary btn-sm"	
-				onclick="javascript:document.location.href='/member/add?memberType=P'" value="新增一般會員" />
+				onclick="javascript:document.location.href='/admin/member/add?memberType=P'" value="新增一般會員" />
 			<input type="button" class="btn btn-primary btn-sm"
-					onclick="javascript:document.location.href='/member/add?memberType=O'" value="新增公益團體" />
+					onclick="javascript:document.location.href='/admin/member/add?memberType=O'" value="新增公益團體" />
 		</div>
 		
 <!-- 		條件搜尋表單 -->
@@ -192,7 +191,7 @@
 				url: "/admin/member/delete",
 				data: {"id":memberId}					
 			})
-			.done(function(response){			
+			.done(function(response){
 				if (response.status =="SUCCESS"){
 					alert("刪除成功");
 				} else {
@@ -227,7 +226,7 @@
 			 	//分頁、排序都交由伺服器處理
 		        serverSide: true,
 		        ajax: {
-		            url: "/admin/member/queryPageRequest",
+		            url: "/admin/member/queryPage",
 		            type: "get",
 		            dataType : "json",
 					//傳送給伺服器的資料(datatable預設會傳送d的資料)
@@ -265,7 +264,7 @@
 		           	{data: "id" },
 		           	{data: function (data, type, row ) {
 // 		        	   console.log(data)
-		        	   	var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/member/edit?id="+data.id+"'\" value='修改'  />";
+		        	   	var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/member/edit?id="+data.id+"'\" value='修改'  />";
 						var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='刪除' />"  
 		               	return editButt + deleteButt;			        	   
 		           		}
@@ -293,7 +292,7 @@
 				    
 			        
 			 } );
-			
+			//設定行號(非id)	
 			dataTable.on('draw.dt',function() {
 				dataTable.column(0, {
 	                search: 'applied',
@@ -301,13 +300,13 @@
 	            }).nodes().each(function(cell, i) {
 	                //i從0開始，所以先加1
 	                i = i+1;
-	                //服務氣模式下，使用DT提供的API直接獲取分頁資訊
+	                //服務模式下，使用DT提供的API直接獲取分頁資訊
 	                var pageinfo = dataTable.page.info();
-	                //当前第几页，从0开始
+	                //當前第幾頁，從0开始
 	                var pageno = pageinfo.page;
-	                //每页数据
+	                //每頁數據
 	                var length = pageinfo.length;
-	                //行号等于 页数*每页数据长度+行号
+	                //行號等於頁數*每頁數據長度+行號
 	                var columnIndex = (i+pageno*length);
 	                cell.innerHTML = columnIndex;
 	            });

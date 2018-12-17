@@ -80,12 +80,10 @@
 
 </head>
 <body>
-	<!-- 使用AJAX -->
-	<!-- 	<div id="navBar"></div> -->
-	<c:import url="/html/nav.html" />
+	<jsp:include page="../admin_layout/nav.jsp" />
 	<article>
 		<input type="button" class="btn btn-primary btn-sm"
-							onclick="javascript:document.location.href='/member/list'" value="回上一頁" />
+							onclick="javascript:document.location.href='/admin/member/list'" value="回上一頁" />
 		<h2>Member Edit</h2>
 		<h4>Member Id ${member.id}</h4>
 
@@ -277,8 +275,7 @@
 							url : "/admin/member/update",
 							data : $("form").serialize(),
 						}).done(function(response) {
-							alert(response.obj);
-							
+// 							alert(response.obj);							
 							if (response.status =='SUCCESS'){
 								alert("資料更新成功");
 							} else{
@@ -286,11 +283,7 @@
 									alert("the "+idx+"th ERROR, because "+message);
 								});
 							}
-// 							$.each(data, function(key, value) {
-// 								if (key == 'msg') {
-// 									alert(value);
-// 								}
-// 							})
+
 						});
 
 					})

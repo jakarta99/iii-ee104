@@ -1,5 +1,7 @@
 package team.lala.timebank.web.admin;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.lala.timebank.commons.ajax.AjaxResponse;
-import team.lala.timebank.commons.ajax.PageResponse;
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.service.PenaltyService;
 import team.lala.timebank.spec.PenaltySpecification;
@@ -82,15 +83,13 @@ public class AdminPenaltyController {
 
 	@ResponseBody
 	@RequestMapping("/query")
-	public PageResponse<Penalty> queryPenalty(Penalty inputPenalty, @RequestParam("pageNumber") Integer pageNumber,
-			@RequestParam("pageSize") Integer pageSize) {
-		PageResponse<Penalty> response = new PageResponse<Penalty>();
+	public Page<Penalty> queryPenalty(Penalty inputPenalty, @RequestParam(value="start",required=false) Optional<Integer> start, 
+			@RequestParam(value="length",required=false) Optional<Integer> length) {
+		int page = start.orElse(0)/length.orElse(10);
 		PenaltySpecification penaltySpec = new PenaltySpecification(inputPenalty);
-
-		PageRequest thisPage = PageRequest.of(pageNumber, pageSize);
-		Page<Penalty> penalties = penaltyService.findBySpecification(penaltySpec, thisPage);
-		response.setPage(penalties);
-		return response;
+		Page<Penalty> penalties = penaltyService.findBySpecification(
+				penaltySpec, PageRequest.of(page, length.orElse(10)));
+		return penalties;
 
 	}
 

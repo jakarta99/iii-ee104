@@ -91,17 +91,16 @@
 </head>
 <body>
 
-	<c:import url="/html/nav.html"/>
+	<jsp:include page="../admin_layout/nav.jsp" />
 
 	<article>
-		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
 		<h2>Member List</h2>
 		
 		<div >
 			<input type="button" class="btn btn-primary btn-sm"	
-				onclick="javascript:document.location.href='/member/add?memberType=P'" value="新增一般會員" />
+				onclick="javascript:document.location.href='/admin/member/add?memberType=P'" value="新增一般會員" />
 			<input type="button" class="btn btn-primary btn-sm"
-					onclick="javascript:document.location.href='/member/add?memberType=O'" value="新增公益團體" />
+					onclick="javascript:document.location.href='/admin/member/add?memberType=O'" value="新增公益團體" />
 		</div>
 		
 <!-- 		條件搜尋表單 -->
@@ -164,10 +163,9 @@
 		
 		
 		<fieldset style="width:1200px">
-		<input type='button' class="btn btn-primary btn-sm"  onclick="edit" value='修改'  />
-<!-- 		<input type='button' class="btn btn-primary btn-sm" onclick="delete()" id='deleteButt"+ source.id +"' value='刪除' />   -->
+		<input type='button' class="btn btn-primary btn-sm" id="editButt" onclick="editRow()" value='修改'  />
 		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="deleteToggleButt"> 刪除</button>
+		<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="deleteButt"> 刪除</button>
 		
 		<!-- Modal -->
 		<div class="modal fade" id=exampleModal tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -197,9 +195,9 @@
 		<table  id=table class="table table-striped table-bordered">				
 			<thead>
 				<tr>
-<!-- 					<th scope="col"></th> -->
+					<th scope="col"></th> 
 					<th scope="col">id</th>
-					<th scope="col" width="100px"></th>
+<!-- 					<th scope="col" width="100px"></th> -->
 					<th scope="col">會員帳號</th>
 					<th scope="col">會員姓名</th>
 					<th scope="col">會員型態</th>
@@ -222,38 +220,44 @@
 	
 
 	<script>
-	var dataTable;
-	var selectedRowId = 0;
-
-
-	function deleteRow(){
-		if (selectedRowId != 0 ){
-			$('#exampleModal').modal('hide');					
-			$.ajax({
-				type: "get",
-				dataType: "json",         
-				url: "/admin/member/delete",
-				data: {"id":selectedRowId}					
-			})
-			.done(function(response){
-				
-				if (response.status =="SUCCESS"){
-// 					alert("刪除成功");
-				} else {
-					$.each(response.messages, function(idx, message) {
-						alert("the "+idx+"th ERROR, because "+message);
-					});
-				}		
-
-				dataTable.draw('page');
-				if ($("table tbody tr").length < 2){
-					alert($("table tbody tr").length +", no row exists");
-					dataTable.page( 'previous' ).draw('page');;
-				} 
-				
-			})	
-		}			
-	}
+		var dataTable;
+		var selectedRowId = 0;
+	
+	
+		function deleteRow(){
+			if (selectedRowId != 0 ){
+				$('#exampleModal').modal('hide');					
+				$.ajax({
+					type: "get",
+					dataType: "json",         
+					url: "/admin/member/delete",
+					data: {"id":selectedRowId}					
+				})
+				.done(function(response){
+					if (response.status =="SUCCESS"){
+	// 					alert("刪除成功");
+					} else {
+						$.each(response.messages, function(idx, message) {
+							alert("the "+idx+"th ERROR, because "+message);
+						});
+					}		
+	
+					dataTable.draw('page');
+					if ($("table tbody tr").length < 2){
+						alert($("table tbody tr").length +", no row exists");
+						dataTable.page( 'previous' ).draw('page');;
+					} 
+					
+				})	
+			}			
+		}
+		
+		function editRow(){
+			if (selectedRowId != 0 ){
+				javascript:document.location.href='/admin/member/edit?id='+selectedRowId;
+// 				window.location.replace("/admin/member/list");
+			}
+		}
 		
 	
 	
@@ -276,7 +280,7 @@
 		        serverSide: true,
 		        rowId: 'id',
 		        ajax: {
-		            url: "/admin/member/queryPageRequest",
+		            url: "/admin/member/queryPage",
 		            type: "get",
 		            dataType : "json",
 		            data: function(d){
@@ -306,16 +310,15 @@
 		       },
 
 		     	columns: [
-// 		     		{data:  },
+		     	   {data:null},
 		           {data: "id" },
-		           {data: function (source, type, val) {
-// 		        	   console.log(source) ; console.log("val="+val);
-		        	   	var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/member/edit?id="+source.id+"'\" value='修改'  />";
-						var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+source.id+")\" id='deleteButt"+ source.id +"' value='刪除' />"  
-		               	return editButt + deleteButt;			        	   
-		           	}
-		        	   
-		           },
+// 		           {data: function (source, type, val) {
+// 		        	   	console.log(source) ; console.log("val="+val);
+// 		        	   	var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/member/edit?id="+source.id+"'\" value='修改'  />";
+// 						var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+source.id+")\" id='deleteButt"+ source.id +"' value='刪除' />"  
+// 		               	return editButt + deleteButt;			        	   
+// 		           	 }		        	   
+// 		           },
 		           { data: "account" },
 		           { data: "name" },
 		           { data: "memberType" },
@@ -328,6 +331,13 @@
 		                return new Date(data.signUpDate).toLocaleDateString();
 		            } },
 		       ],
+		       columnDefs: [{
+	                "searchable": false,
+	                "orderable": false,
+	                "targets": [0, 1, 2],
+	            }],
+	            order: [[1, 'asc']]
+				    
 		       
 // 		       select:{
 // 		    	   	select: 'single',
@@ -336,48 +346,48 @@
    
 			        
 			 } );
+			//設定行號(非id)			 
+			dataTable.on('draw.dt',function() {
+				dataTable.column(0, {
+	                search: 'applied',
+	                order: 'applied'
+	            }).nodes().each(function(cell, i) {
+	                //i從0開始，所以先加1
+	                i = i+1;
+	                //服務模式下，使用DT提供的API直接獲取分頁資訊
+	                var pageinfo = dataTable.page.info();
+	              	//當前第幾頁，從0开始
+	                var pageno = pageinfo.page;
+	              	//每頁數據
+	                var length = pageinfo.length;
+	                //行號等於頁數*每頁數據長度+行號
+	                var columnIndex = (i+pageno*length);
+	                cell.innerHTML = columnIndex;
+	            });
+	        }); 
 			
-			$('#deleteToggleButt').prop("disabled", true);
+			$('#deleteButt').prop("disabled", true);
+			$('#editButt').prop("disabled", true);
+			
 			 		
 			 $('#table tbody').on( 'click', 'tr', function () {
 			        if ( $(this).hasClass('selected')) {
 			            $(this).removeClass('selected');
 			            selectedRowId = 0;
-			            $('#deleteToggleButt').prop("disabled", true);
+			            $('#deleteButt').prop("disabled", true);
+			            $('#editButt').prop("disabled", true);
 			        }
 			        else {
 			        	$('tr.selected').removeClass('selected');
 			        	selectedRowId = this.id;
 			        	$(this).addClass('selected');
-			            $('#deleteToggleButt').prop("disabled", false);
+			            $('#deleteButt').prop("disabled", false);
+			            $('#editButt').prop("disabled", false);
 			        }
 			    } );
 			 
 
-
-
-			
-			
-// 			dataTable.on( 'select', function ( e, dt, type, indexes ) {
-// 			    if ( type === 'row' ) {		    	
-// 			    	selectedRow = dataTable.row(dt).data();
-// 			    	$('#deleteToggleButt').prop("disabled", false);
-// 			        console.log("row selected:"+selectedRow);
-// 			 		alert("select row")
-// 			    }
-// 			} );
-// 			dataTable.on( 'deselect', function ( e, dt, type, indexes ) {
-// 			    if ( type === 'row' ) {		    	
-// 			    	selectedRow = dataTable.row(dt).data();
-// // 			    	$('#deleteToggleButt').prop("disabled", true);
-// 			    	alert("row deselected:"+selectedRow);
-			 		
-// 			    }
-// 			} );
-			
-			
-			
-			
+		
 			var datePickerSetting = {
 				format : "yyyy/mm/dd",
 				autoclose : true,

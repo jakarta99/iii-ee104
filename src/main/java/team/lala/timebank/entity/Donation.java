@@ -1,6 +1,6 @@
 package team.lala.timebank.entity;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "Donation")
@@ -26,29 +27,33 @@ public class Donation {
 
 	@Column(name = "value")
 	private Integer value;
-
+	
+	
 	@Column(name = "donate_time")
-	private LocalDateTime donateTime;
-	
-	@Transient
-	private LocalDateTime donateTimeBegin;
-	
-	@Transient
-	private LocalDateTime donateTimeEnd;
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date donateTime;
 
-	public LocalDateTime getDonateTimeBegin() {
+	@Transient
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date donateTimeBegin;
+
+	@Transient
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date donateTimeEnd;
+
+	public Date getDonateTimeBegin() {
 		return donateTimeBegin;
 	}
 
-	public void setDonateTimeBegin(LocalDateTime donateTimeBegin) {
+	public void setDonateTimeBegin(Date donateTimeBegin) {
 		this.donateTimeBegin = donateTimeBegin;
 	}
 
-	public LocalDateTime getDonateTimeEnd() {
+	public Date getDonateTimeEnd() {
 		return donateTimeEnd;
 	}
 
-	public void setDonateTimeEnd(LocalDateTime donateTimeEnd) {
+	public void setDonateTimeEnd(Date donateTimeEnd) {
 		this.donateTimeEnd = donateTimeEnd;
 	}
 
@@ -84,11 +89,11 @@ public class Donation {
 		this.value = value;
 	}
 
-	public LocalDateTime getDonateTime() {
+	public Date getDonateTime() {
 		return donateTime;
 	}
 
-	public void setDonateTime(LocalDateTime donateTime) {
+	public void setDonateTime(Date donateTime) {
 		this.donateTime = donateTime;
 	}
 
@@ -97,6 +102,5 @@ public class Donation {
 		return "Donation [id=" + id + ", memberId=" + memberId + ", organizationId=" + organizationId + ", value="
 				+ value + ", donateTime=" + donateTime + "]";
 	}
-
 
 }

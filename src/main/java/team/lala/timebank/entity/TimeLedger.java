@@ -1,6 +1,7 @@
 package team.lala.timebank.entity;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * DATETIME    MEMBER_ID   DEPOSIT         WITHDRAWAL           BALANCE          DESCRIPTION 
@@ -30,7 +34,16 @@ public class TimeLedger {
 	private Long memberId;
 	
 	@Column(name="transaction_Time")
-	private LocalDateTime transactionTime;
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date transactionTime;
+	
+	@Transient
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date transactionTimeBegin;
+
+	@Transient
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date transactionTimeEnd;
 	
 	@Column(name="deposit_Value")
 	private Integer depositValue;
@@ -44,87 +57,84 @@ public class TimeLedger {
 	@Column(name="description")
 	private String description;
 
-	
 	public Long getId() {
 		return id;
 	}
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
 	public Long getMemberId() {
 		return memberId;
 	}
-
 
 	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
 	}
 
-
-	public LocalDateTime getTransactionTime() {
+	public Date getTransactionTime() {
 		return transactionTime;
 	}
 
-
-	public void setTransactionTime(LocalDateTime transactionTime) {
+	public void setTransactionTime(Date transactionTime) {
 		this.transactionTime = transactionTime;
 	}
 
+	public Date getTransactionTimeBegin() {
+		return transactionTimeBegin;
+	}
+
+	public void setTransactionTimeBegin(Date transactionTimeBegin) {
+		this.transactionTimeBegin = transactionTimeBegin;
+	}
+
+	public Date getTransactionTimeEnd() {
+		return transactionTimeEnd;
+	}
+
+	public void setTransactionTimeEnd(Date transactionTimeEnd) {
+		this.transactionTimeEnd = transactionTimeEnd;
+	}
 
 	public Integer getDepositValue() {
 		return depositValue;
 	}
 
-
 	public void setDepositValue(Integer depositValue) {
 		this.depositValue = depositValue;
 	}
-
 
 	public Integer getWithdrawalValue() {
 		return withdrawalValue;
 	}
 
-
 	public void setWithdrawalValue(Integer withdrawalValue) {
 		this.withdrawalValue = withdrawalValue;
 	}
-
 
 	public Integer getBalanceValue() {
 		return balanceValue;
 	}
 
-
 	public void setBalanceValue(Integer balanceValue) {
 		this.balanceValue = balanceValue;
 	}
-
 
 	public String getDescription() {
 		return description;
 	}
 
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-
 	@Override
 	public String toString() {
 		return "TimeLedger [id=" + id + ", memberId=" + memberId + ", transactionTime=" + transactionTime
+				+ ", transactionTimeBegin=" + transactionTimeBegin + ", transactionTimeEnd=" + transactionTimeEnd
 				+ ", depositValue=" + depositValue + ", withdrawalValue=" + withdrawalValue + ", balanceValue="
 				+ balanceValue + ", description=" + description + "]";
 	}
 
-
-	
-	
-	
-	
 }

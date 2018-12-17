@@ -75,10 +75,9 @@
 
 </head>
 <body>
-<!-- 	<div id="navBar"></div> -->
-	<c:import url="/html/nav.html"/>
+	<jsp:include page="../admin_layout/nav.jsp" />
 	<article>
-		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/member/list'" value="回會員列表"  />
+		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/admin/member/list'" value="回會員列表"  />
 		<h2>Member Add</h2>
 		<form action="#" method="post" >
 			<fieldset>
@@ -204,10 +203,7 @@
 	
 	<script>
 		$(document).ready(function(){
-			//add nav.html
-// 			$.get("/html/nav.html",function(data){
-// 				$("#navBar").html(data);
-// 			});
+
 // 			$("form div").addClass("form-group");
 // 			$("form input").addClass("form-control");
 // 			$("form textarea").addClass("form-control");
@@ -233,18 +229,19 @@
 					url:"/admin/member/insert",
 					data: $("form").serialize()
 				}).done(function(response){
-					alert(response.obj);
+// 					alert(response.obj);
 // 					console.log("status="+response.status);
 // 					console.log("message="+response.message);
 					
 					if(response.status == "SUCCESS") {
 						alert("會員新增成功");
+						window.location.replace("/admin/member/list");
 					} else {
 						$.each(response.messages, function(idx, message) {
 							alert("the "+idx+"th ERROR, because "+message);
 						});
 					}					
-					window.location.replace("/member/list");
+					
 				})
 			})
 

@@ -1,5 +1,7 @@
 package team.lala.timebank.web.admin;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,8 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.commons.ajax.PageResponse;
+import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.TimeLedger;
 import team.lala.timebank.service.TimeLedgerService;
+import team.lala.timebank.spec.OrderSpecification;
 import team.lala.timebank.spec.TimeLedgerSpecification;
 
 @Controller
@@ -98,18 +102,13 @@ public class AdminTimeLedgerRecordController {
 	
 	@RequestMapping("/query")
 	@ResponseBody
-	public PageResponse<TimeLedger> queryTimeLedger(TimeLedger inputTimeLedger,
-			@RequestParam("pageNumber") Integer pageNumber, @RequestParam("pageSize") Integer pageSize){
-		PageResponse<TimeLedger> response = new PageResponse<TimeLedger>();
-		try {
-			TimeLedgerSpecification timeLedgerSpecification = new TimeLedgerSpecification(inputTimeLedger);
-			PageRequest thisPage = PageRequest.of(pageNumber, pageSize);
-			Page<TimeLedger> timeLedgers = timeLedgerService.findBySpecification(timeLedgerSpecification, thisPage);
-			response.setPage(timeLedgers);
-		} catch (Exception e) {
-			response.addMessage("Failed to search. " + e.getMessage());
-			e.printStackTrace();
-		}
-		return response;
+	public Page<TimeLedger> queryTimeLedger(TimeLedger inputTimeLedger,
+			@RequestParam(name = "start", required = false) Optional<Integer> start, 
+			@RequestParam(name = "length", required = false) Optional<Integer> length){
+		int page = start.orElse(0)/length.orElse(10);
+		TimeLedgerSpecification timeLedgerSpec = new TimeLedgerSpecification(inputTimeLedger);
+		Page<TimeLedger> timeLedgers = timeLedgerService.findBySpecification(
+				timeLedgerSpec, PageRequest.of(page, length.orElse(10)));
+		return timeLedgers;
 	}
 }

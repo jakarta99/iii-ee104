@@ -20,10 +20,8 @@
 <title>add donation</title>
 </head>
 <body>
-<script src="/js/backstageNav.js"></script>
-<br>
-<br>
-<br>
+<jsp:include page="../admin_layout/nav.jsp" />
+
 <h1>add donation</h1>
 	<form>
 	  <fieldset>
@@ -38,13 +36,13 @@
 	  	<input type="button" onclick="addData()" value="新增" id="addButt" />
 	  </fieldset>
 	</form>
-<a href="/donation/list">back to list</a>
+<a href="/admin/donation/list">back to list</a>
 <script>
 	function addData(){
 		$.ajax({
 			method: "post",
 			dataType: "json",
-			url: "/donation/insert",
+			url: "/admin/donation/insert",
 			data: $("form").serialize(),
 			success: function(response){
 				
@@ -55,7 +53,7 @@
 						alert(message);
 					});
 				}
-				//window.location.replace("/donation/list");
+				window.location.replace("/admin/donation/list");
 			}
 		})
 	}

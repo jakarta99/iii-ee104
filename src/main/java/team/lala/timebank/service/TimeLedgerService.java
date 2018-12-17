@@ -40,7 +40,7 @@ public class TimeLedgerService {
 		timeLedger.setMemberId(memberId);
 		timeLedger.setDepositValue(hours);
 		timeLedger.setBalanceValue(lastTimeLedger.getBalanceValue() + hours);
-		timeLedger.setTransactionTime(LocalDateTime.now());
+		timeLedger.setTransactionTime(new Date());
 		timeLedger.setDescription("deposit");
 
 		// 3. insert
@@ -59,7 +59,7 @@ public class TimeLedgerService {
 			timeLedger = new TimeLedger();
 			timeLedger.setMemberId(memberId);
 			timeLedger.setWithdrawalValue(hours);
-			timeLedger.setTransactionTime(LocalDateTime.now());
+			timeLedger.setTransactionTime(new Date());
 			timeLedger.setBalanceValue(lastTimeLedger.getBalanceValue() - hours);
 			timeLedger.setDescription("withdrawal");
 		}
@@ -84,7 +84,7 @@ public class TimeLedgerService {
 //	}
 	
 	public TimeLedger insert(TimeLedger newTimeLedger) {
-		newTimeLedger.setTransactionTime(LocalDateTime.now());
+		newTimeLedger.setTransactionTime(new Date());
 		TimeLedger timeLedger = timeLedgerDao.save(newTimeLedger);
 		return timeLedger;		
 	}
