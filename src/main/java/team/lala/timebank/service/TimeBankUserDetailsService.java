@@ -11,7 +11,7 @@ import team.lala.timebank.config.SecurityUser;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.entity.Member;
 
-@Transactional
+@Transactional //沒寫會有InternalAuthenticationServiceException(spring security可處理的exception)
 @Service
 public class TimeBankUserDetailsService implements UserDetailsService {
 
@@ -28,10 +28,11 @@ public class TimeBankUserDetailsService implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException("UsernameNotFound");
 		}
+		System.out.println("user=" + user);
 //		return user;
 		
 		//另建一SecurityUser繼承member，負責處理authority問題，
-		//可避免發生Lazy initializer exception		
+		//可避免發生org.hibernate.LazyInitializationException(系統直接發生500)		
 		UserDetails userDetail = new SecurityUser(user);
 		System.out.println("userDetail=" +userDetail);
 		return userDetail;
