@@ -142,10 +142,10 @@
 				url:"/admin/penalty/delete",
 				data:{"id":penaltyId}
 			}).done(function(respones){
-				if (response.status =="SUCCESS"){
+				if (respones.status =="SUCCESS"){
 					alert("刪除成功");
 				} else {
-					$.each(response.messages, function(idx, message) {
+					$.each(respones.messages, function(idx, message) {
 						alert("the "+idx+"th ERROR, because "+message);
 					});
 				}
@@ -170,6 +170,7 @@
 				searching: false,				
 			 	processing: true,
 				serverSide: true,  //分頁、排序都交由伺服器處理
+				lengthMenu: [ 3, 6, 9, 12, ],
 				ajax:{
 					url:"/admin/penalty/query",
 					type:"get",
@@ -177,10 +178,10 @@
 					data:function(d){ 				//傳送給伺服器的資料(datatable預設會傳送d的資料)
 						var start = d.start;
 						var length = d.length;
-						var request = $('from').serialize() + "&start=" + start + "&length=" + length;
+						var request = $('form').serialize() + "&start=" + start + "&length=" + length;
 						return request;
 					},
-					dataSrc:"context",
+					dataSrc:"content",
 					dataFilter:function(resp){		//對伺服器送來的資料進行修改
 						 var json = jQuery.parseJSON( resp );
 			             json.recordsTotal = json.totalElements;
@@ -188,17 +189,17 @@
 			             return JSON.stringify( json ); 
 					},
 				}, drawCallback:function(d){
-						var api = this.api();
-						var pageNum = parseInt(d.json.pageable.pageNumber) ;
-						var totalPages = d.json.totalPages;
-						$('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
+					var api = this.api();
+					var pageNum = parseInt(d.json.pageable.pageNumber) ;
+					var totalPages = d.json.totalPages;
+					$('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
 				}, columns: [ 		//設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
 		     		{data:null},
 		           	{data: "id" },
 		           	{data: function (data, type, row ) {
 						var editButt = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/penalty/edit?id="
-											+ penalty.id + "'\" value='修改'  />";
-						var deleteButt = "<input type='button' class=\"btn btn-primary btn-sm\" id='deleteButt"+ penalty.id +"' value='刪除' />";
+											+ data.id + "'\" value='修改'  />";
+						var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='刪除' />"
 		               	return editButt + deleteButt;	}
 		           	},
 					{data:"orderListId"},
@@ -232,7 +233,7 @@
 	        });	
 			//日期選擇器
 			var datePickerSetting = {
-				format : "yyyy-mm-dd",
+				format : "yyyy/mm/dd",
 				autoclose : true,
 				todayHighlight : true,
 				language : 'zh-TW',

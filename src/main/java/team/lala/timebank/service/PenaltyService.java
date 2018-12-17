@@ -1,6 +1,5 @@
 package team.lala.timebank.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +19,7 @@ public class PenaltyService {
 	private PenaltyDao penaltyDao;
 
 	public Penalty save(Penalty penalty) {
-		penalty.setUpdateDate(LocalDateTime.now());
+		penalty.setUpdateDate(new java.util.Date());
 		return penaltyDao.save(penalty);
 	}
  
