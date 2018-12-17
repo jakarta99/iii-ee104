@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Universal - All In 1 Template</title>
-    <jsp:include page="commons/commons_layout/commons_css.jsp"/>
+    <jsp:include page="commons/commons_layout/commons_css_links.jsp"/>
   </head>
   <body>
     <div id="all">
@@ -326,7 +326,7 @@
     </div>
     
     <!-- Javascript files-->
-    <jsp:include page="commons/commons_layout/commons_js.jsp"/>
+    <jsp:include page="commons/commons_layout/commons_js_links.jsp"/>
     
   </body>
 </html>
