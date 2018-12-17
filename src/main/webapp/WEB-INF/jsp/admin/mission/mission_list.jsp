@@ -35,7 +35,7 @@
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 
-
+<%-- <jsp:include page="commons/commons_layout/commons_css.jsp"/> --%>
 <meta charset="UTF-8">
 <title>mission list</title>
 <style>
@@ -59,7 +59,11 @@
     </style>
 </head>
 <body>
-<jsp:include page="../admin_layout/nav.jsp" />
+ <!-- Top bar-->
+<%--       <jsp:include page="commons/commons_layout/commons_top-bar.jsp"/> --%>
+ 	
+	  <!-- Navbar -->
+<%--       <jsp:include page="commons/commons_layout/commons_nav.jsp"/> --%>
 	<div class="margintop">
 	<h1 class="s2">mission list</h1>
 	
@@ -90,7 +94,7 @@
 <!-- 	</fieldset> -->
 	
 	<fieldset>
-	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/admin/mission/query'">add</button>
+	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/admin/mission/add'">add</button>
 	<table id="table" class="table table-hover">
 	<thead>
 	<tr>
@@ -103,7 +107,7 @@
 		<th scope="col">serviceType</th>
 		<th scope="col">publishDate</th>
 <!-- 		<th scope="col">startDate</th> -->
-<!-- 		<th scope="col">endDateTime</th> -->
+<!-- 		<th scope="col">endDate</th> -->
 		<th scope="col">peopleNeeded</th>
 <!-- 		<th scope="col">contactPerson</th> -->
 <!-- 		<th scope="col">contactPhone</th> -->
@@ -130,9 +134,9 @@
 // 	}
 	
 	
-	function deleteRequest(id) {
+	function deleteMission(id) {
 		$.ajax({
-			url : '/admin/request/delete?id=' + id,
+			url : '/admin/mission/delete?id=' + id,
 			type : 'post',
 			dataType : 'JSON',
 			success : function(deleteResult) {
@@ -184,7 +188,7 @@
 					"columns":[						
 						{"data": function (source, type, val) {
 							 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/admin/mission/edit?id="+source.id+"'\">Edit</button>";     
-							 var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteRequest("+source.id+")\">Delete</button>"; 	
+							 var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteMission("+source.id+")\">Delete</button>"; 	
 							 return editbutton + deletebutton;}
 						},					 
 						{"data":"id"},

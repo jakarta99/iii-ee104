@@ -27,7 +27,11 @@ public class MissionService {
 
 	// insert
 	public Mission insert(Mission mission) {
+		System.out.println(mission.getId());
+		System.out.println(mission.getStartDate());
+		
 		mission.setPublishDate(new Date());
+		System.out.println(new Date());
 		
 
 		return missionDao.save(mission);

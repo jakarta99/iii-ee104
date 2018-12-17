@@ -34,6 +34,7 @@ public class RequestsService {
 
 	// update
 	public Requests save(Requests request) {
+		System.out.println(request.getId());
 		
 		Requests r=requestsDao.save(request);
 		return r;
