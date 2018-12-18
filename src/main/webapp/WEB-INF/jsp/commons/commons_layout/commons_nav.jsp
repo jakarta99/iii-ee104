@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+ <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>       
  <header class="nav-holder make-sticky">
         <div id="navbar" role="navigation" class="navbar navbar-expand-lg">
           <div class="container"><a href="/" class="navbar-brand home"><img src="img/logo.png" alt="Universal logo" class="d-none d-md-inline-block"><img src="img/logo-small.png" alt="Universal logo" class="d-inline-block d-md-none"><span class="sr-only">Universal - go to homepage</span></a>
@@ -173,7 +173,10 @@
                   </ul>
                 </li>
                 <!-- ========== FULL WIDTH MEGAMENU END ==================-->				
-                <!-- ========== Contact dropdown ==================-->
+                <!-- ========== admin dropdown ==================-->
+                <sec:authorize access="hasRole('ADMIN')">
+    
+				
                 <li class="nav-item dropdown"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle">管理者系統 <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li class="dropdown-item"><a href="/admin/member/list" class="nav-link" id="backStage-member">member</a> </li>
@@ -182,8 +185,10 @@
                     <li class="dropdown-item"><a href="/admin/request/list" class="nav-link" id="backStage-request">request</a></li>
                     <li class="dropdown-item"><a href="/admin/time-ledger/list" class="nav-link" id="backStage-timeledger">time-ledger</a></li>
                     <li class="dropdown-item"><a href="/admin/penalty/list" class="nav-link" id="backStage-penalty">penalty</a></li>
+                    <li class="dropdown-item"><a href="/admin/mission/list" class="nav-link" id="backStage-penalty">mission</a></li>
                   </ul>
                 </li>
+                </sec:authorize>
                 <!-- ========== Contact dropdown end ==================-->
               </ul>
             </div>
