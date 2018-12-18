@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Universal - All In 1 Template</title>
+    <title>Timebank</title>
     <jsp:include page="commons/commons_layout/commons_css_links.jsp"/>
   </head>
   <body>
