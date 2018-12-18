@@ -26,7 +26,7 @@
 </head>
 
 <body>
-<script src="/js/backstageNav.js"></script>
+<jsp:include page="../admin_layout/nav.jsp" />
 <br>
 <br>
 <br>
