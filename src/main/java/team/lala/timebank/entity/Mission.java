@@ -40,19 +40,19 @@ public class Mission {
 	@Column(name = "service_Type", nullable = false)
 	private Integer serviceType;// 服務類型
 
-	@Column(name = "publish_Date", nullable = false)
 	@Past
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@Column(name = "publish_Date", nullable = false)
 	private Date publishDate;
 
-	@Column(name = "start_Date", nullable = false)
 	@Past
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+	@DateTimeFormat(pattern = "yyyy/MM/dd" )
+	@Column(name = "start_Date")
 	private Date startDate;// 工作開始時間
 
-	@Column(name = "end_Date", nullable = false)
 	@Past
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+	@DateTimeFormat(pattern = "yyyy/MM/dd" )
+	@Column(name = "end_Date")
 	private Date endDate;// 工作開始時間
 
 	@Column(name = "people_Needed", nullable = false)

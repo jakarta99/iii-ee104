@@ -1,6 +1,5 @@
 package team.lala.timebank.spec;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class PenaltySpecification implements Specification<Penalty> {
 
 	@Override
 	public Predicate toPredicate(Root<Penalty> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-		List<Predicate> list = new ArrayList<Predicate>();	
+		List<Predicate> list = new ArrayList<Predicate>();
 		if (!StringUtils.isEmpty(inputPenalty.getOrderListId())) {
 			list.add(cb.equal(root.get("orderListId").as(String.class), inputPenalty.getOrderListId()));
 		}
@@ -33,10 +32,12 @@ public class PenaltySpecification implements Specification<Penalty> {
 			list.add(cb.equal(root.get("memberId").as(String.class), inputPenalty.getMemberId()));
 		}
 		if (!StringUtils.isEmpty(inputPenalty.getDateBefore())) {
-			list.add(cb.greaterThanOrEqualTo(root.get("updateDate").as(LocalDateTime.class), inputPenalty.getDateBefore()));
+			list.add(cb.greaterThanOrEqualTo(root.get("updateDate").as(java.util.Date.class),
+					inputPenalty.getDateBefore()));
 		}
 		if (!StringUtils.isEmpty(inputPenalty.getDateAfter())) {
-			list.add(cb.lessThanOrEqualTo(root.get("updateDate").as(LocalDateTime.class), inputPenalty.getDateAfter()));
+			list.add(cb.lessThanOrEqualTo(root.get("updateDate").as(java.util.Date.class),
+					inputPenalty.getDateAfter()));
 		}
 		if (!StringUtils.isEmpty(inputPenalty.getDescription())) {
 			list.add(cb.like(root.get("description").as(String.class), "%" + inputPenalty.getDescription() + "%"));

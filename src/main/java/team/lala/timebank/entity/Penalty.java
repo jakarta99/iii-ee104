@@ -1,6 +1,5 @@
 package team.lala.timebank.entity;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -29,7 +28,8 @@ public class Penalty {
 	private Long memberId;
 
 	@Column(name = "update_date")
-	private LocalDateTime updateDate;
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date updateDate;
 
 	@Column(name = "description", length = 50)
 	private String description;
@@ -41,10 +41,12 @@ public class Penalty {
 	private Integer penaltyTimeValue;
 	
 	@Transient
-	private LocalDateTime dateBefore;
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date dateBefore;
 
 	@Transient
-	private LocalDateTime dateAfter;
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date dateAfter;
 
 	public String toString() {
 		return "Penalty [id=" + id + ", orderListId=" + orderListId + ", memberId=" + memberId + ", updateDate="
@@ -76,11 +78,11 @@ public class Penalty {
 		this.memberId = memberId;
 	}
 
-	public LocalDateTime getUpdateDate() {
+	public Date getUpdateDate() {
 		return updateDate;
 	}
 
-	public void setUpdateDate(LocalDateTime updateDate) {
+	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
 
@@ -108,21 +110,23 @@ public class Penalty {
 		this.penaltyTimeValue = penaltyTimeValue;
 	}
 
-	public LocalDateTime getDateBefore() {
+	public Date getDateBefore() {
 		return dateBefore;
 	}
 
-	public void setDateBefore(LocalDateTime dateBefore) {
+	public void setDateBefore(Date dateBefore) {
 		this.dateBefore = dateBefore;
 	}
 
-	public LocalDateTime getDateAfter() {
+	public Date getDateAfter() {
 		return dateAfter;
 	}
 
-	public void setDateAfter(LocalDateTime dateAfter) {
+	public void setDateAfter(Date dateAfter) {
 		this.dateAfter = dateAfter;
 	}
+
+
 
 	
 
