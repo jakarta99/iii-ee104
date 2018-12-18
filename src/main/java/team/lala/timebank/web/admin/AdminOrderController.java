@@ -31,7 +31,7 @@ public class AdminOrderController {
 //		List<Order> orders = orderService.findAll();
 //		model.addAttribute("orders", orders);
 		return "/admin/order/order_list2"; // getRequestDispatcher("/WEB-INF/jsp/order_list.jsp").forward(request,
-									// response);
+											// response);
 	}
 	
 	@ResponseBody
