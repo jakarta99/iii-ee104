@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.entity.Member;
+import team.lala.timebank.entity.Role;
 import team.lala.timebank.enums.MemberType;
 import team.lala.timebank.enums.YesNo;
 
@@ -21,6 +24,15 @@ public class MemberService {
 
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	protected EntityManager em;
+	
+	 public Member addMemberRole(int memberId, int rolejId) {
+		 	Member member = em.find(Member.class, memberId);
+		    Role role = em.find(Role.class, rolejId);
+		    role.addMember(member);
+		    return member;
+	} 
 	
 	
 	public Member insert(Member newMember) throws SQLException  {

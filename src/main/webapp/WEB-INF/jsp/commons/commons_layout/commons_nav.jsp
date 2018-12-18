@@ -186,6 +186,7 @@
                     <li class="dropdown-item"><a href="/admin/time-ledger/list" class="nav-link" id="backStage-timeledger">time-ledger</a></li>
                     <li class="dropdown-item"><a href="/admin/penalty/list" class="nav-link" id="backStage-penalty">penalty</a></li>
                     <li class="dropdown-item"><a href="/admin/mission/list" class="nav-link" id="backStage-penalty">mission</a></li>
+                    <li class="dropdown-item"><a href="/admin/role/list" class="nav-link" id="backStage-role">role</a></li>
                   </ul>
                 </li>
                 </sec:authorize>
