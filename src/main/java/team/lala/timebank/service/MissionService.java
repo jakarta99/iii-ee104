@@ -28,10 +28,12 @@ public class MissionService {
 	// insert
 	public Mission insert(Mission mission) {
 		System.out.println(mission.getId());
+		System.out.println(mission.getStartDate().getClass());
 		System.out.println(mission.getStartDate());
-		
+		mission.setStartDate(mission.getStartDate());
+		mission.setEndDate(mission.getEndDate());
 		mission.setPublishDate(new Date());
-		System.out.println(new Date());
+		
 		
 
 		return missionDao.save(mission);
@@ -39,7 +41,9 @@ public class MissionService {
 
 	// update
 	public Mission update(Mission mission) {
-
+		System.out.println(mission.getTermType().getClass());
+		System.out.println(mission.getTermType());
+ 
 		return missionDao.save(mission);
 	}
 

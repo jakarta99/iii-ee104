@@ -35,6 +35,14 @@
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 
+<!-- DateTimePicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/i18n/jquery-ui-timepicker-zh-TW.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
+
+
 <%-- <jsp:include page="commons/commons_layout/commons_css.jsp"/> --%>
 <meta charset="UTF-8">
 <title>mission list</title>
@@ -55,6 +63,18 @@
         .margintop{
 			 margin-top:70px;
 		}
+		.county,.district {
+	  padding: 0.375rem 0.75rem;
+	  font-size: 1rem;
+	  line-height: 1.5;
+	  color: #495057;
+	  background-color: #fff;
+	  background-image: none;
+	  background-clip: padding-box;
+	  border: 1px solid #ced4da;
+	  border-radius: 0.25rem;
+	  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	}
  
     </style>
 </head>
@@ -65,33 +85,59 @@
 	  <!-- Navbar -->
 <%--       <jsp:include page="commons/commons_layout/commons_nav.jsp"/> --%>
 	<div class="margintop">
+	
 	<h1 class="s2">mission list</h1>
 	
-<!-- 	<fieldset> -->
-<!-- 	<form id="form"> -->
-<!-- 			<div> -->
-<!-- 			基本查詢: -->
-<!-- 			</div> -->
-<!-- 			<label>Id :</label>  -->
-<!-- 			<input type="text" value="" placeholder="Id" id="Id" name="Id"/> -->
-<!-- 			<label>jobArea :</label>  -->
-<!-- 			<input type="text" value="" placeholder="jobArea" id="jobArea" name="jobArea"/> -->
-<!-- 			<input type="button" value="搜尋" id="searchButton" onclick="search()"/> -->
-<!-- 			<div> -->
-<!-- 			<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample"> -->
-<!-- 			進階查詢: -->
-<!--   			</a> -->
-<!--   			</div>  -->
-<!-- 			<div class="collapse" id="collapse"> -->
-<!-- 			<label>serviceType</label> -->
-<!-- 			<input type="text" value="" placeholder="serviceType" id="serviceType" name="serviceType"/> -->
-<!-- 			<label>jobTitle :</label>  -->
-<!-- 			<input type="text" value="" placeholder="jobTitle" id="jobTitle" name="jobTitle"/> -->
-<!-- 			<label>termType :</label>  -->
-<!-- 			<input type="text" value="" placeholder="termType" id="termType" name="termType"/> -->
-<!-- 			</div> -->
-<!-- 		</form> -->
-<!-- 	</fieldset> -->
+	<fieldset>
+	<form>
+			<div>
+			基本查詢:
+			</div>
+			
+			<label>縣市:</label> 
+			<div style='display:inline' role="tw-city-selector" ></div>
+			
+			<label>會員類型 :</label> 
+				<select  id="serviceType" name="serviceType">
+					<option value="">選擇服務類型</option>
+					<option value="1">照顧老人</option>
+			        <option value="2">孩童教育</option>
+			        <option value="3">環境清潔</option>
+			        <option value="4">生態保育</option>	
+				</select>
+				
+			<label>長短期 :</label> 
+				<select  id="termType" name="termType">
+					<option value="">選擇長短期</option>
+					<option value="L">長期</option>
+			        <option value="S">短期</option>
+				</select>
+				
+			<label>startDate:</label>
+			<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
+			<label>endDate:</label>
+			<input type="text"  id="endDate" name="endDate" autocomplete="off"/>
+			
+			
+			<input type="button" value="搜尋" id="searchButt" />
+			<div>
+			
+			<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+			進階查詢:
+  			</a>
+  			</div> 
+			<div class="collapse" id="collapse">
+			
+			<label>timeValue :</label> 
+			<input type="text" value="" placeholder="timeValue" id="timeValue" name="timeValue"/>
+			
+			<label>jobTitle :</label> 
+			<input type="text" value="" placeholder="jobTitle" id="jobTitle" name="jobTitle"/>
+			
+			
+			</div>
+		</form>
+	</fieldset>
 	
 	<fieldset>
 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/admin/mission/add'">add</button>
@@ -127,11 +173,11 @@
 	
 	<script>
 	
-	var datatable;
+	var dataTable;
 	
-// 	function search() {	
-		
-// 	}
+ 	$("#searchButt").click(	function(){
+		dataTable.ajax.reload();
+	})
 	
 	
 	function deleteMission(id) {
@@ -143,19 +189,13 @@
  				//alert(deleteResult.obj.id);
 				if(deleteResult.status == "SUCCESS"){
 					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);									
-					//datatable.row('.selected').remove().draw( false );
-					//datatable.page("next").draw(false);
-					//datatable.order().draw(false);
 					
-					
-// 					datatable.ajax.reload();
-					datatable.destroy();
-					list();			
 				}else{
 					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);
-					alert("FAIL reason:" + deleteResult.messages);
-					
-				}			
+					alert("FAIL reason:" + deleteResult.messages);	
+				}
+				dataTable.ajax.reload();
+				
 			},
 		})
 	}
@@ -164,31 +204,73 @@
 
 	$(document).ready( function () {
 
+		new TwCitySelector();
 		
-			datatable=$('#table').DataTable({
-				"infoCallback": function( settings, start, end, max, total, pre ) {
-		 			    var api = this.api();
-		 			    var pageInfo = api.page.info();
-		 			   	console.log(pageInfo);
-		 			   api.rows( {page:'current'} ).data()
-		 			    return '顯示第 '+(pageInfo.start+1)+' 筆到第  '+(pageInfo.end)+' 筆 共 '+ pageInfo.recordsTotal+' 筆資料 ';
-		 			 },	
+		$('#startDate').datetimepicker({
+			dateFormat: "yy/mm/dd",
+		    todayHighlight: true,
+		    language: 'zh-TW',
+		    startView:"years",
+		})
+		
+		$('#endDate').datetimepicker({
+			dateFormat: "yy/mm/dd",
+		    todayHighlight: true,
+		    language: 'zh-TW',
+		    startView:"years",
+		})
+		
+		
+		dataTable=$('#table').DataTable({
+				pageResize: true,
+				fixedHeader: true,
+				pagingType: 'full_numbers',
+	 			searching:false,
+	 			processing:true,
+	 			serverSide:true,
+// 	 			"stateSave": true,
+// 				"infoCallback": function( settings, start, end, max, total, pre ) {
+// 		 			    var api = this.api();
+// 		 			    var pageInfo = api.page.info();
+// 		 			   	console.log(pageInfo);
+// 		 			   api.rows( {page:'current'} ).data()
+// 		 			    return '顯示第 '+(pageInfo.start+1)+' 筆到第  '+(pageInfo.end)+' 筆 共 '+ pageInfo.recordsTotal+' 筆資料 ';
+// 		 			 },	
 				"lengthMenu": [ 3, 6, 9, 12, ],
-	 			"processing":true,
-	 			"searching":true,
-	 			"serverside":true,
-	 			"stateSave": true,
-				"ajax":{
-					"url":"/admin/mission/query",
-					"type": "get",
-				    "dataType" : "json",
-	 			    "data":$("form").serialize(),
-				    "dataSrc":"",		   
-					},
-					"columns":[						
-						{"data": function (source, type, val) {
-							 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/admin/mission/edit?id="+source.id+"'\">Edit</button>";     
-							 var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteMission("+source.id+")\">Delete</button>"; 	
+				ajax:{
+					url:"/admin/mission/querypage",
+					type: "get",
+				    dataType : "json",
+// 	 			    "data":$("form").serialize(),
+				    data: function(d){
+		            	console.log(d);
+		            	var start = d.start;
+						var length = d.length;
+						var request = $("form").serialize()+"&start="+start+"&length="+length;
+		            	return request;
+		            },
+
+				    dataSrc:"content",
+				    dataFilter: function(resp){
+// 		            	console.log(resp)
+		                var json = jQuery.parseJSON( resp );
+		                json.recordsTotal = json.totalElements;
+		                json.recordsFiltered = json.totalElements;	     			
+// 		     			console.log(JSON.stringify( json ))
+		                return JSON.stringify( json ); 
+		            },
+				},
+					 drawCallback: function (d) {
+		 		        	//console.log(d)
+				        	  var api = this.api();
+				        	  var pageNum = parseInt(d.json.pageable.pageNumber) ;
+				        	  var totalPages = d.json.totalPages;
+				        	  $('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
+				       },
+					columns:[						
+						{"data": function (data, type, val) {
+							 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/admin/mission/edit?id="+data.id+"'\">Edit</button>";     
+							 var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteMission("+data.id+")\">Delete</button>"; 	
 							 return editbutton + deletebutton;}
 						},					 
 						{"data":"id"},
@@ -211,20 +293,46 @@
 						{"data": null, render: function ( data, type, row ) {
 			                return data.county + data.district+ data.address;
 			            }},						
-						
-				
+					],
+					 columnDefs: [{
+			                "searchable": false,
+			                "orderable": false,
+			                "targets": [0],
+			            }],
+			            order: [[1, 'asc']]
 					
-					]
+					
+					
 				});		
 			
 		
+// 			dataTable.on('draw.dt',function() {
+// 				dataTable.column(0, {
+// 	                search: 'applied',
+// 	                order: 'applied'
+// 	            }).nodes().each(function(cell, i) {
+// 	                //i從0開始，所以先加1
+// 	                i = i+1;
+// 	                //服務模式下，使用DT提供的API直接獲取分頁資訊
+// 	                var pageinfo = dataTable.page.info();
+// 	                //當前第幾頁，從0开始
+// 	                var pageno = pageinfo.page;
+// 	                //每頁數據
+// 	                var length = pageinfo.length;
+// 	                //行號等於頁數*每頁數據長度+行號
+// 	                var columnIndex = (i+pageno*length);
+// 	                cell.innerHTML = columnIndex;
+// 	            });
+// 	        });
 		
 		
 		
 		
 		
-		
-		
+// 			$("#searchButt").click(	function(){
+// 				dataTable.ajax.reload();
+
+// 			})
 		
 		
 		

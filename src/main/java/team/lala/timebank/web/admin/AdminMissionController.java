@@ -3,6 +3,7 @@ package team.lala.timebank.web.admin;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -74,6 +75,7 @@ public class AdminMissionController {
 	@ResponseBody
 	public AjaxResponse<Mission> update(Mission mission) {
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
+		
 		// Requests r =requestsService.getOne(requests.getId());
 		// r.setJobArea(requests.getJobArea());
 		// r.setJobTitle(requests.getJobTitle());
@@ -117,21 +119,13 @@ public class AdminMissionController {
 	}
 	@RequestMapping("/querypage")
 	@ResponseBody
-	public PageResponse<Mission> query(Mission inputMission, @RequestParam(required=false) Integer pageNumber,
-			@RequestParam(required=false) Integer pageSize) {
-		PageResponse<Mission> response = new PageResponse<Mission>();
-
-		try {
-			MissionSpecification missionSpecification = new MissionSpecification(inputMission);
-			PageRequest thisPage = PageRequest.of(pageNumber, pageSize);
-			Page<Mission> missionPage = missionService.findBySpecification(missionSpecification, thisPage);
-			response.setPage(missionPage);
-		} catch (Exception e) {
-			response.addMessage("查詢失敗，" + e.getMessage());
-			e.printStackTrace();
-		}
-
-		return response;
+	public Page<Mission> query(Mission inputMission,@RequestParam(value="start",required=false) Optional<Integer> start, 
+			@RequestParam(value="length",required=false) Optional<Integer> length) {
+		int page = start.orElse(0)/length.orElse(10);
+		MissionSpecification missionSpec = new MissionSpecification(inputMission);	
+		Page<Mission> missions = missionService.findBySpecification(missionSpec,PageRequest.of(page, length.orElse(10)));
+		
+		return missions;
 	}
 
 }

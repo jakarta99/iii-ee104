@@ -73,7 +73,7 @@
 	<form action="/admin/mission/insert" method="post">
 	
 	
-	<div >			
+	<div>			
 		<label>活動縣市:</label> <br>
 		<div role="tw-city-selector" ></div>
 		<div>
@@ -179,7 +179,6 @@
 			    todayHighlight: true,
 			    language: 'zh-TW',
 			    startView:"years",
-			    endDate:"0d"
 			})
 			
 			$('#endDate').datetimepicker({
@@ -188,8 +187,15 @@
 			    todayHighlight: true,
 			    language: 'zh-TW',
 			    startView:"years",
-			    endDate:"0d",			   
 			})
+			
+			$('#startDate').datetimepicker(datetimepickerSetting);
+			$('#endDate').datetimepicker(datetimepickerSetting);
+			
+			$("div[role='tw-city-selector']").attr("data-county-value",'${mission.county}');
+			$("div[role='tw-city-selector']").attr("data-district-value", '${mission.district}');
+			
+
 
 			
 		

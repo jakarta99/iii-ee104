@@ -40,18 +40,15 @@ public class Mission {
 	@Column(name = "service_Type", nullable = false)
 	private Integer serviceType;// 服務類型
 
-	@Past
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@Column(name = "publish_Date", nullable = false)
 	private Date publishDate;
 
-	@Past
-	@DateTimeFormat(pattern = "yyyy/MM/dd" )
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm" )
 	@Column(name = "start_Date")
 	private Date startDate;// 工作開始時間
 
-	@Past
-	@DateTimeFormat(pattern = "yyyy/MM/dd" )
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm" )
 	@Column(name = "end_Date")
 	private Date endDate;// 工作開始時間
 

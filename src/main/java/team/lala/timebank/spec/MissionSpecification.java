@@ -1,6 +1,7 @@
 package team.lala.timebank.spec;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -12,6 +13,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
 import team.lala.timebank.entity.Mission;
+import team.lala.timebank.enums.TermType;
 
 @SuppressWarnings("serial")
 public class MissionSpecification implements Specification<Mission> {
@@ -26,29 +28,39 @@ public class MissionSpecification implements Specification<Mission> {
 	public Predicate toPredicate(Root<Mission> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 		List<Predicate> list = new ArrayList<Predicate>();
 
-		if (!StringUtils.isEmpty(inputMission.getId())) {
-			list.add(criteriaBuilder.equal(root.get("id").as(String.class), inputMission.getId()));
+		if (!StringUtils.isEmpty(inputMission.getCounty())) {
+			list.add(criteriaBuilder.equal(root.get("county").as(String.class), inputMission.getCounty()));
 		}
 
-//		if (!StringUtils.isEmpty(inputMission.getJobArea())) {
-//			list.add(criteriaBuilder.equal(root.get("jobArea").as(String.class), inputMission.getJobArea()));
-//		}
+		if (!StringUtils.isEmpty(inputMission.getDistrict())) {
+			list.add(criteriaBuilder.equal(root.get("district").as(String.class), inputMission.getDistrict()));
+		}
+
+		if (!StringUtils.isEmpty(inputMission.getStartDate())) {
+			list.add(criteriaBuilder.greaterThanOrEqualTo(root.get("startDate").as(Date.class),
+					inputMission.getStartDate()));
+		}
+		if (!StringUtils.isEmpty(inputMission.getEndDate())) {
+			list.add(criteriaBuilder.lessThanOrEqualTo(root.get("endDate").as(Date.class), inputMission.getEndDate()));
+		}
 
 		if (!StringUtils.isEmpty(inputMission.getServiceType())) {
 			list.add(criteriaBuilder.equal(root.get("serviceType").as(String.class), inputMission.getServiceType()));
 		}
 
 		if (!StringUtils.isEmpty(inputMission.getTitle())) {
-			list.add(criteriaBuilder.like(root.get("title").as(String.class),"%" + inputMission.getTitle() + "%"));
+			list.add(criteriaBuilder.like(root.get("title").as(String.class), "%" + inputMission.getTitle() + "%"));
 		}
 		if (!StringUtils.isEmpty(inputMission.getTermType())) {
-			list.add(criteriaBuilder.equal(root.get("termType").as(String.class), inputMission.getTermType()));
+			list.add(criteriaBuilder.equal(root.get("termType").as(TermType.class), inputMission.getTermType()));
 		}
-//		if (!StringUtils.isEmpty(inputRequest.getTimeValue())) {
-//			list.add(criteriaBuilder.equal(root.get("timeValue").as(String.class), inputRequest.getTimeValue()));
-//		}
 
-		Predicate[] p = new Predicate[list.size()];  
-        return criteriaBuilder.and(list.toArray(p));  
+		if (!StringUtils.isEmpty(inputMission.getTimeValue())) {
+			list.add(criteriaBuilder.greaterThanOrEqualTo(root.get("timeValue").as(Integer.class),
+					inputMission.getTimeValue()));
+		}
+
+		Predicate[] p = new Predicate[list.size()];
+		return criteriaBuilder.and(list.toArray(p));
 	}
 }
