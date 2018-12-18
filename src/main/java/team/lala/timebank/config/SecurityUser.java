@@ -19,6 +19,7 @@ public class SecurityUser extends Member implements UserDetails {
 			this.setAccount(member.getAccount());
 			this.setPassword(member.getPassword());
 			this.setEmail(member.getEmail());
+			this.setName(member.getName());
 			this.setRoles(member.getRoles());
 		}
 	}
