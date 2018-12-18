@@ -80,7 +80,7 @@
 	<fieldset>
 	
 	<input type="hidden" value="${mission.id}" id="id" name="id"/>
-	<input type="hidden" value="${publishDate}" pattern="yyyy-MM-dd" id="publishDate" name="publishDate"/>
+	<input type="hidden" value="${publishDate}"  id="publishDate" name="publishDate"/>
 	
 	
 	<div>			
@@ -114,14 +114,6 @@
     </select>
     </div>
     
-<!--      <div class="form-group"> -->
-<!-- 		<label>termType:</label><br> -->
-<!-- 		<label>長期</label>  -->
-<!-- 		<input type="radio" value="L" name="termType" /> -->
-<!-- 		<label>短期</label>  -->
-<!-- 		<input type="radio" value="S" name="termType" /><br> -->
-<!-- 	</div> -->
-    console.log(${mission.termType})
     <div>
 		<label>startDate:</label> 
 		<input  value="${startDate}" id="startDate" name="startDate" class="form-control" autocomplete="off"><br>

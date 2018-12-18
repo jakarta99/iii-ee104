@@ -43,7 +43,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
 
 
-<%-- <jsp:include page="commons/commons_layout/commons_css.jsp"/> --%>
+<jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 <meta charset="UTF-8">
 <title>mission list</title>
 <style>
@@ -79,6 +79,7 @@
     </style>
 </head>
 <body>
+
  <!-- Top bar-->
       <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
  	
