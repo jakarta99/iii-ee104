@@ -30,8 +30,8 @@ public class AdminMemberController {
 	@RequestMapping("/list")
 	public String listPage(Model model) {
 		//FIXME		
-		return "/member/member_list";
-//		return "/admin/member/member_list2";
+//		return "/member/member_list";
+		return "/admin/member/member_list2";
 
 	}
 
