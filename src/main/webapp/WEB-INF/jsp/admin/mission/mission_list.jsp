@@ -80,10 +80,10 @@
 </head>
 <body>
  <!-- Top bar-->
-<%--       <jsp:include page="commons/commons_layout/commons_top-bar.jsp"/> --%>
+      <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
  	
 	  <!-- Navbar -->
-<%--       <jsp:include page="commons/commons_layout/commons_nav.jsp"/> --%>
+      <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
 	<div class="margintop">
 	
 	<h1 class="s2">mission list</h1>
@@ -228,14 +228,14 @@
 	 			searching:false,
 	 			processing:true,
 	 			serverSide:true,
-// 	 			"stateSave": true,
-// 				"infoCallback": function( settings, start, end, max, total, pre ) {
-// 		 			    var api = this.api();
-// 		 			    var pageInfo = api.page.info();
-// 		 			   	console.log(pageInfo);
-// 		 			   api.rows( {page:'current'} ).data()
-// 		 			    return '顯示第 '+(pageInfo.start+1)+' 筆到第  '+(pageInfo.end)+' 筆 共 '+ pageInfo.recordsTotal+' 筆資料 ';
-// 		 			 },	
+	 			"stateSave": true,
+				"infoCallback": function( settings, start, end, max, total, pre ) {
+		 			    var api = this.api();
+		 			    var pageInfo = api.page.info();
+		 			   	console.log(pageInfo);
+		 			   api.rows( {page:'current'} ).data()
+		 			    return '顯示第 '+(pageInfo.start+1)+' 筆到第  '+(pageInfo.end)+' 筆 共 '+ pageInfo.recordsTotal+' 筆資料 ';
+		 			 },	
 				"lengthMenu": [ 3, 6, 9, 12, ],
 				ajax:{
 					url:"/admin/mission/querypage",
@@ -258,15 +258,15 @@
 		                json.recordsFiltered = json.totalElements;	     			
 // 		     			console.log(JSON.stringify( json ))
 		                return JSON.stringify( json ); 
-		            },
-				},
-					 drawCallback: function (d) {
-		 		        	//console.log(d)
-				        	  var api = this.api();
-				        	  var pageNum = parseInt(d.json.pageable.pageNumber) ;
-				        	  var totalPages = d.json.totalPages;
-				        	  $('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
-				       },
+		            	},
+					},
+// 					 drawCallback: function (d) {
+// 		 		        	//console.log(d)
+// 				        	  var api = this.api();
+// 				        	  var pageNum = parseInt(d.json.pageable.pageNumber) ;
+// 				        	  var totalPages = d.json.totalPages;
+// 				        	  $('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
+// 				       },
 					columns:[						
 						{"data": function (data, type, val) {
 							 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/admin/mission/edit?id="+data.id+"'\">Edit</button>";     
@@ -324,17 +324,6 @@
 // 	                cell.innerHTML = columnIndex;
 // 	            });
 // 	        });
-		
-		
-		
-		
-		
-// 			$("#searchButt").click(	function(){
-// 				dataTable.ajax.reload();
-
-// 			})
-		
-		
 		
 		
 		

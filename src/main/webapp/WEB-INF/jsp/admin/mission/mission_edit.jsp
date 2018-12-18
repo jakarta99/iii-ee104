@@ -108,7 +108,7 @@
     </div>
     
     <div class="form-group">
-    termType:<select id="termType" name="termType" class="form-control">
+    termType:<select id="termType" name="termType" class="form-control" >
         <option value="L">長期</option>
         <option value="S">短期</option>
     </select>
@@ -121,7 +121,7 @@
 <!-- 		<label>短期</label>  -->
 <!-- 		<input type="radio" value="S" name="termType" /><br> -->
 <!-- 	</div> -->
-    
+    console.log(${mission.termType})
     <div>
 		<label>startDate:</label> 
 		<input  value="${startDate}" id="startDate" name="startDate" class="form-control" autocomplete="off"><br>
@@ -193,7 +193,9 @@
 			    startView:"years",
 			})
 			
-			$('#termType').val(${mission.termType})
+// 			$("select[name='termType'][value="+'${mission.termType}' + "]").prop("selected ", true);
+// 			alert("${mission.termType}")
+			$('#termType').val("${mission.termType}")
 			$('#serviceType').val(${mission.serviceType})
 			
 			
