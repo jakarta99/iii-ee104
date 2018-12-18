@@ -46,7 +46,7 @@
                     </li>
                   </ul>
                 </li>
-                <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Portfolio <b class="caret"></b></a>
+                <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" class="dropdown-toggle">常見問題 <b class="caret"></b></a>
                   <ul class="dropdown-menu megamenu">
                     <li>
                       <div class="row">
@@ -82,7 +82,7 @@
                   </ul>
                 </li>
                 <!-- ========== FULL WIDTH MEGAMENU ==================-->
-                <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">All Pages <b class="caret"></b></a>
+                <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">關於我們 <b class="caret"></b></a>
                   <ul class="dropdown-menu megamenu">
                     <li>
                       <div class="row">
