@@ -6,7 +6,7 @@
         <div class="container">
           <div class="row d-flex align-items-center">
             <div class="col-md-6 d-md-block d-none">
-              <p>Contact us on +420 777 555 333 or hello@universal.com.</p>
+              <p>志工媒合平台</p>
             </div>
             <div class="col-md-6">
               <div class="d-flex justify-content-md-end justify-content-between">
@@ -14,35 +14,30 @@
                   <li class="list-inline-item"><a href="#"><i class="fa fa-phone"></i></a></li>
                   <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
                 </ul>
-                <div class="login">
-       
+                
+                <!-- sign in & sign out -->
+                <div class="login">       
 	               	<sec:authorize  access="!isAuthenticated()">         	
 	               	 <a href="/login"  class="login-btn">
 	                	<i class="fa fa-sign-in"></i>
 	                	<span class="d-none d-md-inline-block">Sign In</span>
 	                 </a>
-	                </sec:authorize>
+				  	<a href="customer-register.html" class="signup-btn">
+                		<i class="fa fa-user"></i><span class="d-none d-md-inline-block">Sign Up</span>
+                	</a>
+	                </sec:authorize>	                
 					<sec:authorize  access="isAuthenticated()">
-					
-<!-- 1. logout method:put -->
-<!-- 					<form id="form1" action="/logout" method="post"> 				 -->
-<!-- 						<a href="javascript:;" onclick="document.getElementById('form1').submit();" class="logout-btn"> -->
-<!-- 	                	<i class="fa fa-sign-in"></i> -->
-<!-- 	                	<span class="d-none d-md-inline-block">Sign Out</span> -->
-<!-- 		                 </a> -->
-<!-- 	                </form> -->
 
-<!-- 2. logout method:get -->
+						<span class="d-none d-md-inline-block"> 
+							Welcome Back, <sec:authentication property="name"/>&nbsp&nbsp&nbsp
+						</span>					
+						<!-- logout method:get -->
 						<a href="/logout" class="logout-btn">
-	                	<i class="fa fa-sign-in"></i>
-	                	<span class="d-none d-md-inline-block">Sign Out</span>
+	                		<i class="fa fa-sign-in"></i>
+	                		<span class="d-none d-md-inline-block">Sign Out</span>
 		                </a>
 	        
 	                </sec:authorize>
-						
-<!--                 		<span class="d-none d-md-inline-block">Sign In</span></a> -->
-				  		<a href="customer-register.html" class="signup-btn">
-                		<i class="fa fa-user"></i><span class="d-none d-md-inline-block">Sign Up</span></a>
                </div>
                 <ul class="social-custom list-inline">
                   <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
