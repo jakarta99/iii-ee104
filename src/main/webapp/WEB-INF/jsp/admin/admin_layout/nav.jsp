@@ -31,6 +31,8 @@
 						<a	class="dropdown-item" href="/admin/request/list" id="backStage-request">request</a>
 						<a	class="dropdown-item" href="/admin/time-ledger/list" id="backStage-timeledger">time-ledger</a>
 						<a	class="dropdown-item" href="/admin/penalty/list" id="backStage-penalty">penalty</a>
+						<a	class="dropdown-item" href="/admin/role/list" id="backStage-role">role</a>	
+						<a	class="dropdown-item" href="/admin/securityUser/list" id="backStage-role">securityUser</a>						
 					</div></li>
 			</ul>
 			<a href='<c:url value="/logout"/>' class="nav-link">

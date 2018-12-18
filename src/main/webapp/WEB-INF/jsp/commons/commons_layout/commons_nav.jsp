@@ -46,7 +46,7 @@
                     </li>
                   </ul>
                 </li>
-                <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Portfolio <b class="caret"></b></a>
+                <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" class="dropdown-toggle">常見問題 <b class="caret"></b></a>
                   <ul class="dropdown-menu megamenu">
                     <li>
                       <div class="row">
@@ -82,7 +82,7 @@
                   </ul>
                 </li>
                 <!-- ========== FULL WIDTH MEGAMENU ==================-->
-                <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">All Pages <b class="caret"></b></a>
+                <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">關於我們 <b class="caret"></b></a>
                   <ul class="dropdown-menu megamenu">
                     <li>
                       <div class="row">
@@ -186,6 +186,7 @@
                     <li class="dropdown-item"><a href="/admin/time-ledger/list" class="nav-link" id="backStage-timeledger">time-ledger</a></li>
                     <li class="dropdown-item"><a href="/admin/penalty/list" class="nav-link" id="backStage-penalty">penalty</a></li>
                     <li class="dropdown-item"><a href="/admin/mission/list" class="nav-link" id="backStage-penalty">mission</a></li>
+                    <li class="dropdown-item"><a href="/admin/role/list" class="nav-link" id="backStage-role">role</a></li>
                   </ul>
                 </li>
                 </sec:authorize>

@@ -2,6 +2,7 @@ package team.lala.timebank.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Role {
 	@Column(name="ROLE_NAME")
 	private String roleName;
 	
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JsonBackReference 
 	@JoinTable(
 			name="USER_ROLE",
@@ -58,6 +59,21 @@ public class Role {
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
+	
+	 public void addMember(Member member) {
+	       if (!getMembers().contains(member)) {
+	    	   getMembers().add(member);
+	       }
+	       if (!member.getRoles().contains(this)) {
+	    	   member.getRoles().add(this);
+	       }
+	  }
+
+	@Override
+	public String toString() {
+		return "Role [id=" + id + ", roleName=" + roleName+ "]";
+	}
+	    
 
 
 

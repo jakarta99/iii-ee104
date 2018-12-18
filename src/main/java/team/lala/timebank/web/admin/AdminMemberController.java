@@ -29,11 +29,9 @@ public class AdminMemberController {
 	
 	@RequestMapping("/list")
 	public String listPage(Model model) {
-		List<Member> members = memberService.findAll();
-		model.addAttribute("members", members);
-		
-//		return "/member/member_list";
-		return "/admin/member/member_list2";
+		//FIXME		
+		return "/member/member_list";
+//		return "/admin/member/member_list2";
 
 	}
 

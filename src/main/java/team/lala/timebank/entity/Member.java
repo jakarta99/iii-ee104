@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -50,7 +51,8 @@ public class Member implements UserDetails {
 	@Column(name = "PASSWORD")
 	private String password;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY,
+			cascade=CascadeType.ALL)
 	@JsonManagedReference
 	@JoinTable(
 			name="USER_ROLE",
@@ -164,6 +166,16 @@ public class Member implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "ORG_IDENTITY_CONFIRMATION")
 	private YesNo orgIdConfirmation;
+	
+	
+//	 public void addRole(Role role) {
+//	       if (!getRoles().contains(role)) {
+//	           getRoles().add(role);
+//	       }
+//	       if (!role.getMembers().contains(this)) {
+//	    	   role.getMembers().add(this);
+//	       }
+//	  }
 
 	public Long getId() {
 		return id;
