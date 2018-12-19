@@ -41,6 +41,37 @@
 	<h2>securityUser List</h2>
 	
 	<fieldset style="width:700px">
+		<input type="button" id="editButt3" onclick="editRow()" value="更新-2"/>
+		
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary btn-sm" id="editButt" onclick="editRow()" data-toggle="modal" data-target="#exampleModal" > 更新</button>
+		
+ 		<!-- Modal --> 
+		<div class="modal fade" id=exampleModal tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		      <form>
+		      	<label>會員編號 :</label> 
+		      	<input type="text" name="memberId" value="">
+		      
+		      </form>
+		        Are you sure you want to delete this Member?
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary" onclick='deleteRow()' >OK</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
 		<table  id=table class="table table-striped table-bordered">				
 			<thead>
 				<tr>
@@ -69,27 +100,41 @@
 	<script>
 	
 		var dataTable;
+		var selectedRowId = 0;
 
-		function deleteRow(memberId, roleId){
-// 			alert(memberId+","+ roleId)
-			$.ajax({
-				type: "get",
-				dataType: "json",         
-				url: "/admin/securityUser/delete",
-				data: {"memberId":memberId,
-						"roleId" : roleId}					
-			})
-			.done(function(response){
-				if (response.status =="SUCCESS"){
-					alert("刪除成功");
-				} else {
-					$.each(response.messages, function(idx, message) {
-						alert("the "+idx+"th ERROR, because "+message);
-					});
-				}			
-				dataTable.ajax.reload(); //會回到第一頁
-			})	
+// 		function deleteRow(memberId, roleId){
+// // 			alert(memberId+","+ roleId)
+// 			$.ajax({
+// 				type: "get",
+// 				dataType: "json",         
+// 				url: "/admin/securityUser/delete",
+// 				data: {"memberId":memberId,
+// 						"roleId" : roleId}					
+// 			})
+// 			.done(function(response){
+// 				if (response.status =="SUCCESS"){
+// 					alert("刪除成功");
+// 				} else {
+// 					$.each(response.messages, function(idx, message) {
+// 						alert("the "+idx+"th ERROR, because "+message);
+// 					});
+// 				}			
+// 				dataTable.ajax.reload(); //會回到第一頁
+// 			})	
 			
+// 		}
+		
+		function editRow(){
+			var array = selectedRowId.split(",",2);
+			if (array!= null ){
+				$.post("/admin/securityUser/add", 
+						{memberId:array[0],rowId: array[1]}, 
+						function(data){
+							console.log(data);
+						}) 
+// 				javascript:document.location.href='/admin/securityUser/securityUser_add?memberId='+array[0]+'&rowId=' +array[1];
+// 				window.location.replace("/admin/member/list");
+			}
 		}
 
 	
@@ -108,6 +153,11 @@
 				fixedHeader: true,
 // 				pagingType: 'full_numbers',
 				searching: false,
+				select:true,
+				
+				rowId:function(source, type, val){
+					return "memberId="+source.id+",roleId=" + source.role.id;
+				},
 		        ajax: {
 		            url: "/admin/securityUser/query",
 		            type: "get",
@@ -123,7 +173,7 @@
 		           	}		        	   
 		           },
 		           {data: "id" },
-		           { data: "account" },
+		           {data: "account" },
 		           {data: function(source, type, val){
 		        	   return source.role.roleName;
 		           }}
@@ -132,6 +182,23 @@
 				
 			        
 			 } );
+			
+			
+			 $('#table tbody').on( 'click', 'tr', function () {
+			        if ( $(this).hasClass('selected')) {
+			            $(this).removeClass('selected');
+			            selectedRowId = 0;
+			            $('#deleteButt').prop("disabled", true);
+			            $('#editButt').prop("disabled", true);
+			        }
+			        else {
+			        	$('tr.selected').removeClass('selected');
+			        	selectedRowId = this.id;
+						$(this).addClass('selected');
+			            $('#deleteButt').prop("disabled", false);
+			            $('#editButt').prop("disabled", false);
+			        }
+			    } );
 			
 			
 		})	

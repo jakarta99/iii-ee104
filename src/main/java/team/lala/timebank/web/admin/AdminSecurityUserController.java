@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,10 +36,21 @@ public class AdminSecurityUserController {
 		return "/admin/securityUser/securityUser_list";
 	}
 	
-
+	@ResponseBody
 	@RequestMapping("/add")
-	public String add() {
-		return "/admin/securityUser/securityUser_add";
+	public Map<String, Object> add(@RequestParam("memberId") Long memberId , @RequestParam("roleId") Long roleId, Model model) {
+		System.out.println("memberId" +memberId+", roleId"+roleId);
+		Member member = memberService.getOne(memberId);
+		Map<String, Object> map = new HashMap<>();
+		Set<Role> roles = member.getRoles();
+		for (Role r : roles) {
+			map.put("id", member.getId());
+			map.put("account", member.getUsername());
+			map.put("role", r);
+			
+		}	
+//		model.addAttribute(map);
+		return map;
 	}
 	
 	
