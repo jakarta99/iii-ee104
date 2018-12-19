@@ -46,8 +46,9 @@
 				<tr>
 <!-- 					<th scope="col"></th> -->
 					<th scope="col" width="100px"></th>
-					<th scope="col">id</th>
-					<th scope="col">使用者角色</th>
+					<th scope="col">會員編號</th>	
+					<th scope="col">會員帳號</th>
+					<th scope="col">角色</th>
 
 
 				
@@ -69,24 +70,27 @@
 	
 		var dataTable;
 
-// 		function deleteRow(memberId){
-// 			$.ajax({
-// 				type: "get",
-// 				dataType: "json",         
-// 				url: "/admin/role/delete",
-// 				data: {"id":memberId}					
-// 			})
-// 			.done(function(response){
-// 				if (response.status =="SUCCESS"){
-// 					alert("刪除成功");
-// 				} else {
-// 					$.each(response.messages, function(idx, message) {
-// 						alert("the "+idx+"th ERROR, because "+message);
-// 					});
-// 				}			
-// 				dataTable.ajax.reload(); //會回到第一頁
-// 			})	
-// 		}
+		function deleteRow(memberId, roleId){
+// 			alert(memberId+","+ roleId)
+			$.ajax({
+				type: "get",
+				dataType: "json",         
+				url: "/admin/securityUser/delete",
+				data: {"memberId":memberId,
+						"roleId" : roleId}					
+			})
+			.done(function(response){
+				if (response.status =="SUCCESS"){
+					alert("刪除成功");
+				} else {
+					$.each(response.messages, function(idx, message) {
+						alert("the "+idx+"th ERROR, because "+message);
+					});
+				}			
+				dataTable.ajax.reload(); //會回到第一頁
+			})	
+			
+		}
 
 	
 
@@ -98,12 +102,7 @@
 			$("#searchButt, #resetButt").addClass("btn btn-primary");
 			
 			
-// 			$.get("/admin/securityUser/query" ,function(data){
-				
-// 				$("#securityUser" ).html(data);
-// 			})
-			
-			
+
 			dataTable =  $('#table').DataTable( {
 				pageResize: true, 
 				fixedHeader: true,
@@ -118,15 +117,16 @@
 		        
 		     	columns: [		        
 		           {data: function (source, type, val) {
-		        	   console.log(source)
-		        	   	var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/role/edit?id="+source.id+"'\" value='修改'  />";
-						var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+source.id+")\" id='deleteButt"+ source.id +"' value='刪除' />"  
-		               	return editButt + deleteButt;			        	   
+		        	  	console.log(source)
+		 				var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+source.id+","+source.role.id+")\" id='deleteButt"+ source.id +"' value='刪除' />"  
+		               	return deleteButt;			        	   
 		           	}		        	   
 		           },
 		           {data: "id" },
 		           { data: "account" },
-// 		           {data: ""}
+		           {data: function(source, type, val){
+		        	   return source.role.roleName;
+		           }}
 
 		       ],
 				

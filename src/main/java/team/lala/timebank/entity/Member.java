@@ -416,8 +416,7 @@ public class Member implements UserDetails {
 		for (Role role : userRoles) {
 			authorities.add(new SimpleGrantedAuthority(rolePrefix+ role.getRoleName()));			
 		}
-		
-//		list.add(new SimpleGrantedAuthority("ADMIN"));
+
 		return authorities;
 	}
 

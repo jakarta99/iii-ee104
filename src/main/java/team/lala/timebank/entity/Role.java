@@ -68,6 +68,23 @@ public class Role {
 	    	   member.getRoles().add(this);
 	       }
 	  }
+	 
+	 
+	 
+	 public void deleteMember(Member member) {
+		 Set<Member> members = this.getMembers();
+		 Set<Role> roles = member.getRoles();
+		 if (roles.contains(this)) {
+			 System.out.println("member.getRoles().contains(this");
+			 roles.remove(this);
+			 member.setRoles(roles);
+		 }	       
+	       if (members.contains(member)) {
+	    	   System.out.println("getMembers().contains(member)");
+	    	   members.remove(member);
+	    	   this.setMembers(members);
+	       }
+	  }
 
 	@Override
 	public String toString() {
