@@ -207,7 +207,11 @@ fieldset {
 							alert(message);
 						});
 					}
-					dataTable.ajax.reload();
+					dataTable.draw('page');
+					if ($("table tbody tr").length < 2){
+						dataTable.page( 'previous' ).draw('page');;
+					} 
+// 					dataTable.ajax.reload();
 				}
 			})
 		}
