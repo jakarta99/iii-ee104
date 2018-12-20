@@ -51,7 +51,7 @@ public class Member implements UserDetails {
 	@Column(name = "PASSWORD")
 	private String password;
 	
-	@ManyToMany(fetch=FetchType.LAZY,
+	@ManyToMany(fetch=FetchType.EAGER,
 			cascade=CascadeType.ALL)
 	@JsonManagedReference
 	@JoinTable(
@@ -407,17 +407,19 @@ public class Member implements UserDetails {
 				+ orgIdConfirmation + "]";
 	}
 	
-	private static final String rolePrefix = "ROLE_";
+//	private static final String rolePrefix = "ROLE_";
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> authorities = new ArrayList<>();
-		Set<Role> userRoles = this.getRoles();
-		for (Role role : userRoles) {
-			authorities.add(new SimpleGrantedAuthority(rolePrefix+ role.getRoleName()));			
-		}
-
-		return authorities;
+//		List<GrantedAuthority> authorities = new ArrayList<>();
+//		Set<Role> userRoles = this.getRoles();
+//		for (Role role : userRoles) {
+//			authorities.add(new SimpleGrantedAuthority(rolePrefix+ role.getRoleName()));			
+//		}
+//
+//		return authorities;
+		
+		return roles;
 	}
 
 	@Override

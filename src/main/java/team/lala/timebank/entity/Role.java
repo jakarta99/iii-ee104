@@ -13,12 +13,14 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
 @Table(name="ROLE")
-public class Role {
+public class Role implements GrantedAuthority{
 	@Id
 	@Column(name="ROLE_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -89,6 +91,11 @@ public class Role {
 	@Override
 	public String toString() {
 		return "Role [id=" + id + ", roleName=" + roleName+ "]";
+	}
+
+	@Override
+	public String getAuthority() {
+		return "ROLE_"+ roleName;
 	}
 	    
 
