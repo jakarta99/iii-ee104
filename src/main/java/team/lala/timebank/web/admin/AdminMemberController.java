@@ -8,21 +8,26 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.enums.MemberType;
 import team.lala.timebank.service.MemberService;
 import team.lala.timebank.spec.MemberSpecification;
 
+@Slf4j
 @Controller
 @RequestMapping("/admin/member")
 public class AdminMemberController {
 
+	
+//	private Logger log = LoggerFactory.getLogger(AdminMemberController.class);
+	
+	
 	@Autowired
 	private MemberService memberService;
 
@@ -67,9 +72,9 @@ public class AdminMemberController {
 	public Page<Member> queryMember(Member inputMember, @RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length){
 		int page = start.orElse(0)/length.orElse(10);
-//		System.out.println("start=" + start + ", page"+ page+", length=" +length);
-//		System.out.println("inputmember=" + inputMember);
 
+		log.debug("start={},page={},length={}", start, page, length );
+		log.debug("inputMember={}",inputMember);
 		MemberSpecification memberSpec = new MemberSpecification(inputMember);	
 		Page<Member> members = memberService.findBySpecification(memberSpec,PageRequest.of(page, length.orElse(10)));
 		

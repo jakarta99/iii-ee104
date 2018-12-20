@@ -17,7 +17,11 @@ import org.springframework.security.core.GrantedAuthority;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name="ROLE")
 public class Role implements GrantedAuthority{
@@ -46,22 +50,7 @@ public class Role implements GrantedAuthority{
 	}
 	
 	
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getRoleName() {
-		return roleName;
-	}
-
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
-	
 	 public void addMember(Member member) {
 	       if (!getMembers().contains(member)) {
 	    	   getMembers().add(member);
