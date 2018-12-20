@@ -28,7 +28,7 @@ import team.lala.timebank.spec.OrderSpecification;
 import team.lala.timebank.spec.RequestSpecification;
 
 @Controller
-@RequestMapping("/mission")
+@RequestMapping("/mission") 
 public class MissionController {
 
 	@Autowired
