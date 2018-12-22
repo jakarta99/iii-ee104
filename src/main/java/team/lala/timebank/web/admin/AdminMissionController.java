@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.commons.ajax.PageResponse;
 import team.lala.timebank.entity.Member;
@@ -28,6 +29,7 @@ import team.lala.timebank.spec.MissionSpecification;
 import team.lala.timebank.spec.OrderSpecification;
 import team.lala.timebank.spec.RequestSpecification;
 
+@Slf4j
 @Controller
 @RequestMapping("/admin/mission")
 public class AdminMissionController {

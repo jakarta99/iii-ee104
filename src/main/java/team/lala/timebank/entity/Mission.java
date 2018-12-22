@@ -14,8 +14,13 @@ import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.Getter;
+import lombok.Setter;
 import team.lala.timebank.enums.TermType;
 
+
+@Getter
+@Setter
 @Entity
 @Table(name = "mission")
 public class Mission {
@@ -76,141 +81,7 @@ public class Mission {
 	@Column(name = "address", nullable = false)
 	private String address;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(Long memberId) {
-		this.memberId = memberId;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public Integer getTimeValue() {
-		return timeValue;
-	}
-
-	public void setTimeValue(Integer timeValue) {
-		this.timeValue = timeValue;
-	}
-
-	public TermType getTermType() {
-		return termType;
-	}
-
-	public void setTermType(TermType termType) {
-		this.termType = termType;
-	}
-
-	public Integer getServiceType() {
-		return serviceType;
-	}
-
-	public void setServiceType(Integer serviceType) {
-		this.serviceType = serviceType;
-	}
-
-	public Date getPublishDate() {
-		return publishDate;
-	}
-
-	public void setPublishDate(Date publishDate) {
-		this.publishDate = publishDate;
-	}
-
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-
-	public Integer getPeopleNeeded() {
-		return peopleNeeded;
-	}
-
-	public void setPeopleNeeded(Integer peopleNeeded) {
-		this.peopleNeeded = peopleNeeded;
-	}
-
-	public String getContactPerson() {
-		return contactPerson;
-	}
-
-	public void setContactPerson(String contactPerson) {
-		this.contactPerson = contactPerson;
-	}
-
-	public String getContactPhone() {
-		return contactPhone;
-	}
-
-	public void setContactPhone(String contactPhone) {
-		this.contactPhone = contactPhone;
-	}
-
-	public String getContactEmail() {
-		return contactEmail;
-	}
-
-	public void setContactEmail(String contactEmail) {
-		this.contactEmail = contactEmail;
-	}
-
-	public String getDiscription() {
-		return discription;
-	}
-
-	public void setDiscription(String discription) {
-		this.discription = discription;
-	}
-
-	public String getCounty() {
-		return county;
-	}
-
-	public void setCounty(String county) {
-		this.county = county;
-	}
-
-	public String getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(String district) {
-		this.district = district;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
+	
 
 	@Override
 	public String toString() {
