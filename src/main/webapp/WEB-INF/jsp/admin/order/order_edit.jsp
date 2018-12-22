@@ -35,23 +35,24 @@
 
 <form>
 	<input type="hidden" value="${order.id}" id="id" name="id"/>
-	supplierAcception(Y/N):
-	<input type="radio" value="Y" name="supplierAcception" />Y  
-	<input type="radio" value="N" name="supplierAcception" />N<p>	
+	orderAcception(Y/N):
+	<input type="radio" value="Y" name="orderAcception" />Y  
+	<input type="radio" value="N" name="orderAcception" />N<p>	
 	
-	confirmation(Y/N):
-	<input type="radio" value="Y" name="confirmation" />Y  
-	<input type="radio" value="N" name="confirmation" />N<p>
+	orderConfirmation(Y/N):
+	<input type="radio" value="Y" name="orderConfirmation" />Y  
+	<input type="radio" value="N" name="orderConfirmation" />N<p>
 	
 	status:<input type="text" value="${order.status}" id="status" name="status"><p>
+	
 	<button type="button" onclick="updateOrder()" class="btn btn-outline-primary">update</button>
 </form>
 <a href="/admin/order/list">back to order_list</a>
 
 
 <script>
-$("input[name='supplierAcception'][value="+'${order.supplierAcception}' + "]").prop("checked", true);
-$("input[name='confirmation'][value="+'${order.confirmation}' + "]").prop("checked", true);
+$("input[name='orderAcception'][value="+'${order.orderAcception}' + "]").prop("checked", true);
+$("input[name='orderConfirmation'][value="+'${order.orderConfirmation}' + "]").prop("checked", true);
 
 
 function updateOrder(){

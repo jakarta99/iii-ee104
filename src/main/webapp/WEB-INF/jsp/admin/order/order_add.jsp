@@ -35,22 +35,22 @@
 <form>
 
 <!-- id:<input type="text" value="" id="id" name="id"/> -->
-requestList_Id(FK, range:1~11):
-<input type="text" value="" id="requests" name="requests"/><p> 
+misson_Id(FK, 目前假資料有1~19):
+<input type="text" value="" id="mission" name="mission"/><p> 
 
-supplierId:
-<input type="text" value="" id="supplierId" name="supplierId"/><p>
+volunteerId:
+<input type="text" value="" id="volunteerId" name="volunteerId"/><p>
 
-requesterId:
-<input type="text" value="" id="requesterId" name="requesterId"/><p>
+serviceRequesterId:
+<input type="text" value="" id="serviceRequesterId" name="serviceRequesterId"/><p>
 
-<label>supplierAcception(Y/N):  </label>
-<input type="radio" value="Y" name="supplierAcception" />Y  
-<input type="radio" value="N" name="supplierAcception" />N<p>
+<label>orderAcception(Y/N):  </label>
+<input type="radio" value="Y" name="orderAcception" />Y  
+<input type="radio" value="N" name="orderAcception" />N<p>
 
-<label>confirmation(Y/N):  </label>
-<input type="radio" value="Y" name="confirmation" />Y  
-<input type="radio" value="N" name="confirmation" />N<p>
+<label>orderConfirmation(Y/N):  </label>
+<input type="radio" value="Y" name="orderConfirmation" />Y  
+<input type="radio" value="N" name="orderConfirmation" />N<p>
 
 status:
 <input type="text" value="" id="status" name="status"><p>

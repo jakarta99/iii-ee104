@@ -29,20 +29,20 @@ public class OrderSpecification implements Specification<Order>  {
 			list.add(criteriaBuilder.equal(root.get("id").as(Long.class), inputOrder.getId()));
 		}
 
-		if(!StringUtils.isEmpty(inputOrder.getSupplierId())) {
-			list.add(criteriaBuilder.equal(root.get("supplierId").as(String.class), inputOrder.getSupplierId()));
+		if(!StringUtils.isEmpty(inputOrder.getVolunteerId())) {
+			list.add(criteriaBuilder.equal(root.get("volunteerId").as(String.class), inputOrder.getVolunteerId()));
 		}
 
-		if(!StringUtils.isEmpty(inputOrder.getRequesterId())) {
-			list.add(criteriaBuilder.equal(root.get("requesterId").as(Long.class), inputOrder.getRequesterId()));
+		if(!StringUtils.isEmpty(inputOrder.getServiceRequesterId())) {
+			list.add(criteriaBuilder.equal(root.get("serviceRequesterId").as(Long.class), inputOrder.getServiceRequesterId()));
 		}
 
-		if(!StringUtils.isEmpty(inputOrder.getSupplierAcception())) {
-			list.add(criteriaBuilder.equal(root.get("supplierAcception").as(YesNo.class), inputOrder.getSupplierAcception()));
+		if(!StringUtils.isEmpty(inputOrder.getOrderAcception())) {
+			list.add(criteriaBuilder.equal(root.get("orderAcception").as(YesNo.class), inputOrder.getOrderAcception()));
 		}
 		
-		if(!StringUtils.isEmpty(inputOrder.getConfirmation())) {
-			list.add(criteriaBuilder.equal(root.get("confirmation").as(YesNo.class), inputOrder.getConfirmation()));
+		if(!StringUtils.isEmpty(inputOrder.getOrderConfirmation())) {
+			list.add(criteriaBuilder.equal(root.get("orderConfirmation").as(YesNo.class), inputOrder.getOrderConfirmation()));
 		}
 		
 		if(!StringUtils.isEmpty(inputOrder.getStatus())) {

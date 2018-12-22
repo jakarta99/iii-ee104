@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Order List</title>
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-  
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Bootstrap core CSS -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
 	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
@@ -23,250 +19,228 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous">
-<!-- data tables -->
-<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" /> -->
-<!-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
+<!-- date picker -->
+<script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
+<script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
+<script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
+<link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
+<!-- data table -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/js/dataTable_full_numbers_no_ellipses.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
+<script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
+<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>	
 
+
+<style>
+	 article{
+	 	margin-top:70px;
+	 }
+	 
+	 article fieldset {
+/*  		width: 500px;  */
+ 		border-radius: 20px; 
+ 		padding: 20px 20px 0px 20px;  
+ 		border: 3px double #bebebe; 
+		margin: auto; 
+ 		margin-top: 10px;  
+ 		margin-bottom: 20px;  
+	}
+
+	 table tr td, button{
+	 	text-align:center;
+	 	line-height:center; 
+	 }
+	 article .btn{
+	 	margin-left:3px;
+	 	margin-right:3px
+	 } 
+
+</style>
+<meta charset="UTF-8">
+<title>Order List</title>
 </head>
 <body>
-<script src="/js/backstageNav.js"></script>
-<br>
-<br>
-<br>
-<h2> Order Lists </h2>
-<div>
-	find all orders:
-	<button id="find_all_btn">findAllOrders</button>
-</div>
-<hr>
-<div>
-	<form>
-		id:
-		<input type="text" value="" id="id" name="id"/><br>
+	<!-- 加入nav.html(放在static/html) -->
+	<jsp:include page="../admin_layout/nav.jsp" />
+	<article>
+		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
+		<h1 style="padding-top: 2cm">Order List</h1>
+		<button onclick="javascript:document.location.href='/admin/order/add'" class="btn btn-primary btn-sm">Add</button>
+
+		<!-- 條件搜尋表單 -->
+		<div id="sideBar">
+			<form>
+				<fieldset>
+				<legend>Search</legend>
+				<div>
+					<div>
+						<label>id: </label>
+						<input type="text" value="${param.id}" id="id" name="id" placeholder="id" />
+					</div>
+					<div>
+						<label>volunteerId:</label>
+						<input type="text" value="${param.volunteerId}" id="volunteerId" name="volunteerId"/>
+					</div>
+					<div>
+						<label>serviceRequesterId:</label>
+						<input type="text" value="${param.serviceRequesterId}" id="serviceRequesterId" name="serviceRequesterId"/>
+					</div>
+				</div>
+				<div>
+					<div>
+						<label>orderAcception(Y/N):</label>
+						<input type="radio" value="Y" name="orderAcception" />Y
+						<input type="radio" value="N" name="orderAcception" />N
+					</div>
+					<div>
+						<label>orderConfirmation(Y/N):</label>
+						<input type="radio" value="Y" name="orderConfirmation" />Y
+						<input type="radio" value="N" name="orderConfirmation" />N
+					</div>
+					<div>	
+						<label>status:</label>
+						<input type="text" value="${param.status}" id="status" name="status"/>
+					</div>
+				</div>
+					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
+<!-- 					<button id="searchButt" style="margin:10px">搜尋</button> -->
+					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
+				</fieldset>
+				
+			</form>
+		</div>
+		<fieldset style="width:300">
+		<table id="table" class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th scope="col"></th>
+					<th scope="col" width="100px"></th>
+					<th scope="col">ID</th>			
+					<th scope="col">volunteerId</th>
+					<th scope="col">serviceRequesterId</th>
+					<th scope="col">orderAcception(Y/N)</th>
+					<th scope="col">orderConfirmation(Y/N)</th>
+					<th scope="col">status</th>
+					<th scope="col">mission.title</th>
+					<th scope="col">mission.timeValue</th>
+				</tr>
+			</thead>
+			<tbody id="TableBody">
+				<!-- 會員資料 -->
+			</tbody>
+		</table>
+		</fieldset>
+	</article>
+	<script>
+
+		var dataTable;
 		
-		supplierId:
-		<input type="text" value="" id="supplierId" name="supplierId"/><br>
-		
-		requesterId:
-		<input type="text" value="" id="requesterId" name="requesterId"/><br>
-		
-		supplierAcception(Y/N):
-		<input type="text" value="" id="supplierAcception" name="supplierAcception"/><br>
-		
-		confirmation(Y/N):
-		<input type="text" value="" id="confirmation" name="confirmation"/><br>
-		
-		status:
-		<input type="text" value="" id="status" name="status"/><br>
-		
-		<button type="button" id="find_btn">find</button>
-	</form>
-</div>
+		function deleteRow(orderId){
+			$.ajax({
+				type: "get",
+				dataType: "json",         
+				url: "/admin/order/delete",
+				data: {"id":orderId}					
+			})
+			.done(function(response){			
+				if (response.status =="SUCCESS"){
+					alert("刪除成功");
+				} else {
+					$.each(response.messages, function(idx, message) {
+						alert("the "+idx+"th ERROR, because "+message);
+					});
+				}			
+				dataTable.draw('page');
+				if ($("table tbody tr").length < 2){
+					dataTable.page( 'previous' ).draw('page');;
+				} 
+			})	
+		}
 
-<hr>
+		$(document).ready(function() {
+			$("form").addClass("form-inline");
+			$("form div[id!='collapse']").addClass("form-group mx-sm-3 mb-3");
+			$("form input, select").addClass("form-control mx-3");
+			$("#searchButt, #resetButt").addClass("btn btn-primary");
 
+			dataTable = $('#table').DataTable({
+				pageResize: true, 
+				fixedHeader: true,
+				pagingType: 'full_numbers',
+				searching: false,				
+			 	processing: true,
+				serverSide: true,  //分頁、排序都交由伺服器處理
+				ajax:{
+					url:"/admin/order/query",
+					type:"get",
+					dataType:"json",
+					data:function(d){ 				//傳送給伺服器的資料(datatable預設會傳送d的資料)
+						var start = d.start;
+						var length = d.length;
+						var request = $("form").serialize()+"&start="+start+"&length="+length;
+						return request;
+					},
+					dataSrc:"content",
+					dataFilter:function(resp){		//對伺服器送來的資料進行修改
+						 var json = jQuery.parseJSON( resp );
+			             json.recordsTotal = json.totalElements;
+			             json.recordsFiltered = json.totalElements;	     			
+			             return JSON.stringify( json ); 
+					},
+				}, drawCallback:function(d){
+						var api = this.api();
+						var pageNum = parseInt(d.json.pageable.pageNumber) ;
+						var totalPages = d.json.totalPages;
+						$('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
+				}, columns: [ 		//設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
+		     		{data:null},
+		           	{data: function (data, type, row ) {
+						var editButt = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/order/edit?id="
+											+ data.id + "'\" value='修改'  />";
+						var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='刪除' />"  
+		               	return editButt + deleteButt;	}
+		           	},
+		           	{data:"id" },
+					{data:"volunteerId"},
+					{data:"serviceRequesterId"},
+					{data:"orderAcception"},
+					{data:"orderConfirmation"},
+					{data:"status"},
+					{data:"mission.title"},
+					{data:"mission.timeValue"},
+							
+				], columnDefs:[{		//禁用第0123列的搜索和排序
+					"searchable": false,
+	                "orderable": false,
+	                "targets": [0, 1, 2],
+				}], order: [[1, 'asc']]   
+			 });
+			
+			dataTable.on('draw.dt',function() {
+				dataTable.column(0, {
+	                search:'applied',
+	                order:'applied'
+	            }).nodes().each(function(cell, i) {
+					 i = i+1;								//i從0開始，所以先加1
+	                var pageinfo = dataTable.page.info();	//服務氣模式下，使用DT提供的API直接獲取分頁資訊
+	                var pageno = pageinfo.page;				//当前第几页，从0开始
+	                var length = pageinfo.length;			//每页数据
+	                var columnIndex = (i+pageno*length);	//行号等于 页数*每页数据长度+行号
+	                cell.innerHTML = columnIndex;
+	            });
+	        });	
 
+			
+			//搜尋事件
+			$("#searchButt").click(	function(){
+				dataTable.ajax.reload();
 
-<div id="myTable_length">
-	<label>Show 
-		<select name="myTable_length">
-			<option value="3">3</option>
-			<option value="6">6</option>
-			<option value="10">10</option>
-			<option value="15">15</option>
-		</select> entries
-	</label>
-</div>
-
-<div id="myTable_paginate">
-<!-- 	<a id="myTable_previous" href="#">Previous</a> -->
-	<button id="myTable_previous">Previous</button>
-	<span id="myTable_pages" style="font-size:18px">0</span>
-	<button id="myTable_next">Next</button>
-<!-- 	<a id="myTable_next" href="#">Next</a> -->
-
-</div>
-
-<div id="myTable_info" style="font-size:18px">Showing 0 to 0 of 0 entries</div>
-
-<table border="1" id="myTable"> 
-	<thead>
-		<tr class="tableTitle">
-			<th><button onclick="javascript:document.location.href='/admin/order/add'">Add</button></th>
-			<th>id</th>
-			<th>supplierId</th>
-			<th>requesterId</th>
-			<th>supplierAcception</th>
-			<th>confirmation</th>
-			<th>status</th>
-			<th>jobTitle<p>(form REQUEST)</th>
-			<th>timeValue<p>(form REQUEST)</th>
-		</tr>
-	</thead>
-	<tbody>
-	
-	</tbody>
-</table>
-
-
-<script>
-	var thisPageSize = $("select[name='myTable_length']").val(); //一頁顯示幾筆
-	var thisPageElements; //本頁幾筆資料
-	var thisPage; //本頁的index
-	var totalPages;
-	var indexOfThisPageFirstData;
-	
-	$(document).ready(function(){
-		findAllOrders(0,thisPageSize);
-		//1.查詢全部資料
-		$("#find_all_btn").click(function(){
-			findAllOrders(0, thisPageSize);
-		});
-		
-		//2.查詢部分條件資料
-		$("#find_btn").click(function(){
-			findOrders(0, thisPageSize);
-		});
-
-		//3.換頁功能
-		//A.點擊動態生成的頁數標籤後，跳頁重新呼叫controller
-		$("#myTable_pages").on("click",".pageNum",function(){
-			var changePage = parseInt($(this).text()) - 1; //取得頁數值後減一(求index值)
-			findOrders(changePage, thisPageSize);
-		});
-		//B.點擊前一頁、下一頁
-		$("#myTable_previous").click(function(){
-			if(thisPage > 0){
-				findOrders(thisPage - 1, thisPageSize); //取得本頁頁數後減一(回前頁)
-			}
+			})
 		})
-		
-		$("#myTable_next").click(function(){
-			if(thisPage + 1 < totalPages){
-				findOrders(thisPage + 1, thisPageSize);
-			}
-		})
-		
-		//4.更改每頁資料筆數
-		$("select[name='myTable_length']").change(function(){
-			thisPageSize = $(this).val();
-			//根據換頁前第一筆資料位置，推算換頁後應留在第幾頁(index)
-			var changePageIndex = Math.floor((indexOfThisPageFirstData + 1) / thisPageSize);
-			findOrders(changePageIndex, thisPageSize);
-		})
-				
-	})
-	
-	function findAllOrders(pageNumber, pageSize){
-		$("#id").val("");  
-		$("#supplierId").val("");
-		$("#requesterId").val("");
-		$("#supplierAcception").val("");
-		$("#confirmation").val("");
-		$("#status").val("");
-		findOrders(pageNumber, pageSize);
-	}
-	
-	function findOrders(pageNumber, pageSize){
-		$.ajax({
-			url:'/admin/order/query?pageNumber=' + pageNumber + '&pageSize=' + pageSize,  
-			type:'post',
-			data:$('form').serialize(),
-			dataType:'json',
-			success:function(orders){
-// 				if(orders.status == "SUCCESS"){alert("");}else{}
-				//1.讀取分頁各項資訊，初始化全域變數
-					//本頁第一筆資料的index
-					indexOfThisPageFirstData = orders.page.pageable.offset;
-					
-					//第index頁******待處理:頁數過多時要切割........
-					thisPage = orders.page.pageable.pageNumber; 
-		
-					//orders.totalPages 共幾頁
-					totalPages = orders.page.totalPages;
-					
-					//本頁共幾筆
-					thisPageElements = orders.page.numberOfElements
-				//A.顯示分頁資訊:Showing XXX to XXX of XXX entries
-				var totalEntries = "Showing "+ (orders.page.totalElements > 0? indexOfThisPageFirstData + 1: indexOfThisPageFirstData)  //(indexOfThisPageFirstData + 1)
-								+ " to " + (indexOfThisPageFirstData + thisPageElements)  //orders.numberOfElements本頁共幾筆資料
-								+ " of " + orders.page.totalElements + " entries";  //orders.totalElements  所有資料共幾筆
-				$("#myTable_info").text(totalEntries);
-				
-				//B.顯示每頁超連結
-				if(totalPages > 0){
-					var pageLinks = "";
-					for(var i = 1; i <= totalPages; i++){ 
-						if(thisPage + 1 == i){  //標示當下頁數，顯示為粗體且無超連結
-							pageLinks += "<a class='pageNum' style='font-weight:bold'>" + i +"</a>  ";
-						}else{   //其他頁數顯示超連結
-							pageLinks += "<a class='pageNum' href='#'>" + i +"</a>  ";
-						}
-					}
-					$("#myTable_pages").html(pageLinks);
-				}else{
-					$("#myTable_pages").text(" 0 "); //如查無資料，則顯示0頁
-				}
-				
-				
-				
-				//------------------------------------------------------------------------------------------
-				//2.產生表格
-				$("tbody").text(""); 
-				$.each(orders.page.content, function(index, order){ //讀陣列資料(每筆資料為物件order)
-					//產生首欄按鈕(edit、delete)
-					var editBtn = $("<button onclick=\"javascript:document.location.href='/admin/order/edit?id="+order.id+"'\">Edit</button>");
-					var delBtn = $("<button onclick=\"deleteOrder("+order.id+")\">Delete</button>");						
-					var btn =$("<td></td>").append([editBtn, delBtn]); 
-					//將order的每個屬性放入欄位
-					var id = $("<td></td>").text(order.id);					
-					var supplierId = $("<td></td>").text(order.supplierId);
-					var requesterId = $("<td></td>").text(order.requesterId);
-					var supplierAcception = $("<td></td>").text(order.supplierAcception);
-					var confirmation = $("<td></td>").text(order.confirmation);
-					var status = $("<td></td>").text(order.status);
-					var jobTitle = $("<td></td>").text(order.requests.jobTitle);
-					var timeValue = $("<td></td>").text(order.requests.timeValue);
 						
-					var row = $("<tr></tr>").append([btn, id, supplierId, requesterId, supplierAcception, confirmation, status, jobTitle, timeValue]);
-					$("tbody").append(row);
-				})
-				
-				//------------------------------------------------------------------------------------------
-			}
-		})
-	}
-	
-	
-	function deleteOrder(orderId){  //刪除資料的按鈕所觸發的方法(#delBtn的onclick)
-		$.ajax({
-			url:'/admin/order/delete?id=' + orderId,
-			type:'delete',
-			dataType:'json',
-			success:function(deleteResult){
-				if(deleteResult.status == "SUCCESS"){
-					alert("delete no." + deleteResult.obj.id + " order - STATUS:" + deleteResult.status);
-					if(thisPageElements == 1){ //如果刪了該頁最後一筆資料，則直接跳轉到上一頁(否則留在該頁會無資料可供顯示)
-						thisPage--;
-						findOrders(thisPage, thisPageSize);
-					}else{
-						findOrders(thisPage, thisPageSize);
-					}
-				}else{
-					alert("delete no." + deleteResult.obj.id + " order - STATUS:" + deleteResult.status);
-					alert("FAIL reason:" + deleteResult.messages);
-				}
-			},
-		})
-	}
-	
-	
 
-	
-
-</script>
-
-
+	</script>
 
 </body>
 </html>

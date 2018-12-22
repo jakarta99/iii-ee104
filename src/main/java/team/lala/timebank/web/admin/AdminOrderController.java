@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
-import team.lala.timebank.commons.ajax.PageResponse;
 import team.lala.timebank.entity.Order;
-import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.service.OrderService;
 import team.lala.timebank.spec.OrderSpecification;
-import team.lala.timebank.spec.PenaltySpecification;
 
+@Slf4j
 @Controller
 @RequestMapping("/admin/order")
 public class AdminOrderController {
@@ -28,9 +27,7 @@ public class AdminOrderController {
 
 	@RequestMapping("/list")
 	public String listPage() {
-//		List<Order> orders = orderService.findAll();
-//		model.addAttribute("orders", orders);
-		return "/admin/order/order_list2"; // getRequestDispatcher("/WEB-INF/jsp/order_list.jsp").forward(request,
+		return "/admin/order/order_list"; // getRequestDispatcher("/WEB-INF/jsp/order_list.jsp").forward(request,
 											// response);
 	}
 	
@@ -42,33 +39,13 @@ public class AdminOrderController {
 		OrderSpecification orderSpec = new OrderSpecification(inputOrder);
 		Page<Order> orders = orderService.findBySpecification(
 				orderSpec, PageRequest.of(page, length.orElse(10)));
-		
+		System.out.println("orders={}"+orders );
+		log.debug("orders={}", orders );
 		return orders;
 
 	}
 	
 	
-//	@RequestMapping("/query")
-//	@ResponseBody
-//	public PageResponse<Order> queryOrder(Order order, @RequestParam("pageNumber") Integer pageNumber,
-//												@RequestParam("pageSize") Integer pageSize){
-//		PageResponse<Order> response = new PageResponse<Order>();
-//		
-//		try {
-//			OrderSpecification orderSpecification = new OrderSpecification(order);
-//			PageRequest thisPage = PageRequest.of(pageNumber, pageSize);
-//			Page<Order> orders = orderService.findBySpecification(orderSpecification, thisPage);
-//			response.setPage(orders);
-//		} catch (Exception e) {
-//			response.addMessage("查詢失敗，" + e.getMessage());
-//			e.printStackTrace();
-//		}
-//
-//		return response;
-//
-//	}
-	
-
 	@RequestMapping("/add")
 	public String addPage() {
 		return "/admin/order/order_add";
@@ -128,8 +105,5 @@ public class AdminOrderController {
 		}
 		return response;
 	}
-	
-	
-	
 	
 }

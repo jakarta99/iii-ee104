@@ -11,8 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
 import team.lala.timebank.enums.YesNo;
 
+@Getter
+@Setter
 @Entity
 @Table(name="ORDER_LIST")
 public class Order{
@@ -20,94 +24,38 @@ public class Order{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name="SUPPLIER_ID")
-	private Long supplierId;
+	@Column(name="VOLUNTEER_ID")
+	private Long volunteerId;
 	
-	@Column(name="REQUESTER_ID")
-	private Long requesterId;
-	
-	@Enumerated(EnumType.STRING)
-	@Column(name="SUPPLIER_ACCEPTION")
-	private YesNo supplierAcception;
+	@Column(name="SERVICE_REQUESTER_ID")
+	private Long serviceRequesterId;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name="SERVICE_CONFIRMATION")
-	private YesNo confirmation;
+	@Column(name="ORDER_ACCEPTION")
+	private YesNo orderAcception;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="ORDER_CONFIRMATION")
+	private YesNo orderConfirmation;
 	
 	@Column(name="STATUS")
 	private String status;
 	
 	@ManyToOne
-	@JoinColumn(name="requests",    //代表本entity屬性名稱
-				referencedColumnName="id",  //代表合併的目標entity，其對應的欄位名稱
-				insertable=true, updatable=true) //spring boot自動產生資料時，會把Requests主表的@Id當作一個欄位，產生資料表
-													//故此處insertable必須設為true
-	private Requests requests;  
-	
-	public Requests getRequests() {
-		return requests;
-	}
-
-	public void setRequests(Requests requests) {
-		this.requests = requests;
-	}
+	@JoinColumn(name="mission",    
+				referencedColumnName="id",  
+				insertable=true, updatable=true) 
+	private Mission mission;
 
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", requests=" + requests + ", supplierId=" + supplierId + ", requesterId="
-				+ requesterId + ", supplierAcception=" + supplierAcception + ", confirmation=" + confirmation
-				+ ", status=" + status + "]";
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
-
-	public Long getSupplierId() {
-		return supplierId;
-	}
-
-	public void setSupplierId(Long supplierId) {
-		this.supplierId = supplierId;
-	}
-
-	public Long getRequesterId() {
-		return requesterId;
-	}
-
-	public void setRequesterId(Long requesterId) {
-		this.requesterId = requesterId;
-	}
+		return "Order [id=" + id + ", volunteerId=" + volunteerId + ", serviceRequesterId=" + serviceRequesterId
+				+ ", orderAcception=" + orderAcception + ", orderConfirmation=" + orderConfirmation + ", status="
+				+ status + ", mission=" + mission + "]";
+	}  
+	
+	
 
 	
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public YesNo getSupplierAcception() {
-		return supplierAcception;
-	}
-
-	public void setSupplierAcception(YesNo supplierAcception) {
-		this.supplierAcception = supplierAcception;
-	}
-
-	public YesNo getConfirmation() {
-		return confirmation;
-	}
-
-	public void setConfirmation(YesNo confirmation) {
-		this.confirmation = confirmation;
-	}
 
 }

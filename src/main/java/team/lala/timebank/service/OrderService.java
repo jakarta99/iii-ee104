@@ -27,7 +27,6 @@ public class OrderService {
 	}
 	
 	public Page<Order> findBySpecification(Specification<Order> specification, PageRequest pageRequest) {
-//		PageRequest thisPage = PageRequest.of(0, 5);
 		return orderDao.findAll(specification, pageRequest);
 	}
 	
@@ -36,20 +35,15 @@ public class OrderService {
 		return orders;
 	}
 	
-	//透過志工會員id查詢所有申請及目前審核狀態 (流程：志工申請提供服務的紀錄)
-	public List<Order> findBySupplierId(Long supplierId) {
-		List<Order> orders = orderDao.findBySupplierId(supplierId);
+	
+	public List<Order> findByVolunteerId(Long volunteerId) {
+		List<Order> orders = orderDao.findByVolunteerId(volunteerId);
 		return orders;
 	}
 	
-	//測試join用
-	public List<Order> findOrderBySupplierIdAndJobTitle(Long supplierId, String jobTitle) {
-		List<Order> order = orderDao.findOrderBySupplierIdAndJobTitle(supplierId, jobTitle);
-		return order;
-	}
 	
-	public List<Order> findByConfirmation(YesNo confirmation){
-		List<Order> order = orderDao.findByConfirmation(confirmation);
+	public List<Order> findByOrderConfirmation(YesNo orderConfirmation){
+		List<Order> order = orderDao.findByOrderConfirmation(orderConfirmation);
 		return order;
 	};
 	
@@ -74,10 +68,10 @@ public class OrderService {
 	
 	public Order update(Order order) {
 		Order dbOrder = null;
-		if(order.getId() != null) {
+		if(order.getId() != null ) {
 			dbOrder = getById(order.getId());
-			dbOrder.setSupplierAcception(order.getSupplierAcception());
-			dbOrder.setConfirmation(order.getConfirmation());
+			dbOrder.setOrderAcception(order.getOrderAcception());
+			dbOrder.setOrderConfirmation(order.getOrderConfirmation());
 			dbOrder.setStatus(order.getStatus());
 			dbOrder = orderDao.save(dbOrder);
 		}
