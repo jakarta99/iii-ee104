@@ -337,35 +337,19 @@ INSERT INTO TIME_LEDGER (MEMBER_ID,TRANSACTION_TIME,DEPOSIT_VALUE,WITHDRAWAL_VAL
 VALUES(4, '2018-12-24', 0,400,0,'deposit');
 --penalty
 
-INSERT INTO PENALTY (order_list_id, member_id, update_date, description, status, penalty_time_value)
-VALUES(2, 1, '2018-11-10', '缺席', 1 , 4);
+INSERT INTO PENALTY (ORDER_LIST, accuser, update_date, description, status, penalty_time_value)
+VALUES(1, 1, '2018-11-10', '缺席', 1 , 4);
 
-INSERT INTO PENALTY (order_list_id, member_id, update_date, description, status, penalty_time_value)
-VALUES(3, 2, '2018-11-11', '遲到1小時', 2 , 2);
+INSERT INTO PENALTY (ORDER_LIST, accuser, update_date, description, status, penalty_time_value)
+VALUES(2, 2, '2018-11-11', '遲到1小時', 2 , 2);
 
-INSERT INTO PENALTY (order_list_id, member_id, update_date, description, status, penalty_time_value)
-VALUES(1, 3, '2018-11-12', '服務態度不佳', 3 ,0);
+INSERT INTO PENALTY (ORDER_LIST, accuser, update_date, description, status, penalty_time_value)
+VALUES(3, 3, '2018-11-12', '服務態度不佳', 3 ,0);
 
-INSERT INTO PENALTY (order_list_id, member_id, update_date, description, status, penalty_time_value)
-VALUES(2, 1, '2018-11-13', '缺席', 1 , 4);
+INSERT INTO PENALTY (ORDER_LIST, accuser, update_date, description, status, penalty_time_value)
+VALUES(4, 1, '2018-11-13', '缺席', 1 , 4);
 
-INSERT INTO PENALTY (order_list_id, member_id, update_date, description, status, penalty_time_value)
-VALUES(2, 1, '2018-11-14', '缺席', 1 , 4);
 
-INSERT INTO PENALTY (order_list_id, member_id, update_date, description, status, penalty_time_value)
-VALUES(2, 1, '2018-11-15', '缺席', 1 , 4);
-
-INSERT INTO PENALTY (order_list_id, member_id, update_date, description, status, penalty_time_value)
-VALUES(2, 1, '2018-11-16', '缺席', 1 , 4);
-
-INSERT INTO PENALTY (order_list_id, member_id, update_date, description, status, penalty_time_value)
-VALUES(2, 1, '2018-11-17', '缺席', 1 , 4);
-
-INSERT INTO PENALTY (order_list_id, member_id, update_date, description, status, penalty_time_value)
-VALUES(2, 1, '2018-11-18', '缺席', 1 , 4);
-
-INSERT INTO PENALTY (order_list_id, member_id, update_date, description, status, penalty_time_value)
-VALUES(2, 1, '2018-11-19', '缺席', 1 , 4);
 
 --donation
 
