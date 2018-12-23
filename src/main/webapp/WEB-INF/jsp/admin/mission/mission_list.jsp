@@ -227,7 +227,7 @@
 				fixedHeader: true,
 				pagingType: 'full_numbers',
 	 			searching:false,
-	 			processing:true,
+	 			processing:false,
 	 			serverSide:true,
 	 			"stateSave": true,
 				"infoCallback": function( settings, start, end, max, total, pre ) {
@@ -279,7 +279,7 @@
 						{"data":"title"},
 						{"data":"timeValue"},
 						{"data":"termType"},
-						{"data":"serviceType"},
+						{"data":"serviceType.serviceType"},
 						{"data":null, render: function ( data, type, row ) {
 			                return new Date(data.publishDate).toLocaleDateString();
 			            } },	

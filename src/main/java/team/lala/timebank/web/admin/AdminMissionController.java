@@ -22,8 +22,10 @@ import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Requests;
+import team.lala.timebank.entity.ServiceType;
 import team.lala.timebank.service.MissionService;
 import team.lala.timebank.service.RequestsService;
+import team.lala.timebank.service.ServiceTypeService;
 import team.lala.timebank.spec.MemberSpecification;
 import team.lala.timebank.spec.MissionSpecification;
 import team.lala.timebank.spec.OrderSpecification;
@@ -36,6 +38,10 @@ public class AdminMissionController {
 
 	@Autowired
 	private MissionService missionService;
+	
+	@Autowired
+	private ServiceTypeService serviceTypeService;
+	
 
 	@RequestMapping("/list")
 	public String listPage(Model model) {
@@ -44,15 +50,19 @@ public class AdminMissionController {
 	}
 
 	@RequestMapping("/add")
-	public String addPage() {
-
+	public String addPage(Model model) {
+		List<ServiceType> serviceType=serviceTypeService.findAll();	
+		model.addAttribute("serviceType", serviceType);
 		return "/admin/mission/mission_add";
 	}
 
 	@RequestMapping("/edit")
 	public String editPage(@RequestParam("id") Long id, Model model) {
 		Mission mission = missionService.getOne(id);
+		List<ServiceType> serviceType=serviceTypeService.findAll();		
 		model.addAttribute("mission", mission);
+		model.addAttribute("serviceType", serviceType);
+		
 		return "/admin/mission/mission_edit";
 	}
 

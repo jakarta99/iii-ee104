@@ -91,10 +91,9 @@
     
     <div class="form-group">
     serviceType:<select id="serviceType" name="serviceType" class="form-control">
-        <option value="1">照顧老人</option>
-        <option value="2">孩童教育</option>
-        <option value="3">環境清潔</option>
-        <option value="4">生態保育</option>			
+        <c:forEach var="serviceType" items="${serviceType}"> 
+			<option value="${serviceType.id}">${serviceType.serviceType}</option> 
+		</c:forEach> 
     </select>
     </div>
     
@@ -168,6 +167,9 @@
 		}
 		$(document).ready(function() {
 			
+			
+// 			$('#serviceType').append()
+			
 						
 			new TwCitySelector();
 			
@@ -189,8 +191,6 @@
 			    startView:"years",
 			})
 			
-			$('#startDate').datetimepicker(datetimepickerSetting);
-			$('#endDate').datetimepicker(datetimepickerSetting);
 			
 			$("div[role='tw-city-selector']").attr("data-county-value",'${mission.county}');
 			$("div[role='tw-city-selector']").attr("data-district-value", '${mission.district}');

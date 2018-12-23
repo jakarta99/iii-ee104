@@ -20,12 +20,12 @@ public class ServiceType {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="ServiceType")
-	private String ServiceType;
+	@Column(name="service_Type")
+	private String serviceType;
 
 	@Override
 	public String toString() {
-		return "ServiceType [id=" + id + ", ServiceType=" + ServiceType + "]";
+		return "ServiceType [id=" + id + ", ServiceType=" + serviceType + "]";
 	}
 
 	

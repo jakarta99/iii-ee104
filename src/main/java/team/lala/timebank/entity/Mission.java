@@ -9,6 +9,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Past;
 
@@ -42,8 +44,13 @@ public class Mission {
 	@Column(name = "term_Type", nullable = false)
 	private TermType termType;// 長短期
 
-	@Column(name = "service_Type", nullable = false)
-	private Integer serviceType;// 服務類型
+//	@Column(name = "service_Type", nullable = false)
+//	private Integer serviceType;// 服務類型
+	
+	@ManyToOne
+	@JoinColumn(name="service_Type",    
+				referencedColumnName="id") 
+	private ServiceType serviceType;
 
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@Column(name = "publish_Date", nullable = false)
