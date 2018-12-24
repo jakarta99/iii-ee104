@@ -8,48 +8,14 @@
             <div id="navigation" class="navbar-collapse collapse">
               <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item dropdown active"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle">公益團體 <b class="caret"></b></a>
-<!--                   <ul class="dropdown-menu"> -->
-<!--                     <li class="dropdown-item"><a href="/" class="nav-link">Option 1: Default Page</a></li> -->
-<!--                     <li class="dropdown-item"><a href="index2.html" class="nav-link">Option 2: Application</a></li> -->
-<!--                     <li class="dropdown-item"><a href="index3.html" class="nav-link">Option 3: Startup</a></li> -->
-<!--                     <li class="dropdown-item"><a href="index4.html" class="nav-link">Option 4: Agency</a></li> -->
-<!--                     <li class="dropdown-item"><a href="index5.html" class="nav-link">Option 5: Portfolio</a></li> -->
-<!--                   </ul> -->
                 </li>
                 <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" class="dropdown-toggle">志工招募<b class="caret"></b></a>
-                  <ul class="dropdown-menu megamenu">
-                    <li>
-<!--                       <div class="row"> -->
-<!--                          <div class="col-lg-6"><img src="/img/template-easy-customize.png" alt="" class="img-fluid d-none d-lg-block"></div> --> 
-<!--                         <div class="col-lg-3 col-md-6"> -->
-<!--                           <h5>Shortcodes</h5> -->
-<!--                           <ul class="list-unstyled mb-3"> -->
-<!--                             <li class="nav-item"><a href="template-accordions.html" class="nav-link">Accordions</a></li> -->
-<!--                             <li class="nav-item"><a href="template-alerts.html" class="nav-link">Alerts</a></li> -->
-<!--                             <li class="nav-item"><a href="template-buttons.html" class="nav-link">Buttons</a></li> -->
-<!--                             <li class="nav-item"><a href="template-content-boxes.html" class="nav-link">Content boxes</a></li> -->
-<!--                             <li class="nav-item"><a href="template-blocks.html" class="nav-link">Horizontal blocks</a></li> -->
-<!--                             <li class="nav-item"><a href="template-pagination.html" class="nav-link">Pagination</a></li> -->
-<!--                             <li class="nav-item"><a href="template-tabs.html" class="nav-link">Tabs</a></li> -->
-<!--                             <li class="nav-item"><a href="template-typography.html" class="nav-link">Typography</a></li> -->
-<!--                           </ul> -->
-<!--                         </div> -->
-<!--                         <div class="col-lg-3 col-md-6"> -->
-<!--                           <h5>Header variations</h5> -->
-<!--                           <ul class="list-unstyled mb-3"> -->
-<!--                             <li class="nav-item"><a href="template-header-default.html" class="nav-link">Default sticky header</a></li> -->
-<!--                             <li class="nav-item"><a href="template-header-nosticky.html" class="nav-link">No sticky header</a></li> -->
-<!--                             <li class="nav-item"><a href="template-header-light.html" class="nav-link">Light header</a></li> -->
-<!--                           </ul> -->
-<!--                         </div> -->
-<!--                       </div> -->
-                    </li>
-                  </ul>
                 </li>
               <li class="nav-item dropdown menu-large" ><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">會員專區 <b class="caret"></b></a>
                   <ul class="dropdown-menu megamenu" style="width:450px;">
                     <li>
                       <div class="row">
+
                         <div class="col-md-6 col-lg-3">
                            <h5><a href="#" >行事曆</a></h5>                      
                           <h5><a href="#" >系統訊息</a></h5>
@@ -61,7 +27,7 @@
                             <li class="nav-item"><a href="#" class="nav-link">招募紀錄</a></li>
                             <li class="nav-item"><a href="#" class="nav-link">刊登任務</a></li>                      
                           </ul>
-                         <h5><a href="#" >志工申請</a></h5>
+                         <h5><a href="javascript:document.location.href='/user/volunteerApplication/page'" >志工申請</a></h5>
                           <ul class="list-unstyled mb-3">
                             <li class="nav-item"><a href="#" class="nav-link">申請中</a></li>
                             <li class="nav-item"><a href="#" class="nav-link">服務紀錄</a></li>                          
@@ -78,17 +44,7 @@
                 </li>
                       
                       
-<!--                       <div class="row"> -->
-               
-<!--                         <div class="col-lg-3 col-md-6"> -->
-<!--                           <h5>我的申請</h5> -->
-<!--                           <ul class="list-unstyled mb-3"> -->
-<!--                          <li> <button class="btn btn-primary btn-sm" style=margin-left:45px  -->
-<!--                          			onclick="javascript:document.location.href='/user/application/page'">我的申請</button></li> -->
-<!--                             <li class="nav-item"><a href="about.html" class="nav-link">申請中</a></li> -->
-<!--                             <li class="nav-item"><a href="team.html" class="nav-link">服務紀錄</a></li> -->
-<!--                           </ul> -->
-<!--                         </div> -->
+
                      
                 <!-- ========== FULL WIDTH MEGAMENU ==================-->
                 <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">關於我們 <b class="caret"></b></a>
@@ -207,6 +163,8 @@
                     <li class="dropdown-item"><a href="/admin/role/list" class="nav-link" id="backStage-role">role</a></li>
                     <li class="dropdown-item"><a href="/admin/serviceType/list" class="nav-link" id="backStage-role">serviceType</a></li>
                     <li class="dropdown-item"><a href="/user/personal-info/list" class="nav-link" id="backStage-personalinfo">personal-info</a></li>
+                    <li class="dropdown-item"><a href="/penalty/tempPenaltyEntrance" class="nav-link" id="backStage-personalinfo">模擬提出檢舉(未全部完成)</a></li>
+                    <li class="dropdown-item"><a href="/penalty/showVertifyList" class="nav-link" id="backStage-personalinfo">檢舉案件審核(未全部完成)</a></li>
 <!--                     <li class="dropdown-item"><a href="/user/my-donation/list" class="nav-link" id="backStage-mydonation">my-donation</a></li> -->
                   </ul>
                 </li>

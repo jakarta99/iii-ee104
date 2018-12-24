@@ -27,10 +27,10 @@
 	<h1 style="padding-top: 2cm">檢舉成功(暫放，之後要放個人檢舉案件列表)</h1>
 
 
-		媒合案件編號(Order.id):${penalty.order.id}<p>
-		活動編號(Mission.id):${penalty.order.mission.id}<p>
-		活動名稱(Mission.title):${penalty.order.mission.title}<p>
-		活動時間(Mission.startDate~endDate):${penalty.order.mission.startDate} ~ ${penalty.order.mission.endDate}<p>
+		媒合案件編號(Order.id):${reportOnePenalty.order.id}<p>
+		活動編號(Mission.id):${reportOnePenalty.order.mission.id}<p>
+		活動名稱(Mission.title):${reportOnePenalty.order.mission.title}<p>
+		活動時間(Mission.startDate~endDate):${reportOnePenalty.order.mission.startDate} ~ ${reportOnePenalty.order.mission.endDate}<p>
 		
 		
 <!-- 		#檢舉人會員編號  accuser-memberId: -->
@@ -38,10 +38,13 @@
 <!-- 		檢舉人姓名: -->
 <%-- 		<input type="text" id="" name="" value="${penalty.accuserName}"  disabled="disabled"/><p> --%>
 		
-		#被檢舉人會員編號  defendant-memberId:${penalty.defendant.id}<p>
-		被檢舉人姓名:${penalty.defendant.name}<p>
-		檢舉情形描述description:${penalty.description}<p>
-		狀態:${penalty.status}<p>
+		#被檢舉人會員編號  defendant-memberId:${reportOnePenalty.defendant.id}<p>
+		被檢舉人姓名:${reportOnePenalty.defendant.name}<p>
+		檢舉情形描述description:${reportOnePenalty.description}<p>
+		狀態:${reportOnePenalty.status}<p>
+		
+		<a href="#">back to 我的檢舉案件</a><p>
+		<a href="/penalty/tempPenaltyEntrance">back to 我的所有媒合案件(清單)</a>
 		
 		
 		

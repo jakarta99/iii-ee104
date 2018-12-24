@@ -39,7 +39,7 @@
 		<input type="text" id="" name="" value="${reportBasicData.order.mission.startDate} ~ ${reportBasicData.order.mission.endDate}" size="50"  disabled="disabled"/><p>
 		
 		
-		#檢舉人會員編號  accuser-memberId:
+		#檢舉人會員編號  accuser-memberId(暫時直接抓目前登入者之id):
 		<input type="text" id="accuser" name="accuser" value="${reportBasicData.accuserId}"  readonly/><p>
 		檢舉人姓名:
 		<input type="text" id="" name="" value="${reportBasicData.accuserName}"  disabled="disabled"/><p>
@@ -61,18 +61,7 @@
 	
 	<script type="text/javascript">
 	
-// 		$('#add').click(function(){
-// 			$.ajax({
-// 				url:"/penalty/insert",
-// 				method:"put",
-// 				dataType:"json",
-// 				data:$('form').serialize()
-// 			}).done(function(result){
-// 				alert(result.status);
-// 				window.location.replace("/penalty/my_report_list");
-// 			})
-// 		})
-		
+
 	</script>
 </body>
 </html>
