@@ -13,7 +13,7 @@
 	<!-- Navbar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />
 	
-	<jsp:include page="user_layout/user_sidebar.jsp" />
+	<jsp:include page="../user_layout/user_sidebar.jsp" />
 	<div>
 	
 	

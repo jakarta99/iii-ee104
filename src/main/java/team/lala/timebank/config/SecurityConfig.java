@@ -24,7 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers("/", "/home", "/js/**", "/css/**", "/img/**", "/vendor/**").permitAll()
-				.antMatchers("/admin/**").access("hasRole('ADMIN')")
+				.antMatchers("/admin/**","/user/**").access("hasRole('ADMIN')")
+				.antMatchers("/user/**").access("hasRole('USER')")
 				.and().formLogin().loginPage("/login")
 				.failureHandler((req, res, exp) -> {
 					String errMsg = "";
