@@ -1,5 +1,6 @@
 package team.lala.timebank.service;
 
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
@@ -9,13 +10,18 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.MissionDao;
+import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
+
 @Service
 public class MissionService {
 
 	@Autowired
 	private MissionDao missionDao;
+	@Autowired
+	private MemberDao memberDao;
 
 	public List<Mission> findBySpecification(Specification<Mission> specification) {
 		return missionDao.findAll(specification);
@@ -33,8 +39,17 @@ public class MissionService {
 		mission.setStartDate(mission.getStartDate());
 		mission.setEndDate(mission.getEndDate());
 		mission.setPublishDate(new Date());
-		
-		
+
+		return missionDao.save(mission);
+	}
+
+	public Mission insert(Mission mission, Principal principal) {
+		Member member = memberDao.findByAccount(principal.getName());
+
+		mission.setId(member.getId());
+		mission.setStartDate(mission.getStartDate());
+		mission.setEndDate(mission.getEndDate());
+		mission.setPublishDate(new Date());
 
 		return missionDao.save(mission);
 	}
@@ -43,7 +58,7 @@ public class MissionService {
 	public Mission update(Mission mission) {
 		System.out.println(mission.getTermType().getClass());
 		System.out.println(mission.getTermType());
- 
+
 		return missionDao.save(mission);
 	}
 

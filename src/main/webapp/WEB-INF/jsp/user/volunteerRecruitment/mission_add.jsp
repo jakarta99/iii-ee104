@@ -85,9 +85,6 @@
     title:<input type="text" value="" id="title" name="title" class="form-control"/>
     </div>
     
-<!--     <div class="form-group"> -->
-<!--     memberId:<input type="text" value="" id="memberId" name="memberId" class="form-control"/> -->
-<!--     </div> -->
     
     <div class="form-group">
     serviceType:<select id="serviceType" name="serviceType" class="form-control">
