@@ -21,6 +21,7 @@
 <style>
 	article {
 		margin-top: 30px;
+		margin-bottom: 30px;
 		padding: 10px;
 	}
 	article fieldset {
@@ -29,13 +30,9 @@
 		padding: 20px 20px 0px 20px; 
 		border: 2px solid #bebebe;
 		margin: auto;
-		margin-top: 10px; 
-		margin-bottom: 20px; 
 	}
 	article input, select, label {
- 		padding-left: 10px;  		
- 		margin:auto;   
- 		margin-bottom:20px;
+  		padding-left: 10px;  		   
   		line-height:center; 
 	}
 /* 	設定縣市地區選擇器的css樣式 */
@@ -52,7 +49,7 @@
 	  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	}
 	.center{
-		text-align: center
+		text-align: center;
 	}
 </style>
 
@@ -73,61 +70,61 @@
 				<input type="hidden" value="${member.memberType}" id="memberType" name="memberType" />
 				<div>
 					<label>帳號 :</label>
-					<input type="text" value="${member.account}" id="account" name="account" readonly style="background-color:#DDDDDD"><br>
-				</div>
+					<input type="text" value="${member.account}" id="account" name="account" readonly style="background-color:#DDDDDD" ><br>
+				</div><hr>
 				<div>
 					<label>密碼 :</label>
 					<input type="text" value="${member.password}" id="password" name="password"><br>
-				</div>
+				</div><hr>
 				<div>
 					<label>名字 :</label>
 					<input type="text" value="${member.name}" id="name" name="name"><br>
-				</div>
+				</div><hr>
 				<fmt:formatDate value="${member.birthDate}" pattern="yyyy/MM/dd" var="birthDate" />
 				<c:choose>
 					<c:when test="${member.memberType eq 'P'}">
 						<div>
 							<label>身分證字號 :</label>
-							<input type="text" value="${member.certificateIdNumber}" id="certificateIdNumber"	name="certificateIdNumber"><br>
-						</div>
+							<input type="text" value="${member.certificateIdNumber}" id="certificateIdNumber" name="certificateIdNumber"><br>
+						</div><hr>
 						<div>
 							<label>出生日期:</label>
 							<input type="text" value="${birthDate}" id="birthDate" name="birthDate" autocomplete="off"><br>
-						</div>
+						</div><hr>
 					</c:when>
 					<c:when test="${member.memberType eq 'O'}">
 						<div>
 							<label>統一編號 :</label> 
 							<input type="text" value="${member.certificateIdNumber}" id="certificateIdNumber" name="certificateIdNumber"><br>
-						</div>
+						</div><hr>
 						<div>
 							<label>創立日期:</label> 
 							<input type="text" value="${birthDate}" id="birthDate" name="birthDate" autocomplete="off"><br>
-						</div>
+						</div><hr>
 					</c:when>
 				</c:choose>
 				<div>
 					<label>email:</label> 
 					<input type="text" value="${member.email}" id="email" name="email"><br>
-				</div>
+				</div><hr>
 				<div>
 					<label>住家電話:</label> 
 					<input type="text" value="${member.telephone}" id="telephone" name="telephone"><br>
-				</div>
+				</div><hr>
 				<div>
 					<label>手機:</label> 
 					<input type="text" value="${member.mobile}" id="mobile" name="mobile"><br>
-				</div>
+				</div><hr>
 				<div>			
 					<label>住址:</label>
 					<span role="tw-city-selector"></span>
 					<input type="text" value="${member.address}" id="address" name="address"><br>
-				</div>
+				</div><hr>
 				<div>
 					<fmt:formatDate value="${member.signUpDate}" pattern="yyyy/MM/dd" var="signUpDate" />
 					<label>註冊日期:</label> 
 					<input type="text" value="${signUpDate}" id="signUpDate" name="signUpDate" autocomplete="off"><br>
-				</div>
+				</div><hr>
 			</fieldset>
 			<fieldset>
 			<legend>驗證資訊</legend>
@@ -137,19 +134,15 @@
 					<input type="radio" value="Y" name="emailVerification">
 					<label>N</label> 
 					<input type="radio" value="N" name="emailVerification"><br>
-				</div>
+				</div><hr>
 				<c:if test="${member.memberType eq 'O' }">
 					<div>
 						<label>機構身分驗證 (Y/N): </label>
-						<div>
 							<label>Y</label> 
 							<input type="radio" value="Y" name="orgIdConfirmation">
-						</div>
-						<div>
 							<label>N</label> 
 							<input type="radio" value="N" name="orgIdConfirmation"><br>								
-						</div>
-					</div>
+					</div><hr>
 				</c:if>	
 			</fieldset>
 				<c:if test="${member.memberType eq 'O' }">
@@ -158,33 +151,33 @@
 					<div >
 						<label>創辦人:</label> 
 						<input type="text" value="${member.orgFounder}" id="orgFounder" name="orgFounder"><br>
-					</div>
+					</div><hr>
 					<div>
 						<label>執行長:</label>
 						<input type="text" value="${member.orgCeo}" id="orgCeo" name="orgCeo"><br>
-					</div>
+					</div><hr>
 					<div>
 						<label>聯絡人:</label>
 						<input type="text" value="${member.orgContactPerson}" id="orgContactPerson" name="orgContactPerson"><br>
-					</div>
+					</div><hr>
 					<div>
 						<label>聯絡人電話:</label> 
 						<input type="text" value="${member.orgContactPersonTel}" id="orgContactPersonTel" name="orgContactPersonTel"><br>
-					</div>
+					</div><hr>
 					<div>
 						<label>聯絡人手機:</label>
 						<input type="text" value="${member.orgContactPersonMobile}" id="orgContactPersonMobile" name="orgContactPersonMobile"><br>
-					</div>
+					</div><hr>
 					<div>
 						<label>網址:</label>
 						<input type="url" size="50px" value="${member.orgWebsiteLink}" id="orgWebsiteLink" name="orgWebsiteLink"><br>
-					</div>
+					</div><hr>
 					<div>
 						<label>創立宗旨:</label>
 						<textarea rows="5" cols="50" id="orgFoundPurpose" name="orgFoundPurpose">
 							${member.orgFoundPurpose}
 						</textarea><br>
-					</div>
+					</div><hr>
 					</fieldset>
 				</c:if>
 				<fieldset style="border:none">
