@@ -1,5 +1,36 @@
 package team.lala.timebank.web.member;
 
+import java.security.Principal;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import team.lala.timebank.entity.Mission;
+import team.lala.timebank.service.MissionService;
+
+@RequestMapping("")
+@Controller
 public class RecruitFinishController {
 
+	@Autowired
+	private MissionService missionService;
+
+	@RequestMapping("")
+	@ResponseBody
+	public void getAllRecruit(Principal principal, Model model) {
+		List<Mission> missions = missionService.findByMemberAccount(principal);
+		model.addAllAttributes(missions);
+	}
+	
+	@RequestMapping("")
+	public void editRecruit(Mission mission) {
+		
+	}
+	
+	
+	
 }
