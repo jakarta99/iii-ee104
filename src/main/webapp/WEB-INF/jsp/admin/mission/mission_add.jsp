@@ -67,6 +67,9 @@
     </style>
 </head>
 <body>
+<jsp:include page="../admin_layout/nav.jsp" />
+
+	
 <div id="navBar" class="margintop"></div>
 	<h1 class="s2">mission add</h1>
 	<fieldset>

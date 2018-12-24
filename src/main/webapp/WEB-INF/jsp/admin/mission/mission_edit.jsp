@@ -72,6 +72,7 @@
 <fmt:formatDate value="${mission.publishDate }" pattern="yyyy/MM/dd" var="publishDate" />
 <fmt:formatDate value="${mission.startDate }" pattern="yyyy/MM/dd HH:mm" var="startDate" />
 <fmt:formatDate value="${mission.endDate }" pattern="yyyy/MM/dd HH:mm" var="endDate" />
+<jsp:include page="../admin_layout/nav.jsp" />
 <div id="navBar" class="margintop"></div>
 	
 	<h1 class="s2">mission edit</h1>
