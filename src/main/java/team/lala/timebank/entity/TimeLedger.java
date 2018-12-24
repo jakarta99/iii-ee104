@@ -13,6 +13,9 @@ import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * DATETIME    MEMBER_ID   DEPOSIT         WITHDRAWAL           BALANCE          DESCRIPTION 
  * -----------------------------------------------------------------------------   
@@ -23,6 +26,8 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author Gary Lee
  *
  */
+@Getter
+@Setter
 @Entity
 @Table(name="Time_Ledger")
 public class TimeLedger {
@@ -57,77 +62,7 @@ public class TimeLedger {
 	@Column(name="description")
 	private String description;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(Long memberId) {
-		this.memberId = memberId;
-	}
-
-	public Date getTransactionTime() {
-		return transactionTime;
-	}
-
-	public void setTransactionTime(Date transactionTime) {
-		this.transactionTime = transactionTime;
-	}
-
-	public Date getTransactionTimeBegin() {
-		return transactionTimeBegin;
-	}
-
-	public void setTransactionTimeBegin(Date transactionTimeBegin) {
-		this.transactionTimeBegin = transactionTimeBegin;
-	}
-
-	public Date getTransactionTimeEnd() {
-		return transactionTimeEnd;
-	}
-
-	public void setTransactionTimeEnd(Date transactionTimeEnd) {
-		this.transactionTimeEnd = transactionTimeEnd;
-	}
-
-	public Integer getDepositValue() {
-		return depositValue;
-	}
-
-	public void setDepositValue(Integer depositValue) {
-		this.depositValue = depositValue;
-	}
-
-	public Integer getWithdrawalValue() {
-		return withdrawalValue;
-	}
-
-	public void setWithdrawalValue(Integer withdrawalValue) {
-		this.withdrawalValue = withdrawalValue;
-	}
-
-	public Integer getBalanceValue() {
-		return balanceValue;
-	}
-
-	public void setBalanceValue(Integer balanceValue) {
-		this.balanceValue = balanceValue;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	
 
 	@Override
 	public String toString() {

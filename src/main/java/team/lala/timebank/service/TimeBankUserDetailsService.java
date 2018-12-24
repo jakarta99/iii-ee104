@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.entity.Member;
@@ -18,7 +18,7 @@ public class TimeBankUserDetailsService implements UserDetailsService {
 	private MemberDao memberDao;
 	
 	@Override
-//	@Transactional(readOnly = true)
+	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 		Member user = memberDao.findByAccount(username);
