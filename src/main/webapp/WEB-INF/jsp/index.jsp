@@ -6,15 +6,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Timebank</title>
-    <jsp:include page="commons/commons_layout/commons_css_links.jsp"/>
+    <jsp:include page="basic/commons/commons_layout/commons_css_links.jsp"/>
   </head>
   <body>
     <div id="all">
       <!-- Top bar-->
-      <jsp:include page="commons/commons_layout/commons_top-bar.jsp"/>
+      <jsp:include page="basic/commons/commons_layout/commons_top-bar.jsp"/>
  	
 	  <!-- Navbar -->
-      <jsp:include page="commons/commons_layout/commons_nav.jsp"/>
+      <jsp:include page="basic/commons/commons_layout/commons_nav.jsp"/>
       
       <section style="background: url('img/photogrid.jpg') center center repeat; background-size: cover;" class="bar background-white relative-positioned">
         <div class="container">
@@ -310,12 +310,12 @@
         </div>
       </section>
       <!-- FOOTER -->
-      <jsp:include page="commons/commons_layout/commons_footer.jsp"/>
+      <jsp:include page="basic/commons/commons_layout/commons_footer.jsp"/>
       
     </div>
     
     <!-- Javascript files-->
-    <jsp:include page="commons/commons_layout/commons_js_links.jsp"/>
+    <jsp:include page="basic/commons/commons_layout/commons_js_links.jsp"/>
     
   </body>
 </html>
