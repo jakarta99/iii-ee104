@@ -14,8 +14,8 @@
  					<li class="nav-item"><a href="#collapseMission" class="nav-link" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseMission">志工招募</a>
                      	<div class="collapse" id="collapseMission">
 	                     	 <ul class="nav nav-pills flex-column text-sm">
-	                     	 	 <li class="nav-item"><a href="" class="nav-link">招募紀錄</a></li>
-	                    		 <li class="nav-item"><a href="" class="nav-link">刊登任務</a></li>
+	                     	 	 <li class="nav-item"><a href="/user/recruitFinish/list" class="nav-link">招募紀錄</a></li>
+	                    		 <li class="nav-item"><a href="/user/volunteerRecruitment/add" class="nav-link">刊登任務</a></li>
 	                     	 </ul>
 				 		</div>
 				 	</li>
