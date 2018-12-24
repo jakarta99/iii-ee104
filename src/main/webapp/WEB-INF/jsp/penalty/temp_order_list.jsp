@@ -87,16 +87,6 @@
 					</div>
 				</div>
 				<div>
-					<div>
-						<label>orderAcception(Y/N):</label>
-						<input type="radio" value="Y" name="orderAcception" />Y
-						<input type="radio" value="N" name="orderAcception" />N
-					</div>
-					<div>
-						<label>orderConfirmation(Y/N):</label>
-						<input type="radio" value="Y" name="orderConfirmation" />Y
-						<input type="radio" value="N" name="orderConfirmation" />N
-					</div>
 					<div>	
 						<label>status:</label>
 						<input type="text" value="${param.status}" id="status" name="status"/>
@@ -118,8 +108,6 @@
 					<th scope="col">ID</th>			
 					<th scope="col">volunteerId</th>
 					<th scope="col">serviceRequesterId</th>
-					<th scope="col">orderAcception(Y/N)</th>
-					<th scope="col">orderConfirmation(Y/N)</th>
 					<th scope="col">status</th>
 					<th scope="col">mission.title</th>
 					<th scope="col">mission.timeValue</th>
@@ -187,8 +175,6 @@
 		           	{data:"id" },
 					{data:"volunteerId"},
 					{data:"serviceRequesterId"},
-					{data:"orderAcception"},
-					{data:"orderConfirmation"},
 					{data:"status"},
 					{data:"mission.title"},
 					{data:"mission.timeValue"},

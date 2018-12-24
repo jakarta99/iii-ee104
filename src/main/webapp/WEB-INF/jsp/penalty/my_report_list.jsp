@@ -24,24 +24,46 @@
 </head>
 <body>
 
-	<h1 style="padding-top: 2cm">檢舉成功(暫放，之後要放個人檢舉案件列表)</h1>
-
-
-		媒合案件編號(Order.id):${reportOnePenalty.order.id}<p>
-		活動編號(Mission.id):${reportOnePenalty.order.mission.id}<p>
-		活動名稱(Mission.title):${reportOnePenalty.order.mission.title}<p>
-		活動時間(Mission.startDate~endDate):${reportOnePenalty.order.mission.startDate} ~ ${reportOnePenalty.order.mission.endDate}<p>
-		
-		
-<!-- 		#檢舉人會員編號  accuser-memberId: -->
-<%-- 		<input type="text" id="accuser" name="accuser" value="${penalty.accuser}"  readonly/><p> --%>
-<!-- 		檢舉人姓名: -->
-<%-- 		<input type="text" id="" name="" value="${penalty.accuserName}"  disabled="disabled"/><p> --%>
-		
-		#被檢舉人會員編號  defendant-memberId:${reportOnePenalty.defendant.id}<p>
-		被檢舉人姓名:${reportOnePenalty.defendant.name}<p>
-		檢舉情形描述description:${reportOnePenalty.description}<p>
-		狀態:${reportOnePenalty.status}<p>
+	<h1 style="padding-top: 2cm">第二步、上傳佐證資料</h1>
+		<h3>確認第一步填寫資料</h3>
+		<table border='1'>
+			<tr>
+				<td>媒合案件編號(Order.id)</td>
+				<td>${reportOnePenalty.order.id}</td>
+			</tr>
+			<tr>
+				<td>活動編號(Mission.id)</td>
+				<td>${reportOnePenalty.order.mission.id}</td>
+			</tr>
+			<tr>
+				<td>活動名稱(Mission.title)</td>
+				<td>${reportOnePenalty.order.mission.title}</td>
+			</tr>
+			<tr>
+				<td>活動時間(Mission.startDate~endDate)</td>
+				<td>${reportOnePenalty.order.mission.startDate} ~ ${reportOnePenalty.order.mission.endDate}</td>
+			</tr>
+			<tr>
+				<td>#被檢舉人會員編號  defendant-memberId</td>
+				<td>${reportOnePenalty.defendant.id}</td>
+			</tr>
+			<tr>
+				<td>被檢舉人姓名</td>
+				<td>${reportOnePenalty.defendant.name}</td>
+			</tr>
+			<tr>
+				<td>檢舉情形描述description</td>
+				<td>${reportOnePenalty.description}</td>
+			</tr>
+		</table>
+		<hr>
+		<h3>上傳舉證資料</h3>
+		<form action="/penalty/storeProofPic" method="Post" enctype="multipart/form-data">
+			<input type="hidden" id="penaltyId" name="penaltyId" value="${reportOnePenalty.id}">
+			<input type="file" id="proofPic" name="proofPic"  accept="image/*"><p>
+			請選擇圖檔，如無佐證資料，則直接送出審核<p>
+			<input type="submit" value="送出審核">
+		</form>
 		
 		<a href="#">back to 我的檢舉案件</a><p>
 		<a href="/penalty/tempPenaltyEntrance">back to 我的所有媒合案件(清單)</a>

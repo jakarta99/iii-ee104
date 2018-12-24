@@ -58,7 +58,7 @@
 
 </style>
 <meta charset="UTF-8">
-<title>Vertify Report List</title>
+<title>檢舉案件審查</title>
 </head>
 <body>
 	<!-- 加入nav.html(放在static/html) -->
@@ -66,8 +66,7 @@
 	<article>
 		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
 		<h1 style="padding-top: 2cm">檢舉案件審查  Vertify Report List</h1>
-		<button onclick="javascript:document.location.href='/admin/penalty/add'" class="btn btn-primary btn-sm">Add</button>
-
+		
 		<!-- 條件搜尋表單 -->
 		<div id="sideBar">
 			<form>
@@ -143,28 +142,7 @@
 	<script>
 
 		var dataTable;
-		
-		function deleteRow(penaltyId){
-			$.ajax({
-				type:"get",
-				dataType:"json",
-				url:"/admin/penalty/delete",
-				data:{"id":penaltyId}
-			}).done(function(respones){
-				if (respones.status =="SUCCESS"){
-					alert("刪除成功");
-				} else {
-					$.each(respones.messages, function(idx, message) {
-						alert("the "+idx+"th ERROR, because "+message);
-					});
-				}
-				dataTable.draw('page');
-				if($("table tbody tr").length < 2){
-					dataTable.page("previous").draw('page');
-				}
-			})
-			
-		}
+
 
 		$(document).ready(function() {
 			$("form").addClass("form-inline");
