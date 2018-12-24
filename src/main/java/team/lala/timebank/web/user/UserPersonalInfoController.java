@@ -14,7 +14,7 @@ import team.lala.timebank.service.MemberService;
 
 @Slf4j
 @Controller
-@RequestMapping("/user/personal-info")
+@RequestMapping("/basic/user/personal-info")
 public class UserPersonalInfoController {
 	
 	@Autowired
@@ -27,7 +27,7 @@ public class UserPersonalInfoController {
 							.getPrincipal();
 		Member member = memberService.getOne(userDetails.getId());
 		model.addAttribute("member", member);
-		return "/user/personal_info/personal-info_edit";
+		return "/basic/user/personal_info/personal-info_edit";
 	}
 	
 	@ResponseBody
