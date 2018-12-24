@@ -10,7 +10,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.OrderDao;
-import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.enums.YesNo;
 
@@ -62,17 +61,18 @@ public class OrderService {
 	}
 	
 	public Order insert(Order order) {
-		Order o = orderDao.save(order);
-		return o;
+		order.setVolunteerApplyTime(new java.util.Date());
+		return orderDao.save(order);
 	}
 	
 	public Order update(Order order) {
-		Order dbOrder = null;
+		Order dbOrder = orderDao.getOne(order.getId());
 		if(order.getId() != null ) {
-			dbOrder = getById(order.getId());
-			dbOrder.setOrderAcception(order.getOrderAcception());
-			dbOrder.setOrderConfirmation(order.getOrderConfirmation());
+			dbOrder.setVolunteerId(order.getVolunteerId());
+			dbOrder.setServiceRequesterId(order.getServiceRequesterId());
 			dbOrder.setStatus(order.getStatus());
+			dbOrder.setVolunteerApplyTime(order.getVolunteerApplyTime());
+			dbOrder.setOrderAcceptTime(order.getOrderAcceptTime());
 			dbOrder = orderDao.save(dbOrder);
 		}
 		return dbOrder;

@@ -12,7 +12,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
 import team.lala.timebank.entity.Order;
-import team.lala.timebank.enums.YesNo;
 
 @SuppressWarnings("serial")
 public class OrderSpecification implements Specification<Order>  {
@@ -35,14 +34,6 @@ public class OrderSpecification implements Specification<Order>  {
 
 		if(!StringUtils.isEmpty(inputOrder.getServiceRequesterId())) {
 			list.add(criteriaBuilder.equal(root.get("serviceRequesterId").as(Long.class), inputOrder.getServiceRequesterId()));
-		}
-
-		if(!StringUtils.isEmpty(inputOrder.getOrderAcception())) {
-			list.add(criteriaBuilder.equal(root.get("orderAcception").as(YesNo.class), inputOrder.getOrderAcception()));
-		}
-		
-		if(!StringUtils.isEmpty(inputOrder.getOrderConfirmation())) {
-			list.add(criteriaBuilder.equal(root.get("orderConfirmation").as(YesNo.class), inputOrder.getOrderConfirmation()));
 		}
 		
 		if(!StringUtils.isEmpty(inputOrder.getStatus())) {

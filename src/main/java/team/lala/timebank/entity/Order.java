@@ -1,9 +1,9 @@
 package team.lala.timebank.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,9 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Getter;
 import lombok.Setter;
-import team.lala.timebank.enums.YesNo;
 
 @Getter
 @Setter
@@ -30,16 +31,16 @@ public class Order{
 	@Column(name="SERVICE_REQUESTER_ID")
 	private Long serviceRequesterId;
 	
-	@Enumerated(EnumType.STRING)
-	@Column(name="ORDER_ACCEPTION")
-	private YesNo orderAcception;
-	
-	@Enumerated(EnumType.STRING)
-	@Column(name="ORDER_CONFIRMATION")
-	private YesNo orderConfirmation;
-	
 	@Column(name="STATUS")
 	private String status;
+	
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm" )
+	@Column(name="VOLUNTEER_APPLY_TIME")
+	private Date volunteerApplyTime;
+	
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm" )
+	@Column(name="ORDER_ACCEPT_TIME")
+	private Date orderAcceptTime;
 	
 	@ManyToOne
 	@JoinColumn(name="mission",    
@@ -50,12 +51,9 @@ public class Order{
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", volunteerId=" + volunteerId + ", serviceRequesterId=" + serviceRequesterId
-				+ ", orderAcception=" + orderAcception + ", orderConfirmation=" + orderConfirmation + ", status="
-				+ status + ", mission=" + mission + "]";
-	}  
-	
-	
+				+ ", status=" + status + ", volunteerApplyTime=" + volunteerApplyTime + ", orderAcceptTime="
+				+ orderAcceptTime + ", mission=" + mission + "]";
+	}
 
-	
 
 }
