@@ -88,6 +88,7 @@ public class PenaltyController {
 		//2.判斷是否已被檢舉過。如已被檢舉過，則回傳無法檢舉的資訊並且導回原頁面
 		//如回傳true，代表該筆order有檢舉紀錄，檢舉紀錄的檢舉人與目前登入會員相同(不得再次提出檢舉)
 		Boolean penaltyRecord = penaltyService.checkRecord(orderId, accuserId);
+		log.debug("penaltyRecord={}", penaltyRecord);
 		if(penaltyRecord) {
 			model.addAttribute("penaltyExist", orderId + "號媒合案件已有您的檢舉紀錄，不得重複提出檢舉");
 			return "/penalty/temp_order_list";
@@ -178,12 +179,16 @@ public class PenaltyController {
 		//之後要包到Service內
 		//呼叫service將圖片存到Server
 		//確認是否有此資料夾，如無則建資料夾
-		File dir = new File("D:\\Jasmine\\git\\iii-ee104-2\\iii-ee104\\src\\main\\resources\\static\\img\\");
+//		File dir = new File("D:\\Jasmine\\git\\iii-ee104-2\\iii-ee104\\src\\main\\resources\\static\\img\\");
+		File dir = new File("D:\\penaltyProoves\\");
+		
 		if(!dir.exists()) {
 			dir.mkdirs();
 		}
 		
-		String location = "D:\\Jasmine\\git\\iii-ee104-2\\iii-ee104\\src\\main\\resources\\static\\img\\"
+//		String location = "D:\\Jasmine\\git\\iii-ee104-2\\iii-ee104\\src\\main\\resources\\static\\img\\"
+//						+ "penaltyProof_" + penaltyId + ".jpg";
+		String location = "D:\\penaltyProoves\\"
 						+ "penaltyProof_" + penaltyId + ".jpg";
 		FileOutputStream fos = new FileOutputStream(location);
 		fos.write(proofPic.getBytes());

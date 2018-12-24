@@ -12,12 +12,15 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.OrderDao;
 import team.lala.timebank.dao.PenaltyDao;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
+import team.lala.timebank.web.penalty.PenaltyController;
 
+@Slf4j
 @Service
 public class PenaltyService {
 
@@ -66,10 +69,9 @@ public class PenaltyService {
 	//Jasmine
 	public Boolean checkRecord(Long orderId, Long accuserId) {
 		List<Penalty> penalties = findByOrder(orderDao.getOne(orderId));
-		
 		if(penalties.size() > 0) { //該筆order有檢舉紀錄
 			for(Penalty p : penalties) {
-				if(p.getAccuser() == accuserId) { //檢舉紀錄的檢舉人與目前登入會員相同(不得再次提出檢舉)
+				if(p.getAccuser().equals(accuserId)) { //檢舉紀錄的檢舉人與目前登入會員相同(不得再次提出檢舉)
 					return true;
 				}
 			}

@@ -72,7 +72,8 @@
 					class="form-control" value="${penalty.description}" readonly/><p>
 		
 		<div id="proof">
-			<a id="proofPic" href="/img/${penalty.proofPicName}" target="_blank">佐證資料檢視</a><p>
+			<a id="proofPic" href="/penaltyProoves/${penalty.proofPicName}" target="_blank">佐證資料檢視</a><p>
+			<!-- Server存取圖片路徑設定方式詳見WebConfig.java -->
 		</div>
 
 		
