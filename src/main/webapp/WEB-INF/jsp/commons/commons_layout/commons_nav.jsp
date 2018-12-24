@@ -68,13 +68,9 @@
                           <h5>我的申請</h5>
                           <ul class="list-unstyled mb-3">
                          <li> <button class="btn btn-primary btn-sm" style=margin-left:45px 
-                         			onclick="javascript:document.location.href='/member/application/area'">會員專區</button></li>
+                         			onclick="javascript:document.location.href='/member/application/area'">我的申請</button></li>
                             <li class="nav-item"><a href="about.html" class="nav-link">申請中</a></li>
                             <li class="nav-item"><a href="team.html" class="nav-link">服務紀錄</a></li>
-                          </ul>
-                          <h5>Marketing</h5>
-                          <ul class="list-unstyled">
-                            <li class="nav-item"><a href="packages.html" class="nav-link">Packages</a></li>
                           </ul>
                         </div>
                       </div>
