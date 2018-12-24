@@ -11,11 +11,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.MissionDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
-
+import team.lala.timebank.web.admin.AdminOrderController;
+@Slf4j
 @Service
 public class MissionService {
 
@@ -47,7 +49,7 @@ public class MissionService {
 	public Mission insert(Mission mission, Principal principal) {
 		Member member = memberDao.findByAccount(principal.getName());
 
-		mission.setId(member.getId());
+		mission.setMemberId(member.getId());
 		mission.setStartDate(mission.getStartDate());
 		mission.setEndDate(mission.getEndDate());
 		mission.setPublishDate(new Date());

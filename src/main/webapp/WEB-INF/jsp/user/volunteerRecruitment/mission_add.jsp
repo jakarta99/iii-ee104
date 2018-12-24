@@ -68,9 +68,9 @@
 </head>
 <body>
 <div id="navBar" class="margintop"></div>
-	<h1 class="s2">mission add</h1>
+	<h1 class="s2">mission add(after login)</h1>
 	<fieldset>
-	<form action="/admin/mission/insert" method="post">
+	<form action="/user/volunteerRecruitment/insert" method="post">
 	
 	
 	<div>			
@@ -145,16 +145,17 @@
 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/admin/mission/list'">回列表頁</button>
 	</fieldset>
 	<script>
+	
 		function addMission() {
 			$.ajax({
-				url : "/admin/mission/insert",				
+				url : "/user/volunteerRecruitment/insert",				
 				type : 'post',
 				data : $('form').serialize(),
 				dataType : 'JSON',
 				success : function(addResult) {
 					if(addResult.status == "SUCCESS"){
 						alert("新增編號" + addResult.obj.id + " "+ addResult.status);
-						document.location.href = "/admin/mission/add"
+						document.location.href = "/user/volunteerRecruitment/add"
 					}else{
 						alert("新增編號" + addResult.obj.id + " " + addResult.status);
 						alert("FAIL reason:" + addResult.messages);
