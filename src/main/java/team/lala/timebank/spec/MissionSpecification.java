@@ -27,7 +27,11 @@ public class MissionSpecification implements Specification<Mission> {
 	@Override
 	public Predicate toPredicate(Root<Mission> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 		List<Predicate> list = new ArrayList<Predicate>();
-
+		
+		if (!StringUtils.isEmpty(inputMission.getId())) {
+			list.add(criteriaBuilder.equal(root.get("id").as(Long.class), inputMission.getId()));
+		}
+		
 		if (!StringUtils.isEmpty(inputMission.getCounty())) {
 			list.add(criteriaBuilder.equal(root.get("county").as(String.class), inputMission.getCounty()));
 		}
