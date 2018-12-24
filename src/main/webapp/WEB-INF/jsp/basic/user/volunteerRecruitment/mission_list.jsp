@@ -43,9 +43,9 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
 
 
-<jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
+<jsp:include page="/basic/commons/commons_layout/commons_css_links.jsp"/>
 <meta charset="UTF-8">
-<title>mission list(after login)</title>
+<title>mission list(login)</title>
 <style>
 
 	 	
@@ -81,10 +81,10 @@
 <body>
 
  <!-- Top bar-->
-      <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
+      <jsp:include page="/basic/commons/commons_layout/commons_top-bar.jsp"/>
  	
 	  <!-- Navbar -->
-      <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
+      <jsp:include page="/basic/commons/commons_layout/commons_nav.jsp"/>
 	<div class="margintop">
 	
 	<h1 class="s2">mission list</h1>
@@ -141,7 +141,7 @@
 	</fieldset>
 	
 	<fieldset>
-	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/user/volunteerRecruitment/add'">add</button>
+	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/admin/mission/add'">add</button>
 	<table id="table" class="table table-hover">
 	<thead>
 	<tr>
@@ -183,7 +183,7 @@
 	
 	function deleteMission(id) {
 		$.ajax({
-			url : '/user/volunteerRecruitment/delete?id=' + id,
+			url : '/user/recruitFinish/delete?id=' + id,
 			type : 'post',
 			dataType : 'JSON',
 			success : function(deleteResult) {

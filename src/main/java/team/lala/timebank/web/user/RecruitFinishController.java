@@ -31,7 +31,7 @@ public class RecruitFinishController {
 	public Page<Mission> getMemberMission(Mission inputMission, Principal principal, @RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
 		int page = start.orElse(0)/length.orElse(10);
-		log.debug("inputMission={}", missionService.setMemberId(principal, inputMission));
+		
 		MissionSpecification missionSpec = new MissionSpecification(missionService.setMemberId(principal, inputMission));
 		Page<Mission> missions = missionService.findBySpecification(missionSpec, PageRequest.of(page, length.orElse(10)));
 		return missions;
