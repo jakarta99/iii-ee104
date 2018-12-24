@@ -30,6 +30,7 @@ public class PenaltyService {
 	@Autowired
 	private MemberDao memberDao;
 	
+	//Jasmine
 	public Map<String, Object> getAccuserAndDefendant(Long orderId, Long accuserId) {
 		Order order = orderDao.getOne(orderId);
 		Map<String, Object> result = new HashMap<>();
@@ -54,6 +55,7 @@ public class PenaltyService {
 		return result;
 	}
 	
+	//Jasmine
 	public Penalty vertifyPenalty(Long penaltyId, Integer status, Integer penaltyTimeValue) {
 		Penalty dbPenalty = penaltyDao.getOne(penaltyId);
 		dbPenalty.setPenaltyTimeValue(penaltyTimeValue);
@@ -61,7 +63,19 @@ public class PenaltyService {
 		return penaltyDao.save(dbPenalty);
 	}
 	
-	
+	//Jasmine
+	public Boolean checkRecord(Long orderId, Long accuserId) {
+		List<Penalty> penalties = findByOrder(orderDao.getOne(orderId));
+		
+		if(penalties.size() > 0) { //該筆order有檢舉紀錄
+			for(Penalty p : penalties) {
+				if(p.getAccuser() == accuserId) { //檢舉紀錄的檢舉人與目前登入會員相同(不得再次提出檢舉)
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 	
 	
 	
@@ -101,11 +115,16 @@ public class PenaltyService {
 	public Page<Penalty> findBySpecification(Specification<Penalty> specification, PageRequest pageRequest){
 		return penaltyDao.findAll(specification, pageRequest);
 	}
+
 	
-	// 查詢某人的所有Penalty (更改by Brian)
-	public List<Penalty> findByDefendant(Long defendant) {
-		List<Penalty> penaltys = penaltyDao.findByDefendant(defendant);
-		return penaltys;
+	public List<Penalty> findByAccuser(Long accuser) {
+		List<Penalty> penalties = penaltyDao.findByAccuser(accuser);
+		return penalties;
+	}
+	
+	public List<Penalty> findByOrder(Order order){
+		List<Penalty> penalties = penaltyDao.findByOrder(order);
+		return penalties;
 	}
 
 }

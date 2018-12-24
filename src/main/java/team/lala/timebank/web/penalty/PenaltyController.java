@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
-import team.lala.timebank.commons.ajax.PageResponse;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
-import team.lala.timebank.entity.TimeLedger;
 import team.lala.timebank.service.OrderService;
 import team.lala.timebank.service.PenaltyService;
 import team.lala.timebank.service.TimeLedgerService;
@@ -70,16 +68,21 @@ public class PenaltyController {
 	//針對order按檢舉按鍵後，呼叫這支(放文件提醒)
 	@RequestMapping("/report")
 	public String report(@RequestParam("orderId")Long orderId, Model model) {  
-		//1.先判斷同一組order與defendant是否已被檢舉過。如已被檢舉過，則回傳無法檢舉的資訊並且導回原頁面
-		
-		
-		
-		//2.取出目前登入之會員id，做為檢舉者id
+
+		//1.取出目前登入之會員id，做為檢舉者id
 		Member userDetails = (Member) SecurityContextHolder.getContext()  
 					.getAuthentication()  
 					.getPrincipal();
 		Long accuserId = userDetails.getId();
 //		log.debug("USERNAME={}", userDetails.getUsername());
+		
+		//2.判斷是否已被檢舉過。如已被檢舉過，則回傳無法檢舉的資訊並且導回原頁面
+		//如回傳true，代表該筆order有檢舉紀錄，檢舉紀錄的檢舉人與目前登入會員相同(不得再次提出檢舉)
+		Boolean penaltyRecord = penaltyService.checkRecord(orderId, accuserId);
+		if(penaltyRecord) {
+			model.addAttribute("penaltyExist", orderId + "號媒合案件已有您的檢舉紀錄，不得重複提出檢舉");
+			return "/penalty/temp_order_list";
+		}
 		
 		//3.如果未被檢舉過，則將需要顯示在檢舉頁面的資料放入model
 		Map<String, Object> reportBasicData = penaltyService.getAccuserAndDefendant(orderId, accuserId);
