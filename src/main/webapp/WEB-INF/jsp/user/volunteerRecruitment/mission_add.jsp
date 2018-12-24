@@ -34,6 +34,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/i18n/jquery-ui-timepicker-zh-TW.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
 
+<jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 
 <title>mission add</title>
 <style>
@@ -67,7 +68,11 @@
     </style>
 </head>
 <body>
-<div id="navBar" class="margintop"></div>
+ <!-- Top bar-->
+      <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
+ 	
+	  <!-- Navbar -->
+      <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
 	<h1 class="s2">mission add(after login)</h1>
 	<fieldset>
 	<form action="/user/volunteerRecruitment/insert" method="post">
@@ -144,6 +149,7 @@
 	</form>
 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/admin/mission/list'">回列表頁</button>
 	</fieldset>
+	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script>
 	
 		function addMission() {

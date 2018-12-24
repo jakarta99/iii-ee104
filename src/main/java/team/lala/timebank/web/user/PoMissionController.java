@@ -20,7 +20,7 @@ import team.lala.timebank.web.admin.AdminOrderController;
 @Slf4j
 @Controller
 @RequestMapping("/user/volunteerRecruitment")
-public class PoMission {
+public class PoMissionController {
 	@Autowired
 	private MissionService missionService;
 
