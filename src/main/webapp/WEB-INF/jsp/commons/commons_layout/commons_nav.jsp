@@ -188,7 +188,6 @@
                     <li class="dropdown-item"><a href="/admin/mission/list" class="nav-link" id="backStage-penalty">mission</a></li>
                     <li class="dropdown-item"><a href="/admin/role/list" class="nav-link" id="backStage-role">role</a></li>
                     <li class="dropdown-item"><a href="/admin/serviceType/list" class="nav-link" id="backStage-role">serviceType</a></li>
-                    <li class="dropdown-item"><a href="/admin/personalInfo/list" class="nav-link" id="backStage-personalInfo">personalInfo</a></li>
                   </ul>
                 </li>
                 </sec:authorize>
