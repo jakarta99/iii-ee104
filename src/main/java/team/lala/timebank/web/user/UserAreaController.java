@@ -13,7 +13,7 @@ public class UserAreaController {
 
 	@RequestMapping("/page")
 	public String MemberArea() {
-		return "/user/volunteerApplication/volunteerApplication";
+		return "/basic/user/volunteerApplication/volunteerApplication";
 	}
 
 	@ResponseBody
