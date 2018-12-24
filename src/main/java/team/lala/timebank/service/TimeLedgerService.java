@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import team.lala.timebank.dao.TimeLedgerDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
+import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.entity.TimeLedger;
 import team.lala.timebank.enums.YesNo;
 
@@ -67,6 +68,43 @@ public class TimeLedgerService {
 		return timeLedgerDao.save(timeLedger);
 
 	}
+	
+	//Jasmine
+	//審核檢舉案完畢後，進行扣款(未完成)
+	//transaction_type還沒加入entity中，待改完要再加
+	public TimeLedger doPenaltyDebit(Penalty penalty) {
+		
+		// 1. findTimeLedgerByMemberId
+		TimeLedger lastTimeLedger = 
+				timeLedgerDao.findTop1ByMemberIdOrderByTransactionTimeDesc(penalty.getDefendant().getId());
+		
+		//如果尚無交易紀錄，則先將餘額設為0元
+		if(lastTimeLedger == null || lastTimeLedger.getBalanceValue() == null) {
+			lastTimeLedger.setBalanceValue(0);
+		}
+
+		// 2. prepare PenaltyTimeledger data(可以倒扣)
+		TimeLedger timeLedger = new TimeLedger();
+		timeLedger.setMemberId(penalty.getDefendant().getId());
+		timeLedger.setWithdrawalValue(penalty.getPenaltyTimeValue());
+		timeLedger.setDepositValue(0);
+		timeLedger.setTransactionTime(new Date());
+		timeLedger.setBalanceValue(lastTimeLedger.getBalanceValue() - penalty.getPenaltyTimeValue());
+		String peanltyReason = "[違規處罰] 活動日期:"
+				+ penalty.getOrder().getMission().getStartDate().toString()
+				+ " ~ "
+				+ penalty.getOrder().getMission().getEndDate().toString()
+				+ ", 活動名稱:"
+				+ penalty.getOrder().getMission().getTitle(); //活動日期+活動名稱+"-違規處罰"
+		timeLedger.setDescription(peanltyReason);
+
+		// 3. insert
+		return timeLedgerDao.save(timeLedger);
+
+	}
+	
+	
+	
 
 	// 查詢特定會員某段時間的交易紀錄
 	public List<TimeLedger> findByMemberIdAndTransactionTimeBetween(Long memberId, LocalDateTime transactionTimeBegin,
