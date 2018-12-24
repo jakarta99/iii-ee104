@@ -12,7 +12,11 @@
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp" />
 	<!-- Navbar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />
+	
+	<jsp:include page="../../commons/commons_layout/user_sidebar.jsp" />
 	<div>
+	
+	
 		<ul>
 			<li>申請</li>
 			<ul>

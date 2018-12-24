@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.ServiceType;
 import team.lala.timebank.service.MissionService;
 import team.lala.timebank.spec.MissionSpecification;
-
-@RequestMapping("/user/RecruitFinish")
+@Slf4j
+@RequestMapping("/user/recruitFinish")
 @Controller
 public class RecruitFinishController {
 	
@@ -30,9 +31,9 @@ public class RecruitFinishController {
 	public Page<Mission> getMemberMission(Mission inputMission, Principal principal, @RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
 		int page = start.orElse(0)/length.orElse(10);
-	
+		log.debug("inputMission={}", missionService.setMemberId(principal, inputMission));
 		MissionSpecification missionSpec = new MissionSpecification(missionService.setMemberId(principal, inputMission));
-		Page<Mission> missions = missionService.findBySpecification(missionSpec,PageRequest.of(page, length.orElse(10)));
+		Page<Mission> missions = missionService.findBySpecification(missionSpec, PageRequest.of(page, length.orElse(10)));
 		return missions;
 	}
 	

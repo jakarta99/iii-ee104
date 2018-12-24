@@ -46,7 +46,7 @@ public class MemberDataController {
 		result += "您的捐贈時間為:" + totalDonateTime + "小時<br>";
 
 		int totalPenaltyTime = 0;
-		List<Penalty> penaltys = penaltyService.findByDefendant(memberId);
+		List<Penalty> penaltys = penaltyService.findByAccuser(memberId);
 		if (penaltys != null) {
 			for (Penalty penalty : penaltys) {
 				totalPenaltyTime += penalty.getPenaltyTimeValue();
