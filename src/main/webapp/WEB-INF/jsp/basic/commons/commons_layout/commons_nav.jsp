@@ -23,7 +23,15 @@
                         </div>
                         <div class="col-md-6 col-lg-3">
                           <h5><a href="#" >志工招募</a></h5>
-                         <h5><a href="javascript:document.location.href='/user/volunteerApplication/page'" >志工申請</a></h5>    
+                          <ul class="list-unstyled mb-3">
+                            <li class="nav-item"><a href="/user/recruitFinish/list" class="nav-link">招募紀錄</a></li>
+                            <li class="nav-item"><a href="/user/volunteerRecruitment/add" class="nav-link">刊登任務</a></li>                      
+                          </ul>
+                         <h5><a href="javascript:document.location.href='/user/volunteerApplication/page'" >志工申請</a></h5>
+                          <ul class="list-unstyled mb-3">
+                            <li class="nav-item"><a href="#" class="nav-link">申請中</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link">服務紀錄</a></li>                          
+                          </ul>
                         </div>
                         <div class="col-md-6 col-lg-3">
                          <h5><a href="#" >我的交易紀錄</a></h5>
