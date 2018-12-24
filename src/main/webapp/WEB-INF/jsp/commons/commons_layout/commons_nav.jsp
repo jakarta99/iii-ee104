@@ -7,7 +7,7 @@
             <button type="button" data-toggle="collapse" data-target="#navigation" class="navbar-toggler btn-template-outlined"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
             <div id="navigation" class="navbar-collapse collapse">
               <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item dropdown active"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle">志工活動 <b class="caret"></b></a>
+                <li class="nav-item dropdown active"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle">公益團體 <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li class="dropdown-item"><a href="/" class="nav-link">Option 1: Default Page</a></li>
                     <li class="dropdown-item"><a href="index2.html" class="nav-link">Option 2: Application</a></li>
@@ -16,7 +16,7 @@
                     <li class="dropdown-item"><a href="index5.html" class="nav-link">Option 5: Portfolio</a></li>
                   </ul>
                 </li>
-                <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" class="dropdown-toggle">公益組織<b class="caret"></b></a>
+                <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" class="dropdown-toggle">志工招募<b class="caret"></b></a>
                   <ul class="dropdown-menu megamenu">
                     <li>
                       <div class="row">
@@ -46,7 +46,7 @@
                     </li>
                   </ul>
                 </li>
-                <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" class="dropdown-toggle">常見問題 <b class="caret"></b></a>
+                <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" class="dropdown-toggle">會員專區<b class="caret"></b></a>
                   <ul class="dropdown-menu megamenu">
                     <li>
                       <div class="row">
@@ -65,12 +65,10 @@
                           </ul>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                          <h5>About</h5>
+                          <h5>我的申請</h5>
                           <ul class="list-unstyled mb-3">
-                            <li class="nav-item"><a href="about.html" class="nav-link">About us</a></li>
-                            <li class="nav-item"><a href="team.html" class="nav-link">Our team</a></li>
-                            <li class="nav-item"><a href="team-member.html" class="nav-link">Team member</a></li>
-                            <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+                            <li class="nav-item"><a href="about.html" class="nav-link">申請中</a></li>
+                            <li class="nav-item"><a href="team.html" class="nav-link">服務紀錄</a></li>
                           </ul>
                           <h5>Marketing</h5>
                           <ul class="list-unstyled">
@@ -170,6 +168,15 @@
                         </div>
                       </div>
                     </li>
+                  </ul>
+                </li>
+                 <li class="nav-item dropdown active"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle">常見問題<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li class="dropdown-item"><a href="/" class="nav-link">Option 1: Default Page</a></li>
+                    <li class="dropdown-item"><a href="index2.html" class="nav-link">Option 2: Application</a></li>
+                    <li class="dropdown-item"><a href="index3.html" class="nav-link">Option 3: Startup</a></li>
+                    <li class="dropdown-item"><a href="index4.html" class="nav-link">Option 4: Agency</a></li>
+                    <li class="dropdown-item"><a href="index5.html" class="nav-link">Option 5: Portfolio</a></li>
                   </ul>
                 </li>
                 <!-- ========== FULL WIDTH MEGAMENU END ==================-->				
