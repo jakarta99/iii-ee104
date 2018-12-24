@@ -69,18 +69,18 @@
 					
 		檢舉內容描述(description):
 		<input type="text" id="PenaltyDescription" name="PenaltyDescription"
-					class="form-control" value="${penalty.description}" readonly /><p>
+					class="form-control" value="${penalty.description}" readonly/><p>
 					
-		審核結果:
+		審核結果 (審核中&無須懲罰案件的懲罰時數一律為0，且不得更改):
 		<select class="form-control" id="status" name="status">
 			<option value=1></option>
 			<option value=2>需懲罰</option>
 			<option value=3>無需懲罰</option>
 		</select><p>
 		
-		penaltyTimeValue:
+		penaltyTimeValue (如果需懲罰，時數小於等於0，會跳出alert):
 		<input type="text" id="penaltyTimeValue" name="penaltyTimeValue"
-					class="form-control" value="${penalty.penaltyTimeValue}" />
+					class="form-control" value="${penalty.penaltyTimeValue}" readonly/>
 			
 		<input type="button" class="btn btn-primary" id="vertify" value="完成審核">
 	</form>
@@ -94,24 +94,33 @@
 
 			$('#vertify').click(function() {
 				//alert($('#penaltyId').val());
-				$.ajax({
-					url : "/penalty/doneVertify",
-					method : "put",
-					dataType : "json",
-					data : {"penaltyId":$('#penaltyId').val(),"status":$('#status').val(),"penaltyTimeValue":$('#penaltyTimeValue').val()}
-				}).done(function(result) {
-					alert(result.status);
-					document.location.href="/penalty/showVertifyList";
-				})
+				if($('#status').val() == 2 && $('#penaltyTimeValue').val() <= 0){
+					alert("處罰時數需大於0");
+				}else{
+					$.ajax({
+						url : "/penalty/doneVertify",
+						method : "put",
+						dataType : "json",
+						data : {"penaltyId":$('#penaltyId').val(),"status":$('#status').val(),"penaltyTimeValue":$('#penaltyTimeValue').val()}
+					}).done(function(result) {
+						alert(result.status);
+						document.location.href="/penalty/showVertifyList";
+					})
+				}
+				
 			})
 			
 			$('#status').change(function(){
-				alert($(this).val());
-				if($(this).val() == 1 || $(this).val() == 3){ //審核中&無須處罰者，扣款時數強制寫為0
-					$(penaltyTimeValue).val("0");
-					$(penaltyTimeValue).attr("readonly");
+				//alert($(this).val());
+				if($(this).val()==1 || $(this).val()==3){ //審核中&無須處罰者，扣款時數強制寫為0，且不得更改
+					$('#penaltyTimeValue').prop("readonly", true);	
+					$('#penaltyTimeValue').val("0");
 				}
-				if()
+				
+				if($(this).val() == 2){ //須處罰者，扣款時數可編輯
+					$('#penaltyTimeValue').removeAttr("readonly");
+				}
+				
 			})
 			
 
