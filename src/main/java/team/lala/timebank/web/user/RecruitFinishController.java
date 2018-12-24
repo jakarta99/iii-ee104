@@ -17,7 +17,7 @@ import team.lala.timebank.entity.ServiceType;
 import team.lala.timebank.service.MissionService;
 import team.lala.timebank.spec.MissionSpecification;
 
-@RequestMapping("/user/RecruitFinish")
+@RequestMapping("/user/recruitFinish")
 @Controller
 public class RecruitFinishController {
 	
