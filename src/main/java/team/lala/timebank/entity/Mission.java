@@ -86,8 +86,9 @@ public class Mission {
 
 	@Column(name = "address", nullable = false)
 	private String address;
-
 	
+	@Column(name = "status", nullable = false)
+	private Integer status;
 
 	@Override
 	public String toString() {
@@ -96,9 +97,12 @@ public class Mission {
 				+ ", startDate=" + startDate + ", endDate=" + endDate + ", peopleNeeded=" + peopleNeeded
 				+ ", contactPerson=" + contactPerson + ", contactPhone=" + contactPhone + ", contactEmail="
 				+ contactEmail + ", discription=" + discription + ", county=" + county + ", district=" + district
-				+ ", address=" + address + "]";
+				+ ", address=" + address + ", status=" + status + "]";
 	}
 
+	
+
+	
 	
 	
 	
