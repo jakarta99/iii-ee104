@@ -23,7 +23,7 @@ public class RecruitFinishController {
 	@ResponseBody
 	public void getAllRecruit(Principal principal, Model model) {
 		List<Mission> missions = missionService.findByMemberAccount(principal);
-		model.addAllAttributes(missions);
+		model.addAttribute(missions);
 	}
 	
 	@RequestMapping("/edit")
