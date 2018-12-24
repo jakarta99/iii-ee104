@@ -141,7 +141,7 @@
 	</fieldset>
 	
 	<fieldset>
-	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/admin/mission/add'">add</button>
+	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/user/volunteerRecruitment/add'">add</button>
 	<table id="table" class="table table-hover">
 	<thead>
 	<tr>
@@ -183,7 +183,7 @@
 	
 	function deleteMission(id) {
 		$.ajax({
-			url : '/admin/mission/delete?id=' + id,
+			url : '/user/volunteerRecruitment/delete?id=' + id,
 			type : 'post',
 			dataType : 'JSON',
 			success : function(deleteResult) {
@@ -239,7 +239,7 @@
 		 			 },	
 				"lengthMenu": [ 3, 6, 9, 12, ],
 				ajax:{
-					url:"/admin/mission/querypage",
+					url:"/user/RecruitFinish/list",
 					type: "get",
 				    dataType : "json",
 // 	 			    "data":$("form").serialize(),
@@ -270,7 +270,7 @@
 // 				       },
 					columns:[						
 						{"data": function (data, type, val) {
-							 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/admin/mission/edit?id="+data.id+"'\">Edit</button>";     
+							 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/RecruitFinish/edit?id="+data.id+"'\">Edit</button>";     
 							 var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteMission("+data.id+")\">Delete</button>"; 	
 							 return editbutton + deletebutton;}
 						},					 

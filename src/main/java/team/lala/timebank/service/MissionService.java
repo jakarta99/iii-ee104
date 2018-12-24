@@ -3,7 +3,6 @@ package team.lala.timebank.service;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,13 +10,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.MissionDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
-import team.lala.timebank.web.admin.AdminOrderController;
-@Slf4j
+
 @Service
 public class MissionService {
 
@@ -49,7 +46,7 @@ public class MissionService {
 	public Mission insert(Mission mission, Principal principal) {
 		Member member = memberDao.findByAccount(principal.getName());
 
-		mission.setMemberId(member.getId());
+		mission.setId(member.getId());
 		mission.setStartDate(mission.getStartDate());
 		mission.setEndDate(mission.getEndDate());
 		mission.setPublishDate(new Date());
@@ -76,21 +73,26 @@ public class MissionService {
 		return missionList;
 	}
 
-	public Mission findByMissionId(Long missionId) {
+	public List<Mission> findByMemberId(Long memberid) {
 
-		Mission mission = missionDao.getOne(missionId);
+		List<Mission> missionList = missionDao.findByMemberId(memberid);
 
-		return mission;
+		return missionList;
+
 	}
-
-	// 取得member所有mission
+	//取得member所有mission
 	public List<Mission> findByMemberAccount(Principal principal) {
-
-		// loginAccount取得member.getid取得mission list
+		
+		//loginAccount取得member.getid取得mission list
 		List<Mission> missionList = missionDao.findByMemberId(memberDao.findByAccount(principal.getName()).getId());
 
 		return missionList;
 
+	}
+	public Mission setMemberId(Principal principal,Mission mission) {
+		
+		mission.setMemberId(memberDao.findByAccount(principal.getName()).getId());
+		return mission;
 	}
 
 	public Mission getOne(Long id) {
