@@ -1,4 +1,4 @@
-package team.lala.timebank.web.member;
+package team.lala.timebank.web.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,16 +8,16 @@ import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Order;
 
 @Controller
-@RequestMapping("/member/application")
-public class MemberAreaController {
+@RequestMapping("/user/volunteerApplication")
+public class UserAreaController {
 
-	@RequestMapping("/area")
+	@RequestMapping("/page")
 	public String MemberArea() {
-		return "/user/apply/memberArea";
+		return "/user/volunteerApplication/volunteerApplication";
 	}
 
 	@ResponseBody
-	@RequestMapping("/application")
+	@RequestMapping("/apply")
 	public AjaxResponse<Order> Application() {
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		return response;
