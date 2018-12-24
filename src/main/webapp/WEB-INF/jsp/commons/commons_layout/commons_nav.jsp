@@ -17,10 +17,10 @@
 <!--                   </ul> -->
                 </li>
                 <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" class="dropdown-toggle">志工招募<b class="caret"></b></a>
-<!--                   <ul class="dropdown-menu megamenu"> -->
-<!--                     <li> -->
+                  <ul class="dropdown-menu megamenu">
+                    <li>
 <!--                       <div class="row"> -->
-<!--                         <div class="col-lg-6"><img src="/img/template-easy-customize.png" alt="" class="img-fluid d-none d-lg-block"></div> -->
+<!--                          <div class="col-lg-6"><img src="/img/template-easy-customize.png" alt="" class="img-fluid d-none d-lg-block"></div> --> 
 <!--                         <div class="col-lg-3 col-md-6"> -->
 <!--                           <h5>Shortcodes</h5> -->
 <!--                           <ul class="list-unstyled mb-3"> -->
@@ -43,39 +43,33 @@
 <!--                           </ul> -->
 <!--                         </div> -->
 <!--                       </div> -->
-<!--                     </li> -->
-<!--                   </ul> -->
-                </li>
-                <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" class="dropdown-toggle">會員專區<b class="caret"></b></a>
-                  <ul class="dropdown-menu megamenu">
-                    <li>
-                      <div class="row">
-<!--                         <div class="col-lg-6"><img src="/img/template-homepage.png" alt="" class="img-fluid d-none d-lg-block"></div> -->
-<!--                         <div class="col-lg-3 col-md-6"> -->
-<!--                           <h5>Portfolio</h5> -->
-<!--                           <ul class="list-unstyled mb-3"> -->
-<!--                             <li class="nav-item"><a href="portfolio-2.html" class="nav-link">2 columns</a></li> -->
-<!--                             <li class="nav-item"><a href="portfolio-no-space-2.html" class="nav-link">2 columns with negative space</a></li> -->
-<!--                             <li class="nav-item"><a href="portfolio-3.html" class="nav-link">3 columns</a></li> -->
-<!--                             <li class="nav-item"><a href="portfolio-no-space-3.html" class="nav-link">3 columns with negative space</a></li> -->
-<!--                             <li class="nav-item"><a href="portfolio-4.html" class="nav-link">4 columns</a></li> -->
-<!--                             <li class="nav-item"><a href="portfolio-no-space-4.html" class="nav-link">4 columns with negative space</a></li> -->
-<!--                             <li class="nav-item"><a href="portfolio-detail.html" class="nav-link">Portfolio - detail</a></li> -->
-<!--                             <li class="nav-item"><a href="portfolio-detail-2.html" class="nav-link">Portfolio - detail 2</a></li> -->
-<!--                           </ul> -->
-<!--                         </div> -->
-                        <div class="col-lg-3 col-md-6">
-                          <h5>我的申請</h5>
-                          <ul class="list-unstyled mb-3">
-                         <li> <button class="btn btn-primary btn-sm" style=margin-left:45px 
-                         			onclick="javascript:document.location.href='/user/application/page'">我的申請</button></li>
-                            <li class="nav-item"><a href="about.html" class="nav-link">申請中</a></li>
-                            <li class="nav-item"><a href="team.html" class="nav-link">服務紀錄</a></li>
-                          </ul>
-                        </div>
-                      </div>
                     </li>
                   </ul>
+                </li>
+                 <li class="nav-item dropdown"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle">會員專區 <b class="caret"></b></a>
+                      <div class="row">
+		                  <ul class="dropdown-menu">
+		                    <li class="dropdown-item"><a href="#" class="nav-link" >行事曆</a></li>
+		                    <li class="dropdown-item"><a href="#" class="nav-link" >系統訊息</a></li>
+		                    <li class="dropdown-item"><a href="#" class="nav-link" >我的個人資訊</a></li>
+		                    <li class="dropdown-item"><a href="#" class="nav-link" >志工招募</a></li>
+		                    <li class="dropdown-item"><a href="javascript:document.location.href='/user/volunteerApplication/page'" class="nav-link" >志工申請</a></li>
+		                    <li class="dropdown-item"><a href="#" class="nav-link" >我的交易紀錄</a></li>
+		                    <li class="dropdown-item"><a href="#" class="nav-link" >我的最愛</a></li>
+		                    <li class="dropdown-item"><a href="#" class="nav-link" >我的捐款</a></li>
+		
+		                  </ul>
+               
+<!--                         <div class="col-lg-3 col-md-6"> -->
+<!--                           <h5>我的申請</h5> -->
+<!--                           <ul class="list-unstyled mb-3"> -->
+<!--                          <li> <button class="btn btn-primary btn-sm" style=margin-left:45px  -->
+<!--                          			onclick="javascript:document.location.href='/user/application/page'">我的申請</button></li> -->
+<!--                             <li class="nav-item"><a href="about.html" class="nav-link">申請中</a></li> -->
+<!--                             <li class="nav-item"><a href="team.html" class="nav-link">服務紀錄</a></li> -->
+<!--                           </ul> -->
+<!--                         </div> -->
+                      </div>
                 </li>
                 <!-- ========== FULL WIDTH MEGAMENU ==================-->
                 <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">關於我們 <b class="caret"></b></a>
@@ -194,6 +188,8 @@
                     <li class="dropdown-item"><a href="/admin/role/list" class="nav-link" id="backStage-role">role</a></li>
                     <li class="dropdown-item"><a href="/admin/serviceType/list" class="nav-link" id="backStage-role">serviceType</a></li>
                     <li class="dropdown-item"><a href="/user/personal-info/list" class="nav-link" id="backStage-personalinfo">personal-info</a></li>
+                    <li class="dropdown-item"><a href="/penalty/tempPenaltyEntrance" class="nav-link" id="backStage-personalinfo">模擬提出檢舉(未全部完成)</a></li>
+                    <li class="dropdown-item"><a href="/penalty/showVertifyList" class="nav-link" id="backStage-personalinfo">檢舉案件審核(未全部完成)</a></li>
 <!--                     <li class="dropdown-item"><a href="/user/my-donation/list" class="nav-link" id="backStage-mydonation">my-donation</a></li> -->
                   </ul>
                 </li>

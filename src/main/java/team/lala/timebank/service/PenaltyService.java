@@ -30,15 +30,15 @@ public class PenaltyService {
 	@Autowired
 	private MemberDao memberDao;
 	
-	public Map<String, Object> getAccuserAndDefendant(Long orderId, Long defendantId) {
+	public Map<String, Object> getAccuserAndDefendant(Long orderId, Long accuserId) {
 		Order order = orderDao.getOne(orderId);
 		Map<String, Object> result = new HashMap<>();
 		//查出原告被告id
-		Long accuserId = null;
-		if(defendantId == order.getVolunteerId()) {
-			accuserId = order.getServiceRequesterId();
+		Long defendantId = null;
+		if(accuserId == order.getVolunteerId()) {
+			defendantId = order.getServiceRequesterId();
 		} else {
-			accuserId = order.getVolunteerId();
+			defendantId = order.getVolunteerId();
 		}
 		
 		//查出原告被告姓名
