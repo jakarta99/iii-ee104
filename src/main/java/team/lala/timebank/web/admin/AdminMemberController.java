@@ -77,26 +77,25 @@ public class AdminMemberController {
 		log.debug("inputMember={}",inputMember);
 		MemberSpecification memberSpec = new MemberSpecification(inputMember);	
 		Page<Member> members = memberService.findBySpecification(memberSpec,PageRequest.of(page, length.orElse(10)));
-		
-//		System.out.println("PageRequest=" +PageRequest.of(page, length.orElse(10)));		
-//		System.out.println("queryMember=" +members.getContent());
-//		System.out.println("Total Element Number=" +members.getTotalElements()+", total page=" + members.getTotalPages());
+		log.debug("PageRequest={}",PageRequest.of(page, length.orElse(10)));
+		log.debug("queryMember={}",members.getContent());
+		log.debug("Total Element Number={},total page={} ",members.getTotalElements(), members.getTotalPages());
 		return members;
 	}
 	
 	@ResponseBody
 	@RequestMapping("/update")
-	public AjaxResponse<Member> updateMember(Member member) {
-		System.out.println("inputMember="+member);			
+	public AjaxResponse<Member> updateMember(Member member) {		
+		log.debug("inputMember={}", member);
 		AjaxResponse<Member> response = new AjaxResponse<Member>();
 		try {
 			Member updatedMember = memberService.update(member);
 			response.setObj(updatedMember);
-			System.out.println("updatedMember="+updatedMember);		
-			System.out.println("資料更新成功");
+			log.debug("updatedMember={}", updatedMember);
+			log.debug("資料更新成功" );
 		} catch (Exception e) {
 			response.addMessage("資料更新失敗" + e.getMessage());
-			System.out.println("資料更新失敗");
+			log.debug("資料更新失敗" );
 		}
 		return 	response;
 	}
@@ -105,13 +104,13 @@ public class AdminMemberController {
 	@RequestMapping("/insert")
 	@ResponseBody
 	public AjaxResponse<Member> insertMember(Member member) {		
-		System.out.println("member = " + member);
+		log.debug("member={}", member);
 		AjaxResponse<Member> response = new AjaxResponse<Member>();
 		
 		try {
 			Member newMember = memberService.insert(member);
 			response.setObj(newMember);
-			System.out.println("新增成功");
+			log.debug("新增成功" );
 		} catch (Exception e) {
 			response.addMessage("新增失敗" + e.getMessage());
 			e.printStackTrace();
@@ -126,7 +125,7 @@ public class AdminMemberController {
 		System.out.println("id = "+id);
 		try {
 			memberService.deleteById(id);
-			System.out.println("刪除成功");
+			log.debug("刪除成功" );
 		} catch (Exception e) {
 			response.addMessage("刪除失敗" + e.getMessage());
 			e.printStackTrace();

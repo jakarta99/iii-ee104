@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Past;
 
+import org.hibernate.annotations.BatchSize;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -52,9 +53,10 @@ public class Member implements UserDetails {
 	@Column(name = "PASSWORD")
 	private String password;
 	
-	@ManyToMany(fetch=FetchType.EAGER,
+	@ManyToMany(fetch=FetchType.LAZY,
 			cascade=CascadeType.ALL)
 	@JsonManagedReference
+	@BatchSize(size=10)
 	@JoinTable(
 			name="USER_ROLE",
 			joinColumns=@JoinColumn(name="USER_ID"),

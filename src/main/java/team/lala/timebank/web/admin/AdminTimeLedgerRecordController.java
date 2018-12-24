@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.commons.ajax.PageResponse;
 import team.lala.timebank.entity.Order;
@@ -18,7 +19,7 @@ import team.lala.timebank.entity.TimeLedger;
 import team.lala.timebank.service.TimeLedgerService;
 import team.lala.timebank.spec.OrderSpecification;
 import team.lala.timebank.spec.TimeLedgerSpecification;
-
+@Slf4j
 @Controller
 @RequestMapping("/admin/time-ledger")
 public class AdminTimeLedgerRecordController {

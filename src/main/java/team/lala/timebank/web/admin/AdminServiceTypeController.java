@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.ServiceType;
 import team.lala.timebank.service.ServiceTypeService;
-
+@Slf4j
 @Controller
 @RequestMapping("/admin/serviceType")
 public class AdminServiceTypeController {
