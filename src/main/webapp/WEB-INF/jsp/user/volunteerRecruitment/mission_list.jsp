@@ -239,7 +239,7 @@
 		 			 },	
 				"lengthMenu": [ 3, 6, 9, 12, ],
 				ajax:{
-					url:"/user/RecruitFinish/list",
+					url:"/user/recruitFinish/list",
 					type: "get",
 				    dataType : "json",
 // 	 			    "data":$("form").serialize(),
@@ -270,7 +270,7 @@
 // 				       },
 					columns:[						
 						{"data": function (data, type, val) {
-							 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/RecruitFinish/edit?id="+data.id+"'\">Edit</button>";     
+							 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/recruitFinish/edit?id="+data.id+"'\">Edit</button>";     
 							 var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteMission("+data.id+")\">Delete</button>"; 	
 							 return editbutton + deletebutton;}
 						},					 

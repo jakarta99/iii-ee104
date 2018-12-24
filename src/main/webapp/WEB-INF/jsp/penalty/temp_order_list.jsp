@@ -138,6 +138,11 @@
 		
 
 		$(document).ready(function() {
+			if('${penaltyExist}'.length != 0){
+				alert('${penaltyExist}');
+			}
+			
+			
 			$("form").addClass("form-inline");
 			$("form div[id!='collapse']").addClass("form-group mx-sm-3 mb-3");
 			$("form input, select").addClass("form-control mx-3");

@@ -19,13 +19,13 @@
                         <div class="col-md-6 col-lg-3">
                            <h5><a href="#" >行事曆</a></h5>                      
                           <h5><a href="#" >系統訊息</a></h5>
-                          <h5><a href="#" >我的個人資訊</a></h5>                          
+                          <h5><a href="/user/personal-info/edit" >我的個人資訊</a></h5>                          
                         </div>
                         <div class="col-md-6 col-lg-3">
                           <h5><a href="#" >志工招募</a></h5>
                           <ul class="list-unstyled mb-3">
-                            <li class="nav-item"><a href="#" class="nav-link">招募紀錄</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link">刊登任務</a></li>                      
+                            <li class="nav-item"><a href="/user/recruitFinish/list" class="nav-link">招募紀錄</a></li>
+                            <li class="nav-item"><a href="/user/volunteerRecruitment/add" class="nav-link">刊登任務</a></li>                      
                           </ul>
                          <h5><a href="javascript:document.location.href='/user/volunteerApplication/page'" >志工申請</a></h5>
                           <ul class="list-unstyled mb-3">
@@ -36,7 +36,7 @@
                         <div class="col-md-6 col-lg-3">
                          <h5><a href="#" >我的交易紀錄</a></h5>
                          <h5><a href="#" >我的最愛</a></h5>
-                          <h5><a href="#" >我的捐款</a></h5>     
+                          <h5><a href="/user/my-donation/list" >我的捐款</a></h5>     
                         </div>
                       </div>
                     </li>
@@ -162,10 +162,8 @@
                     <li class="dropdown-item"><a href="/admin/mission/list" class="nav-link" id="backStage-penalty">mission</a></li>
                     <li class="dropdown-item"><a href="/admin/role/list" class="nav-link" id="backStage-role">role</a></li>
                     <li class="dropdown-item"><a href="/admin/serviceType/list" class="nav-link" id="backStage-role">serviceType</a></li>
-                    <li class="dropdown-item"><a href="/user/personal-info/list" class="nav-link" id="backStage-personalinfo">personal-info</a></li>
                     <li class="dropdown-item"><a href="/penalty/tempPenaltyEntrance" class="nav-link" id="backStage-personalinfo">模擬提出檢舉(未全部完成)</a></li>
                     <li class="dropdown-item"><a href="/penalty/showVertifyList" class="nav-link" id="backStage-personalinfo">檢舉案件審核(未全部完成)</a></li>
-<!--                     <li class="dropdown-item"><a href="/user/my-donation/list" class="nav-link" id="backStage-mydonation">my-donation</a></li> -->
                   </ul>
                 </li>
                 </sec:authorize>
