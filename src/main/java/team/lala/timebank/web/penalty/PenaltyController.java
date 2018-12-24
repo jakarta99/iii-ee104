@@ -44,16 +44,14 @@ public class PenaltyController {
 	private OrderService orderService;
 
 	
-	//模擬檢視會員媒合清單
+	//模擬檢視會員媒合清單(開發debug用，之後要刪)
 	@RequestMapping("/tempPenaltyEntrance")
 	public String listPage() {
-//		List<Order> orders = orderService.findAll();
-//		model.addAttribute("orders", orders);
 		return "/penalty/temp_order_list"; // getRequestDispatcher("/WEB-INF/jsp/order_list.jsp").forward(request,
 									// response);
 	}
 	
-	//模擬檢視會員媒合清單
+	//模擬檢視會員媒合清單(開發debug用，之後要刪)
 	@RequestMapping("/tempOrders")
 	@ResponseBody
 	public Page<Order> queryOrder(Order inputOrder, @RequestParam(value="start",required=false) Optional<Integer> start, 
@@ -69,12 +67,9 @@ public class PenaltyController {
 	
 	
 	
-	//針對order按檢舉按鍵，呼叫這支
+	//針對order按檢舉按鍵後，呼叫這支(放文件提醒)
 	@RequestMapping("/report")
-	public String report(@RequestParam("orderId")Long orderId, Model model) {   //, @RequestParam("defendant") Long defendantId
-		//如果呼叫我的頁面可以直接送給我被檢舉的整個Order物件、原告被告的id與姓名，那我就不用呼叫getAccuserAndDefendant這支service了~
-		//目前先假設最糟狀況--無法給我這些資訊，那麼至少要給我orderId與被告id
-		
+	public String report(@RequestParam("orderId")Long orderId, Model model) {  
 		//1.先判斷同一組order與defendant是否已被檢舉過。如已被檢舉過，則回傳無法檢舉的資訊並且導回原頁面
 		
 		
