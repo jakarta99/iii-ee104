@@ -188,6 +188,8 @@
                     <li class="dropdown-item"><a href="/admin/role/list" class="nav-link" id="backStage-role">role</a></li>
                     <li class="dropdown-item"><a href="/admin/serviceType/list" class="nav-link" id="backStage-role">serviceType</a></li>
                     <li class="dropdown-item"><a href="/user/personal-info/list" class="nav-link" id="backStage-personalinfo">personal-info</a></li>
+                    <li class="dropdown-item"><a href="/penalty/tempPenaltyEntrance" class="nav-link" id="backStage-personalinfo">模擬提出檢舉(未全部完成)</a></li>
+                    <li class="dropdown-item"><a href="/penalty/showVertifyList" class="nav-link" id="backStage-personalinfo">檢舉案件審核(未全部完成)</a></li>
 <!--                     <li class="dropdown-item"><a href="/user/my-donation/list" class="nav-link" id="backStage-mydonation">my-donation</a></li> -->
                   </ul>
                 </li>

@@ -13,20 +13,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
+import team.lala.timebank.commons.ajax.PageResponse;
 import team.lala.timebank.entity.Member;
+import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.entity.TimeLedger;
+import team.lala.timebank.service.OrderService;
 import team.lala.timebank.service.PenaltyService;
 import team.lala.timebank.service.TimeLedgerService;
+import team.lala.timebank.spec.OrderSpecification;
 import team.lala.timebank.spec.PenaltySpecification;
 
 @Slf4j
 @Controller
 @RequestMapping("/penalty")
-//@SessionAttributes(names= {"penalty"})
+@SessionAttributes(names= {"reportOnePenalty"})
 public class PenaltyController {
 
 	@Autowired
@@ -34,17 +39,55 @@ public class PenaltyController {
 	
 	@Autowired
 	private TimeLedgerService timeLedgerService;
+	
+	@Autowired
+	private OrderService orderService;
 
+	
+	//模擬檢視會員媒合清單
+	@RequestMapping("/tempPenaltyEntrance")
+	public String listPage() {
+//		List<Order> orders = orderService.findAll();
+//		model.addAttribute("orders", orders);
+		return "/penalty/temp_order_list"; // getRequestDispatcher("/WEB-INF/jsp/order_list.jsp").forward(request,
+									// response);
+	}
+	
+	//模擬檢視會員媒合清單
+	@RequestMapping("/tempOrders")
+	@ResponseBody
+	public Page<Order> queryOrder(Order inputOrder, @RequestParam(value="start",required=false) Optional<Integer> start, 
+			@RequestParam(value="length",required=false) Optional<Integer> length) {
+		int page = start.orElse(0)/length.orElse(10);
+		OrderSpecification orderSpec = new OrderSpecification(inputOrder);
+		Page<Order> orders = orderService.findBySpecification(
+				orderSpec, PageRequest.of(page, length.orElse(10)));
+		System.out.println("orders={}"+orders );
+		log.debug("orders={}", orders );
+		return orders;
+	}
+	
+	
+	
+	//針對order按檢舉按鍵，呼叫這支
 	@RequestMapping("/report")
-	public String report(@RequestParam("orderId")Long orderId, @RequestParam("defendant") Long defendantId, Model model) {  
+	public String report(@RequestParam("orderId")Long orderId, Model model) {   //, @RequestParam("defendant") Long defendantId
 		//如果呼叫我的頁面可以直接送給我被檢舉的整個Order物件、原告被告的id與姓名，那我就不用呼叫getAccuserAndDefendant這支service了~
 		//目前先假設最糟狀況--無法給我這些資訊，那麼至少要給我orderId與被告id
 		
 		//1.先判斷同一組order與defendant是否已被檢舉過。如已被檢舉過，則回傳無法檢舉的資訊並且導回原頁面
 		
 		
-		//2.如果未被檢舉過，則將需要顯示在檢舉頁面的資料放入model
-		Map<String, Object> reportBasicData = penaltyService.getAccuserAndDefendant(orderId, defendantId);
+		
+		//2.取出目前登入之會員id，做為檢舉者id
+		Member userDetails = (Member) SecurityContextHolder.getContext()  
+					.getAuthentication()  
+					.getPrincipal();
+		Long accuserId = userDetails.getId();
+//		log.debug("USERNAME={}", userDetails.getUsername());
+		
+		//3.如果未被檢舉過，則將需要顯示在檢舉頁面的資料放入model
+		Map<String, Object> reportBasicData = penaltyService.getAccuserAndDefendant(orderId, accuserId);
 		if(reportBasicData != null && reportBasicData.size() != 0) {
 			model.addAttribute("reportBasicData",reportBasicData);
 		}
@@ -56,7 +99,7 @@ public class PenaltyController {
 	public String insert(Penalty penalty, Model model) {
 //		log.debug("PUT BEFORE penalty={}", penalty);
 		penalty = penaltyService.save(penalty);
-		model.addAttribute("penalty", penalty);
+		model.addAttribute("reportOnePenalty", penalty);
 //		log.debug("PUT AFTER penalty={}", penalty);
 		return "redirect:/penalty/my-report-list";
 	}
