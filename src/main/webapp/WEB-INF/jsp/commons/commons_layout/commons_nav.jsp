@@ -53,7 +53,7 @@
 		                    <li class="dropdown-item"><a href="#" class="nav-link" >系統訊息</a></li>
 		                    <li class="dropdown-item"><a href="#" class="nav-link" >我的個人資訊</a></li>
 		                    <li class="dropdown-item"><a href="#" class="nav-link" >志工招募</a></li>
-		                    <li class="dropdown-item"><a href="#" class="nav-link" >志工申請</a></li>
+		                    <li class="dropdown-item"><a href="javascript:document.location.href='/user/volunteerApplication/page'" class="nav-link" >志工申請</a></li>
 		                    <li class="dropdown-item"><a href="#" class="nav-link" >我的交易紀錄</a></li>
 		                    <li class="dropdown-item"><a href="#" class="nav-link" >我的最愛</a></li>
 		                    <li class="dropdown-item"><a href="#" class="nav-link" >我的捐款</a></li>
