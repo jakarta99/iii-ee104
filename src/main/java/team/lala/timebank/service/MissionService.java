@@ -3,6 +3,7 @@ package team.lala.timebank.service;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -73,9 +74,18 @@ public class MissionService {
 		return missionList;
 	}
 
-	public List<Mission> findByMemberId(Long memberid) {
+	public Mission findByMissionId(Long missionId) {
 
-		List<Mission> missionList = missionDao.findByMemberId(memberid);
+		Mission mission = missionDao.getOne(missionId);
+
+		return mission;
+	}
+
+	// 取得member所有mission
+	public List<Mission> findByMemberAccount(Principal principal) {
+
+		// loginAccount取得member.getid取得mission list
+		List<Mission> missionList = missionDao.findByMemberId(memberDao.findByAccount(principal.getName()).getId());
 
 		return missionList;
 
