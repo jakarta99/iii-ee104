@@ -46,19 +46,39 @@
                     </li>
                   </ul>
                 </li>
-                 <li class="nav-item dropdown"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle">會員專區 <b class="caret"></b></a>
+              <li class="nav-item dropdown menu-large" ><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">會員專區 <b class="caret"></b></a>
+                  <ul class="dropdown-menu megamenu" style="width:450px;">
+                    <li>
                       <div class="row">
-		                  <ul class="dropdown-menu">
-		                    <li class="dropdown-item"><a href="#" class="nav-link" >行事曆</a></li>
-		                    <li class="dropdown-item"><a href="#" class="nav-link" >系統訊息</a></li>
-		                    <li class="dropdown-item"><a href="#" class="nav-link" >我的個人資訊</a></li>
-		                    <li class="dropdown-item"><a href="#" class="nav-link" >志工招募</a></li>
-		                    <li class="dropdown-item"><a href="#" class="nav-link" >志工申請</a></li>
-		                    <li class="dropdown-item"><a href="#" class="nav-link" >我的交易紀錄</a></li>
-		                    <li class="dropdown-item"><a href="#" class="nav-link" >我的最愛</a></li>
-		                    <li class="dropdown-item"><a href="#" class="nav-link" >我的捐款</a></li>
-		
-		                  </ul>
+                        <div class="col-md-6 col-lg-3">
+                           <h5><a href="#" >行事曆</a></h5>                      
+                          <h5><a href="#" >系統訊息</a></h5>
+                          <h5><a href="#" >我的個人資訊</a></h5>                          
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                          <h5><a href="#" >志工招募</a></h5>
+                          <ul class="list-unstyled mb-3">
+                            <li class="nav-item"><a href="#" class="nav-link">招募紀錄</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link">刊登任務</a></li>                      
+                          </ul>
+                         <h5><a href="#" >志工申請</a></h5>
+                          <ul class="list-unstyled mb-3">
+                            <li class="nav-item"><a href="#" class="nav-link">申請中</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link">服務紀錄</a></li>                          
+                          </ul>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                         <h5><a href="#" >我的交易紀錄</a></h5>
+                         <h5><a href="#" >我的最愛</a></h5>
+                          <h5><a href="#" >我的捐款</a></h5>     
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                      
+                      
+<!--                       <div class="row"> -->
                
 <!--                         <div class="col-lg-3 col-md-6"> -->
 <!--                           <h5>我的申請</h5> -->
@@ -69,8 +89,7 @@
 <!--                             <li class="nav-item"><a href="team.html" class="nav-link">服務紀錄</a></li> -->
 <!--                           </ul> -->
 <!--                         </div> -->
-                      </div>
-                </li>
+                     
                 <!-- ========== FULL WIDTH MEGAMENU ==================-->
                 <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">關於我們 <b class="caret"></b></a>
                   <ul class="dropdown-menu megamenu">
