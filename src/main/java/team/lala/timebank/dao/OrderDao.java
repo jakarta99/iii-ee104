@@ -13,6 +13,6 @@ public interface OrderDao extends JpaRepository<Order,Long>, JpaSpecificationExe
 
 	public List<Order> findByVolunteerId(Long volunteerId);
 	
-	public List<Order> findByOrderConfirmation(YesNo orderConfirmation);
+
 
 }

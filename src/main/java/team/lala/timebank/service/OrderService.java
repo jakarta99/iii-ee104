@@ -41,11 +41,7 @@ public class OrderService {
 	}
 	
 	
-	public List<Order> findByOrderConfirmation(YesNo orderConfirmation){
-		List<Order> order = orderDao.findByOrderConfirmation(orderConfirmation);
-		return order;
-	};
-	
+
 	
 	public Order getById(Long id) {
 		//getOne查無資料不會回傳null，而是噴錯(確認是在Service處理Exception，還是在Controller)
