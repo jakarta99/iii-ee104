@@ -12,22 +12,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.service.MissionService;
 
-@RequestMapping("")
+@RequestMapping("/user/RecruitFinish")
 @Controller
 public class RecruitFinishController {
 
 	@Autowired
 	private MissionService missionService;
 
-	@RequestMapping("")
+	@RequestMapping("/list")
 	@ResponseBody
 	public void getAllRecruit(Principal principal, Model model) {
 		List<Mission> missions = missionService.findByMemberAccount(principal);
 		model.addAllAttributes(missions);
 	}
 	
-	@RequestMapping("")
-	public void editRecruit(Mission mission) {
+	@RequestMapping("/edit")
+	public void editRecruit(Mission inputMission) {
+		Mission mission = missionService.findByMissionId(inputMission.getId());
+		missionService.update(mission);
 		
 	}
 	
