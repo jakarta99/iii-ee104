@@ -10,7 +10,7 @@ import team.lala.timebank.entity.Penalty;
 public interface PenaltyDao extends JpaRepository<Penalty, Long>, JpaSpecificationExecutor<Penalty> {
 
 	// 查詢某人的Penalty by Brian
-	public List<Penalty> findByMemberId(Long memberId);
+	public List<Penalty> findByDefendant(Long defendant);
 	
 
 }
