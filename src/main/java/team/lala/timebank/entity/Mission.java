@@ -108,8 +108,7 @@ public class Mission {
 	@JoinColumn(name="status",    
 				referencedColumnName="id",  
 				insertable=true, updatable=true)
-	@Column(name = "status", nullable = false)
-	private Integer status;
+	private MissionStatus status;
 
 	@Override
 	public String toString() {
