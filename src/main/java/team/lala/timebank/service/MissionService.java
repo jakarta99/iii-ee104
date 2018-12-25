@@ -13,9 +13,11 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.MissionDao;
+import team.lala.timebank.dao.MissionStatusDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.MissionStatus;
+
 @Slf4j
 @Service
 public class MissionService {
@@ -24,6 +26,8 @@ public class MissionService {
 	private MissionDao missionDao;
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private MissionStatusDao missionStatusDao;
 
 	public List<Mission> findBySpecification(Specification<Mission> specification) {
 		return missionDao.findAll(specification);
@@ -35,7 +39,7 @@ public class MissionService {
 
 	// insert
 	public Mission insert(Mission mission) {
-		
+
 		mission.setStartDate(mission.getStartDate());
 		mission.setEndDate(mission.getEndDate());
 		mission.setPublishDate(new Date());
@@ -45,13 +49,15 @@ public class MissionService {
 
 	public Mission insert(Mission mission, Principal principal) {
 		Member member = memberDao.findByAccount(principal.getName());
-		log.debug("member.getId()={}",member.getId());
+		log.debug("member.getId()={}", member.getId());
 		mission.setMemberId(member.getId());
-		log.debug("mission.memberid={}",mission.getMemberId());
+
+		MissionStatus missionStatus = missionStatusDao.getOne(1l);
+		log.debug("mission.memberid={}", mission.getMemberId());
 		mission.setStartDate(mission.getStartDate());
 		mission.setEndDate(mission.getEndDate());
 		mission.setPublishDate(new Date());
-		mission.setStatus(1);
+		mission.setStatus(missionStatus);
 
 		return missionDao.save(mission);
 	}
@@ -82,8 +88,8 @@ public class MissionService {
 		return missionList;
 
 	}
-	
-	public Mission findByAccount(Principal principal,Mission mission) {
+
+	public Mission findByAccount(Principal principal, Mission mission) {
 		mission.setMemberId(memberDao.findByAccount(principal.getName()).getId());
 		return mission;
 	}

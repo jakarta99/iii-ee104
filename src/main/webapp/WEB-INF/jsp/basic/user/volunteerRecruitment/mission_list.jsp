@@ -134,8 +134,8 @@
 			<label>jobTitle :</label> 
 			<input type="text" value="" placeholder="jobTitle" id="jobTitle" name="jobTitle"/>
 			
-			<label>status :</label> 
-			<input type="text" value="" placeholder="status" id="status" name="status"/>
+			<label>missionStatus :</label> 
+			<input type="text" value="" placeholder="missionStatus" id="missionStatus" name="missionStatus"/>
 			</div>
 		</form>
 	</fieldset>
@@ -291,7 +291,7 @@
 							var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerRecruitment/edit?id="+data.id+"'\">志工審核</button>";   
 							return vbutton;}							 
 						},
-			            {"data":"status"},
+			            {"data":"status.missionStatus"},
 									
 					],
 					 columnDefs: [{
