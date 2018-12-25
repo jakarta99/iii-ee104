@@ -83,7 +83,7 @@
 	<input type="hidden" value="${mission.id}" id="id" name="id"/>
 	<input type="hidden" value="${publishDate}"  id="publishDate" name="publishDate"/>
 	<input type="hidden" value="${mission.approvedQuantity}"  id="approvedQuantity" name="approvedQuantity"/>
-	<input type="hidden" value="${mission.status}"  id="publishDate" name="publishDate"/>
+	<input type="hidden" value="${mission.status.id}"  id="status" name="status"/>
 	
 	
 	<div>			
@@ -98,7 +98,7 @@
     title:<input type="text" value="${mission.title}" id="title" name="title" class="form-control"/>
     </div>
    
-   <input type="hidden" value="${mission.memberId}" id="memberId" name="memberId"/><p>
+   <input type="hidden" value="${mission.member.id}" id="member" name="member"/><p>
    
    
    	<div class="form-group">
@@ -159,7 +159,7 @@
 	
 	</div>
 	<div>
-	<input type="button" class="btn btn-outline-secondary" onclick="javascript:document.location.href='/admin/request/list'" value="回列表頁"/>
+	<input type="button" class="btn btn-outline-secondary" onclick="javascript:document.location.href='/admin/mission/list'" value="回列表頁"/>
 
 	</div>
 					

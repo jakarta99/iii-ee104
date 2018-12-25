@@ -141,7 +141,7 @@
 	<tr>
 		<th>選項</th>
 		<th scope="col">id</th>
-		<th scope="col">memberId</th>
+		<th scope="col">memberName</th>
 		<th scope="col">title</th>
 		<th scope="col">timeValue</th>
 		<th scope="col">termType</th>
@@ -268,7 +268,7 @@
 							 return editbutton + deletebutton;}
 						},					 
 						{"data":"id"},
-						{"data":"memberId.name"},
+						{"data":"member.name"},
 						{"data":"title"},
 						{"data":"timeValue"},
 						{"data":"termType"},
