@@ -97,7 +97,7 @@
 								<div>
 									<label>出生日期:</label>
 									<input type="text" value="${param.birthDate}" id="birthDate" name="birthDate" autocomplete="off">
-								</div>
+								</div><hr>
 							</c:when>
 							<c:when test="${memberType eq 'O'}">
 								<div>
