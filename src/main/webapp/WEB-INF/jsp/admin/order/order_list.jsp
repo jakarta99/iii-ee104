@@ -79,13 +79,10 @@
 						<input type="text" value="${param.id}" id="id" name="id" placeholder="id" />
 					</div>
 					<div>
-						<label>volunteerId:</label>
-						<input type="text" value="${param.volunteerId}" id="volunteerId" name="volunteerId"/>
+						<label>volunteer:</label>
+						<input type="text" value="${param.volunteer}" id="volunteer" name="volunteer"/>
 					</div>
-					<div>
-						<label>serviceRequesterId:</label>
-						<input type="text" value="${param.serviceRequesterId}" id="serviceRequesterId" name="serviceRequesterId"/>
-					</div>
+					
 				</div>
 				<div>
 					<div>
@@ -117,8 +114,7 @@
 					<th scope="col"></th>
 					<th scope="col" width="100px"></th>
 					<th scope="col">ID</th>			
-					<th scope="col">volunteerId</th>
-					<th scope="col">serviceRequesterId</th>
+					<th scope="col">volunteer</th>
 					<th scope="col">orderAcception(Y/N)</th>
 					<th scope="col">orderConfirmation(Y/N)</th>
 					<th scope="col">status</th>
@@ -202,8 +198,7 @@
 		               	return editButt + deleteButt;	}
 		           	},
 		           	{data:"id" },
-					{data:"volunteerId"},
-					{data:"serviceRequesterId"},
+					{data:"volunteer.id"},
 					{data:"orderAcception"},
 					{data:"orderConfirmation"},
 					{data:"status"},
