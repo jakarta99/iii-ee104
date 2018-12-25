@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Sign Up</title>
+<title>Sign Up Type</title>
 <jsp:include page="../../../admin/admin_layout/admin_css_js_links.jsp" />
 <!-- css -->
 <jsp:include page="../commons_layout/commons_css_links.jsp" />
@@ -37,6 +37,7 @@
 	<jsp:include page="../commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="../commons_layout/commons_nav.jsp"/>
+	<section class="bar">
 	<div class="container">
     	<div class="row">
     		<!-- Sidebar -->
@@ -47,17 +48,16 @@
           			<fieldset>
           			<legend>帳戶類型</legend>
           			<div>
-          				<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/commons/sing-up/add?memberType=P'" value="新增一般會員"/>
-          				<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/commons/sing-up/add?memberType=O'" value="新增公益團體"/>
+          				<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/commons/sign-up/add?memberType=P'" value="新增一般會員"/>
+          				<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/commons/sign-up/add?memberType=O'" value="新增公益團體"/>
           			</div>
           			</fieldset>
           		</form>
           	</article>
         </div>
     </div>
+    </section>
 	<!-- FOOTER -->
-	<jsp:include page="../commons_layout/commons_footer.jsp"/>
-	<!-- Javascript files -->
-	<jsp:include page="../commons_layout/commons_js_links.jsp"/>
+<%-- 	<jsp:include page="../commons_layout/commons_footer.jsp"/> --%>
 </body>
 </html>

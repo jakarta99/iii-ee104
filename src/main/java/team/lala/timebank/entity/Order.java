@@ -34,10 +34,10 @@ public class Order{
 	
 	@ManyToOne
 //	@JsonBackReference 
-	@JoinColumn(name="status",    
+	@JoinColumn(name="ORDER_STATUS",    
 				referencedColumnName="id",  
 				insertable=true, updatable=true)
-	private OrderStatus status;
+	private OrderStatus orderStatus;
 	
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm" )
 	@Column(name="VOLUNTEER_APPLY_TIME")
@@ -56,9 +56,16 @@ public class Order{
 
 	@Override
 	public String toString() {
+<<<<<<< HEAD
 		return "Order [id=" + id + ", volunteerId=" + volunteerId + ", status=" + status + ", volunteerApplyTime="
 				+ volunteerApplyTime + ", orderAcceptTime=" + orderAcceptTime + ", mission=" + mission + "]";
+=======
+		return "Order [id=" + id + ", volunteerId=" + volunteerId + ", serviceRequesterId=" + serviceRequesterId
+				+ ", orderStatus=" + orderStatus + ", volunteerApplyTime=" + volunteerApplyTime + ", orderAcceptTime="
+				+ orderAcceptTime + ", mission=" + mission + "]";
+>>>>>>> branch 'master' of https://github.com/jakarta99/iii-ee104.git
 	}
+
 
 
 }
