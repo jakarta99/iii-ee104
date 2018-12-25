@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						errMsg = "Unknown error - " + exp.getMessage();
 					}
 					req.setAttribute("message", errMsg);
-					req.getRequestDispatcher("/WEB-INF/jsp/commons/login.jsp").forward(req, res);
+					req.getRequestDispatcher("/WEB-INF/jsp/basic/commons/login.jsp").forward(req, res);
 				}).and().logout().logoutSuccessUrl("/")
 				.deleteCookies("JSESSIONID")
 //				.and().oauth2Login().loginPage("/oauth_login")
