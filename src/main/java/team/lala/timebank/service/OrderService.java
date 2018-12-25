@@ -10,15 +10,17 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.OrderDao;
+import team.lala.timebank.dao.OrderStatusDao;
 import team.lala.timebank.entity.Order;
-import team.lala.timebank.enums.YesNo;
+import team.lala.timebank.entity.OrderStatus;
 
 @Service
 public class OrderService {
 	
 	@Autowired
 	private OrderDao orderDao;
-	
+	@Autowired
+	private OrderStatusDao orderStatusDao;
 	
 	
 	public List<Order> findBySpecification(Specification<Order> specification){
@@ -63,10 +65,10 @@ public class OrderService {
 	
 	public Order update(Order order) {
 		Order dbOrder = orderDao.getOne(order.getId());
+//		orderStatusDao.getOne(order.getId())
 		if(order.getId() != null ) {
 			dbOrder.setVolunteerId(order.getVolunteerId());
-			dbOrder.setServiceRequesterId(order.getServiceRequesterId());
-			dbOrder.setStatus(order.getStatus());
+			dbOrder.setOrderStatus(order.getOrderStatus());
 			dbOrder.setVolunteerApplyTime(order.getVolunteerApplyTime());
 			dbOrder.setOrderAcceptTime(order.getOrderAcceptTime());
 			dbOrder = orderDao.save(dbOrder);

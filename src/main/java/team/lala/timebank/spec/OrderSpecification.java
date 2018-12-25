@@ -32,12 +32,9 @@ public class OrderSpecification implements Specification<Order>  {
 			list.add(criteriaBuilder.equal(root.get("volunteerId").as(String.class), inputOrder.getVolunteerId()));
 		}
 
-		if(!StringUtils.isEmpty(inputOrder.getServiceRequesterId())) {
-			list.add(criteriaBuilder.equal(root.get("serviceRequesterId").as(Long.class), inputOrder.getServiceRequesterId()));
-		}
 		
-		if(!StringUtils.isEmpty(inputOrder.getStatus())) {
-			list.add(criteriaBuilder.equal(root.get("status").as(String.class), inputOrder.getStatus()));
+		if(!StringUtils.isEmpty(inputOrder.getOrderStatus())) {
+			list.add(criteriaBuilder.equal(root.get("status").as(String.class), inputOrder.getOrderStatus()));
 		}
 		
 		//排序(暫時寫死)，如何從前端傳排序資料
