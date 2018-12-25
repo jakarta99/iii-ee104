@@ -28,7 +28,7 @@
 						<a class="dropdown-item" href="/admin/member/list" id="backStage-member">member</a> 
 						<a	class="dropdown-item" href="/admin/order/list" id="backStage-order">order</a> 
 						<a	class="dropdown-item" href="/admin/donation/list" id="backStage-donation">donation</a>
-						<a	class="dropdown-item" href="/admin/request/list" id="backStage-request">request</a>
+						<a	class="dropdown-item" href="/admin/mission/list" id="backStage-mission">mission</a>
 						<a	class="dropdown-item" href="/admin/time-ledger/list" id="backStage-timeledger">time-ledger</a>
 						<a	class="dropdown-item" href="/admin/penalty/list" id="backStage-penalty">penalty</a>
 						<a	class="dropdown-item" href="/admin/role/list" id="backStage-role">role</a>	
