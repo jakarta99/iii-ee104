@@ -138,15 +138,16 @@
 			</div>
 		</form>
 	</fieldset>
-	
+	<div class='s2'><button onclick='recruiting()' >進行中</button><button onclick='checkTime()' >時數待核發</button><button onclick='recruited()' >已完成</button></div>
 	<fieldset>
 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/user/volunteerRecruitment/add'">add</button>
+	
 	<table id="table" class="table table-hover">
 	<thead>
 	<tr>
 		<th>選項</th>
-		<th scope="col">id</th>
-		<th scope="col">memberId</th>
+		<th scope="col">title</th>
+		<th scope="col">peopleNeeded</th>
 		<th scope="col">title</th>
 		<th scope="col">timeValue</th>
 		<th scope="col">termType</th>
@@ -236,7 +237,7 @@
 		 			   api.rows( {page:'current'} ).data()
 		 			    return '顯示第 '+(pageInfo.start+1)+' 筆到第  '+(pageInfo.end)+' 筆 共 '+ pageInfo.recordsTotal+' 筆資料 ';
 		 			 },	
-				"lengthMenu": [ 3, 6, 9, 12, ],
+				"lengthMenu": [6,12],
 				ajax:{
 					url:"/user/volunteerRecruitment/query",
 					type: "get",

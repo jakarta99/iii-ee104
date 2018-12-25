@@ -1,18 +1,14 @@
 package team.lala.timebank.web.penalty;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
@@ -104,7 +99,7 @@ public class PenaltyController {
 	
 	//提出檢舉時呼叫的方法
 	@RequestMapping(value="/doReport", method = RequestMethod.POST)
-	public String insert(Penalty penalty, Model model) {
+	public String doReport(Penalty penalty, Model model) {
 
 		penalty = penaltyService.save(penalty);
 		model.addAttribute("reportOnePenalty", penalty);
@@ -174,29 +169,31 @@ public class PenaltyController {
 	
 	//將佐證圖片存至Server
 	@RequestMapping("/storeProofPic")
-	public String store(@RequestParam("proofPic") MultipartFile proofPic, @RequestParam("penaltyId") Long penaltyId) throws IOException {
+	public String storeProofPic(@RequestParam("proofPic") MultipartFile proofPic, @RequestParam("penaltyId") Long penaltyId) throws IOException {
 		
-		//之後要包到Service內
-		//呼叫service將圖片存到Server
-		//確認是否有此資料夾，如無則建資料夾
-//		File dir = new File("D:\\Jasmine\\git\\iii-ee104-2\\iii-ee104\\src\\main\\resources\\static\\img\\");
-		File dir = new File("D:\\penaltyProoves\\");
+		log.debug("pictureName={}", proofPic.getOriginalFilename());
 		
-		if(!dir.exists()) {
-			dir.mkdirs();
+		//如果有上傳圖片，才存檔案到Server，及存路徑到DB
+		if(proofPic.getOriginalFilename().length() > 0) {
+			//之後要包到Service內
+			//呼叫service將圖片存到Server
+			//確認是否有此資料夾，如無則建資料夾
+			File dir = new File("D:\\penaltyProoves\\");
+			
+			if(!dir.exists()) {
+				dir.mkdirs();
+			}
+			
+			String location = "D:\\penaltyProoves\\"
+							+ "penaltyProof_" + penaltyId + ".jpg";
+			FileOutputStream fos = new FileOutputStream(location);
+			fos.write(proofPic.getBytes());
+			fos.close();
+			//將圖片路徑存到DB
+			Penalty penalty = penaltyService.getOne(penaltyId);
+			penalty.setProofPicName("penaltyProof_" + penaltyId + ".jpg");
+			penaltyService.update(penalty);
 		}
-		
-//		String location = "D:\\Jasmine\\git\\iii-ee104-2\\iii-ee104\\src\\main\\resources\\static\\img\\"
-//						+ "penaltyProof_" + penaltyId + ".jpg";
-		String location = "D:\\penaltyProoves\\"
-						+ "penaltyProof_" + penaltyId + ".jpg";
-		FileOutputStream fos = new FileOutputStream(location);
-		fos.write(proofPic.getBytes());
-		fos.close();
-		//將圖片路徑存到DB
-		Penalty penalty = penaltyService.getOne(penaltyId);
-		penalty.setProofPicName("penaltyProof_" + penaltyId + ".jpg");
-		penaltyService.update(penalty);
 		
 		return "redirect:/penalty/tempPenaltyEntrance";//回傳上傳成功與否之資訊
 	}
