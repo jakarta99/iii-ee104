@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.OrderDao;
+import team.lala.timebank.dao.OrderStatusDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.OrderStatus;
-import team.lala.timebank.spec.OrderSpecification;
 
 @Service
 public class OrderService {
@@ -24,6 +24,9 @@ public class OrderService {
 	@Autowired
 	private MemberDao memberDao;
 	
+	@Autowired
+	private OrderStatusDao orderStatusDao;
+	
 	public List<Order> findBySpecification(Specification<Order> specification){
 		return orderDao.findAll(specification);
 	}
@@ -32,17 +35,11 @@ public class OrderService {
 		return orderDao.findAll(specification, pageRequest);
 	}
 	
-	public Page<Order> findBySpecificationWhereStatusEqualOne(String account, PageRequest pageRequest){
+	public Page<Order> findByVolunteerAndOrderStatus(String account, Long orderStatus, PageRequest pageRequest){	
+		OrderStatus status = orderStatusDao.getOne(orderStatus);
 		
-		OrderStatus orderStatus = new OrderStatus();
-		orderStatus.setOrderStatus("志工申請了");
-
 		Member member = memberDao.findByAccount(account);
-		Order order = new Order();
-		order.setVolunteer(member);
-		order.setOrderStatus(orderStatus);
-		OrderSpecification orderSpec = new OrderSpecification(order);
-		return orderDao.findAll(orderSpec, pageRequest);
+		return orderDao.findByVolunteerAndOrderStatus(member, status, pageRequest);
 	}
 	
 	public List<Order> findAll() {

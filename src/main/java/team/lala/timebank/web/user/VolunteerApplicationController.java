@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Order;
+import team.lala.timebank.entity.OrderStatus;
 import team.lala.timebank.service.OrderService;
-import team.lala.timebank.spec.OrderSpecification;
 
 @Slf4j
 @Controller
@@ -32,16 +32,14 @@ public class VolunteerApplicationController {
 
 	@ResponseBody
 	@RequestMapping("/queryApplication")
-	public Page<Order> QueryApplication(Principal principal, @RequestParam(value="start",required=false) Optional<Integer> start, 
+	public Page<Order> QueryApplication(Principal principal, /*@RequestParam(value="orderStatus") Long orderStatus,*/ @RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
-		log.debug("principal.getName()={}",principal.getName());
+
 		int page = start.orElse(0)/length.orElse(10);
 		String account = principal.getName();
-		Order order = new Order();
-		OrderSpecification orderSpec = new OrderSpecification(order);
-		Page<Order> orders = orderService.findBySpecification(
-				orderSpec, PageRequest.of(page, length.orElse(10)));
-		return orders;
+		
+		log.debug("{}",orderService.findByVolunteerAndOrderStatus(account, 1l, PageRequest.of(page, length.orElse(10))));
+		return orderService.findByVolunteerAndOrderStatus(account, 1l, PageRequest.of(page, length.orElse(10)));
 	}
 
 	@ResponseBody
