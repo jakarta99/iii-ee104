@@ -35,7 +35,7 @@ public class Order{
 	
 	@ManyToOne
 //	@JsonBackReference 
-	@JoinColumn(name="ORDERSTATUS",    
+	@JoinColumn(name="ORDER_STATUS",    
 				referencedColumnName="id",  
 				insertable=true, updatable=true)
 	private OrderStatus orderStatus;

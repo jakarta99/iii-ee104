@@ -30,22 +30,22 @@ INSERT INTO SERVICE_TYPE VALUES ('宗教信仰');
 
 
 --mission
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,status) 
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status) 
 VALUES (1,'中華育幼機構關懷協會',2,'L',2,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','大安區','復興南路一段390號15樓',1);
 
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,status) 
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status) 
 VALUES (2,'中華育幼機構關懷協會',2,'S',2,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','大安區','復興南路一段390號15樓',1);
 
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,status) 
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status) 
 VALUES (3,'中華育幼機構關懷協會',2,'L',2,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','大安區','復興南路一段390號15樓',1);
 
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,status) 
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status) 
 VALUES (1,'中華育幼機構關懷協會',2,'S',2,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','大安區','復興南路一段390號15樓',1);
 
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,status) 
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status) 
 VALUES (1,'中華育幼機構關懷協會',2,'L',2,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','大安區','復興南路一段390號15樓',1);
 
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,status) 
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status) 
 VALUES (1,'中華育幼機構關懷協會',2,'S',2,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','大安區','復興南路一段390號15樓',1);
 
 
@@ -88,16 +88,16 @@ INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (5, 2)
 
 
 --ORDER_LIST
-INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, SERVICE_REQUESTER_ID, STATUS, VOLUNTEER_APPLY_TIME) 
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, SERVICE_REQUESTER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
 VALUES(1, 3, 2, 1, '2018/10/11 17:00');
 
-INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, SERVICE_REQUESTER_ID, STATUS, VOLUNTEER_APPLY_TIME, ORDER_ACCEPT_TIME) 
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, SERVICE_REQUESTER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME, ORDER_ACCEPT_TIME) 
 VALUES(1, 1, 2, 3, '2018/10/11 17:00', '2018/10/13 17:00' );
 
-INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, SERVICE_REQUESTER_ID, STATUS, VOLUNTEER_APPLY_TIME, ORDER_ACCEPT_TIME) 
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, SERVICE_REQUESTER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME, ORDER_ACCEPT_TIME) 
 VALUES(2, 2, 4, 3, '2018/10/12 17:00', '2018/10/15 17:00' );
 
-INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, SERVICE_REQUESTER_ID, STATUS, VOLUNTEER_APPLY_TIME, ORDER_ACCEPT_TIME) 
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, SERVICE_REQUESTER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME, ORDER_ACCEPT_TIME) 
 VALUES(2, 3, 4, 3, '2018/11/10 17:00', '2018/11/14 17:00' );
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, SERVICE_REQUESTER_ID, STATUS, VOLUNTEER_APPLY_TIME, ORDER_ACCEPT_TIME) 
