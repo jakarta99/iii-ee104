@@ -36,9 +36,10 @@ public class Mission {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(name = "MEMBER_ID", nullable = false)
-	private Long memberId; // 刊登者
+	
+	@ManyToOne
+	@JoinColumn(name = "MEMBER_ID", referencedColumnName = "id")
+	private Member memberId; // 刊登者
 
 	@Column(name = "TITLE", nullable = false, length = 50)
 	private String title;// 活動名稱

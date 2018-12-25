@@ -48,16 +48,12 @@ public class MissionService {
 	}
 
 	public Mission insert(Mission mission, Principal principal) {
-		Member member = memberDao.findByAccount(principal.getName());
-		log.debug("member.getId()={}", member.getId());
-		mission.setMemberId(member.getId());
+		mission.setMemberId(memberDao.findByAccount(principal.getName()));
+		mission.setStatus(missionStatusDao.getOne(1l));
 
-		MissionStatus missionStatus = missionStatusDao.getOne(1l);
-		log.debug("mission.memberid={}", mission.getMemberId());
 		mission.setStartDate(mission.getStartDate());
 		mission.setEndDate(mission.getEndDate());
 		mission.setPublishDate(new Date());
-		mission.setStatus(missionStatus);
 
 		return missionDao.save(mission);
 	}
@@ -81,7 +77,7 @@ public class MissionService {
 		return missionList;
 	}
 
-	public List<Mission> findByMemberId(Long memberid) {
+	public List<Mission> findByMemberId(Member memberid) {
 
 		List<Mission> missionList = missionDao.findByMemberId(memberid);
 
@@ -90,7 +86,7 @@ public class MissionService {
 	}
 
 	public Mission findByAccount(Principal principal, Mission mission) {
-		mission.setMemberId(memberDao.findByAccount(principal.getName()).getId());
+		mission.setMemberId(memberDao.findByAccount(principal.getName()));
 		return mission;
 	}
 
