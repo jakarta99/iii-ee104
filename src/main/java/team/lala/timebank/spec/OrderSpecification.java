@@ -41,18 +41,17 @@ public class OrderSpecification implements Specification<Order>  {
 			list.add(criteriaBuilder.equal(root.get("status").as(String.class), inputOrder.getOrderStatus()));
 		}
 		
-		if(!StringUtils.isEmpty(inputOrder.getVolunteer().getAccount())) {
-			Join<Member, Order> join = root.join("orgDonee", JoinType.LEFT);
-			list.add(criteriaBuilder.equal(root.get("volunteer").as(Member.class), inputOrder.getVolunteer()));
-			//排序(暫時寫死)，如何從前端傳排序資料
-			//同時針對兩個欄位排序
+		//排序(暫時寫死)，如何從前端傳排序資料
+		//同時針對兩個欄位排序
 //		List<javax.persistence.criteria.Order> orderList = new ArrayList();
 //		javax.persistence.criteria.Order orderByConfirm = criteriaBuilder.desc(root.get("confirmation"));
 //		javax.persistence.criteria.Order orderBySupplierId = criteriaBuilder.desc(root.get("supplierId"));
 //		orderList.add(orderByConfirm);
 //		orderList.add(orderBySupplierId);
 //		query.orderBy(orderList);
-			
+		
+		if(!StringUtils.isEmpty(inputOrder.getVolunteer().getAccount())) {
+			list.add(criteriaBuilder.equal(root.get("volunteer").as(Member.class), inputOrder.getVolunteer()));
 		}
 		
 		Predicate[] p = new Predicate[list.size()];
