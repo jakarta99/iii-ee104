@@ -32,8 +32,8 @@ public class MissionSpecification implements Specification<Mission> {
 			list.add(criteriaBuilder.equal(root.get("status").as(Integer.class), inputMission.getStatus()));
 		}
 
-		if (!StringUtils.isEmpty(inputMission.getMemberId())) {
-			list.add(criteriaBuilder.equal(root.get("memberId").as(Long.class), inputMission.getMemberId()));
+		if (!StringUtils.isEmpty(inputMission.getMember())) {
+			list.add(criteriaBuilder.equal(root.get("memberId").as(Long.class), inputMission.getMember()));
 		}
 
 		if (!StringUtils.isEmpty(inputMission.getCounty())) {

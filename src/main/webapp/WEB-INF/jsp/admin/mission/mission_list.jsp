@@ -268,7 +268,7 @@
 							 return editbutton + deletebutton;}
 						},					 
 						{"data":"id"},
-						{"data":"memberId"},
+						{"data":"memberId.name"},
 						{"data":"title"},
 						{"data":"timeValue"},
 						{"data":"termType"},

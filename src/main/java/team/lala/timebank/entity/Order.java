@@ -28,7 +28,7 @@ public class Order{
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name="VOLUNTEER",    
+	@JoinColumn(name="VOLUNTEER_ID",    
 			referencedColumnName="id") 
 	private Member volunteer;
 	

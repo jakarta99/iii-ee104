@@ -43,7 +43,7 @@
 	<input type="radio" value="Y" name="orderConfirmation" />Y  
 	<input type="radio" value="N" name="orderConfirmation" />N<p>
 	
-	status:<input type="text" value="${order.status}" id="status" name="status"><p>
+	status:<input type="text" value="${order.orderStatus}" id="orderStatus" name="orderStatus"><p>
 	
 	<button type="button" onclick="updateOrder()" class="btn btn-outline-primary">update</button>
 </form>
@@ -51,8 +51,8 @@
 
 
 <script>
-$("input[name='orderAcception'][value="+'${order.orderAcception}' + "]").prop("checked", true);
-$("input[name='orderConfirmation'][value="+'${order.orderConfirmation}' + "]").prop("checked", true);
+$("input[name='orderAcceptTime'][value="+'${order.orderAcceptTime}' + "]").prop("checked", true);
+$("input[name='orderConfirmationTime'][value="+'${order.orderConfirmationTime}' + "]").prop("checked", true);
 
 
 function updateOrder(){
