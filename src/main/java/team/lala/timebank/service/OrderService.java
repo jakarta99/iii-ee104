@@ -9,10 +9,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.OrderDao;
-import team.lala.timebank.dao.OrderStatusDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
+import team.lala.timebank.entity.OrderStatus;
+import team.lala.timebank.spec.OrderSpecification;
 
 @Service
 public class OrderService {
@@ -20,8 +22,7 @@ public class OrderService {
 	@Autowired
 	private OrderDao orderDao;
 	@Autowired
-	private OrderStatusDao orderStatusDao;
-	
+	private MemberDao memberDao;
 	
 	public List<Order> findBySpecification(Specification<Order> specification){
 		return orderDao.findAll(specification);
@@ -31,26 +32,34 @@ public class OrderService {
 		return orderDao.findAll(specification, pageRequest);
 	}
 	
+	public Page<Order> findBySpecificationWhereStatusEqualOne(String account, PageRequest pageRequest){
+		
+		OrderStatus orderStatus = new OrderStatus();
+		orderStatus.setOrderStatus("志工申請了");
+
+		Member member = memberDao.findByAccount(account);
+		Order order = new Order();
+		order.setVolunteer(member);
+		order.setOrderStatus(orderStatus);
+		OrderSpecification orderSpec = new OrderSpecification(order);
+		return orderDao.findAll(orderSpec, pageRequest);
+	}
+	
 	public List<Order> findAll() {
 		List<Order> orders = orderDao.findAll();
 		return orders;
 	}
-	
 	
 	public List<Order> findByVolunteer(Member volunteer) {
 		List<Order> orders = orderDao.findByVolunteer(volunteer);
 		return orders;
 	}
 	
-	
-
-	
 	public Order getById(Long id) {
 		//getOne查無資料不會回傳null，而是噴錯(確認是在Service處理Exception，還是在Controller)
 		Order order = orderDao.getOne(id);
 		return order;
 	}
-	
 	
 	//測試用，待確認Optional物件用法，用不到記得刪
 	public Optional<Order> findById(Long id) {

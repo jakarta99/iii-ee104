@@ -6,13 +6,18 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
+import com.nimbusds.oauth2.sdk.id.Actor;
+
 import team.lala.timebank.entity.Donation;
+import team.lala.timebank.entity.Member;
 
 @SuppressWarnings("serial")
 public class DonationSpecification implements Specification<Donation> {
@@ -43,14 +48,19 @@ public class DonationSpecification implements Specification<Donation> {
 					inputDonation.getDonateTimeEnd()));
 		}
 
-		if (!StringUtils.isEmpty(inputDonation.getOrgDonee())) {
-			list.add(criteriaBuilder.equal(root.get("organizationId").as(Long.class),
-					inputDonation.getOrgDonee()));
+		if (!StringUtils.isEmpty(inputDonation.getOrgDoneeAccount())) {
+			Join<Member, Donation> join = root.join("orgDonee", JoinType.LEFT);
+			list.add(criteriaBuilder.equal(join.get("account"),  inputDonation.getOrgDoneeAccount()));
+
 		}
 
-		if (!StringUtils.isEmpty(inputDonation.getDonator())) {
-			list.add(criteriaBuilder.equal(root.get("memberId").as(Long.class), inputDonation.getDonator()));
+		if (!StringUtils.isEmpty(inputDonation.getDonatorAccount())) {
+			Join<Member, Donation> join = root.join("donator", JoinType.LEFT);
+			list.add(criteriaBuilder.equal(join.get("account"),  inputDonation.getDonatorAccount()));
 		}
+
+		
+		
 		if (!StringUtils.isEmpty(inputDonation.getId())) {
 			list.add(criteriaBuilder.equal(root.get("id").as(Long.class), inputDonation.getId()));
 		}

@@ -52,8 +52,10 @@
 					
 		檢舉人id(accuserId):
 		<input type="text" id="memberId" name="memberId"
-					class="form-control" value="${penalty.accuser}" readonly /><p>
-		檢舉人姓名:<p>
+					class="form-control" value="${penalty.accuser.id}" readonly /><p>
+		檢舉人姓名:
+		<input type="text" id="memberId" name="memberId"
+					class="form-control" value="${penalty.accuser.name}" readonly /><p>
 		
 		被檢舉人會員編號  defendant-memberId:
 		<input type="text" id="defendantId" name="defendantId"

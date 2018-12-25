@@ -39,12 +39,14 @@ public class MissionService {
 
 	// insert
 	public Mission insert(Mission mission) {
+		log.debug("mission={}",mission);
 		mission.setStatus(missionStatusDao.getOne(1l));
 		mission.setStartDate(mission.getStartDate());
 		mission.setEndDate(mission.getEndDate());
 		mission.setPublishDate(new Date());
 		mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
 		mission.setApprovedQuantity(0);
+		log.debug("mission={}",mission);
 		return missionDao.save(mission);
 	}
 
@@ -61,6 +63,11 @@ public class MissionService {
 
 	// update
 	public Mission update(Mission mission) {
+		
+		log.debug("mission={}",mission);
+		log.debug("mission.getStatus()={}",mission.getStatus());
+		log.debug("mission.getMember={}",mission.getMember());
+//		mission.setMember(mission.getMember());
 		mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
 		return missionDao.save(mission);
 	}

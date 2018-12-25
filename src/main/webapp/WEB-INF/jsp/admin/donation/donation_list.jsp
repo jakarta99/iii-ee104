@@ -72,9 +72,9 @@
 		    <label>id:</label>
 		    <input type="text" value="${param.id}" id="id" name="id"/>
 		    <label>donator:</label>
-		    <input type="text" value="${param.donator}" id="donator" name="donator"/>
+		    <input type="text" value="${param.donator}" id="donatorAccount" name="donatorAccount"/>
 		    <label>orgDonee:</label>
-		    <input type="text" value="${param.orgDonee}" id="orgDonee" name="orgDonee"/>
+		    <input type="text" value="${param.orgDonee}" id="orgDoneeAccount" name="orgDoneeAccount"/>
 	    </div>
 	    <div style=margin:15px>
 		    <label>起始日期</label>

@@ -41,14 +41,14 @@
 		
 		
 		#檢舉人會員編號  accuser-memberId(暫時直接抓目前登入者之id):
-		<input type="text" id="accuser" name="accuser" value="${reportBasicData.accuserId}"  readonly/><p>
+		<input type="text" id="accuser" name="accuser" value="${reportBasicData.accuser.id}"  readonly/><p>
 		檢舉人姓名:
-		<input type="text" id="" name="" value="${reportBasicData.accuserName}"  disabled="disabled"/><p>
+		<input type="text" id="" name="" value="${reportBasicData.accuser.name}"  disabled="disabled"/><p>
 		
 		#被檢舉人會員編號  defendant-memberId:
-		<input type="text" id="defendant" name="defendant" value="${reportBasicData.defendantId}" readonly/><p>
+		<input type="text" id="defendant" name="defendant" value="${reportBasicData.defendant.id}" readonly/><p>
 		被檢舉人姓名:
-		<input type="text" id="" name="" value="${reportBasicData.defendantName}"  disabled="disabled"/><p>
+		<input type="text" id="" name="" value="${reportBasicData.defendant.name}"  disabled="disabled"/><p>
 		
 		檢舉內容描述description:
 		<textarea  id="description" name="description" cols="50" rows="5"></textarea><p>

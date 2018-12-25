@@ -68,7 +68,7 @@
 						<th scope="col">活動結束時間(mission.endDate)</th>
 						<th scope="col">時數(mission.timeValue)</th>
 						<th scope="col">申請時間(volunteerApplyTime)</th>
-						<th scope="col">狀態(order.status)</th>
+						<th scope="col">狀態(status)</th>
 						<th scope="col" width="100px"></th>
 					</tr>
 				</thead>
@@ -115,13 +115,13 @@
 			 	processing: true,
 				serverSide: true,  //分頁、排序都交由伺服器處理
 				ajax:{
-					url:"/user/volunteerApplication/apply",
+					url:"/user/volunteerApplication/queryApplication",
 					type:"get",
 					dataType:"json",
 					data:function(d){ 				//傳送給伺服器的資料(datatable預設會傳送d的資料)
 						var start = d.start;
 						var length = d.length;
-						var request = $("form").serialize()+"&start="+start+"&length="+length;
+						var request = "start="+start+"&length="+length;
 						return request;
 					},
 					dataSrc:"content",
@@ -140,15 +140,16 @@
 		     		{data:null},
 		           	{data:"mission.title" },
 		           	{ data: null, render: function ( data, type, row ) {
-		                return data.county + data.district+ data.address;
+		           		console.log(data);
+		                return data.mission.county + data.mission.district+ data.mission.address;
 		            } },
 					{data:"mission.startDate"},
 					{data:"mission.endDate"},
 					{data:"mission.timeValue"},
 					{data:"volunteerApplyTime"},
-					{data:"order.status"},
+					{data:"orderStatus.orderStatus"},
 		           	{data: function (data, type, row ) {
-		           		var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='刪除' />"
+		           		var cancelButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='刪除' />"
 		               	return cancelButt	}
 		           	},
 							
