@@ -88,7 +88,7 @@
 					class="form-control" value="${penalty.penaltyTimeValue}" readonly/>
 		
 		審核意見、原因:<p>
-		<textarea  id="vertifyReason" name="vertifyReason" cols="50" rows="5" value="${penalty.vertifyReason}"></textarea><p>
+		<textarea  id="vertifyReason" name="vertifyReason" cols="50" rows="5"></textarea><p>
 			
 		<input type="button" class="btn btn-primary" id="vertify" value="完成審核">
 	</form>
@@ -99,6 +99,8 @@
 		$(document).ready(function() {
 
 			$('#status').val('${penalty.status}');
+			
+			$('#vertifyReason').val('${penalty.vertifyReason}');
 			
 			//無佐證資料時，不顯示佐證資料超連結
 			var proofPicName = '${penalty.proofPicName}';
@@ -115,7 +117,8 @@
 						url : "/penalty/doneVertify",
 						method : "put",
 						dataType : "json",
-						data : {"penaltyId":$('#penaltyId').val(),"status":$('#status').val(),"penaltyTimeValue":$('#penaltyTimeValue').val()}
+						data : {"penaltyId":$('#penaltyId').val(),"status":$('#status').val(),
+							"penaltyTimeValue":$('#penaltyTimeValue').val(),"vertifyReason":$('#vertifyReason').val()}
 					}).done(function(result) {
 						alert(result.status);
 						document.location.href="/penalty/showVertifyList";
