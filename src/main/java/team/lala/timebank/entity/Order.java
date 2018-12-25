@@ -56,15 +56,11 @@ public class Order{
 
 	@Override
 	public String toString() {
-<<<<<<< HEAD
-		return "Order [id=" + id + ", volunteerId=" + volunteerId + ", status=" + status + ", volunteerApplyTime="
-				+ volunteerApplyTime + ", orderAcceptTime=" + orderAcceptTime + ", mission=" + mission + "]";
-=======
-		return "Order [id=" + id + ", volunteerId=" + volunteerId + ", serviceRequesterId=" + serviceRequesterId
-				+ ", orderStatus=" + orderStatus + ", volunteerApplyTime=" + volunteerApplyTime + ", orderAcceptTime="
-				+ orderAcceptTime + ", mission=" + mission + "]";
->>>>>>> branch 'master' of https://github.com/jakarta99/iii-ee104.git
+		return "Order [id=" + id + ", volunteerId=" + volunteerId + ", orderStatus=" + orderStatus
+				+ ", volunteerApplyTime=" + volunteerApplyTime + ", orderAcceptTime=" + orderAcceptTime + ", mission="
+				+ mission + "]";
 	}
+
 
 
 
