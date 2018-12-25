@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.DonationDao;
 import team.lala.timebank.entity.Donation;
+import team.lala.timebank.entity.Member;
 
 @Service
 public class DonationService {
@@ -58,9 +59,9 @@ public class DonationService {
 	}
 
 	// 查某人所有的Donations(更改by Brian)
-	public List<Donation> findByMemberId(Long memberId) {
+	public List<Donation> findByMemberId(Member memberId) {
 
-		List<Donation> donations = donationDao.findByMemberId(memberId);
+		List<Donation> donations = donationDao.findByDonator(memberId);
 
 		return donations;
 

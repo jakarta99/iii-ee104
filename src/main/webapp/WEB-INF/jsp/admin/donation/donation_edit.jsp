@@ -30,10 +30,10 @@
 	    <legend>insert</legend>
 	    <label>id:</label>
 	    <input type="hidden" value="${donation.id}" id="id" name="id"/>
-	    <label>memberId:</label>
-	    <input type="text" disabled="disabled" value="${donation.memberId.account}" id="memberId" name="memberId"/>
-	    <label>organizationId:</label>
-	    <input type="text" disabled="disabled" value="${donation.organizationId.account}" id="organizationId" name="organizationId"/>
+	    <label>donator:</label>
+	    <input type="text" disabled="disabled" value="${donation.donator.account}" id="donator" name="donator"/>
+	    <label>orgDonee:</label>
+	    <input type="text" disabled="disabled" value="${donation.orgDonee.account}" id="orgDonee" name="orgDonee"/>
 	    <label>value:</label>
 	    <input type="text" value="${donation.value}" id="value" name="value"/>
 	  	<input type="button" onclick="editData()" value="更改" id="updateButt" />

@@ -71,10 +71,10 @@
 	    <div style=margin:15px>
 		    <label>id:</label>
 		    <input type="text" value="${param.id}" id="id" name="id"/>
-		    <label>memberId:</label>
-		    <input type="text" value="${param.memberId}" id="memberId" name="memberId"/>
-		    <label>organizationId:</label>
-		    <input type="text" value="${param.organizationId}" id="organizationId" name="organizationId"/>
+		    <label>donator:</label>
+		    <input type="text" value="${param.donator}" id="donator" name="donator"/>
+		    <label>orgDonee:</label>
+		    <input type="text" value="${param.orgDonee}" id="orgDonee" name="orgDonee"/>
 	    </div>
 	    <div style=margin:15px>
 		    <label>起始日期</label>
@@ -94,8 +94,8 @@
 			<tr>
 				<th scope="col" width="130px"></th>
 				<th scope="col">id</th>
-				<th scope="col">memberId</th>
-				<th scope="col">organizationId</th>
+				<th scope="col">donator</th>
+				<th scope="col">orgDonee</th>
 				<th scope="col">value</th>
 				<th scope="col">donateTime</th>
 			</tr>
@@ -156,8 +156,8 @@
 				return editButt + deleteButt;
 			}},
 			{data:'id'},
-			{data:"memberId.account"},
-			{data:"organizationId.account"},
+			{data:"donator.account"},
+			{data:"orgDonee.account"},
 			{data:"value"},
 			{data: null, render: function ( data, type, row ) {
                 return new Date(data.donateTime).toLocaleDateString();
@@ -201,8 +201,8 @@
 // 							$("<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"javascript:document.location.href='/admin/donation/edit?id="+ donation.id +"'\" value='修改'/>"),
 // 							$("<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteData(" + donation.id + ")\" value='刪除' />"),
 // 							$("<td></td>").text(donation.id),
-// 							$("<td></td>").text(donation.memberId),
-// 							$("<td></td>").text(donation.organizationId),
+// 							$("<td></td>").text(donation.donator),
+// 							$("<td></td>").text(donation.orgDonee),
 // 							$("<td></td>").text(donation.value),
 // 							$("<td></td>").text(donation.donateTime),
 // 							$("</tr>")]);
