@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.Mapping;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
@@ -101,6 +102,12 @@ public class Mission {
 	@Column(name = "address", nullable = false)
 	private String address;
 	
+	
+	@ManyToOne
+//	@JsonBackReference 
+	@JoinColumn(name="status",    
+				referencedColumnName="id",  
+				insertable=true, updatable=true)
 	@Column(name = "status", nullable = false)
 	private Integer status;
 
