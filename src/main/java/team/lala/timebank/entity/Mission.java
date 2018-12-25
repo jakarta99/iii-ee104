@@ -36,7 +36,7 @@ public class Mission {
 	
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_ID", referencedColumnName = "id")
-	private Member memberId; // 刊登者
+	private Member member; // 刊登者
 
 	@Column(name = "TITLE", nullable = false, length = 50)
 	private String title;// 活動名稱
@@ -107,7 +107,7 @@ public class Mission {
 
 	@Override
 	public String toString() {
-		return "Mission [id=" + id + ", memberId=" + memberId + ", title=" + title + ", timeValue=" + timeValue
+		return "Mission [id=" + id + ", member=" + member + ", title=" + title + ", timeValue=" + timeValue
 				+ ", termType=" + termType + ", serviceType=" + serviceType + ", orders=" + orders + ", publishDate="
 				+ publishDate + ", deadline=" + deadline + ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", peopleNeeded=" + peopleNeeded + ", contactPerson=" + contactPerson + ", contactPhone="
@@ -115,5 +115,6 @@ public class Mission {
 				+ county + ", district=" + district + ", address=" + address + ", status=" + status
 				+ ", approvedQuantity=" + approvedQuantity + "]";
 	}
+
 
 }
