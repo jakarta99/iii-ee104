@@ -28,7 +28,7 @@ public class PenaltySpecification implements Specification<Penalty> {
 
 	@Override
 	public Predicate toPredicate(Root<Penalty> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-		Join<Penalty,Order> penaltyJoinOrder = root.join("order_list");
+//		Join<Penalty,Order> penaltyJoinOrder = root.join("order_list");
 		
 		List<Predicate> list = new ArrayList<Predicate>();
 		if (!StringUtils.isEmpty(inputPenalty.getId())) {

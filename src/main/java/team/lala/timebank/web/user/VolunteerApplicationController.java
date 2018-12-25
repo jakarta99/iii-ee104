@@ -32,12 +32,12 @@ public class VolunteerApplicationController {
 
 	@ResponseBody
 	@RequestMapping("/queryApplication")
-	public Page<Order> Application(Principal principal, @RequestParam(value="start",required=false) Optional<Integer> start, 
+	public Page<Order> QueryApplication(Principal principal, @RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
 		log.debug("principal.getName()={}",principal.getName());
 		int page = start.orElse(0)/length.orElse(10);
+		String account = principal.getName();
 		Order order = new Order();
-		order.setStatus("1");
 		OrderSpecification orderSpec = new OrderSpecification(order);
 		Page<Order> orders = orderService.findBySpecification(
 				orderSpec, PageRequest.of(page, length.orElse(10)));

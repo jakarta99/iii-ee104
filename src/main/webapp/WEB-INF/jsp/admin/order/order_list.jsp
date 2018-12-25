@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,6 +62,8 @@
 <title>Order List</title>
 </head>
 <body>
+	<fmt:formatDate value="${order.orderAcceptTime }" pattern="yyyy/MM/dd HH:mm" var="orderAcceptTime" />
+	<fmt:formatDate value="${order.orderConfirmationTime }" pattern="yyyy/MM/dd HH:mm" var="orderConfirmationTime" />
 	<!-- 加入nav.html(放在static/html) -->
 	<jsp:include page="../admin_layout/nav.jsp" />
 	<article>
@@ -86,18 +89,18 @@
 				</div>
 				<div>
 					<div>
-						<label>orderAcception(Y/N):</label>
-						<input type="radio" value="Y" name="orderAcception" />Y
-						<input type="radio" value="N" name="orderAcception" />N
+						<label>orderAcceptTime</label>
+						<input type="radio" value="Y" name="orderAcceptTime" />Y
+						<input type="radio" value="N" name="orderAcceptTime" />N
 					</div>
 					<div>
-						<label>orderConfirmation(Y/N):</label>
-						<input type="radio" value="Y" name="orderConfirmation" />Y
-						<input type="radio" value="N" name="orderConfirmation" />N
+						<label>orderConfirmationTime:</label>
+						<input type="radio" value="Y" name="orderConfirmationTime" />Y
+						<input type="radio" value="N" name="orderConfirmationTime" />N
 					</div>
 					<div>	
-						<label>status:</label>
-						<input type="text" value="${param.status}" id="status" name="status"/>
+						<label>orderStatus:</label>
+						<input type="text" value="${param.orderStatus}" id="orderStatus" name="orderStatus"/>
 					</div>
 				</div>
 					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
@@ -115,11 +118,11 @@
 					<th scope="col" width="100px"></th>
 					<th scope="col">ID</th>			
 					<th scope="col">volunteer</th>
-					<th scope="col">orderAcception(Y/N)</th>
-					<th scope="col">orderConfirmation(Y/N)</th>
-					<th scope="col">status</th>
-					<th scope="col">mission.title</th>
-					<th scope="col">mission.timeValue</th>
+					<th scope="col">orderAcceptionTime</th>
+					<th scope="col">orderConfirmationTime</th>
+					<th scope="col">orderStatus</th>
+					<th scope="col">missionTitle</th>
+					<th scope="col">missionTimeValue</th>
 				</tr>
 			</thead>
 			<tbody id="TableBody">
@@ -199,9 +202,11 @@
 		           	},
 		           	{data:"id" },
 					{data:"volunteer.id"},
-					{data:"orderAcception"},
-					{data:"orderConfirmation"},
-					{data:"status"},
+					{data: null, render: function ( data, type, row ) {
+						return new Date(data.orderAcceptTime).toLocaleDateString();}},
+					{data: null, render: function ( data, type, row ) {
+						return new Date(data.volunteerApplyTime).toLocaleDateString();}},
+					{data:"orderStatus.orderStatus"},
 					{data:"mission.title"},
 					{data:"mission.timeValue"},
 							
@@ -233,7 +238,18 @@
 
 			})
 		})
-						
+		var datePickerSetting = {
+			format : "yyyy/MM/dd HH:mm",
+			autoclose : true,
+			todayHighlight : true,
+			language : 'zh-TW',
+			clearBtn:true,
+			startView:"2",
+			endDate:"0d",
+		};
+	$('#orderConfirmationTime').datepicker(datePickerSetting);
+	$('#orderAcceptTime').datepicker(datePickerSetting);
+		
 
 	</script>
 
