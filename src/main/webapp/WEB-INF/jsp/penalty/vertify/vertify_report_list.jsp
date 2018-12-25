@@ -66,7 +66,7 @@
 	<article>
 		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
 		<h1 style="padding-top: 2cm">檢舉案件審查  Vertify Report List</h1>
-		
+		<h4>預設載入尚未完成審查之案件</h4>
 		<!-- 條件搜尋表單 -->
 		<div id="sideBar">
 			<form>
@@ -75,12 +75,13 @@
 				<div>
 					<label>檢舉人: </label>
 					<input type="text" value="${param.memberId}" id="accuser" name="accuser" placeholder="accuser" />
+					
 					<label>status: </label>
 					<select id="status" name="status">
 						<option value="">請選擇</option>
 						<option value=1>審核中</option>
-						<option value=2>有罪</option>
-						<option value=3>無罪</option>
+						<option value=2>審核完成，有懲罰</option>
+						<option value=3>審核完成，未懲罰</option>
 					</select>
 					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
 					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
@@ -111,7 +112,23 @@
 		</div>
 		<fieldset style="width:300">
 		
-		<button id="vertifyingCase">審核中</button>  <button id="vertified">審核歷史紀錄</button>
+		<table border="1">
+			<tr>
+				<td>審核中案件查詢</td>
+				<td><button id="vertifyingCase">查詢</button></td>
+			</tr>
+			<tr>
+				<td>歷史紀錄查詢</td>
+				<td>
+					<select id="penaltyChosen" name="penaltyChosen" style="width:150px">
+						<option value=2>有懲罰</option>
+						<option value=3>未懲罰</option>
+					</select>
+					<button id="vertified">查詢</button>
+				</td>
+			</tr>
+		</table>
+
 		
 		<table id="table" class="table table-striped table-bordered">
 			<thead>
@@ -129,7 +146,6 @@
 <!-- 					<th scope="col">被檢舉者帳戶餘額(timeledger)(debug用)</th> -->
 					
 					<th scope="col">檢舉事由描述</th>
-					
 					<th scope="col">逞罰額度(時間)</th>
 					<th scope="col">處理進度</th>
 					
@@ -148,6 +164,9 @@
 
 
 		$(document).ready(function() {
+			//預設僅先載入審核中檢舉案件
+			$('#status').val("1");
+			
 			$("form").addClass("form-inline");
 			$("form div[id!='collapse']").addClass("form-group mx-sm-3 mb-3");
 			$("form input, select").addClass("form-control mx-3");
@@ -251,6 +270,14 @@
 				$('#status').val("1");
 				dataTable.ajax.reload();
 			})
+			
+			//按審核歷史紀錄按紐
+			$("#vertified").click(function(){
+				$('#status').val($('#penaltyChosen').val());
+				dataTable.ajax.reload();
+			})
+			
+
 		})
 						
 
