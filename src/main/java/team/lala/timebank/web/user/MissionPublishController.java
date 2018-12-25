@@ -19,8 +19,8 @@ import team.lala.timebank.service.ServiceTypeService;
 import team.lala.timebank.web.admin.AdminOrderController;
 @Slf4j
 @Controller
-@RequestMapping("/user/volunteerRecruitment")
-public class PoMissionController {
+@RequestMapping("/user/missionPublish")
+public class MissionPublishController {
 	@Autowired
 	private MissionService missionService;
 
@@ -29,7 +29,7 @@ public class PoMissionController {
 
 	@RequestMapping("/add")
 	public String addPage(Model model, Principal principal) {
-
+		
 		List<ServiceType> serviceType = serviceTypeService.findAll();
 		model.addAttribute("serviceType", serviceType);
 
@@ -42,7 +42,8 @@ public class PoMissionController {
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
 
 		try {
-			missionService.insert(mission, principal);
+			mission=missionService.insert(mission, principal);
+			log.debug("mission={}",mission);
 			response.setObj(mission);
 		} catch (Exception e) {
 			response.addMessage("新增失敗，" + e.getMessage());
