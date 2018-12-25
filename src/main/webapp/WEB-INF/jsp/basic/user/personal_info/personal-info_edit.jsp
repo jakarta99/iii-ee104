@@ -23,7 +23,6 @@
 		margin-top: 30px;
 		margin-bottom: 30px;
 		padding: 10px;
-		display: 
 	}
 	article fieldset {
 		width: 800px;
@@ -240,6 +239,9 @@
 			})
 		})
 	</script>
-
+	<!-- FOOTER -->
+	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
+	<!-- Javascript files-->
+	<jsp:include page="../../commons/commons_layout/commons_js_links.jsp"/>
 </body>
 </html>
