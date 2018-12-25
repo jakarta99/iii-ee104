@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,11 @@
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
-  
+  <!-- date picker -->
+<script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
+<script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
+<script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
+<link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
 	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
@@ -34,16 +39,30 @@
 <h4>edit no.${order.id}  Order</h4>
 
 <form>
+	
 	<input type="hidden" value="${order.id}" id="id" name="id"/>
-	orderAcception(Y/N):
-	<input type="radio" value="Y" name="orderAcception" />Y  
-	<input type="radio" value="N" name="orderAcception" />N<p>	
+	orderAcceptTime:
+	<fmt:formatDate value="${order.orderAcceptTime}" pattern="yyyy/MM/dd"	var="orderAcceptTime" />
+	<input type="text" value="${orderAcceptTime}" id="orderAcceptTime" name="orderAcceptTime" autocomplete="off" />
 	
-	orderConfirmation(Y/N):
-	<input type="radio" value="Y" name="orderConfirmation" />Y  
-	<input type="radio" value="N" name="orderConfirmation" />N<p>
+	volunteerApplyTime:
+	<fmt:formatDate value="${order.volunteerApplyTime}" pattern="yyyy/MM/dd"	var="volunteerApplyTime" />
+	<input type="text" value="${volunteerApplyTime}" id="volunteerApplyTime" name="volunteerApplyTime" autocomplete="off" />
 	
-	status:<input type="text" value="${order.orderStatus}" id="orderStatus" name="orderStatus"><p>
+	orderStatus:
+	<select id="orderStatus" name="orderStatus">
+					<option value="">${order.orderStatus.orderStatus}</option>
+					<option value="1">志工申請了</option>
+			        <option value="2">接受服務</option>
+			        <option value="3">拒絕服務</option>
+			        <option value="4">服務完，未發時數</option>
+			        <option value="5">服務完，已發時數</option>
+			        <option value="6">交易取消</option>
+			        <option value="7">志工 臨時請假</option>
+			        <option value="8">志工 臨時不去</option>
+				</select>
+	
+	
 	
 	<button type="button" onclick="updateOrder()" class="btn btn-outline-primary">update</button>
 </form>
@@ -51,13 +70,19 @@
 
 
 <script>
-$("input[name='orderAcceptTime'][value="+'${order.orderAcceptTime}' + "]").prop("checked", true);
-$("input[name='orderConfirmationTime'][value="+'${order.orderConfirmationTime}' + "]").prop("checked", true);
-
+var datePickerSetting = {
+		format : "yyyy/mm/dd",
+		autoclose : true,
+		todayHighlight : true,
+		language : 'zh-TW',	
+		endDate:"0d",
+	};
+	$('#orderAcceptTime').datepicker(datePickerSetting);
+	$('#volunteerApplyTime').datepicker(datePickerSetting);
 
 function updateOrder(){
 	$.ajax({
-		url:'/order/update',
+		url:'/admin/order/update',
 		type:'put',
 		data:$('form').serialize(),
 		dataType:'json',

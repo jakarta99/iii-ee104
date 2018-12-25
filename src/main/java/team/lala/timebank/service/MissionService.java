@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,6 @@ import team.lala.timebank.dao.MissionDao;
 import team.lala.timebank.dao.MissionStatusDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
-import team.lala.timebank.entity.MissionStatus;
 
 @Slf4j
 @Service
@@ -76,17 +76,17 @@ public class MissionService {
 		return missionList;
 	}
 
-	public List<Mission> findByMemberId(Member memberid) {
+	public List<Mission> findByMember(Member member) {
 
-		List<Mission> missionList = missionDao.findByMemberId(memberid);
+		List<Mission> missionList = missionDao.findByMember(member);
 
 		return missionList;
 
 	}
 
-	public Mission findByAccount(Principal principal, Mission mission) {
-		mission.setMember(memberDao.findByAccount(principal.getName()));
-		return mission;
+	public Page<Mission> findByAccount(Principal principal, Mission mission, Pageable pageable) {
+		Page<Mission> missions = missionDao.findByMember(memberDao.findByAccount(principal.getName()), pageable);
+		return missions;
 	}
 
 	public Mission getOne(Long id) {
