@@ -174,7 +174,7 @@
 		           	},
 		           	{data:"id" },
 					{data:"volunteer.id"},
-					{data:"mission.memberId.id"},
+					{data:"mission.member.id"},
 					{data:"orderStatus.orderStatus"},
 					{data:"mission.title"},
 					{data:"mission.timeValue"},

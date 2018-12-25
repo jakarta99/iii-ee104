@@ -37,6 +37,8 @@ public class Mission {
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_ID", referencedColumnName = "id")
 	private Member member; // 刊登者
+	
+	
 
 	@Column(name = "TITLE", nullable = false, length = 50)
 	private String title;// 活動名稱

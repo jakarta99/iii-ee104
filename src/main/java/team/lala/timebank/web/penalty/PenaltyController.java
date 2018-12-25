@@ -78,22 +78,21 @@ public class PenaltyController {
 					.getAuthentication()  
 					.getPrincipal();
 		Long accuserId = userDetails.getId();
-//		log.debug("USERNAME={}", userDetails.getUsername());
 		
 		//2.判斷是否已被檢舉過。如已被檢舉過，則回傳無法檢舉的資訊並且導回原頁面
-		//如回傳true，代表該筆order有檢舉紀錄，檢舉紀錄的檢舉人與目前登入會員相同(不得再次提出檢舉)
-		Boolean penaltyRecord = penaltyService.checkRecord(orderId, accuserId);
-		log.debug("penaltyRecord={}", penaltyRecord);
-		if(penaltyRecord) {
+		Penalty penalty = penaltyService.checkRecordandProvidePenalty(orderId, accuserId);
+		
+		if(penalty == null) {
 			model.addAttribute("penaltyExist", orderId + "號媒合案件已有您的檢舉紀錄，不得重複提出檢舉");
 			return "/penalty/temp_order_list";
 		}
 		
 		//3.如果未被檢舉過，則將需要顯示在檢舉頁面的資料放入model
-		Map<String, Object> reportBasicData = penaltyService.getAccuserAndDefendant(orderId, accuserId);
-		if(reportBasicData != null && reportBasicData.size() != 0) {
-			model.addAttribute("reportBasicData",reportBasicData);
-		}
+		model.addAttribute("reportBasicData",penalty);
+//		Map<String, Object> reportBasicData = penaltyService.getAccuserAndDefendant(orderId, accuserId);
+//		if(reportBasicData != null && reportBasicData.size() != 0) {
+//			
+//		}
 		return "/penalty/violation_report";
 	}
 	
