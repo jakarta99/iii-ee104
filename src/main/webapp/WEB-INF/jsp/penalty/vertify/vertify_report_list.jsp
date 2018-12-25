@@ -89,10 +89,10 @@
 						role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a>
 				</div>
 				<div class="collapse" id="collapse">
-					<div>
-						<label>orderListId</label>
-						<input type="text" value="${param.orderListId}" id="order" name="order" />
-					</div>
+<!-- 					<div> -->
+<!-- 						<label>orderListId</label> -->
+<%-- 						<input type="text" value="${param.orderListId}" id="order" name="order" /> --%>
+<!-- 					</div> -->
 					<div>
 						<label>description</label>
 						<input type="text" value="${param.description}" id="description" name="description" />
@@ -211,7 +211,7 @@
 											+ data.id + "'\" value='審核'  />";
 		               	return vertifyButt;	}
 		           	},
-		           	{data: "id" },
+		           	{data:"id" },
 					{data:"order.id"},
 					{data:"order.mission.title"},
 					{data:null, render:function(data, type, row){
