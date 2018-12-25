@@ -105,7 +105,7 @@ public class Mission {
 	
 	@ManyToOne
 //	@JsonBackReference 
-	@JoinColumn(name="status",    
+	@JoinColumn(name="Mission_Status",    
 				referencedColumnName="id",  
 				insertable=true, updatable=true)
 	private MissionStatus status;

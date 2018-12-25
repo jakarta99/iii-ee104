@@ -26,16 +26,15 @@ public class Order{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(name="VOLUNTEER_ID")
-	private Long volunteerId;
 	
-	@Column(name="SERVICE_REQUESTER_ID")
-	private Long serviceRequesterId;
+	@ManyToOne
+	@JoinColumn(name="VOLUNTEER_ID",    
+			referencedColumnName="id") 
+	private Member volunteerId;
 	
 	@ManyToOne
 //	@JsonBackReference 
-	@JoinColumn(name="ORDERSTATUS",    
+	@JoinColumn(name="ORDER_STATUS",    
 				referencedColumnName="id",  
 				insertable=true, updatable=true)
 	private OrderStatus orderStatus;
@@ -54,13 +53,22 @@ public class Order{
 				referencedColumnName="id",  
 				insertable=true, updatable=true) 
 	private Mission mission;
+	
+	@Column(name="MEMBER_SCORE")
+	private Long memberScore;
+	
+	@Column(name="FEEDBACK_SCORE")
+	private Long feedBackScore;
+	
 
+	
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", volunteerId=" + volunteerId + ", serviceRequesterId=" + serviceRequesterId
-				+ ", orderStatus=" + orderStatus + ", volunteerApplyTime=" + volunteerApplyTime + ", orderAcceptTime="
-				+ orderAcceptTime + ", mission=" + mission + "]";
+		return "Order [id=" + id + ", volunteerId=" + volunteerId + ", orderStatus=" + orderStatus
+				+ ", volunteerApplyTime=" + volunteerApplyTime + ", orderAcceptTime=" + orderAcceptTime + ", mission="
+				+ mission + "]";
 	}
+
 
 
 
