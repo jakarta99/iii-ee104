@@ -15,6 +15,7 @@ import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.MissionDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
+import team.lala.timebank.entity.MissionStatus;
 @Slf4j
 @Service
 public class MissionService {
@@ -23,6 +24,8 @@ public class MissionService {
 	private MissionDao missionDao;
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private MissionStatus missionStatus;
 
 	public List<Mission> findBySpecification(Specification<Mission> specification) {
 		return missionDao.findAll(specification);
@@ -46,11 +49,12 @@ public class MissionService {
 		Member member = memberDao.findByAccount(principal.getName());
 		log.debug("member.getId()={}",member.getId());
 		mission.setMemberId(member.getId());
+		missionStatus.setId(1L);
 		log.debug("mission.memberid={}",mission.getMemberId());
 		mission.setStartDate(mission.getStartDate());
 		mission.setEndDate(mission.getEndDate());
 		mission.setPublishDate(new Date());
-		mission.setStatus(1);
+		mission.setStatus(missionStatus);
 
 		return missionDao.save(mission);
 	}

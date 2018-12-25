@@ -53,7 +53,15 @@ public class Order{
 				referencedColumnName="id",  
 				insertable=true, updatable=true) 
 	private Mission mission;
+	
+	@Column(name="MEMBER_SCORE")
+	private Long memberScore;
+	
+	@Column(name="FEEDBACK_SCORE")
+	private Long feedBackScore;
+	
 
+	
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", volunteerId=" + volunteerId + ", orderStatus=" + orderStatus
