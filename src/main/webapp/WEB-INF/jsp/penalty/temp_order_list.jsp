@@ -106,8 +106,8 @@
 					<th scope="col"></th>
 					<th scope="col" width="100px"></th>
 					<th scope="col">ID</th>			
-					<th scope="col">volunteerId</th>
-					<th scope="col">serviceRequesterId</th>
+					<th scope="col">volunteerId.id</th>
+					<th scope="col">mission.memberId</th>
 					<th scope="col">status</th>
 					<th scope="col">mission.title</th>
 					<th scope="col">mission.timeValue</th>
@@ -173,9 +173,9 @@
 		               	return reportButt;	}
 		           	},
 		           	{data:"id" },
-					{data:"volunteerId"},
-					{data:"serviceRequesterId"},
-					{data:"status"},
+					{data:"volunteer.id"},
+					{data:"mission.memberId.id"},
+					{data:"orderStatus.orderStatus"},
 					{data:"mission.title"},
 					{data:"mission.timeValue"},
 							
