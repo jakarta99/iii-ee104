@@ -30,7 +30,7 @@ public class TimeLedgerService {
 	// 存款
 	public TimeLedger deposit(int hours, Long memberId) {
 		// 1.找出會員最近一筆交易紀錄
-		TimeLedger lastTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTimeDesc(memberId);
+		TimeLedger lastTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTimeDesc(memberDao.getOne(memberId));
 
 		// 尚無交易紀錄者，先將存款餘額設為0
 		if (lastTimeLedger == null) {
@@ -54,7 +54,7 @@ public class TimeLedgerService {
 	// 提款
 	public TimeLedger withdrawal(Integer hours, Long memberId) {
 		// 1. findTimeLedgerByMemberId
-		TimeLedger lastTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTimeDesc(memberId);
+		TimeLedger lastTimeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTimeDesc(memberDao.getOne(memberId));
 		TimeLedger timeLedger = null;
 
 		// 尚無交易紀錄，或帳戶餘額小於本次提款時數者，不得提款
@@ -78,9 +78,10 @@ public class TimeLedgerService {
 	public TimeLedger doPenaltyDebit(Penalty penalty) {
 		
 		// 1. findTimeLedgerByMemberId
+		log.debug("檢舉者ID={}", penalty.getDefendant().getId());
 		TimeLedger lastTimeLedger = 
-				timeLedgerDao.findTop1ByMemberIdOrderByTransactionTimeDesc(penalty.getDefendant().getId());
-		
+				timeLedgerDao.findTop1ByMemberIdOrderByTransactionTimeDesc(memberDao.getOne(penalty.getDefendant().getId()));
+		log.debug("最後一筆交易紀錄={}", lastTimeLedger);
 		//如果尚無交易紀錄，則先將餘額設為0元
 		if(lastTimeLedger == null || lastTimeLedger.getBalanceValue() == null) {
 			lastTimeLedger.setBalanceValue(0);
@@ -100,7 +101,7 @@ public class TimeLedgerService {
 				+ ", 活動名稱:"
 				+ penalty.getOrder().getMission().getTitle(); //活動日期+活動名稱+"-違規處罰"
 		timeLedger.setDescription(peanltyReason);
-
+		log.debug("扣款紀錄={}", timeLedger);
 		// 3. insert
 		return timeLedgerDao.save(timeLedger);
 
@@ -159,7 +160,7 @@ public class TimeLedgerService {
 
 	// 尋找最新一筆資料 更新by Brian
 	public TimeLedger getLastTransaction(Long memberId) {
-		TimeLedger timeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTimeDesc(memberId);
+		TimeLedger timeLedger = timeLedgerDao.findTop1ByMemberIdOrderByTransactionTimeDesc(memberDao.getOne(memberId));
 		if (timeLedger == null) {
 			return null;
 		}

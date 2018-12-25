@@ -12,6 +12,6 @@ public class WebConfig implements WebMvcConfigurer {
 		//Jasmine:設定檢舉佐證資料上傳與存取路徑
 		registry
             .addResourceHandler("/penaltyProoves/**")
-            .addResourceLocations("file:D:/penaltyProoves/");
+            .addResourceLocations("file:D:/penaltyProoves/img/");
     }
 }
