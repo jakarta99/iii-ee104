@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -59,6 +60,12 @@ public class Penalty {
 
 	@Column(name = "penalty_time_value")
 	private Integer penaltyTimeValue;
+	
+//	@Lob
+//	@Column(name = "proof_Pic")
+//	private byte[] proofPic;
+	@Column(name = "proof_pic_name")
+	private String proofPicName;
 	
 	@Transient
 	@DateTimeFormat(pattern = "yyyy/MM/dd") //不進資料庫，用於查詢時間區間

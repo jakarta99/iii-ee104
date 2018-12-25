@@ -20,12 +20,13 @@
 	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous">
 
-<title>Violation Report</title>
+<title>Violation Report 提出檢舉</title>
 </head>
 <body>
 
-	<h1 style="padding-top: 2cm">Violation Report 檢舉</h1>
-	<h3>#開頭為debug用，正式上線時拿掉</h3>
+	<h1 style="padding-top: 2cm">第一步、填寫檢舉資料</h1>
+	<h4>#開頭為debug用，正式上線時拿掉</h4>
+	<hr>
 	<form action="/penalty/doReport" method="Post">
 <!-- 	新發現:input設disabled，則不會被序列化 -->
 		#媒合案件編號(Order.id):
@@ -52,11 +53,9 @@
 		檢舉內容描述description:
 		<textarea  id="description" name="description" cols="50" rows="5"></textarea><p>
 		
-		
-		status(隱藏，預設為審核中):
 		<input type="hidden" id="status" name="status" value="1"/><p>
 		
-		<input type="submit" id="add" value="送出檢舉" class="btn btn-primary mb-2" />
+		<input type="submit" id="add" value="下一步" class="btn btn-primary mb-2" />
 	</form>
 	
 	<script type="text/javascript">

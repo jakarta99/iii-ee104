@@ -1,11 +1,18 @@
 package team.lala.timebank.web.penalty;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
@@ -79,6 +88,7 @@ public class PenaltyController {
 		//2.判斷是否已被檢舉過。如已被檢舉過，則回傳無法檢舉的資訊並且導回原頁面
 		//如回傳true，代表該筆order有檢舉紀錄，檢舉紀錄的檢舉人與目前登入會員相同(不得再次提出檢舉)
 		Boolean penaltyRecord = penaltyService.checkRecord(orderId, accuserId);
+		log.debug("penaltyRecord={}", penaltyRecord);
 		if(penaltyRecord) {
 			model.addAttribute("penaltyExist", orderId + "號媒合案件已有您的檢舉紀錄，不得重複提出檢舉");
 			return "/penalty/temp_order_list";
@@ -95,10 +105,10 @@ public class PenaltyController {
 	//提出檢舉時呼叫的方法
 	@RequestMapping(value="/doReport", method = RequestMethod.POST)
 	public String insert(Penalty penalty, Model model) {
-//		log.debug("PUT BEFORE penalty={}", penalty);
+
 		penalty = penaltyService.save(penalty);
 		model.addAttribute("reportOnePenalty", penalty);
-//		log.debug("PUT AFTER penalty={}", penalty);
+
 		return "redirect:/penalty/my-report-list";
 	}
 	
@@ -159,6 +169,41 @@ public class PenaltyController {
 		}
 		return ajaxResponse;
 	}
+	
+
+	
+	//將佐證圖片存至Server
+	@RequestMapping("/storeProofPic")
+	public String store(@RequestParam("proofPic") MultipartFile proofPic, @RequestParam("penaltyId") Long penaltyId) throws IOException {
+		
+		//之後要包到Service內
+		//呼叫service將圖片存到Server
+		//確認是否有此資料夾，如無則建資料夾
+//		File dir = new File("D:\\Jasmine\\git\\iii-ee104-2\\iii-ee104\\src\\main\\resources\\static\\img\\");
+		File dir = new File("D:\\penaltyProoves\\");
+		
+		if(!dir.exists()) {
+			dir.mkdirs();
+		}
+		
+//		String location = "D:\\Jasmine\\git\\iii-ee104-2\\iii-ee104\\src\\main\\resources\\static\\img\\"
+//						+ "penaltyProof_" + penaltyId + ".jpg";
+		String location = "D:\\penaltyProoves\\"
+						+ "penaltyProof_" + penaltyId + ".jpg";
+		FileOutputStream fos = new FileOutputStream(location);
+		fos.write(proofPic.getBytes());
+		fos.close();
+		//將圖片路徑存到DB
+		Penalty penalty = penaltyService.getOne(penaltyId);
+		penalty.setProofPicName("penaltyProof_" + penaltyId + ".jpg");
+		penaltyService.update(penalty);
+		
+		return "redirect:/penalty/tempPenaltyEntrance";//回傳上傳成功與否之資訊
+	}
+
+	
+	
+	
 	
 	
 	

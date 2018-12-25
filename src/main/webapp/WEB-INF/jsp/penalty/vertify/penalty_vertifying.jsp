@@ -70,7 +70,13 @@
 		檢舉內容描述(description):
 		<input type="text" id="PenaltyDescription" name="PenaltyDescription"
 					class="form-control" value="${penalty.description}" readonly/><p>
-					
+		
+		<div id="proof">
+			<a id="proofPic" href="/penaltyProoves/${penalty.proofPicName}" target="_blank">佐證資料檢視</a><p>
+			<!-- Server存取圖片路徑設定方式詳見WebConfig.java -->
+		</div>
+
+		
 		審核結果 (審核中&無須懲罰案件的懲罰時數一律為0，且不得更改):
 		<select class="form-control" id="status" name="status">
 			<option value=1></option>
@@ -91,7 +97,13 @@
 		$(document).ready(function() {
 
 			$('#status').val('${penalty.status}');
-
+			
+			//無佐證資料時，不顯示佐證資料超連結
+			var proofPicName = '${penalty.proofPicName}';
+			if(proofPicName.length == 0){
+				$("#proof").html("");
+			}
+			
 			$('#vertify').click(function() {
 				//alert($('#penaltyId').val());
 				if($('#status').val() == 2 && $('#penaltyTimeValue').val() <= 0){

@@ -43,7 +43,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
 
 
-<jsp:include page="/basic/commons/commons_layout/commons_css_links.jsp"/>
+<jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 <meta charset="UTF-8">
 <title>mission list(login)</title>
 <style>
@@ -79,12 +79,11 @@
     </style>
 </head>
 <body>
-
  <!-- Top bar-->
-      <jsp:include page="/basic/commons/commons_layout/commons_top-bar.jsp"/>
+      <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
  	
 	  <!-- Navbar -->
-      <jsp:include page="/basic/commons/commons_layout/commons_nav.jsp"/>
+      <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
 	<div class="margintop">
 	
 	<h1 class="s2">mission list</h1>
@@ -239,7 +238,7 @@
 		 			 },	
 				"lengthMenu": [ 3, 6, 9, 12, ],
 				ajax:{
-					url:"/user/recruitFinish/list",
+					url:"/user/volunteerRecruitment/query",
 					type: "get",
 				    dataType : "json",
 // 	 			    "data":$("form").serialize(),
