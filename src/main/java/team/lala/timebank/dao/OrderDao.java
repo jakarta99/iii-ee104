@@ -10,7 +10,7 @@ import team.lala.timebank.entity.Order;
 
 public interface OrderDao extends JpaRepository<Order,Long>, JpaSpecificationExecutor<Order>{
 
-	public List<Order> findByVolunteerId(Member volunteerId);
+	public List<Order> findByVolunteer(Member volunteer);
 	
 
 

@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.OrderDao;
 import team.lala.timebank.dao.OrderStatusDao;
+import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
-import team.lala.timebank.entity.OrderStatus;
 
 @Service
 public class OrderService {
@@ -37,8 +37,8 @@ public class OrderService {
 	}
 	
 	
-	public List<Order> findByVolunteerId(Long volunteerId) {
-		List<Order> orders = orderDao.findByVolunteerId(volunteerId);
+	public List<Order> findByVolunteer(Member volunteer) {
+		List<Order> orders = orderDao.findByVolunteer(volunteer);
 		return orders;
 	}
 	
@@ -67,7 +67,7 @@ public class OrderService {
 		Order dbOrder = orderDao.getOne(order.getId());
 //		orderStatusDao.getOne(order.getId())
 		if(order.getId() != null ) {
-			dbOrder.setVolunteerId(order.getVolunteerId());
+			dbOrder.setVolunteer(order.getVolunteer());
 			dbOrder.setOrderStatus(order.getOrderStatus());
 			dbOrder.setVolunteerApplyTime(order.getVolunteerApplyTime());
 			dbOrder.setOrderAcceptTime(order.getOrderAcceptTime());

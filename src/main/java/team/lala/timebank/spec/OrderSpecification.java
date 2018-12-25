@@ -28,8 +28,8 @@ public class OrderSpecification implements Specification<Order>  {
 			list.add(criteriaBuilder.equal(root.get("id").as(Long.class), inputOrder.getId()));
 		}
 
-		if(!StringUtils.isEmpty(inputOrder.getVolunteerId())) {
-			list.add(criteriaBuilder.equal(root.get("volunteerId").as(String.class), inputOrder.getVolunteerId()));
+		if(!StringUtils.isEmpty(inputOrder.getVolunteer())) {
+			list.add(criteriaBuilder.equal(root.get("volunteerId").as(String.class), inputOrder.getVolunteer()));
 		}
 
 		

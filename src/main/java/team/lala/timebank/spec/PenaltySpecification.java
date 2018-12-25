@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -14,7 +15,6 @@ import org.springframework.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
-import team.lala.timebank.web.penalty.PenaltyController;
 
 @Slf4j
 @SuppressWarnings("serial")
@@ -28,14 +28,18 @@ public class PenaltySpecification implements Specification<Penalty> {
 
 	@Override
 	public Predicate toPredicate(Root<Penalty> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+		Join<Penalty,Order> penaltyJoinOrder = root.join("order_list");
+		
 		List<Predicate> list = new ArrayList<Predicate>();
 		if (!StringUtils.isEmpty(inputPenalty.getId())) {
 			list.add(cb.equal(root.get("id").as(String.class), inputPenalty.getId()));
 		}
 //		log.debug("orderId={}", inputPenalty.getOrder().getId());
 //		if (!StringUtils.isEmpty(inputPenalty.getOrder().getId())) {
-//			list.add(cb.equal(root.get("order_list").as(Long.class), inputPenalty.getOrder().getId()));
+//			list.add(cb.equal(penaltyJoinOrder.get("id").as(String.class), inputPenalty.getOrder().getId()));
 //		}
+//		cb.equal(penaltyJoinOrder.get("order_list"), input)
+		
 		if (!StringUtils.isEmpty(inputPenalty.getAccuser())) {
 			list.add(cb.equal(root.get("accuser").as(String.class), inputPenalty.getAccuser()));
 		}

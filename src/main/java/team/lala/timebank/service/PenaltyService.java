@@ -43,10 +43,10 @@ public class PenaltyService {
 		Map<String, Object> result = new HashMap<>();
 		//查出原告被告id
 		Long defendantId = null;
-		if(memberDao.getOne(accuserId) == order.getVolunteerId()) {
-			defendantId = order.getMission().getMemberId();
+		if(memberDao.getOne(accuserId) == order.getVolunteer()) {
+			defendantId = order.getMission().getMemberId().getId();
 		} else {
-			defendantId = order.getVolunteerId().getId();
+			defendantId = order.getVolunteer().getId();
 		}
 		
 		//查出原告被告姓名

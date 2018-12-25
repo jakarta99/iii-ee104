@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,9 +28,9 @@ public class Order{
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name="VOLUNTEER_ID",    
+	@JoinColumn(name="VOLUNTEER",    
 			referencedColumnName="id") 
-	private Member volunteerId;
+	private Member volunteer;
 	
 	@ManyToOne
 //	@JsonBackReference 
@@ -48,7 +48,8 @@ public class Order{
 	private Date orderAcceptTime;
 	
 	@ManyToOne
-	@JsonBackReference 
+//	@JsonBackReference 
+	@JsonIgnoreProperties("orders")
 	@JoinColumn(name="mission",    
 				referencedColumnName="id",  
 				insertable=true, updatable=true) 
@@ -59,17 +60,14 @@ public class Order{
 	
 	@Column(name="FEEDBACK_SCORE")
 	private Long feedBackScore;
-	
 
-	
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", volunteerId=" + volunteerId + ", orderStatus=" + orderStatus
-				+ ", volunteerApplyTime=" + volunteerApplyTime + ", orderAcceptTime=" + orderAcceptTime + ", mission="
-				+ mission + "]";
+		return "Order [id=" + id + ", volunteer=" + volunteer + ", orderStatus=" + orderStatus + ", volunteerApplyTime="
+				+ volunteerApplyTime + ", orderAcceptTime=" + orderAcceptTime + ", mission=" + mission
+				+ ", memberScore=" + memberScore + ", feedBackScore=" + feedBackScore + "]";
 	}
-
-
+	
 
 
 }
