@@ -83,7 +83,6 @@ public class MissionService {
 	}
 	
 	public Mission findByAccount(Principal principal,Mission mission) {
-		
 		mission.setMemberId(memberDao.findByAccount(principal.getName()).getId());
 		return mission;
 	}

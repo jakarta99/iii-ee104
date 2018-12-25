@@ -138,29 +138,21 @@
 			</div>
 		</form>
 	</fieldset>
-	<div class='s2'><button onclick='recruiting()' >進行中</button><button onclick='checkTime()' >時數待核發</button><button onclick='recruited()' >已完成</button></div>
-	<fieldset>
-	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/user/volunteerRecruitment/add'">add</button>
 	
+	<fieldset>
+	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/user/volunteerRecruitment/add'">進行中</button>
+	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/user/volunteerRecruitment/add'">時數代核發</button>
+	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/user/volunteerRecruitment/add'">歷史紀錄</button>
 	<table id="table" class="table table-hover">
 	<thead>
 	<tr>
 		<th>選項</th>
-		<th scope="col">title</th>
-		<th scope="col">peopleNeeded</th>
-		<th scope="col">title</th>
-		<th scope="col">timeValue</th>
-		<th scope="col">termType</th>
-		<th scope="col">serviceType</th>
-		<th scope="col">publishDate</th>
-<!-- 		<th scope="col">startDate</th> -->
-<!-- 		<th scope="col">endDate</th> -->
-		<th scope="col">peopleNeeded</th>
-<!-- 		<th scope="col">contactPerson</th> -->
-<!-- 		<th scope="col">contactPhone</th> -->
-<!-- 		<th scope="col">contactEmail</th> -->
-<!-- 		<th scope="col">discription</th> -->
-		<th scope="col">地址</th>
+		<th scope="col">活動名稱</th>
+		<th scope="col">需求人數</th>
+		<th scope="col">地點</th>
+		<th scope="col">時間</th>
+		<th scope="col">志工審核</th>
+		<th scope="col">狀態</th>
 	</tr>
 	 </thead>	
 	 <tbody id="tbody">	
@@ -237,7 +229,7 @@
 		 			   api.rows( {page:'current'} ).data()
 		 			    return '顯示第 '+(pageInfo.start+1)+' 筆到第  '+(pageInfo.end)+' 筆 共 '+ pageInfo.recordsTotal+' 筆資料 ';
 		 			 },	
-				"lengthMenu": [6,12],
+				"lengthMenu": [ 3, 6, 9, 12, ],
 				ajax:{
 					url:"/user/volunteerRecruitment/query",
 					type: "get",
@@ -274,26 +266,22 @@
 							 var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteMission("+data.id+")\">Delete</button>"; 	
 							 return editbutton + deletebutton;}
 						},					 
-						{"data":"id"},
-						{"data":"memberId"},
 						{"data":"title"},
-						{"data":"timeValue"},
-						{"data":"termType"},
-						{"data":"serviceType.serviceType"},
-						{"data":null, render: function ( data, type, row ) {
-			                return new Date(data.publishDate).toLocaleDateString();
-			            } },	
-						
-// 						{"data":"startDate"},						
-// 						{"data":"endDate"},						
 						{"data":"peopleNeeded"},						
-// 						{"data":"contactPerson"},						
-// 						{"data":"contactPhone"},						
-// 						{"data":"contactEmail"},						
-// 						{"data":"discription"},						
 						{"data": null, render: function ( data, type, row ) {
 			                return data.county + data.district+ data.address;
 			            }},						
+						
+			            {"data":null, render: function ( data, type, row ) {
+			                return new Date(data.startDate).toLocaleDateString();
+			            } },	
+					
+						{"data":function (data, type, val) {
+							var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerRecruitment/edit?id="+data.id+"'\">志工審核</button>";   
+							return vbutton;}							 
+						},
+			            {"data":"status"},
+									
 					],
 					 columnDefs: [{
 			                "searchable": false,
