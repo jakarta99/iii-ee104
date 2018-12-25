@@ -20,6 +20,8 @@ import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.Mapping;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Getter;
 import lombok.Setter;
 import team.lala.timebank.enums.TermType;
@@ -56,6 +58,7 @@ public class Mission {
 				referencedColumnName="id") 
 	private ServiceType serviceType;
 	
+	@JsonManagedReference
 	@OneToMany(
 			mappedBy ="mission",
 			cascade = {CascadeType.REMOVE}
