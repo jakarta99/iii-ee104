@@ -5,16 +5,12 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
-import team.lala.timebank.entity.Donation;
-import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 
 @SuppressWarnings("serial")
@@ -37,7 +33,7 @@ public class OrderSpecification implements Specification<Order>  {
 		}
 
 		
-		if(!StringUtils.isEmpty(inputOrder.getOrderStatus().getOrderStatus())) {
+		if(!StringUtils.isEmpty(inputOrder.getOrderStatus())) {
 			list.add(criteriaBuilder.equal(root.get("status").as(String.class), inputOrder.getOrderStatus()));
 		}
 		
@@ -49,10 +45,7 @@ public class OrderSpecification implements Specification<Order>  {
 //		orderList.add(orderByConfirm);
 //		orderList.add(orderBySupplierId);
 //		query.orderBy(orderList);
-		
-		if(!StringUtils.isEmpty(inputOrder.getVolunteer().getAccount())) {
-			list.add(criteriaBuilder.equal(root.get("volunteer").as(Member.class), inputOrder.getVolunteer()));
-		}
+
 		
 		Predicate[] p = new Predicate[list.size()];
 		return criteriaBuilder.and(list.toArray(p));
