@@ -15,12 +15,6 @@
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
-<!-- data table -->
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/js/dataTable_full_numbers_no_ellipses.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
-<script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
-<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>	
 
 
 <style>
