@@ -170,6 +170,17 @@ public class Member implements UserDetails {
 	@Column(name = "ORG_IDENTITY_CONFIRMATION")
 	private YesNo orgIdConfirmation;
 	
+	@Column(name = "BALANCE_VALUE")
+	private Integer balanceValue;
+	
+	@Column(name = "SUM_SCORE")
+	private Integer sumScore;
+	
+	@Column(name = "SCORED_TIMES")
+	private Integer scoredTimes;
+	
+	@Column(name = "AVERAGE_SCORE")
+	private Integer averageScore;
 	
 //	 public void addRole(Role role) {
 //	       if (!getRoles().contains(role)) {
@@ -235,10 +246,8 @@ public class Member implements UserDetails {
 				+ ", orgFounder=" + orgFounder + ", orgCeo=" + orgCeo + ", orgContactPerson=" + orgContactPerson
 				+ ", orgContactPersonTel=" + orgContactPersonTel + ", orgContactPersonMobile=" + orgContactPersonMobile
 				+ ", orgWebsiteLink=" + orgWebsiteLink + ", orgFoundPurpose=" + orgFoundPurpose + ", orgIdConfirmation="
-				+ orgIdConfirmation + "]";
+				+ orgIdConfirmation + ", balanceValue=" + balanceValue + ", sumScore=" + sumScore + ", scoredTimes="
+				+ scoredTimes + ", averageScore=" + averageScore + "]";
 	}
-
-
-		
 
 }
