@@ -2,7 +2,6 @@ package team.lala.timebank.service;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,16 +12,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.OrderDao;
 import team.lala.timebank.dao.PenaltyDao;
+import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
-import team.lala.timebank.web.penalty.PenaltyController;
 
 @Slf4j
 @Service
@@ -34,33 +32,6 @@ public class PenaltyService {
 	@Autowired
 	private OrderDao orderDao;
 	
-	@Autowired
-	private MemberDao memberDao;
-	
-	//Jasmine 補註解
-	public Map<String, Object> getAccuserAndDefendant(Long orderId, Long accuserId) {
-		Order order = orderDao.getOne(orderId);
-		Map<String, Object> result = new HashMap<>();
-		//查出原告被告id
-		Long defendantId = null;
-		if(memberDao.getOne(accuserId) == order.getVolunteer()) {
-			defendantId = order.getMission().getMember().getId();
-		} else {
-			defendantId = order.getVolunteer().getId();
-		}
-		
-		//查出原告被告姓名
-		String accuserName = memberDao.getOne(accuserId).getName();
-		String defendantName = memberDao.getOne(defendantId).getName();
-		
-		result.put("order", order);
-		result.put("accuserId", accuserId);
-		result.put("accuserName", accuserName);
-		result.put("defendantId", defendantId);
-		result.put("defendantName", defendantName);
-		
-		return result;
-	}
 	
 	//Jasmine 補註解
 	public Penalty vertifyPenalty(Long penaltyId, Integer status, Integer penaltyTimeValue, String vertifyReason) {
@@ -71,17 +42,44 @@ public class PenaltyService {
 		return penaltyDao.save(dbPenalty);
 	}
 	
-	//Jasmine 補註解
-	public Boolean checkRecord(Long orderId, Long accuserId) {
+	//Jasmine 
+	//點選一筆order後，判斷是否有檢舉紀錄，以及被檢舉人是誰。如無檢舉紀錄則無法進入填寫檢舉之畫面
+	//進入檢舉畫面會將相關資料帶入(被檢舉人、活動名稱....)
+	public Penalty checkRecordandProvidePenalty(Long orderId, Long accuserId) {
 		List<Penalty> penalties = findByOrder(orderDao.getOne(orderId));
+		Order thisOrder = orderDao.getOne(orderId);
+		Penalty penalty = new Penalty();
+		Member defendant;
 		if(penalties.size() > 0) { //該筆order有檢舉紀錄
 			for(Penalty p : penalties) {
-				if(p.getAccuser().equals(accuserId)) { //檢舉紀錄的檢舉人與目前登入會員相同(不得再次提出檢舉)
-					return true;
+				if(p.getAccuser().equals(accuserId)) { //該筆order的檢舉人與目前登入會員相同(不得再次提出檢舉)
+					return null;
+				}else{
+					if(accuserId == thisOrder.getMission().getMember().getId()) {//如果檢舉者是雇主
+						defendant = thisOrder.getVolunteer();//被告就是志工
+					} else {
+						defendant = thisOrder.getMission().getMember();
+					}
+					penalty.setAccuser(accuserId);
+					penalty.setOrder(thisOrder);
+					penalty.setDefendant(defendant);
+					penalty.setStatus(1);
+					return penalty;
 				}
 			}
 		}
-		return false;
+		
+		if(accuserId == thisOrder.getMission().getMember().getId()) {//如果檢舉者是雇主
+			defendant = thisOrder.getVolunteer();//被告就是志工
+		} else {
+			defendant = thisOrder.getMission().getMember();
+		}
+		penalty.setAccuser(accuserId);
+		penalty.setOrder(thisOrder);
+		penalty.setDefendant(defendant);
+		penalty.setStatus(1);
+		return penalty;
+		
 	}
 	
 	//Jasmine 補註解
