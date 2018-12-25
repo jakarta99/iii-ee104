@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!doctype html>
 <html>
 <head>
@@ -68,30 +69,43 @@
           	<article>
           		<h2 class=center>建立您的TimeBank帳戶</h2>
           		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/commons/sign-up/type'" value="回前頁">
+          		<table>
+				  <form:form action="save" method="post" commandName="user">
+					<tr>  <td>User Name:</td> <td><form:input  path="name"/> </td> 
+					      <td> <form:errors path="name" cssStyle="color: red;"/></td> </tr>
+					<tr> <td> Password :</td> <td><form:input path="password"/> </td> 
+					     <td> <form:errors path="password" cssStyle="color: red;"/> </td> </tr>
+					<tr> <td>  Email :</td> <td><form:input path="email"/> </td> 
+					     <td> <form:errors path="email" cssStyle="color: red;"/> </td> </tr>
+					<tr> <td>  Date of Birth :</td> <td><form:input path="birthDate"/> </td> 
+					     <td> <form:errors path="dob" cssStyle="color: red;"/> </td> </tr>	     
+					<tr> <td colspan=3>   <input type="submit"> </td>
+				  </form:form>
+				</table>   
           		<form action="#" method="post">
           			<fieldset>
           				<legend>帳戶資料</legend>
           				<input type="hidden" value="" id="id" name="id"> 
 						<input type="hidden" value="${memberType}" id="memberType" name="memberType">
 						<div>
-							<label>帳號 :</label>
+							<label>帳號:</label>
 							<input type="text" value="${param.account}" id="account" name="account">
 						</div><hr>
 						<div>
-							<label>密碼 :</label>
+							<label>密碼:</label>
 							<input type="text" value="${param.password}" id="password" name="password">
 						</div>
           			</fieldset>
           			<fieldset>	
 						<legend>個人資料</legend>
 						<div>
-							<label>名字 :</label>
+							<label>名稱:</label>
 							<input type="text" value="${param.name}" id="name" name="name">
 						</div><hr>
 						<c:choose>
 							<c:when test="${memberType eq 'P'}">
 								<div>
-									<label>身分證字號 :</label>
+									<label>身分證字號:</label>
 									<input type="text" value="${param.certificateIdNumber}" id="certificateIdNumber" name="certificateIdNumber">
 								</div><hr>
 								<div>
@@ -101,7 +115,7 @@
 							</c:when>
 							<c:when test="${memberType eq 'O'}">
 								<div>
-									<label>統一編號 :</label> 
+									<label>統一編號:</label> 
 									<input type="text" value="${param.certificateIdNumber}" id="certificateIdNumber" name="certificateIdNumber">
 								</div><hr>
 								<div>
@@ -206,7 +220,7 @@
 					
 					if(response.status == "SUCCESS") {
 						alert("會員新增成功");
-// 						window.location.replace("/admin/member/list");
+// 						window.location.replace("/admin/member/list");	//驗證信頁面
 					} else {
 						$.each(response.messages, function(idx, message) {
 							alert("the "+idx+"th ERROR, because "+message);
