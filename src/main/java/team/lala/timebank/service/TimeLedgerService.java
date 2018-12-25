@@ -11,13 +11,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.TimeLedgerDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.entity.TimeLedger;
 import team.lala.timebank.enums.YesNo;
+import team.lala.timebank.web.admin.AdminTimeLedgerRecordController;
 
+@Slf4j
 @Service
 public class TimeLedgerService {
 
@@ -33,7 +36,7 @@ public class TimeLedgerService {
 		if (lastTimeLedger == null) {
 			lastTimeLedger = new TimeLedger();
 			lastTimeLedger.setBalanceValue(0); // balanceValue型別為Integer，預設null改為0
-			System.out.println("會員第一次交易");
+			log.debug("會員第一次交易");
 		}
 
 		// 2. prepare timeledger data
@@ -145,7 +148,7 @@ public class TimeLedgerService {
 	// 刪除一筆資料
 	public void delete(Long id) {
 		timeLedgerDao.deleteById(id);
-		System.out.println("刪除單筆存摺資料成功");
+		log.debug("刪除單筆存摺資料成功");
 	}
 
 	// 查詢全部交易紀錄
