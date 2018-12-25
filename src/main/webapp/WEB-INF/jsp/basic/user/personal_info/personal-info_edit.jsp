@@ -28,7 +28,7 @@
 	article fieldset {
 		width: 800px;
 		border-radius: 20px;
-		padding: 20px 20px 0px 20px; 
+		padding: 20px; 
 		border: 2px solid #bebebe;
 		margin: auto;
 	}
@@ -62,6 +62,7 @@
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
 	<div class="container">
     	<div class="row">
+            <!-- Sidebar -->
             <jsp:include page="../user_layout/user_sidebar.jsp"/>
             <article>
 				<h2 class=center>個人資訊</h2>
@@ -127,7 +128,7 @@
 							<fmt:formatDate value="${member.signUpDate}" pattern="yyyy/MM/dd" var="signUpDate" />
 							<label>註冊日期:</label> 
 							<input type="text" value="${signUpDate}" id="signUpDate" name="signUpDate" autocomplete="off"><br>
-						</div><hr>
+						</div>
 					</fieldset>
 					<fieldset>
 					<legend>驗證資訊</legend>
@@ -145,7 +146,7 @@
 									<input type="radio" value="Y" name="orgIdConfirmation">
 									<label>N</label> 
 									<input type="radio" value="N" name="orgIdConfirmation"><br>								
-							</div><hr>
+							</div>
 						</c:if>	
 					</fieldset>
 						<c:if test="${member.memberType eq 'O' }">
@@ -180,7 +181,7 @@
 								<textarea rows="5" cols="50" id="orgFoundPurpose" name="orgFoundPurpose">
 									${member.orgFoundPurpose}
 								</textarea><br>
-							</div><hr>
+							</div>
 							</fieldset>
 						</c:if>
 						<fieldset style="border:none">

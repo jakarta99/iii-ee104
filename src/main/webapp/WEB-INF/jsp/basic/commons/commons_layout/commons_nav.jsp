@@ -19,7 +19,7 @@
                         <div class="col-md-6 col-lg-3">
                            <h5><a href="#" >行事曆</a></h5>                      
                           <h5><a href="#" >系統訊息</a></h5>
-                          <h5><a href="/basic/user/personal-info/edit" >我的個人資訊</a></h5>                          
+                          <h5><a href="/user/personal-info/edit" >我的個人資訊</a></h5>                          
                         </div>
                         <div class="col-md-6 col-lg-3">
                           <h5><a href="#" >志工招募</a></h5>
