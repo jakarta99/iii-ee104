@@ -29,7 +29,7 @@ INSERT INTO SERVICE_TYPE VALUES ('宗教信仰');
 
 
 
-
+--mission
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,status) 
 VALUES (1,'中華育幼機構關懷協會',2,'L',2,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','大安區','復興南路一段390號15樓',1);
 
@@ -54,6 +54,7 @@ INSERT INTO ROLE (ROLE_NAME) VALUES  ('ADMIN');
 INSERT INTO ROLE (ROLE_NAME) VALUES  ('USER');
 INSERT INTO ROLE (ROLE_NAME) VALUES  ('ORG_USER');
 
+--member
 INSERT INTO MEMBER ( ACCOUNT, PASSWORD, NAME, TYPE, EMAIL,CERTIFICATE_ID_NUMBER, BIRTH_DATE,TEL, MOBILE, COUNTY, DISTRICT, ADDRESS, EMAIL_VERTIFICATION, SIGN_UP_DATE)
 VALUES('sheila1112','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','sheila', 'P', 'sheila000@gmail.com','A123456789', '1970/5/15','25644433', '0912356278','台北市','大安區','復興南路一段390號15樓', 'Y','2015-5-13');
 
@@ -69,6 +70,7 @@ VALUES('12345678','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG'
 INSERT INTO MEMBER (ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, CERTIFICATE_ID_NUMBER, BIRTH_DATE, ORG_FOUNDER, ORG_CEO,TEL, MOBILE, COUNTY, DISTRICT, ADDRESS,EMAIL_VERTIFICATION, SIGN_UP_DATE, ORG_IDENTITY_CONFIRMATION, ORG_CONTACT_PERSON, ORG_CONTACT_PERSON_MOBILE, ORG_CONTACT_PERSON_TEL , ORG_FOUND_PURPOSE, ORG_WEBSITE_LINK)
 VALUES('jack1112','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','jasmine', 'O', 'jasmine002@gmail.com','F123456223','1990/12/27','Tom老師', '鄭正','25644433', '0912356278','台中市','東區','大勇街28號', 'N','2015-6-8','N','陳玉華','0925343233','25643772','','');
 
+--user_role
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (1, 1)
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (1, 2)
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (1, 3)
@@ -80,29 +82,6 @@ INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (5, 2)
 
 
 
-
-INSERT INTO Requests( member_id, JOB_TITLE, TIME_VALUE, job_Area, term_Type, service_Type) 
-VALUES (1,'中華育幼機構關懷協會',2,1,2,1);
-INSERT INTO Requests( member_id, JOB_TITLE, TIME_VALUE, job_Area, term_Type, service_Type) 
-VALUES (1,'中華關懷協會',2,1,2,1);
-INSERT INTO Requests( member_id, JOB_TITLE, TIME_VALUE, job_Area, term_Type, service_Type) 
-VALUES (1,'育幼機構協會',2,1,2,1);
-INSERT INTO Requests( member_id, JOB_TITLE, TIME_VALUE, job_Area, term_Type, service_Type) 
-VALUES (2,'中華育幼機構關懷協會',2,2,2,2);
-INSERT INTO Requests( member_id, JOB_TITLE, TIME_VALUE, job_Area, term_Type, service_Type) 
-VALUES (3,'中華關懷協會',2,3,2,3);
-INSERT INTO Requests( member_id, JOB_TITLE, TIME_VALUE, job_Area, term_Type, service_Type) 
-VALUES (4,'育幼協會',2,4,2,4);
-INSERT INTO Requests( member_id, JOB_TITLE, TIME_VALUE, job_Area, term_Type, service_Type) 
-VALUES (1,'中華關懷協會',2,1,2,1);
-INSERT INTO Requests( member_id, JOB_TITLE, TIME_VALUE, job_Area, term_Type, service_Type) 
-VALUES (1,'育幼機構協會',2,1,2,1);
-INSERT INTO Requests( member_id, JOB_TITLE, TIME_VALUE, job_Area, term_Type, service_Type) 
-VALUES (2,'中華育幼機構關懷協會',2,2,2,2);
-INSERT INTO Requests( member_id, JOB_TITLE, TIME_VALUE, job_Area, term_Type, service_Type) 
-VALUES (3,'中華關懷協會',2,3,2,3);
-INSERT INTO Requests( member_id, JOB_TITLE, TIME_VALUE, job_Area, term_Type, service_Type) 
-VALUES (4,'育幼協會',2,4,2,4);
 
 --ORDER_LIST
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, SERVICE_REQUESTER_ID, STATUS, VOLUNTEER_APPLY_TIME, ORDER_ACCEPT_TIME) 
