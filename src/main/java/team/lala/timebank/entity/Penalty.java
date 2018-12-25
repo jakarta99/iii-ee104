@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -37,37 +36,40 @@ public class Penalty {
 				insertable=true, updatable=true) 
 	private Order order; //無法用order當資料行名稱
 
-	@Column(name = "accuser") //****待改資料行名稱
-	private Long accuser;//檢舉人(原告)
+	@OneToOne
+	@JoinColumn(name="ACCUSER_ID",    
+				referencedColumnName="id",  
+				insertable=true, updatable=true) 
+	private Member accuser;//檢舉人(原告)
 	
 	
 	@OneToOne
-	@JoinColumn(name="MEMBER",    
+	@JoinColumn(name="DEFENDANT_ID",    
 				referencedColumnName="id",  
 				insertable=true, updatable=true) 
 	private Member defendant;
 	//被檢舉人(被告)
 
-	@Column(name = "update_date")
+	@Column(name = "UPDATE_DATE")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date updateDate;
 
-	@Column(name = "description", length = 50) //檢舉內容說明
+	@Column(name = "DESCRIPTION", length = 50) //檢舉內容說明
 	private String description;
 
-	@Column(name = "status")  //1~3 提出申訴、審核中、審核結束_需懲罰、審核結束_不需懲罰
+	@Column(name = "STATUS")  //1~3 提出申訴、審核中、審核結束_需懲罰、審核結束_不需懲罰
 	private Integer status;
 
-	@Column(name = "penalty_time_value")
+	@Column(name = "PENALTY_TIME_VALUE")
 	private Integer penaltyTimeValue;
 	
 //	@Lob
 //	@Column(name = "proof_Pic")
 //	private byte[] proofPic;
-	@Column(name = "proof_pic_name")
+	@Column(name = "PROOF_PIC_NAME")
 	private String proofPicName;
 	
-	@Column(name = "vertify_reason")
+	@Column(name = "VERTIFY_REASON")
 	private String vertifyReason;
 	
 	@Transient

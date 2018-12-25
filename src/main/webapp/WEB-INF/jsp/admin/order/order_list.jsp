@@ -239,7 +239,7 @@
 			})
 		})
 		var datePickerSetting = {
-			format : "yyyy/MM/dd HH:mm",
+			format : "yyyy/MM/dd",
 			autoclose : true,
 			todayHighlight : true,
 			language : 'zh-TW',

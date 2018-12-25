@@ -72,23 +72,23 @@
 						<legend>個人資料</legend>
 						<input type="hidden" value="${member.id}" id="id" name="id" /> 
 						<input type="hidden" value="${member.memberType}" id="memberType" name="memberType" />
+<!-- 						<div> -->
+<!-- 							<label>帳號:</label> -->
+<%-- 							<input  type="text" value="${member.account}" id="account" name="account" readonly style="background-color:#DDDDDD" ><br> --%>
+<!-- 						</div><hr> -->
+<!-- 						<div> -->
+<!-- 							<label>密碼:</label> -->
+<%-- 							<input type="text" value="${member.password}" id="password" name="password"><br> --%>
+<!-- 						</div><hr> -->
 						<div>
-							<label>帳號 :</label>
-							<input  type="text" value="${member.account}" id="account" name="account" readonly style="background-color:#DDDDDD" ><br>
-						</div><hr>
-						<div>
-							<label>密碼 :</label>
-							<input type="text" value="${member.password}" id="password" name="password"><br>
-						</div><hr>
-						<div>
-							<label>名字 :</label>
+							<label>名稱:</label>
 							<input type="text" value="${member.name}" id="name" name="name"><br>
 						</div><hr>
 						<fmt:formatDate value="${member.birthDate}" pattern="yyyy/MM/dd" var="birthDate" />
 						<c:choose>
 							<c:when test="${member.memberType eq 'P'}">
 								<div>
-									<label>身分證字號 :</label>
+									<label>身分證字號:</label>
 									<input type="text" value="${member.certificateIdNumber}" id="certificateIdNumber" name="certificateIdNumber"><br>
 								</div><hr>
 								<div>
@@ -98,7 +98,7 @@
 							</c:when>
 							<c:when test="${member.memberType eq 'O'}">
 								<div>
-									<label>統一編號 :</label> 
+									<label>統一編號:</label> 
 									<input type="text" value="${member.certificateIdNumber}" id="certificateIdNumber" name="certificateIdNumber"><br>
 								</div><hr>
 								<div>
@@ -141,7 +141,7 @@
 						</div><hr>
 						<c:if test="${member.memberType eq 'O' }">
 							<div>
-								<label>機構身分驗證 (Y/N): </label>
+								<label>機構身分驗證 (Y/N):</label>
 									<label>Y</label> 
 									<input type="radio" value="Y" name="orgIdConfirmation">
 									<label>N</label> 
