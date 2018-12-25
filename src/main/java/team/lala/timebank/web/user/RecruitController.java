@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Mission;
+import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.ServiceType;
 import team.lala.timebank.service.MissionService;
 import team.lala.timebank.service.ServiceTypeService;
@@ -77,7 +78,7 @@ public class RecruitController {
 	//進行中
 	@RequestMapping("/recruiting")
 	@ResponseBody
-	public Page<Mission> Recruiting(Mission inputMission, Principal principal,
+	public Page<Mission> recruiting(Mission inputMission, Principal principal,
 			@RequestParam(value = "start", required = false) Optional<Integer> start,
 			@RequestParam(value = "length", required = false) Optional<Integer> length) {
 		int page = start.orElse(0) / length.orElse(10);
@@ -88,6 +89,21 @@ public class RecruitController {
 				PageRequest.of(page, length.orElse(10)));
 		return missions;
 	}
-	//order
-
+	
+	
+	
+	
+//	// order
+//	@RequestMapping("/")
+//	@ResponseBody
+//	public Page<Order> queryOrder(Mission inputMission, Principal principal,
+//			@RequestParam(value = "start", required = false) Optional<Integer> start,
+//			@RequestParam(value = "length", required = false) Optional<Integer> length) {
+//		int page = start.orElse(0) / length.orElse(10);
+//
+//		MissionSpecification missionSpec = new MissionSpecification(
+//				missionService.findByAccount(principal, inputMission));
+//		Page<Order> missions = missionService.findBySpecification(missionSpec, PageRequest.of(page, length.orElse(10)));
+//		return missions;
+//	}
 }
