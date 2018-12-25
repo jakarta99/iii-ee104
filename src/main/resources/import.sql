@@ -279,48 +279,47 @@ VALUES(4, 1, 3, '2018-11-13', '缺席', 1 , 4);
 
 --donation
 
-INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,value,donate_time) 
 VALUES(1,3,10,'2018-11-6');
 
-INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,value,donate_time) 
 VALUES(2,3,15,'2018-05-6');
 
-INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,value,donate_time) 
 VALUES(3,3,3,'2018-10-6');
 
-INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,value,donate_time) 
 VALUES(1,3,10,'2018-11-6');
 
-INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,value,donate_time) 
 VALUES(2,5,15,'2018-05-6');
 
-INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,value,donate_time) 
 VALUES(3,5,3,'2018-10-6');
 
-INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,value,donate_time) 
 VALUES(3,5,140,'2013-11-6');
 
-INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,value,donate_time) 
 VALUES(1,5,102,'2015-11-6');
 
-INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,value,donate_time) 
 VALUES(1,5,210,'2018-1-6');
 
-INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,DONATE_VALUE,donate_time) 
 VALUES(4,5,102,'2015-11-6');
 
-INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,DONATE_VALUE,donate_time) 
 VALUES(4,3,210,'2018-1-6');
 
-INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,DONATE_VALUE,donate_time) 
 VALUES(4,3,102,'2015-11-6');
 
-INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,DONATE_VALUE,donate_time) 
 VALUES(1,3,210,'2018-1-6');
 
-INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,DONATE_VALUE,donate_time) 
 VALUES(2,3,102,'2015-11-6');
 
-INSERT INTO DONATION(member_id,organization_id,value,donate_time) 
+INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,DONATE_VALUE,donate_time) 
 VALUES(1,5,210,'2018-1-6');
-

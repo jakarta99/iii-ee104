@@ -43,13 +43,13 @@ public class DonationSpecification implements Specification<Donation> {
 					inputDonation.getDonateTimeEnd()));
 		}
 
-		if (!StringUtils.isEmpty(inputDonation.getOrganizationId())) {
+		if (!StringUtils.isEmpty(inputDonation.getOrgDonee())) {
 			list.add(criteriaBuilder.equal(root.get("organizationId").as(Long.class),
-					inputDonation.getOrganizationId()));
+					inputDonation.getOrgDonee()));
 		}
 
-		if (!StringUtils.isEmpty(inputDonation.getMemberId())) {
-			list.add(criteriaBuilder.equal(root.get("memberId").as(Long.class), inputDonation.getMemberId()));
+		if (!StringUtils.isEmpty(inputDonation.getDonator())) {
+			list.add(criteriaBuilder.equal(root.get("memberId").as(Long.class), inputDonation.getDonator()));
 		}
 		if (!StringUtils.isEmpty(inputDonation.getId())) {
 			list.add(criteriaBuilder.equal(root.get("id").as(Long.class), inputDonation.getId()));

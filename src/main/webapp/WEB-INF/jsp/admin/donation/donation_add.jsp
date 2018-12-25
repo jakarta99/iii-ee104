@@ -27,10 +27,10 @@
 	  <fieldset>
 	    <legend>insert</legend>
 	
-	    <label>memberId:</label>
-	    <input type="text" value="" id="memberId" name="memberId"/>
-	    <label>organizationId:</label>
-	    <input type="text" value="" id="organizationId" name="organizationId"/>
+	    <label>donator:</label>
+	    <input type="text" value="" id="donator" name="donator"/>
+	    <label>orgDonee:</label>
+	    <input type="text" value="" id="orgDonee" name="orgDonee"/>
 	    <label>value:</label>
 	    <input type="text" value="" id="value" name="value"/>
 	  	<input type="button" onclick="addData()" value="新增" id="addButt" />

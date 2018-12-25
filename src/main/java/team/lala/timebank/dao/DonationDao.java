@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import team.lala.timebank.entity.Donation;
+import team.lala.timebank.entity.Member;
 
 public interface DonationDao extends JpaRepository<Donation, Long>, JpaSpecificationExecutor<Donation> {
 
-	// 查詢某人的Donation by Brian
-	public List<Donation> findByMemberId(Long memberId);
+	public List<Donation> findByDonator(Member memberId);
 
 }

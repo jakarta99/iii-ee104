@@ -27,21 +27,21 @@ public class Donation {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name="member_id",    
+	@JoinColumn(name="DONATOR_ID",    
 			referencedColumnName="id") 
-	private Member memberId;
+	private Member donator;
 
 	@ManyToOne
 	@BatchSize(size=30)
-	@JoinColumn(name="organization_id",    
+	@JoinColumn(name="ORG_DONEE_ID",    
 			referencedColumnName="id") 
-	private Member organizationId;
+	private Member orgDonee; //被捐贈者
 
-	@Column(name = "value")
+	@Column(name = "DONATE_VALUE")
 	private Integer value;
 	
 	
-	@Column(name = "donate_time")
+	@Column(name = "DONATE_TIME")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date donateTime;
 
@@ -55,10 +55,11 @@ public class Donation {
 
 	@Override
 	public String toString() {
-		return "Donation [id=" + id + ", memberId=" + memberId + ", organizationId=" + organizationId + ", value="
-				+ value + ", donateTime=" + donateTime + ", donateTimeBegin=" + donateTimeBegin + ", donateTimeEnd="
+		return "Donation [id=" + id + ", donator=" + donator + ", orgDonee=" + orgDonee + ", value=" + value
+				+ ", donateTime=" + donateTime + ", donateTimeBegin=" + donateTimeBegin + ", donateTimeEnd="
 				+ donateTimeEnd + "]";
 	}
+
 
 
 }
