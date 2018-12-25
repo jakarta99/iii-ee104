@@ -156,7 +156,7 @@
 	
 	</div>
 	<div>
-	<input type="button" class="btn btn-outline-secondary" onclick="javascript:document.location.href='/admin/request/list'" value="回列表頁"/>
+	<input type="button" class="btn btn-outline-secondary" onclick="javascript:document.location.href='/user/volunteerRecruitment/list'" value="回列表頁"/>
 
 	</div>
 					
@@ -208,7 +208,7 @@
 				success : function(editResult) {
 					if(editResult.status == "SUCCESS"){
 						alert("更新編號" + editResult.obj.id + " " + editResult.status);
-						document.location.href="/admin/mission/list";
+						document.location.href="/user/volunteerRecruitment/list";
 					}else{
 						alert("更新編號" + editResult.obj.id + " " + editResult.status);
 						alert("失敗原因" + editResult.messages);
