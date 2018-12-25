@@ -165,7 +165,7 @@ fieldset {
 					return editButton + deleteButton;
 				}},	
 				{data:'id'},
-				{data:"memberId"},
+				{data:"memberId.account"},
 				{data: null, render: function ( data, type, row ) {
 	                return new Date(data.transactionTime).toLocaleDateString();
 	            }},

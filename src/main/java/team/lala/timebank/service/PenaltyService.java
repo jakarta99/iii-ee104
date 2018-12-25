@@ -1,5 +1,8 @@
 package team.lala.timebank.service;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
@@ -33,7 +37,7 @@ public class PenaltyService {
 	@Autowired
 	private MemberDao memberDao;
 	
-	//Jasmine
+	//Jasmine 補註解
 	public Map<String, Object> getAccuserAndDefendant(Long orderId, Long accuserId) {
 		Order order = orderDao.getOne(orderId);
 		Map<String, Object> result = new HashMap<>();
@@ -58,15 +62,16 @@ public class PenaltyService {
 		return result;
 	}
 	
-	//Jasmine
-	public Penalty vertifyPenalty(Long penaltyId, Integer status, Integer penaltyTimeValue) {
+	//Jasmine 補註解
+	public Penalty vertifyPenalty(Long penaltyId, Integer status, Integer penaltyTimeValue, String vertifyReason) {
 		Penalty dbPenalty = penaltyDao.getOne(penaltyId);
 		dbPenalty.setPenaltyTimeValue(penaltyTimeValue);
 		dbPenalty.setStatus(status);
+		dbPenalty.setVertifyReason(vertifyReason);
 		return penaltyDao.save(dbPenalty);
 	}
 	
-	//Jasmine
+	//Jasmine 補註解
 	public Boolean checkRecord(Long orderId, Long accuserId) {
 		List<Penalty> penalties = findByOrder(orderDao.getOne(orderId));
 		if(penalties.size() > 0) { //該筆order有檢舉紀錄
@@ -79,6 +84,28 @@ public class PenaltyService {
 		return false;
 	}
 	
+	//Jasmine 補註解
+	public Boolean storeProofPic(MultipartFile proofPic, Long penaltyId) {
+		try {
+			//確認是否有此資料夾，如無則建資料夾
+			File dir = new File("D:\\penaltyProoves\\");
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+			String location = "D:\\penaltyProoves\\" + "penaltyProof_" + penaltyId + ".jpg";
+			FileOutputStream fos = new FileOutputStream(location);
+			fos.write(proofPic.getBytes());
+			fos.close();
+			//將圖片路徑存到DB
+			Penalty penalty = getOne(penaltyId);
+			penalty.setProofPicName("penaltyProof_" + penaltyId + ".jpg");
+			update(penalty);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 	
 	
 	

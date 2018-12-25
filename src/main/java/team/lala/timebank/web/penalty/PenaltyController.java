@@ -147,12 +147,13 @@ public class PenaltyController {
 	@RequestMapping("/doneVertify")
 	@ResponseBody
 	public AjaxResponse<Penalty> doneVertify(@RequestParam("penaltyId") Long penaltyId, 
-			@RequestParam("status") Integer status, @RequestParam("penaltyTimeValue") Integer penaltyTimeValue) {
+			@RequestParam("status") Integer status, @RequestParam("penaltyTimeValue") Integer penaltyTimeValue, 
+			@RequestParam("vertifyReason") String vertifyReason) {
 		AjaxResponse<Penalty> ajaxResponse = new AjaxResponse<Penalty>();
 		
 		try {
 			//完成檢舉案件審核，結果存入DB
-			Penalty penalty = penaltyService.vertifyPenalty(penaltyId, status, penaltyTimeValue);
+			Penalty penalty = penaltyService.vertifyPenalty(penaltyId, status, penaltyTimeValue, vertifyReason);
 			//如果審核結果為2(需懲罰)，才進行被檢舉人帳戶扣款
 			if(status == 2) {
 				timeLedgerService.doPenaltyDebit(penalty);
@@ -175,25 +176,10 @@ public class PenaltyController {
 		
 		//如果有上傳圖片，才存檔案到Server，及存路徑到DB
 		if(proofPic.getOriginalFilename().length() > 0) {
-			//之後要包到Service內
-			//呼叫service將圖片存到Server
-			//確認是否有此資料夾，如無則建資料夾
-			File dir = new File("D:\\penaltyProoves\\");
-			
-			if(!dir.exists()) {
-				dir.mkdirs();
-			}
-			
-			String location = "D:\\penaltyProoves\\"
-							+ "penaltyProof_" + penaltyId + ".jpg";
-			FileOutputStream fos = new FileOutputStream(location);
-			fos.write(proofPic.getBytes());
-			fos.close();
-			//將圖片路徑存到DB
-			Penalty penalty = penaltyService.getOne(penaltyId);
-			penalty.setProofPicName("penaltyProof_" + penaltyId + ".jpg");
-			penaltyService.update(penalty);
+			Boolean result = penaltyService.storeProofPic(proofPic, penaltyId);
 		}
+		
+		//待處理:上傳檔案類型，判斷副檔名。
 		
 		return "redirect:/penalty/tempPenaltyEntrance";//回傳上傳成功與否之資訊
 	}

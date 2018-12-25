@@ -12,13 +12,10 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.TimeLedgerDao;
-import team.lala.timebank.entity.Member;
-import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.entity.TimeLedger;
-import team.lala.timebank.enums.YesNo;
-import team.lala.timebank.web.admin.AdminTimeLedgerRecordController;
 
 @Slf4j
 @Service
@@ -26,6 +23,9 @@ public class TimeLedgerService {
 
 	@Autowired
 	private TimeLedgerDao timeLedgerDao;
+	
+	@Autowired
+	private MemberDao memberDao;
 
 	// 存款
 	public TimeLedger deposit(int hours, Long memberId) {
@@ -41,7 +41,7 @@ public class TimeLedgerService {
 
 		// 2. prepare timeledger data
 		TimeLedger timeLedger = new TimeLedger();
-		timeLedger.setMemberId(memberId);
+		timeLedger.setMemberId(memberDao.getOne(memberId));
 		timeLedger.setDepositValue(hours);
 		timeLedger.setBalanceValue(lastTimeLedger.getBalanceValue() + hours);
 		timeLedger.setTransactionTime(new Date());
@@ -61,7 +61,7 @@ public class TimeLedgerService {
 		if (lastTimeLedger != null && lastTimeLedger.getBalanceValue() >= hours) {
 			// 2. prepare timeledger data
 			timeLedger = new TimeLedger();
-			timeLedger.setMemberId(memberId);
+			timeLedger.setMemberId(memberDao.getOne(memberId));
 			timeLedger.setWithdrawalValue(hours);
 			timeLedger.setTransactionTime(new Date());
 			timeLedger.setBalanceValue(lastTimeLedger.getBalanceValue() - hours);
@@ -88,7 +88,7 @@ public class TimeLedgerService {
 
 		// 2. prepare PenaltyTimeledger data(可以倒扣)
 		TimeLedger timeLedger = new TimeLedger();
-		timeLedger.setMemberId(penalty.getDefendant().getId());
+		timeLedger.setMemberId(penalty.getDefendant());
 		timeLedger.setWithdrawalValue(penalty.getPenaltyTimeValue());
 		timeLedger.setDepositValue(0);
 		timeLedger.setTransactionTime(new Date());

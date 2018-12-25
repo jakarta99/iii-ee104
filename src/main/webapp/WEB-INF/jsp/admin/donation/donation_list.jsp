@@ -156,8 +156,8 @@
 				return editButt + deleteButt;
 			}},
 			{data:'id'},
-			{data:"memberId"},
-			{data:"organizationId"},
+			{data:"memberId.account"},
+			{data:"organizationId.account"},
 			{data:"value"},
 			{data: null, render: function ( data, type, row ) {
                 return new Date(data.donateTime).toLocaleDateString();
