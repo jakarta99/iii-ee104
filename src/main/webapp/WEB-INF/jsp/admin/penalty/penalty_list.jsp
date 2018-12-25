@@ -72,7 +72,7 @@
 		<div id="sideBar">
 			<form>
 				<fieldset>
-				<legend>Serach</legend>
+				<legend>Search</legend>
 				<div>
 					<label>memberId: </label>
 					<input type="text" value="${param.memberId}" id="memberId" name="memberId" placeholder="memberId" />
@@ -117,8 +117,8 @@
 					<th scope="col"></th>
 					<th scope="col">ID</th>
 					<th scope="col" width="100px"></th>
-					<th scope="col">雇主ID</th>
-					<th scope="col">被檢舉者ID</th>
+					<th scope="col">檢舉者(原告)ID</th>
+					<th scope="col">被檢舉者(被告)ID</th>
 					<th scope="col">逞罰時間</th>
 					<th scope="col">處理進度</th>
 					<th scope="col">描述</th>
@@ -202,8 +202,8 @@
 						var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='刪除' />"
 		               	return editButt + deleteButt;	}
 		           	},
-					{data:"orderListId"},
-					{data:"memberId"},
+					{data:"accuser.id"},
+					{data:"defendant.id"},
 					{data:"penaltyTimeValue"},
 					{data:"status"},
 					{data:"description"},
