@@ -33,7 +33,7 @@ public class PoMissionController {
 		List<ServiceType> serviceType = serviceTypeService.findAll();
 		model.addAttribute("serviceType", serviceType);
 
-		return "/user/volunteerRecruitment/mission_add";
+		return "/basic/user/volunteerRecruitment/mission_add";
 	}
 
 	@RequestMapping("/insert")

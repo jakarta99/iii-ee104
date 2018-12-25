@@ -60,136 +60,139 @@
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-    <!-- Sidebar -->
-	<jsp:include page="../user_layout/user_sidebar.jsp"/>
-	<article>
-		<h2 class=center>個人資訊</h2>
-		<div class=center>您在 TimeBank中使用的基本資訊</div>
-		<div></div>
-		<form action="#" method="post">
-			<fieldset>
-			<legend>個人資料</legend>
-				<input type="hidden" value="${member.id}" id="id" name="id" /> 
-				<input type="hidden" value="${member.memberType}" id="memberType" name="memberType" />
-				<div>
-					<label>帳號 :</label>
-					<input type="text" value="${member.account}" id="account" name="account" readonly style="background-color:#DDDDDD" ><br>
-				</div><hr>
-				<div>
-					<label>密碼 :</label>
-					<input type="text" value="${member.password}" id="password" name="password"><br>
-				</div><hr>
-				<div>
-					<label>名字 :</label>
-					<input type="text" value="${member.name}" id="name" name="name"><br>
-				</div><hr>
-				<fmt:formatDate value="${member.birthDate}" pattern="yyyy/MM/dd" var="birthDate" />
-				<c:choose>
-					<c:when test="${member.memberType eq 'P'}">
+	<div class="container">
+    	<div class="row">
+            <jsp:include page="../user_layout/user_sidebar.jsp"/>
+            <article>
+				<h2 class=center>個人資訊</h2>
+				<div class=center>您在 TimeBank中使用的基本資訊</div>
+				<form action="#" method="post">
+					<fieldset>
+					<legend>個人資料</legend>
+						<input type="hidden" value="${member.id}" id="id" name="id" /> 
+						<input type="hidden" value="${member.memberType}" id="memberType" name="memberType" />
 						<div>
-							<label>身分證字號 :</label>
-							<input type="text" value="${member.certificateIdNumber}" id="certificateIdNumber" name="certificateIdNumber"><br>
+							<label>帳號 :</label>
+							<input  type="text" value="${member.account}" id="account" name="account" readonly style="background-color:#DDDDDD" ><br>
 						</div><hr>
 						<div>
-							<label>出生日期:</label>
-							<input type="text" value="${birthDate}" id="birthDate" name="birthDate" autocomplete="off"><br>
-						</div><hr>
-					</c:when>
-					<c:when test="${member.memberType eq 'O'}">
-						<div>
-							<label>統一編號 :</label> 
-							<input type="text" value="${member.certificateIdNumber}" id="certificateIdNumber" name="certificateIdNumber"><br>
+							<label>密碼 :</label>
+							<input type="text" value="${member.password}" id="password" name="password"><br>
 						</div><hr>
 						<div>
-							<label>創立日期:</label> 
-							<input type="text" value="${birthDate}" id="birthDate" name="birthDate" autocomplete="off"><br>
+							<label>名字 :</label>
+							<input type="text" value="${member.name}" id="name" name="name"><br>
 						</div><hr>
-					</c:when>
-				</c:choose>
-				<div>
-					<label>email:</label> 
-					<input type="text" value="${member.email}" id="email" name="email"><br>
-				</div><hr>
-				<div>
-					<label>住家電話:</label> 
-					<input type="text" value="${member.telephone}" id="telephone" name="telephone"><br>
-				</div><hr>
-				<div>
-					<label>手機:</label> 
-					<input type="text" value="${member.mobile}" id="mobile" name="mobile"><br>
-				</div><hr>
-				<div>			
-					<label>住址:</label>
-					<span role="tw-city-selector"></span>
-					<input type="text" value="${member.address}" id="address" name="address"><br>
-				</div><hr>
-				<div>
-					<fmt:formatDate value="${member.signUpDate}" pattern="yyyy/MM/dd" var="signUpDate" />
-					<label>註冊日期:</label> 
-					<input type="text" value="${signUpDate}" id="signUpDate" name="signUpDate" autocomplete="off"><br>
-				</div><hr>
-			</fieldset>
-			<fieldset>
-			<legend>驗證資訊</legend>
-				<div>
-					<label>Email驗證信確認(Y/N):</label>
-					<label>Y</label> 
-					<input type="radio" value="Y" name="emailVerification">
-					<label>N</label> 
-					<input type="radio" value="N" name="emailVerification"><br>
-				</div><hr>
-				<c:if test="${member.memberType eq 'O' }">
-					<div>
-						<label>機構身分驗證 (Y/N): </label>
-							<label>Y</label> 
-							<input type="radio" value="Y" name="orgIdConfirmation">
-							<label>N</label> 
-							<input type="radio" value="N" name="orgIdConfirmation"><br>								
-					</div><hr>
-				</c:if>	
-			</fieldset>
-				<c:if test="${member.memberType eq 'O' }">
-				<fieldset>	
-				<legend>其他資訊</legend>
-					<div >
-						<label>創辦人:</label> 
-						<input type="text" value="${member.orgFounder}" id="orgFounder" name="orgFounder"><br>
-					</div><hr>
-					<div>
-						<label>執行長:</label>
-						<input type="text" value="${member.orgCeo}" id="orgCeo" name="orgCeo"><br>
-					</div><hr>
-					<div>
-						<label>聯絡人:</label>
-						<input type="text" value="${member.orgContactPerson}" id="orgContactPerson" name="orgContactPerson"><br>
-					</div><hr>
-					<div>
-						<label>聯絡人電話:</label> 
-						<input type="text" value="${member.orgContactPersonTel}" id="orgContactPersonTel" name="orgContactPersonTel"><br>
-					</div><hr>
-					<div>
-						<label>聯絡人手機:</label>
-						<input type="text" value="${member.orgContactPersonMobile}" id="orgContactPersonMobile" name="orgContactPersonMobile"><br>
-					</div><hr>
-					<div>
-						<label>網址:</label>
-						<input type="url" size="50px" value="${member.orgWebsiteLink}" id="orgWebsiteLink" name="orgWebsiteLink"><br>
-					</div><hr>
-					<div>
-						<label>創立宗旨:</label>
-						<textarea rows="5" cols="50" id="orgFoundPurpose" name="orgFoundPurpose">
-							${member.orgFoundPurpose}
-						</textarea><br>
-					</div><hr>
+						<fmt:formatDate value="${member.birthDate}" pattern="yyyy/MM/dd" var="birthDate" />
+						<c:choose>
+							<c:when test="${member.memberType eq 'P'}">
+								<div>
+									<label>身分證字號 :</label>
+									<input type="text" value="${member.certificateIdNumber}" id="certificateIdNumber" name="certificateIdNumber"><br>
+								</div><hr>
+								<div>
+									<label>出生日期:</label>
+									<input type="text" value="${birthDate}" id="birthDate" name="birthDate" autocomplete="off"><br>
+								</div><hr>
+							</c:when>
+							<c:when test="${member.memberType eq 'O'}">
+								<div>
+									<label>統一編號 :</label> 
+									<input type="text" value="${member.certificateIdNumber}" id="certificateIdNumber" name="certificateIdNumber"><br>
+								</div><hr>
+								<div>
+									<label>創立日期:</label> 
+									<input type="text" value="${birthDate}" id="birthDate" name="birthDate" autocomplete="off"><br>
+								</div><hr>
+							</c:when>
+						</c:choose>
+						<div>
+							<label>email:</label> 
+							<input type="text" value="${member.email}" id="email" name="email"><br>
+						</div><hr>
+						<div>
+							<label>住家電話:</label> 
+							<input type="text" value="${member.telephone}" id="telephone" name="telephone"><br>
+						</div><hr>
+						<div>
+							<label>手機:</label> 
+							<input type="text" value="${member.mobile}" id="mobile" name="mobile"><br>
+						</div><hr>
+						<div>			
+							<label>住址:</label>
+							<span role="tw-city-selector"></span>
+							<input type="text" value="${member.address}" id="address" name="address"><br>
+						</div><hr>
+						<div>
+							<fmt:formatDate value="${member.signUpDate}" pattern="yyyy/MM/dd" var="signUpDate" />
+							<label>註冊日期:</label> 
+							<input type="text" value="${signUpDate}" id="signUpDate" name="signUpDate" autocomplete="off"><br>
+						</div><hr>
 					</fieldset>
-				</c:if>
-				<fieldset style="border:none">
-					<div>
-						<input type="button" class="btn btn-primary btn-sm" id="updateButt" value="儲存"> 
-					</div>
-				</fieldset>
-		</form>
-	</article>
+					<fieldset>
+					<legend>驗證資訊</legend>
+						<div>
+							<label>Email驗證信確認(Y/N):</label>
+							<label>Y</label> 
+							<input type="radio" value="Y" name="emailVerification">
+							<label>N</label> 
+							<input type="radio" value="N" name="emailVerification"><br>
+						</div><hr>
+						<c:if test="${member.memberType eq 'O' }">
+							<div>
+								<label>機構身分驗證 (Y/N): </label>
+									<label>Y</label> 
+									<input type="radio" value="Y" name="orgIdConfirmation">
+									<label>N</label> 
+									<input type="radio" value="N" name="orgIdConfirmation"><br>								
+							</div><hr>
+						</c:if>	
+					</fieldset>
+						<c:if test="${member.memberType eq 'O' }">
+						<fieldset>	
+						<legend>其他資訊</legend>
+							<div >
+								<label>創辦人:</label> 
+								<input type="text" value="${member.orgFounder}" id="orgFounder" name="orgFounder"><br>
+							</div><hr>
+							<div>
+								<label>執行長:</label>
+								<input type="text" value="${member.orgCeo}" id="orgCeo" name="orgCeo"><br>
+							</div><hr>
+							<div>
+								<label>聯絡人:</label>
+								<input type="text" value="${member.orgContactPerson}" id="orgContactPerson" name="orgContactPerson"><br>
+							</div><hr>
+							<div>
+								<label>聯絡人電話:</label> 
+								<input type="text" value="${member.orgContactPersonTel}" id="orgContactPersonTel" name="orgContactPersonTel"><br>
+							</div><hr>
+							<div>
+								<label>聯絡人手機:</label>
+								<input type="text" value="${member.orgContactPersonMobile}" id="orgContactPersonMobile" name="orgContactPersonMobile"><br>
+							</div><hr>
+							<div>
+								<label>網址:</label>
+								<input type="url" size="50px" value="${member.orgWebsiteLink}" id="orgWebsiteLink" name="orgWebsiteLink"><br>
+							</div><hr>
+							<div>
+								<label>創立宗旨:</label>
+								<textarea rows="5" cols="50" id="orgFoundPurpose" name="orgFoundPurpose">
+									${member.orgFoundPurpose}
+								</textarea><br>
+							</div><hr>
+							</fieldset>
+						</c:if>
+						<fieldset style="border:none">
+							<div>
+								<input type="button" class="btn btn-primary btn-sm" id="updateButt" value="儲存"> 
+							</div>
+						</fieldset>
+				</form>
+			</article>
+          </div>
+        </div>
+	
 	
  	<script>
 		$(document).ready(function() {
