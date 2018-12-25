@@ -30,7 +30,6 @@ import team.lala.timebank.spec.MemberSpecification;
 import team.lala.timebank.spec.MissionSpecification;
 import team.lala.timebank.spec.OrderSpecification;
 
-
 @Slf4j
 @Controller
 @RequestMapping("/admin/mission")
@@ -38,10 +37,9 @@ public class AdminMissionController {
 
 	@Autowired
 	private MissionService missionService;
-	
+
 	@Autowired
 	private ServiceTypeService serviceTypeService;
-	
 
 	@RequestMapping("/list")
 	public String listPage(Model model) {
@@ -51,7 +49,7 @@ public class AdminMissionController {
 
 	@RequestMapping("/add")
 	public String addPage(Model model) {
-		List<ServiceType> serviceType=serviceTypeService.findAll();	
+		List<ServiceType> serviceType = serviceTypeService.findAll();
 		model.addAttribute("serviceType", serviceType);
 		return "/admin/mission/mission_add";
 	}
@@ -59,10 +57,10 @@ public class AdminMissionController {
 	@RequestMapping("/edit")
 	public String editPage(@RequestParam("id") Long id, Model model) {
 		Mission mission = missionService.getOne(id);
-		List<ServiceType> serviceType=serviceTypeService.findAll();		
+		List<ServiceType> serviceType = serviceTypeService.findAll();
 		model.addAttribute("mission", mission);
 		model.addAttribute("serviceType", serviceType);
-		
+
 		return "/admin/mission/mission_edit";
 	}
 
@@ -87,13 +85,7 @@ public class AdminMissionController {
 	@ResponseBody
 	public AjaxResponse<Mission> update(Mission mission) {
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
-		
-		// Requests r =requestsService.getOne(requests.getId());
-		// r.setJobArea(requests.getJobArea());
-		// r.setJobTitle(requests.getJobTitle());
-		// r.setServiceType(requests.getServiceType());
-		// r.setTermType(requests.getTermType());
-		// r.setTimeValue(requests.getTimeValue());
+
 		try {
 			missionService.update(mission);
 			response.setObj(mission);
@@ -129,14 +121,17 @@ public class AdminMissionController {
 		System.out.println(mission);
 		return mission;
 	}
+
 	@RequestMapping("/querypage")
 	@ResponseBody
-	public Page<Mission> query(Mission inputMission,@RequestParam(value="start",required=false) Optional<Integer> start, 
-			@RequestParam(value="length",required=false) Optional<Integer> length) {
-		int page = start.orElse(0)/length.orElse(10);
-		MissionSpecification missionSpec = new MissionSpecification(inputMission);	
-		Page<Mission> missions = missionService.findBySpecification(missionSpec,PageRequest.of(page, length.orElse(10)));
-		
+	public Page<Mission> query(Mission inputMission,
+			@RequestParam(value = "start", required = false) Optional<Integer> start,
+			@RequestParam(value = "length", required = false) Optional<Integer> length) {
+		int page = start.orElse(0) / length.orElse(10);
+		MissionSpecification missionSpec = new MissionSpecification(inputMission);
+		Page<Mission> missions = missionService.findBySpecification(missionSpec,
+				PageRequest.of(page, length.orElse(10)));
+
 		return missions;
 	}
 
