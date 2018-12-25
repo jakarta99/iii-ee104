@@ -35,10 +35,10 @@ public class Order{
 	
 	@ManyToOne
 //	@JsonBackReference 
-	@JoinColumn(name="status",    
+	@JoinColumn(name="ORDERSTATUS",    
 				referencedColumnName="id",  
 				insertable=true, updatable=true)
-	private OrderStatus status;
+	private OrderStatus orderStatus;
 	
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm" )
 	@Column(name="VOLUNTEER_APPLY_TIME")
@@ -58,9 +58,10 @@ public class Order{
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", volunteerId=" + volunteerId + ", serviceRequesterId=" + serviceRequesterId
-				+ ", status=" + status + ", volunteerApplyTime=" + volunteerApplyTime + ", orderAcceptTime="
+				+ ", orderStatus=" + orderStatus + ", volunteerApplyTime=" + volunteerApplyTime + ", orderAcceptTime="
 				+ orderAcceptTime + ", mission=" + mission + "]";
 	}
+
 
 
 }
