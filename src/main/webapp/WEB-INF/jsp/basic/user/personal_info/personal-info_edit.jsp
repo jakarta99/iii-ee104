@@ -151,7 +151,7 @@
 					</fieldset>
 					<c:if test="${member.memberType eq 'O' }">
 						<fieldset>	
-							<legend>其他資訊</legend>
+							<legend>公司資料</legend>
 							<div >
 								<label>創辦人:</label> 
 								<input type="text" value="${member.orgFounder}" id="orgFounder" name="orgFounder"><br>
