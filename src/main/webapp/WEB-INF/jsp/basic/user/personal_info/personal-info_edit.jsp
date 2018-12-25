@@ -59,6 +59,7 @@
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
+	<section class="bar">
 	<div class="container">
     	<div class="row">
             <!-- Sidebar -->
@@ -66,9 +67,9 @@
             <article>
 				<h2 class=center>個人資訊</h2>
 				<div class=center>您在 TimeBank中使用的基本資訊</div>
-				<form action="#" method="post">
+				<form action="/user/personalInfo/edit" method="post">
 					<fieldset>
-					<legend>個人資料</legend>
+						<legend>個人資料</legend>
 						<input type="hidden" value="${member.id}" id="id" name="id" /> 
 						<input type="hidden" value="${member.memberType}" id="memberType" name="memberType" />
 						<div>
@@ -130,7 +131,7 @@
 						</div>
 					</fieldset>
 					<fieldset>
-					<legend>驗證資訊</legend>
+						<legend>驗證資訊</legend>
 						<div>
 							<label>Email驗證信確認(Y/N):</label>
 							<label>Y</label> 
@@ -148,9 +149,9 @@
 							</div>
 						</c:if>	
 					</fieldset>
-						<c:if test="${member.memberType eq 'O' }">
+					<c:if test="${member.memberType eq 'O' }">
 						<fieldset>	
-						<legend>其他資訊</legend>
+							<legend>其他資訊</legend>
 							<div >
 								<label>創辦人:</label> 
 								<input type="text" value="${member.orgFounder}" id="orgFounder" name="orgFounder"><br>
@@ -181,8 +182,8 @@
 									${member.orgFoundPurpose}
 								</textarea><br>
 							</div>
-							</fieldset>
-						</c:if>
+						</fieldset>
+					</c:if>
 						<fieldset style="border:none">
 							<div>
 								<input type="button" class="btn btn-primary btn-sm" id="updateButt" value="儲存"> 
@@ -190,10 +191,11 @@
 						</fieldset>
 				</form>
 			</article>
-          </div>
-        </div>
-	
-	
+		</div>
+	</div>
+	</section>
+	<!-- FOOTER -->
+	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
  	<script>
 		$(document).ready(function() {
 // 			$("form div").addClass("form-group");
@@ -239,9 +241,5 @@
 			})
 		})
 	</script>
-	<!-- FOOTER -->
-	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
-	<!-- Javascript files-->
-	<jsp:include page="../../commons/commons_layout/commons_js_links.jsp"/>
 </body>
 </html>
