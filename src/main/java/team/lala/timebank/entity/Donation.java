@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.BatchSize;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
@@ -31,6 +32,7 @@ public class Donation {
 	private Member memberId;
 
 	@ManyToOne
+	@BatchSize(size=30)
 	@JoinColumn(name="organization_id",    
 			referencedColumnName="id") 
 	private Member organizationId;

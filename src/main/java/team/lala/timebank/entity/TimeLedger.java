@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.BatchSize;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
@@ -38,6 +39,7 @@ public class TimeLedger {
 	private Long id;
 	
 	@ManyToOne
+//	@BatchSize(size=30)
 	@JoinColumn(name="member_Id",    
 			referencedColumnName="id") 
 	private Member memberId;

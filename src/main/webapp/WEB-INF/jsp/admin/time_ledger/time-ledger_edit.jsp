@@ -56,7 +56,7 @@ fieldset {
 					class="form-control" />
 			</div>
 			<div class="form-group">
-				memberId: <input type="text" value="${timeLedger.memberId}"
+				memberId: <input type="text" value="${timeLedger.memberId.account}"
 					id="memberId" name="memberId" class="form-control" readonly/>
 			</div>
 			<!-- 			<div class="form-group"> transactionTime:-->
