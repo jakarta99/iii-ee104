@@ -15,7 +15,6 @@ import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.MissionDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
-import team.lala.timebank.web.user.RecruitFinishController;
 @Slf4j
 @Service
 public class MissionService {
@@ -35,9 +34,7 @@ public class MissionService {
 
 	// insert
 	public Mission insert(Mission mission) {
-		System.out.println(mission.getId());
-		System.out.println(mission.getStartDate().getClass());
-		System.out.println(mission.getStartDate());
+		
 		mission.setStartDate(mission.getStartDate());
 		mission.setEndDate(mission.getEndDate());
 		mission.setPublishDate(new Date());
@@ -84,16 +81,8 @@ public class MissionService {
 		return missionList;
 
 	}
-	//取得member所有mission
-	public List<Mission> findByMemberAccount(Principal principal) {
-		
-		//loginAccount取得member.getid取得mission list
-		List<Mission> missionList = missionDao.findByMemberId(memberDao.findByAccount(principal.getName()).getId());
-
-		return missionList;
-
-	}
-	public Mission setMemberId(Principal principal,Mission mission) {
+	
+	public Mission findByAccount(Principal principal,Mission mission) {
 		
 		mission.setMemberId(memberDao.findByAccount(principal.getName()).getId());
 		return mission;
