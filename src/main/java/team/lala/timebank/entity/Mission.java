@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,10 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.Mapping;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -55,7 +52,8 @@ public class Mission {
 	@JoinColumn(name = "SERVICE_TYPE", referencedColumnName = "id")
 	private ServiceType serviceType;
 
-	@JsonManagedReference
+//	@JsonManagedReference
+	@JsonIgnoreProperties("mission")
 	@OneToMany(mappedBy = "mission", cascade = { CascadeType.REMOVE })
 	private Set<Order> orders;
 

@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -48,7 +48,8 @@ public class Order{
 	private Date orderAcceptTime;
 	
 	@ManyToOne
-	@JsonBackReference 
+//	@JsonBackReference 
+	@JsonIgnoreProperties("orders")
 	@JoinColumn(name="mission",    
 				referencedColumnName="id",  
 				insertable=true, updatable=true) 
