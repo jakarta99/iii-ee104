@@ -74,7 +74,20 @@ public class RecruitController {
 		}
 		return response;
 	}
-
+	//進行中
+	@RequestMapping("/recruiting")
+	@ResponseBody
+	public Page<Mission> Recruiting(Mission inputMission, Principal principal,
+			@RequestParam(value = "start", required = false) Optional<Integer> start,
+			@RequestParam(value = "length", required = false) Optional<Integer> length) {
+		int page = start.orElse(0) / length.orElse(10);
+		
+		MissionSpecification missionSpec = new MissionSpecification(
+				missionService.findByAccount(principal, inputMission));
+		Page<Mission> missions = missionService.findBySpecification(missionSpec,
+				PageRequest.of(page, length.orElse(10)));
+		return missions;
+	}
 
 
 }
