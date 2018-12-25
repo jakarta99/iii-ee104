@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -38,6 +39,9 @@ public class Mission {
 	@JoinColumn(name = "MEMBER_ID", referencedColumnName = "id")
 	private Member member; // 刊登者
 	
+	@Transient
+	private String memberAccount;
+	
 	
 
 	@Column(name = "TITLE", nullable = false, length = 50)
@@ -53,6 +57,9 @@ public class Mission {
 	@ManyToOne
 	@JoinColumn(name = "SERVICE_TYPE", referencedColumnName = "id")
 	private ServiceType serviceType;
+	
+	@Transient
+	private String serviceTypeDetail;
 
 //	@JsonManagedReference
 	@JsonIgnoreProperties("mission")
@@ -103,20 +110,25 @@ public class Mission {
 	// @JsonBackReference
 	@JoinColumn(name = "MISSION_STATUS", referencedColumnName = "id", insertable = true, updatable = true)
 	private MissionStatus status;
+	
+	@Transient
+	private String statusDetail;
 
 	@Column(name = "APPROVED_QUANTITY", nullable = false)
 	private Integer approvedQuantity;
 
 	@Override
 	public String toString() {
-		return "Mission [id=" + id + ", member=" + member + ", title=" + title + ", timeValue=" + timeValue
-				+ ", termType=" + termType + ", serviceType=" + serviceType + ", orders=" + orders + ", publishDate="
-				+ publishDate + ", deadline=" + deadline + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", peopleNeeded=" + peopleNeeded + ", contactPerson=" + contactPerson + ", contactPhone="
-				+ contactPhone + ", contactEmail=" + contactEmail + ", discription=" + discription + ", county="
-				+ county + ", district=" + district + ", address=" + address + ", status=" + status
-				+ ", approvedQuantity=" + approvedQuantity + "]";
+		return "Mission [id=" + id + ", member=" + member + ", memberAccount=" + memberAccount + ", title=" + title
+				+ ", timeValue=" + timeValue + ", termType=" + termType + ", serviceType=" + serviceType
+				+ ", serviceTypeDetail=" + serviceTypeDetail + ", orders=" + orders + ", publishDate=" + publishDate
+				+ ", deadline=" + deadline + ", startDate=" + startDate + ", endDate=" + endDate + ", peopleNeeded="
+				+ peopleNeeded + ", contactPerson=" + contactPerson + ", contactPhone=" + contactPhone
+				+ ", contactEmail=" + contactEmail + ", discription=" + discription + ", county=" + county
+				+ ", district=" + district + ", address=" + address + ", status=" + status + ", statusDetail="
+				+ statusDetail + ", approvedQuantity=" + approvedQuantity + "]";
 	}
 
+	
 
 }

@@ -6,13 +6,18 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
+import team.lala.timebank.entity.Donation;
+import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
+import team.lala.timebank.entity.MissionStatus;
 import team.lala.timebank.enums.TermType;
 
 @SuppressWarnings("serial")
@@ -27,14 +32,15 @@ public class MissionSpecification implements Specification<Mission> {
 	@Override
 	public Predicate toPredicate(Root<Mission> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 		List<Predicate> list = new ArrayList<Predicate>();
-
-		if (!StringUtils.isEmpty(inputMission.getStatus())) {
-			list.add(criteriaBuilder.equal(root.get("status").as(Integer.class), inputMission.getStatus()));
+		
+		if (!StringUtils.isEmpty(inputMission.getMemberAccount())) {
+			Join<Member, Mission> join = root.join("member", JoinType.LEFT);
+			list.add(criteriaBuilder.equal(join.get("account"), inputMission.getMemberAccount()));
 		}
 
-		if (!StringUtils.isEmpty(inputMission.getMember())) {
-			list.add(criteriaBuilder.equal(root.get("memberId").as(Long.class), inputMission.getMember()));
-		}
+//		if (!StringUtils.isEmpty(inputMission.getMember())) {
+//			list.add(criteriaBuilder.equal(root.get("memberId").as(Long.class), inputMission.getMember()));
+//		}
 
 		if (!StringUtils.isEmpty(inputMission.getCounty())) {
 			list.add(criteriaBuilder.equal(root.get("county").as(String.class), inputMission.getCounty()));

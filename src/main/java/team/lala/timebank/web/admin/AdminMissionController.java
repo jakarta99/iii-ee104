@@ -127,6 +127,8 @@ public class AdminMissionController {
 	public Page<Mission> query(Mission inputMission,
 			@RequestParam(value = "start", required = false) Optional<Integer> start,
 			@RequestParam(value = "length", required = false) Optional<Integer> length) {
+		
+		log.debug("inputMission={}",inputMission);
 		int page = start.orElse(0) / length.orElse(10);
 		MissionSpecification missionSpec = new MissionSpecification(inputMission);
 		Page<Mission> missions = missionService.findBySpecification(missionSpec,

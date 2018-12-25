@@ -95,10 +95,16 @@
 			<label>會員類型 :</label> 
 				<select  id="serviceType" name="serviceType">
 					<option value="">選擇服務類型</option>
-					<option value="1">照顧老人</option>
-			        <option value="2">孩童教育</option>
-			        <option value="3">環境清潔</option>
-			        <option value="4">生態保育</option>	
+					<option value="1">婦幼關懷</option>
+			        <option value="2">身心障礙</option>
+			        <option value="3">老人服務</option>
+			        <option value="4">社會服務</option>
+			        <option value="5">動物保護</option>
+			        <option value="6">國際救援</option>
+			        <option value="7">環境保護</option>
+			        <option value="8">文教藝術</option>
+			        <option value="9">醫療服務</option>
+			        <option value="10">宗教信仰</option>
 				</select>
 				
 			<label>長短期 :</label> 
@@ -107,6 +113,15 @@
 					<option value="L">長期</option>
 			        <option value="S">短期</option>
 				</select>
+				
+			<label>狀態:</label> 
+				<select  id="status" name="status">
+					<option value="">選擇狀態</option>
+					<option value="1">1</option>
+			        <option value="2">2</option>
+			        <option value="3">3</option>
+			        <option value="4">4</option>
+				</select>	
 				
 			<label>startDate:</label>
 			<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
@@ -128,6 +143,9 @@
 			
 			<label>jobTitle :</label> 
 			<input type="text" value="" placeholder="jobTitle" id="jobTitle" name="jobTitle"/>
+			
+			<label>memberAccount :</label> 
+			<input type="text" value="" placeholder="memberAccount" id="memberAccount" name="memberAccount"/>
 			
 			
 			</div>
@@ -268,7 +286,7 @@
 							 return editbutton + deletebutton;}
 						},					 
 						{"data":"id"},
-						{"data":"member.name"},
+						{"data":"member.account"},
 						{"data":"title"},
 						{"data":"timeValue"},
 						{"data":"termType"},
