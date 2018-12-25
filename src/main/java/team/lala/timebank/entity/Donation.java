@@ -30,12 +30,18 @@ public class Donation {
 	@JoinColumn(name="DONATOR_ID",    
 			referencedColumnName="id") 
 	private Member donator;
+	
+	@Transient
+	private String donatorAccount;
 
 	@ManyToOne
-	@BatchSize(size=30)
 	@JoinColumn(name="ORG_DONEE_ID",    
 			referencedColumnName="id") 
 	private Member orgDonee; //被捐贈者
+	
+	@Transient
+	private String orgDoneeAccount;
+
 
 	@Column(name = "DONATE_VALUE")
 	private Integer value;
@@ -55,10 +61,11 @@ public class Donation {
 
 	@Override
 	public String toString() {
-		return "Donation [id=" + id + ", donator=" + donator + ", orgDonee=" + orgDonee + ", value=" + value
-				+ ", donateTime=" + donateTime + ", donateTimeBegin=" + donateTimeBegin + ", donateTimeEnd="
-				+ donateTimeEnd + "]";
+		return "Donation [id=" + id + ", donator=" + donator + ", donatorAccount=" + donatorAccount + ", orgDonee="
+				+ orgDonee + ", orgDoneeAccount=" + orgDoneeAccount + ", value=" + value + ", donateTime=" + donateTime
+				+ ", donateTimeBegin=" + donateTimeBegin + ", donateTimeEnd=" + donateTimeEnd + "]";
 	}
+
 
 
 

@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Donation;
 import team.lala.timebank.service.DonationService;
 import team.lala.timebank.spec.DonationSpecification;
-
+@Slf4j
 @Controller
 @RequestMapping("/admin/donation")
 public class AdminDonationController {
@@ -92,7 +93,7 @@ public class AdminDonationController {
 			@RequestParam(name = "length", required = false) Optional<Integer> length) {
 		//required 設為false會傳回null
 		int page = start.orElse(0) / length.orElse(10);	
-
+		log.debug("inputDonation={}, start={},length={}" , inputDonation, start, length);
 		DonationSpecification donationSpecification = new DonationSpecification(inputDonation);
 		Page<Donation> donations = donationService.findBySpecification(donationSpecification,
 				PageRequest.of(page, length.orElse(10)));
