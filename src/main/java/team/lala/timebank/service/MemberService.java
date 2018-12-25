@@ -66,6 +66,10 @@ public class MemberService {
 			dbMember.setEmailVerification(member.getEmailVerification());
 			dbMember.setBirthDate(member.getBirthDate());
 			dbMember.setCertificateIdNumber(member.getCertificateIdNumber());
+			dbMember.setBalanceValue(member.getBalanceValue());
+			dbMember.setSumScore(member.getSumScore());
+			dbMember.setScoredTimes(member.getScoredTimes());
+			dbMember.setAverageScore(member.getAverageScore());
 			
 			if (dbMember.getMemberType() == MemberType.O) {
 				dbMember.setOrgCeo(member.getOrgCeo());

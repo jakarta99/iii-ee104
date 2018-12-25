@@ -71,7 +71,23 @@ public class MemberSpecification implements Specification<Member> {
 		if (!StringUtils.isEmpty(inputMember.getSignUpDateEnd())) {
 			list.add(cb.lessThanOrEqualTo(root.get("signUpDate").as(Date.class), inputMember.getSignUpDateEnd()));					
 		}
-			
+		
+		if(!StringUtils.isEmpty(inputMember.getBalanceValue())) {
+			list.add(cb.equal(root.get("balanceValue").as(Integer.class), inputMember.getBalanceValue()));
+		}
+		
+		if(!StringUtils.isEmpty(inputMember.getSumScore())) {
+			list.add(cb.equal(root.get("sumScore").as(Integer.class), inputMember.getSumScore()));
+		}
+		
+		if(!StringUtils.isEmpty(inputMember.getScoredTimes())) {
+			list.add(cb.equal(root.get("scoredTimes").as(Integer.class), inputMember.getScoredTimes()));
+		}
+		
+		if(!StringUtils.isEmpty(inputMember.getAverageScore())) {
+			list.add(cb.equal(root.get("averageScore").as(Integer.class), inputMember.getAverageScore()));
+		}
+		
         Predicate[] p = new Predicate[list.size()];  
 
         return cb.and(list.toArray(p));  
