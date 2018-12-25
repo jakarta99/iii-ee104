@@ -33,8 +33,12 @@ public class Order{
 	@Column(name="SERVICE_REQUESTER_ID")
 	private Long serviceRequesterId;
 	
-	@Column(name="STATUS")
-	private String status;
+	@ManyToOne
+//	@JsonBackReference 
+	@JoinColumn(name="status",    
+				referencedColumnName="id",  
+				insertable=true, updatable=true)
+	private OrderStatus status;
 	
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm" )
 	@Column(name="VOLUNTEER_APPLY_TIME")

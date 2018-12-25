@@ -134,15 +134,17 @@
 			<label>jobTitle :</label> 
 			<input type="text" value="" placeholder="jobTitle" id="jobTitle" name="jobTitle"/>
 			
-			
+			<label>status :</label> 
+			<input type="text" value="" placeholder="status" id="status" name="status"/>
 			</div>
 		</form>
 	</fieldset>
 	
 	<fieldset>
-	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/user/volunteerRecruitment/add'">進行中</button>
-	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/user/volunteerRecruitment/add'">時數代核發</button>
-	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/user/volunteerRecruitment/add'">歷史紀錄</button>
+	
+	<button class="btn btn-outline-secondary" id="status1Butt" >進行中</button>
+	<button class="btn btn-outline-secondary" id="status23Butt" >時數代核發</button>
+	<button class="btn btn-outline-secondary" id="status4Butt" >歷史紀錄</button>
 	<table id="table" class="table table-hover">
 	<thead>
 	<tr>
@@ -168,8 +170,27 @@
 	
 	var dataTable;
 	
- 	$("#searchButt").click(	function(){
+ 	$("#searchButt").click(function(){
+		
+ 		dataTable.ajax.reload();
+	})
+	
+	$("#status1Butt").click(function(){
+		$("#status").val(1);
 		dataTable.ajax.reload();
+		$("#status").val();
+	})
+	
+	$("#status23Butt").click(function(){
+		$("#status").val(2);
+		dataTable.ajax.reload();
+		$("#status").val();
+	})
+	
+	$("#status4Butt").click(function(){
+		$("#status").val(4);
+		dataTable.ajax.reload();
+		$("#status").val();
 	})
 	
 	
@@ -234,7 +255,6 @@
 					url:"/user/volunteerRecruitment/query",
 					type: "get",
 				    dataType : "json",
-// 	 			    "data":$("form").serialize(),
 				    data: function(d){
 		            	console.log(d);
 		            	var start = d.start;
@@ -245,21 +265,12 @@
 
 				    dataSrc:"content",
 				    dataFilter: function(resp){
-// 		            	console.log(resp)
 		                var json = jQuery.parseJSON( resp );
 		                json.recordsTotal = json.totalElements;
 		                json.recordsFiltered = json.totalElements;	     			
-// 		     			console.log(JSON.stringify( json ))
 		                return JSON.stringify( json ); 
 		            	},
 					},
-// 					 drawCallback: function (d) {
-// 		 		        	//console.log(d)
-// 				        	  var api = this.api();
-// 				        	  var pageNum = parseInt(d.json.pageable.pageNumber) ;
-// 				        	  var totalPages = d.json.totalPages;
-// 				        	  $('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
-// 				       },
 					columns:[						
 						{"data": function (data, type, val) {
 							 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerRecruitment/edit?id="+data.id+"'\">Edit</button>";     
@@ -293,27 +304,6 @@
 					
 					
 				});		
-			
-		
-// 			dataTable.on('draw.dt',function() {
-// 				dataTable.column(0, {
-// 	                search: 'applied',
-// 	                order: 'applied'
-// 	            }).nodes().each(function(cell, i) {
-// 	                //i從0開始，所以先加1
-// 	                i = i+1;
-// 	                //服務模式下，使用DT提供的API直接獲取分頁資訊
-// 	                var pageinfo = dataTable.page.info();
-// 	                //當前第幾頁，從0开始
-// 	                var pageno = pageinfo.page;
-// 	                //每頁數據
-// 	                var length = pageinfo.length;
-// 	                //行號等於頁數*每頁數據長度+行號
-// 	                var columnIndex = (i+pageno*length);
-// 	                cell.innerHTML = columnIndex;
-// 	            });
-// 	        });
-		
 		
 		
 	});

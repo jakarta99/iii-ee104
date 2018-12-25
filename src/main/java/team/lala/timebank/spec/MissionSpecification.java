@@ -27,15 +27,20 @@ public class MissionSpecification implements Specification<Mission> {
 	@Override
 	public Predicate toPredicate(Root<Mission> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 		List<Predicate> list = new ArrayList<Predicate>();
-		
+
 		if (!StringUtils.isEmpty(inputMission.getStatus())) {
-			list.add(criteriaBuilder.equal(root.get("status").as(Integer.class), inputMission.getStatus()));
+			if (inputMission.getStatus() == 3 || inputMission.getStatus() == 4) {
+
+				list.add(criteriaBuilder.equal(root.get("status").as(Integer.class), inputMission.getStatus()));
+			}
+			if(inputMission.getStatus() == 2)
+			list.add(criteriaBuilder.lessThanOrEqualTo(root.get("status").as(Integer.class), inputMission.getStatus()));
 		}
-		
+
 		if (!StringUtils.isEmpty(inputMission.getMemberId())) {
 			list.add(criteriaBuilder.equal(root.get("memberId").as(Long.class), inputMission.getMemberId()));
 		}
-	
+
 		if (!StringUtils.isEmpty(inputMission.getCounty())) {
 			list.add(criteriaBuilder.equal(root.get("county").as(String.class), inputMission.getCounty()));
 		}
