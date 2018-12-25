@@ -24,8 +24,6 @@ public class MissionService {
 	private MissionDao missionDao;
 	@Autowired
 	private MemberDao memberDao;
-	@Autowired
-	private MissionStatus missionStatus;
 
 	public List<Mission> findBySpecification(Specification<Mission> specification) {
 		return missionDao.findAll(specification);
@@ -49,12 +47,11 @@ public class MissionService {
 		Member member = memberDao.findByAccount(principal.getName());
 		log.debug("member.getId()={}",member.getId());
 		mission.setMemberId(member.getId());
-		missionStatus.setId(1L);
 		log.debug("mission.memberid={}",mission.getMemberId());
 		mission.setStartDate(mission.getStartDate());
 		mission.setEndDate(mission.getEndDate());
 		mission.setPublishDate(new Date());
-		mission.setStatus(missionStatus);
+		mission.setStatus(1);
 
 		return missionDao.save(mission);
 	}

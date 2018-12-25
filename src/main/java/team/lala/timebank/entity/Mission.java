@@ -27,104 +27,94 @@ import lombok.Getter;
 import lombok.Setter;
 import team.lala.timebank.enums.TermType;
 
-
 @Getter
 @Setter
 @Entity
-@Table(name = "mission")
+@Table(name = "MISSION")
 public class Mission {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "member_Id", nullable = false)
+	@Column(name = "MEMBER_ID", nullable = false)
 	private Long memberId; // 刊登者
 
-	@Column(name = "title", nullable = false, length = 50)
+	@Column(name = "TITLE", nullable = false, length = 50)
 	private String title;// 活動名稱
 
-	@Column(name = "time_Value", nullable = false)
+	@Column(name = "TIME_VALUE", nullable = false)
 	private Integer timeValue;// 可獲得時數(工作的時間)
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "term_Type", nullable = false)
+	@Column(name = "TERM_TYPE", nullable = false)
 	private TermType termType;// 長短期
 
-//	@Column(name = "service_Type", nullable = false)
-//	private Integer serviceType;// 服務類型
-	
 	@ManyToOne
-	@JoinColumn(name="service_Type",    
-				referencedColumnName="id") 
+	@JoinColumn(name = "SERVICE_TYPE", referencedColumnName = "id")
 	private ServiceType serviceType;
-	
+
 	@JsonManagedReference
-	@OneToMany(
-			mappedBy ="mission",
-			cascade = {CascadeType.REMOVE}
-			)
+	@OneToMany(mappedBy = "mission", cascade = { CascadeType.REMOVE })
 	private Set<Order> orders;
-	
+
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	@Column(name = "publish_Date", nullable = false)
+	@Column(name = "PUBLISH_DATE", nullable = false)
 	private Date publishDate;
 
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm" )
-	@Column(name = "start_Date")
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@Column(name = "DEADLINE", nullable = false)
+	private Date deadline;
+
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+	@Column(name = "START_DATE")
 	private Date startDate;// 工作開始時間
 
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm" )
-	@Column(name = "end_Date")
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+	@Column(name = "END_DATE")
 	private Date endDate;// 工作開始時間
 
-	@Column(name = "people_Needed", nullable = false)
+	@Column(name = "PEOPLE_NEEDED", nullable = false)
 	private Integer peopleNeeded;
 
-	@Column(name = "contact_Person", nullable = false, length = 20)
+	@Column(name = "CONTACT_PERSON", nullable = false, length = 20)
 	private String contactPerson;
 
-	@Column(name = "contact_Phone", nullable = false, length = 20)
+	@Column(name = "CONTACT_PHONE", nullable = false, length = 20)
 	private String contactPhone;
 
-	@Column(name = "contact_Email", nullable = false, length = 20)
+	@Column(name = "CONTACT_EMAIL", nullable = false, length = 20)
 	private String contactEmail;
 
-	@Column(name = "discription", nullable = false, length = 300)
+	@Column(name = "DISCRIPTION", nullable = false, length = 300)
 	private String discription;
 
-	@Column(name = "county", nullable = false)
+	@Column(name = "COUNTY", nullable = false)
 	private String county;
 
-	@Column(name = "district", nullable = false)
+	@Column(name = "DISTRICT", nullable = false)
 	private String district;
 
-	@Column(name = "address", nullable = false)
+	@Column(name = "ADDRESS", nullable = false)
 	private String address;
-	
-	
+
 	@ManyToOne
-//	@JsonBackReference 
-	@JoinColumn(name="Mission_Status",    
-				referencedColumnName="id",  
-				insertable=true, updatable=true)
+	// @JsonBackReference
+	@JoinColumn(name = "MISSION_STATUS", referencedColumnName = "id", insertable = true, updatable = true)
 	private MissionStatus status;
+
+	@Column(name = "APPROVED_QUANTITY", nullable = false)
+	private Integer approvedQuantity;
 
 	@Override
 	public String toString() {
 		return "Mission [id=" + id + ", memberId=" + memberId + ", title=" + title + ", timeValue=" + timeValue
-				+ ", termType=" + termType + ", serviceType=" + serviceType + ", publishDate=" + publishDate
-				+ ", startDate=" + startDate + ", endDate=" + endDate + ", peopleNeeded=" + peopleNeeded
-				+ ", contactPerson=" + contactPerson + ", contactPhone=" + contactPhone + ", contactEmail="
-				+ contactEmail + ", discription=" + discription + ", county=" + county + ", district=" + district
-				+ ", address=" + address + ", status=" + status + "]";
+				+ ", termType=" + termType + ", serviceType=" + serviceType + ", orders=" + orders + ", publishDate="
+				+ publishDate + ", deadline=" + deadline + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", peopleNeeded=" + peopleNeeded + ", contactPerson=" + contactPerson + ", contactPhone="
+				+ contactPhone + ", contactEmail=" + contactEmail + ", discription=" + discription + ", county="
+				+ county + ", district=" + district + ", address=" + address + ", status=" + status
+				+ ", approvedQuantity=" + approvedQuantity + "]";
 	}
 
-	
-
-	
-	
-	
-	
-	
 }
