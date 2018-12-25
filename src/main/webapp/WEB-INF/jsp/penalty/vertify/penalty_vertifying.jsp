@@ -75,7 +75,6 @@
 			<a id="proofPic" href="/penaltyProoves/${penalty.proofPicName}" target="_blank">佐證資料檢視</a><p>
 			<!-- Server存取圖片路徑設定方式詳見WebConfig.java -->
 		</div>
-
 		
 		審核結果 (審核中&無須懲罰案件的懲罰時數一律為0，且不得更改):
 		<select class="form-control" id="status" name="status">
@@ -84,9 +83,12 @@
 			<option value=3>無需懲罰</option>
 		</select><p>
 		
-		penaltyTimeValue (如果需懲罰，時數小於等於0，會跳出alert):
+		懲罰時數 (如果需懲罰，時數小於等於0，會跳出alert):
 		<input type="text" id="penaltyTimeValue" name="penaltyTimeValue"
 					class="form-control" value="${penalty.penaltyTimeValue}" readonly/>
+		
+		審核意見、原因:<p>
+		<textarea  id="vertifyReason" name="vertifyReason" cols="50" rows="5" value="${penalty.vertifyReason}"></textarea><p>
 			
 		<input type="button" class="btn btn-primary" id="vertify" value="完成審核">
 	</form>

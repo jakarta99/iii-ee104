@@ -24,8 +24,8 @@
 </head>
 <body>
 
-	<h1 style="padding-top: 2cm">第二步、上傳佐證資料</h1>
-		<h3>確認第一步填寫資料</h3>
+	<h1 style="padding-top: 2cm">第二步、是否上傳佐證資料</h1>
+		<h3>您填寫之檢舉資料如下：</h3>
 		<table border='1'>
 			<tr>
 				<td>媒合案件編號(Order.id)</td>

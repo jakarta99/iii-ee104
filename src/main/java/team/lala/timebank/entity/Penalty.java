@@ -67,6 +67,9 @@ public class Penalty {
 	@Column(name = "proof_pic_name")
 	private String proofPicName;
 	
+	@Column(name = "vertify_reason")
+	private String vertifyReason;
+	
 	@Transient
 	@DateTimeFormat(pattern = "yyyy/MM/dd") //不進資料庫，用於查詢時間區間
 	private Date dateBefore;
@@ -79,9 +82,10 @@ public class Penalty {
 	public String toString() {
 		return "Penalty [id=" + id + ", order=" + order + ", accuser=" + accuser + ", defendant=" + defendant
 				+ ", updateDate=" + updateDate + ", description=" + description + ", status=" + status
-				+ ", penaltyTimeValue=" + penaltyTimeValue + ", dateBefore=" + dateBefore + ", dateAfter=" + dateAfter
-				+ "]";
+				+ ", penaltyTimeValue=" + penaltyTimeValue + ", proofPicName=" + proofPicName + ", vertifyReason="
+				+ vertifyReason + ", dateBefore=" + dateBefore + ", dateAfter=" + dateAfter + "]";
 	}
+
 	
 	
 	//待處理:
