@@ -9,7 +9,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.ServiceTypeDao;
-import team.lala.timebank.entity.Area;
 import team.lala.timebank.entity.ServiceType;
 
 @Service
