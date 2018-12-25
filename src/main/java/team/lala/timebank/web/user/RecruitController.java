@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.extern.slf4j.Slf4j;
+import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.ServiceType;
 import team.lala.timebank.service.MissionService;
@@ -23,7 +24,7 @@ import team.lala.timebank.spec.MissionSpecification;
 @Slf4j
 @RequestMapping("/user/volunteerRecruitment")
 @Controller
-public class RecruitFinishController {
+public class RecruitController {
 
 	@Autowired
 	private ServiceTypeService serviceTypeService;
@@ -44,7 +45,7 @@ public class RecruitFinishController {
 		int page = start.orElse(0) / length.orElse(10);
 
 		MissionSpecification missionSpec = new MissionSpecification(
-				missionService.setMemberId(principal, inputMission));
+				missionService.findByAccount(principal, inputMission));
 		Page<Mission> missions = missionService.findBySpecification(missionSpec,
 				PageRequest.of(page, length.orElse(10)));
 		return missions;
@@ -57,6 +58,21 @@ public class RecruitFinishController {
 		model.addAttribute("mission", mission);
 		model.addAttribute("serviceType", serviceType);
 		return "/basic/user/volunteerRecruitment/mission_edit";
+	}
+	@RequestMapping("/delete")
+	@ResponseBody
+	public AjaxResponse<Mission> deletePage(@RequestParam("id") Long id) {
+		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
+		try {
+			response.setObj(missionService.getOne(id));
+			missionService.delete(id);
+
+		} catch (Exception e) {
+			response.addMessage("刪除失敗，" + e.getMessage());
+
+			e.printStackTrace();
+		}
+		return response;
 	}
 
 

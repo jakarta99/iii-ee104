@@ -73,9 +73,13 @@
  	
 	  <!-- Navbar -->
       <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-	<h1 class="s2">mission add(after login)</h1>
+	  <section class="bar">
+        <div class="container">
+          <div class="row">
+            <jsp:include page="../user_layout/user_sidebar.jsp" />
 	<fieldset>
-	<form action="/user/volunteerRecruitment/insert" method="post">
+            <h1 class="s2">mission add(after login)</h1>
+	<form action="/user/missionPublish/insert" method="post">
 	
 	
 	<div>			
@@ -149,19 +153,26 @@
 	</form>
 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/admin/mission/list'">回列表頁</button>
 	</fieldset>
+          </div>
+        </div>
+	
+	
+	
+	
+	  </section>
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script>
 	
 		function addMission() {
 			$.ajax({
-				url : "/user/volunteerRecruitment/insert",				
+				url : "/user/missionPublish/insert",				
 				type : 'post',
 				data : $('form').serialize(),
 				dataType : 'JSON',
 				success : function(addResult) {
 					if(addResult.status == "SUCCESS"){
 						alert("新增編號" + addResult.obj.id + " "+ addResult.status);
-						document.location.href = "/user/volunteerRecruitment/add"
+						document.location.href = "/user/missionPublish/add"
 					}else{
 						alert("新增編號" + addResult.obj.id + " " + addResult.status);
 						alert("FAIL reason:" + addResult.messages);

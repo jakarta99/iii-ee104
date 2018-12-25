@@ -63,14 +63,14 @@
 			<input type="file" id="proofPic" name="proofPic"  accept="image/*"><p>
 			請選擇圖檔，如無佐證資料，則直接送出審核<p>
 			<input type="submit" value="送出審核">
+<!-- 			<button id="sendReport">送出審核</button> -->
 		</form>
 		
 		<a href="#">back to 我的檢舉案件</a><p>
 		<a href="/penalty/tempPenaltyEntrance">back to 我的所有媒合案件(清單)</a>
 		
-		
-		
-	
-	
+<script type="text/javascript">
+
+</script>		
 </body>
 </html>

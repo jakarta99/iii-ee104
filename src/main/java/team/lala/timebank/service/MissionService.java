@@ -10,11 +10,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.MissionDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
-
+@Slf4j
 @Service
 public class MissionService {
 
@@ -33,9 +34,7 @@ public class MissionService {
 
 	// insert
 	public Mission insert(Mission mission) {
-		System.out.println(mission.getId());
-		System.out.println(mission.getStartDate().getClass());
-		System.out.println(mission.getStartDate());
+		
 		mission.setStartDate(mission.getStartDate());
 		mission.setEndDate(mission.getEndDate());
 		mission.setPublishDate(new Date());
@@ -45,11 +44,13 @@ public class MissionService {
 
 	public Mission insert(Mission mission, Principal principal) {
 		Member member = memberDao.findByAccount(principal.getName());
-
-		mission.setId(member.getId());
+		log.debug("member.getId()={}",member.getId());
+		mission.setMemberId(member.getId());
+		log.debug("mission.memberid={}",mission.getMemberId());
 		mission.setStartDate(mission.getStartDate());
 		mission.setEndDate(mission.getEndDate());
 		mission.setPublishDate(new Date());
+		mission.setStatus(1);
 
 		return missionDao.save(mission);
 	}
@@ -80,16 +81,8 @@ public class MissionService {
 		return missionList;
 
 	}
-	//取得member所有mission
-	public List<Mission> findByMemberAccount(Principal principal) {
-		
-		//loginAccount取得member.getid取得mission list
-		List<Mission> missionList = missionDao.findByMemberId(memberDao.findByAccount(principal.getName()).getId());
-
-		return missionList;
-
-	}
-	public Mission setMemberId(Principal principal,Mission mission) {
+	
+	public Mission findByAccount(Principal principal,Mission mission) {
 		
 		mission.setMemberId(memberDao.findByAccount(principal.getName()).getId());
 		return mission;

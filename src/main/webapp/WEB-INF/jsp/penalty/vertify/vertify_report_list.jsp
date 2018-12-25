@@ -110,6 +110,9 @@
 			</form>
 		</div>
 		<fieldset style="width:300">
+		
+		<button id="vertifyingCase">審核中</button>  <button id="vertified">審核歷史紀錄</button>
+		
 		<table id="table" class="table table-striped table-bordered">
 			<thead>
 				<tr>
@@ -241,7 +244,12 @@
 			//搜尋事件
 			$("#searchButt").click(	function(){
 				dataTable.ajax.reload();
-
+			})
+			
+			//按下審核中的按鍵
+			$("#vertifyingCase").click(	function(){
+				$('#status').val("1");
+				dataTable.ajax.reload();
 			})
 		})
 						
