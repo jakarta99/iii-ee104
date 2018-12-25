@@ -88,11 +88,11 @@ public class PenaltyService {
 	public Boolean storeProofPic(MultipartFile proofPic, Long penaltyId) {
 		try {
 			//確認是否有此資料夾，如無則建資料夾
-			File dir = new File("D:\\penaltyProoves\\");
+			File dir = new File("D:\\penaltyProoves\\img\\");
 			if (!dir.exists()) {
 				dir.mkdirs();
 			}
-			String location = "D:\\penaltyProoves\\" + "penaltyProof_" + penaltyId + ".jpg";
+			String location = "D:\\penaltyProoves\\img\\" + "penaltyProof_" + penaltyId + ".jpg";
 			FileOutputStream fos = new FileOutputStream(location);
 			fos.write(proofPic.getBytes());
 			fos.close();
