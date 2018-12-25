@@ -44,7 +44,7 @@ public class PenaltyService {
 		//查出原告被告id
 		Long defendantId = null;
 		if(memberDao.getOne(accuserId) == order.getVolunteer()) {
-			defendantId = order.getMission().getMemberId().getId();
+			defendantId = order.getMission().getMember().getId();
 		} else {
 			defendantId = order.getVolunteer().getId();
 		}
