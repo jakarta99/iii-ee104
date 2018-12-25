@@ -32,6 +32,9 @@ public class PenaltyService {
 	@Autowired
 	private OrderDao orderDao;
 	
+	@Autowired
+	private MemberDao memberDao;
+	
 	
 	//Jasmine 補註解
 	public Penalty vertifyPenalty(Long penaltyId, Integer status, Integer penaltyTimeValue, String vertifyReason) {
@@ -46,35 +49,27 @@ public class PenaltyService {
 	//點選一筆order後，判斷是否有檢舉紀錄，以及被檢舉人是誰。如無檢舉紀錄則無法進入填寫檢舉之畫面
 	//進入檢舉畫面會將相關資料帶入(被檢舉人、活動名稱....)
 	public Penalty checkRecordandProvidePenalty(Long orderId, Long accuserId) {
-		List<Penalty> penalties = findByOrder(orderDao.getOne(orderId));
 		Order thisOrder = orderDao.getOne(orderId);
+		Member accuser = memberDao.getOne(accuserId);
+		List<Penalty> penalties = findByOrder(thisOrder);
+		
+		
 		Penalty penalty = new Penalty();
 		Member defendant;
-		if(penalties.size() > 0) { //該筆order有檢舉紀錄
+		if(penalties.size() > 0) { //該筆order有檢舉紀錄(有雙向檢舉之可能，故需判斷檢舉紀錄的檢舉者是否相同)
 			for(Penalty p : penalties) {
-				if(p.getAccuser().equals(accuserId)) { //該筆order的檢舉人與目前登入會員相同(不得再次提出檢舉)
+				if(p.getAccuser().equals(accuser)) { //該筆order的檢舉人與目前登入會員相同(不得再次提出檢舉)
 					return null;
-				}else{
-					if(accuserId == thisOrder.getMission().getMember().getId()) {//如果檢舉者是雇主
-						defendant = thisOrder.getVolunteer();//被告就是志工
-					} else {
-						defendant = thisOrder.getMission().getMember();
-					}
-					penalty.setAccuser(accuserId);
-					penalty.setOrder(thisOrder);
-					penalty.setDefendant(defendant);
-					penalty.setStatus(1);
-					return penalty;
 				}
 			}
 		}
 		
-		if(accuserId == thisOrder.getMission().getMember().getId()) {//如果檢舉者是雇主
+		if(accuser == thisOrder.getMission().getMember()) {//如果檢舉者是雇主
 			defendant = thisOrder.getVolunteer();//被告就是志工
 		} else {
 			defendant = thisOrder.getMission().getMember();
 		}
-		penalty.setAccuser(accuserId);
+		penalty.setAccuser(accuser);
 		penalty.setOrder(thisOrder);
 		penalty.setDefendant(defendant);
 		penalty.setStatus(1);

@@ -218,7 +218,7 @@
 						return new Date(data.updateDate).toLocaleDateString();
 						}
 					},
-					{data:"accuser"},
+					{data:"accuser.id"},
 					{data:"defendant.id"},
 					{data:"defendant.name"},
 					//{data:" "},
