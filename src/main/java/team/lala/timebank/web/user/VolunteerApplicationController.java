@@ -46,14 +46,13 @@ public class VolunteerApplicationController {
 	
 	@ResponseBody
 	@RequestMapping("/volunteerRecord/queryRecord")		//查詢媒合紀錄資料
-	public Page<Order> QueryRecord(Principal principal, Order order, @RequestParam(value="orderStatus") Long orderStatus, @RequestParam(value="start",required=false) Optional<Integer> start, 
+	public Page<Order> QueryRecord(Principal principal, Order order, @RequestParam(value="orderStatus") Long orderStatus,
+			@RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
-
 		int page = start.orElse(0)/length.orElse(10);
 		String account = principal.getName();
-		OrderSpecification orderSpecification = new OrderSpecification(order);
-		
-		return orderService.findByVolunteerAndOrderStatusOrVolunteerAndOrderStatusBetween(
+		OrderSpecification orderSpecification = new OrderSpecification(order);		
+		return orderService.findByVolunteerAndOrderStatusBetween(
 				orderSpecification, account, orderStatus, PageRequest.of(page, length.orElse(10)));
 	}
 

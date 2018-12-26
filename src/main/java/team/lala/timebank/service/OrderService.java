@@ -43,8 +43,10 @@ public class OrderService {
 	}
 	
 	//根據媒合結果狀態查詢
-	public Page<Order> findByVolunteerAndOrderStatusOrVolunteerAndOrderStatusBetween(Specification<Order> specification,
+	public Page<Order> findByVolunteerAndOrderStatusBetween(Specification<Order> specification,
 			String account, Long orderStatus, PageRequest pageRequest){
+		Member member = memberDao.findByAccount(account);
+		orderDao.findByVolunteer(member, pageRequest, specification);
 		return null;
 		
 	}

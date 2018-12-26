@@ -67,6 +67,30 @@ public class Order{
 	
 	@Column(name="FEEDBACK_SCORE")
 	private Long feedBackScore;
+	
+	@Transient
+	private String missionTitle;
+	
+	@Transient
+	private String county;
+	
+	@Transient
+	private String district;
+	
+	@Transient
+	private String address;
+	
+	@Transient
+	private Date startDate;// 工作開始時間
+	
+	@Transient
+	private Date endDate;// 工作結束時間
+	
+	@Transient
+	private Integer timeValue;// 可獲得時數(工作的時間)
+	
+	@Transient
+	private Long Status;
 
 	@Override
 	public String toString() {

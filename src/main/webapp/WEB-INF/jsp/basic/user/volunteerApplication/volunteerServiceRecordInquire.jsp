@@ -78,25 +78,35 @@
 	<fieldset>
 	<form>
 			<div>基本查詢:</div>
-			<label>縣市:</label> 
-			<div style='display:inline' role="tw-city-selector" ></div>						
-			<label>startDate:</label>
+			<label>住址:</label>
+			<div role="tw-city-selector" ></div>
+			<label>開始日期:</label>
 			<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
-			<label>endDate:</label>
+			<label>結束日期:</label>
 			<input type="text"  id="endDate" name="endDate" autocomplete="off"/>
 			<input type="button" value="搜尋" id="searchButt" />
+			<input type="reset"  value="清除重填" />
 			<div>	
 			<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
 			進階查詢:
   			</a>
   			</div> 
 			<div class="collapse" id="collapse">		
-				<label>timeValue :</label> 
-				<input type="text" value="" placeholder="timeValue" id="timeValue" name="timeValue"/>		
-				<label>title :</label> 
-				<input type="text" value="" placeholder="title" id="title" name="title"/>	
-				<label>statusDetail :</label> 
-				<input type="text" value="" placeholder="statusDetail" id="statusDetail" name="statusDetail"/>			
+				<label>獲得時間 :</label> 
+				<input type="text" value="" id="timeValue" name="timeValue"/>		
+				<label>任務標題 :</label> 
+				<input type="text" value="" id="missionTitle" name="missionTitle"/>	
+				<label>類別 :</label> 
+				<select  id="status" name="status">
+					<option value="">選擇服務類型</option>
+					<option value="5">已完成</option>
+			        <option value="6">Requester 取消交易</option>
+			        <option value="7">志工 取消交易</option>
+			        <option value="8">Requester 臨時取消活動(不懲罰)</option>
+			        <option value="9">Requester 臨時取消活動(要懲罰)</option>
+			        <option value="10">志工 臨時請假(不懲罰)</option>
+			        <option value="11">志工 臨時不去(要懲罰)</option>
+				</select>		
 			</div>
 		</form>
 	</fieldset>
@@ -144,7 +154,7 @@
 					data:function(d){ 				//傳送給伺服器的資料(datatable預設會傳送d的資料)
 						var start = d.start;
 						var length = d.length;
-						var request = "orderStatus=" + orderStatus +
+						var request =  $("form").serialize() + "&orderStatus=" + orderStatus +
 											"&start=" + start + "&length="+ length;
 						console.log(request)
 						return request;
