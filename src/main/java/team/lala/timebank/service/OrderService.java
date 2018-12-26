@@ -10,9 +10,11 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.MemberDao;
+import team.lala.timebank.dao.MissionDao;
 import team.lala.timebank.dao.OrderDao;
 import team.lala.timebank.dao.OrderStatusDao;
 import team.lala.timebank.entity.Member;
+import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.OrderStatus;
 
@@ -23,7 +25,6 @@ public class OrderService {
 	private OrderDao orderDao;
 	@Autowired
 	private MemberDao memberDao;
-	
 	@Autowired
 	private OrderStatusDao orderStatusDao;
 	
@@ -34,6 +35,18 @@ public class OrderService {
 	public Page<Order> findBySpecification(Specification<Order> specification, PageRequest pageRequest) {
 		return orderDao.findAll(specification, pageRequest);
 	}
+	
+	public Page<Order> findByMission(Mission inputMission, int page, Optional<Integer> length){
+		Page<Order> orders = orderDao.findByMission(inputMission, PageRequest.of(page, length.orElse(10)));
+//		mission.setMember(memberDao.findByAccount(principal.getName()));
+//		OrderSpecification orderSpec = new OrderSpecification(inputMission);
+//		Page<Order> orders = findBySpecification(orderSpec,
+//				PageRequest.of(page, length.orElse(10)));
+		
+		return orders;	
+	}
+	
+	
 	
 	public Page<Order> findByVolunteerAndOrderStatus(String account, Long orderStatus, PageRequest pageRequest){	
 		OrderStatus status = orderStatusDao.getOne(orderStatus);
