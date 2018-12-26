@@ -61,8 +61,8 @@
 <title>檢舉案件審查</title>
 </head>
 <body>
-	<!-- 加入nav.html(放在static/html) -->
-<%-- 	<jsp:include page="../admin_layout/nav.jsp" /> --%>
+	<!-- 加入nav.html -->
+	<jsp:include page="../../../../admin/admin_layout/nav.jsp" />
 	<article>
 		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
 		<h1 style="padding-top: 2cm">檢舉案件審查  Vertify Report List</h1>

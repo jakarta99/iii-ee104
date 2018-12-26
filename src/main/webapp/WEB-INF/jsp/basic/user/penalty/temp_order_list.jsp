@@ -4,21 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- css-->
+<jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
+<jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 
+<!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- Bootstrap core CSS -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
-	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
-	crossorigin="anonymous"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
-	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
-	crossorigin="anonymous">
+
 <!-- date picker -->
 <script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
@@ -61,44 +53,47 @@
 <title>媒合案件清單(模擬畫面)</title>
 </head>
 <body>
-	<!-- 加入nav.html(放在static/html) -->
-<%-- 	<jsp:include page="../admin_layout/nav.jsp" /> --%>
+	<!-- Top bar-->
+	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp" />
+	<!-- Navbar -->
+	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />
+      
 	<article>
 		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
 		<h1 style="padding-top: 2cm">媒合案件清單(模擬檢舉流程用)</h1>
 		
 		<!-- 條件搜尋表單 -->
-		<div id="sideBar">
-			<form>
-				<fieldset>
-				<legend>Search</legend>
-				<div>
-					<div>
-						<label>id: </label>
-						<input type="text" value="${param.id}" id="id" name="id" placeholder="id" />
-					</div>
-					<div>
-						<label>volunteerId:</label>
-						<input type="text" value="${param.volunteerId}" id="volunteerId" name="volunteerId"/>
-					</div>
-					<div>
-						<label>serviceRequesterId:</label>
-						<input type="text" value="${param.serviceRequesterId}" id="serviceRequesterId" name="serviceRequesterId"/>
-					</div>
-				</div>
-				<div>
-					<div>	
-						<label>status:</label>
-						<input type="text" value="${param.status}" id="status" name="status"/>
-					</div>
-				</div>
-					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
-<!-- 					<button id="searchButt" style="margin:10px">搜尋</button> -->
-					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
-				</fieldset>
+<!-- 		<div id="sideBar"> -->
+<!-- 			<form> -->
+<!-- 				<fieldset> -->
+<!-- 				<legend>Search</legend> -->
+<!-- 				<div> -->
+<!-- 					<div> -->
+<!-- 						<label>id: </label> -->
+<%-- 						<input type="text" value="${param.id}" id="id" name="id" placeholder="id" /> --%>
+<!-- 					</div> -->
+<!-- 					<div> -->
+<!-- 						<label>volunteerId:</label> -->
+<%-- 						<input type="text" value="${param.volunteerId}" id="volunteerId" name="volunteerId"/> --%>
+<!-- 					</div> -->
+<!-- 					<div> -->
+<!-- 						<label>serviceRequesterId:</label> -->
+<%-- 						<input type="text" value="${param.serviceRequesterId}" id="serviceRequesterId" name="serviceRequesterId"/> --%>
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div> -->
+<!-- 					<div>	 -->
+<!-- 						<label>status:</label> -->
+<%-- 						<input type="text" value="${param.status}" id="status" name="status"/> --%>
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/>  -->
+<!-- 
+<!-- 					<input type="reset" value="重設" id="resetButt" style="margin:10px"/> -->
+<!-- 				</fieldset> -->
 				
-			</form>
-		</div>
+<!-- 			</form> -->
+<!-- 		</div> -->
 		<fieldset style="width:300">
 		<table id="table" class="table table-striped table-bordered">
 			<thead>
@@ -119,6 +114,11 @@
 		</table>
 		</fieldset>
 	</article>
+	
+	<!-- FOOTER -->
+	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
+	
+	
 	<script>
 
 		var dataTable;

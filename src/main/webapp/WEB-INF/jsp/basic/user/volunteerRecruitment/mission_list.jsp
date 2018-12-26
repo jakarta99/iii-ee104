@@ -4,26 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" 
-		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" 
-		crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" 
-		integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" 
-		crossorigin="anonymous"></script>
-<link rel="stylesheet" 
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" 
-		integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" 
-		crossorigin="anonymous">
-<script defer
-	src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<!-- css -->
+<jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
+<<!-- Javascript files-->
+<jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
 				
@@ -43,7 +27,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
 
 
-<jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
+
 <meta charset="UTF-8">
 <title>mission list(login)</title>
 <style>
@@ -79,11 +63,12 @@
     </style>
 </head>
 <body>
- <!-- Top bar-->
-      <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
- 	
-	  <!-- Navbar -->
-      <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
+<!-- Top bar-->
+<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
+		 	
+<!-- Navbar -->	
+<jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
+		 	  
 	<div class="margintop">
 	
 	<h1 class="s2">mission list</h1>
@@ -307,6 +292,8 @@
 		
 		
 	});
-	</script>	
+	</script>
+	 <!-- FOOTER -->
+   <jsp:include page="../../commons/commons_layout/commons_footer.jsp" />	
 </body>
 </html>

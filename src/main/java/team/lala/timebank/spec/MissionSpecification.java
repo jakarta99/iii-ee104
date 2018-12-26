@@ -32,15 +32,21 @@ public class MissionSpecification implements Specification<Mission> {
 	@Override
 	public Predicate toPredicate(Root<Mission> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 		List<Predicate> list = new ArrayList<Predicate>();
-		
+
+		if (!StringUtils.isEmpty(inputMission.getStatusDetail())) {
+			Join<MissionStatus, Mission> join = root.join("status", JoinType.LEFT);
+			list.add(criteriaBuilder.equal(join.get("missionStatus"), inputMission.getStatusDetail()));
+		}
+
 		if (!StringUtils.isEmpty(inputMission.getMemberAccount())) {
 			Join<Member, Mission> join = root.join("member", JoinType.LEFT);
 			list.add(criteriaBuilder.equal(join.get("account"), inputMission.getMemberAccount()));
 		}
 
-//		if (!StringUtils.isEmpty(inputMission.getMember())) {
-//			list.add(criteriaBuilder.equal(root.get("memberId").as(Long.class), inputMission.getMember()));
-//		}
+		if (!StringUtils.isEmpty(inputMission.getServiceTypeDetail())) {
+			Join<Member, Mission> join = root.join("serviceType", JoinType.LEFT);
+			list.add(criteriaBuilder.equal(join.get("serviceType"), inputMission.getServiceTypeDetail()));
+		}
 
 		if (!StringUtils.isEmpty(inputMission.getCounty())) {
 			list.add(criteriaBuilder.equal(root.get("county").as(String.class), inputMission.getCounty()));

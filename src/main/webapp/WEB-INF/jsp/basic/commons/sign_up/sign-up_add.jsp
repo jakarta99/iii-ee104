@@ -68,20 +68,7 @@
             <jsp:include page="../../user/user_layout/user_sidebar.jsp"/>
           	<article>
           		<h2 class=center>建立您的TimeBank帳戶</h2>
-          		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/commons/sign-up/type'" value="回前頁">
-          		<table>
-				  <form:form action="save" method="post" commandName="user">
-					<tr>  <td>User Name:</td> <td><form:input  path="name"/> </td> 
-					      <td> <form:errors path="name" cssStyle="color: red;"/></td> </tr>
-					<tr> <td> Password :</td> <td><form:input path="password"/> </td> 
-					     <td> <form:errors path="password" cssStyle="color: red;"/> </td> </tr>
-					<tr> <td>  Email :</td> <td><form:input path="email"/> </td> 
-					     <td> <form:errors path="email" cssStyle="color: red;"/> </td> </tr>
-					<tr> <td>  Date of Birth :</td> <td><form:input path="birthDate"/> </td> 
-					     <td> <form:errors path="dob" cssStyle="color: red;"/> </td> </tr>	     
-					<tr> <td colspan=3>   <input type="submit"> </td>
-				  </form:form>
-				</table>   
+          		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/commons/sign-up/type'" value="回前頁">  
           		<form action="#" method="post">
           			<fieldset>
           				<legend>帳戶資料</legend>

@@ -22,8 +22,9 @@
 <title>檢舉案件審核</title>
 </head>
 <body>
+
 	<!-- 加入nav.html(放在static/html) -->
-<%-- 	<jsp:include page="../admin_layout/nav.jsp" /> --%>
+	<jsp:include page="../../../../admin/admin_layout/nav.jsp" />
 	
 	<h1 style="padding-top: 2cm">檢舉案件審核</h1>
 	<h4>審核 編號第${penalty.id}案</h4>
