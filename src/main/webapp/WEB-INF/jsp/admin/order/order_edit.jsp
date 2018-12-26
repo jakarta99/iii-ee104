@@ -41,6 +41,7 @@
 <form>
 	
 	<input type="hidden" value="${order.id}" id="id" name="id"/>
+	<input type="hidden" value="${order.volunteer.id}" id="volunteer" name="volunteer"/>
 	orderAcceptTime:
 	<fmt:formatDate value="${order.orderAcceptTime}" pattern="yyyy/MM/dd"	var="orderAcceptTime" />
 	<input type="text" value="${orderAcceptTime}" id="orderAcceptTime" name="orderAcceptTime" autocomplete="off" />
@@ -51,7 +52,7 @@
 	
 	orderStatus:
 	<select id="orderStatus" name="orderStatus">
-					<option value="">${order.orderStatus.orderStatus}</option>
+					<option value="${order.orderStatus.id}">${order.orderStatus.orderStatus}</option>
 					<option value="1">志工申請了</option>
 			        <option value="2">接受服務</option>
 			        <option value="3">拒絕服務</option>

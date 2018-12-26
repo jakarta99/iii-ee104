@@ -83,7 +83,7 @@
 					</div>
 					<div>
 						<label>volunteer:</label>
-						<input type="text" value="${param.volunteer}" id="volunteer" name="volunteer"/>
+						<input type="text" value="${param.volunteerId}" id="volunteerId" name="volunteerId"/>
 					</div>
 					
 				</div>
@@ -100,7 +100,7 @@
 					</div>
 					<div>	
 						<label>orderStatus:</label>
-						<input type="text" value="${param.orderStatus}" id="orderStatus" name="orderStatus"/>
+						<input type="text" value="${param.orderStatusDetail}" id="orderStatusDetail" name="orderStatusDetail"/>
 					</div>
 				</div>
 					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 

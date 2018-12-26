@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,6 +33,9 @@ public class Order{
 			referencedColumnName="id") 
 	private Member volunteer;
 	
+	@Transient
+	private String volunteerId;
+	
 	@ManyToOne
 //	@JsonBackReference 
 	@JoinColumn(name="ORDER_STATUS",    
@@ -39,11 +43,14 @@ public class Order{
 				insertable=true, updatable=true)
 	private OrderStatus orderStatus;
 	
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm" )
+	@Transient
+	private String orderStatusDetail;
+	
+	@DateTimeFormat(pattern = "yyyy/MM/dd" )
 	@Column(name="VOLUNTEER_APPLY_TIME")
 	private Date volunteerApplyTime;
 	
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm" )
+	@DateTimeFormat(pattern = "yyyy/MM/dd" )
 	@Column(name="ORDER_ACCEPT_TIME")
 	private Date orderAcceptTime;
 	
