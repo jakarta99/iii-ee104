@@ -35,11 +35,18 @@ public class OrderService {
 		return orderDao.findAll(specification, pageRequest);
 	}
 	
+	//根據申請中狀態查詢
 	public Page<Order> findByVolunteerAndOrderStatus(String account, Long orderStatus, PageRequest pageRequest){	
 		OrderStatus status = orderStatusDao.getOne(orderStatus);
-		
 		Member member = memberDao.findByAccount(account);
 		return orderDao.findByVolunteerAndOrderStatus(member, status, pageRequest);
+	}
+	
+	//根據媒合結果狀態查詢
+	public Page<Order> findByVolunteerAndOrderStatusOrVolunteerAndOrderStatusBetween(Specification<Order> specification,
+			String account, Long orderStatus, PageRequest pageRequest){
+		return null;
+		
 	}
 	
 	public List<Order> findAll() {
