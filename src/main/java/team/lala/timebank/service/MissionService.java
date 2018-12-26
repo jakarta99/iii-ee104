@@ -104,6 +104,8 @@ public class MissionService {
 	}
 	
 	public Page<Mission> findByAccount(Principal principal, Mission mission, int page, Optional<Integer> length) {
+//		mission.setMember(memberDao.findByAccount(principal.getName()));
+//		Page<Mission> missions = missionDao.findByMember(memberDao.findByAccount(principal.getName()), PageRequest.of(page, length.orElse(10)), new MissionSpecification(mission));
 		mission.setMember(memberDao.findByAccount(principal.getName()));
 		MissionSpecification missionSpec = new MissionSpecification(mission);
 		Page<Mission> missions = findBySpecification(missionSpec,

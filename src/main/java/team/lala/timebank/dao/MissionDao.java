@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -15,4 +16,6 @@ public interface MissionDao extends JpaRepository<Mission, Long>, JpaSpecificati
 	public List<Mission> findByMember(Member member);
 	
 	public Page<Mission> findByMember(Member member, Pageable pageable);
+			
+	public Page<Mission> findByMember(Member member, Pageable pageable, Specification<Mission> specification);
 }
