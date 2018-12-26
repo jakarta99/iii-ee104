@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.MissionDao;
 import team.lala.timebank.dao.OrderDao;
@@ -17,7 +18,7 @@ import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.OrderStatus;
-
+@Slf4j
 @Service
 public class OrderService {
 	
@@ -43,7 +44,7 @@ public class OrderService {
 //		OrderSpecification orderSpec = new OrderSpecification(inputMission);
 //		Page<Order> orders = findBySpecification(orderSpec,
 //				PageRequest.of(page, length.orElse(10)));
-		
+		log.debug("Orders={}",orders);
 		return orders;	
 	}
 	

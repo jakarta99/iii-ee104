@@ -317,7 +317,7 @@
 			            } },	
 					
 						{"data":function (data, type, val) {
-							var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerRecruitment/edit?id="+data.id+"'\">志工審核</button>";   
+							var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">志工審核</button>";   
 							return vbutton;}							 
 						},
 			            {"data":"status.missionStatus"},

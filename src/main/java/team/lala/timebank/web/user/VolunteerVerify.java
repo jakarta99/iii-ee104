@@ -37,8 +37,9 @@ public class VolunteerVerify {
 		int page = start.orElse(0) / length.orElse(10);
 		
 //		Page<Mission> missions = missionService.findByAccount(principal, inputMission, PageRequest.of(page, length.orElse(10)));
-		Page<Order> Orders = orderService.findByMission(inputMission, page, length);
-		return Orders;
+		Page<Order> orders = orderService.findByMission(inputMission, page, length);
+		
+		return orders;
 	}
 	
 	
