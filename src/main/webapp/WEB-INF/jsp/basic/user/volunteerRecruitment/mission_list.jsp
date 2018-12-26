@@ -195,19 +195,19 @@
 	$("#status1Butt").click(function(){
 		$("#statusDetail").val("未開始");
 		dataTable.ajax.reload();
-		$("#statusDetail").val();
+		
 	})
 	
 	$("#status23Butt").click(function(){
 		$("#statusDetail").val('進行中');
 		dataTable.ajax.reload();
-		$("#statusDetail").val();
+		
 	})
 	
 	$("#status4Butt").click(function(){
 		$("#statusDetail").val('結案');
 		dataTable.ajax.reload();
-		$("#statusDetail").val();
+		
 	})
 	
 	
