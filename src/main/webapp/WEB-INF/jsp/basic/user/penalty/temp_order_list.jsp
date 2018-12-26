@@ -63,37 +63,37 @@
 		<h1 style="padding-top: 2cm">媒合案件清單(模擬檢舉流程用)</h1>
 		
 		<!-- 條件搜尋表單 -->
-		<div id="sideBar">
-			<form>
-				<fieldset>
-				<legend>Search</legend>
-				<div>
-					<div>
-						<label>id: </label>
-						<input type="text" value="${param.id}" id="id" name="id" placeholder="id" />
-					</div>
-					<div>
-						<label>volunteerId:</label>
-						<input type="text" value="${param.volunteerId}" id="volunteerId" name="volunteerId"/>
-					</div>
-					<div>
-						<label>serviceRequesterId:</label>
-						<input type="text" value="${param.serviceRequesterId}" id="serviceRequesterId" name="serviceRequesterId"/>
-					</div>
-				</div>
-				<div>
-					<div>	
-						<label>status:</label>
-						<input type="text" value="${param.status}" id="status" name="status"/>
-					</div>
-				</div>
-					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
-<!-- 					<button id="searchButt" style="margin:10px">搜尋</button> -->
-					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
-				</fieldset>
+<!-- 		<div id="sideBar"> -->
+<!-- 			<form> -->
+<!-- 				<fieldset> -->
+<!-- 				<legend>Search</legend> -->
+<!-- 				<div> -->
+<!-- 					<div> -->
+<!-- 						<label>id: </label> -->
+<%-- 						<input type="text" value="${param.id}" id="id" name="id" placeholder="id" /> --%>
+<!-- 					</div> -->
+<!-- 					<div> -->
+<!-- 						<label>volunteerId:</label> -->
+<%-- 						<input type="text" value="${param.volunteerId}" id="volunteerId" name="volunteerId"/> --%>
+<!-- 					</div> -->
+<!-- 					<div> -->
+<!-- 						<label>serviceRequesterId:</label> -->
+<%-- 						<input type="text" value="${param.serviceRequesterId}" id="serviceRequesterId" name="serviceRequesterId"/> --%>
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div> -->
+<!-- 					<div>	 -->
+<!-- 						<label>status:</label> -->
+<%-- 						<input type="text" value="${param.status}" id="status" name="status"/> --%>
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/>  -->
+<!-- 
+<!-- 					<input type="reset" value="重設" id="resetButt" style="margin:10px"/> -->
+<!-- 				</fieldset> -->
 				
-			</form>
-		</div>
+<!-- 			</form> -->
+<!-- 		</div> -->
 		<fieldset style="width:300">
 		<table id="table" class="table table-striped table-bordered">
 			<thead>
