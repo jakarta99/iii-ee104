@@ -95,7 +95,7 @@
     title:<input type="text" value="${mission.title}" id="title" name="title" class="form-control"/>
     </div>
    
-   <input type="hidden" value="${mission.memberId}" id="memberId" name="memberId"/><p>
+   <input type="hidden" value="${mission.member.id}" id="member" name="member"/><p>
    
    
    	<div class="form-group">

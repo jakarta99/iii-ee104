@@ -39,7 +39,7 @@
 
 	 	
         fieldset {
-            width: 60%;
+            width: 100%;
             border-radius: 20px;
             padding: 20px;
             margin: 20px;
@@ -80,7 +80,7 @@
         <div class="container">
           <div class="row">
             <jsp:include page="../user_layout/user_sidebar.jsp" />
-    <div class="mb-5">
+    <div>
 	<h1 class="s2">mission list</h1>
 	<fieldset>
 	<form>
@@ -92,12 +92,18 @@
 			<div style='display:inline' role="tw-city-selector" ></div>
 			
 			<label>會員類型 :</label> 
-				<select  id="serviceType" name="serviceType">
+				<select  id="serviceTypeDetail" name="serviceTypeDetail">
 					<option value="">選擇服務類型</option>
-					<option value="1">照顧老人</option>
-			        <option value="2">孩童教育</option>
-			        <option value="3">環境清潔</option>
-			        <option value="4">生態保育</option>	
+					<option value="婦幼關懷">婦幼關懷</option>
+			        <option value="身心障礙">身心障礙</option>
+			        <option value="老人服務">老人服務</option>
+			        <option value="社會服務">社會服務</option>
+			        <option value="動物保護">動物保護</option>
+			        <option value="國際救援">國際救援</option>
+			        <option value="環境保護">環境保護</option>
+			        <option value="文教藝術">文教藝術</option>
+			        <option value="醫療服務">醫療服務</option>
+			        <option value="宗教信仰">宗教信仰</option>
 				</select>
 				
 			<label>長短期 :</label> 
@@ -106,6 +112,15 @@
 					<option value="L">長期</option>
 			        <option value="S">短期</option>
 				</select>
+				
+<!-- 			<label>狀態:</label>  -->
+<!-- 				<select  id="status" name="status"> -->
+<!-- 					<option value="">選擇狀態</option> -->
+<!-- 					<option value="1">1</option> -->
+<!-- 			        <option value="2">2</option> -->
+<!-- 			        <option value="3">3</option> -->
+<!-- 			        <option value="4">4</option> -->
+<!-- 				</select>	 -->
 				
 			<label>startDate:</label>
 			<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
@@ -125,11 +140,14 @@
 			<label>timeValue :</label> 
 			<input type="text" value="" placeholder="timeValue" id="timeValue" name="timeValue"/>
 			
-			<label>jobTitle :</label> 
-			<input type="text" value="" placeholder="jobTitle" id="jobTitle" name="jobTitle"/>
+			<label>title :</label> 
+			<input type="text" value="" placeholder="title" id="title" name="title"/>
 			
-			<label>missionStatus :</label> 
-			<input type="text" value="" placeholder="missionStatus" id="missionStatus" name="missionStatus"/>
+			
+			<label>statusDetail :</label> 
+			<input type="text" value="" placeholder="statusDetail" id="statusDetail" name="statusDetail"/>
+			
+			
 			</div>
 		</form>
 	</fieldset>
@@ -175,21 +193,21 @@
 	})
 	
 	$("#status1Butt").click(function(){
-		$("#status").val(1);
+		$("#statusDetail").val("未開始");
 		dataTable.ajax.reload();
-		$("#status").val();
+		$("#statusDetail").val();
 	})
 	
 	$("#status23Butt").click(function(){
-		$("#status").val(2);
+		$("#statusDetail").val('進行中');
 		dataTable.ajax.reload();
-		$("#status").val();
+		$("#statusDetail").val();
 	})
 	
 	$("#status4Butt").click(function(){
-		$("#status").val(4);
+		$("#statusDetail").val('結案');
 		dataTable.ajax.reload();
-		$("#status").val();
+		$("#statusDetail").val();
 	})
 	
 	
