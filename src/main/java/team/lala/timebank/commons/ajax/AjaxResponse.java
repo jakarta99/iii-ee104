@@ -7,6 +7,8 @@ public class AjaxResponse<T> {
 	
 	private String status;
 	
+	private String statusDescription;
+
 	private List<String> messages;
 	
 	private T obj;
@@ -54,6 +56,13 @@ public class AjaxResponse<T> {
 	}
 	
 	
+	public String getStatusDescription() {
+		return statusDescription;
+	}
+
+	public void setStatusDescription(String statusDescription) {
+		this.statusDescription = statusDescription;
+	}
 	
 	
 

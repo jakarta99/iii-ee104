@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
+import team.lala.timebank.enums.SystemMessageType;
 import team.lala.timebank.enums.YesNo;
 
 @Getter
@@ -20,6 +21,7 @@ import team.lala.timebank.enums.YesNo;
 @Entity
 @Table(name="SYSTEM_MESSAGE")
 public class SystemMessage {
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -27,13 +29,13 @@ public class SystemMessage {
 	@OneToOne
 	@JoinColumn(name="MEMBER_ID",
 				referencedColumnName="id",  
-				insertable=false, updatable=false) 
+				insertable=true, updatable=true) 
 	private Member member;
 	
 	@OneToOne
 	@JoinColumn(name="SENDER_ID",
 				referencedColumnName="id",  
-				insertable=false, updatable=false) 
+				insertable=true, updatable=true) 
 	private Member Sender;
 	
 	
@@ -41,12 +43,18 @@ public class SystemMessage {
 	private Date ReleaseTime;
 	
 	@Column(name="MESSAGE_TYPE")
-	private String MessageType;//之後改ENUM，還沒完全確定訊息類型種類(懲罰、核發時數通知、申訴結果)
+	private SystemMessageType MessageType;//之後改ENUM，還沒完全確定訊息類型種類(懲罰、核發時數通知、申訴結果)
 	
 	@Column(name="MESSAGE")
 	private String message;
 	
 	@Column(name="READ_STATUS")
 	private YesNo readStatus;
+	
+	@Override
+	public String toString() {
+		return "SystemMessage [id=" + id + ", member=" + member + ", Sender=" + Sender + ", ReleaseTime=" + ReleaseTime
+				+ ", MessageType=" + MessageType + ", message=" + message + ", readStatus=" + readStatus + "]";
+	}
 
 }
