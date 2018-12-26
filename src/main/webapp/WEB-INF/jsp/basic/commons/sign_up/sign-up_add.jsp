@@ -121,13 +121,13 @@
 						<div class="block">
 							<label for="idAccount">帳號:</label>
 							<input type="text" value="${param.account}" id="idAccount" placeholder="請輸入帳號" name="account" autofocus autocompelete="off">
-							<span id="idspAccount">${errors.account}</span>
-							<div class="remark">(1.不可空白，2.至少六個字以上，3.必須全部為英文或數字)</div>
+							<span id="idspAccount"></span>
+							<div class="remark">(1.不可空白，2.至少6個字以上，3.必須全部為英文或數字)</div>
 						</div>
 						<div class="block">
 							<label for="idPassword">密碼:</label>
 							<input type="text" value="${param.password}" id="idPassword" placeholder="請輸入密碼" name="password" autofocus autocompelete="off">
-							<span id="idspPassword">${errors.password}</span>
+							<span id="idspPassword"></span>
 							<div class="remark">(1.不可空白，2.至少6個字且必須包含字母、數字、特殊符號[!@#$%^&*])</div>
 						</div>
           			</fieldset>
@@ -386,12 +386,15 @@
 						alert("會員新增成功");
 // 						window.location.replace("/admin/member/list");	//驗證信頁面
 					} else {
-						
-						
-						$.each(response.messages, function(idx, message) {
+						$.each(response.messages, function(idx, message){
 							alert("the "+idx+"th ERROR, because "+message);
-							alert("${errors}");
-						});
+							$("#idspAccount").html(message);
+						})
+// 						console.log(response.messages);
+// 						$.each(response.messages, function(idx, message) {
+// 							alert("the "+idx+"th ERROR, because "+message);
+// 							alert("${response.errors.account}");
+// 						});
 					}						
 				})
 			})

@@ -1,16 +1,10 @@
 package team.lala.timebank.web.commons;
 
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Member;
-import team.lala.timebank.entity.TimeLedger;
 import team.lala.timebank.enums.MemberType;
 import team.lala.timebank.service.MemberService;
 
@@ -31,7 +24,7 @@ public class CommonsSignUpController {
 	private MemberService memberService;
 	
 	@Autowired
-	private CommonsSignUpController commonsSignUpController;
+	private PasswordEncoder encoder;
 	
 	@RequestMapping("/type")
 	public String typePage(Model model) {
@@ -52,9 +45,7 @@ public class CommonsSignUpController {
 	
 	@RequestMapping("/insert")
 	@ResponseBody
-	public AjaxResponse<Member> insertMember(Model model, Member member, BindingResult bindingResults) {		
-		
-		Map<String, String> errors = new HashMap<>();
+	public AjaxResponse<Member> insertMember(Member member/*, BindingResult bindingResults*/) {		
 		
 //		if(bindingResults != null && bindingResults.hasFieldErrors()) {
 //			if(bindingResults.hasFieldErrors("birthDate")) {
@@ -63,11 +54,14 @@ public class CommonsSignUpController {
 //		}
 		
 		log.debug("member={}", member);
-		AjaxResponse<Member> response = new AjaxResponse<Member>();
-//		AjaxResponse<Map> response = new AjaxResponse<Map>();//回傳前端
+//		AjaxResponse<Member> response = new AjaxResponse<Member>();
+		AjaxResponse<Member> response = new AjaxResponse<Member>();//回傳前端
 //		Map<String, Object> result = new HashMap<>(); //ajaxResponse.obj
+//		Map<String, String> errors = new HashMap<>();
+		
+		
+		
 //		response.setObj(result);
-//		
 //		result.put("member", member); //ajaxResponse.obj.member
 //		result.put("errors", errors);//ajaxResponse.obj.errors
 		
@@ -91,8 +85,13 @@ public class CommonsSignUpController {
 		// findByLoginAccount回傳如果是null，代表資料庫沒相同的帳號，可以註冊
 		if (memberService.findByAccount(member) == null) {
 			try {
+				member.setPassword(encoder.encode(member.getPassword()));
 				Member newMember = memberService.insert(member);
+//				result.put("member", newMember);
+//				response.setObj(result);
+				
 				response.setObj(newMember);
+				
 				log.debug("新增成功");
 			} catch (Exception e) {
 				response.addMessage("新增失敗" + e.getMessage());
@@ -100,7 +99,7 @@ public class CommonsSignUpController {
 				
 			}
 		}else {
-			errors.put("account", "帳號重複(測)");
+//			errors.put("account", "帳號重複(測)");
 			log.debug("wrong!!!帳號重複");
 			response.addMessage("帳號重複");
 		}
@@ -109,9 +108,9 @@ public class CommonsSignUpController {
 //		if(errors!=null && !errors.isEmpty()) {
 //			return "/basic/commons/sign_up/sign-up_add";
 //		}
-		model.addAttribute("errors", errors);
+//		model.addAttribute("errors", errors);
 //		result.put("errors", errors);
-		log.debug("test={}", errors.get("account"));
+//		log.debug("test={}", errors.get("account"));
 		return response;
 	}
 
