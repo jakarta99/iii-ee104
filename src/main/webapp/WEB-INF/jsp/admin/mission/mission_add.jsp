@@ -184,6 +184,9 @@
 			    todayHighlight: true,
 			    language: 'zh-TW',
 			    startView:"years",
+			    minDate: '0',
+			    numberOfMonths: 2,
+			    stepMinute: 10,
 			})
 			
 			$('#endDate').datetimepicker({
@@ -192,6 +195,9 @@
 			    todayHighlight: true,
 			    language: 'zh-TW',
 			    startView:"years",
+			    minDate: '0',
+			    numberOfMonths: 2,
+			    stepMinute: 10,
 			})
 			
 			
