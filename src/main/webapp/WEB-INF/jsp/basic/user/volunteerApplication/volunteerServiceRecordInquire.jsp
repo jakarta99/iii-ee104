@@ -12,14 +12,27 @@
 <script type="text/javascript" src="/js/dataTable_full_numbers_no_ellipses.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
 <script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
-<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>	
+<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+<!-- 台灣縣市地區選單	 -->
+<script src="/js/tw-city-selector.min.js"></script>
+<!-- date picker -->
+<script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
+<script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
+<script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
+<link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
+
+<!-- DateTimePicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/i18n/jquery-ui-timepicker-zh-TW.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
+
 		
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 <meta charset="UTF-8">
 <title>mission list(login)</title>
-<style>
-
-	 	
+<style> 	
         fieldset {
             width: 90%;
             border-radius: 20px;
@@ -61,6 +74,32 @@
         <button type="button" id="orderStatus1" class="btn btn-primary">媒合成功紀錄</button>
         <button type="button" id="orderStatus2" class="btn btn-primary">媒合失敗紀錄</button>
         	<div class="row">
+        			<!-- 條件搜尋表單 -->
+	<fieldset>
+	<form>
+			<div>基本查詢:</div>
+			<label>縣市:</label> 
+			<div style='display:inline' role="tw-city-selector" ></div>						
+			<label>startDate:</label>
+			<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
+			<label>endDate:</label>
+			<input type="text"  id="endDate" name="endDate" autocomplete="off"/>
+			<input type="button" value="搜尋" id="searchButt" />
+			<div>	
+			<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+			進階查詢:
+  			</a>
+  			</div> 
+			<div class="collapse" id="collapse">		
+				<label>timeValue :</label> 
+				<input type="text" value="" placeholder="timeValue" id="timeValue" name="timeValue"/>		
+				<label>title :</label> 
+				<input type="text" value="" placeholder="title" id="title" name="title"/>	
+				<label>statusDetail :</label> 
+				<input type="text" value="" placeholder="statusDetail" id="statusDetail" name="statusDetail"/>			
+			</div>
+		</form>
+	</fieldset>
 				<fieldset style="width: 300">
 					<table id="table" class="table table-striped table-bordered">
 						<thead>
@@ -99,7 +138,7 @@
 			 	processing: true,
 				serverSide: true,  //分頁、排序都交由伺服器處理
 				ajax:{
-					url:"/user/volunteerApplication/queryApplication",
+					url:"/user/volunteerRecord/queryRecord",
 					type:"get",
 					dataType:"json",
 					data:function(d){ 				//傳送給伺服器的資料(datatable預設會傳送d的資料)
@@ -157,7 +196,23 @@
 	                var columnIndex = (i+pageno*length);	//行号等于 页数*每页数据长度+行号
 	                cell.innerHTML = columnIndex;
 	            });
-	        });			
+	        });	
+			
+			new TwCitySelector();
+			
+			$('#startDate').datetimepicker({
+				dateFormat: "yy/mm/dd",
+			    todayHighlight: true,
+			    language: 'zh-TW',
+			    startView:"years",
+			})
+			
+			$('#endDate').datetimepicker({
+				dateFormat: "yy/mm/dd",
+			    todayHighlight: true,
+			    language: 'zh-TW',
+			    startView:"years",
+			})
 		//搜尋事件
 		$("#searchButt").click(	function(){
 			dataTable.ajax.reload();
@@ -165,7 +220,7 @@
 		})
 		//切換服務狀態
 		$('#orderStatus4').click(function(){
-			orderStatus = 4;
+			orderStatus = 5;
 			dataTable.ajax.reload();
 		})
 		$('#orderStatus5').click(function(){

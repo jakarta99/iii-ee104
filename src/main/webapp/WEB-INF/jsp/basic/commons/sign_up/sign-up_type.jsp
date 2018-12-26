@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -11,15 +11,16 @@
 <jsp:include page="../commons_layout/commons_css_links.jsp" />
 <style>
 	article {
+		font-family: 'Righteous', cursive;
 		margin-top: 30px;
 		margin-bottom: 30px;
 		padding: 10px;
 	}
 	article fieldset {
 		width: 800px;
-		border-radius: 20px;
+		border-radius: 15px;
 		padding: 20px; 
-		border: 2px solid #bebebe;
+		border: 3px solid rgb(146, 168, 209);
 		margin: auto;
 	}
 	article input{
@@ -29,6 +30,16 @@
 	.center{
 		text-align: center;
 	}
+	.myform {
+        margin: 8% 11%;
+        border-collapse: collapse;
+        font-size: 100%;
+        line-height: 200%;
+    }
+    legend{
+        font-size:150%;
+        color:rgb(193, 186, 177);
+    }
 </style>
 
 </head>
