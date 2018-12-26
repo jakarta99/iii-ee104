@@ -35,11 +35,11 @@
 <form>
 
 <!-- id:<input type="text" value="" id="id" name="id"/> -->
-misson_Id(FK, 目前假資料有1~19):
+misson_Id:
 <input type="text" value="" id="mission" name="mission"/><p> 
 
-volunteerId:
-<input type="text" value="" id="volunteerId" name="volunteerId"/><p>
+volunteer:
+<input type="text" value="" id="volunteer" name="volunteer"/><p>
 
 serviceRequesterId:
 <input type="text" value="" id="serviceRequesterId" name="serviceRequesterId"/><p>

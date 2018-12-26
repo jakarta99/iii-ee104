@@ -90,7 +90,12 @@ public class MissionService {
 		return missionList;
 
 	}
-
+	
+	public Mission findByAccount(Principal principal, Mission mission) {
+		mission.setMember(memberDao.findByAccount(principal.getName()));
+		return mission;
+	}
+	
 	public Page<Mission> findByAccount(Principal principal, Mission mission, Pageable pageable) {
 		Page<Mission> missions = missionDao.findByMember(memberDao.findByAccount(principal.getName()), pageable);
 		return missions;
