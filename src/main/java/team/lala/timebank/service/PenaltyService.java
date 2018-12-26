@@ -2,9 +2,7 @@ package team.lala.timebank.service;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.OrderDao;
 import team.lala.timebank.dao.PenaltyDao;
+import team.lala.timebank.dao.SystemMessageDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
@@ -35,19 +34,12 @@ public class PenaltyService {
 	@Autowired
 	private MemberDao memberDao;
 	
-	
-	//Jasmine 補註解
-	public Penalty vertifyPenalty(Long penaltyId, Integer status, Integer penaltyTimeValue, String vertifyReason) {
-		Penalty dbPenalty = penaltyDao.getOne(penaltyId);
-		dbPenalty.setPenaltyTimeValue(penaltyTimeValue);
-		dbPenalty.setStatus(status);
-		dbPenalty.setVertifyReason(vertifyReason);
-		return penaltyDao.save(dbPenalty);
-	}
+	@Autowired
+	private SystemMessageDao systemMessageDao;
 	
 	//Jasmine 
 	//點選一筆order後，判斷是否有檢舉紀錄，以及被檢舉人是誰。如無檢舉紀錄則無法進入填寫檢舉之畫面
-	//進入檢舉畫面會將相關資料帶入(被檢舉人、活動名稱....)
+	//進入檢舉畫面會將相關資料帶入(被檢舉人、活動名稱....)，但還不寫入DB
 	public Penalty checkRecordandProvidePenalty(Long orderId, Long accuserId) {
 		Order thisOrder = orderDao.getOne(orderId);
 		Member accuser = memberDao.getOne(accuserId);
@@ -77,6 +69,15 @@ public class PenaltyService {
 		
 	}
 	
+	//Jasmine 完成審核後寄站內信給檢舉人
+	public void sendSystemMessageToAccuser(Penalty penalty) {
+		if(penalty != null) {
+			
+		}
+//		systemMessageDao
+	}
+	
+	
 	//Jasmine 補註解
 	public Boolean storeProofPic(MultipartFile proofPic, Long penaltyId) {
 		try {
@@ -99,6 +100,18 @@ public class PenaltyService {
 		}
 		return true;
 	}
+	
+	//Jasmine 補註解
+	public Penalty vertifyPenalty(Long penaltyId, Integer status, Integer penaltyTimeValue, String vertifyReason) {
+		Penalty dbPenalty = penaltyDao.getOne(penaltyId);
+		dbPenalty.setPenaltyTimeValue(penaltyTimeValue);
+		dbPenalty.setStatus(status);
+		dbPenalty.setVertifyReason(vertifyReason);
+		return penaltyDao.save(dbPenalty);
+	}
+	
+	
+	
 	
 	
 	

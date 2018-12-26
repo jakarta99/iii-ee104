@@ -3,6 +3,7 @@ package team.lala.timebank.service;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ import team.lala.timebank.dao.MissionDao;
 import team.lala.timebank.dao.MissionStatusDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
+import team.lala.timebank.spec.MissionSpecification;
 
 @Slf4j
 @Service
@@ -101,9 +103,12 @@ public class MissionService {
 
 	}
 	
-	public Mission findByAccount(Principal principal, Mission mission) {
+	public Page<Mission> findByAccount(Principal principal, Mission mission, int page, Optional<Integer> length) {
 		mission.setMember(memberDao.findByAccount(principal.getName()));
-		return mission;
+		MissionSpecification missionSpec = new MissionSpecification(mission);
+		Page<Mission> missions = findBySpecification(missionSpec,
+				PageRequest.of(page, length.orElse(10)));
+		return missions;
 	}
 	
 	public Page<Mission> findByAccount(Principal principal, Mission mission, Pageable pageable) {

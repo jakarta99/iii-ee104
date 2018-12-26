@@ -46,10 +46,7 @@ public class RecruitController {
 		int page = start.orElse(0) / length.orElse(10);
 		
 //		Page<Mission> missions = missionService.findByAccount(principal, inputMission, PageRequest.of(page, length.orElse(10)));
-		MissionSpecification missionSpec = new MissionSpecification(
-				missionService.findByAccount(principal, inputMission));
-		Page<Mission> missions = missionService.findBySpecification(missionSpec,
-				PageRequest.of(page, length.orElse(10)));
+		Page<Mission> missions = missionService.findByAccount(principal, inputMission, page, length);
 		return missions;
 	}
 
@@ -85,10 +82,7 @@ public class RecruitController {
 		int page = start.orElse(0) / length.orElse(10);
 
 //		Page<Mission> missions = missionService.findByAccount(principal, inputMission, PageRequest.of(page, length.orElse(10)));
-		MissionSpecification missionSpec = new MissionSpecification(
-				missionService.findByAccount(principal, inputMission));
-		Page<Mission> missions = missionService.findBySpecification(missionSpec,
-				PageRequest.of(page, length.orElse(10)));
+		Page<Mission> missions = missionService.findByAccount(principal, inputMission, page, length);
 		return missions;
 	}
 	
