@@ -54,7 +54,7 @@
 		</table>
 		<hr>
 		<h2>是否上傳舉證資料?</h2>
-		<form action="/penalty/storeProofPic" method="Post" enctype="multipart/form-data">
+		<form action="/penalty/storeProofPic" method="Post" enctype="multipart/form-data" onSubmit="return CheckForm();">
 			<input type="hidden" id="penaltyId" name="penaltyId" value="${reportOnePenalty.id}">
 			<input type="file" id="proofPic" name="proofPic"  accept="image/*"><p>
 			請選擇圖檔，如無佐證資料，則直接送出審核<p>
@@ -67,6 +67,20 @@
 		
 <script type="text/javascript">
 
+	function CheckForm(){
+		if($("#proofPic").val() == ""){
+			if(confirm("您沒有選擇佐證資料，確定不上傳嗎？")==true) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		if(confirm("上傳佐證資料後將無法修改，確認要上傳佐證資料嗎？")==true) {
+			return true;
+		} else {
+			return false;
+		}
+	} 
 </script>		
 </body>
 </html>
