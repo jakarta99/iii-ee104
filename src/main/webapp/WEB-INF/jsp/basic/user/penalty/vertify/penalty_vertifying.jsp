@@ -124,6 +124,9 @@
 							"penaltyTimeValue":$('#penaltyTimeValue').val(),"vertifyReason":$('#vertifyReason').val()}
 					}).done(function(result) {
 						alert(result.status);
+						if(result.statusDescription != null){
+							alert(result.statusDescription);
+						}
 						document.location.href="/penalty/showVertifyList";
 					})
 				}

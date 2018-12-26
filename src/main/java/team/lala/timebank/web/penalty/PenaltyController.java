@@ -150,24 +150,30 @@ public class PenaltyController {
 			@RequestParam("vertifyReason") String vertifyReason) {
 		AjaxResponse<Penalty> ajaxResponse = new AjaxResponse<Penalty>();
 		
+		//測完看能否再包些東西進Service
 		try {
-			//完成檢舉案件審核，結果存入DB
+			//進行檢舉案件審核，結果存入DB (但可能是暫存審核意見，還沒完成審核
 			Penalty penalty = penaltyService.vertifyPenalty(penaltyId, status, penaltyTimeValue, vertifyReason);
 			
-			//寄站內信通知原告
-			
-			//如果審核結果為2(需懲罰)，才進行被檢舉人帳戶扣款
-			if(status==2) {
-				timeLedgerService.doPenaltyDebit(penalty);
+			//如果完成審核，寄站內信通知原告
+			if(status == 2 || status == 3) { 
+				penaltyService.sendSystemMessageToAccuser(penalty); //寄信
+				ajaxResponse.setStatusDescription("1.已寄站內信給檢舉人。");
 			}
 			
-			//寄站內信通知被告
+			//如果審核結果為2(需懲罰)，才進行被檢舉人帳戶扣款，並且寄站內信給被告
+			if(status==2) {
+				timeLedgerService.doPenaltyDebit(penalty); //扣款
+				penaltyService.sendSystemMessageToDefendant(penalty); //寄信
+				ajaxResponse.setStatusDescription(ajaxResponse.getStatusDescription() + " 2.已寄站內信給被檢舉人。");
+			}
 			
 			ajaxResponse.setObj(penalty);
 		} catch (Exception e) {
 			ajaxResponse.addMessage(e.getMessage());
 			e.printStackTrace();
 		}
+		
 		return ajaxResponse;
 	}
 	
