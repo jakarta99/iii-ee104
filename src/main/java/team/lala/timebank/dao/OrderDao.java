@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -19,7 +20,5 @@ public interface OrderDao extends JpaRepository<Order,Long>, JpaSpecificationExe
 	public Page<Order> findByMission(Mission mission, Pageable Pageable);
 	
 	public Page<Order> findByVolunteerAndOrderStatus(Member volunteer, OrderStatus orderStatus, Pageable Pageable);
-	
-
 
 }

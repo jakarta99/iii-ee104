@@ -108,7 +108,6 @@
 						var length = d.length;
 						var request = "orderStatus=" + orderStatus +
 											"&start=" + start + "&length="+ length;
-						console.log(request)
 						return request;
 					},
 					dataSrc:"content",
@@ -151,7 +150,6 @@
 	                "targets": [0, 1, 2],
 				}], order: [[1, 'asc']]   
 			 });
-			
 			dataTable.on('draw.dt',function() {
 				dataTable.column(0, {
 	                search:'applied',
@@ -165,6 +163,7 @@
 	                cell.innerHTML = columnIndex;
 	            });
 	        });	
+		})
 		//切換服務狀態
 		$('#orderStatus1').click(function(){
 			orderStatus = 1;
@@ -217,6 +216,5 @@
 		    return fmt;
 		};
 	</script>
-	
 </body>
 </html>

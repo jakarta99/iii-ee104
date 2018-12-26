@@ -153,14 +153,12 @@ public class PenaltyController {
 				penaltyService.sendSystemMessageToAccuser(penalty); //寄信
 				ajaxResponse.setStatusDescription("1.已寄站內信給檢舉人。");
 			}
-			
 			//如果審核結果為2(需懲罰)，才進行被檢舉人帳戶扣款，並且寄站內信給被告
 			if(status==2) {
 				timeLedgerService.doPenaltyDebit(penalty); //扣款
 				penaltyService.sendSystemMessageToDefendant(penalty); //寄信
 				ajaxResponse.setStatusDescription(ajaxResponse.getStatusDescription() + " 2.已寄站內信給被檢舉人。");
 			}
-			
 			ajaxResponse.setObj(penalty);
 		} catch (Exception e) {
 			ajaxResponse.addMessage(e.getMessage());

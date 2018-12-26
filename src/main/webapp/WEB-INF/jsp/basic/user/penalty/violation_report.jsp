@@ -27,7 +27,7 @@
 	<h1 style="padding-top: 2cm">填寫檢舉資料</h1>
 	<h4>#開頭為debug用，正式上線時拿掉</h4>
 	<hr>
-	<form action="/penalty/doReport" method="Post">
+	<form action="/penalty/doReport" method="Post" onSubmit="return CheckForm();">
 <!-- 	新發現:input設disabled，則不會被序列化 -->
 		#媒合案件編號(Order.id):
 		<input type="text" id="orderListId" name="order" value="${reportBasicData.order.id}" readonly/><p>
@@ -63,7 +63,13 @@
 	
 	
 	<script type="text/javascript">
-	
+	function CheckForm(){
+		if(confirm("確認要送出檢舉嗎？")==true) {
+			return true;
+		} else {
+			return false;
+		}
+	}   
 
 	</script>
 </body>

@@ -30,7 +30,7 @@
                          <h5><a href="#">志工申請</a></h5>
                           <ul class="list-unstyled mb-3">
                             <li class="nav-item"><a href="javascript:document.location.href='/user/volunteerApplication/applicationPage'" class="nav-link">申請中</a></li>
-                            <li class="nav-item"><a href="javascript:document.location.href='/user/volunteerApplication/RecordPage'" class="nav-link">服務紀錄</a></li>                          
+                            <li class="nav-item"><a href="javascript:document.location.href='/user/volunteerRecord/RecordPage'" class="nav-link">服務紀錄</a></li>                          
                           </ul>
                         </div>
                         <div class="col-md-6 col-lg-3">
