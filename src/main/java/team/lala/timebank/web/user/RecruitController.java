@@ -92,6 +92,24 @@ public class RecruitController {
 		return missions;
 	}
 	
+	@RequestMapping("/update")
+	@ResponseBody
+	public AjaxResponse<Mission> updateuser(Mission mission) {
+		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
+				
+		log.debug("mission.getMember()={}",mission.getMember());
+
+		try {
+			missionService.update(mission);
+			response.setObj(mission);
+		} catch (Exception e) {
+			response.addMessage("修改失敗，" + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return response;
+	}
+	
 	
 	
 	

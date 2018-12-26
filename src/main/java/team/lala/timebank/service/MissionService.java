@@ -71,6 +71,16 @@ public class MissionService {
 		mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
 		return missionDao.save(mission);
 	}
+	
+	public Mission updateuser(Mission mission) {
+		
+		log.debug("mission={}",mission);
+		log.debug("mission.getStatus()={}",mission.getStatus());
+		log.debug("mission.getMember={}",mission.getMember());
+		mission.setMember(mission.getMember());
+		mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
+		return missionDao.save(mission);
+	}
 
 	public List<Mission> findAll() {
 
