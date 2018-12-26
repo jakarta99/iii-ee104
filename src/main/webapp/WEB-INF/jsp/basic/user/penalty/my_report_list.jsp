@@ -20,8 +20,8 @@
 	<!-- Navbar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />
 	
-	<h1 style="padding-top: 2cm">第二步、是否上傳佐證資料</h1>
-		<h3>您填寫之檢舉資料如下：</h3>
+	
+		<h2>您已提出檢舉，資料如下：</h2>
 		<table border='1'>
 			<tr>
 				<td>媒合案件編號(Order.id)</td>
@@ -53,13 +53,12 @@
 			</tr>
 		</table>
 		<hr>
-		<h3>上傳舉證資料</h3>
+		<h2>是否上傳舉證資料?</h2>
 		<form action="/penalty/storeProofPic" method="Post" enctype="multipart/form-data">
 			<input type="hidden" id="penaltyId" name="penaltyId" value="${reportOnePenalty.id}">
 			<input type="file" id="proofPic" name="proofPic"  accept="image/*"><p>
 			請選擇圖檔，如無佐證資料，則直接送出審核<p>
-			<input type="submit" value="送出審核">
-<!-- 			<button id="sendReport">送出審核</button> -->
+			<input type="submit" value="上傳佐證資料">
 		</form>
 		
 		

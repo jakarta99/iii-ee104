@@ -24,7 +24,7 @@
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />
 	
 	
-	<h1 style="padding-top: 2cm">第一步、填寫檢舉資料</h1>
+	<h1 style="padding-top: 2cm">填寫檢舉資料</h1>
 	<h4>#開頭為debug用，正式上線時拿掉</h4>
 	<hr>
 	<form action="/penalty/doReport" method="Post">
@@ -55,7 +55,7 @@
 		
 		<input type="hidden" id="status" name="status" value="1"/><p>
 		
-		<input type="submit" id="add" value="下一步" class="btn btn-primary mb-2" />
+		<input type="submit" id="add" value="送出檢舉" class="btn btn-primary mb-2" />
 	</form>
 	
 	<!-- FOOTER -->

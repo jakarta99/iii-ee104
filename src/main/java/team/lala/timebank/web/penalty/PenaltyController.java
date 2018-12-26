@@ -1,9 +1,6 @@
 package team.lala.timebank.web.penalty;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +23,7 @@ import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.service.OrderService;
 import team.lala.timebank.service.PenaltyService;
+import team.lala.timebank.service.SystemMessageService;
 import team.lala.timebank.service.TimeLedgerService;
 import team.lala.timebank.spec.OrderSpecification;
 import team.lala.timebank.spec.PenaltySpecification;
@@ -45,6 +43,8 @@ public class PenaltyController {
 	@Autowired
 	private OrderService orderService;
 
+	@Autowired
+	private SystemMessageService systemMessageService;
 	//basic/user
 	//模擬檢視會員媒合清單(開發debug用，之後要刪)
 	@RequestMapping("/tempPenaltyEntrance")

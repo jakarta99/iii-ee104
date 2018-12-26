@@ -71,28 +71,18 @@
 		<div id="sideBar">
 			<form>
 				<fieldset>
-				<legend>Serach</legend>
+				<legend>Search</legend>
 				<div>
-					<label>檢舉人: </label>
-					<input type="text" value="${param.memberId}" id="accuser" name="accuser" placeholder="accuser" />
+<!-- 					<label>檢舉人: </label> -->
+<%-- 					<input type="text" value="${param.memberId}" id="accuser" name="accuser" placeholder="accuser" /> --%>
 					
-					<label>status: </label>
-					<select id="status" name="status">
+<!-- 					審核狀態status:-->
+					<select id="status" name="status" style="display:none">  
 						<option value="">請選擇</option>
 						<option value=1>審核中</option>
 						<option value=2>審核完成，有懲罰</option>
 						<option value=3>審核完成，未懲罰</option>
 					</select>
-					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
-					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
-					<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" 
-						role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a>
-				</div>
-				<div class="collapse" id="collapse">
-<!-- 					<div> -->
-<!-- 						<label>orderListId</label> -->
-<%-- 						<input type="text" value="${param.orderListId}" id="order" name="order" /> --%>
-<!-- 					</div> -->
 					<div>
 						<label>description</label>
 						<input type="text" value="${param.description}" id="description" name="description" />
@@ -106,6 +96,17 @@
 						<input type="text" value="${param.dateBefore}" id="dateBefore" name="dateBefore" autocomplete="off" /> 
 						<input type="text" value="${param.dateAfter}" id="dateAfter" name="dateAfter" autocomplete="off" />
 					</div>
+					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
+					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
+<!-- 					<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse"  -->
+<!-- 						role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a> -->
+				</div>
+				<div class="collapse" id="collapse">
+<!-- 					<div> -->
+<!-- 						<label>orderListId</label> -->
+<%-- 						<input type="text" value="${param.orderListId}" id="order" name="order" /> --%>
+<!-- 					</div> -->
+					
 				</div>
 				</fieldset>
 			</form>
@@ -114,18 +115,14 @@
 		
 		<table border="1">
 			<tr>
-				<td>審核中案件查詢</td>
-				<td><button id="vertifyingCase">查詢</button></td>
-			</tr>
-			<tr>
-				<td>歷史紀錄查詢</td>
 				<td>
 					<select id="penaltyChosen" name="penaltyChosen" style="width:150px">
-						<option value=2>有懲罰</option>
-						<option value=3>未懲罰</option>
+						<option value=2>有罪</option>
+						<option value=3>無罪</option>
 					</select>
-					<button id="vertified">查詢</button>
+					<button id="vertified">審核歷史紀錄查詢</button>
 				</td>
+				<td><button id="vertifyingCase">審核中案件查詢</button></td>
 			</tr>
 		</table>
 
@@ -178,13 +175,13 @@
 				pagingType: 'full_numbers',
 				searching: false,				
 			 	processing: true,
-				serverSide: true,  //分頁、排序都交由伺服器處理
+				serverSide: true,  //DataTable:分頁、排序都交由伺服器處理
 				lengthMenu: [ 3, 6, 9, 12, ],
 				ajax:{
 					url:"/penalty/getVertifyList",
 					type:"get",
 					dataType:"json",
-					data:function(d){ 				//傳送給伺服器的資料(datatable預設會傳送d的資料)
+					data:function(d){ 				//DataTable:傳送給伺服器的資料(datatable預設會傳送d的資料)
 						var start = d.start;
 						var length = d.length;
 						var request = $('form').serialize() + "&start=" + start + "&length=" + length;
@@ -192,7 +189,7 @@
 						return request;
 					},
 					dataSrc:"content",
-					dataFilter:function(resp){		//對伺服器送來的資料進行修改
+					dataFilter:function(resp){		//DataTable:對伺服器送來的資料進行修改
 						
 						var json = jQuery.parseJSON( resp );
 			             json.recordsTotal = json.totalElements;
@@ -204,11 +201,17 @@
 					var pageNum = parseInt(d.json.pageable.pageNumber) ;
 					var totalPages = d.json.totalPages;
 					$('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
-				}, columns: [ 		//設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
+				}, columns: [ 		//DataTable:設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
 		     		{data:null},
-		           	{data: function (data, type, row ) {
-						var vertifyButt = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/penalty/vertify?id="
-											+ data.id + "'\" value='審核'  />";
+		           	{data: function (data) {
+		           		var vertifyButt = "";
+		           		//已完成審核之案件，不顯示審核按鈕
+		           		if(data.status != 1){
+		           			vertifyButt = "已完成審核"
+						}else{
+							vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/penalty/vertify?id="
+								+ data.id + "'\" value='審核'  /></div>";
+						}
 		               	return vertifyButt;	}
 		           	},
 		           	{data:"id" },
@@ -221,13 +224,12 @@
 					{data:"accuser.id"},
 					{data:"defendant.id"},
 					{data:"defendant.name"},
-					//{data:" "},
 					{data:"description"},
 					{data:"penaltyTimeValue"},
 					{data:"status"},
 					
 					
-				], columnDefs:[{		//禁用第0123列的搜索和排序
+				], columnDefs:[{		//DataTable:禁用第0123列的搜索和排序
 					"searchable": false,
 	                "orderable": false,
 	                "targets": [0, 1, 2],
@@ -239,14 +241,15 @@
 	                search:'applied',
 	                order:'applied'
 	            }).nodes().each(function(cell, i) {
-					 i = i+1;								//i從0開始，所以先加1
-	                var pageinfo = dataTable.page.info();	//服務氣模式下，使用DT提供的API直接獲取分頁資訊
-	                var pageno = pageinfo.page;				//当前第几页，从0开始
-	                var length = pageinfo.length;			//每页数据
-	                var columnIndex = (i+pageno*length);	//行号等于 页数*每页数据长度+行号
+					 i = i+1;								//DataTable:i從0開始，所以先加1
+	                var pageinfo = dataTable.page.info();	//DataTable:服務氣模式下，使用DT提供的API直接獲取分頁資訊
+	                var pageno = pageinfo.page;				//DataTable:当前第几页，从0开始
+	                var length = pageinfo.length;			//DataTable:每页数据
+	                var columnIndex = (i+pageno*length);	//DataTable:行号等于 页数*每页数据长度+行号
 	                cell.innerHTML = columnIndex;
 	            });
 	        });	
+			
 			//日期選擇器
 			var datePickerSetting = {
 				format : "yyyy/mm/dd",
@@ -260,7 +263,7 @@
 			$("#dateBefore").datepicker(datePickerSetting);
 			$("#dateAfter").datepicker(datePickerSetting);
 			
-			//搜尋事件
+			//搜尋
 			$("#searchButt").click(	function(){
 				dataTable.ajax.reload();
 			})
@@ -276,6 +279,8 @@
 				$('#status').val($('#penaltyChosen').val());
 				dataTable.ajax.reload();
 			})
+			
+			
 			
 
 		})
