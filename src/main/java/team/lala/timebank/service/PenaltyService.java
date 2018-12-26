@@ -47,11 +47,9 @@ public class PenaltyService {
 	public Penalty checkRecordandProvidePenalty(Long orderId, Long accuserId) {
 		Order thisOrder = orderDao.getOne(orderId);
 		Member accuser = memberDao.getOne(accuserId);
-		List<Penalty> penalties = findByOrder(thisOrder);
-		
-		
-		Penalty penalty = new Penalty();
-		Member defendant;
+
+		List<Penalty> penalties = findByOrder(thisOrder);//查出這筆order的所有檢舉紀錄
+
 		if(penalties.size() > 0) { //該筆order有檢舉紀錄(有雙向檢舉之可能，故需判斷檢舉紀錄的檢舉者是否相同)
 			for(Penalty p : penalties) {
 				if(p.getAccuser().equals(accuser)) { //該筆order的檢舉人與目前登入會員相同(不得再次提出檢舉)
@@ -60,11 +58,13 @@ public class PenaltyService {
 			}
 		}
 		
+		Member defendant;
 		if(accuser == thisOrder.getMission().getMember()) {//如果檢舉者是雇主
 			defendant = thisOrder.getVolunteer();//被告就是志工
 		} else {
 			defendant = thisOrder.getMission().getMember();
 		}
+		Penalty penalty = new Penalty();
 		penalty.setAccuser(accuser);
 		penalty.setOrder(thisOrder);
 		penalty.setDefendant(defendant);

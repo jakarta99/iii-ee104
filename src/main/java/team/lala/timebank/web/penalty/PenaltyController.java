@@ -43,8 +43,6 @@ public class PenaltyController {
 	@Autowired
 	private OrderService orderService;
 
-	@Autowired
-	private SystemMessageService systemMessageService;
 	//basic/user
 	//模擬檢視會員媒合清單(開發debug用，之後要刪)
 	@RequestMapping("/tempPenaltyEntrance")
@@ -73,13 +71,12 @@ public class PenaltyController {
 	@RequestMapping("/report")
 	public String report(@RequestParam("orderId")Long orderId, Model model) {  
 
-		//1.取出目前登入之會員id，做為檢舉者id
-		Member userDetails = (Member) SecurityContextHolder.getContext()  
-					.getAuthentication()  
-					.getPrincipal();
-		Long accuserId = userDetails.getId();
-		
-		//2.判斷是否已被檢舉過。如已被檢舉過，則回傳無法檢舉的資訊並且導回原頁面
+		//1.判斷是否已被檢舉過。如已被檢舉過，則回傳無法檢舉的資訊並且導回原頁面
+		Member accuser = (Member) SecurityContextHolder.getContext()   
+				.getAuthentication()  
+				.getPrincipal();
+		log.debug("accuser={}", accuser); //Controller裡的accuser如果直接傳進Service，會變空，只能傳入accuserId????
+		Long accuserId = accuser.getId();
 		Penalty penalty = penaltyService.checkRecordandProvidePenalty(orderId, accuserId);
 		
 		if(penalty == null) {
@@ -87,12 +84,8 @@ public class PenaltyController {
 			return "/basic/user/penalty/temp_order_list";
 		}
 		
-		//3.如果未被檢舉過，則將需要顯示在檢舉頁面的資料放入model
+		//2.如果未被檢舉過，則將需要顯示在檢舉頁面的資料放入model(session scope)
 		model.addAttribute("reportBasicData",penalty);
-//		Map<String, Object> reportBasicData = penaltyService.getAccuserAndDefendant(orderId, accuserId);
-//		if(reportBasicData != null && reportBasicData.size() != 0) {
-//			
-//		}
 		return "/basic/user/penalty/violation_report";
 	}
 	
@@ -148,14 +141,14 @@ public class PenaltyController {
 	public AjaxResponse<Penalty> doneVertify(@RequestParam("penaltyId") Long penaltyId, 
 			@RequestParam("status") Integer status, @RequestParam("penaltyTimeValue") Integer penaltyTimeValue, 
 			@RequestParam("vertifyReason") String vertifyReason) {
-		AjaxResponse<Penalty> ajaxResponse = new AjaxResponse<Penalty>();
 		
+		AjaxResponse<Penalty> ajaxResponse = new AjaxResponse<Penalty>();
 		//測完看能否再包些東西進Service
 		try {
-			//進行檢舉案件審核，結果存入DB (但可能是暫存審核意見，還沒完成審核
+			//進行檢舉案件審核，結果存入DB (但可能是暫存審核意見，還沒完成審核)
 			Penalty penalty = penaltyService.vertifyPenalty(penaltyId, status, penaltyTimeValue, vertifyReason);
 			
-			//如果完成審核，寄站內信通知原告
+			//完成審核，寄站內信通知原告
 			if(status == 2 || status == 3) { 
 				penaltyService.sendSystemMessageToAccuser(penalty); //寄信
 				ajaxResponse.setStatusDescription("1.已寄站內信給檢舉人。");
@@ -191,7 +184,6 @@ public class PenaltyController {
 		}
 		
 		//待處理:上傳檔案類型，判斷副檔名。
-		
 		return "redirect:/penalty/tempPenaltyEntrance";//回傳上傳成功與否之資訊
 	}
 
