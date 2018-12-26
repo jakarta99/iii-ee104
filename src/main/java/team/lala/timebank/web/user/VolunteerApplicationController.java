@@ -14,46 +14,30 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Order;
-import team.lala.timebank.entity.OrderStatus;
 import team.lala.timebank.service.OrderService;
 
 @Slf4j
 @Controller
-@RequestMapping("/user/volunteerApplication")
+@RequestMapping("/user")
 public class VolunteerApplicationController {
 	
 	@Autowired
 	private OrderService orderService;
 
-	@RequestMapping("/applicationPage")
+	@RequestMapping("/volunteerApplication/applicationPage")
 	public String MemberArea() {
 		return "/basic/user/volunteerApplication/volunteerApplication";
 	}
 
 	@ResponseBody
-	@RequestMapping("/queryApplication")
-	public Page<Order> QueryApplication(Principal principal, /*@RequestParam(value="orderStatus") Long orderStatus,*/ @RequestParam(value="start",required=false) Optional<Integer> start, 
+	@RequestMapping("/volunteerApplication/queryApplication")
+	public Page<Order> QueryApplication(Principal principal, @RequestParam(value="orderStatus") Long orderStatus, @RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
 
 		int page = start.orElse(0)/length.orElse(10);
 		String account = principal.getName();
 		
-		log.debug("{}",orderService.findByVolunteerAndOrderStatus(account, 1l, PageRequest.of(page, length.orElse(10))));
-		return orderService.findByVolunteerAndOrderStatus(account, 1l, PageRequest.of(page, length.orElse(10)));
-	}
-
-	@ResponseBody
-	@RequestMapping("/acceptService")
-	public AjaxResponse<Order> AcceptService() {
-		AjaxResponse<Order> response = new AjaxResponse<Order>();
-		return response;
-	}
-
-	@ResponseBody
-	@RequestMapping("/eventEnd")
-	public AjaxResponse<Order> EventEnd() {
-		AjaxResponse<Order> response = new AjaxResponse<Order>();
-		return response;
+		return orderService.findByVolunteerAndOrderStatus(account, (Long)orderStatus, PageRequest.of(page, length.orElse(10)));
 	}
 
 	@ResponseBody
@@ -70,7 +54,7 @@ public class VolunteerApplicationController {
 		return response;
 	}
 	@ResponseBody
-	@RequestMapping("/delete")
+	@RequestMapping("/volunteerApplication/delete")
 	public AjaxResponse<Order> cancelApplication(@RequestParam("id") Long id){
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		try {

@@ -6,11 +6,13 @@
 <head>
 <!-- css -->
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
+
 <!-- Javascript files-->
 <jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
 
 <script defer
 	src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
 				
@@ -30,7 +32,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
 
 
-<jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
+
 <meta charset="UTF-8">
 <title>mission list(login)</title>
 <style>
@@ -66,11 +68,13 @@
     </style>
 </head>
 <body>
+
  <!-- Top bar-->
       <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
  	
 	  <!-- Navbar -->
       <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
+
 	
 	 <section class="bar">
         <div class="container">
@@ -302,6 +306,8 @@
 		
 		
 	});
-	</script>	
+	</script>
+	 <!-- FOOTER -->
+   <jsp:include page="../../commons/commons_layout/commons_footer.jsp" />	
 </body>
 </html>

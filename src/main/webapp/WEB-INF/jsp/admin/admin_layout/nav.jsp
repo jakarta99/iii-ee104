@@ -26,13 +26,15 @@
 					aria-expanded="false">TIMEBANK BackStage</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown01">
 						<a class="dropdown-item" href="/admin/member/list" id="backStage-member">member</a> 
-						<a	class="dropdown-item" href="/admin/order/list" id="backStage-order">order</a> 
-						<a	class="dropdown-item" href="/admin/donation/list" id="backStage-donation">donation</a>
-						<a	class="dropdown-item" href="/admin/mission/list" id="backStage-mission">mission</a>
-						<a	class="dropdown-item" href="/admin/time-ledger/list" id="backStage-timeledger">time-ledger</a>
-						<a	class="dropdown-item" href="/admin/penalty/list" id="backStage-penalty">penalty</a>
-						<a	class="dropdown-item" href="/admin/role/list" id="backStage-role">role</a>	
-						<a	class="dropdown-item" href="/admin/securityUser/list" id="backStage-role">securityUser</a>						
+						<a class="dropdown-item" href="/admin/order/list" id="backStage-order">order</a> 
+						<a class="dropdown-item" href="/admin/donation/list" id="backStage-donation">donation</a>
+						<a class="dropdown-item" href="/admin/mission/list" id="backStage-mission">mission</a>
+						<a class="dropdown-item" href="/admin/time-ledger/list" id="backStage-timeledger">time-ledger</a>
+						<a class="dropdown-item" href="/admin/penalty/list" id="backStage-penalty">penalty</a>
+						<a class="dropdown-item" href="/admin/role/list" id="backStage-role">role</a>	
+						<a class="dropdown-item" href="/admin/securityUser/list" id="backStage-role">securityUser</a>	
+						<a class="dropdown-item" href="/penalty/tempPenaltyEntrance" id="backStage-personalinfo">【使用者】模擬提出檢舉(暫放)</a>
+                    	<a class="dropdown-item" href="/penalty/showVertifyList" id="backStage-personalinfo">【管理者】檢舉案件審核</a>			
 					</div></li>
 			</ul>
 			<a href='<c:url value="/logout"/>' class="nav-link">

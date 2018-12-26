@@ -25,13 +25,16 @@ public class SystemMessage {
 	private Long id;
 	
 	@OneToOne
-	@JoinColumn(name="MEMBER",
+	@JoinColumn(name="MEMBER_ID",
 				referencedColumnName="id",  
 				insertable=false, updatable=false) 
 	private Member member;
 	
-	@Column(name="SENDER_ID")
-	private Long SenderId;
+	@OneToOne
+	@JoinColumn(name="SENDER_ID",
+				referencedColumnName="id",  
+				insertable=false, updatable=false) 
+	private Member Sender;
 	
 	
 	@Column(name="RELEASE_TIME")

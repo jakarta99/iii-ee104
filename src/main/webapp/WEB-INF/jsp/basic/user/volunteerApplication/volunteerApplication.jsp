@@ -55,57 +55,42 @@
 	<!-- Navbar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />
 	
-	<div>
-	<jsp:include page="../user_layout/user_sidebar.jsp" />
-		<fieldset style="width: 300">
-			<table id="table" class="table table-striped table-bordered">
-				<thead>
-					<tr>
-						<th scope="col"></th>
-						<th scope="col">活動名稱(mission.title)</th>
-						<th scope="col">地點(mission.county district address)</th>
-						<th scope="col">活動開始時間(mission.startDate)</th>
-						<th scope="col">活動結束時間(mission.endDate)</th>
-						<th scope="col">時數(mission.timeValue)</th>
-						<th scope="col">申請時間(volunteerApplyTime)</th>
-						<th scope="col">狀態(status)</th>
-						<th scope="col" width="100px"></th>
-					</tr>
-				</thead>
-				<tbody id="tableBody">
-					<!-- 會員資料 -->
-				</tbody>
-			</table>
-		</fieldset>
-	</div>
+	<section class="bar">
+			<jsp:include page="../user_layout/user_sidebar.jsp" />
+        <div class="container">
+        <button type="button" id="orderStatus1" class="btn btn-primary">申請中</button>
+        <button type="button" id="orderStatus2" class="btn btn-primary">機構接受服務</button>
+        <button type="button" id="orderStatus3" class="btn btn-primary">活動時間結束，未發時數</button>
+        	<div class="row">
+				<fieldset style="width: 300">
+					<table id="table" class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th scope="col"></th>
+								<th scope="col">活動名稱</th>
+								<th scope="col">地點</th>
+								<th scope="col">活動開始時間</th>
+								<th scope="col">活動結束時間</th>
+								<th scope="col">時數</th>
+								<th scope="col">申請時間</th>
+								<th scope="col">狀態</th>
+								<th scope="col" width="50px"></th>
+							</tr>
+						</thead>
+						<tbody id="tableBody">
+							<!-- 會員資料 -->
+						</tbody>
+					</table>
+				</fieldset>
+	 		</div>
+	 	</div>
+	</section>
 
 	<!-- FOOTER -->
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
-		<script>
-		function deleteRow(orderId){
-			$.ajax({
-				type: "get",
-				dataType: "json",         
-				url: "/user/volunteerApplication/delete",
-				data: {"id":orderId}					
-			})
-			.done(function(response){			
-				if (response.status =="SUCCESS"){
-					alert("申請已取消");
-				} else {
-					$.each(response.messages, function(idx, message) {
-						alert("the "+idx+"th ERROR, because "+message);
-					});
-				}			
-				dataTable.draw('page');
-				if ($("table tbody tr").length < 2){
-					dataTable.page( 'previous' ).draw('page');;
-				} 
-			})	
-		}
-		
+		<script>	
 		var dataTable;
-		
+		var orderStatus = 1;
 		$(document).ready(function() {
 			dataTable = $('#table').DataTable({
 				pageResize: true, 
@@ -121,7 +106,9 @@
 					data:function(d){ 				//傳送給伺服器的資料(datatable預設會傳送d的資料)
 						var start = d.start;
 						var length = d.length;
-						var request = "start="+start+"&length="+length;
+						var request = "orderStatus=" + orderStatus +
+											"&start=" + start + "&length="+ length;
+						console.log(request)
 						return request;
 					},
 					dataSrc:"content",
@@ -140,13 +127,18 @@
 		     		{data:null},
 		           	{data:"mission.title" },
 		           	{ data: null, render: function ( data, type, row ) {
-		           		console.log(data);
 		                return data.mission.county + data.mission.district+ data.mission.address;
 		            } },
-					{data:"mission.startDate"},
-					{data:"mission.endDate"},
+		            { data: null, render: function ( data, type, row ) {
+		            	return new Date(data.mission.startDate).Format('yyyy-MM-dd hh-mm');
+		            } },
+		            { data: null, render: function ( data, type, row ) {
+		            	return new Date(data.mission.endDate).Format('yyyy-MM-dd hh-mm');
+		            } },
 					{data:"mission.timeValue"},
-					{data:"volunteerApplyTime"},
+					{ data: null, render: function ( data, type, row ) {
+		            	return new Date(data.volunteerApplyTime).Format('yyyy-MM-dd hh-mm');
+		            } },
 					{data:"orderStatus.orderStatus"},
 		           	{data: function (data, type, row ) {
 		           		var cancelButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='刪除' />"
@@ -173,12 +165,62 @@
 	                cell.innerHTML = columnIndex;
 	            });
 	        });			
-			//搜尋事件
-			$("#searchButt").click(	function(){
-				dataTable.ajax.reload();
-
+		//搜尋事件
+		$("#searchButt").click(	function(){
+			dataTable.ajax.reload();
 			})
 		})
+		//切換服務狀態
+		$('#orderStatus1').click(function(){
+			orderStatus = 1;
+			dataTable.ajax.reload();
+		})
+		$('#orderStatus2').click(function(){
+			orderStatus = 2;
+			dataTable.ajax.reload();
+		})
+		$('#orderStatus3').click(function(){
+			orderStatus = 3;
+			dataTable.ajax.reload();
+		})
+		//刪除事件方法
+		function deleteRow(orderId){
+			$.ajax({
+				type: "get",
+				dataType: "json",         
+				url: "/user/volunteerApplication/delete",
+				data: {"id":orderId}					
+			})
+			.done(function(response){			
+				if (response.status =="SUCCESS"){
+					alert("申請已取消");
+				} else {
+					$.each(response.messages, function(idx, message) {
+						alert("the "+idx+"th ERROR, because "+message);
+					});
+				}			
+				dataTable.draw('page');
+				if ($("table tbody tr").length < 2){
+					dataTable.page( 'previous' ).draw('page');;
+				} 
+			})	
+		}
+		//自訂日期格式
+		Date.prototype.Format = function (fmt) {
+		    var o = {
+		        "M+": this.getMonth() + 1, //月份
+		        "d+": this.getDate(), //日
+		        "h+": this.getHours(), //小时
+		        "m+": this.getMinutes(), //分
+		        "s+": this.getSeconds(), //秒
+		        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+		        "S": this.getMilliseconds() //毫秒
+		    };
+		    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+		    for (var k in o)
+		        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+		    return fmt;
+		};
 	</script>
 	
 </body>
