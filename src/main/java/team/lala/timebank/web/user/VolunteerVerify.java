@@ -31,14 +31,15 @@ public class VolunteerVerify {
 
 	@RequestMapping("/query")
 	@ResponseBody
-	public Page<Order> getOrderByMemberIdAndStatus(Order inputOrder, Principal principal,
+	public Page<Order> getOrderByMissionAndStatus(Mission inputMission,
 			@RequestParam(value = "start", required = false) Optional<Integer> start,
 			@RequestParam(value = "length", required = false) Optional<Integer> length) {
 		int page = start.orElse(0) / length.orElse(10);
 		
 //		Page<Mission> missions = missionService.findByAccount(principal, inputMission, PageRequest.of(page, length.orElse(10)));
-		Page<Order> Orders = orderService(principal, inputMission, page, length);
-		return missions;
+		Page<Order> orders = orderService.findByMission(inputMission, page, length);
+		
+		return orders;
 	}
 	
 	

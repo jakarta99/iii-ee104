@@ -80,7 +80,7 @@
         <div class="container">
           <div class="row">
             <jsp:include page="../user_layout/user_sidebar.jsp" />
-    <div style="width:600px">
+    <div style="width:850px">
 	<h1 class="s2">mission list</h1>
 	<fieldset>
 	<form>
@@ -154,8 +154,8 @@
 	
 	<fieldset >
 	
-	<button class="btn btn-outline-secondary" id="status1Butt" >進行中</button>
-	<button class="btn btn-outline-secondary" id="status23Butt" >時數代核發</button>
+	<button class="btn btn-outline-primary" id="status12Butt" >進行中</button>
+	<button class="btn btn-outline-secondary" id="status3Butt" >時數代核發</button>
 	<button class="btn btn-outline-secondary" id="status4Butt" >歷史紀錄</button>
 	<table id="table" class="table table-hover">
 	<thead>
@@ -186,25 +186,37 @@
 	<script>
 	
 	var dataTable;
+// 	<button class="btn btn-outline-primary" id="status1Butt" >進行中</button>
+// 	<button class="btn btn-outline-secondary" id="status23Butt" >時數代核發</button>
+// 	<button class="btn btn-outline-secondary" id="status4Butt" >歷史紀錄</button>
 	
  	$("#searchButt").click(function(){
 		
  		dataTable.ajax.reload();
 	})
 	
-	$("#status1Butt").click(function(){
+	$("#status12Butt").click(function(){
 		$("#statusDetail").val("2");
+		$("#status12Butt").attr('class',"btn btn-outline-primary")
+		$("#status3Butt").attr('class',"btn btn-outline-secondary")
+		$("#status4Butt").attr('class',"btn btn-outline-secondary")
 		dataTable.ajax.reload();
 		
 	})
 	
-	$("#status23Butt").click(function(){
+	$("#status3Butt").click(function(){
+		$("#status12Butt").attr('class',"btn btn-outline-secondary")
+		$("#status3Butt").attr('class',"btn btn-outline-primary")
+		$("#status4Butt").attr('class',"btn btn-outline-secondary")
 		$("#statusDetail").val('3');
 		dataTable.ajax.reload();
 		
 	})
 	
 	$("#status4Butt").click(function(){
+		$("#status12Butt").attr('class',"btn btn-outline-secondary")
+		$("#status3Butt").attr('class',"btn btn-outline-secondary")
+		$("#status4Butt").attr('class',"btn btn-outline-primary")
 		$("#statusDetail").val('4');
 		dataTable.ajax.reload();
 		
@@ -305,7 +317,7 @@
 			            } },	
 					
 						{"data":function (data, type, val) {
-							var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerRecruitment/edit?id="+data.id+"'\">志工審核</button>";   
+							var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">志工審核</button>";   
 							return vbutton;}							 
 						},
 			            {"data":"status.missionStatus"},
