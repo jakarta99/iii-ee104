@@ -112,7 +112,8 @@ public class Mission {
 	private MissionStatus status;
 	
 	@Transient
-	private String statusDetail;
+	private Integer statusDetail;
+//	private String statusDetail;
 
 	@Column(name = "APPROVED_QUANTITY", nullable = false)
 	private Integer approvedQuantity;

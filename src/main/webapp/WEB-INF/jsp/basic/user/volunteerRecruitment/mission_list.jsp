@@ -80,7 +80,7 @@
         <div class="container">
           <div class="row">
             <jsp:include page="../user_layout/user_sidebar.jsp" />
-    <div>
+    <div style="width:600px">
 	<h1 class="s2">mission list</h1>
 	<fieldset>
 	<form>
@@ -193,19 +193,19 @@
 	})
 	
 	$("#status1Butt").click(function(){
-		$("#statusDetail").val("未開始");
+		$("#statusDetail").val("2");
 		dataTable.ajax.reload();
 		
 	})
 	
 	$("#status23Butt").click(function(){
-		$("#statusDetail").val('進行中');
+		$("#statusDetail").val('3');
 		dataTable.ajax.reload();
 		
 	})
 	
 	$("#status4Butt").click(function(){
-		$("#statusDetail").val('結案');
+		$("#statusDetail").val('4');
 		dataTable.ajax.reload();
 		
 	})
@@ -250,7 +250,7 @@
 		    language: 'zh-TW',
 		    startView:"years",
 		})
-		
+		$("#statusDetail").val("2");
 		
 		dataTable=$('#table').DataTable({
 				pageResize: true,
