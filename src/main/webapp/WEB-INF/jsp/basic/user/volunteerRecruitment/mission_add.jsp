@@ -5,18 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- css -->
+<jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
+<!-- Javascript files-->
+<jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" 
-		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" 
-		crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" 
-		integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" 
-		crossorigin="anonymous"></script>
-<link rel="stylesheet" 
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" 
-		integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" 
-		crossorigin="anonymous">
+<script defer
+	src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
@@ -34,7 +29,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/i18n/jquery-ui-timepicker-zh-TW.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
 
-<jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
+
 
 <title>mission add</title>
 <style>
@@ -68,21 +63,21 @@
     </style>
 </head>
 <body>
- <!-- Top bar-->
-      <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
+	<!-- Top bar-->
+	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
  	
-	  <!-- Navbar -->
-      <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-	  <section class="bar">
-        <div class="container">
-          <div class="row">
-            <jsp:include page="../user_layout/user_sidebar.jsp" />
-	<fieldset>
-            <h1 class="s2">mission add(after login)</h1>
-	<form action="/user/missionPublish/insert" method="post">
+	<!-- Navbar -->
+    <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
+		<section class="bar">
+        	<div class="container">
+          	<div class="row">
+            	<jsp:include page="../user_layout/user_sidebar.jsp" />
+				<fieldset>
+           			<h1 class="s2">mission add(after login)</h1>
+					<form action="/user/missionPublish/insert" method="post">
 	
 	
-	<div>			
+	<div>		
 		<label>活動縣市:</label> <br>
 		<div role="tw-city-selector" ></div>
 		<div>
@@ -153,13 +148,15 @@
 	</form>
 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/admin/mission/list'">回列表頁</button>
 	</fieldset>
+	
+	
           </div>
         </div>
 	
 	
-	
-	
 	  </section>
+	  
+	  
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script>
 	

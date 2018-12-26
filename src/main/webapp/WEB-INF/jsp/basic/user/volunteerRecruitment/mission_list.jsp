@@ -4,24 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- css -->
+<jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
+<!-- Javascript files-->
+<jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
 
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" 
-		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" 
-		crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" 
-		integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" 
-		crossorigin="anonymous"></script>
-<link rel="stylesheet" 
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" 
-		integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" 
-		crossorigin="anonymous">
 <script defer
 	src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
@@ -50,7 +37,7 @@
 
 	 	
         fieldset {
-            width: 90%;
+            width: 60%;
             border-radius: 20px;
             padding: 20px;
             margin: 20px;
@@ -84,10 +71,13 @@
  	
 	  <!-- Navbar -->
       <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-	<div class="margintop">
 	
+	 <section class="bar">
+        <div class="container">
+          <div class="row">
+            <jsp:include page="../user_layout/user_sidebar.jsp" />
+    <div class="mb-5">
 	<h1 class="s2">mission list</h1>
-	
 	<fieldset>
 	<form>
 			<div>
@@ -140,7 +130,7 @@
 		</form>
 	</fieldset>
 	
-	<fieldset>
+	<fieldset >
 	
 	<button class="btn btn-outline-secondary" id="status1Butt" >進行中</button>
 	<button class="btn btn-outline-secondary" id="status23Butt" >時數代核發</button>
@@ -162,8 +152,13 @@
 	</table>
 		
 	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/'">回列表頁</button>
+	
 	</fieldset>
 	</div>
+	</div>
+	</div>
+	  </section>
+	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 	
 	<script>
