@@ -81,7 +81,7 @@
         <div class="container">
           <div class="row">
             <jsp:include page="../user_layout/user_sidebar.jsp" />
-    <div>
+    <div style="width:850px">
 	<h1 class="s2">志工審核</h1>
 	
 	<fieldset >
@@ -138,7 +138,7 @@
 		 			 },	
 				"lengthMenu": [ 3, 6, 9, 12, ],
 				ajax:{
-					url:"/user/volunteerRecruitment/query",
+					url:"/user/volunteerVerify/query",
 					type: "get",
 				    dataType : "json",
 				    data: function(d){

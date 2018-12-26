@@ -337,7 +337,5 @@
 		
 	});
 	</script>
-	 <!-- FOOTER -->
-   <jsp:include page="../../commons/commons_layout/commons_footer.jsp" />	
 </body>
 </html>
