@@ -164,12 +164,7 @@
 	                var columnIndex = (i+pageno*length);	//行号等于 页数*每页数据长度+行号
 	                cell.innerHTML = columnIndex;
 	            });
-	        });			
-		//搜尋事件
-		$("#searchButt").click(	function(){
-			dataTable.ajax.reload();
-			})
-		})
+	        });	
 		//切換服務狀態
 		$('#orderStatus1').click(function(){
 			orderStatus = 1;
@@ -180,7 +175,7 @@
 			dataTable.ajax.reload();
 		})
 		$('#orderStatus3').click(function(){
-			orderStatus = 3;
+			orderStatus = 4;
 			dataTable.ajax.reload();
 		})
 		//刪除事件方法

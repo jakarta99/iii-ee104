@@ -25,8 +25,13 @@ public class VolunteerApplicationController {
 	private OrderService orderService;
 
 	@RequestMapping("/volunteerApplication/applicationPage")
-	public String MemberArea() {
+	public String ApplicationPage() {
 		return "/basic/user/volunteerApplication/volunteerApplication";
+	}
+	
+	@RequestMapping("/volunteerApplication/RecordPage")
+	public String RecordPage() {
+		return "/basic/user/volunteerApplication/volunteerServiceRecordInquire";	
 	}
 
 	@ResponseBody
@@ -40,19 +45,6 @@ public class VolunteerApplicationController {
 		return orderService.findByVolunteerAndOrderStatus(account, (Long)orderStatus, PageRequest.of(page, length.orElse(10)));
 	}
 
-	@ResponseBody
-	@RequestMapping("/matchSuccessRecord")
-	public AjaxResponse<Order> MatchSuccessRecord() {
-		AjaxResponse<Order> response = new AjaxResponse<Order>();
-		return response;
-	}
-
-	@ResponseBody
-	@RequestMapping("/matchFailRecord")
-	public AjaxResponse<Order> MatchFailRecord() {
-		AjaxResponse<Order> response = new AjaxResponse<Order>();
-		return response;
-	}
 	@ResponseBody
 	@RequestMapping("/volunteerApplication/delete")
 	public AjaxResponse<Order> cancelApplication(@RequestParam("id") Long id){
