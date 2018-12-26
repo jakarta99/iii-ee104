@@ -45,11 +45,11 @@ public class PenaltyController {
 	@Autowired
 	private OrderService orderService;
 
-	
+	//basic/user
 	//模擬檢視會員媒合清單(開發debug用，之後要刪)
 	@RequestMapping("/tempPenaltyEntrance")
 	public String listPage() {
-		return "/penalty/temp_order_list"; // getRequestDispatcher("/WEB-INF/jsp/order_list.jsp").forward(request,
+		return "/basic/user/penalty/temp_order_list"; // getRequestDispatcher("/WEB-INF/jsp/order_list.jsp").forward(request,
 									// response);
 	}
 	
@@ -84,7 +84,7 @@ public class PenaltyController {
 		
 		if(penalty == null) {
 			model.addAttribute("penaltyExist", orderId + "號媒合案件已有您的檢舉紀錄，不得重複提出檢舉");
-			return "/penalty/temp_order_list";
+			return "/basic/user/penalty/temp_order_list";
 		}
 		
 		//3.如果未被檢舉過，則將需要顯示在檢舉頁面的資料放入model
@@ -93,7 +93,7 @@ public class PenaltyController {
 //		if(reportBasicData != null && reportBasicData.size() != 0) {
 //			
 //		}
-		return "/penalty/violation_report";
+		return "/basic/user/penalty/violation_report";
 	}
 	
 	//提出檢舉時呼叫的方法
@@ -109,7 +109,7 @@ public class PenaltyController {
 	//檢舉成功
 	@RequestMapping("/my-report-list")
 	public String showReportList() {
-		return "/penalty/my_report_list";
+		return "/basic/user/penalty/my_report_list";
 	}
 	
 	//*************************************************
@@ -117,7 +117,7 @@ public class PenaltyController {
 	//跳轉審查列表
 	@RequestMapping("/showVertifyList")
 	public String showVertifyList() {
-		return "/penalty/vertify/vertify_report_list";
+		return "/basic/user/penalty/vertify/vertify_report_list";
 	}
 	
 	//查出所有待審查列表
@@ -139,7 +139,7 @@ public class PenaltyController {
 	public String vertify(@RequestParam("id") Long id, Model model) {
 		Penalty penalty = penaltyService.getOne(id);
 		model.addAttribute("penalty", penalty);
-		return "/penalty/vertify/penalty_vertifying";
+		return "/basic/user/penalty/vertify/penalty_vertifying";
 	}
 	
 	//呼叫審查service(扣違規會員時數)，完成審查(update成功)後跳出成功對話框(SUCCESS)，轉回所有待審查清單
