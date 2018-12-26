@@ -153,10 +153,16 @@ public class PenaltyController {
 		try {
 			//完成檢舉案件審核，結果存入DB
 			Penalty penalty = penaltyService.vertifyPenalty(penaltyId, status, penaltyTimeValue, vertifyReason);
+			
+			//寄站內信通知原告
+			
 			//如果審核結果為2(需懲罰)，才進行被檢舉人帳戶扣款
 			if(status==2) {
 				timeLedgerService.doPenaltyDebit(penalty);
 			}
+			
+			//寄站內信通知被告
+			
 			ajaxResponse.setObj(penalty);
 		} catch (Exception e) {
 			ajaxResponse.addMessage(e.getMessage());
