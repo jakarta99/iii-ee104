@@ -7,7 +7,8 @@
 <title>Time Bank Login</title>
 <!-- css -->
 <jsp:include page="commons_layout/commons_css_links.jsp"/>
-
+<!-- Javascript files-->
+<jsp:include page="commons_layout/commons_js_links.jsp" />
 
 
 </head>
@@ -64,8 +65,7 @@
    <!-- FOOTER -->
    <jsp:include page="commons_layout/commons_footer.jsp" />
    
-   <!-- Javascript files-->
-   <jsp:include page="commons_layout/commons_js_links.jsp" />
+
 
 </body>
 </html>
