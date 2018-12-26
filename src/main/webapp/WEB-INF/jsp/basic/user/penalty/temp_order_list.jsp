@@ -4,21 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- css-->
+<jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
+<jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 
+<!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- Bootstrap core CSS -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
-	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
-	crossorigin="anonymous"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
-	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
-	crossorigin="anonymous">
+
 <!-- date picker -->
 <script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
@@ -61,8 +53,11 @@
 <title>媒合案件清單(模擬畫面)</title>
 </head>
 <body>
-	<!-- 加入nav.html(放在static/html) -->
-<%-- 	<jsp:include page="../admin_layout/nav.jsp" /> --%>
+	<!-- Top bar-->
+	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp" />
+	<!-- Navbar -->
+	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />
+      
 	<article>
 		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
 		<h1 style="padding-top: 2cm">媒合案件清單(模擬檢舉流程用)</h1>
@@ -119,6 +114,11 @@
 		</table>
 		</fieldset>
 	</article>
+	
+	<!-- FOOTER -->
+	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
+	
+	
 	<script>
 
 		var dataTable;
