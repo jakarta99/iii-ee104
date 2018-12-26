@@ -93,18 +93,18 @@
 			<div style='display:inline' role="tw-city-selector" ></div>
 			
 			<label>會員類型 :</label> 
-				<select  id="serviceType" name="serviceType">
+				<select  id="serviceTypeDetail" name="serviceTypeDetail">
 					<option value="">選擇服務類型</option>
-					<option value="1">婦幼關懷</option>
-			        <option value="2">身心障礙</option>
-			        <option value="3">老人服務</option>
-			        <option value="4">社會服務</option>
-			        <option value="5">動物保護</option>
-			        <option value="6">國際救援</option>
-			        <option value="7">環境保護</option>
-			        <option value="8">文教藝術</option>
-			        <option value="9">醫療服務</option>
-			        <option value="10">宗教信仰</option>
+					<option value="婦幼關懷">婦幼關懷</option>
+			        <option value="身心障礙">身心障礙</option>
+			        <option value="老人服務">老人服務</option>
+			        <option value="社會服務">社會服務</option>
+			        <option value="動物保護">動物保護</option>
+			        <option value="國際救援">國際救援</option>
+			        <option value="環境保護">環境保護</option>
+			        <option value="文教藝術">文教藝術</option>
+			        <option value="醫療服務">醫療服務</option>
+			        <option value="宗教信仰">宗教信仰</option>
 				</select>
 				
 			<label>長短期 :</label> 
@@ -114,14 +114,14 @@
 			        <option value="S">短期</option>
 				</select>
 				
-			<label>狀態:</label> 
-				<select  id="status" name="status">
-					<option value="">選擇狀態</option>
-					<option value="1">1</option>
-			        <option value="2">2</option>
-			        <option value="3">3</option>
-			        <option value="4">4</option>
-				</select>	
+<!-- 			<label>狀態:</label>  -->
+<!-- 				<select  id="status" name="status"> -->
+<!-- 					<option value="">選擇狀態</option> -->
+<!-- 					<option value="1">1</option> -->
+<!-- 			        <option value="2">2</option> -->
+<!-- 			        <option value="3">3</option> -->
+<!-- 			        <option value="4">4</option> -->
+<!-- 				</select>	 -->
 				
 			<label>startDate:</label>
 			<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
@@ -141,11 +141,14 @@
 			<label>timeValue :</label> 
 			<input type="text" value="" placeholder="timeValue" id="timeValue" name="timeValue"/>
 			
-			<label>jobTitle :</label> 
-			<input type="text" value="" placeholder="jobTitle" id="jobTitle" name="jobTitle"/>
+			<label>title :</label> 
+			<input type="text" value="" placeholder="title" id="title" name="title"/>
 			
 			<label>memberAccount :</label> 
 			<input type="text" value="" placeholder="memberAccount" id="memberAccount" name="memberAccount"/>
+			
+			<label>statusDetail :</label> 
+			<input type="text" value="" placeholder="statusDetail" id="statusDetail" name="statusDetail"/>
 			
 			
 			</div>
@@ -158,20 +161,20 @@
 	<thead>
 	<tr>
 		<th>選項</th>
-		<th scope="col">id</th>
-		<th scope="col">memberName</th>
-		<th scope="col">title</th>
-		<th scope="col">timeValue</th>
-		<th scope="col">termType</th>
-		<th scope="col">serviceType</th>
-		<th scope="col">publishDate</th>
+		<th scope="col">會員編號</th>
+		<th scope="col">會員帳號</th>
+		<th scope="col">活動名稱</th>
+		<th scope="col">時數</th>
+		<th scope="col">長短期</th>
+		<th scope="col">服務類型</th>
+		<th scope="col">結束日期</th>
 <!-- 		<th scope="col">startDate</th> -->
 <!-- 		<th scope="col">endDate</th> -->
-		<th scope="col">peopleNeeded</th>
+		<th scope="col">需求人數</th>
 <!-- 		<th scope="col">contactPerson</th> -->
 <!-- 		<th scope="col">contactPhone</th> -->
 <!-- 		<th scope="col">contactEmail</th> -->
-<!-- 		<th scope="col">discription</th> -->
+		<th scope="col">狀態</th>
 		<th scope="col">地址</th>
 	</tr>
 	 </thead>	
@@ -289,10 +292,15 @@
 						{"data":"member.account"},
 						{"data":"title"},
 						{"data":"timeValue"},
-						{"data":"termType"},
+						{"data":null, render: function ( data, type, row ) {
+			                	if(data.termType=='S'){
+			                		return '短期';	
+			                	}else
+			                		return '長期';
+			            } },
 						{"data":"serviceType.serviceType"},
 						{"data":null, render: function ( data, type, row ) {
-			                return new Date(data.publishDate).toLocaleDateString();
+			                return new Date(data.endDate).toLocaleDateString();
 			            } },	
 						
 // 						{"data":"startDate"},						
@@ -301,7 +309,7 @@
 // 						{"data":"contactPerson"},						
 // 						{"data":"contactPhone"},						
 // 						{"data":"contactEmail"},						
-// 						{"data":"discription"},						
+						{"data":"status.missionStatus"},						
 						{"data": null, render: function ( data, type, row ) {
 			                return data.county + data.district+ data.address;
 			            }},						
