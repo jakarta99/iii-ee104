@@ -154,8 +154,8 @@
 	
 	<fieldset >
 	
-	<button class="btn btn-outline-primary" id="status12Butt" >進行中</button>
-	<button class="btn btn-outline-secondary" id="status3Butt" >時數代核發</button>
+	<button class="btn btn-outline-primary" id="status12Butt" >未開始</button>
+	<button class="btn btn-outline-secondary" id="status3Butt" >時數未核發</button>
 	<button class="btn btn-outline-secondary" id="status4Butt" >歷史紀錄</button>
 	<table id="table" class="table table-hover">
 	<thead>
@@ -302,9 +302,14 @@
 					},
 					columns:[						
 						{"data": function (data, type, val) {
+							if(data.status.id<=2){
 							 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerRecruitment/edit?id="+data.id+"'\">編輯</button>";     
 							 var cancelbutton="<button class='btn btn-outline-secondary' onclick=\"cancelMission("+data.id+")\">取消</button>"; 	
-							 return editbutton + cancelbutton;}
+							 return editbutton + cancelbutton;
+							 }else{
+								 return "活動進行中" ;
+							 }
+						}
 						},					 
 						{"data":"title"},
 						{"data":"peopleNeeded"},						
@@ -314,7 +319,7 @@
 						
 			            {"data":null, render: function ( data, type, row ) {
 			                return new Date(data.startDate).toLocaleDateString();
-			            } },	
+			            }},	
 					
 						{"data":function (data, type, val) {
 							if(data.status.id==1){
