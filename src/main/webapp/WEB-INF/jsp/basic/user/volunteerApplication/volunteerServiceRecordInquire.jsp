@@ -26,7 +26,7 @@
 <title>mission list(login)</title>
 <style> 	
         fieldset {
-            width: 70%;
+            width: 100%;
             border-radius: 20px;
             padding: 20px;
             margin: 20px;
@@ -64,6 +64,7 @@
         	<div class="row">
 			<jsp:include page="../user_layout/user_sidebar.jsp" />
         			<!-- 條件搜尋表單 -->
+        		<div style="width: 600">
 				<fieldset>
 			    <button type="button" id="orderStatus7" class="btn btn-primary">媒合成功紀錄</button>
 			    <button type="button" id="orderStatus3" class="btn btn-secondary">媒合失敗紀錄</button>
@@ -90,19 +91,16 @@
 							<label>狀態 :</label> 
 							<select  id="status" name="status">
 								<option value="">選擇狀態</option>
-								<option value="3">requester 拒絕服務</option>
-						        <option value="4">Requester 取消交易</option>
-						        <option value="5">志工 取消交易</option>
-								<option value="7">已完成</option>
-						        <option value="8">Requester 臨時取消活動(不懲罰)</option>
-						        <option value="9">Requester 臨時取消活動(要懲罰)</option>
-						        <option value="10">志工 臨時請假(不懲罰)</option>
-						        <option value="11">志工 臨時不去(要懲罰)</option>
-							</select>		
+								<option value=7>已完成</option>
+								<option value=8>Requester 臨時取消活動(不懲罰)</option>
+								<option value=9>Requester 臨時取消活動(要懲罰)</option>
+								<option value=10>志工 臨時請假(不懲罰)</option>
+								<option value=11>志工 臨時不去(要懲罰)</option>
+							</select>
 						</div>
 					</form>
-<!-- 				</fieldset> -->
-<!-- 				<fieldset style="width: 300"> -->
+				</fieldset>
+				<fieldset>
 					<table id="table" class="table table-striped table-bordered">
 						<thead>
 							<tr>
@@ -122,10 +120,10 @@
 						</tbody>
 					</table>
 				</fieldset>
+				</div>
 	 		</div>
 	 	</div>
 	</section>
-
 	<!-- FOOTER -->
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
 	<script>	
@@ -248,16 +246,30 @@
 			})
 		})
 		//切換服務狀態
+		var Status7 = 
+			"<option value=''>選擇狀態</option>"+
+			"<option value=7>已完成</option>"+
+			"<option value=8>Requester 臨時取消活動(不懲罰)</option>"+
+			"<option value=9>Requester 臨時取消活動(要懲罰)</option>"+
+			"<option value=10>志工 臨時請假(不懲罰)</option>"+
+			"<option value=11>志工 臨時不去(要懲罰)</option>";
+		var Status3 = 
+			"<option value=''>選擇狀態</option>"+
+			"<option value=3>requester 拒絕服務</option>"+
+			"<option value=4>Requester 取消交易</option>"+
+			"<option value=5>志工 取消交易</option>";    
 		$('#orderStatus7').click(function(){
 			orderStatus = 7;
 			$('#orderStatus7').attr('class','btn btn-primary')
 			$('#orderStatus3').attr('class','btn btn-secondary')
+			$('#status').html(Status7);
 			dataTable.ajax.reload();
 		})
 		$('#orderStatus3').click(function(){
 			orderStatus = 3;
 			$('#orderStatus7').attr('class','btn btn-secondary')
 			$('#orderStatus3').attr('class','btn btn-primary')
+			$('#status').html(Status3);
 			dataTable.ajax.reload();
 		})
 		//自訂日期格式

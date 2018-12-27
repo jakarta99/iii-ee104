@@ -60,8 +60,14 @@ public class OrderService {
 			PageRequest pageRequest) {
 		order.setVolunteerId(account);
 		if (order.getStatus() == null) {
-			order.setStatus(orderStatus);
-		}
+			if(orderStatus == 7L) {
+				order.setStatusBegin(7L);
+				order.setStatusEnd(11L);				
+			} else if (orderStatus == 3L) {
+				order.setStatusBegin(3L);
+				order.setStatusEnd(5L);
+			}
+		} 
 		OrderSpecification orderSpecification = new OrderSpecification(order);
 		return orderDao.findAll(orderSpecification, pageRequest);
 	}

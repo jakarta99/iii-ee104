@@ -93,14 +93,22 @@ public class Order{
 	
 	@Transient
 	private Long status;
+	
+	@Transient
+	private Long statusBegin;
+	
+	@Transient
+	private Long statusEnd;
 
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", volunteer=" + volunteer + ", orderStatus=" + orderStatus + ", volunteerApplyTime="
+		return "Order [id=" + id + ", volunteer=" + volunteer + ", volunteerId=" + volunteerId + ", orderStatus="
+				+ orderStatus + ", orderStatusDetail=" + orderStatusDetail + ", volunteerApplyTime="
 				+ volunteerApplyTime + ", orderAcceptTime=" + orderAcceptTime + ", mission=" + mission
-				+ ", memberScore=" + memberScore + ", feedBackScore=" + feedBackScore + "]";
+				+ ", memberScore=" + memberScore + ", feedBackScore=" + feedBackScore + ", missionTitle=" + missionTitle
+				+ ", county=" + county + ", district=" + district + ", address=" + address + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", timeValue=" + timeValue + ", status=" + status + ", statusBegin="
+				+ statusBegin + ", statusEnd=" + statusEnd + "]";
 	}
-	
-
 
 }

@@ -50,6 +50,7 @@ public class VolunteerApplicationController {
 	public Page<Order> QueryRecord(Principal principal, Order order, @RequestParam(value="orderStatus") Long orderStatus,
 			@RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
+		log.debug("order={}", order);
 		int page = start.orElse(0)/length.orElse(10);
 		String account = principal.getName();		
 		return orderService.findByVolunteerAndOrderStatusBetween(

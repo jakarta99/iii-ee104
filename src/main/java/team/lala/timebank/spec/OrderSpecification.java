@@ -45,15 +45,15 @@ public class OrderSpecification implements Specification<Order>  {
 			list.add(criteriaBuilder.equal(join.get("account"), inputOrder.getVolunteerId()));
 		}
 		
+		if (!StringUtils.isEmpty(inputOrder.getStatusBegin()) && !StringUtils.isEmpty(inputOrder.getStatusEnd())) {
+			Join<OrderStatus, Order> join = root.join("orderStatus", JoinType.LEFT);
+				list.add(criteriaBuilder.greaterThanOrEqualTo(join.get("id").as(Long.class), inputOrder.getStatusBegin()));
+				list.add(criteriaBuilder.lessThanOrEqualTo(join.get("id").as(Long.class), inputOrder.getStatusEnd()));
+		}
+		
 		if (!StringUtils.isEmpty(inputOrder.getStatus())) {
 			Join<OrderStatus, Order> join = root.join("orderStatus", JoinType.LEFT);
-			if (inputOrder.getStatus() == 7) {
-				list.add(criteriaBuilder.greaterThanOrEqualTo(join.get("id").as(Long.class), 7L));
-				list.add(criteriaBuilder.lessThanOrEqualTo(join.get("id").as(Long.class), 11L));
-			} else if (inputOrder.getStatus() == 3){
-				list.add(criteriaBuilder.greaterThanOrEqualTo(join.get("id").as(Long.class), 3L));
-				list.add(criteriaBuilder.lessThanOrEqualTo(join.get("id").as(Long.class), 5L));				
-			}
+				list.add(criteriaBuilder.equal(join.get("id").as(Long.class), inputOrder.getStatus()));
 		}
 		//排序(暫時寫死)，如何從前端傳排序資料
 		//同時針對兩個欄位排序
