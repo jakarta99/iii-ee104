@@ -66,7 +66,7 @@
 		<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
 		
 <script type="text/javascript">
-
+	
 	function CheckForm(){
 		if($("#proofPic").val() == ""){
 			if(confirm("您沒有選擇佐證資料，確定不上傳嗎？")==true) {

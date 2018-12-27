@@ -65,8 +65,7 @@
 	<jsp:include page="../../../../admin/admin_layout/nav.jsp" />
 	<article>
 		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
-		<h1 style="padding-top: 2cm">檢舉案件審查  Vertify Report List</h1>
-		<h4>預設載入尚未完成審查之案件</h4>
+		<h1 style="padding-top: 2cm">檢舉案件審查</h1>
 		<!-- 條件搜尋表單 -->
 		<div id="sideBar">
 			<form>
@@ -112,19 +111,19 @@
 			</form>
 		</div>
 		<fieldset style="width:300">
+
 		
-		<table border="1">
-			<tr>
-				<td>
-					<select id="penaltyChosen" name="penaltyChosen" style="width:150px">
-						<option value=2>有罪</option>
-						<option value=3>無罪</option>
-					</select>
-					<button id="vertified">審核歷史紀錄查詢</button>
-				</td>
-				<td><button id="vertifyingCase">審核中案件查詢</button></td>
-			</tr>
-		</table>
+		
+		<div class="btn-group">
+		  <button type="button" class="btn btn-info" id="vertifyingCase">審核中</button>
+		  <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="history">
+		    審核歷史紀錄
+		  </button>
+		  <div class="dropdown-menu">
+		    	<a class="dropdown-item" href="#" id="vertified2">有罪</a>
+		    	<a class="dropdown-item" href="#" id="vertified3">無罪</a>
+		  </div>
+		</div>
 
 		
 		<table id="table" class="table table-striped table-bordered">
@@ -155,6 +154,7 @@
 		</table>
 		</fieldset>
 	</article>
+	
 	<script>
 
 		var dataTable;
@@ -272,11 +272,23 @@
 			$("#vertifyingCase").click(	function(){
 				$('#status').val("1");
 				dataTable.ajax.reload();
+				$("#history").attr('class', 'btn btn-outline-info dropdown-toggle');
+				$(this).attr('class', 'btn btn-info');
 			})
 			
 			//按審核歷史紀錄按紐
-			$("#vertified").click(function(){
-				$('#status').val($('#penaltyChosen').val());
+			$("#history").click(function(){
+				$("#vertifyingCase").attr('class', 'btn btn-outline-info');
+				$(this).attr('class', 'btn btn-info dropdown-toggle');
+			})
+			
+			//選擇有罪無罪
+			$("#vertified2").click(function(){
+				$('#status').val("2");
+				dataTable.ajax.reload();
+			})
+			$("#vertified3").click(function(){
+				$('#status').val("3");
 				dataTable.ajax.reload();
 			})
 			
