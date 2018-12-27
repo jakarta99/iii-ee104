@@ -92,8 +92,8 @@
 	<table id="table" class="table table-hover">
 	<thead>
 	<tr>
-		<th>選項</th>
-		<th scope="col">招募編號</th>
+		<th>活動名稱</th>
+		<th scope="col">志工帳號</th>
 		<th scope="col">志工名字</th>
 		<th scope="col">聯絡方式</th>
 		<th scope="col">評點分數</th>
@@ -115,7 +115,7 @@
 	  </section>
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	
-	<script>
+<script>
 	
 	var dataTable;
 	
@@ -132,7 +132,6 @@
 				"infoCallback": function( settings, start, end, max, total, pre ) {
 		 			    var api = this.api();
 		 			    var pageInfo = api.page.info();
-		 			   	console.log(pageInfo);
 		 			   api.rows( {page:'current'} ).data()
 		 			    return '顯示第 '+(pageInfo.start+1)+' 筆到第  '+(pageInfo.end)+' 筆 共 '+ pageInfo.recordsTotal+' 筆資料 ';
 		 			 },	
@@ -142,10 +141,12 @@
 					type: "get",
 				    dataType : "json",
 				    data: function(d){
-		            	console.log(d);
+// 		            	var mission = ${mission};
+// 		            	alert(mission);
+						var missionId = ${missionId}
 		            	var start = d.start;
 						var length = d.length;
-						var request = $("form").serialize()+"&start="+start+"&length="+length;
+						var request = "start=" + start + "&length=" + length + "&missionId=" + missionId;
 		            	return request;
 		            },
 
@@ -158,13 +159,15 @@
 		            	},
 					},
 					columns:[						
-						{"data":""},						
-						{"data":"order.volunteer.name"},
-						{"data":"order.volunteer.telephone"},
-						{"data":"order.volunteer.averageScore"},
-			            {"data":null, render: function ( data, type, row ) {
+						{"data":"mission.title"},	
+						{"data":"volunteer.account"},
+						{"data":"volunteer.name"},
+						{"data":"volunteer.telephone"},
+						{"data":"volunteer.averageScore"},
+			            {"data":null, render: function (data, type, row ) {
 			                return new Date(data.volunteerApplyTime).toLocaleDateString();
 			            } },	
+						
 									
 						{"data": function (data, type, val) {
 							 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerRecruitment/edit?id="+data.id+"'\">接受</button>";     
@@ -172,7 +175,7 @@
 							 return editbutton + deletebutton;}
 						},					 
 					
-			            {"data":"order.mission.missionStatus"},
+			            {"data":"mission.status.missionStatus"},
 									
 					],
 					 columnDefs: [{
@@ -188,7 +191,7 @@
 		
 		
 	});
-	</script>
+</script>
 	 <!-- FOOTER -->
    <jsp:include page="../../commons/commons_layout/commons_footer.jsp" />	
 </body>

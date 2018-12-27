@@ -19,7 +19,8 @@ import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -61,8 +62,7 @@ public class Mission {
 	@Transient
 	private String serviceTypeDetail;
 
-//	@JsonManagedReference
-	@JsonIgnoreProperties("mission")
+	@JsonBackReference
 	@OneToMany(mappedBy = "mission", cascade = { CascadeType.REMOVE })
 	private Set<Order> orders;
 
@@ -107,7 +107,7 @@ public class Mission {
 	private String address;
 
 	@ManyToOne
-	// @JsonBackReference
+//	@JsonBackReference
 	@JoinColumn(name = "MISSION_STATUS", referencedColumnName = "id", insertable = true, updatable = true)
 	private MissionStatus status;
 	

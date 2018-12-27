@@ -15,6 +15,7 @@ import javax.persistence.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -37,7 +38,7 @@ public class Order{
 	private String volunteerId;
 	
 	@ManyToOne
-//	@JsonBackReference 
+	@JsonIgnoreProperties
 	@JoinColumn(name="ORDER_STATUS",    
 				referencedColumnName="id",  
 				insertable=true, updatable=true)
@@ -55,8 +56,7 @@ public class Order{
 	private Date orderAcceptTime;
 	
 	@ManyToOne
-//	@JsonBackReference 
-	@JsonIgnoreProperties("orders")
+	@JsonManagedReference
 	@JoinColumn(name="mission",    
 				referencedColumnName="id",  
 				insertable=true, updatable=true) 

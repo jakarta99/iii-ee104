@@ -58,10 +58,5 @@ public class VolunteerVerifyController {
 		return null;
 		
 	}
-	
-	
-	
-	
-	
 
 }
