@@ -31,35 +31,36 @@ public class MissionService {
 	@Autowired
 	private MissionStatusDao missionStatusDao;
 
-	public List<Mission> findBySpecification(Specification<Mission> specification) {
-		return missionDao.findAll(specification);
-	}
+	// public List<Mission> findBySpecification(Specification<Mission>
+	// specification) {
+	// return missionDao.findAll(specification);
+	// }
 
+	// list for Admin
 	public Page<Mission> findBySpecification(Specification<Mission> specification, PageRequest pageRequest) {
 		return missionDao.findAll(specification, pageRequest);
 	}
 
-	public Page<Mission> findByMemberAndSpecification(Principal principal, Mission mission, int page,
-			Optional<Integer> length) {
+	// list for user
+	public Page<Mission> findByMemberAndSpecification(Principal principal, Mission mission, PageRequest pageRequest) {
 		mission.setMember(memberDao.findByAccount(principal.getName()));
 		MissionSpecification missionSpec = new MissionSpecification(mission);
-		Page<Mission> missions = this.findBySpecification(missionSpec, PageRequest.of(page, length.orElse(10)));
+		Page<Mission> missions = this.findBySpecification(missionSpec, pageRequest);
 		return missions;
 	}
 
-	// insert
+	// insert for Admin
 	public Mission insert(Mission mission) {
-		log.debug("mission={}", mission);
 		mission.setStatus(missionStatusDao.getOne(1l));
 		mission.setStartDate(mission.getStartDate());
 		mission.setEndDate(mission.getEndDate());
 		mission.setPublishDate(new Date());
 		mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
 		mission.setApprovedQuantity(0);
-		log.debug("mission={}", mission);
 		return missionDao.save(mission);
 	}
 
+	// insert for user
 	public Mission insert(Mission mission, Principal principal) {
 		mission.setMember(memberDao.findByAccount(principal.getName()));
 		mission.setStatus(missionStatusDao.getOne(1l));
@@ -71,23 +72,28 @@ public class MissionService {
 		return missionDao.save(mission);
 	}
 
-	// update
+	// update for user & Admin
 	public Mission update(Mission mission) {
-
-		log.debug("mission={}", mission);
-		log.debug("mission.getStatus()={}", mission.getStatus());
-		log.debug("mission.getMember={}", mission.getMember());
-		// mission.setMember(mission.getMember());
 		mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
 		return missionDao.save(mission);
 	}
 
+	// cancel for user
+	public Mission cancel(Long id) {
+		Mission mission=missionDao.getOne(id);
+		
+		log.debug("mission",mission);
+		log.debug("mission.getStatus().getId()={}",mission.getStatus().getId());
+		if (mission.getStatus().getId() <= 2) {
+			mission.setStatus(missionStatusDao.getOne(5l));
+			return missionDao.save(mission);
+		}
+		return null;
+	}
+
 	public List<Mission> findAll() {
-
 		List<Mission> missionList = missionDao.findAll();
-
 		if (missionList == null) {
-			// FIXME test on console
 			System.out.println("jobList does not exist");
 		}
 		return missionList;
@@ -111,7 +117,6 @@ public class MissionService {
 		Mission mission = missionDao.getOne(id);
 
 		if (mission == null) {
-			// FIXME test on console
 			System.out.println("id" + id + " does not exist");
 		}
 		return mission;

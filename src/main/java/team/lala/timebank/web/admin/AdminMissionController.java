@@ -112,15 +112,15 @@ public class AdminMissionController {
 		return response;
 	}
 
-	@RequestMapping("/query")
-	@ResponseBody
-	public List<Mission> query(Mission inputMission) {
-		System.out.println("inputMission=" + inputMission);
-		MissionSpecification missionSpecification = new MissionSpecification(inputMission);
-		List<Mission> mission = missionService.findBySpecification(missionSpecification);
-		System.out.println(mission);
-		return mission;
-	}
+//	@RequestMapping("/query")
+//	@ResponseBody
+//	public List<Mission> query(Mission inputMission) {
+//		System.out.println("inputMission=" + inputMission);
+//		MissionSpecification missionSpecification = new MissionSpecification(inputMission);
+//		List<Mission> mission = missionService.findBySpecification(missionSpecification);
+//		System.out.println(mission);
+//		return mission;
+//	}
 
 	@RequestMapping("/querypage")
 	@ResponseBody
