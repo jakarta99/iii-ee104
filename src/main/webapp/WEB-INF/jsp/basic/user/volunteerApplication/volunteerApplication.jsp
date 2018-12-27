@@ -21,7 +21,7 @@
 
 	 	
         fieldset {
-            width: 90%;
+            width: 70%;
             border-radius: 20px;
             padding: 20px;
             margin: 20px;
@@ -56,13 +56,13 @@
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />
 	
 	<section class="bar">
-			<jsp:include page="../user_layout/user_sidebar.jsp" />
         <div class="container">
-        <button type="button" id="orderStatus1" class="btn btn-primary">申請中</button>
-        <button type="button" id="orderStatus2" class="btn btn-secondary ">機構接受服務</button>
-        <button type="button" id="orderStatus3" class="btn btn-secondary ">活動時間結束，未發時數</button>
         	<div class="row">
-				<fieldset style="width: 300">
+			<jsp:include page="../user_layout/user_sidebar.jsp" />
+				<fieldset>
+		        <button type="button" id="orderStatus1" class="btn btn-primary">申請中</button>
+		        <button type="button" id="orderStatus2" class="btn btn-secondary ">機構接受服務</button>
+		        <button type="button" id="orderStatus3" class="btn btn-secondary ">活動時間結束，未發時數</button>
 					<table id="table" class="table table-striped table-bordered">
 						<thead>
 							<tr>
@@ -140,7 +140,7 @@
 		            } },
 					{data:"orderStatus.orderStatus"},
 		           	{data: function (data, type, row ) {
-		           		var cancelButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='刪除' />"
+		           		var cancelButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='取消' />"
 		               	return cancelButt	}
 		           	},
 							
