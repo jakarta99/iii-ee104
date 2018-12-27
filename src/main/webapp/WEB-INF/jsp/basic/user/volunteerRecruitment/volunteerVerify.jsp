@@ -126,7 +126,6 @@
 			type : 'post',
 			dataType : 'JSON',
 			success : function(acceptResult) {
-//  				alert(cancelResult);
 				if(acceptResult.status == "SUCCESS"){
 					alert("接受編號" + acceptResult.obj.id + " " + acceptResult.status);									
 					
@@ -140,6 +139,24 @@
 		})
 	}
 	
+	function reject(id) {
+		$.ajax({
+			url : '/user/volunteerVerify/reject?id=' + id,
+			type : 'post',
+			dataType : 'JSON',
+			success : function(rejectResult) {
+				if(rejectResult.status == "SUCCESS"){
+					alert("拒絕編號" + rejectResult.obj.id + " " + rejectResult.status);									
+					
+				}else{
+					alert("拒絕編號" + rejectResult.obj.id + " " + rejectResult.status);
+					alert("FAIL reason:" + rejectResult.messages);	
+				}
+				dataTable.ajax.reload();
+				
+			},
+		})
+	}
 	
 	
 	
