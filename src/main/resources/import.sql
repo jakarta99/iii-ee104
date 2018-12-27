@@ -9,9 +9,12 @@ INSERT INTO MISSION_STATUS VALUES ('取消');
 INSERT INTO ORDER_STATUS VALUES ('志工申請了');
 INSERT INTO ORDER_STATUS VALUES ('requester 接受服務');
 INSERT INTO ORDER_STATUS VALUES ('requester 拒絕服務');
+INSERT INTO ORDER_STATUS VALUES ('交易取消(Requester 取消交易)(系統取消交易)');
+INSERT INTO ORDER_STATUS VALUES ('交易取消(志工 取消交易)(系統取消交易)');
 INSERT INTO ORDER_STATUS VALUES ('服務完，未發時數');
 INSERT INTO ORDER_STATUS VALUES ('服務完，已發時數');
-INSERT INTO ORDER_STATUS VALUES ('交易取消(Requester 取消交易)(系統取消交易)');
+INSERT INTO ORDER_STATUS VALUES ('Requester 臨時取消活動(不懲罰)(手動取消 )');
+INSERT INTO ORDER_STATUS VALUES ('Requester 臨時取消活動(要懲罰)(手動取消 )');
 INSERT INTO ORDER_STATUS VALUES ('志工 臨時請假(不懲罰)(手動取消交易)');
 INSERT INTO ORDER_STATUS VALUES ('志工 臨時不去(要懲罰)(手動取消交易)');
 
