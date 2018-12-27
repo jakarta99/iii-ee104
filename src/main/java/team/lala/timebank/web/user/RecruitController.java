@@ -77,14 +77,18 @@ public class RecruitController {
 		}
 		return response;
 	}
-
+	
+	//取消mission並拒絕所有apply的order
 	@RequestMapping("/cancel")
 	@ResponseBody
 	public AjaxResponse<Mission> cancel(@RequestParam("id") Long id) {
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
 		try {
+			
 			response.setObj(missionService.getOne(id));
+			//更改mission狀態為5
 			missionService.cancel(id);
+			//拒絕所有apply的order
 			List<Order> orders = orderService.findByMission(missionService.getOne(id));
 			orderService.rejectOrders(orders);
 

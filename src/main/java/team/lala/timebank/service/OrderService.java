@@ -135,13 +135,14 @@ public class OrderService {
 		}
 		return null;
 	}
-
+	
+	//根據mission找出所有的order
 	public List<Order> findByMission(Mission mission) {
 		List<Order> orders = orderDao.findByMission(mission);
 		return orders;
 	}
 
-	//
+	//拒絕所有的apply
 	public void rejectOrders(List<Order> orders) {
 		for (int i = 0; i < orders.size(); i++) {
 			
