@@ -1,5 +1,6 @@
 package team.lala.timebank.web.user;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
+import team.lala.timebank.entity.ServiceType;
+import team.lala.timebank.service.MissionService;
 import team.lala.timebank.service.OrderService;
+import team.lala.timebank.service.ServiceTypeService;
 
 @Slf4j
 @Controller
@@ -22,23 +26,29 @@ public class VolunteerVerifyController {
 	
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private MissionService missionService;
+
 	
 	@RequestMapping("/list")
 	public String listPage(@RequestParam(value = "id") Long id, Model model) {
-		model.addAttribute("MissionId",id);
+		
+//		Mission mission = missionService.getOne(id);
+//		model.addAttribute("mission", mission);
+		model.addAttribute("missionId", id);
 		return "/basic/user/volunteerRecruitment/volunteerVerify";
 	}
 
 	@RequestMapping("/query")
 	@ResponseBody
-	public Page<Order> getOrderByMissionAndStatus(Mission inputMission,
+	public Page<Order> getOrderByMissionAndStatus(
 			@RequestParam(value = "start", required = false) Optional<Integer> start,
-			@RequestParam(value = "length", required = false) Optional<Integer> length) {
+			@RequestParam(value = "length", required = false) Optional<Integer> length,
+			@RequestParam(value = "missionId") Long id) {
 		int page = start.orElse(0) / length.orElse(10);
-		log.debug("Mission={}", inputMission);
+		Mission mission = missionService.getOne(id);
 //		Page<Mission> missions = missionService.findByAccount(principal, inputMission, PageRequest.of(page, length.orElse(10)));
-		Page<Order> orders = orderService.findByMission(inputMission, page, length);
-		log.debug("Order={}", orders);
+		Page<Order> orders = orderService.findByMission(mission, page, length);
 		return orders;
 	}
 	
@@ -48,10 +58,5 @@ public class VolunteerVerifyController {
 		return null;
 		
 	}
-	
-	
-	
-	
-	
 
 }
