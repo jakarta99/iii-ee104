@@ -65,8 +65,8 @@
 			<jsp:include page="../user_layout/user_sidebar.jsp" />
         			<!-- 條件搜尋表單 -->
 				<fieldset>
-			    <button type="button" id="orderStatus1" class="btn btn-primary">媒合成功紀錄</button>
-			    <button type="button" id="orderStatus2" class="btn btn-primary">媒合失敗紀錄</button>
+			    <button type="button" id="orderStatus7" class="btn btn-primary">媒合成功紀錄</button>
+			    <button type="button" id="orderStatus3" class="btn btn-secondary">媒合失敗紀錄</button>
 					<form>
 						<div>基本查詢:</div>
 						<label>住址:</label>
@@ -153,7 +153,6 @@
 					},
 					dataSrc:"content",
 					dataFilter:function(resp){		//對伺服器送來的資料進行修改
-						console.log(resp)
 						 var json = jQuery.parseJSON( resp );
 			             json.recordsTotal = json.totalElements;
 			             json.recordsFiltered = json.totalElements;	     			
@@ -249,12 +248,16 @@
 			})
 		})
 		//切換服務狀態
-		$('#orderStatus4').click(function(){
+		$('#orderStatus7').click(function(){
 			orderStatus = 7;
+			$('#orderStatus7').attr('class','btn btn-primary')
+			$('#orderStatus3').attr('class','btn btn-secondary')
 			dataTable.ajax.reload();
 		})
-		$('#orderStatus5').click(function(){
+		$('#orderStatus3').click(function(){
 			orderStatus = 3;
+			$('#orderStatus7').attr('class','btn btn-secondary')
+			$('#orderStatus3').attr('class','btn btn-primary')
 			dataTable.ajax.reload();
 		})
 		//自訂日期格式

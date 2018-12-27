@@ -62,7 +62,7 @@
 				<fieldset>
 		        <button type="button" id="orderStatus1" class="btn btn-primary">申請中</button>
 		        <button type="button" id="orderStatus2" class="btn btn-secondary ">機構接受服務</button>
-		        <button type="button" id="orderStatus3" class="btn btn-secondary ">活動時間結束，未發時數</button>
+		        <button type="button" id="orderStatus6" class="btn btn-secondary ">活動時間結束，未發時數</button>
 					<table id="table" class="table table-striped table-bordered">
 						<thead>
 							<tr>
@@ -169,21 +169,21 @@
 			orderStatus = 1;
 			$('#orderStatus1').attr('class','btn btn-primary')
 			$('#orderStatus2').attr('class','btn btn-secondary')
-			$('#orderStatus3').attr('class','btn btn-secondary')
+			$('#orderStatus6').attr('class','btn btn-secondary')
 			dataTable.ajax.reload();
 		})
 		$('#orderStatus2').click(function(){
 			orderStatus = 2;
 			$('#orderStatus1').attr('class','btn btn-secondary')
 			$('#orderStatus2').attr('class','btn btn-primary')
-			$('#orderStatus3').attr('class','btn btn-secondary')
+			$('#orderStatus6').attr('class','btn btn-secondary')
 			dataTable.ajax.reload();
 		})
 		$('#orderStatus3').click(function(){
 			orderStatus = 6;
 			$('#orderStatus1').attr('class','btn btn-secondary')
 			$('#orderStatus2').attr('class','btn btn-secondary')
-			$('#orderStatus3').attr('class','btn btn-primary')
+			$('#orderStatus6').attr('class','btn btn-primary')
 			dataTable.ajax.reload();
 		})
 		//刪除事件方法
