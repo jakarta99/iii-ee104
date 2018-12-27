@@ -326,8 +326,12 @@
 							var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">志工審核</button>";   
 								return vbutton;
 								
+							}else if(data.status.id==3){
+								var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">核發時數</button>";   
+								return vbutton;
+
 							}else{
-								return "審核完畢";
+								return "已結案"	
 							}
 							
 							}							 
