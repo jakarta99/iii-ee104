@@ -44,9 +44,9 @@ public class RecruitController {
 			@RequestParam(value = "start", required = false) Optional<Integer> start,
 			@RequestParam(value = "length", required = false) Optional<Integer> length) {
 		int page = start.orElse(0) / length.orElse(10);
-		
-//		Page<Mission> missions = missionService.findByAccount(principal, inputMission, PageRequest.of(page, length.orElse(10)));
-		Page<Mission> missions = missionService.findByAccount(principal, inputMission, page, length);
+
+		Page<Mission> missions = missionService.findByMemberAndSpecification(principal, inputMission,
+				PageRequest.of(page, length.orElse(10)));
 		return missions;
 	}
 
@@ -58,6 +58,7 @@ public class RecruitController {
 		model.addAttribute("serviceType", serviceType);
 		return "/basic/user/volunteerRecruitment/mission_edit";
 	}
+
 	@RequestMapping("/delete")
 	@ResponseBody
 	public AjaxResponse<Mission> deletePage(@RequestParam("id") Long id) {
@@ -73,7 +74,24 @@ public class RecruitController {
 		}
 		return response;
 	}
-	//進行中
+
+	@RequestMapping("/cancel")
+	@ResponseBody
+	public AjaxResponse<Mission> cancel(@RequestParam("id") Long id) {
+		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
+		try {
+			response.setObj(missionService.getOne(id));
+			missionService.cancel(id);
+
+		} catch (Exception e) {
+			response.addMessage("取消失敗，" + e.getMessage());
+
+			e.printStackTrace();
+		}
+		return response;
+	}
+
+	// 進行中
 	@RequestMapping("/recruiting")
 	@ResponseBody
 	public Page<Mission> recruiting(Mission inputMission, Principal principal,
@@ -81,17 +99,17 @@ public class RecruitController {
 			@RequestParam(value = "length", required = false) Optional<Integer> length) {
 		int page = start.orElse(0) / length.orElse(10);
 
-//		Page<Mission> missions = missionService.findByAccount(principal, inputMission, PageRequest.of(page, length.orElse(10)));
-		Page<Mission> missions = missionService.findByAccount(principal, inputMission, page, length);
+		Page<Mission> missions = missionService.findByMember(principal, inputMission,
+				PageRequest.of(page, length.orElse(10)));
 		return missions;
 	}
-	
+
 	@RequestMapping("/update")
 	@ResponseBody
-	public AjaxResponse<Mission> updateuser(Mission mission) {
+	public AjaxResponse<Mission> update(Mission mission) {
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
-				
-		log.debug("mission.getMember()={}",mission.getMember());
+
+		log.debug("mission.getMember()={}", mission.getMember());
 
 		try {
 			missionService.update(mission);
@@ -103,21 +121,19 @@ public class RecruitController {
 
 		return response;
 	}
-	
-	
-	
-	
-//	// order
-//	@RequestMapping("/")
-//	@ResponseBody
-//	public Page<Order> queryOrder(Mission inputMission, Principal principal,
-//			@RequestParam(value = "start", required = false) Optional<Integer> start,
-//			@RequestParam(value = "length", required = false) Optional<Integer> length) {
-//		int page = start.orElse(0) / length.orElse(10);
-//
-//		MissionSpecification missionSpec = new MissionSpecification(
-//				missionService.findByAccount(principal, inputMission));
-//		Page<Order> missions = missionService.findBySpecification(missionSpec, PageRequest.of(page, length.orElse(10)));
-//		return missions;
-//	}
+
+	// // order
+	// @RequestMapping("/")
+	// @ResponseBody
+	// public Page<Order> queryOrder(Mission inputMission, Principal principal,
+	// @RequestParam(value = "start", required = false) Optional<Integer> start,
+	// @RequestParam(value = "length", required = false) Optional<Integer> length) {
+	// int page = start.orElse(0) / length.orElse(10);
+	//
+	// MissionSpecification missionSpec = new MissionSpecification(
+	// missionService.findByAccount(principal, inputMission));
+	// Page<Order> missions = missionService.findBySpecification(missionSpec,
+	// PageRequest.of(page, length.orElse(10)));
+	// return missions;
+	// }
 }

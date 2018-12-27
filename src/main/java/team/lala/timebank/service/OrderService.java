@@ -62,6 +62,12 @@ public class OrderService {
 	public Page<Order> findByVolunteerAndOrderStatusBetween(Specification<Order> specification,
 			String account, Long orderStatus, PageRequest pageRequest){
 		Member member = memberDao.findByAccount(account);
+		if(orderStatus == 4) {
+			OrderStatus status = orderStatusDao.getOne(orderStatus);
+			return orderDao.findByVolunteerAndOrderStatus(member, status, pageRequest);
+		} else if (orderStatus == 5 ) {
+			
+		}
 		orderDao.findByVolunteer(member, pageRequest, specification);
 		return null;
 		

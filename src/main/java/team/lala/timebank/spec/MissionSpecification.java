@@ -35,13 +35,18 @@ public class MissionSpecification implements Specification<Mission> {
 
 		if (!StringUtils.isEmpty(inputMission.getStatusDetail())) {
 			Join<MissionStatus, Mission> join = root.join("status", JoinType.LEFT);
-			if (inputMission.getStatusDetail()<=2) {
-				
-				list.add(criteriaBuilder.lessThanOrEqualTo(join.get("id"),inputMission.getStatusDetail()));
-						
-//						(join.get("id"), inputMission.getStatusDetail()));
-			} else {
-				list.add(criteriaBuilder.equal(join.get("id"), inputMission.getStatusDetail()));				
+			if (inputMission.getStatusDetail() <= 2) {
+
+				list.add(criteriaBuilder.lessThanOrEqualTo(join.get("id"), inputMission.getStatusDetail()));
+
+			}
+			else if (inputMission.getStatusDetail() >= 4) {
+
+				list.add(criteriaBuilder.greaterThanOrEqualTo(join.get("id"), inputMission.getStatusDetail()));
+
+			} 
+			else {
+				list.add(criteriaBuilder.equal(join.get("id"), inputMission.getStatusDetail()));
 			}
 		}
 

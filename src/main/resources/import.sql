@@ -3,14 +3,18 @@ INSERT INTO MISSION_STATUS VALUES ('未開始');
 INSERT INTO MISSION_STATUS VALUES ('未開始已審核');
 INSERT INTO MISSION_STATUS VALUES ('進行中');
 INSERT INTO MISSION_STATUS VALUES ('結案');
+INSERT INTO MISSION_STATUS VALUES ('取消');
 
 --ORDERSTATUS
 INSERT INTO ORDER_STATUS VALUES ('志工申請了');
 INSERT INTO ORDER_STATUS VALUES ('requester 接受服務');
 INSERT INTO ORDER_STATUS VALUES ('requester 拒絕服務');
+INSERT INTO ORDER_STATUS VALUES ('交易取消(Requester 取消交易)(系統取消交易)');
+INSERT INTO ORDER_STATUS VALUES ('交易取消(志工 取消交易)(系統取消交易)');
 INSERT INTO ORDER_STATUS VALUES ('服務完，未發時數');
 INSERT INTO ORDER_STATUS VALUES ('服務完，已發時數');
-INSERT INTO ORDER_STATUS VALUES ('交易取消(Requester 取消交易)(系統取消交易)');
+INSERT INTO ORDER_STATUS VALUES ('Requester 臨時取消活動(不懲罰)(手動取消 )');
+INSERT INTO ORDER_STATUS VALUES ('Requester 臨時取消活動(要懲罰)(手動取消 )');
 INSERT INTO ORDER_STATUS VALUES ('志工 臨時請假(不懲罰)(手動取消交易)');
 INSERT INTO ORDER_STATUS VALUES ('志工 臨時不去(要懲罰)(手動取消交易)');
 
@@ -75,10 +79,10 @@ INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publ
 VALUES (1,'一起照顧老人',2,'L',3,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','大安區','復興南路一段390號15樓',1,'2018/12/31',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY) 
-VALUES (2,'一起照顧小孩',2,'S',1,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','板橋區','復興南路一段390號15樓',1,'2018/12/31',0);
+VALUES (1,'一起照顧小孩',2,'S',1,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','板橋區','復興南路一段390號15樓',1,'2018/12/31',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY) 
-VALUES (3,'一起照顧動物',2,'L',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','信義區','復興南路一段390號15樓',1,'2018/12/31',0);
+VALUES (1,'一起照顧動物',2,'L',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','信義區','復興南路一段390號15樓',1,'2018/12/31',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY) 
 VALUES (1,'一起照顧老人2',3,'S',3,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','樹林區','復興南路一段390號15樓',2,'2018/12/31',0);
@@ -119,6 +123,17 @@ VALUES (1,'一起照顧動物4',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY) 
 VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓',4,'2018/12/31',0);
 
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY) 
+VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓',5,'2018/12/31',0);
+
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY) 
+VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓',5,'2018/12/31',0);
+
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY) 
+VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓',5,'2018/12/31',0);
+
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY) 
+VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓',5,'2018/12/31',0);
 
 --ORDER_LIST
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
@@ -184,7 +199,7 @@ VALUES(1, 4,  9, '2018/10/11 17:00');
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
 VALUES(1, 4,  10, '2018/10/11 17:00');
 
-NSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
 VALUES(1, 4,  11, '2018/10/11 17:00');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
@@ -217,7 +232,7 @@ VALUES(1, 4,  9, '2018/10/11 17:00');
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
 VALUES(1, 4,  10, '2018/10/11 17:00');
 
-NSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
 VALUES(1, 4,  11, '2018/10/11 17:00');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
@@ -250,7 +265,7 @@ VALUES(1, 4,  9, '2018/10/11 17:00');
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
 VALUES(1, 4,  10, '2018/10/11 17:00');
 
-NSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
 VALUES(1, 4,  11, '2018/10/11 17:00');
 
 
@@ -320,10 +335,10 @@ VALUES(4, 1, 3, '2018/11/13', '缺席', 1 , 4);
 --donation
 
 
-INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,value,donate_time) 
+INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,DONATE_VALUE,donate_time) 
 VALUES(1,3,10,'2018/11/6');
 
-INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,value,donate_time) 
+INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,DONATE_VALUE,donate_time) 
 VALUES(2,3,15,'2018/05/6');
 
 INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,DONATE_VALUE,donate_time) 

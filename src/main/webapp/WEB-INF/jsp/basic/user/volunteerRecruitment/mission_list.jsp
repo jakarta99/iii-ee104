@@ -196,10 +196,10 @@
 	})
 	
 	$("#status12Butt").click(function(){
-		$("#statusDetail").val("2");
 		$("#status12Butt").attr('class',"btn btn-outline-primary")
 		$("#status3Butt").attr('class',"btn btn-outline-secondary")
 		$("#status4Butt").attr('class',"btn btn-outline-secondary")
+		$("#statusDetail").val("2");
 		dataTable.ajax.reload();
 		
 	})
@@ -223,19 +223,19 @@
 	})
 	
 	
-	function deleteMission(id) {
+	function cancelMission(id) {
 		$.ajax({
-			url : '/user/volunteerRecruitment/delete?id=' + id,
+			url : '/user/volunteerRecruitment/cancel?id=' + id,
 			type : 'post',
 			dataType : 'JSON',
-			success : function(deleteResult) {
- 				//alert(deleteResult.obj.id);
-				if(deleteResult.status == "SUCCESS"){
-					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);									
+			success : function(cancelResult) {
+//  				alert(cancelResult);
+				if(cancelResult.status == "SUCCESS"){
+					alert("取消編號" + cancelResult.obj.id + " " + cancelResult.status);									
 					
 				}else{
-					alert("刪除編號" + deleteResult.obj.id + " " + deleteResult.status);
-					alert("FAIL reason:" + deleteResult.messages);	
+					alert("取消編號" + cancelResult.obj.id + " " + cancelResult.status);
+					alert("FAIL reason:" + cancelResult.messages);	
 				}
 				dataTable.ajax.reload();
 				
@@ -302,9 +302,9 @@
 					},
 					columns:[						
 						{"data": function (data, type, val) {
-							 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerRecruitment/edit?id="+data.id+"'\">Edit</button>";     
-							 var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteMission("+data.id+")\">Delete</button>"; 	
-							 return editbutton + deletebutton;}
+							 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerRecruitment/edit?id="+data.id+"'\">編輯</button>";     
+							 var cancelbutton="<button class='btn btn-outline-secondary' onclick=\"cancelMission("+data.id+")\">取消</button>"; 	
+							 return editbutton + cancelbutton;}
 						},					 
 						{"data":"title"},
 						{"data":"peopleNeeded"},						
@@ -317,10 +317,18 @@
 			            } },	
 					
 						{"data":function (data, type, val) {
+							if(data.status.id==1){
 							var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">志工審核</button>";   
-							return vbutton;}							 
+								return vbutton;
+								
+							}else{
+								return "審核完畢";
+							}
+							
+							}							 
 						},
-			            {"data":"status.missionStatus"},
+			            
+						{"data":"status.missionStatus"},
 									
 					],
 					 columnDefs: [{

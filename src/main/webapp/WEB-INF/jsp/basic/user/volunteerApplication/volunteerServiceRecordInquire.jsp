@@ -34,7 +34,7 @@
 <title>mission list(login)</title>
 <style> 	
         fieldset {
-            width: 90%;
+            width: 70%;
             border-radius: 20px;
             padding: 20px;
             margin: 20px;
@@ -66,51 +66,50 @@
 	<!-- Top bar-->
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp" />
 	<!-- Navbar -->
-	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />
-	
+	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />	
 	<section class="bar">
-			<jsp:include page="../user_layout/user_sidebar.jsp" />
         <div class="container">
-        <button type="button" id="orderStatus1" class="btn btn-primary">媒合成功紀錄</button>
-        <button type="button" id="orderStatus2" class="btn btn-primary">媒合失敗紀錄</button>
         	<div class="row">
+			<jsp:include page="../user_layout/user_sidebar.jsp" />
         			<!-- 條件搜尋表單 -->
-	<fieldset>
-	<form>
-			<div>基本查詢:</div>
-			<label>住址:</label>
-			<div role="tw-city-selector" ></div>
-			<label>開始日期:</label>
-			<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
-			<label>結束日期:</label>
-			<input type="text"  id="endDate" name="endDate" autocomplete="off"/>
-			<input type="button" value="搜尋" id="searchButt" />
-			<input type="reset"  value="清除重填" />
-			<div>	
-			<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
-			進階查詢:
-  			</a>
-  			</div> 
-			<div class="collapse" id="collapse">		
-				<label>獲得時間 :</label> 
-				<input type="text" value="" id="timeValue" name="timeValue"/>		
-				<label>任務標題 :</label> 
-				<input type="text" value="" id="missionTitle" name="missionTitle"/>	
-				<label>類別 :</label> 
-				<select  id="status" name="status">
-					<option value="">選擇服務類型</option>
-					<option value="5">已完成</option>
-			        <option value="6">Requester 取消交易</option>
-			        <option value="7">志工 取消交易</option>
-			        <option value="8">Requester 臨時取消活動(不懲罰)</option>
-			        <option value="9">Requester 臨時取消活動(要懲罰)</option>
-			        <option value="10">志工 臨時請假(不懲罰)</option>
-			        <option value="11">志工 臨時不去(要懲罰)</option>
-				</select>		
-			</div>
-		</form>
-	</fieldset>
-				<fieldset style="width: 300">
+				<fieldset>
+			    <button type="button" id="orderStatus1" class="btn btn-primary">媒合成功紀錄</button>
+			    <button type="button" id="orderStatus2" class="btn btn-primary">媒合失敗紀錄</button>
+					<form>
+						<div>基本查詢:</div>
+						<label>住址:</label>
+						<div role="tw-city-selector" ></div>
+						<label>開始日期:</label>
+						<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
+						<label>結束日期:</label>
+						<input type="text"  id="endDate" name="endDate" autocomplete="off"/>
+						<input type="button" value="搜尋" id="searchButt" />
+						<input type="reset"  value="清除重填" />
+						<div>	
+						<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+						進階查詢:
+			  			</a>
+			  			</div> 
+						<div class="collapse" id="collapse">		
+							<label>獲得時間 :</label> 
+							<input type="text" value="" id="timeValue" name="timeValue"/>		
+							<label>任務標題 :</label> 
+							<input type="text" value="" id="missionTitle" name="missionTitle"/>	
+							<label>狀態 :</label> 
+							<select  id="status" name="status">
+								<option value="">選擇狀態</option>
+								<option value="5">已完成</option>
+						        <option value="6">Requester 取消交易</option>
+						        <option value="7">志工 取消交易</option>
+						        <option value="8">Requester 臨時取消活動(不懲罰)</option>
+						        <option value="9">Requester 臨時取消活動(要懲罰)</option>
+						        <option value="10">志工 臨時請假(不懲罰)</option>
+						        <option value="11">志工 臨時不去(要懲罰)</option>
+							</select>		
+						</div>
+					</form>
+<!-- 				</fieldset> -->
+<!-- 				<fieldset style="width: 300"> -->
 					<table id="table" class="table table-striped table-bordered">
 						<thead>
 							<tr>
@@ -138,7 +137,7 @@
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
 	<script>	
 		var dataTable;
-		var orderStatus = 4;
+		var orderStatus = 7;
 		$(document).ready(function() {
 			dataTable = $('#table').DataTable({
 				pageResize: true, 
@@ -230,11 +229,11 @@
 		})
 		//切換服務狀態
 		$('#orderStatus4').click(function(){
-			orderStatus = 5;
+			orderStatus = 7;
 			dataTable.ajax.reload();
 		})
 		$('#orderStatus5').click(function(){
-			orderStatus = 2;
+			orderStatus = 3;
 			dataTable.ajax.reload();
 		})
 		//自訂日期格式
