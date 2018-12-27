@@ -117,4 +117,29 @@ public class OrderService {
 		orderDao.deleteById(id);
 	}
 	
+	//accept 志工 改狀態為2接受
+	public Order accept(Long id) {
+		Order order=orderDao.getOne(id);
+		
+		log.debug("order",order);
+		log.debug("order.getStatus().getId()={}",order.getOrderStatus().getId());
+		if (order.getOrderStatus().getId() == 1) {
+			order.setOrderStatus(orderStatusDao.getOne(2L));
+			return orderDao.save(order);
+		}
+		return null;
+	}
+	
+	//reject 志工 改狀態為3拒絕
+	public Order reject(Long id) {
+		Order order=orderDao.getOne(id);
+		
+		log.debug("order",order);
+		log.debug("order.getStatus().getId()={}",order.getOrderStatus().getId());
+		if (order.getOrderStatus().getId() == 1) {
+			order.setOrderStatus(orderStatusDao.getOne(3L));
+			return orderDao.save(order);
+		}
+		return null;
+	}
 }

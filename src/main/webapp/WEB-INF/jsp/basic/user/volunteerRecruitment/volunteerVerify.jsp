@@ -119,6 +119,33 @@
 	
 	var dataTable;
 	
+	
+	function accept(id) {
+		$.ajax({
+			url : '/user/volunteerVerify/accept?id=' + id,
+			type : 'post',
+			dataType : 'JSON',
+			success : function(acceptResult) {
+//  				alert(cancelResult);
+				if(acceptResult.status == "SUCCESS"){
+					alert("接受編號" + acceptResult.obj.id + " " + acceptResult.status);									
+					
+				}else{
+					alert("接受編號" + acceptResult.obj.id + " " + acceptResult.status);
+					alert("FAIL reason:" + acceptResult.messages);	
+				}
+				dataTable.ajax.reload();
+				
+			},
+		})
+	}
+	
+	
+	
+	
+	
+	
+	
 	$(document).ready( function () {
 
 		dataTable=$('#table').DataTable({
@@ -170,9 +197,19 @@
 						
 									
 						{"data": function (data, type, val) {
-							 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerRecruitment/edit?id="+data.id+"'\">接受</button>";     
-							 var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteMission("+data.id+")\">拒絕</button>"; 	
-							 return editbutton + deletebutton;}
+							if(data.orderStatus.id==1){
+							 var acceptbutton="<button class='btn btn-outline-secondary' onclick=\"accept("+data.id+")\">接受</button>";     
+							 var rejectbutton="<button class='btn btn-outline-secondary' onclick=\"reject("+data.id+")\">拒絕</button>"; 	
+							 return acceptbutton + rejectbutton;
+							 }else if(data.orderStatus.id==2){
+								 return "以接受";
+								 
+							 }else if(data.orderStatus.id==3){
+								 return "以拒絕";
+							 }else if(data.orderStatus.id>=4){
+								 return "不應該出現的狀態";
+							 }
+						}
 						},					 
 					
 			            {"data":"mission.status.missionStatus"},
