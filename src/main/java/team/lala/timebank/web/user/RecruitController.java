@@ -91,19 +91,6 @@ public class RecruitController {
 		return response;
 	}
 
-	// 進行中
-	@RequestMapping("/recruiting")
-	@ResponseBody
-	public Page<Mission> recruiting(Mission inputMission, Principal principal,
-			@RequestParam(value = "start", required = false) Optional<Integer> start,
-			@RequestParam(value = "length", required = false) Optional<Integer> length) {
-		int page = start.orElse(0) / length.orElse(10);
-
-		Page<Mission> missions = missionService.findByMember(principal, inputMission,
-				PageRequest.of(page, length.orElse(10)));
-		return missions;
-	}
-
 	@RequestMapping("/update")
 	@ResponseBody
 	public AjaxResponse<Mission> update(Mission mission) {
@@ -122,18 +109,5 @@ public class RecruitController {
 		return response;
 	}
 
-	// // order
-	// @RequestMapping("/")
-	// @ResponseBody
-	// public Page<Order> queryOrder(Mission inputMission, Principal principal,
-	// @RequestParam(value = "start", required = false) Optional<Integer> start,
-	// @RequestParam(value = "length", required = false) Optional<Integer> length) {
-	// int page = start.orElse(0) / length.orElse(10);
-	//
-	// MissionSpecification missionSpec = new MissionSpecification(
-	// missionService.findByAccount(principal, inputMission));
-	// Page<Order> missions = missionService.findBySpecification(missionSpec,
-	// PageRequest.of(page, length.orElse(10)));
-	// return missions;
-	// }
+	
 }
