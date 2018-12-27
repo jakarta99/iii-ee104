@@ -42,6 +42,13 @@ public class VolunteerVerifyController {
 		return orders;
 	}
 	
+	@RequestMapping("/verify")
+	@ResponseBody
+	public String verifyVolunteer(Order order, Model model) {
+		return null;
+		
+	}
+	
 	
 	
 	
