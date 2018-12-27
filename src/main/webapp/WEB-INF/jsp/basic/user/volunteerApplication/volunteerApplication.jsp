@@ -179,7 +179,7 @@
 			$('#orderStatus6').attr('class','btn btn-secondary')
 			dataTable.ajax.reload();
 		})
-		$('#orderStatus3').click(function(){
+		$('#orderStatus6').click(function(){
 			orderStatus = 6;
 			$('#orderStatus1').attr('class','btn btn-secondary')
 			$('#orderStatus2').attr('class','btn btn-secondary')
