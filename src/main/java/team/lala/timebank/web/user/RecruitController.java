@@ -19,6 +19,7 @@ import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.ServiceType;
 import team.lala.timebank.service.MissionService;
+import team.lala.timebank.service.OrderService;
 import team.lala.timebank.service.ServiceTypeService;
 import team.lala.timebank.spec.MissionSpecification;
 
@@ -31,6 +32,8 @@ public class RecruitController {
 	private ServiceTypeService serviceTypeService;
 	@Autowired
 	private MissionService missionService;
+	@Autowired
+	private OrderService orderService;
 
 	@RequestMapping("/list")
 	public String listPage() {
@@ -82,6 +85,8 @@ public class RecruitController {
 		try {
 			response.setObj(missionService.getOne(id));
 			missionService.cancel(id);
+			List<Order> orders = orderService.findByMission(missionService.getOne(id));
+			orderService.rejectOrders(orders);
 
 		} catch (Exception e) {
 			response.addMessage("取消失敗，" + e.getMessage());
@@ -89,6 +94,19 @@ public class RecruitController {
 			e.printStackTrace();
 		}
 		return response;
+	}
+
+	// 進行中
+	@RequestMapping("/recruiting")
+	@ResponseBody
+	public Page<Mission> recruiting(Mission inputMission, Principal principal,
+			@RequestParam(value = "start", required = false) Optional<Integer> start,
+			@RequestParam(value = "length", required = false) Optional<Integer> length) {
+		int page = start.orElse(0) / length.orElse(10);
+
+		Page<Mission> missions = missionService.findByMember(principal, inputMission,
+				PageRequest.of(page, length.orElse(10)));
+		return missions;
 	}
 
 	@RequestMapping("/update")
@@ -109,5 +127,18 @@ public class RecruitController {
 		return response;
 	}
 
-	
+	// // order
+	// @RequestMapping("/")
+	// @ResponseBody
+	// public Page<Order> queryOrder(Mission inputMission, Principal principal,
+	// @RequestParam(value = "start", required = false) Optional<Integer> start,
+	// @RequestParam(value = "length", required = false) Optional<Integer> length) {
+	// int page = start.orElse(0) / length.orElse(10);
+	//
+	// MissionSpecification missionSpec = new MissionSpecification(
+	// missionService.findByAccount(principal, inputMission));
+	// Page<Order> missions = missionService.findBySpecification(missionSpec,
+	// PageRequest.of(page, length.orElse(10)));
+	// return missions;
+	// }
 }

@@ -165,7 +165,7 @@
 		<th scope="col">需求人數</th>
 		<th scope="col">地點</th>
 		<th scope="col">時間</th>
-		<th scope="col">志工審核</th>
+		<th id="statusField" scope="col">志工審核</th>
 		<th scope="col">狀態</th>
 	</tr>
 	 </thead>	
@@ -196,6 +196,7 @@
 	})
 	
 	$("#status12Butt").click(function(){
+		$("#statusField").empty().append("志工審核")
 		$("#status12Butt").attr('class',"btn btn-outline-primary")
 		$("#status3Butt").attr('class',"btn btn-outline-secondary")
 		$("#status4Butt").attr('class',"btn btn-outline-secondary")
@@ -205,6 +206,7 @@
 	})
 	
 	$("#status3Butt").click(function(){
+		$("#statusField").empty().append("時數核發")
 		$("#status12Butt").attr('class',"btn btn-outline-secondary")
 		$("#status3Butt").attr('class',"btn btn-outline-primary")
 		$("#status4Butt").attr('class',"btn btn-outline-secondary")
@@ -214,6 +216,7 @@
 	})
 	
 	$("#status4Butt").click(function(){
+		$("#statusField").empty().append("結案紀錄")
 		$("#status12Butt").attr('class',"btn btn-outline-secondary")
 		$("#status3Butt").attr('class',"btn btn-outline-secondary")
 		$("#status4Butt").attr('class',"btn btn-outline-primary")
@@ -330,8 +333,14 @@
 								var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">核發時數</button>";   
 								return vbutton;
 
+							}else if(data.status.id==5){
+								var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">取消紀錄</button>";   
+								return vbutton;	
+							}else if(data.status.id==4){
+								var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">結案紀錄</button>";   
+								return vbutton;	
 							}else{
-								return "已結案"	
+								return "已審核";
 							}
 							
 							}							 
