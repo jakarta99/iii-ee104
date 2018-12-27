@@ -196,10 +196,10 @@
 	})
 	
 	$("#status12Butt").click(function(){
-		$("#statusDetail").val("2");
 		$("#status12Butt").attr('class',"btn btn-outline-primary")
 		$("#status3Butt").attr('class',"btn btn-outline-secondary")
 		$("#status4Butt").attr('class',"btn btn-outline-secondary")
+		$("#statusDetail").val("2");
 		dataTable.ajax.reload();
 		
 	})
@@ -229,7 +229,7 @@
 			type : 'post',
 			dataType : 'JSON',
 			success : function(cancelResult) {
- 				alert(cancelResult);
+//  				alert(cancelResult);
 				if(cancelResult.status == "SUCCESS"){
 					alert("取消編號" + cancelResult.obj.id + " " + cancelResult.status);									
 					
@@ -317,10 +317,18 @@
 			            } },	
 					
 						{"data":function (data, type, val) {
+							if(data.status.id==1){
 							var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">志工審核</button>";   
-							return vbutton;}							 
+								return vbutton;
+								
+							}else{
+								return "審核完畢";
+							}
+							
+							}							 
 						},
-			            {"data":"status.missionStatus"},
+			            
+						{"data":"status.missionStatus"},
 									
 					],
 					 columnDefs: [{
