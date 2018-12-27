@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
-import team.lala.timebank.dao.MissionDao;
 import team.lala.timebank.dao.OrderDao;
 import team.lala.timebank.dao.OrderStatusDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.OrderStatus;
+import team.lala.timebank.spec.OrderSpecification;
 @Slf4j
 @Service
 public class OrderService {
@@ -59,18 +59,14 @@ public class OrderService {
 	}
 	
 	//根據媒合結果狀態查詢
-	public Page<Order> findByVolunteerAndOrderStatusBetween(Specification<Order> specification,
-			String account, Long orderStatus, PageRequest pageRequest){
-		Member member = memberDao.findByAccount(account);
-		if(orderStatus == 4) {
-			OrderStatus status = orderStatusDao.getOne(orderStatus);
-			return orderDao.findByVolunteerAndOrderStatus(member, status, pageRequest);
-		} else if (orderStatus == 5 ) {
-			
-		}
-		orderDao.findByVolunteer(member, pageRequest, specification);
-		return null;
-		
+	public Page<Order> findByVolunteerAndOrderStatusBetween(Order order, String account,
+													Long orderStatus, PageRequest pageRequest){
+			order.setVolunteerId(account);
+			if(order.getStatus() == null) {
+				order.setStatus(orderStatus);
+			} 
+			OrderSpecification orderSpecification = new OrderSpecification(order);
+			return orderDao.findAll(orderSpecification, pageRequest);
 	}
 	
 	public List<Order> findAll() {

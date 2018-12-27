@@ -20,15 +20,7 @@
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
-
-<!-- DateTimePicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/i18n/jquery-ui-timepicker-zh-TW.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
-
-		
+	
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 <meta charset="UTF-8">
 <title>mission list(login)</title>
@@ -98,9 +90,10 @@
 							<label>狀態 :</label> 
 							<select  id="status" name="status">
 								<option value="">選擇狀態</option>
-								<option value="5">已完成</option>
-						        <option value="6">Requester 取消交易</option>
-						        <option value="7">志工 取消交易</option>
+								<option value="3">requester 拒絕服務</option>
+						        <option value="4">Requester 取消交易</option>
+						        <option value="5">志工 取消交易</option>
+								<option value="7">已完成</option>
 						        <option value="8">Requester 臨時取消活動(不懲罰)</option>
 						        <option value="9">Requester 臨時取消活動(要懲罰)</option>
 						        <option value="10">志工 臨時請假(不懲罰)</option>
@@ -160,6 +153,7 @@
 					},
 					dataSrc:"content",
 					dataFilter:function(resp){		//對伺服器送來的資料進行修改
+						console.log(resp)
 						 var json = jQuery.parseJSON( resp );
 			             json.recordsTotal = json.totalElements;
 			             json.recordsFiltered = json.totalElements;	     			
@@ -184,8 +178,22 @@
 		            } },
 					{data:"mission.timeValue"},
 					{data:"orderStatus.orderStatus"},
-					{data:"memberScore"},
-					{data:""},
+					{ data: null, render: function ( data, type, row ) {
+						if(data.memberScore == null){
+							return 0;
+						} else {
+		            		return data.memberScore;							
+						}
+		            } },
+		            { data: null, render: function ( data, type, row ) {
+		            	if(data.orderStatus.id == 8 || data.orderStatus.id == 9){
+		            		var editButt = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='#?id="
+								+ data.id + "'\" value='檢舉'  />";
+		            		return editButt;
+		            	} else {
+		            		return null;		            		
+		            	}
+		            } },
 				], columnDefs:[{		//禁用第0123列的搜索和排序
 					"searchable": false,
 	                "orderable": false,
@@ -209,19 +217,32 @@
 			
 			new TwCitySelector();
 			
-			$('#startDate').datetimepicker({
-				dateFormat: "yy/mm/dd",
-			    todayHighlight: true,
-			    language: 'zh-TW',
-			    startView:"years",
-			})
+			//日期選擇器
+			var datePickerSetting = {
+				format : "yyyy/mm/dd",
+				autoclose : true,
+				todayHighlight : true,
+				language : 'zh-TW',
+				clearBtn : true,
+				startView : "2",
+				endDate : "0d",
+			};
+			$("#startDate").datepicker(datePickerSetting);
+			$("#endDate").datepicker(datePickerSetting);
 			
-			$('#endDate').datetimepicker({
-				dateFormat: "yy/mm/dd",
-			    todayHighlight: true,
-			    language: 'zh-TW',
-			    startView:"years",
-			})
+// 			$('#startDate').datetimepicker({
+// 				dateFormat: "yy/mm/dd",
+// 			    todayHighlight: true,
+// 			    language: 'zh-TW',
+// 			    startView:"years",
+// 			})
+			
+// 			$('#endDate').datetimepicker({
+// 				dateFormat: "yy/mm/dd",
+// 			    todayHighlight: true,
+// 			    language: 'zh-TW',
+// 			    startView:"years",
+// 			})
 		//搜尋事件
 		$("#searchButt").click(	function(){
 			dataTable.ajax.reload();

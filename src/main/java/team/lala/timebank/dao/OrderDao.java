@@ -20,7 +20,5 @@ public interface OrderDao extends JpaRepository<Order,Long>, JpaSpecificationExe
 	public Page<Order> findByMission(Mission mission, Pageable Pageable);
 	
 	public Page<Order> findByVolunteerAndOrderStatus(Member volunteer, OrderStatus orderStatus, Pageable Pageable);
-	
-	public Page<Order> findByVolunteer(Member volunteer, Pageable pageable, Specification<Order> specification);
 
 }

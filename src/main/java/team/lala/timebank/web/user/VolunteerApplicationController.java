@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.service.OrderService;
-import team.lala.timebank.spec.OrderSpecification;
 
+@Slf4j
 @Controller
 @RequestMapping("/user")
 public class VolunteerApplicationController {
@@ -50,10 +51,9 @@ public class VolunteerApplicationController {
 			@RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
 		int page = start.orElse(0)/length.orElse(10);
-		String account = principal.getName();
-		OrderSpecification orderSpecification = new OrderSpecification(order);		
+		String account = principal.getName();		
 		return orderService.findByVolunteerAndOrderStatusBetween(
-				orderSpecification, account, orderStatus, PageRequest.of(page, length.orElse(10)));
+				order, account, orderStatus, PageRequest.of(page, length.orElse(10)));
 	}
 
 	@ResponseBody
