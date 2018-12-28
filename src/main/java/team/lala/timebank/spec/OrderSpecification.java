@@ -37,9 +37,17 @@ public class OrderSpecification implements Specification<Order>  {
 			list.add(criteriaBuilder.equal(join.get("account"), inputOrder.getVolunteerAccount()));
 		}
 		
-		if (!StringUtils.isEmpty(inputOrder.getOrderStatus())) {
+		if(StringUtils.isEmpty(inputOrder.getOrderStatus())) {
+			if (!StringUtils.isEmpty(inputOrder.getOrderStatusDetail())) {
+				list.add(criteriaBuilder.like(root.get("orderStatus").as(String.class), "%" + inputOrder.getOrderStatusDetail() + "%"));
+			}
+		}
+		
+		if(!StringUtils.isEmpty(inputOrder.getOrderStatus())) {
 			list.add(criteriaBuilder.like(root.get("orderStatus").as(String.class), "%" + inputOrder.getOrderStatus() + "%"));
 		}
+		
+		
 		
 		//排序(暫時寫死)，如何從前端傳排序資料
 		//同時針對兩個欄位排序
