@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,11 +16,11 @@ import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
 import lombok.Setter;
+import team.lala.timebank.enums.OrderStatus;
 
 @Getter
 @Setter
@@ -35,13 +37,10 @@ public class Order{
 	private Member volunteer;
 	
 	@Transient
-	private String volunteerId;
+	private String volunteerAccount; 
 	
-	@ManyToOne
-	@JsonIgnoreProperties
-	@JoinColumn(name="ORDER_STATUS",    
-				referencedColumnName="id",  
-				insertable=true, updatable=true)
+	@Enumerated(EnumType.STRING)
+	@Column(name = "TYPE")
 	private OrderStatus orderStatus;
 	
 	@Transient
@@ -68,6 +67,7 @@ public class Order{
 	@Column(name="FEEDBACK_SCORE")
 	private Long feedBackScore;
 	
+	
 	@Transient
 	private String missionTitle;
 	
@@ -92,23 +92,10 @@ public class Order{
 	private Integer timeValue;// 可獲得時數(工作的時間)
 	
 	@Transient
-	private Long status;
-	
-	@Transient
 	private Long statusBegin;
 	
 	@Transient
 	private Long statusEnd;
 
-	@Override
-	public String toString() {
-		return "Order [id=" + id + ", volunteer=" + volunteer + ", volunteerId=" + volunteerId + ", orderStatus="
-				+ orderStatus + ", orderStatusDetail=" + orderStatusDetail + ", volunteerApplyTime="
-				+ volunteerApplyTime + ", orderAcceptTime=" + orderAcceptTime + ", mission=" + mission
-				+ ", memberScore=" + memberScore + ", feedBackScore=" + feedBackScore + ", missionTitle=" + missionTitle
-				+ ", county=" + county + ", district=" + district + ", address=" + address + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", timeValue=" + timeValue + ", status=" + status + ", statusBegin="
-				+ statusBegin + ", statusEnd=" + statusEnd + "]";
-	}
 
 }

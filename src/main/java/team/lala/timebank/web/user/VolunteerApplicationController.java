@@ -36,25 +36,20 @@ public class VolunteerApplicationController {
 
 	@ResponseBody
 	@RequestMapping("/volunteerApplication/queryApplication")	//查詢申請中網頁的資料
-	public Page<Order> QueryApplication(Principal principal, @RequestParam(value="orderStatus") Long orderStatus, @RequestParam(value="start",required=false) Optional<Integer> start, 
+	public Page<Order> QueryApplication(Principal principal, Order order,
+			@RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
-
 		int page = start.orElse(0)/length.orElse(10);
-		String account = principal.getName();
-		
-		return orderService.findByVolunteerAndOrderStatus(account, (Long)orderStatus, PageRequest.of(page, length.orElse(10)));
+		return orderService.findByVolunteerAndOrderStatus(principal, order, PageRequest.of(page, length.orElse(10)));
 	}
 	
 	@ResponseBody
 	@RequestMapping("/volunteerRecord/queryRecord")		//查詢媒合紀錄資料
-	public Page<Order> QueryRecord(Principal principal, Order order, @RequestParam(value="orderStatus") Long orderStatus,
+	public Page<Order> QueryRecord(Principal principal, Order order, @RequestParam(value="orderStatus") String orderStatus,
 			@RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
-		log.debug("order={}", order);
 		int page = start.orElse(0)/length.orElse(10);
-		String account = principal.getName();		
-		return orderService.findByVolunteerAndOrderStatusBetween(
-				order, account, orderStatus, PageRequest.of(page, length.orElse(10)));
+		return orderService.findByVolunteerAndOrderStatus(principal, order, PageRequest.of(page, length.orElse(10)));
 	}
 
 	@ResponseBody
