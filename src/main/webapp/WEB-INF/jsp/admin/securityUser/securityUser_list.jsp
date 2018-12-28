@@ -8,43 +8,60 @@
 
 <jsp:include page="../admin_layout/admin_css_js_links.jsp" />
 <style>
- article{
+	 article{
 	 	margin-top:70px;
 	 }
 	 
 	 article fieldset {
-/* 		width: 500px; */
-		border-radius: 20px;
-		padding: 20px 20px 0px 20px; 
-		border: 3px double #bebebe;
-		margin: auto;
-		margin-top: 10px; 
-		margin-bottom: 20px; 
+ 		border-radius: 20px; 
+ 		padding: 20px 20px 0px 20px;  
+/*  		border: 3px double #bebebe;  */
+		background-color:#ffeecc;
+		margin: auto; 
+ 		margin-top: 10px;  
+ 		margin-bottom: 20px;  
+ 		
 	}
 
 	 table tr td, button{
 	 	text-align:center;
 	 	line-height:center; 
 	 }
+	 
 	 article .btn{
 	 	margin-left:3px;
 	 	margin-right:3px
 	 }
 	 
-
+	 legend{
+	 	color:#2c3e50;
+	 	font-size: 30px;
+	 }
+	 
+/* 	 @font-face{ */
+/* 		font-family: custom-serif; */
+/* 	    src: local("LiSong Pro"), local("微軟正黑體"), local("PMingLiU"); */
+/* 	    unicode-range: U+4E00-9FFF; */
+/* 	 } */
+	 
+/* 	 body{ */
+/* 	 	font-family: custom-serif; */
+/* 	 } */
 </style>
 </head>
 <body>
 
 <jsp:include page="../admin_layout/nav.jsp" />
 	<article>
-	<h2>securityUser List</h2>
-	
+	<div class="container" style="margin-top: 140px">
+		<h2 class="text-center text-uppercase text-secondary mb-0">securityUser List</h2>
+        <hr class="star-dark mb-5">
+	</div>
 	<fieldset style="width:700px">
-		<input type="button" id="editButt3" onclick="editRow()" value="更新-2"/>
+		<input type="button" class="btn btn-warning btn-sm" id="editButt3" onclick="editRow()" value="更新-2"/>
 		
 		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary btn-sm" id="editButt" onclick="editRow()" data-toggle="modal" data-target="#exampleModal" > 更新</button>
+		<button type="button" class="btn btn-warning btn-sm" id="editButt" onclick="editRow()" data-toggle="modal" data-target="#exampleModal" > 更新</button>
 		
  		<!-- Modal --> 
 		<div class="modal fade" id=exampleModal tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -144,7 +161,7 @@
 			$("form").addClass("form-inline");
 			$("form div[id!='collapse']").addClass("form-group mx-sm-3 mb-3");
 			$("form input, select").addClass("form-control mx-3");
-			$("#searchButt, #resetButt").addClass("btn btn-primary");
+			$("#searchButt, #resetButt").addClass("btn btn-warning");
 			
 			
 
@@ -168,7 +185,7 @@
 		     	columns: [		        
 		           {data: function (source, type, val) {
 		        	  	console.log(source)
-		 				var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+source.id+","+source.role.id+")\" id='deleteButt"+ source.id +"' value='刪除' />"  
+		 				var deleteButt="<input type='button' class=\"btn btn-warning btn-sm\" onclick=\"deleteRow("+source.id+","+source.role.id+")\" id='deleteButt"+ source.id +"' value='刪除' />"  
 		               	return deleteButt;			        	   
 		           	}		        	   
 		           },

@@ -5,128 +5,145 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
-	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
-	crossorigin="anonymous"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
-	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
-	crossorigin="anonymous">
-
-<script defer
-	src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<jsp:include page="../admin_layout/admin_css_js_links.jsp" />
 
 <!-- date picker -->
 <script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
-<!-- data table -->
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
-<script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
-<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>	
+
 
 <title>TimeLedger List</title>
 <style>
-fieldset {
-	width: 1200px;
-	border-radius: 20px;
-	padding: 20px;
-	margin: 20px;
-	border: 3px double #bebebe;
-	margin: auto
-}
+	 article{
+	 	margin-top:70px;
+	 }
+	 
+	 article fieldset {
+ 		border-radius: 20px; 
+ 		padding: 20px 20px 0px 20px;  
+/*  		border: 3px double #bebebe;  */
+		background-color:#ffeecc;
+		margin: auto; 
+ 		margin-top: 10px;  
+ 		margin-bottom: 20px;  
+ 		
+	}
 
-.center {
-	text-align: center
-}
-
-.margintop{
-	 margin-top:70px;
-}
+	 table tr td, button{
+	 	text-align:center;
+	 	line-height:center; 
+	 }
+	 
+	 article .btn{
+	 	margin-left:3px;
+	 	margin-right:3px
+	 }
+	 
+	 legend{
+	 	color:#2c3e50;
+	 	font-size: 30px;
+	 }
+	 
+/* 	 @font-face{ */
+/* 		font-family: custom-serif; */
+/* 	    src: local("LiSong Pro"), local("微軟正黑體"), local("PMingLiU"); */
+/* 	    unicode-range: U+4E00-9FFF; */
+/* 	 } */
+	 
+/* 	 body{ */
+/* 	 	font-family: custom-serif; */
+/* 	 } */
 </style>
 </head>
 <body>
 	<jsp:include page="../admin_layout/nav.jsp" />
-	<div class="margintop"></div>
-	<h1 class="center">TimeLedger List</h1>
-	<hr>
-	<button onclick="javascript:document.location.href='/admin/time-ledger/add'"
-				class="btn btn-outline-secondary">Add</button>
-<!-- 			<button id="findAll" onclick="findAll()" class="btn btn-outline-secondary">findAll</button> -->
-	<hr>
-	<div id="sideBar">
-		<form>
-			<fieldset>
-			<legend>Search</legend>
-			<div>
-				<label>id :</label>
-				<input type="text" value="${param.id}" placeholder="id" id="id" name="id"/>
-				<label>memberId :</label>
-				<input type="text" value="${param.memberId}" placeholder="memberId" id="memberId" name="memberId"/>
-<!-- 				description : -->
-<%-- 				<input type="text" value="${param.description}" placeholder="description" id="description" name="description"/> --%>
-			</div>
-			<div>	
-				<label>depositValue :</label>
-				<input type="text" value="${param.depositValue}" id="depositValue" name="depositValue"/>
-				<label>withdrawalValue :</label> 
-				<input type="text" value="${param.withdrawalValue}"  id="withdrawalValue" name="withdrawalValue"/>
-<!-- 				<label>balanceValue :</label> -->
-<%-- 				<input type="text" value="${param.balanceValue}" id="balanceValue" name="balanceValue"/> --%>
-			</div>
-			<div>
-			    <label>Start Date :</label>
-			    <input type="text" value="${param.transactionTimeBegin}" id="transactionTimeBegin" name="transactionTimeBegin" autocomplete="off"/>
-			    <label>End Date :</label>
-			    <input type="text" value="${param.transactionTimeEnd}" id="transactionTimeEnd" name="transactionTimeEnd" autocomplete="off"/>
-			  	<input type="button" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="search" id="searchButt" />
-			  	<input type="reset" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value=reset id="resetButt" />
-		  	</div>
-		  	</fieldset>
-		</form>
+	<article>
+		<div class="container" style="margin-top: 140px">
+			<h2 class="text-center text-uppercase text-secondary mb-0">TimeLedger List</h2>
+	        <hr class="star-dark mb-5">
 		</div>
-		<hr>
-		<fieldset>
-			<table id="table" class="table table-striped table-bordered">
-				<thead>
-					<tr>
-						<th>選項</th>
-						<th scope="col">id</th>
-						<th scope="col">memberId</th>
-						<th scope="col">transactionTime</th>
-<!-- 						<th scope="col">description</th> -->
-						<th scope="col">depositValue</th>
-						<th scope="col">withdrawalValue</th>
-<!-- 						<th scope="col">balanceValue</th> -->
-					</tr>
-				</thead>
-				<tbody id="timeLedgerTbody">
-				</tbody>
-			</table>
-		</fieldset>
-		<hr>
-		<div>
-			<a href='/'><i class="fas fa-home"></i>back to HOME</a>
-		</div>
+
+	<!-- 			<button id="findAll" onclick="findAll()" class="btn btn-outline-secondary">findAll</button> -->
+	
+		<div id="sideBar">
+			<form>
+				<fieldset style="width:1100px">
+				<legend>Search</legend>
+				<div>
+					<label>id :</label>
+					<input type="text" value="${param.id}" placeholder="id" id="id" name="id"/>
+					<label>memberId :</label>
+					<input type="text" value="${param.memberId}" placeholder="memberId" id="memberId" name="memberId"/>
+					<input type="button" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="search" id="searchButt" />
+				  	<input type="reset" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value=reset id="resetButt" />
+					<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" 
+							role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a>
+				</div>
+				
+				<div class="collapse" id="collapse">
+					<div>	
+						<label>depositValue :</label>
+						<input type="text" value="${param.depositValue}" id="depositValue" name="depositValue"/>
+						<label>withdrawalValue :</label> 
+						<input type="text" value="${param.withdrawalValue}"  id="withdrawalValue" name="withdrawalValue"/>
+					</div>
+					<div>
+					    <label>Start Date :</label>
+					    <input type="text" value="${param.transactionTimeBegin}" id="transactionTimeBegin" name="transactionTimeBegin" autocomplete="off"/>
+					    <label>End Date :</label>
+					    <input type="text" value="${param.transactionTimeEnd}" id="transactionTimeEnd" name="transactionTimeEnd" autocomplete="off"/>
+				  	</div>
+			  	</div>
+			  	</fieldset>
+			</form>
+			</div>
+			
+			<fieldset style="width:1300px">
+			<div style="margin-bottom: 20px">
+				<button onclick="javascript:document.location.href='/admin/time-ledger/add'" class="btn btn-warning btn-sm">新增</button>
+			</div>
+				<table id="table" class="table table-bordered">
+					<thead>
+						<tr>
+							<th scope="col"></th>
+							<th width="100px" scope="col">選項</th>
+							<th scope="col">id</th>
+							<th scope="col">memberId</th>
+							<th scope="col">transactionTime</th>
+	<!-- 						<th scope="col">description</th> -->
+							<th scope="col">depositValue</th>
+							<th scope="col">withdrawalValue</th>
+	<!-- 						<th scope="col">balanceValue</th> -->
+						</tr>
+					</thead>
+					<tbody id="tableBody">
+					</tbody>
+				</table>
+			</fieldset>
+	</article>
+
 	
 	
 	<script>
-		var dataTable;
+	var dataTable;
+	$(document).ready(function() {
+		$("form").addClass("form-inline");
+		$("form div[id!='collapse']").addClass("form-group mx-sm-3 mb-3");
+		$("form input, select").addClass("form-control mx-3");
+		$("#searchButt, #resetButt").addClass("btn btn-outline-secondary");
+		
+		
+		
 		dataTable = $('#table').DataTable({
-			pageResize: true,
+			pageResize: true, 
 			fixedHeader: true,
-			pageingType: 'full_numbers',
-			searching: false,
-			serverSide: true, //分頁&排序---server端處理
+			pagingType: 'full_numbers',
+			searching: false,				
+		 	processing: true,
+			serverSide: true,  //分頁、排序都交由伺服器處理
+// 			lengthMenu: [ 3, 6, 9, 12, ],
 			ajax:{
 				url:'/admin/time-ledger/query',
 				type:'get',
@@ -155,13 +172,14 @@ fieldset {
 				var api = this.api();
 				var pageNum = parseInt(d.json.pageable.pageNumber);
 				var totalPages = d.json.totalPages;
-				$('#information').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
+				$('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
 			},
 			//設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
 			columns:[
+				{data:null},
 				{data:function(data, type, row){
-					var editButton = "<input type='button' class=\"btn btn-outline-secondary\" onclick=\"javascript:document.location.href='/admin/time-ledger/edit?id=" + data.id + "'\" value='Edit' style='margin-right:1em'/>";
-					var deleteButton = "<input type='button' class=\"btn btn-outline-secondary\" onclick=\"deleteData(" + data.id + ")\" value='Delete' />";
+					var editButton = "<input type='button' class=\"btn btn-warning btn-sm\" onclick=\"javascript:document.location.href='/admin/time-ledger/edit?id=" + data.id + "'\" value='修改'/>";
+					var deleteButton = "<input type='button' class=\"btn btn-warning btn-sm\" onclick=\"deleteData(" + data.id + ")\" value='刪除' />";
 					return editButton + deleteButton;
 				}},	
 				{data:'id'},
@@ -177,10 +195,26 @@ fieldset {
 			columnDefs: [{
 	            "searchable": false,
 	            "orderable": false,
-	            "targets": [0],
+	            "targets": [0, 1, 2],
 	        }],
 	        order:[[1, 'asc']]
 		});
+		
+		dataTable.on('draw.dt',function() {
+			dataTable.column(0, {
+                search:'applied',
+                order:'applied'
+            }).nodes().each(function(cell, i) {
+				 i = i+1;								//i從0開始，所以先加1
+                var pageinfo = dataTable.page.info();	//服務氣模式下，使用DT提供的API直接獲取分頁資訊
+                var pageno = pageinfo.page;				//当前第几页，从0开始
+                var length = pageinfo.length;			//每页数据
+                var columnIndex = (i+pageno*length);	//行号等于 页数*每页数据长度+行号
+                cell.innerHTML = columnIndex;
+            });
+        });	
+		
+		
 		var datePickerSetting = {
 				format : "yyyy/mm/dd",
 				autoclose : true,
@@ -192,6 +226,9 @@ fieldset {
 			};
 		$('#transactionTimeBegin').datepicker(datePickerSetting);
 		$('#transactionTimeEnd').datepicker(datePickerSetting);
+	})
+	
+		
 		
 		function deleteData(timeLedgerId){
 			$.ajax({

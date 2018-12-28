@@ -19,4 +19,19 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
 <script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
-<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>		
+<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>	
+
+<!-- 樣式 -->
+    <!-- Bootstrap core CSS -->
+    <link href="../../vendor2/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="../../vendor2/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+	<!-- 插畫風 -->
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/sketchy/bootstrap.min.css">  
+    <!-- Plugin CSS -->
+    <link href="../../vendor2/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template -->
+    <link href="../../css2/freelancer.min.css" rel="stylesheet">
+	

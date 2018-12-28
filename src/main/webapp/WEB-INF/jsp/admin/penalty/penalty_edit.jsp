@@ -34,14 +34,14 @@
 			<label for="orderListId" class="col-sm-1 col-form-label">orderListId</label>
 			<div class="col-sm-2">
 				<input type="text" id="orderListId" name="orderListId"
-					class="form-control" value="${penalty.orderListId}" readonly />
+					class="form-control" value="${penalty.order.id}" readonly />
 			</div>
 		</div>
 		<div class="form_group row">
-			<label for="memberId" class="col-sm-1 col-form-label">memberId</label>
+			<label for="memberId" class="col-sm-1 col-form-label">accuserId</label>
 			<div class="col-sm-2">
 				<input type="text" id="memberId" name="memberId"
-					class="form-control" value="${penalty.memberId}" readonly />
+					class="form-control" value="${penalty.accuser.id}" readonly />
 			</div>
 		</div>
 		<div class="form-group row">
@@ -68,15 +68,16 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-
+			console.log(JSON.stringify($('form').serialize()));
 			$('#status').val('${penalty.status}');
 
 			$('#update').click(function() {
 				$.ajax({
 					url : "/admin/penalty/update",
 					method : "post",
+					contentType:"application/json",
 					dataType : "json",
-					data : $('form').serialize()
+					data : JSON.stringify($('form').serialize())
 				}).done(function(result) {
 					alert(result.status);
 				})

@@ -5,35 +5,11 @@
 <html>
 <head>
 
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" 
-		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" 
-		crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" 
-		integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" 
-		crossorigin="anonymous"></script>
-<link rel="stylesheet" 
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" 
-		integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" 
-		crossorigin="anonymous">
-<script defer
-	src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
+<jsp:include page="../admin_layout/admin_css_js_links.jsp" />  
 				
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
-<!-- date picker -->
-<script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
-<script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
-<script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
-<link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
+
 
 <!-- DateTimePicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
@@ -46,144 +22,148 @@
 <meta charset="UTF-8">
 <title>mission list</title>
 <style>
+	 article{
+	 	margin-top:70px;
+	 }
+	 
+	 article fieldset {
+ 		border-radius: 20px; 
+ 		padding: 20px 20px 0px 20px;  
+/*  		border: 3px double #bebebe;  */
+		background-color:#ffeecc;
+		margin: auto; 
+ 		margin-top: 10px;  
+ 		margin-bottom: 20px;  
+ 		
+	}
 
-	 	
-        fieldset {
-            width: 90%;
-            border-radius: 20px;
-            padding: 20px;
-            margin: 20px;
-            border: 3px double #bebebe;
-            margin: auto
-        }
-        .s2{
-            text-align: center
-        }
-        .margintop{
-			 margin-top:70px;
-		}
-		.county,.district {
-	  padding: 0.375rem 0.75rem;
-	  font-size: 1rem;
-	  line-height: 1.5;
-	  color: #495057;
-	  background-color: #fff;
-	  background-image: none;
-	  background-clip: padding-box;
-	  border: 1px solid #ced4da;
-	  border-radius: 0.25rem;
-	  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	 table tr td, button{
+	 	text-align:center;
+	 	line-height:center; 
+	 }
+	 
+	 article .btn{
+	 	margin-left:3px;
+	 	margin-right:3px
+	 }
+	 
+	 legend{
+	 	color:#2c3e50;
+	 	font-size: 30px;
+	 }
+	 
+/* 	 @font-face{ */
+/* 		font-family: custom-serif; */
+/* 	    src: local("LiSong Pro"), local("微軟正黑體"), local("PMingLiU"); */
+/* 	    unicode-range: U+4E00-9FFF; */
+/* 	 } */
+	 
+/* 	 body{ */
+/* 	 	font-family: custom-serif; */
+/* 	 } */
 	}
  
     </style>
 </head>
 <body>
 <jsp:include page="../admin_layout/nav.jsp" />
+<article>
 	<div class="margintop"></div>
+	<div class="container" style="margin-top: 140px">
+		<h2 class="text-center text-uppercase text-secondary mb-0">mission list</h2>
+        <hr class="star-dark mb-5">
+	</div>
 	
-	<h1 class="s2">mission list</h1>
-	
-	<fieldset>
-	<form>
-			<div>
-			基本查詢:
-			</div>
-			
-			<label>縣市:</label> 
-			<div style='display:inline' role="tw-city-selector" ></div>
-			
-			<label>會員類型 :</label> 
-				<select  id="serviceTypeDetail" name="serviceTypeDetail">
-					<option value="">選擇服務類型</option>
-					<option value="婦幼關懷">婦幼關懷</option>
-			        <option value="身心障礙">身心障礙</option>
-			        <option value="老人服務">老人服務</option>
-			        <option value="社會服務">社會服務</option>
-			        <option value="動物保護">動物保護</option>
-			        <option value="國際救援">國際救援</option>
-			        <option value="環境保護">環境保護</option>
-			        <option value="文教藝術">文教藝術</option>
-			        <option value="醫療服務">醫療服務</option>
-			        <option value="宗教信仰">宗教信仰</option>
-				</select>
+	<div id="sideBar">
+		<form>
+			<fieldset style="width:1100px">
+			<legend>Search</legend>
 				
-			<label>長短期 :</label> 
-				<select  id="termType" name="termType">
-					<option value="">選擇長短期</option>
-					<option value="L">長期</option>
-			        <option value="S">短期</option>
-				</select>
 				
-<!-- 			<label>狀態:</label>  -->
-<!-- 				<select  id="status" name="status"> -->
-<!-- 					<option value="">選擇狀態</option> -->
-<!-- 					<option value="1">1</option> -->
-<!-- 			        <option value="2">2</option> -->
-<!-- 			        <option value="3">3</option> -->
-<!-- 			        <option value="4">4</option> -->
-<!-- 				</select>	 -->
-				
-			<label>startDate:</label>
-			<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
-			<label>endDate:</label>
-			<input type="text"  id="endDate" name="endDate" autocomplete="off"/>
-			
-			
-			<input type="button" value="搜尋" id="searchButt" />
-			<div>
-			
-			<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
-			進階查詢:
-  			</a>
-  			</div> 
-			<div class="collapse" id="collapse">
-			
-			<label>timeValue :</label> 
-			<input type="text" value="" placeholder="timeValue" id="timeValue" name="timeValue"/>
-			
-			<label>title :</label> 
-			<input type="text" value="" placeholder="title" id="title" name="title"/>
-			
-			<label>memberAccount :</label> 
-			<input type="text" value="" placeholder="memberAccount" id="memberAccount" name="memberAccount"/>
-			
-			<label>statusDetail :</label> 
-			<input type="text" value="" placeholder="statusDetail" id="statusDetail" name="statusDetail"/>
-			
-			
-			</div>
+				<div>
+					<label>memberAccount :</label> 
+					<input type="text" value="" placeholder="memberAccount" id="memberAccount" name="memberAccount"/>
+						
+					<label>會員類型 :</label> 
+						<select  id="serviceTypeDetail" name="serviceTypeDetail">
+							<option value="">請選擇</option>
+							<option value="婦幼關懷">婦幼關懷</option>
+					        <option value="身心障礙">身心障礙</option>
+					        <option value="老人服務">老人服務</option>
+					        <option value="社會服務">社會服務</option>
+					        <option value="動物保護">動物保護</option>
+					        <option value="國際救援">國際救援</option>
+					        <option value="環境保護">環境保護</option>
+					        <option value="文教藝術">文教藝術</option>
+					        <option value="醫療服務">醫療服務</option>
+					        <option value="宗教信仰">宗教信仰</option>
+						</select>
+						
+					<label>長短期 :</label> 
+						<select  id="termType" name="termType">
+							<option value="">請選擇</option>
+							<option value="L">長期</option>
+					        <option value="S">短期</option>
+						</select>
+					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
+					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
+					<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" 
+						role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a>
+				</div> 
+				<div class="collapse" id="collapse">
+					<div>
+						<label>縣市:</label> 
+						<div id="twCitySelector" style='display:inline' role="tw-city-selector"></div>
+						
+						<label>startDate:</label>
+						<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
+						
+						<label>endDate:</label>
+						<input type="text"  id="endDate" name="endDate" autocomplete="off"/>
+						
+					</div>
+					<div>
+						<label>title :</label> 
+						<input type="text" value="" placeholder="title" id="title" name="title"/>
+						
+						<label>timeValue :</label> 
+						<input type="text" value="" placeholder="timeValue" id="timeValue" name="timeValue"/>
+						
+						<label>statusDetail :</label> 
+						<input type="text" value="" placeholder="statusDetail" id="statusDetail" name="statusDetail"/>
+					</div>
+				</div>
+			</fieldset>
 		</form>
-	</fieldset>
+	</div>
 	
-	<fieldset>
-	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/admin/mission/add'">add</button>
-	<table id="table" class="table table-hover">
-	<thead>
-	<tr>
-		<th>選項</th>
-		<th scope="col">會員編號</th>
-		<th scope="col">會員帳號</th>
-		<th scope="col">活動名稱</th>
-		<th scope="col">時數</th>
-		<th scope="col">長短期</th>
-		<th scope="col">服務類型</th>
-		<th scope="col">結束日期</th>
-<!-- 		<th scope="col">startDate</th> -->
-<!-- 		<th scope="col">endDate</th> -->
-		<th scope="col">需求人數</th>
-<!-- 		<th scope="col">contactPerson</th> -->
-<!-- 		<th scope="col">contactPhone</th> -->
-<!-- 		<th scope="col">contactEmail</th> -->
-		<th scope="col">狀態</th>
-		<th scope="col">地址</th>
-	</tr>
-	 </thead>	
-	 <tbody id="tbody">	
-	 </tbody>
-	</table>
+	<fieldset style="width:1300px">
+		<div style="margin-bottom: 20px">
+			<button class="btn btn-warning btn-sm" onclick="javascript:document.location.href='/admin/mission/add'">新增</button>
+		</div>
+		<table id="table" class="table table-hover">
+			<thead>
+				<tr>
+					<th width="100px">選項</th>
+					<th scope="col">會員編號</th>
+					<th scope="col">會員帳號</th>
+					<th scope="col">活動名稱</th>
+					<th scope="col">時數</th>
+					<th scope="col">長短期</th>
+					<th scope="col">服務類型</th>
+					<th scope="col">結束日期</th>
+					<th scope="col">需求人數</th>
+					<th scope="col">狀態</th>
+					<th scope="col">地址</th>
+				</tr>
+			 </thead>	
+			 <tbody id="tbody">	
+			 </tbody>
+		</table>
 		
-	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/'">回列表頁</button>
 	</fieldset>
+</article>
+
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 	
 	<script>
@@ -221,6 +201,14 @@
 
 		new TwCitySelector();
 		
+// 		$("select[name='district']").removeClass();
+// 		$("select[name='district']").addClass("form-control mx-3");
+		
+		$("form").addClass("form-inline");
+		$("form div[id!='collapse']").addClass("form-group mx-sm-3 mb-3");
+		$("form input, select").addClass("form-control mx-3");
+		$("#searchButt, #resetButt").addClass("btn btn-outline-secondary");
+		
 		$('#startDate').datetimepicker({
 			dateFormat: "yy/mm/dd",
 		    todayHighlight: true,
@@ -251,7 +239,7 @@
 		 			   api.rows( {page:'current'} ).data()
 		 			    return '顯示第 '+(pageInfo.start+1)+' 筆到第  '+(pageInfo.end)+' 筆 共 '+ pageInfo.recordsTotal+' 筆資料 ';
 		 			 },	
-				"lengthMenu": [ 3, 6, 9, 12, ],
+				"lengthMenu": [ 10, 25, 50, 100],
 				ajax:{
 					url:"/admin/mission/querypage",
 					type: "get",
@@ -284,8 +272,8 @@
 // 				       },
 					columns:[						
 						{"data": function (data, type, val) {
-							 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/admin/mission/edit?id="+data.id+"'\">Edit</button>";     
-							 var deletebutton="<button class='btn btn-outline-secondary' onclick=\"deleteMission("+data.id+")\">Delete</button>"; 	
+							 var editbutton="<button class='btn btn-warning btn-sm' onclick=\"javascript:document.location.href='/admin/mission/edit?id="+data.id+"'\">修改</button>";     
+							 var deletebutton="<button class='btn btn-warning btn-sm' onclick=\"deleteMission("+data.id+")\">刪除</button>"; 	
 							 return editbutton + deletebutton;}
 						},					 
 						{"data":"id"},

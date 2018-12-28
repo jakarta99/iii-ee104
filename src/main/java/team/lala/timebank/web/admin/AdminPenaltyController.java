@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,8 +40,9 @@ public class AdminPenaltyController {
 
 	@RequestMapping("/update")
 	@ResponseBody
-	public AjaxResponse<Penalty> update(Penalty penalty, Model model) {
+	public AjaxResponse<Penalty> update(@RequestBody Penalty penalty, Model model) {
 		AjaxResponse<Penalty> ajaxResponse = new AjaxResponse<Penalty>();
+		
 		try {
 			ajaxResponse.setObj(penaltyService.update(penalty));
 		} catch (Exception e) {

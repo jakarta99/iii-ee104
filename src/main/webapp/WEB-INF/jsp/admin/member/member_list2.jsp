@@ -23,27 +23,41 @@
 	 }
 	 
 	 article fieldset {
-/*  		width: 500px;  */
  		border-radius: 20px; 
  		padding: 20px 20px 0px 20px;  
- 		border: 3px double #bebebe; 
+/*  		border: 3px double #bebebe;  */
+		background-color:#ffeecc;
 		margin: auto; 
  		margin-top: 10px;  
  		margin-bottom: 20px;  
+ 		
 	}
 
 	 table tr td, button{
 	 	text-align:center;
 	 	line-height:center; 
 	 }
+	 
 	 article .btn{
 	 	margin-left:3px;
 	 	margin-right:3px
 	 }
 	 
-
-
+	 legend{
+	 	color:#2c3e50;
+	 	font-size: 30px;
+	 }
 	 
+/* 	 @font-face{ */
+/* 		font-family: custom-serif; */
+/* 	    src: local("LiSong Pro"), local("微軟正黑體"), local("PMingLiU"); */
+/* 	    unicode-range: U+4E00-9FFF; */
+/* 	 } */
+	 
+/* 	 body{ */
+/* 	 	font-family: custom-serif; */
+/* 	 } */
+
 	 /* 	設定縣市地區選擇器的css樣式 */
 	.county,.district {
 	  padding: 0.375rem 0.75rem;
@@ -64,19 +78,15 @@
 
 	<jsp:include page="../admin_layout/nav.jsp" />
 	<article>
-		<h2>Member List</h2>
-		
-		<div >
-			<input type="button" class="btn btn-primary btn-sm"	
-				onclick="javascript:document.location.href='/admin/member/add?memberType=P'" value="新增一般會員" />
-			<input type="button" class="btn btn-primary btn-sm"
-					onclick="javascript:document.location.href='/admin/member/add?memberType=O'" value="新增公益團體" />
+		<div class="container" style="margin-top: 140px">
+			<h2 class="text-center text-uppercase text-secondary mb-0">Member List</h2>
+	        <hr class="star-dark mb-5">
 		</div>
-		
+
 <!-- 		條件搜尋表單 -->
 		<div id="sideBar" >		
 			<form>
-				<fieldset>
+				<fieldset style="width:1100px">
 				<legend>Search</legend>
 				<div >
 					<label>帳號 :</label> 
@@ -91,7 +101,7 @@
 					</select>
 					<input type="button"  value="搜尋" id="searchButt" style="margin:10px"/>
 					<input type="reset"  value="重設"  id="resetButt" style="margin:10px"/>
-				<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
+				<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
 				進階查詢:</a>
 				</div>
 			<div class="collapse" id="collapse">
@@ -104,12 +114,16 @@
 					<label>email:</label> 
 					<input type="text" 
 							value="${param.email }" id="email" name="email">
-					<label>Email驗證信確認(Y/N):</label>
-					<label>Y</label> 
-					<input type="radio" value="Y" name="emailVerification" />
-					<label>N</label> 
-					<input type="radio" value="N" name="emailVerification" />
 				</div>
+				<div>		
+					<label>Email驗證信確認(Y/N):</label>
+					
+					<input type="radio" value="Y" name="emailVerification" />
+					<label>Y</label> 
+					
+					<input type="radio" value="N" name="emailVerification" />
+					<label>N</label> 
+				</div>	
 				<div >	
 					<label>手機:</label> 
 					<input type="text" 
@@ -133,6 +147,12 @@
 		
 		
 		<fieldset style="width:1300px">
+		<div style="margin-bottom: 20px">
+			<input type="button" class="btn btn-warning btn-sm"	
+				onclick="javascript:document.location.href='/admin/member/add?memberType=P'" value="新增一般會員" />
+			<input type="button" class="btn btn-warning btn-sm"
+					onclick="javascript:document.location.href='/admin/member/add?memberType=O'" value="新增公益團體" />
+		</div>
 		<table  id=table class="table table-striped table-bordered">				
 			<thead>
 				<tr>
@@ -195,7 +215,7 @@
 			$("form").addClass("form-inline");
 			$("form div[id!='collapse']").addClass("form-group mx-sm-3 mb-3");
 			$("form input, select").addClass("form-control mx-3");
-			$("#searchButt, #resetButt").addClass("btn btn-primary");
+			$("#searchButt, #resetButt").addClass("btn btn-outline-secondary");
 			
 
 			dataTable =  $('#table').DataTable( {
@@ -245,8 +265,8 @@
 		           	{data: "id" },
 		           	{data: function (data, type, row ) {
 // 		        	   console.log(data)
-		        	   	var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/member/edit/"+data.id+"'\" value='修改'  />";
-						var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='刪除' />"  
+		        	   	var editButt= "<input type='button' class=\"btn btn-warning btn-sm\"  onclick=\"javascript:document.location.href='/admin/member/edit/"+data.id+"'\" value='修改'  />";
+						var deleteButt="<input type='button' class=\"btn btn-warning btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='刪除' />"  
 		               	return editButt + deleteButt;			        	   
 		           		}
 		        	   

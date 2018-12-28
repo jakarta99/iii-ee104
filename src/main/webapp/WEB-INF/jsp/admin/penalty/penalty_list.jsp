@@ -4,32 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="../admin_layout/admin_css_js_links.jsp" />
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- Bootstrap core CSS -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
-	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
-	crossorigin="anonymous"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
-	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
-	crossorigin="anonymous">
+
 <!-- date picker -->
 <script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
-<!-- data table -->
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/js/dataTable_full_numbers_no_ellipses.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
-<script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
-<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>	
 
 
 <style>
@@ -38,23 +20,41 @@
 	 }
 	 
 	 article fieldset {
-/*  		width: 500px;  */
  		border-radius: 20px; 
  		padding: 20px 20px 0px 20px;  
- 		border: 3px double #bebebe; 
+/*  		border: 3px double #bebebe;  */
+		background-color:#ffeecc;
 		margin: auto; 
  		margin-top: 10px;  
  		margin-bottom: 20px;  
+ 		
 	}
 
 	 table tr td, button{
 	 	text-align:center;
 	 	line-height:center; 
 	 }
+	 
 	 article .btn{
 	 	margin-left:3px;
 	 	margin-right:3px
-	 } 
+	 }
+	 
+	 legend{
+	 	color:#2c3e50;
+	 	font-size: 30px;
+	 }
+	 
+/* 	 @font-face{ */
+/* 		font-family: custom-serif; */
+/* 	    src: local("LiSong Pro"), local("微軟正黑體"), local("PMingLiU"); */
+/* 	    unicode-range: U+4E00-9FFF; */
+/* 	 } */
+	 
+/* 	 body{ */
+/* 	 	font-family: custom-serif; */
+/* 	 } */
+    
 
 </style>
 <meta charset="UTF-8">
@@ -64,18 +64,19 @@
 	<!-- 加入nav.html(放在static/html) -->
 	<jsp:include page="../admin_layout/nav.jsp" />
 	<article>
-		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/'" value="回首頁"  />
-		<h1 style="padding-top: 2cm">Penalty List</h1>
-		<button onclick="javascript:document.location.href='/admin/penalty/add'" class="btn btn-primary btn-sm">Add</button>
-
+		<div class="container" style="margin-top: 140px">
+			<h2 class="text-center text-uppercase text-secondary mb-0">Penalty List</h2>
+	        <hr class="star-dark mb-5">
+		</div>
+		
 		<!-- 條件搜尋表單 -->
 		<div id="sideBar">
 			<form>
-				<fieldset>
+				<fieldset style="width:1100px">
 				<legend>Search</legend>
 				<div>
-					<label>memberId: </label>
-					<input type="text" value="${param.memberId}" id="memberId" name="memberId" placeholder="memberId" />
+					<label>accuserId: </label>
+					<input type="text" value="${param.memberId}" id="accuser" name="accuser" placeholder="accuser" />
 					<label>status: </label>
 					<select id="status" name="status">
 						<option value="">請選擇</option>
@@ -85,13 +86,13 @@
 					</select>
 					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
 					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
-					<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" 
+					<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" 
 						role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a>
 				</div>
 				<div class="collapse" id="collapse">
 					<div>
 						<label>orderListId</label>
-						<input type="text" value="${param.orderListId}" id="orderListId" name="orderListId" />
+						<input type="text" value="${param.orderListId}" id="order" name="order" />
 					</div>
 					<div>
 						<label>description</label>
@@ -110,10 +111,13 @@
 				</fieldset>
 			</form>
 		</div>
-		<fieldset style="width:300">
-		<table id="table" class="table table-striped table-bordered">
+		<fieldset style="width:1300px">
+		<div style="margin-bottom: 20px">
+			<button onclick="javascript:document.location.href='/admin/penalty/add'" class="btn btn-warning btn-sm">新增</button>
+		</div>
+		<table id="table" class="table table-bordered">
 			<thead>
-				<tr>
+				<tr style="background-color:#ECFBFD">
 					<th scope="col"></th>
 					<th scope="col">ID</th>
 					<th scope="col" width="100px"></th>
@@ -161,7 +165,7 @@
 			$("form").addClass("form-inline");
 			$("form div[id!='collapse']").addClass("form-group mx-sm-3 mb-3");
 			$("form input, select").addClass("form-control mx-3");
-			$("#searchButt, #resetButt").addClass("btn btn-primary");
+			$("#searchButt, #resetButt").addClass("btn btn-outline-secondary");
 
 			dataTable = $('#table').DataTable({
 				pageResize: true, 
@@ -170,7 +174,7 @@
 				searching: false,				
 			 	processing: true,
 				serverSide: true,  //分頁、排序都交由伺服器處理
-				lengthMenu: [ 3, 6, 9, 12, ],
+// 				lengthMenu: [ 3, 6, 9, 12, ],
 				ajax:{
 					url:"/admin/penalty/query",
 					type:"get",
@@ -197,9 +201,9 @@
 		     		{data:null},
 		           	{data: "id" },
 		           	{data: function (data, type, row ) {
-						var editButt = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/penalty/edit?id="
+						var editButt = "<input type='button' class=\"btn btn-warning btn-sm\"  onclick=\"javascript:document.location.href='/admin/penalty/edit?id="
 											+ data.id + "'\" value='修改'  />";
-						var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='刪除' />"
+						var deleteButt="<input type='button' class=\"btn btn-warning btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='刪除' />"
 		               	return editButt + deleteButt;	}
 		           	},
 					{data:"accuser.id"},
