@@ -34,7 +34,6 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
 
-<meta charset="UTF-8">
 <title>志工審核</title>
 <style>
 
@@ -86,6 +85,8 @@
 	
 	<fieldset >
 	
+<!-- 	<input id='spinner' name='value'> -->
+	
 <!-- 	<button class="btn btn-outline-secondary" id="status1Butt" >進行中</button> -->
 <!-- 	<button class="btn btn-outline-secondary" id="status23Butt" >時數代核發</button> -->
 <!-- 	<button class="btn btn-outline-secondary" id="status4Butt" >歷史紀錄</button> -->
@@ -98,8 +99,8 @@
 		<th scope="col">聯絡方式</th>
 		<th scope="col">評點分數</th>
 		<th scope="col">申請時間</th>
-		<th scope="col">志工審核</th>
-		<th scope="col">活動狀態</th>
+		<th scope="col">時數核發</th>
+		<th scope="col">檢舉</th>
 	</tr>
 	 </thead>	
 	 <tbody id="tbody">	
@@ -168,7 +169,7 @@
 	$(document).ready( function () {
 		
 		
-		var spinner = $( "#spinner" ).spinner();
+		
 		 
 		   
 
@@ -221,12 +222,18 @@
 						
 									
 						{"data": function (data, type, val) {
+							
 							if(data.orderStatus=="ServiceFinishNotPay"){
 								
 								
-								
-								
-								var timeValue="<input id='spinner' type='text' value='"+data.mission.timeValue+"'>"
+								var timeValue="<input class='spinner' name='value' value='"+data.mission.timeValue+"'>"
+								$( ".spinner" ).spinner();  
+// 								var time=data.mission.timeValue
+// 								var timeValue="<select id='timeValue' name='timeValue' class='form-control'>"
+// 													+'<c:forEach var="i" begin="0" end='+time+'>'
+// 													+'<option value=${i} >${i}</option>' 
+// 													+'</c:forEach>' 			
+// 									    		+'</select>'
 								var paybutton="<button class='btn btn-outline-secondary' onclick=\"accept("+data.id+")\">時數核發</button>";     
 								return timeValue+paybutton;
 								
@@ -237,7 +244,16 @@
 						}
 						},					 
 					
-			            {"data":"mission.missionstatus"},
+			            {"data":function (data, type, val) {
+						
+								
+								
+								var paybutton="<button class='btn btn-outline-secondary' onclick=\"accept("+data.id+")\">檢舉</button>";     
+								return paybutton;
+								
+							
+						}
+						},					
 									
 					],
 					 columnDefs: [{
