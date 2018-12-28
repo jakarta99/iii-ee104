@@ -97,5 +97,16 @@ public class Order{
 	@Transient
 	private Long statusEnd;
 
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", volunteer=" + volunteer + ", volunteerAccount=" + volunteerAccount
+				+ ", orderStatus=" + orderStatus + ", orderStatusDetail=" + orderStatusDetail + ", volunteerApplyTime="
+				+ volunteerApplyTime + ", orderAcceptTime=" + orderAcceptTime + ", mission=" + mission
+				+ ", memberScore=" + memberScore + ", feedBackScore=" + feedBackScore + ", missionTitle=" + missionTitle
+				+ ", county=" + county + ", district=" + district + ", address=" + address + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", timeValue=" + timeValue + ", statusBegin=" + statusBegin + ", statusEnd="
+				+ statusEnd + "]";
+	}
+
 
 }

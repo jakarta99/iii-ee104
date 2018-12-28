@@ -89,13 +89,13 @@
 							<label>任務標題 :</label> 
 							<input type="text" value="" id="missionTitle" name="missionTitle"/>	
 							<label>狀態 :</label> 
-							<select  id="status" name="status">
+							<select  id="orderStatus" name="orderStatus">
 								<option value="">選擇狀態</option>
-								<option value=7>已完成</option>
-								<option value=8>Requester 臨時取消活動(不懲罰)</option>
-								<option value=9>Requester 臨時取消活動(要懲罰)</option>
-								<option value=10>志工 臨時請假(不懲罰)</option>
-								<option value=11>志工 臨時不去(要懲罰)</option>
+								<option value='ServiceFinishPayMatchSuccess'>已完成</option>
+								<option value='RequesterCancleActivityNoPunishMatchSuccess'>Requester 臨時取消活動(不懲罰)</option>
+								<option value='RequesterCancleActivityPunishMatchSuccess'>Requester 臨時取消活動(要懲罰)</option>
+								<option value='VolunteerCancleActivityNoPunishMatchSuccess'>志工 臨時請假(不懲罰)</option>
+								<option value=''>志工 臨時不去(要懲罰)</option>
 							</select>
 						</div>
 					</form>
@@ -128,7 +128,7 @@
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
 	<script>	
 		var dataTable;
-		var orderStatus = 7;
+		var orderStatusDetail = "MatchSuccess";
 		$(document).ready(function() {
 			dataTable = $('#table').DataTable({
 				pageResize: true, 
@@ -144,9 +144,8 @@
 					data:function(d){ 				//傳送給伺服器的資料(datatable預設會傳送d的資料)
 						var start = d.start;
 						var length = d.length;
-						var request =  $("form").serialize() + "&orderStatus=" + orderStatus +
+						var request =  $("form").serialize() + "&orderStatusDetail=" + orderStatusDetail +
 											"&start=" + start + "&length="+ length;
-						console.log(request)
 						return request;
 					},
 					dataSrc:"content",
@@ -174,7 +173,7 @@
 		            	return new Date(data.mission.endDate).Format('yyyy-MM-dd hh-mm');
 		            } },
 					{data:"mission.timeValue"},
-					{data:"orderStatus.orderStatus"},
+					{data:"orderStatus"},
 					{ data: null, render: function ( data, type, row ) {
 						if(data.memberScore == null){
 							return 0;
@@ -183,7 +182,7 @@
 						}
 		            } },
 		            { data: null, render: function ( data, type, row ) {
-		            	if(data.orderStatus.id == 8 || data.orderStatus.id == 9){
+		            	if(data.orderStatus == "RequesterCancleActivityNoPunishMatchSuccess" || data.orderStatus.id == 9){
 		            		var editButt = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='#?id="
 								+ data.id + "'\" value='檢舉'  />";
 		            		return editButt;
@@ -248,28 +247,28 @@
 		//切換服務狀態
 		var Status7 = 
 			"<option value=''>選擇狀態</option>"+
-			"<option value=7>已完成</option>"+
-			"<option value=8>Requester 臨時取消活動(不懲罰)</option>"+
-			"<option value=9>Requester 臨時取消活動(要懲罰)</option>"+
-			"<option value=10>志工 臨時請假(不懲罰)</option>"+
-			"<option value=11>志工 臨時不去(要懲罰)</option>";
+			"<option value='ServiceFinishPayMatchSuccess'>已完成</option>"+
+			"<option value='RequesterCancleActivityNoPunishMatchSuccess'>Requester 臨時取消活動(不懲罰)</option>"+
+			"<option value='RequesterCancleActivityPunishMatchSuccess'>Requester 臨時取消活動(要懲罰)</option>"+
+			"<option value='VolunteerCancleActivityNoPunishMatchSuccess'>志工 臨時請假(不懲罰)</option>"+
+			"<option value='VolunteerCancleActivityPunishMatchSuccess'>志工 臨時不去(要懲罰)</option>";
 		var Status3 = 
 			"<option value=''>選擇狀態</option>"+
-			"<option value=3>requester 拒絕服務</option>"+
-			"<option value=4>Requester 取消交易</option>"+
-			"<option value=5>志工 取消交易</option>";    
+			"<option value='RequesterRefuceServiceMatchFail'>requester 拒絕服務</option>"+
+			"<option value='RequesterCancleTransactionMatchFail'>Requester 取消交易</option>"+
+			"<option value='VolunteerCancleTransactionMatchFail'>志工 取消交易</option>";    
 		$('#orderStatus7').click(function(){
-			orderStatus = 7;
+			orderStatusDetail = "MatchSuccess";
 			$('#orderStatus7').attr('class','btn btn-primary')
 			$('#orderStatus3').attr('class','btn btn-secondary')
-			$('#status').html(Status7);
+			$('#orderStatus').html(Status7);
 			dataTable.ajax.reload();
 		})
 		$('#orderStatus3').click(function(){
-			orderStatus = 3;
+			orderStatusDetail = "MatchFail";
 			$('#orderStatus7').attr('class','btn btn-secondary')
 			$('#orderStatus3').attr('class','btn btn-primary')
-			$('#status').html(Status3);
+			$('#orderStatus').html(Status3);
 			dataTable.ajax.reload();
 		})
 		//自訂日期格式

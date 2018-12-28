@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Order;
+import team.lala.timebank.enums.OrderStatus;
 import team.lala.timebank.service.OrderService;
 
 @Slf4j
@@ -36,16 +38,19 @@ public class VolunteerApplicationController {
 
 	@ResponseBody
 	@RequestMapping("/volunteerApplication/queryApplication")	//查詢申請中網頁的資料
-	public Page<Order> QueryApplication(Principal principal, Order order,
+	public Page<Order> QueryApplication(Principal principal, @RequestParam(value="orderStatusDetail") String orderStatusDetail,
 			@RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
+		Order order = new Order();
+		order.setOrderStatusDetail(orderStatusDetail);
 		int page = start.orElse(0)/length.orElse(10);
 		return orderService.findByVolunteerAndOrderStatus(principal, order, PageRequest.of(page, length.orElse(10)));
 	}
 	
 	@ResponseBody
 	@RequestMapping("/volunteerRecord/queryRecord")		//查詢媒合紀錄資料
-	public Page<Order> QueryRecord(Principal principal, Order order, @RequestParam(value="orderStatus") String orderStatus,
+	public Page<Order> QueryRecord(Principal principal, Order order, 
+			@RequestParam(value="orderStatusDetail") String orderStatusDetail,
 			@RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
 		int page = start.orElse(0)/length.orElse(10);
