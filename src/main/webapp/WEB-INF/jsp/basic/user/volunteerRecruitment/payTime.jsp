@@ -82,7 +82,7 @@
           <div class="row">
             <jsp:include page="../user_layout/user_sidebar.jsp" />
     <div style="width:850px">
-	<h1 class="s2">志工審核</h1>
+	<h1 class="s2">時數核發</h1>
 	
 	<fieldset >
 	
@@ -118,6 +118,8 @@
 <script>
 	
 	var dataTable;
+	
+	
 	
 	
 	function accept(id) {
@@ -164,6 +166,11 @@
 	
 	
 	$(document).ready( function () {
+		
+		
+		var spinner = $( "#spinner" ).spinner();
+		 
+		   
 
 		dataTable=$('#table').DataTable({
 				pageResize: true,
@@ -214,15 +221,16 @@
 						
 									
 						{"data": function (data, type, val) {
-							if(data.orderStatus=='ServiceFinishNotPay'){
-								 var acceptbutton="<button class='btn btn-outline-secondary' onclick=\"accept("+data.id+")\">接受</button>";     
-								 var rejectbutton="<button class='btn btn-outline-secondary' onclick=\"reject("+data.id+")\">拒絕</button>"; 	
-								 return acceptbutton + rejectbutton;
-							 }else if(data.orderStatus=='RequesterAcceptService'){
-								 return "以接受";
-								 
-							 }else if(data.orderStatus=='RequesterRefuceServiceMatchFail'){
-								 return "以拒絕";
+							if(data.orderStatus=="ServiceFinishNotPay"){
+								
+								
+								
+								
+								var timeValue="<input id='spinner' type='text' value='"+data.mission.timeValue+"'>"
+								var paybutton="<button class='btn btn-outline-secondary' onclick=\"accept("+data.id+")\">時數核發</button>";     
+								return timeValue+paybutton;
+								
+							
 							 }else {
 								 return "不應該出現的狀態";
 							 }

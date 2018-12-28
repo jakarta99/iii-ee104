@@ -40,6 +40,7 @@ public class RecruitController {
 
 		return "/basic/user/volunteerRecruitment/mission_list";
 	}
+	
 
 	@RequestMapping("/query")
 	@ResponseBody

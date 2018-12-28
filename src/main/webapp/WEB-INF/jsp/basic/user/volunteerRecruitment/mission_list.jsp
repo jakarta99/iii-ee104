@@ -331,7 +331,7 @@
 								return vbutton;
 								
 							}else if(data.missionstatus=="B_AccountsPayable"){
-								var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">核發時數</button>";   
+								var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/payTime/list?id="+data.id+"'\">核發時數</button>";   
 								return vbutton;
 
 							}else if(data.missionstatus=="C_Cancel"){
