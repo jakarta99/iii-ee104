@@ -40,7 +40,7 @@ public class Order{
 	private String volunteerAccount; 
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "TYPE")
+	@Column(name = "ORDER_STATUS")
 	private OrderStatus orderStatus;
 	
 	@Transient
