@@ -21,7 +21,7 @@
 
 	 	
         fieldset {
-            width: 70%;
+            width: 80%;
             border-radius: 20px;
             padding: 20px;
             margin: 20px;
@@ -58,13 +58,13 @@
 	<section class="bar">
         <div class="container">
         	<div class="row">
-			<jsp:include page="../user_layout/user_sidebar.jsp" />
+<%-- 			<jsp:include page="../user_layout/user_sidebar.jsp" /> --%>
 				<fieldset>
 		        <button type="button" id="orderStatus1" name="orderStatus" class="btn btn-primary">申請中</button>
 		        <button type="button" id="orderStatus2" name="orderStatus" class="btn btn-secondary ">機構接受服務</button>
 		        <button type="button" id="orderStatus6" name="orderStatus" class="btn btn-secondary ">活動時間結束，未發時數</button>
-					<table id="table" class="table table-striped table-bordered">
-						<thead>
+					<table id="table" class="table table-bordered">
+						<thead class="thead-light">
 							<tr>
 								<th scope="col"></th>
 								<th scope="col">活動名稱</th>
@@ -77,7 +77,7 @@
 								<th scope="col" width="50px"></th>
 							</tr>
 						</thead>
-						<tbody id="tableBody">
+						<tbody id="tableBody" class="table table-striped">
 							<!-- 會員資料 -->
 						</tbody>
 					</table>
@@ -166,7 +166,7 @@
 	                var columnIndex = (i+pageno*length);	//行号等于 页数*每页数据长度+行号
 	                cell.innerHTML = columnIndex;
 	            });
-	        });	
+	        });
 		})
 		//切換服務狀態
 		$('#orderStatus1').click(function(){

@@ -13,9 +13,12 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
+import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.entity.Member;
+import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 
+@Slf4j
 @SuppressWarnings("serial")
 public class OrderSpecification implements Specification<Order>  {
 	private Order inputOrder;
@@ -26,7 +29,7 @@ public class OrderSpecification implements Specification<Order>  {
 
 	@Override
 	public Predicate toPredicate(Root<Order> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-		List<Predicate> list = new ArrayList<Predicate>();  
+		List<Predicate> list = new ArrayList<Predicate>();
 		
 		if(!StringUtils.isEmpty(inputOrder.getId())) {
 			list.add(criteriaBuilder.equal(root.get("id").as(Long.class), inputOrder.getId()));
@@ -47,7 +50,32 @@ public class OrderSpecification implements Specification<Order>  {
 			list.add(criteriaBuilder.like(root.get("orderStatus").as(String.class), "%" + inputOrder.getOrderStatus() + "%"));
 		}
 		
+		if (!StringUtils.isEmpty(inputOrder.getStartDate())) {
+			log.debug("startDate={}", inputOrder.getStartDate());
+			Join<Mission, Order> join = root.join("startDate", JoinType.LEFT);
+			list.add(criteriaBuilder.greaterThanOrEqualTo(join.get("startDate").as(java.util.Date.class),
+					inputOrder.getStartDate()));
+		}
 		
+		if (!StringUtils.isEmpty(inputOrder.getEndDate())) {
+			Join<Mission, Order> join = root.join("endDate", JoinType.LEFT);
+			list.add(criteriaBuilder.greaterThanOrEqualTo(join.get("endDate").as(java.util.Date.class),
+					inputOrder.getEndDate()));
+		}
+		
+		if(!StringUtils.isEmpty(inputOrder.getCounty())) {
+			Join<Mission, Order> join = root.join("county", JoinType.LEFT);
+			list.add(criteriaBuilder.equal(join.get("county").as(String.class), inputOrder.getCounty()));
+		}
+		
+		if(!StringUtils.isEmpty(inputOrder.getDistrict())) {
+			Join<Mission, Order> join = root.join("district", JoinType.LEFT);
+			list.add(criteriaBuilder.equal(join.get("district").as(String.class), inputOrder.getDistrict()));
+		}
+		
+		if(!StringUtils.isEmpty(inputOrder.getMemberScore())) {
+			list.add(criteriaBuilder.equal(root.get("memberScore").as(String.class), inputOrder.getMemberScore()));
+		}
 		
 		//排序(暫時寫死)，如何從前端傳排序資料
 		//同時針對兩個欄位排序

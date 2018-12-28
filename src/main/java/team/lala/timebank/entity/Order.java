@@ -62,23 +62,16 @@ public class Order{
 	private Mission mission;
 	
 	@Column(name="MEMBER_SCORE")
-	private Long memberScore;
+	private Long memberScore;	//獲得時間
 	
 	@Column(name="FEEDBACK_SCORE")
 	private Long feedBackScore;
-	
-	
-	@Transient
-	private String missionTitle;
 	
 	@Transient
 	private String county;
 	
 	@Transient
 	private String district;
-	
-	@Transient
-	private String address;
 	
 	@Transient
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
@@ -90,23 +83,18 @@ public class Order{
 	
 	@Transient
 	private Integer timeValue;// 可獲得時數(工作的時間)
-	
-	@Transient
-	private Long statusBegin;
-	
-	@Transient
-	private Long statusEnd;
 
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", volunteer=" + volunteer + ", volunteerAccount=" + volunteerAccount
 				+ ", orderStatus=" + orderStatus + ", orderStatusDetail=" + orderStatusDetail + ", volunteerApplyTime="
 				+ volunteerApplyTime + ", orderAcceptTime=" + orderAcceptTime + ", mission=" + mission
-				+ ", memberScore=" + memberScore + ", feedBackScore=" + feedBackScore + ", missionTitle=" + missionTitle
-				+ ", county=" + county + ", district=" + district + ", address=" + address + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", timeValue=" + timeValue + ", statusBegin=" + statusBegin + ", statusEnd="
-				+ statusEnd + "]";
+				+ ", memberScore=" + memberScore + ", feedBackScore=" + feedBackScore + ", county=" + county
+				+ ", district=" + district + ", startDate=" + startDate + ", endDate=" + endDate + ", timeValue="
+				+ timeValue + "]";
 	}
+
+
 
 
 }
