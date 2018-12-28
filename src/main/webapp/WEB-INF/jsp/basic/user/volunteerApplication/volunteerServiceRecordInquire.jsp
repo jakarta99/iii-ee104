@@ -62,9 +62,9 @@
 	<section class="bar">
         <div class="container">
         	<div class="row">
-			<jsp:include page="../user_layout/user_sidebar.jsp" />
+<%-- 			<jsp:include page="../user_layout/user_sidebar.jsp" /> --%>
         			<!-- 條件搜尋表單 -->
-        		<div style="width: 600">
+        		<div>
 				<fieldset>
 			    <button type="button" id="orderStatus7" class="btn btn-primary">媒合成功紀錄</button>
 			    <button type="button" id="orderStatus3" class="btn btn-secondary">媒合失敗紀錄</button>
@@ -85,9 +85,7 @@
 			  			</div> 
 						<div class="collapse" id="collapse">		
 							<label>獲得時間 :</label> 
-							<input type="text" value="" id="timeValue" name="timeValue"/>		
-							<label>任務標題 :</label> 
-							<input type="text" value="" id="missionTitle" name="missionTitle"/>	
+							<input type="text" value="" id="memberScore" name="memberScore"/>
 							<label>狀態 :</label> 
 							<select  id="orderStatus" name="orderStatus">
 								<option value="">選擇狀態</option>
