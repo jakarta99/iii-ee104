@@ -90,7 +90,7 @@
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
 		<script>	
 		var dataTable;
-		var orderStatus = 1;
+		var orderStatusDetail = "VolunteerApply";
 		$(document).ready(function() {
 			dataTable = $('#table').DataTable({
 				pageResize: true, 
@@ -106,8 +106,7 @@
 					data:function(d){ 				//傳送給伺服器的資料(datatable預設會傳送d的資料)
 						var start = d.start;
 						var length = d.length;
-						var request = "orderStatus=" + orderStatus +
-											"&start=" + start + "&length="+ length;
+						var request = "orderStatusDetail=" + orderStatusDetail + "&start=" + start + "&length="+ length;
 						return request;
 					},
 					dataSrc:"content",
@@ -138,10 +137,15 @@
 					{ data: null, render: function ( data, type, row ) {
 		            	return new Date(data.volunteerApplyTime).Format('yyyy-MM-dd hh-mm');
 		            } },
-					{data:"orderStatus.orderStatus"},
+					{data:"orderStatus"},
 		           	{data: function (data, type, row ) {
-		           		var cancelButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='取消' />"
-		               	return cancelButt	}
+		           		if(data.orderStatus == "ServiceFinishNotPay"){
+		           			return null;
+		           		} else {
+		           			var cancelButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='取消' />"
+			               	return cancelButt
+		           		}
+		           		}
 		           	},
 							
 				], columnDefs:[{		//禁用第0123列的搜索和排序
@@ -166,21 +170,21 @@
 		})
 		//切換服務狀態
 		$('#orderStatus1').click(function(){
-			orderStatus = 1;
+			orderStatusDetail = "VolunteerApply";
 			$('#orderStatus1').attr('class','btn btn-primary')
 			$('#orderStatus2').attr('class','btn btn-secondary')
 			$('#orderStatus6').attr('class','btn btn-secondary')
 			dataTable.ajax.reload();
 		})
 		$('#orderStatus2').click(function(){
-			orderStatus = 2;
+			orderStatusDetail = "RequesterAcceptService";
 			$('#orderStatus1').attr('class','btn btn-secondary')
 			$('#orderStatus2').attr('class','btn btn-primary')
 			$('#orderStatus6').attr('class','btn btn-secondary')
 			dataTable.ajax.reload();
 		})
 		$('#orderStatus6').click(function(){
-			orderStatus = 6;
+			orderStatusDetail = "ServiceFinishNotPay";
 			$('#orderStatus1').attr('class','btn btn-secondary')
 			$('#orderStatus2').attr('class','btn btn-secondary')
 			$('#orderStatus6').attr('class','btn btn-primary')
