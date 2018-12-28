@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,8 +49,8 @@ public class AdminMemberController {
 
 	}
 
-	@RequestMapping("/edit")
-	public String editPage(@RequestParam("id") Long id, Model model) {
+	@RequestMapping("/edit/{id}")
+	public String editPage(@PathVariable Long id, Model model) {
 		Member member = memberService.getOne(id);
 		model.addAttribute("member", member);
 		return "/admin/member/member_edit";
@@ -118,9 +120,9 @@ public class AdminMemberController {
 		return response;
 	}
 
-	@RequestMapping("/delete")
+	@RequestMapping("/delete/{id}")
 	@ResponseBody
-	public AjaxResponse<Member> deleteMember(@RequestParam("id") Long id) {
+	public AjaxResponse<Member> deleteMember(@PathVariable Long id) {
 		AjaxResponse<Member> response = new AjaxResponse<Member>();
 		System.out.println("id = "+id);
 		try {

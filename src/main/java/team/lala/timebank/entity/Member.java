@@ -195,14 +195,6 @@ public class Member implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-//		List<GrantedAuthority> authorities = new ArrayList<>();
-//		Set<Role> userRoles = this.getRoles();
-//		for (Role role : userRoles) {
-//			authorities.add(new SimpleGrantedAuthority(rolePrefix+ role.getRoleName()));			
-//		}
-//
-//		return authorities;
-		
 		return roles;
 	}
 

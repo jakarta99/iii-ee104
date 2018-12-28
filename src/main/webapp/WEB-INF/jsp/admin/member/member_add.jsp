@@ -214,7 +214,7 @@
 					method:"post",
 					dataType: "json",        
 					url:"/admin/member/insert",
-					data: $("form").serialize()
+					data: $("form").serializeObject();
 				}).done(function(response){
 // 					alert(response.obj);
 // 					console.log("status="+response.status);

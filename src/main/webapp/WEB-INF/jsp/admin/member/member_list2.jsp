@@ -167,10 +167,10 @@
 		function deleteRow(memberId){
 // 			alert( memberId);
 			$.ajax({
-				type: "get",
-				dataType: "json",         
-				url: "/admin/member/delete",
-				data: {"id":memberId}					
+				type: "delete",
+				dataType: "json", 
+				url: "/admin/member/delete/"+memberId,
+// 				data: {"id":memberId}					
 			})
 			.done(function(response){
 				if (response.status =="SUCCESS"){
@@ -245,7 +245,7 @@
 		           	{data: "id" },
 		           	{data: function (data, type, row ) {
 // 		        	   console.log(data)
-		        	   	var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/member/edit?id="+data.id+"'\" value='修改'  />";
+		        	   	var editButt= "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/member/edit/"+data.id+"'\" value='修改'  />";
 						var deleteButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='刪除' />"  
 		               	return editButt + deleteButt;			        	   
 		           		}

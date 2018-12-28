@@ -12,3 +12,4 @@
 <script src="/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
 <script src="/vendor/jquery.scrollto/jquery.scrollTo.min.js"></script>
 <script src="/js/front.js"></script>
+<script src="/js/jquery.serializeObject.js"></script>
