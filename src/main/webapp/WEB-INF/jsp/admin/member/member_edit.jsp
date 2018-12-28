@@ -256,8 +256,9 @@
 						$.ajax({
 							method : "put",
 							dataType : "json",
+							contentType: 'application/json; charset=UTF-8',
 							url : "/admin/member/update",
-							data : $("form").serialize(),
+							data : JSON.stringify($("form").serializeObject()),
 						}).done(function(response) {
 // 							alert(response.obj);							
 							if (response.status =='SUCCESS'){
