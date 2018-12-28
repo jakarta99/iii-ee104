@@ -224,11 +224,21 @@
 						{"data": function (data, type, val) {
 							
 							if(data.orderStatus=="ServiceFinishNotPay"){
+// 								var ttt="<input class='ss' id='spinner' name='value'>"
+// 								var spinner = $( ".ss" ).spinner();
+// 								var aaa= ttt+spinner
+								
 								var select = "<select id='timeValue' name='timeValue' class='form-control'>"
 								for(var i = 0 ; i <= data.mission.timeValue ; i++){
-									select += "<option value='" + i + "'>"+ i + "</option>"
+									if(i==data.mission.timeValue){
+										select += "<option selected='true' value='" + i + "'>"+ i + "</option>"	
+									}else{
+										select += "<option value='" + i + "'>"+ i + "</option>"
+									}
 								}
 								select +='</select>'
+								$('#select[name="timeValue"]').val(data.mission.timeValue)
+
 								var paybutton="<button class='btn btn-outline-secondary' onclick=\"accept("+data.id+")\">時數核發</button>";     
 								return select + paybutton;
 								
