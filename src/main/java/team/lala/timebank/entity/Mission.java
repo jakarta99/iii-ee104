@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
 import lombok.Setter;
+import team.lala.timebank.enums.MissionStatus;
 import team.lala.timebank.enums.TermType;
 
 @Getter
@@ -35,15 +36,13 @@ public class Mission {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_ID", referencedColumnName = "id")
 	private Member member; // 刊登者
-	
+
 	@Transient
 	private String memberAccount;
-	
-	
 
 	@Column(name = "TITLE", nullable = false, length = 50)
 	private String title;// 活動名稱
@@ -58,7 +57,7 @@ public class Mission {
 	@ManyToOne
 	@JoinColumn(name = "SERVICE_TYPE", referencedColumnName = "id")
 	private ServiceType serviceType;
-	
+
 	@Transient
 	private String serviceTypeDetail;
 
@@ -106,14 +105,9 @@ public class Mission {
 	@Column(name = "ADDRESS", nullable = false)
 	private String address;
 
-	@ManyToOne
-//	@JsonBackReference
-	@JoinColumn(name = "MISSION_STATUS", referencedColumnName = "id", insertable = true, updatable = true)
-	private MissionStatus status;
-	
-	@Transient
-	private Integer statusDetail;
-//	private String statusDetail;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "MISSION_STATUS", nullable = false)
+	private MissionStatus missionstatus;
 
 	@Column(name = "APPROVED_QUANTITY", nullable = false)
 	private Integer approvedQuantity;
@@ -126,10 +120,8 @@ public class Mission {
 				+ ", deadline=" + deadline + ", startDate=" + startDate + ", endDate=" + endDate + ", peopleNeeded="
 				+ peopleNeeded + ", contactPerson=" + contactPerson + ", contactPhone=" + contactPhone
 				+ ", contactEmail=" + contactEmail + ", discription=" + discription + ", county=" + county
-				+ ", district=" + district + ", address=" + address + ", status=" + status + ", statusDetail="
-				+ statusDetail + ", approvedQuantity=" + approvedQuantity + "]";
+				+ ", district=" + district + ", address=" + address + ", missionstatus=" + missionstatus
+				+ ", approvedQuantity=" + approvedQuantity + "]";
 	}
-
-	
 
 }

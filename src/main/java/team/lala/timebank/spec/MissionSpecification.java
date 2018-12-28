@@ -17,7 +17,7 @@ import org.springframework.util.StringUtils;
 import team.lala.timebank.entity.Donation;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
-import team.lala.timebank.entity.MissionStatus;
+import team.lala.timebank.enums.MissionStatus;
 import team.lala.timebank.enums.TermType;
 
 @SuppressWarnings("serial")
@@ -33,21 +33,19 @@ public class MissionSpecification implements Specification<Mission> {
 	public Predicate toPredicate(Root<Mission> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 		List<Predicate> list = new ArrayList<Predicate>();
 
-		if (!StringUtils.isEmpty(inputMission.getStatusDetail())) {
-			Join<MissionStatus, Mission> join = root.join("status", JoinType.LEFT);
-			if (inputMission.getStatusDetail() <= 2) {
+		if (!StringUtils.isEmpty(inputMission.getMissionstatus())) {
+			if(inputMission.getMissionstatus()==MissionStatus.A_New||inputMission.getMissionstatus()==MissionStatus.A_VolunteerApproved) {
+				list.add(criteriaBuilder.like(root.get("missionstatus").as(String.class), "%" +"A_"+ "%"));
+			}else if (inputMission.getMissionstatus()==MissionStatus.B_AccountsPayable) {
+				list.add(criteriaBuilder.equal(root.get("missionstatus").as(MissionStatus.class), inputMission.getMissionstatus()));
+			}else if(inputMission.getMissionstatus()==MissionStatus.C_Cancel||inputMission.getMissionstatus()==MissionStatus.C_Finish){
+				list.add(criteriaBuilder.like(root.get("missionstatus").as(String.class), "%" +"C_"+ "%"));
+			}else
+			list.add(criteriaBuilder.equal(root.get("missionstatus").as(MissionStatus.class), inputMission.getMissionstatus()));
+		}
 
-				list.add(criteriaBuilder.lessThanOrEqualTo(join.get("id"), inputMission.getStatusDetail()));
-
-			}
-			else if (inputMission.getStatusDetail() >= 4) {
-
-				list.add(criteriaBuilder.greaterThanOrEqualTo(join.get("id"), inputMission.getStatusDetail()));
-
-			} 
-			else {
-				list.add(criteriaBuilder.equal(join.get("id"), inputMission.getStatusDetail()));
-			}
+		if (!StringUtils.isEmpty(inputMission.getTitle())) {
+			list.add(criteriaBuilder.like(root.get("title").as(String.class), "%" + inputMission.getTitle() + "%"));
 		}
 
 		if (!StringUtils.isEmpty(inputMission.getMemberAccount())) {
@@ -78,10 +76,6 @@ public class MissionSpecification implements Specification<Mission> {
 
 		if (!StringUtils.isEmpty(inputMission.getServiceType())) {
 			list.add(criteriaBuilder.equal(root.get("serviceType").as(String.class), inputMission.getServiceType()));
-		}
-
-		if (!StringUtils.isEmpty(inputMission.getTitle())) {
-			list.add(criteriaBuilder.like(root.get("title").as(String.class), "%" + inputMission.getTitle() + "%"));
 		}
 		if (!StringUtils.isEmpty(inputMission.getTermType())) {
 			list.add(criteriaBuilder.equal(root.get("termType").as(TermType.class), inputMission.getTermType()));

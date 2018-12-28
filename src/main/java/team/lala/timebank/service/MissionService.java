@@ -3,7 +3,6 @@ package team.lala.timebank.service;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,9 +14,9 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.MissionDao;
-import team.lala.timebank.dao.MissionStatusDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
+import team.lala.timebank.enums.MissionStatus;
 import team.lala.timebank.spec.MissionSpecification;
 
 @Slf4j
@@ -28,8 +27,6 @@ public class MissionService {
 	private MissionDao missionDao;
 	@Autowired
 	private MemberDao memberDao;
-	@Autowired
-	private MissionStatusDao missionStatusDao;
 
 	// public List<Mission> findBySpecification(Specification<Mission>
 	// specification) {
@@ -51,7 +48,7 @@ public class MissionService {
 
 	// insert for Admin
 	public Mission insert(Mission mission) {
-		mission.setStatus(missionStatusDao.getOne(1l));
+		mission.setMissionstatus(MissionStatus.A_New);
 		mission.setStartDate(mission.getStartDate());
 		mission.setEndDate(mission.getEndDate());
 		mission.setPublishDate(new Date());
@@ -63,7 +60,7 @@ public class MissionService {
 	// insert for user
 	public Mission insert(Mission mission, Principal principal) {
 		mission.setMember(memberDao.findByAccount(principal.getName()));
-		mission.setStatus(missionStatusDao.getOne(1l));
+		mission.setMissionstatus(MissionStatus.A_New);
 		mission.setStartDate(mission.getStartDate());
 		mission.setEndDate(mission.getEndDate());
 		mission.setPublishDate(new Date());
@@ -80,12 +77,11 @@ public class MissionService {
 
 	// cancel for user
 	public Mission cancel(Long id) {
-		Mission mission=missionDao.getOne(id);
-		
-		log.debug("mission",mission);
-		log.debug("mission.getStatus().getId()={}",mission.getStatus().getId());
-		if (mission.getStatus().getId() <= 2) {
-			mission.setStatus(missionStatusDao.getOne(5l));
+		Mission mission = missionDao.getOne(id);
+
+		if (mission.getMissionstatus() == MissionStatus.A_New
+				|| mission.getMissionstatus() == MissionStatus.A_VolunteerApproved) {
+			mission.setMissionstatus(MissionStatus.C_Cancel);
 			return missionDao.save(mission);
 		}
 		return null;
