@@ -1,5 +1,6 @@
 package team.lala.timebank.service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,27 +9,26 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.OrderDao;
-import team.lala.timebank.dao.OrderStatusDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
-import team.lala.timebank.entity.OrderStatus;
+import team.lala.timebank.enums.OrderStatus;
 import team.lala.timebank.spec.OrderSpecification;
 
 @Slf4j
 @Service
+@Transactional
 public class OrderService {
 
 	@Autowired
 	private OrderDao orderDao;
 	@Autowired
 	private MemberDao memberDao;
-	@Autowired
-	private OrderStatusDao orderStatusDao;
 
 	public List<Order> findBySpecification(Specification<Order> specification) {
 		return orderDao.findAll(specification);
@@ -48,26 +48,9 @@ public class OrderService {
 		return orders;
 	}
 
-	// 根據申請中狀態查詢
-	public Page<Order> findByVolunteerAndOrderStatus(String account, Long orderStatus, PageRequest pageRequest) {
-		OrderStatus status = orderStatusDao.getOne(orderStatus);
-		Member member = memberDao.findByAccount(account);
-		return orderDao.findByVolunteerAndOrderStatus(member, status, pageRequest);
-	}
-
-	// 根據媒合結果狀態查詢
-	public Page<Order> findByVolunteerAndOrderStatusBetween(Order order, String account, Long orderStatus,
-			PageRequest pageRequest) {
-		order.setVolunteerId(account);
-		if (order.getStatus() == null) {
-			if(orderStatus == 7L) {
-				order.setStatusBegin(7L);
-				order.setStatusEnd(11L);				
-			} else if (orderStatus == 3L) {
-				order.setStatusBegin(3L);
-				order.setStatusEnd(5L);
-			}
-		} 
+	// 根據會員查詢order
+	public Page<Order> findByVolunteerAndOrderStatus(Principal principal, Order order, PageRequest pageRequest) {
+		order.setVolunteer(memberDao.findByAccount(principal.getName()));
 		OrderSpecification orderSpecification = new OrderSpecification(order);
 		return orderDao.findAll(orderSpecification, pageRequest);
 	}
@@ -119,11 +102,8 @@ public class OrderService {
 	// accept 志工 改狀態為2接受
 	public Order accept(Long id) {
 		Order order = orderDao.getOne(id);
-
-		log.debug("order", order);
-		log.debug("order.getStatus().getId()={}", order.getOrderStatus().getId());
-		if (order.getOrderStatus().getId() == 1) {
-			order.setOrderStatus(orderStatusDao.getOne(2L));
+		if (order.getOrderStatus() == OrderStatus.VolunteerApply) {
+			order.setOrderStatus(OrderStatus.RequesterAcceptService);
 			return orderDao.save(order);
 		}
 		return null;
@@ -132,29 +112,23 @@ public class OrderService {
 	// reject 志工 改狀態為3拒絕
 	public Order reject(Long id) {
 		Order order = orderDao.getOne(id);
-
-		log.debug("order", order);
-		log.debug("order.getStatus().getId()={}", order.getOrderStatus().getId());
-		if (order.getOrderStatus().getId() == 1) {
-			order.setOrderStatus(orderStatusDao.getOne(3L));
+		if (order.getOrderStatus() == OrderStatus.VolunteerApply) {
+			order.setOrderStatus(OrderStatus.RequesterRefuceServiceMatchFail);
 			return orderDao.save(order);
 		}
 		return null;
 	}
-	
-	//根據mission找出所有的order
+
+	// 根據mission找出所有的order
 	public List<Order> findByMission(Mission mission) {
 		List<Order> orders = orderDao.findByMission(mission);
 		return orders;
 	}
 
-	//拒絕所有的apply
+	// 拒絕所有的apply
 	public void rejectOrders(List<Order> orders) {
 		for (int i = 0; i < orders.size(); i++) {
-			
 			this.reject(orders.get(i).getId());
-
 		}
-
 	}
 }

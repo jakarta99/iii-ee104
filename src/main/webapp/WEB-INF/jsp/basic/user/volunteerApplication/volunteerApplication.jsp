@@ -60,9 +60,9 @@
         	<div class="row">
 			<jsp:include page="../user_layout/user_sidebar.jsp" />
 				<fieldset>
-		        <button type="button" id="orderStatus1" class="btn btn-primary">申請中</button>
-		        <button type="button" id="orderStatus2" class="btn btn-secondary ">機構接受服務</button>
-		        <button type="button" id="orderStatus6" class="btn btn-secondary ">活動時間結束，未發時數</button>
+		        <button type="button" id="orderStatus1" name="orderStatus" class="btn btn-primary">申請中</button>
+		        <button type="button" id="orderStatus2" name="orderStatus" class="btn btn-secondary ">機構接受服務</button>
+		        <button type="button" id="orderStatus6" name="orderStatus" class="btn btn-secondary ">活動時間結束，未發時數</button>
 					<table id="table" class="table table-striped table-bordered">
 						<thead>
 							<tr>
