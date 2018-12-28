@@ -87,7 +87,7 @@ public class AdminMemberController {
 	
 	@ResponseBody
 	@RequestMapping("/update")
-	public AjaxResponse<Member> updateMember(@RequestBody Member member) {		
+	public AjaxResponse<Member> updateMember(Member member) {		
 		log.debug("inputMember={}", member);
 		AjaxResponse<Member> response = new AjaxResponse<Member>();
 		try {
