@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,12 +44,14 @@ public class SystemMessage {
 	@Column(name="RELEASE_TIME")
 	private Date ReleaseTime;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name="MESSAGE_TYPE")
 	private SystemMessageType MessageType;//之後改ENUM，還沒完全確定訊息類型種類(懲罰、核發時數通知、申訴結果)
 	
 	@Column(name="MESSAGE")
 	private String message;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name="READ_STATUS")
 	private YesNo readStatus;
 	
