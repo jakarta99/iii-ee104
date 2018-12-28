@@ -144,8 +144,8 @@
 			<input type="text" value="" placeholder="title" id="title" name="title"/>
 			
 			
-			<label>statusDetail :</label> 
-			<input type="text" value="" placeholder="statusDetail" id="statusDetail" name="statusDetail"/>
+			<label>missionstatus :</label> 
+			<input type="text" value="" placeholder="missionstatus" id="missionstatus" name="missionstatus"/>
 			
 			
 			</div>
@@ -200,7 +200,7 @@
 		$("#status12Butt").attr('class',"btn btn-outline-primary")
 		$("#status3Butt").attr('class',"btn btn-outline-secondary")
 		$("#status4Butt").attr('class',"btn btn-outline-secondary")
-		$("#statusDetail").val("2");
+		$("#missionstatus").val("A_VolunteerApproved");
 		dataTable.ajax.reload();
 		
 	})
@@ -210,7 +210,7 @@
 		$("#status12Butt").attr('class',"btn btn-outline-secondary")
 		$("#status3Butt").attr('class',"btn btn-outline-primary")
 		$("#status4Butt").attr('class',"btn btn-outline-secondary")
-		$("#statusDetail").val('3');
+		$("#missionstatus").val('B_AccountsPayable');
 		dataTable.ajax.reload();
 		
 	})
@@ -220,7 +220,7 @@
 		$("#status12Butt").attr('class',"btn btn-outline-secondary")
 		$("#status3Butt").attr('class',"btn btn-outline-secondary")
 		$("#status4Butt").attr('class',"btn btn-outline-primary")
-		$("#statusDetail").val('4');
+		$("#missionstatus").val('C_Finish');
 		dataTable.ajax.reload();
 		
 	})
@@ -265,7 +265,8 @@
 		    language: 'zh-TW',
 		    startView:"years",
 		})
-		$("#statusDetail").val("2");
+		
+		$("#missionstatus").val("A_VolunteerApproved");
 		
 		dataTable=$('#table').DataTable({
 				pageResize: true,
@@ -305,7 +306,7 @@
 					},
 					columns:[						
 						{"data": function (data, type, val) {
-							if(data.status.id<=2){
+							if(data.missionstatus=="A_New"||data.missionstatus=="A_VolunteerApproved"){
 							 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerRecruitment/edit?id="+data.id+"'\">編輯</button>";     
 							 var cancelbutton="<button class='btn btn-outline-secondary' onclick=\"cancelMission("+data.id+")\">取消</button>"; 	
 							 return editbutton + cancelbutton;
@@ -325,20 +326,22 @@
 			            }},	
 					
 						{"data":function (data, type, val) {
-							if(data.status.id==1){
+							if(data.missionstatus=="A_New"){
 							var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">志工審核</button>";   
 								return vbutton;
 								
-							}else if(data.status.id==3){
+							}else if(data.missionstatus=="B_AccountsPayable"){
 								var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">核發時數</button>";   
 								return vbutton;
 
-							}else if(data.status.id==5){
+							}else if(data.missionstatus=="C_Cancel"){
 								var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">取消紀錄</button>";   
 								return vbutton;	
-							}else if(data.status.id==4){
+							
+							}else if(data.missionstatus=="C_Finish"){
 								var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">結案紀錄</button>";   
 								return vbutton;	
+							
 							}else{
 								return "已審核";
 							}
@@ -346,7 +349,25 @@
 							}							 
 						},
 			            
-						{"data":"status.missionStatus"},
+						{"data":function (data, type, val) {
+							if(data.missionstatus=="A_New"){
+								return "未開始";
+								
+							}else if(data.missionstatus=="B_AccountsPayable"){
+								return "進行中";
+
+							}else if(data.missionstatus=="C_Cancel"){
+								return "已取消";	
+							
+							}else if(data.missionstatus=="C_Finish"){
+								return "已結案";	
+							
+							}else{
+								return "未開始已審核";
+							}
+							
+							}							 
+						},
 									
 					],
 					 columnDefs: [{

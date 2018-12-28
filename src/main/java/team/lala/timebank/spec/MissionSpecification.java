@@ -35,11 +35,11 @@ public class MissionSpecification implements Specification<Mission> {
 
 		if (!StringUtils.isEmpty(inputMission.getMissionstatus())) {
 			if(inputMission.getMissionstatus()==MissionStatus.A_New||inputMission.getMissionstatus()==MissionStatus.A_VolunteerApproved) {
-				list.add(criteriaBuilder.like(root.get("missionstatus").as(String.class), "%" +"A_"+ "%"));
+				list.add(criteriaBuilder.in(root.get("missionstatus").as(MissionStatus.class)).value(MissionStatus.A_New).value(MissionStatus.A_VolunteerApproved));
 			}else if (inputMission.getMissionstatus()==MissionStatus.B_AccountsPayable) {
 				list.add(criteriaBuilder.equal(root.get("missionstatus").as(MissionStatus.class), inputMission.getMissionstatus()));
 			}else if(inputMission.getMissionstatus()==MissionStatus.C_Cancel||inputMission.getMissionstatus()==MissionStatus.C_Finish){
-				list.add(criteriaBuilder.like(root.get("missionstatus").as(String.class), "%" +"C_"+ "%"));
+				list.add(criteriaBuilder.in(root.get("missionstatus").as(MissionStatus.class)).value(MissionStatus.C_Cancel).value(MissionStatus.C_Finish));
 			}else
 			list.add(criteriaBuilder.equal(root.get("missionstatus").as(MissionStatus.class), inputMission.getMissionstatus()));
 		}
