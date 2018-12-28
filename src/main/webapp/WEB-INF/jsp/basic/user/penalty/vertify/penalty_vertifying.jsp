@@ -62,8 +62,7 @@
 					class="form-control" value="${penalty.description}" readonly/><p>
 		
 		<div id="proof">
-			<a id="proofPic" href="/penaltyProoves/${penalty.proofPicName}" target="_blank">佐證資料檢視</a><p>
-			<!-- Server存取圖片路徑設定方式詳見WebConfig.java -->
+			<a id="proofPic" href="../img/${penalty.proofPicName}" target="_blank">佐證資料檢視</a><p>
 		</div>
 		
 		審核結果 (審核中&無須懲罰案件的懲罰時數一律為0，且不得更改):

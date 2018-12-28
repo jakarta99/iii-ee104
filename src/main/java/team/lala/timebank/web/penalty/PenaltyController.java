@@ -1,7 +1,10 @@
 package team.lala.timebank.web.penalty;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -69,15 +72,10 @@ public class PenaltyController {
 	
 	//針對order按檢舉按鍵後，呼叫這支(放文件提醒)
 	@RequestMapping("/report")
-	public String report(@RequestParam("orderId")Long orderId, Model model) {  
+	public String report(@RequestParam("orderId")Long orderId, Model model, Principal principal) {  
 
 		//1.判斷是否已被檢舉過。如已被檢舉過，則回傳無法檢舉的資訊並且導回原頁面
-		Member accuser = (Member) SecurityContextHolder.getContext()   
-				.getAuthentication()  
-				.getPrincipal();
-		log.debug("accuser={}", accuser); //Controller裡的accuser如果直接傳進Service，會變空，只能傳入accuserId????
-		Long accuserId = accuser.getId();
-		Penalty penalty = penaltyService.checkRecordandProvidePenalty(orderId, accuserId);
+		Penalty penalty = penaltyService.checkRecordandProvidePenalty(orderId, principal);
 		
 		if(penalty == null) {
 			model.addAttribute("penaltyExist", orderId + "號媒合案件已有您的檢舉紀錄，不得重複提出檢舉");
@@ -172,13 +170,16 @@ public class PenaltyController {
 	
 	//將佐證圖片存至Server
 	@RequestMapping("/storeProofPic")
-	public String storeProofPic(@RequestParam("proofPic") MultipartFile proofPic, @RequestParam("penaltyId") Long penaltyId) throws IOException {
+	public String storeProofPic(@RequestParam("proofPic") MultipartFile proofPic, @RequestParam("penaltyId") Long penaltyId, HttpServletRequest request) throws IOException {
 		
 		log.debug("pictureName={}", proofPic.getOriginalFilename());
+		System.out.println("pictureName={}"+proofPic.getOriginalFilename());
 		
 		//如果有上傳圖片，才存檔案到Server，及存路徑到DB
 		if(proofPic.getOriginalFilename().length() > 0) {
-			Boolean result = penaltyService.storeProofPic(proofPic, penaltyId);
+			Boolean result = penaltyService.storeProofPic(proofPic, penaltyId, request);
+			log.debug("storePictureResult={}", result);
+			System.out.println("storePictureResult={}"+ result);
 		}
 		
 		//待處理:上傳檔案類型，判斷副檔名。

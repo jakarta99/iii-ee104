@@ -2,8 +2,11 @@ package team.lala.timebank.service;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -44,9 +47,9 @@ public class PenaltyService {
 	//Jasmine 
 	//點選一筆order後，判斷是否有檢舉紀錄，以及被檢舉人是誰。如無檢舉紀錄則無法進入填寫檢舉之畫面
 	//進入檢舉畫面會將相關資料帶入(被檢舉人、活動名稱....)，但還不寫入DB
-	public Penalty checkRecordandProvidePenalty(Long orderId, Long accuserId) {
+	public Penalty checkRecordandProvidePenalty(Long orderId, Principal principal) {
 		Order thisOrder = orderDao.getOne(orderId);
-		Member accuser = memberDao.getOne(accuserId);
+		Member accuser = memberDao.findByAccount(principal.getName());
 
 		List<Penalty> penalties = findByOrder(thisOrder);//查出這筆order的所有檢舉紀錄
 
@@ -114,14 +117,20 @@ public class PenaltyService {
 	
 	
 	//Jasmine 補註解
-	public Boolean storeProofPic(MultipartFile proofPic, Long penaltyId) {
+	public Boolean storeProofPic(MultipartFile proofPic, Long penaltyId, HttpServletRequest request) {
 		try {
+			String realPath = request.getServletContext().getRealPath("/") + "..\\resources\\static\\img\\";
+			log.debug("realPath={}", realPath);
+			
+//			D:\Jasmine\git\iii-ee104-2\iii-ee104\src\main\resources\static\img
+//			D:\Jasmine\git\iii-ee104-2\iii-ee104\src\main\webapp\
+			System.out.println("realPath={}" + realPath);
 			//確認是否有此資料夾，如無則建資料夾
-			File dir = new File("D:\\penaltyProoves\\img\\");
+			File dir = new File(realPath);
 			if (!dir.exists()) {
 				dir.mkdirs();
 			}
-			String location = "D:\\penaltyProoves\\img\\" + "penaltyProof_" + penaltyId + ".jpg";
+			String location = realPath + "penaltyProof_" + penaltyId + ".jpg";
 			FileOutputStream fos = new FileOutputStream(location);
 			fos.write(proofPic.getBytes());
 			fos.close();
