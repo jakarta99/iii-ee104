@@ -123,18 +123,18 @@
 	
 	
 	
-	function accept(id) {
+	function pay(orderId,hours) {
 		$.ajax({
-			url : '/user/volunteerVerify/accept?id=' + id,
+			url : '/user/payTime/pay?orderId=' + orderId+'&hours='+hours,
 			type : 'post',
 			dataType : 'JSON',
-			success : function(acceptResult) {
-				if(acceptResult.status == "SUCCESS"){
-					alert("接受編號" + acceptResult.obj.id + " " + acceptResult.status);									
+			success : function(payResult) {
+				if(payResult.status == "SUCCESS"){
+					alert("接受編號" + payResult.obj.id + " " + payResult.status);									
 					
 				}else{
-					alert("接受編號" + acceptResult.obj.id + " " + acceptResult.status);
-					alert("FAIL reason:" + acceptResult.messages);	
+					alert("接受編號" + payResult.obj.id + " " + payResult.status);
+					alert("FAIL reason:" + payResult.messages);	
 				}
 				dataTable.ajax.reload();
 				
@@ -217,6 +217,7 @@
 						{"data":"volunteer.telephone"},
 						{"data":"volunteer.averageScore"},
 			            {"data":null, render: function (data, type, row ) {
+			            	console.log(data)
 			                return new Date(data.volunteerApplyTime).toLocaleDateString();
 			            } },	
 						
@@ -228,7 +229,7 @@
 // 								var spinner = $( ".ss" ).spinner();
 // 								var aaa= ttt+spinner
 								
-								var select = "<select id='timeValue' name='timeValue' class='form-control'>"
+								var select = "<select id='"+data.volunteer.id+"' name='timeValue' class='form-control'>"
 								for(var i = 0 ; i <= data.mission.timeValue ; i++){
 									if(i==data.mission.timeValue){
 										select += "<option selected='true' value='" + i + "'>"+ i + "</option>"	
@@ -237,9 +238,11 @@
 									}
 								}
 								select +='</select>'
-								$('#select[name="timeValue"]').val(data.mission.timeValue)
+								
+// 								var value=$("#"+data.volunteer.id+" option:selected").val()
+// 								console.log(value)
 
-								var paybutton="<button class='btn btn-outline-secondary' onclick=\"accept("+data.id+")\">時數核發</button>";     
+								var paybutton="<button class='btn btn-outline-secondary' onclick=\"pay("+data.id+")\">時數核發</button>";     
 								return select + paybutton;
 								
 							
