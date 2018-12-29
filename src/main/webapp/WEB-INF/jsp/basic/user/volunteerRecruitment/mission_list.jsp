@@ -79,17 +79,17 @@
 	 <section class="bar">
         <div class="container">
           <div class="row">
-            <jsp:include page="../user_layout/user_sidebar.jsp" />
-    <div style="width:850px">
-	<h1 class="s2">mission list</h1>
+            
+    <div >
+	<h1 class="s2">我的招募清單</h1>
 	<fieldset>
 	<form>
 			<div>
 			基本查詢:
-			</div>
-			
+			</div >
 			<label>縣市:</label> 
-			<div style='display:inline' role="tw-city-selector" ></div>
+
+			<div   role="tw-city-selector"></div>
 			
 			<label>會員類型 :</label> 
 				<select  id="serviceTypeDetail" name="serviceTypeDetail">
@@ -113,18 +113,10 @@
 			        <option value="S">短期</option>
 				</select>
 				
-<!-- 			<label>狀態:</label>  -->
-<!-- 				<select  id="status" name="status"> -->
-<!-- 					<option value="">選擇狀態</option> -->
-<!-- 					<option value="1">1</option> -->
-<!-- 			        <option value="2">2</option> -->
-<!-- 			        <option value="3">3</option> -->
-<!-- 			        <option value="4">4</option> -->
-<!-- 				</select>	 -->
 				
-			<label>startDate:</label>
+			<label>開始日期:</label>
 			<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
-			<label>endDate:</label>
+			<label>結束日期:</label>
 			<input type="text"  id="endDate" name="endDate" autocomplete="off"/>
 			
 			
@@ -137,15 +129,15 @@
   			</div> 
 			<div class="collapse" id="collapse">
 			
-			<label>timeValue :</label> 
+			<label>時數 :</label> 
 			<input type="text" value="" placeholder="timeValue" id="timeValue" name="timeValue"/>
 			
-			<label>title :</label> 
+			<label>活動名稱 :</label> 
 			<input type="text" value="" placeholder="title" id="title" name="title"/>
 			
 			
 			<label>missionstatus :</label> 
-			<input type="text" value="" placeholder="missionstatus" id="missionstatus" name="missionstatus"/>
+			<input type="hidden" value="" placeholder="missionstatus" id="missionstatus" name="missionstatus"/>
 			
 			
 			</div>
@@ -157,8 +149,9 @@
 	<button class="btn btn-outline-primary" id="status12Butt" >未開始</button>
 	<button class="btn btn-outline-secondary" id="status3Butt" >時數未核發</button>
 	<button class="btn btn-outline-secondary" id="status4Butt" >歷史紀錄</button>
+	
 	<table id="table" class="table table-hover">
-	<thead>
+	<thead class="thead-dark">
 	<tr>
 		<th>選項</th>
 		<th scope="col">活動名稱</th>
@@ -307,8 +300,8 @@
 					columns:[						
 						{"data": function (data, type, val) {
 							if(data.missionstatus=="A_New"||data.missionstatus=="A_VolunteerApproved"){
-							 var editbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerRecruitment/edit?id="+data.id+"'\">編輯</button>";     
-							 var cancelbutton="<button class='btn btn-outline-secondary' onclick=\"cancelMission("+data.id+")\">取消</button>"; 	
+							 var editbutton="<button class='btn btn-outline-primary' onclick=\"javascript:document.location.href='/user/volunteerRecruitment/edit?id="+data.id+"'\">編輯</button>";     
+							 var cancelbutton="<button class='btn btn-outline-danger' onclick=\"cancelMission("+data.id+")\">取消</button>"; 	
 							 return editbutton + cancelbutton;
 							 }else{
 								 return "活動進行中" ;
@@ -327,7 +320,7 @@
 					
 						{"data":function (data, type, val) {
 							if(data.missionstatus=="A_New"){
-							var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">志工審核</button>";   
+							var vbutton="<button class='btn btn-outline btn-primary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">志工審核</button>";   
 								return vbutton;
 								
 							}else if(data.missionstatus=="B_AccountsPayable"){
@@ -343,7 +336,8 @@
 								return vbutton;	
 							
 							}else{
-								return "已審核";
+								var vbutton="<span class='badge badge-success'>已審核</span>"
+								return vbutton;
 							}
 							
 							}							 
