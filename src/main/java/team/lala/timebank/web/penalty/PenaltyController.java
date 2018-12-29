@@ -1,10 +1,7 @@
 package team.lala.timebank.web.penalty;
 
-import java.io.IOException;
 import java.security.Principal;
 import java.util.Optional;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,12 +9,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
@@ -26,7 +25,6 @@ import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.service.OrderService;
 import team.lala.timebank.service.PenaltyService;
-import team.lala.timebank.service.SystemMessageService;
 import team.lala.timebank.service.TimeLedgerService;
 import team.lala.timebank.spec.OrderSpecification;
 import team.lala.timebank.spec.PenaltySpecification;
@@ -70,7 +68,7 @@ public class PenaltyController {
 	
 	
 	
-	//針對order按檢舉按鍵後，呼叫這支(放文件提醒)
+	//針對order按檢舉按鍵後，呼叫這支
 	@RequestMapping("/report")
 	public String report(@RequestParam("orderId")Long orderId, Model model, Principal principal) {  
 
@@ -88,13 +86,28 @@ public class PenaltyController {
 	}
 	
 	//提出檢舉時呼叫的方法
+	//前端用ajax無法同時送檔案和表單，故此處暫不用@ResponseBody，待處理。
 	@RequestMapping(value="/doReport", method = RequestMethod.POST)
-	public String doReport(Penalty penalty, Model model) {
+	public String doReport(Penalty penalty,@RequestParam("proofPic") MultipartFile proofPic
+			, MultipartHttpServletRequest request, Model model) {
 
-		penalty = penaltyService.save(penalty);
-		model.addAttribute("reportOnePenalty", penalty);
 
-		return "redirect:/penalty/my-report-list";
+		AjaxResponse<Penalty> ajaxResponse = new AjaxResponse<Penalty>();
+
+		try {
+			Penalty penaltyResult = penaltyService.savePenaltyAndStoreProofPic(proofPic, penalty, request);
+			ajaxResponse.setObj(penaltyResult);
+			model.addAttribute("reportOnePenalty", ajaxResponse);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			ajaxResponse.addMessage(e.getMessage());
+			model.addAttribute("reportOnePenalty", ajaxResponse);
+			return "/basic/user/penalty/temp_order_list";
+		} 
+//		return "redirect:/penalty/my-report-list";
+//		return ajaxResponse;
+		return "/basic/user/penalty/temp_order_list";
 	}
 	
 	//檢舉成功
@@ -169,22 +182,22 @@ public class PenaltyController {
 
 	
 	//將佐證圖片存至Server
-	@RequestMapping("/storeProofPic")
-	public String storeProofPic(@RequestParam("proofPic") MultipartFile proofPic, @RequestParam("penaltyId") Long penaltyId, HttpServletRequest request) throws IOException {
-		
-		log.debug("pictureName={}", proofPic.getOriginalFilename());
-		System.out.println("pictureName={}"+proofPic.getOriginalFilename());
-		
-		//如果有上傳圖片，才存檔案到Server，及存路徑到DB
-		if(proofPic.getOriginalFilename().length() > 0) {
-			Boolean result = penaltyService.storeProofPic(proofPic, penaltyId, request);
-			log.debug("storePictureResult={}", result);
-			System.out.println("storePictureResult={}"+ result);
-		}
-		
-		//待處理:上傳檔案類型，判斷副檔名。
-		return "redirect:/penalty/tempPenaltyEntrance";//回傳上傳成功與否之資訊
-	}
+//	@RequestMapping("/storeProofPic")
+//	public String storeProofPic(@RequestParam("proofPic") MultipartFile proofPic, @RequestParam("penaltyId") Long penaltyId, HttpServletRequest request) throws IOException {
+//		
+//		log.debug("pictureName={}", proofPic.getOriginalFilename());
+//		System.out.println("pictureName={}"+proofPic.getOriginalFilename());
+//		
+//		//如果有上傳圖片，才存檔案到Server，及存路徑到DB
+//		if(proofPic.getOriginalFilename().length() > 0) {
+//			Boolean result = penaltyService.storeProofPic(proofPic, penaltyId, request);
+//			log.debug("storePictureResult={}", result);
+//			System.out.println("storePictureResult={}"+ result);
+//		}
+//		
+//		//待處理:上傳檔案類型，判斷副檔名。
+//		return "redirect:/penalty/tempPenaltyEntrance";//回傳上傳成功與否之資訊
+//	}
 
 	
 	

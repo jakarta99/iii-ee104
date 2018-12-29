@@ -27,10 +27,11 @@
 	<h1 style="padding-top: 2cm">填寫檢舉資料</h1>
 	<h4>#開頭為debug用，正式上線時拿掉</h4>
 	<hr>
-	<form action="/penalty/doReport" method="Post" onSubmit="return CheckForm();">
-<!-- 	新發現:input設disabled，則不會被序列化 -->
+	<form enctype="multipart/form-data" onSubmit="return CheckForm();" action="/penalty/doReport" method="post">
+<!-- 	<form enctype="multipart/form-data" onSubmit="return CheckForm();"> -->
+<!-- 	input設disabled，則不會被序列化 -->
 		#媒合案件編號(Order.id):
-		<input type="text" id="orderListId" name="order" value="${reportBasicData.order.id}" readonly/><p>
+		<input type="text" id="orderListId" name="order" value="${reportBasicData.order.id}" disabled="disabled"/><p>
 
 		#活動編號(Mission.id):
 		<input type="text" id="" name="" value="${reportBasicData.order.mission.id}"  disabled="disabled"/><p>
@@ -55,7 +56,11 @@
 		
 		<input type="hidden" id="status" name="status" value="1"/><p>
 		
-		<input type="submit" id="add" value="送出檢舉" class="btn btn-primary mb-2" />
+		<input type="file" id="proofPic" name="proofPic"  accept="image/*"><p>
+			請選擇圖檔，如無佐證資料，則直接送出審核<p>
+<!-- 		<input type="submit" value="上傳佐證資料"> -->
+		<button id="add" class="btn btn-primary mb-2" >送出檢舉</button>
+<!-- 		<input id="submit" type="submit" id="add" value="送出檢舉" class="btn btn-primary mb-2" /> -->
 	</form>
 	
 	<!-- FOOTER -->
@@ -69,7 +74,36 @@
 		} else {
 			return false;
 		}
-	}   
+	} 
+	
+
+// 	$("form").submit(function(e){
+// 		e.preventDefault();
+// 		var formData = new FormData($('form')[0]);
+
+// 		$.ajax({
+// 			method: "post",
+// 			dataType: "json",
+// 			url: "/penalty/doReport",
+// 			data: formData, //$("form").serialize(),
+// 			enctype : "multipart/form-data",
+// 		    cache: false,
+// 		    async: false,
+// 		    contentType: false,
+// 		    processData: false,
+// 			success: function(response){
+// 				if(response.status == "SUCCESS"){
+// 					alert("檢舉成功");
+// 				}else{
+// 					$.each(response.message, function(idx, message){
+// 						alert("檢舉失敗，" + message);
+// 					});
+// 				}
+// 				window.location.replace("/penalty/tempPenaltyEntrance");
+// 			}
+// 		})
+// 	})
+	
 
 	</script>
 </body>

@@ -81,6 +81,27 @@
 			return false;
 		}
 	} 
+	
+	function sendReport(){
+		$.ajax({
+			method: "post",
+			dataType: "json",
+			url: "/admin/donation/update",
+			data: $("form").serialize(),
+			success: function(response){
+				
+				if(response.status == "SUCCESS"){
+					alert("更改成功");
+				}else{
+					$.each(response.message, function(idx, message){
+						alert(message);
+					});
+				}
+				window.location.replace("/admin/donation/list");
+			}
+		})
+	}
+	
 </script>		
 </body>
 </html>

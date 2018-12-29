@@ -53,10 +53,6 @@
 		<input type="text" id="defendantName" name="defendantName"
 					class="form-control" value="${penalty.defendant.name}" readonly /><p>
 					
-<!-- 		被檢舉人帳戶餘額: -->
-<!-- 		<input type="text" id="" name="" -->
-<!-- 					class="form-control" value="" readonly /><p> -->
-					
 		檢舉內容描述(description):
 		<input type="text" id="PenaltyDescription" name="PenaltyDescription"
 					class="form-control" value="${penalty.description}" readonly/><p>

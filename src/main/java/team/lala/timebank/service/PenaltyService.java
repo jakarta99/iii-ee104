@@ -117,32 +117,42 @@ public class PenaltyService {
 	
 	
 	//Jasmine 補註解
-	public Boolean storeProofPic(MultipartFile proofPic, Long penaltyId, HttpServletRequest request) {
+	public Penalty savePenaltyAndStoreProofPic(MultipartFile proofPic, Penalty penalty, HttpServletRequest request) {
 		try {
-			String realPath = request.getServletContext().getRealPath("/") + "..\\resources\\static\\img\\";
-			log.debug("realPath={}", realPath);
+			//將Penalty(含圖片名稱)存到DB，才能取得檢舉序號，以編檔名
+			penalty.setUpdateDate(new java.util.Date());
+			penalty = penaltyDao.save(penalty);
 			
-//			D:\Jasmine\git\iii-ee104-2\iii-ee104\src\main\resources\static\img
-//			D:\Jasmine\git\iii-ee104-2\iii-ee104\src\main\webapp\
-			System.out.println("realPath={}" + realPath);
-			//確認是否有此資料夾，如無則建資料夾
-			File dir = new File(realPath);
-			if (!dir.exists()) {
-				dir.mkdirs();
+			//如果有上傳圖片，才存檔案到Server，及存路徑到DB
+			if(proofPic.getOriginalFilename().length() > 0) {
+				//取得應用程式根目錄中圖片之路徑
+				String realPath = request.getServletContext().getRealPath("/") + "..\\resources\\static\\img\\";
+
+				//確認是否有此資料夾，如無則建資料夾
+				File dir = new File(realPath);
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+				
+				//檔名
+				String location = realPath + "penaltyProof_" + penalty.getId() + ".jpg";
+				
+				//寫出檔案到Server
+				FileOutputStream fos = new FileOutputStream(location);
+				fos.write(proofPic.getBytes());
+				fos.close();
+				
+				//將檔名存入DB
+				penalty.setProofPicName("penaltyProof_" + penalty.getId() + ".jpg");
+				penalty = penaltyDao.save(penalty);
+				
 			}
-			String location = realPath + "penaltyProof_" + penaltyId + ".jpg";
-			FileOutputStream fos = new FileOutputStream(location);
-			fos.write(proofPic.getBytes());
-			fos.close();
-			//將圖片路徑存到DB
-			Penalty penalty = getOne(penaltyId);
-			penalty.setProofPicName("penaltyProof_" + penaltyId + ".jpg");
-			update(penalty);
+			return penalty;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return penalty;
 		}
-		return true;
 	}
 	
 	//Jasmine 補註解
