@@ -216,8 +216,8 @@
 					
 				], columnDefs:[{		//DataTable:禁用第0123列的搜索和排序
 					"searchable": false,
-	                "orderable": false,
-	                "targets": [0, 1, 2],
+	                "orderable": true,
+	                "targets": [0, 1],
 				}], order: [[1, 'asc']]   
 			 });
 			
@@ -233,7 +233,9 @@
 	                var columnIndex = (i+pageno*length);	//DataTable:行号等于 页数*每页数据长度+行号
 	                cell.innerHTML = columnIndex;
 	            });
-	        });	
+	        });
+			
+			
 			
 			//日期選擇器
 			var datePickerSetting = {

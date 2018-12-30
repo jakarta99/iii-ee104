@@ -6,10 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -132,6 +132,9 @@ public class PenaltyController {
 		int page = start.orElse(0)/length.orElse(10);
 		log.debug("inputPenalty={}", inputPenalty);
 		PenaltySpecification penaltySpec = new PenaltySpecification(inputPenalty);
+		
+//		Sort sort = new Sort(Sort.Direction.DESC, "id"); //傳入PageRequest.of()當第三個參數
+		
 		Page<Penalty> penalties = penaltyService.findBySpecification(
 				penaltySpec, PageRequest.of(page, length.orElse(10)));
 		log.debug("PenaltiesSize={}", penalties.getSize());
