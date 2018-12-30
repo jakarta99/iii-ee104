@@ -11,7 +11,7 @@
 	fieldset {
  		border-radius: 20px; 
  		padding: 20px 20px 0px 20px;  
-		background-color:#ffeecc;
+		background-color:#d1e9e9;
 		margin: auto; 
  		margin-top: 10px;  
  		margin-bottom: 20px;  
@@ -29,7 +29,7 @@
 	<jsp:include page="../../../../admin/admin_layout/nav.jsp" />
 	
 	<div class="container" style="margin-top: 140px">
-		<h2 class="text-center text-uppercase text-secondary mb-0" style="font-family: '微軟正黑體'">檢舉案件審核</h2>
+		<h2 class="text-center text-uppercase text-secondary mb-0" style="font-family: '微軟正黑體'" id="topic">檢舉案件審核</h2>
 	    <hr class="star-dark mb-5">
 	</div>
 
@@ -130,8 +130,15 @@
 					
 				<div class="form-group col-md-6">
 					<label>懲罰時數:</label>
-					<input type="text" id="penaltyTimeValue" name="penaltyTimeValue"
-								class="form-control" value="${penalty.penaltyTimeValue}" readonly/>
+					<select class="custom-select my-1 mr-sm-2" id="penaltyTimeValue">
+					  <option>Choose...</option>
+					  <option value="0">0</option>
+					  <option value="1">1</option>
+					  <option value="2">2</option>
+					  <option value="3">3</option>
+					  <option value="4">4</option>
+					  <option value="5">5</option>
+					</select>
 				</div>
 	
 			</div>			
@@ -142,8 +149,8 @@
 				</div>
 			</div>
 			
-			<input type="button" class="btn btn-warning" id="vertifyFinish" value="完成審核" disabled>
-			<input type="button" class="btn btn-warning" id="vertifyTemp" value="暫時儲存"><p>
+			<input type="button" class="btn btn-primary" id="vertifyFinish" value="完成審核" disabled>
+			<input type="button" class="btn btn-primary" id="vertifyTemp" value="暫時儲存"><p>
 		</fieldset>
 	</form>
 
@@ -151,10 +158,24 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-
-			$('#status').val('${penalty.status}');
+			var penaltyStatus = "${penalty.status}";
 			
+			//設定審核狀態、審核意見及原因
+			$('#status').val(penaltyStatus);
 			$('#vertifyReason').val('${penalty.vertifyReason}');
+			$('#penaltyTimeValue').val('${penalty.penaltyTimeValue}');
+			
+			//如檢視審核歷史紀錄，則刪去審核按鈕，並將所有欄位設為readonly
+			if(penaltyStatus != 1){
+				$("#vertifyFinish").remove();
+				$("#vertifyTemp").remove();
+				
+				$("#status").prop("disabled", true);
+				$("#penaltyTimeValue").prop("disabled", true);
+				$("#vertifyReason").prop("readonly", true);
+				
+				$("#topic").html("檢舉案件歷史資料");
+			}
 			
 			//無佐證資料時，不顯示佐證資料超連結
 			var proofPicName = '${penalty.proofPicName}';
@@ -212,24 +233,23 @@
 			
 			$('#status').change(function(){
 				//alert($(this).val());
-				if($(this).val()==1){ //審核中&無須處罰者，扣款時數強制寫為0，且不得更改
-					$('#penaltyTimeValue').prop("readonly", true);	
-					$('#penaltyTimeValue').val("0");
+				if($(this).val()==1){ //審核中，扣款時數可編輯
+					$('#penaltyTimeValue').removeAttr("disabled");
 					
 					$('#vertifyFinish').prop("disabled", true);
 					$('#vertifyTemp').prop("disabled", false);
 				}
 				
 				if($(this).val() == 2){ //須處罰者，扣款時數可編輯
-					$('#penaltyTimeValue').removeAttr("readonly");
+					$('#penaltyTimeValue').removeAttr("disabled");
 				
 					$('#vertifyFinish').prop("disabled", false);
 					$('#vertifyTemp').prop("disabled", true);
 				}
 				
-				if($(this).val()==3){ //審核中&無須處罰者，扣款時數強制寫為0，且不得更改
-					$('#penaltyTimeValue').prop("readonly", true);	
+				if($(this).val()==3){ //無須處罰者，扣款時數強制寫為0，且不得更改
 					$('#penaltyTimeValue').val("0");
+					$('#penaltyTimeValue').prop("disabled", true);
 					
 					$('#vertifyFinish').prop("disabled", false);
 					$('#vertifyTemp').prop("disabled", true);
