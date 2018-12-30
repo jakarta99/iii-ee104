@@ -127,7 +127,7 @@ public class PenaltyService {
 			if(proofPic.getOriginalFilename().length() > 0) {
 				//取得應用程式根目錄中圖片之路徑
 				String realPath = request.getServletContext().getRealPath("/") + "..\\resources\\static\\img\\";
-
+				System.out.println(realPath + "***************************");
 				//確認是否有此資料夾，如無則建資料夾
 				File dir = new File(realPath);
 				if (!dir.exists()) {

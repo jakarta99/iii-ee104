@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Order;
-import team.lala.timebank.enums.OrderStatus;
 import team.lala.timebank.service.OrderService;
 
 @Slf4j
@@ -53,16 +51,17 @@ public class VolunteerApplicationController {
 			@RequestParam(value="orderStatusDetail") String orderStatusDetail,
 			@RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
+		log.debug("order={}", order);
 		int page = start.orElse(0)/length.orElse(10);
 		return orderService.findByVolunteerAndOrderStatus(principal, order, PageRequest.of(page, length.orElse(10)));
 	}
 
 	@ResponseBody
-	@RequestMapping("/volunteerApplication/delete")		//取消申請
+	@RequestMapping("/volunteerApplication/delete")		//志工取消申請
 	public AjaxResponse<Order> cancelApplication(@RequestParam("id") Long id){
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		try {
-			orderService.deleteById(id);
+			orderService.cancle(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.addMessage("刪除失敗");
