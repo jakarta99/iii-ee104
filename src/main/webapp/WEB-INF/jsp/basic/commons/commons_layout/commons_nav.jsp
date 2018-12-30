@@ -7,11 +7,11 @@
             <button type="button" data-toggle="collapse" data-target="#navigation" class="navbar-toggler btn-template-outlined"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
             <div id="navigation" class="navbar-collapse collapse">
               <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item dropdown active"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle">公益團體 <b class="caret"></b></a>
+                <li class="nav-item"><a href="javascript: void(0)">公益團體 <b class="caret"></b></a>
                 </li>
-                <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" class="dropdown-toggle">志工招募<b class="caret"></b></a>
+                <li class="nav-item menu-large"><a href="#" >志工招募<b class="caret"></b></a>
                 </li>
-              <li class="nav-item dropdown menu-large" ><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">會員專區 <b class="caret"></b></a>
+              	<li class="nav-item dropdown menu-large" ><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">會員專區 <b class="caret"></b></a>
                   <ul class="dropdown-menu megamenu" style="width:450px;">
                     <li>
                       <div class="row">
@@ -42,7 +42,7 @@
                     </li>
                   </ul>
                 </li>
-                      
+                <li class="nav-item menu-large"><a href="/commons/InternationalVolunteer/list" >國際志工專區<b class="caret"></b></a>     
                       
 
                      
@@ -137,15 +137,15 @@
                     </li>
                   </ul>
                 </li>
-                 <li class="nav-item dropdown active"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle">常見問題<b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li class="dropdown-item"><a href="/" class="nav-link">Option 1: Default Page</a></li>
-                    <li class="dropdown-item"><a href="index2.html" class="nav-link">Option 2: Application</a></li>
-                    <li class="dropdown-item"><a href="index3.html" class="nav-link">Option 3: Startup</a></li>
-                    <li class="dropdown-item"><a href="index4.html" class="nav-link">Option 4: Agency</a></li>
-                    <li class="dropdown-item"><a href="index5.html" class="nav-link">Option 5: Portfolio</a></li>
-                  </ul>
-                </li>
+<!--                  <li class="nav-item dropdown active"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle">常見問題<b class="caret"></b></a> -->
+<!--                   <ul class="dropdown-menu"> -->
+<!--                     <li class="dropdown-item"><a href="/" class="nav-link">Option 1: Default Page</a></li> -->
+<!--                     <li class="dropdown-item"><a href="index2.html" class="nav-link">Option 2: Application</a></li> -->
+<!--                     <li class="dropdown-item"><a href="index3.html" class="nav-link">Option 3: Startup</a></li> -->
+<!--                     <li class="dropdown-item"><a href="index4.html" class="nav-link">Option 4: Agency</a></li> -->
+<!--                     <li class="dropdown-item"><a href="index5.html" class="nav-link">Option 5: Portfolio</a></li> -->
+<!--                   </ul> -->
+<!--                 </li> -->
                 <!-- ========== FULL WIDTH MEGAMENU END ==================-->				
                 <!-- ========== admin dropdown ==================-->
                 <sec:authorize access="hasRole('ADMIN')">
