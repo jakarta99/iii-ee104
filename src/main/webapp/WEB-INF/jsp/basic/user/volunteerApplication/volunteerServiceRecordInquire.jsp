@@ -70,7 +70,7 @@
 			    <button type="button" id="orderStatus3" class="btn btn-secondary">媒合失敗紀錄</button>
 					<form>
 						<div>基本查詢:</div>
-						<label>住址:</label>
+						<label>活動地址:</label>
 						<div role="tw-city-selector" ></div>
 						<label>開始日期:</label>
 						<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
@@ -144,6 +144,7 @@
 						var length = d.length;
 						var request =  $("form").serialize() + "&orderStatusDetail=" + orderStatusDetail +
 											"&start=" + start + "&length="+ length;
+						console.log(request)
 						return request;
 					},
 					dataSrc:"content",
