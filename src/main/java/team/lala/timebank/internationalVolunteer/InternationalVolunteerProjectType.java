@@ -1,4 +1,4 @@
-package team.lala.timebank.webMagic;
+package team.lala.timebank.internationalVolunteer;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

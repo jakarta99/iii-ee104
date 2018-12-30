@@ -1,4 +1,4 @@
-package team.lala.timebank.webMagic;
+package team.lala.timebank.internationalVolunteer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
