@@ -118,6 +118,16 @@ public class OrderService {
 		}
 		return null;
 	}
+	
+	//志工取消申請 狀態1 --> 5
+	public Order cancle (Long id) {
+		Order order = orderDao.getOne(id);
+		if(order.getOrderStatus() == OrderStatus.VolunteerApply) {
+			order.setOrderStatus(OrderStatus.VolunteerCancleTransactionMatchFail);
+			return orderDao.save(order);
+		}
+		return null;
+	}
 
 	// 根據mission找出所有的order
 	public List<Order> findByMission(Mission mission) {

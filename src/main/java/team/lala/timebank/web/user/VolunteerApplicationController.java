@@ -58,11 +58,11 @@ public class VolunteerApplicationController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/volunteerApplication/delete")		//取消申請
+	@RequestMapping("/volunteerApplication/delete")		//志工取消申請
 	public AjaxResponse<Order> cancelApplication(@RequestParam("id") Long id){
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		try {
-			orderService.deleteById(id);
+			orderService.cancle(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.addMessage("刪除失敗");
