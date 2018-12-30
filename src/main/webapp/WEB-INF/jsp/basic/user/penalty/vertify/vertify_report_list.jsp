@@ -15,13 +15,15 @@
 <style>
 	 article{
 	 	margin-top:70px;
+	 	font-family: 微軟正黑體;
 	 }
 	 
 	 article fieldset {
 /*  		width: 500px;  */
  		border-radius: 20px; 
  		padding: 20px 20px 0px 20px;  
- 		border: 3px double #bebebe; 
+/*  		border: 3px double #bebebe;  */
+		background-color:#d1e9e9;
 		margin: auto; 
  		margin-top: 10px;  
  		margin-bottom: 20px;  
@@ -44,11 +46,14 @@
 	<!-- 加入nav.html -->
 	<jsp:include page="../../../../admin/admin_layout/nav.jsp" />
 	<article>
-		<h1 style="margin-top: 140px">檢舉案件審查</h1>
+		<div class="container" style="margin-top: 140px">
+			<h2 class="text-center text-uppercase text-secondary mb-0" style="font-family: '微軟正黑體'">檢舉案件列表</h2>
+		    <hr class="star-dark mb-5">
+		</div>
 		<!-- 條件搜尋表單 -->
 		<div id="sideBar">
 			<form>
-				<fieldset>
+				<fieldset style="width:1100px">
 				<legend>Search</legend>
 				<div>
 <!-- 					<label>檢舉人: </label> -->
@@ -62,15 +67,15 @@
 						<option value=3>審核完成，未懲罰</option>
 					</select>
 					<div>
-						<label>description</label>
+						<label>檢舉事由</label>
 						<input type="text" value="${param.description}" id="description" name="description" />
 					</div>
 					<div>
-						<label>penaltyTimeValue</label>
+						<label>懲罰額度(小時)</label>
 						<input type="text" value="${param.penaltyTimeValue}" id="penaltyTimeValue" name="penaltyTimeValue"/>
 					</div>
 					<div>
-						<label>起始日期</label>
+						<label>檢舉日期</label>
 						<input type="text" value="${param.dateBefore}" id="dateBefore" name="dateBefore" autocomplete="off" /> 
 						<input type="text" value="${param.dateAfter}" id="dateAfter" name="dateAfter" autocomplete="off" />
 					</div>
@@ -89,48 +94,47 @@
 				</fieldset>
 			</form>
 		</div>
-		<fieldset style="width:300">
-
 		
-		
-		<div class="btn-group">
-		  <button type="button" class="btn btn-info" id="vertifyingCase">審核中</button>
-		  <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="history">
-		    審核歷史紀錄
-		  </button>
-		  <div class="dropdown-menu">
-		    	<a class="dropdown-item" href="#" id="vertified2">有罪</a>
-		    	<a class="dropdown-item" href="#" id="vertified3">無罪</a>
-		  </div>
-		</div>
-
-		
-		<table id="table" class="table table-striped table-bordered">
-			<thead>
-				<tr>
-					<th scope="col"></th>
-					<th scope="col" width="50px"></th>
-					<th scope="col">檢舉案件編號ID</th>
-					<th scope="col">媒合案件編號(order.id)</th>
-					<th scope="col">檢舉案件活動名稱(order.mission...)</th>
-					
-					<th scope="col">提出檢舉時間</th>
-					<th scope="col">檢舉人ID(accuser)</th>
-					<th scope="col">被檢舉者ID(defendant.id)</th>
-					<th scope="col">被檢舉者姓名(defendant.name)</th>
-<!-- 					<th scope="col">被檢舉者帳戶餘額(timeledger)(debug用)</th> -->
-					
-					<th scope="col">檢舉事由描述</th>
-					<th scope="col">逞罰額度(時間)</th>
-					<th scope="col">處理進度</th>
-					
-					
-				</tr>
-			</thead>
-			<tbody id="tableBody">
-				<!-- 會員資料 -->
-			</tbody>
-		</table>
+		<fieldset style="width:1300px">
+			<div class="btn-group" style="margin-bottom: 20px">
+			  <button type="button" class="btn btn-primary" id="vertifyingCase">審核中</button>
+			  <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="history">
+			    	審核歷史紀錄
+			  </button>
+			  <div class="dropdown-menu">
+			    	<a class="dropdown-item" href="#" id="vertified2">有罪</a>
+			    	<a class="dropdown-item" href="#" id="vertified3">無罪</a>
+			  </div>
+			</div>
+	
+			
+			<table id="table" class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th scope="col"></th>
+						<th scope="col" width="50px"></th>
+						<th scope="col">檢舉案件編號</th>
+						<th scope="col">媒合案件編號</th>
+						<th scope="col">檢舉案件活動名稱</th>
+						
+						<th scope="col">提出檢舉時間</th>
+						<th scope="col">檢舉人ID</th>
+						<th scope="col">檢舉人帳號</th>
+						<th scope="col">被檢舉者ID</th>
+						<th scope="col">被檢舉者帳號</th>
+	<!-- 					<th scope="col">被檢舉者帳戶餘額(timeledger)(debug用)</th> -->
+						
+						<th scope="col">檢舉事由</th>
+						<th scope="col">懲罰額度(小時)</th>
+						<th scope="col">處理進度</th>
+						
+						
+					</tr>
+				</thead>
+				<tbody id="tableBody">
+					<!-- 會員資料 -->
+				</tbody>
+			</table>
 		</fieldset>
 	</article>
 	
@@ -146,7 +150,7 @@
 			$("form").addClass("form-inline");
 			$("form div[id!='collapse']").addClass("form-group mx-sm-3 mb-3");
 			$("form input, select").addClass("form-control mx-3");
-			$("#searchButt, #resetButt").addClass("btn btn-primary");
+			$("#searchButt, #resetButt").addClass("btn btn-outline-primary");
 
 			dataTable = $('#table').DataTable({
 				pageResize: true, 
@@ -186,7 +190,8 @@
 		           		var vertifyButt = "";
 		           		//已完成審核之案件，不顯示審核按鈕
 		           		if(data.status != 1){
-		           			vertifyButt = "已完成審核"
+		           			vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/penalty/vertify?id="
+								+ data.id + "'\" value='檢視紀錄'  /></div>";
 						}else{
 							vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/penalty/vertify?id="
 								+ data.id + "'\" value='審核'  /></div>";
@@ -201,8 +206,9 @@
 						}
 					},
 					{data:"accuser.id"},
+					{data:"accuser.account"},
 					{data:"defendant.id"},
-					{data:"defendant.name"},
+					{data:"defendant.account"},
 					{data:"description"},
 					{data:"penaltyTimeValue"},
 					{data:"status"},
@@ -251,14 +257,14 @@
 			$("#vertifyingCase").click(	function(){
 				$('#status').val("1");
 				dataTable.ajax.reload();
-				$("#history").attr('class', 'btn btn-outline-info dropdown-toggle');
-				$(this).attr('class', 'btn btn-info');
+				$("#history").attr('class', 'btn btn-outline-primary dropdown-toggle');
+				$(this).attr('class', 'btn btn-primary');
 			})
 			
 			//按審核歷史紀錄按紐
 			$("#history").click(function(){
-				$("#vertifyingCase").attr('class', 'btn btn-outline-info');
-				$(this).attr('class', 'btn btn-info dropdown-toggle');
+				$("#vertifyingCase").attr('class', 'btn btn-outline-primary');
+				$(this).attr('class', 'btn btn-primary dropdown-toggle');
 			})
 			
 			//選擇有罪無罪
