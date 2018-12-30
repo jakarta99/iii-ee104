@@ -7,75 +7,144 @@
 <meta charset="UTF-8">
 <jsp:include page="../../../../admin/admin_layout/admin_css_js_links.jsp" />
 <title>檢舉案件審核</title>
+<style>
+	fieldset {
+ 		border-radius: 20px; 
+ 		padding: 20px 20px 0px 20px;  
+		background-color:#ffeecc;
+		margin: auto; 
+ 		margin-top: 10px;  
+ 		margin-bottom: 20px;  
+ 		
+	}
+	
+	body{
+		font-family: "微軟正黑體"
+	}
+</style>
 </head>
 <body>
 
 	<!-- 加入nav.html(放在static/html) -->
 	<jsp:include page="../../../../admin/admin_layout/nav.jsp" />
 	
-	<h1 style="margin-top: 140px">檢舉案件審核</h1>
-	<h4>審核 編號第${penalty.id}案</h4>
+	<div class="container" style="margin-top: 140px">
+		<h2 class="text-center text-uppercase text-secondary mb-0" style="font-family: '微軟正黑體'">檢舉案件審核</h2>
+	    <hr class="star-dark mb-5">
+	</div>
 
 	<form>
-		<input type="hidden" value="${penalty.id}" id="penaltyId" name="penaltyId" />
-		媒合案件編號(Order.id):
-		<input type="text" id="orderId" name="orderId"
-					class="form-control" value="${penalty.order.id}" readonly /><p>
-					
-		活動編號(Mission.id):
-		<input type="text" id="missionId" name="missionId"
-					class="form-control" value="${penalty.order.mission.id}" readonly /><p>
-		
-		活動時間(Mission.startDate~endDate):
-		<input type="text" id="missionDateRange" name="missionDateRange"
-					class="form-control" value="${penalty.order.mission.startDate} ~ ${penalty.order.mission.endDate}" readonly /><p>
-					
-		活動名稱(Mission.title):
-		<input type="text" id="missionTitle" name="missionTitle"
-					class="form-control" value="${penalty.order.mission.title}" readonly /><p>
-		
-		活動描述(Mission.discription):
-		<input type="text" id="missionDiscription" name="missionDiscription"
-					class="form-control" value="${penalty.order.mission.discription}" readonly /><p>
-					
-		檢舉人id(accuserId):
-		<input type="text" id="memberId" name="memberId"
-					class="form-control" value="${penalty.accuser.id}" readonly /><p>
-		檢舉人姓名:
-		<input type="text" id="memberId" name="memberId"
-					class="form-control" value="${penalty.accuser.name}" readonly /><p>
-		
-		被檢舉人會員編號  defendant-memberId:
-		<input type="text" id="defendantId" name="defendantId"
-					class="form-control" value="${penalty.defendant.id}" readonly /><p>
+		<fieldset style="width:1300px">
+		<legend>第${penalty.id}號檢舉案件基本資料</legend>
+			<input type="hidden" value="${penalty.id}" id="penaltyId" name="penaltyId" />
+			<div class="form-row">
+				<div class="form-group col-md-3">
+					<label>媒合案件編號</label>
+					<input type="text" id="orderId" name="orderId"
+								 class="form-control" value="${penalty.order.id}" readonly />
+				</div>	
+				<div class="form-group col-md-3">		
+					<label>活動編號</label>
+					<input type="text" id="missionId" name="missionId"
+								 class="form-control" value="${penalty.order.mission.id}" readonly />
+				</div>
+			</div>
+	
+			<div class="form-row">
+				<div class="form-group col-md-3">	
+					<label>檢舉人會員編號</label>
+					<input type="text" id="accuserId" name="accuserId"
+								class="form-control" value="${penalty.accuser.id}" readonly />
+				</div>	
+				<div class="form-group col-md-3">
+					<label>檢舉人帳號</label>
+					<input type="text" id="accuserAccount" name="accuserAccount"
+								class="form-control" value="${penalty.accuser.account}" readonly />
+				</div>
 				
-		被檢舉人姓名:
-		<input type="text" id="defendantName" name="defendantName"
-					class="form-control" value="${penalty.defendant.name}" readonly /><p>
-					
-		檢舉內容描述(description):
-		<input type="text" id="PenaltyDescription" name="PenaltyDescription"
-					class="form-control" value="${penalty.description}" readonly/><p>
-		
-		<div id="proof">
-			<a id="proofPic" href="../img/${penalty.proofPicName}" target="_blank">佐證資料檢視</a><p>
-		</div>
-		
-		審核結果 (審核中&無須懲罰案件的懲罰時數一律為0，且不得更改):
-		<select class="form-control" id="status" name="status">
-			<option value=1></option>
-			<option value=2>需懲罰</option>
-			<option value=3>無需懲罰</option>
-		</select><p>
-		
-		懲罰時數 (如果需懲罰，時數小於等於0，會跳出alert):
-		<input type="text" id="penaltyTimeValue" name="penaltyTimeValue"
-					class="form-control" value="${penalty.penaltyTimeValue}" readonly/>
-		
-		審核意見、原因:<p>
-		<textarea  id="vertifyReason" name="vertifyReason" cols="50" rows="5"></textarea><p>
+				<div class="form-group col-md-3">
+					<label>被檢舉人會員編號</label>
+					<input type="text" id="defendantId" name="defendantId"
+								class="form-control" value="${penalty.defendant.id}" readonly />
+				</div>
+				<div class="form-group col-md-3">		
+					<label>被檢舉人帳號</label>
+					<input type="text" id="defendantAccount" name="defendantAccount"
+								class="form-control" value="${penalty.defendant.account}" readonly />
+				</div>
+			</div>
 			
-		<input type="button" class="btn btn-primary" id="vertify" value="完成審核">
+			<div class="form-row">
+				<div class="form-group col-md-3">
+					<label>活動時間起迄</label>
+					<input type="text" id="missionDateRange" name="missionDateRange"
+								class="form-control" value="${penalty.order.mission.startDate}~${penalty.order.mission.endDate}" readonly />
+				</div>
+				
+				<div class="form-group col-md-3">			
+					<label>活動名稱</label>
+					<input type="text" id="missionTitle" name="missionTitle"
+								class="form-control" value="${penalty.order.mission.title}" readonly />
+				</div>
+				
+				<div class="form-group col-md-6">
+					<label>活動描述</label>
+					<input type="text" id="missionDiscription" name="missionDiscription"
+								class="form-control" value="${penalty.order.mission.discription}" readonly />
+				</div>	
+			</div>
+			
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label>檢舉內容描述</label>
+					<input type="text" id="PenaltyDescription" name="PenaltyDescription"
+								class="form-control" value="${penalty.description}" readonly/>
+				</div>
+				<div class="form-group col-md-6">
+					<label>是否檢附佐證資料</label>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="proofRadio1" name="proofRadio" class="custom-control-input" readonly>
+						<label class="custom-control-label" for="customRadio1">是</label>
+						<a id="proofPic" href="../img/${penalty.proofPicName}" target="_blank">佐證資料檢視</a>
+					</div>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="proofRadio2" name="proofRadio" class="custom-control-input" readonly>
+						<label class="custom-control-label" for="customRadio2">否</label>
+					</div>
+					
+				</div>
+			</div>
+		</fieldset>
+		
+		<fieldset style="width:1300px">
+		<legend>審核</legend>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label>審核結果:</label>
+					<select id="status" name="status" class="form-control" >
+						<option value=1>審核中</option>
+						<option value=2>需懲罰</option>
+						<option value=3>無需懲罰</option>
+					</select>
+				</div>
+					
+				<div class="form-group col-md-6">
+					<label>懲罰時數:</label>
+					<input type="text" id="penaltyTimeValue" name="penaltyTimeValue"
+								class="form-control" value="${penalty.penaltyTimeValue}" readonly/>
+				</div>
+	
+			</div>			
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<label>審核意見、原因</label>
+					<textarea class="form-control"  id="vertifyReason" name="vertifyReason" cols="50" rows="5"></textarea>
+				</div>
+			</div>
+			
+			<input type="button" class="btn btn-warning" id="vertifyFinish" value="完成審核" disabled>
+			<input type="button" class="btn btn-warning" id="vertifyTemp" value="暫時儲存"><p>
+		</fieldset>
 	</form>
 
 <!-- 	<a href="/admin/penalty/list">back to penalty_list</a> -->
@@ -90,11 +159,14 @@
 			//無佐證資料時，不顯示佐證資料超連結
 			var proofPicName = '${penalty.proofPicName}';
 			if(proofPicName.length == 0){
-				$("#proof").html("");
+				$("#proofPic").html("");
+				$("#proofRadio2").prop("checked", true);
+			}else{
+				$("#proofRadio1").prop("checked", true);
 			}
 			
-			$('#vertify').click(function() {
-				//alert($('#penaltyId').val());
+			//暫存或完成審核結果的方法
+			function saveVertify(successMessage, errorMessage){
 				if($('#status').val() == 2 && $('#penaltyTimeValue').val() <= 0){
 					alert("處罰時數需大於0");
 				}else{
@@ -103,27 +175,64 @@
 						method : "put",
 						dataType : "json",
 						data : {"penaltyId":$('#penaltyId').val(),"status":$('#status').val(),
-							"penaltyTimeValue":$('#penaltyTimeValue').val(),"vertifyReason":$('#vertifyReason').val()}
-					}).done(function(result) {
-						alert(result.status);
-						if(result.statusDescription != null){
-							alert(result.statusDescription);
-						}
-						document.location.href="/penalty/showVertifyList";
+							"penaltyTimeValue":$('#penaltyTimeValue').val(),"vertifyReason":$('#vertifyReason').val()},
+						success : function(result) {
+							if(result.status == "SUCCESS"){
+								alert(successMessage);
+							}
+							if(result.statusDescription != null){
+								alert(result.statusDescription);
+							}
+							document.location.href="/penalty/showVertifyList";
+						},
+						error: function (result) {
+							if(result.status == "ERROR"){
+								alert(errorMessage);
+							}
+					        $.each(result.messages, function(idx, message) {
+								alert("the "+idx+"th ERROR, because "+message);
+							});
+					    }
 					})
 				}
-				
+			}
+			
+			//完成審核
+			$('#vertifyFinish').click(function() {
+				var conf = confirm("確定送出審核結果? 送出後將無法更改");
+				if(conf == true){
+					saveVertify("完成審核", "審核結果儲存失敗");
+				}
+			})
+			
+			//暫存審核結果
+			$('#vertifyTemp').click(function() {
+				saveVertify("暫存審核內容成功", "暫存審核內容失敗");
 			})
 			
 			$('#status').change(function(){
 				//alert($(this).val());
-				if($(this).val()==1 || $(this).val()==3){ //審核中&無須處罰者，扣款時數強制寫為0，且不得更改
+				if($(this).val()==1){ //審核中&無須處罰者，扣款時數強制寫為0，且不得更改
 					$('#penaltyTimeValue').prop("readonly", true);	
 					$('#penaltyTimeValue').val("0");
+					
+					$('#vertifyFinish').prop("disabled", true);
+					$('#vertifyTemp').prop("disabled", false);
 				}
 				
 				if($(this).val() == 2){ //須處罰者，扣款時數可編輯
 					$('#penaltyTimeValue').removeAttr("readonly");
+				
+					$('#vertifyFinish').prop("disabled", false);
+					$('#vertifyTemp').prop("disabled", true);
+				}
+				
+				if($(this).val()==3){ //審核中&無須處罰者，扣款時數強制寫為0，且不得更改
+					$('#penaltyTimeValue').prop("readonly", true);	
+					$('#penaltyTimeValue').val("0");
+					
+					$('#vertifyFinish').prop("disabled", false);
+					$('#vertifyTemp').prop("disabled", true);
 				}
 				
 			})

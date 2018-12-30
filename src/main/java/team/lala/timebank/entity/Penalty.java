@@ -14,6 +14,9 @@ import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,12 +37,14 @@ public class Penalty {
 	@JoinColumn(name="ORDER_LIST",    
 				referencedColumnName="id",  
 				insertable=true, updatable=true) 
+	@JsonIgnoreProperties(ignoreUnknown = true)
 	private Order order; //無法用order當資料行名稱
 
 	@OneToOne
 	@JoinColumn(name="ACCUSER_ID",    
 				referencedColumnName="id",  
 				insertable=true, updatable=true) 
+	@JsonIgnoreProperties(ignoreUnknown = true)
 	private Member accuser;//檢舉人(原告)
 	
 	
@@ -47,6 +52,7 @@ public class Penalty {
 	@JoinColumn(name="DEFENDANT_ID",    
 				referencedColumnName="id",  
 				insertable=true, updatable=true) 
+	@JsonIgnoreProperties(ignoreUnknown = true)
 	private Member defendant;
 	//被檢舉人(被告)
 

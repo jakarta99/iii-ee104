@@ -149,9 +149,8 @@ public class PenaltyController {
 	//呼叫審查service(扣違規會員時數)，完成審查(update成功)後跳出成功對話框(SUCCESS)，轉回所有待審查清單
 	@RequestMapping("/doneVertify")
 	@ResponseBody
-	public AjaxResponse<Penalty> doneVertify(@RequestParam("penaltyId") Long penaltyId, 
-			@RequestParam("status") Integer status, @RequestParam("penaltyTimeValue") Integer penaltyTimeValue, 
-			@RequestParam("vertifyReason") String vertifyReason) {
+	public AjaxResponse<Penalty> doneVertify(@RequestParam("penaltyId") Long penaltyId, @RequestParam("status") Integer status, 
+			@RequestParam("penaltyTimeValue") Integer penaltyTimeValue, @RequestParam("vertifyReason") String vertifyReason) {
 		
 		AjaxResponse<Penalty> ajaxResponse = new AjaxResponse<Penalty>();
 		//測完看能否再包些東西進Service
@@ -170,7 +169,7 @@ public class PenaltyController {
 				penaltyService.sendSystemMessageToDefendant(penalty); //寄信
 				ajaxResponse.setStatusDescription(ajaxResponse.getStatusDescription() + " 2.已寄站內信給被檢舉人。");
 			}
-			ajaxResponse.setObj(penalty);
+			//ajaxResponse.setObj(penalty);
 		} catch (Exception e) {
 			ajaxResponse.addMessage(e.getMessage());
 			e.printStackTrace();
