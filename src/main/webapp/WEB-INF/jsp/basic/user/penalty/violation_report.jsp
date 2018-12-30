@@ -31,7 +31,7 @@
 <!-- 	<form enctype="multipart/form-data" onSubmit="return CheckForm();"> -->
 <!-- 	input設disabled，則不會被序列化 -->
 		#媒合案件編號(Order.id):
-		<input type="text" id="orderListId" name="order" value="${reportBasicData.order.id}" disabled="disabled"/><p>
+		<input type="text" id="orderListId" name="order" value="${reportBasicData.order.id}" readonly/><p>
 
 		#活動編號(Mission.id):
 		<input type="text" id="" name="" value="${reportBasicData.order.mission.id}"  disabled="disabled"/><p>

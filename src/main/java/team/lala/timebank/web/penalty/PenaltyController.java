@@ -140,8 +140,8 @@ public class PenaltyController {
 	
 	//點選個案後呼叫此controller，進入個案審查畫面
 	@RequestMapping("/vertify")
-	public String vertify(@RequestParam("id") Long id, Model model) {
-		Penalty penalty = penaltyService.getOne(id);
+	public String vertify(@RequestParam("id") Long orderId, Model model) {
+		Penalty penalty = penaltyService.getOne(orderId);
 		model.addAttribute("penalty", penalty);
 		return "/basic/user/penalty/vertify/penalty_vertifying";
 	}
