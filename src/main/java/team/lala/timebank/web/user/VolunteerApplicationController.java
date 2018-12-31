@@ -69,6 +69,15 @@ public class VolunteerApplicationController {
 		}
 		return response;	
 	}
+	
+	@ResponseBody
+	@RequestMapping("/volunteerRecord/report")		//志工檢舉雇主
+	public AjaxResponse<Order> Report(@RequestParam(value="id") Long orderId,
+			@RequestParam(value="description") String description){
+		AjaxResponse<Order> response = new AjaxResponse<Order>();
+		orderService.Report(orderId, description);
+		return response;
+	}
 
 	@ResponseBody
 	@RequestMapping("/volunteerApplication/delete")		//志工取消申請

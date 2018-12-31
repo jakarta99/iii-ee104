@@ -183,14 +183,27 @@
 		            } },
 		            { data: null, render: function(data, type, row ) {
 		            	if(data.orderStatus == "RequesterCancleActivityNoPunishMatchSuccess") {
-		            		var editButt = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='#?id="
-								+ data.id + "'\" value='檢舉'  />";
-		            		return editButt;
+		            		var report = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=report(" + data.id + ") value='檢舉'  />";
+		            		var text = "<textarea cols='40' rows='5' id='text' name='text'></textarea>"
+							var reportModal = '<div class="modal fade" id="reportModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">'+
+											  '<div class="modal-dialog modal-dialog-centered" role="document">'+
+									    '<div class="modal-content">'+
+									     '<div class="modal-header">'+
+									       '<h5 class="modal-title" id="exampleModalCenterTitle">檢舉系統</h5>'+
+									        '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+									          '<span aria-hidden="true">&times;</span>'+
+									        '</button></div>'+
+									      '<div class="modal-body">'+ 
+									      '<h5>檢舉人名<h5><p>' + data.mission.member.account + '</p>' +
+ 									      '<h5>檢舉原因</h5><p>' + text +'</p>' +
+									      '</div><div class="modal-footer">'+
+									      report + '</div></div></div></div>';
+		            		var reportButt = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reportModalCenter">檢舉</button>'
+		            		return reportButt + reportModal;
 		            	} else if (data.orderStatus == "ServiceFinishPayMatchSuccess") {
 							var score = "<input type='button' class='btn btn-primary btn-sm'  onclick=sendScore(" + data.mission.member.id +") value='評分'  />"
 		            		var select = "<select id='score' name='score'><option value=''>請評分</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option></select>"
-// 		            		var text = "<textarea cols='40' rows='5' id='text' name='text'></textarea>"
-							var modal = '<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">'+
+							var scoreModal = '<div class="modal fade" id="scoreModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">'+
 											  '<div class="modal-dialog modal-dialog-centered" role="document">'+
 									    '<div class="modal-content">'+
 									     '<div class="modal-header">'+
@@ -200,12 +213,10 @@
 									        '</button></div>'+
 									      '<div class="modal-body">'+ 
 									      '<span><h5>分數</h5>' + select + '</span>' +
-// 									      '<h5>評語</h5><p>' + text +'</p>' +
 									      '</div><div class="modal-footer">'+
-									       score +
-									       '</div></div></div></div>';
-							var scoreButt = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalCenter">評分</button>'
-		            		return scoreButt + modal;		            		
+									       score + '</div></div></div></div>';
+							var scoreButt = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#scoreModalCenter">評分</button>'
+		            		return scoreButt + scoreModal;		            		
 		            	} else {
 		            		return null;
 		            	}
@@ -266,6 +277,7 @@
 
 		})
 		
+		//評分
 		function sendScore(memberId) {
 			if ($('#score').val() == null || $('#score').val().length == 0){
 				alert("請評分")
@@ -283,6 +295,22 @@
 					window.location.reload();
 				})	
 			}
+		}
+		
+		//檢舉
+		function report(orderId) {
+			$.ajax({
+				url : '/user/volunteerRecord/report?id='+ orderId+'&description=' + $('#text').val(),
+				type : 'get',
+				dataType : 'JSON'
+			}).done(function(response){
+				if (response.status =="SUCCESS"){
+					alert("檢舉成功");
+				} else {
+					alert("檢舉失敗");
+				}			
+				window.location.reload();
+			})			
 		}
 
 		

@@ -15,4 +15,6 @@ public enum OrderStatus {
 	RequesterCancleActivityPunishMatchSuccess,		//Requester臨時取消活動(要懲罰)(手動取消 )
 	VolunteerCancleActivityNoPunishMatchSuccess,	//志工臨時請假(不懲罰)(手動取消交易)
 	VolunteerCancleActivityPunishMatchSuccess;		//志工臨時不去(要懲罰)(手動取消交易)
+//	ServiceFinishPayAndScoreMatchSuccess			服務完，已發時數，以評分完
+//	VolunteerReportRequestMatchSuccess				志工檢舉雇主，處理中
 }

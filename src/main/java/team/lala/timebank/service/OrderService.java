@@ -14,9 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.OrderDao;
+import team.lala.timebank.dao.PenaltyDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
+import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.enums.OrderStatus;
 import team.lala.timebank.spec.OrderSpecification;
 
@@ -29,6 +31,8 @@ public class OrderService {
 	private OrderDao orderDao;
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private PenaltyDao penaltyDao;
 
 	public List<Order> findBySpecification(Specification<Order> specification) {
 		return orderDao.findAll(specification);
@@ -70,6 +74,20 @@ public class OrderService {
 		}
 		member.setAverageScore(member.getSumScore() / member.getScoredTimes());
 		memberDao.save(member);
+	}
+	
+	//志工檢舉雇主
+	public void Report(Long orderId, String description) {
+		Order order = orderDao.getOne(orderId);
+		Penalty penalty = new Penalty();
+		penalty.setOrder(order);
+		penalty.setAccuser(order.getVolunteer());
+		penalty.setDefendant(order.getMission().getMember());
+		penalty.setUpdateDate(new java.util.Date());
+		penalty.setDescription(description);
+		penalty.setStatus(new Integer(1));
+		penaltyDao.save(penalty);
+		
 	}
 
 	public List<Order> findAll() {
