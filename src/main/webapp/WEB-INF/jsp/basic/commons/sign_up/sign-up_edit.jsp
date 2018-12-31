@@ -88,25 +88,9 @@
             <jsp:include page="../../user/user_layout/user_sidebar.jsp"/>
           	<article>
           		<h2 class=center>建立您的TimeBank帳戶</h2>
-          		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/commons/sign-up/type'" value="回前頁">  
+          		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/commons/sign-up/add'" value="回前頁">  
+   		
           		<form class="myform" action="#" method="post" enctype="multipart/form-data">
-          			<fieldset>
-          				<legend>帳戶資料</legend>
-          				<input type="hidden" value="" id="id" name="id"> 
-						<input type="hidden" value="${memberType}" id="memberType" name="memberType">
-						<div class="block">
-							<label for="idAccount">帳號:</label>
-							<input type="text" value="${param.account}" id="idAccount" placeholder="請輸入帳號" name="account" autofocus autocompelete="off">
-							<span id="idspAccount" style='color:red'></span>
-							<div class="remark">(1.不可空白，2.至少6個字以上，3.必須全部為英文或數字)</div>
-						</div>
-						<div class="block">
-							<label for="idPassword">密碼:</label>
-							<input type="text" value="${param.password}" id="idPassword" placeholder="請輸入密碼" name="password" autofocus autocompelete="off">
-							<span id="idspPassword"></span>
-							<div class="remark">(1.不可空白，2.至少6個字且必須包含字母、數字、特殊符號[!@#$%^&*])</div>
-						</div>
-          			</fieldset>
           			<fieldset>	
 						<legend>個人資料</legend>
 						<div class="block">
@@ -223,76 +207,6 @@
 <%-- 	<jsp:include page="../commons_layout/commons_footer.jsp"/> --%>
 	
 	<script>
-	document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("idAccount").addEventListener("keyup", chkAccount);
-    });
-    function chkAccount() {
-        var theAccount = document.getElementById("idAccount").value;
-        var theAccountLen = theAccount.length;
-        //判斷元素值是否為空白，長度是否大於6
-        if (theAccount == ""){
-            document.getElementById("idspAccount").innerHTML =
-                "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
-        }
-        //如果長度是否大於6，判斷是否全部為英文或數字
-        else if (theAccountLen >= 6) {
-            for (var i = 0; i < theAccountLen; i++) {
-            	var AccountChr = theAccount.charAt(i).toUpperCase();//轉換為大寫
-                if (AccountChr >= "A" && AccountChr <= "Z" || AccountChr >= "0" && AccountChr <= "9") {
-                    document.getElementById("idspAccount").innerHTML =
-                        "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
-                } else {
-                    document.getElementById("idspAccount").innerHTML =
-                        "<img src='/img/X.jpg'><span style='color:red'>必須全部為英文或數字</span>"
-                }
-            }
-        }
-        else{
-            document.getElementById("idspAccount").innerHTML =
-                "<img src='/img/X.jpg'><span style='color:red'>至少六個字以上</span>"
-        }
-    }
-	
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("idPassword").addEventListener("keyup", chkPassword);
-    });
-    function chkPassword() {
-        var thePassword = document.getElementById("idPassword").value;
-        var thePasswordLen = thePassword.length;
-        var flag1 = false, flag2 = false, flag3 = false;
-        //判斷元素值是否為空白，長度是否大於6
-        if (thePassword == ""){
-            document.getElementById("idspPassword").innerHTML =
-                "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
-        }
-        //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
-        else if (thePasswordLen >= 6) {
-            for (var i = 0; i < thePasswordLen; i++) {
-                var PasswordChr = thePassword.charAt(i).toUpperCase();//轉換為大寫
-                if (PasswordChr >= "A" && PasswordChr <= "Z") {
-                    flag1 = true;
-                } else if (PasswordChr >= "0" && PasswordChr <= "9") {
-                    flag2 = true;
-                } else if (PasswordChr == "!" || "@" || "#" || "$" || "%" || "^" || "&" || "*") {
-                    flag3 = true;
-                }
-                if (flag1 && flag2 && flag3) {
-                    break;
-                }
-            }
-            if (flag1 && flag2 && flag3){
-                document.getElementById("idspPassword").innerHTML =
-                    "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
-            }else{
-                document.getElementById("idspPassword").innerHTML =
-                    "<img src='/img/X.jpg'><span style='color:red'>必須包含字母、數字、特殊符號[!@#$%^&*]</span>"
-            }
-        }else{
-            document.getElementById("idspPassword").innerHTML =
-                "<img src='/img/X.jpg'><span style='color:red'>至少6個字</span>"
-        }
-    }
-    
 	document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("idName").addEventListener("keyup", chkName);
     });
@@ -564,9 +478,9 @@
 // 			insert new member
 			$("#submit").click(function(){
 				$.ajax({
-					method:"post",
+					method:"put",
 					dataType: "json",        
-					url:"/commons/sign-up/insert",
+					url:"/commons/sign-up/update",
 					data: $("form").serialize()
 				}).done(function(response){
 // 					alert(response.obj);
@@ -574,12 +488,12 @@
 // 					console.log("message="+response.message);
 					
 					if(response.status == "SUCCESS") {
-						alert("會員新增成功");
-// 						window.location.replace("/commons/sign-up/edit");	//edit頁面
+						alert("會員資料輸入成功");
+// 						window.location.replace("/commons/sign-up/update");	//驗證信頁面
 					} else {
 						$.each(response.messages, function(idx, message){
 							alert("the "+idx+"th ERROR, because "+message);
-							$("#idspAccount").html(message);
+// 							$("#idspAccount").html(message);
 						})
 // 						console.log(response.messages);
 // 						$.each(response.messages, function(idx, message) {
