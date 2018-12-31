@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 	
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
-<meta charset="UTF-8">
+
 <title>mission list(login)</title>
 <style> 	
         fieldset {
@@ -53,6 +53,7 @@
 	}
  
     </style>
+    <meta charset="UTF-8">
 </head>
 <body>
 	<!-- Top bar-->
@@ -145,7 +146,6 @@
 						var length = d.length;
 						var request =  $("form").serialize() + "&orderStatusDetail=" + orderStatusDetail +
 											"&start=" + start + "&length="+ length;
-						console.log(request)
 						return request;
 					},
 					dataSrc:"content",
@@ -230,27 +230,7 @@
 	                cell.innerHTML = columnIndex;
 	            });
 	        });
-			
-			function sendScore(memberId) {
-				if ($('#score').val() == null || $('#score').val().length == 0){
-					alert("請評分")
-				} else {			
-				$.ajax({
-					url : '/user/volunteerRecord/score?id=' + memberId+'&score=' + $('#score').val(),
-					type : 'post',
-					dataType : 'JSON'
-					}).done(function(response){
-						if (response.status =="SUCCESS"){
-							alert("評分成功");
-						} else {
-							alert("評分失敗");
-						}			
-						dataTable.ajax.reload();
-					})	
-				}
-			}
-
-			
+					
 			new TwCitySelector();
 			
 			//日期選擇器
@@ -285,6 +265,26 @@
 			})
 
 		})
+		
+		function sendScore(memberId) {
+			if ($('#score').val() == null || $('#score').val().length == 0){
+				alert("請評分")
+			} else {			
+				$.ajax({
+					url : '/user/volunteerRecord/score?id=' + memberId+'&score=' + $('#score').val(),
+					type : 'get',
+					dataType : 'JSON'
+				}).done(function(response){
+					if (response.status =="SUCCESS"){
+						alert("評分成功");
+					} else {
+						alert("評分失敗");
+					}			
+					window.location.reload();
+				})	
+			}
+		}
+
 		
 		//切換服務狀態
 		var Status7 = 

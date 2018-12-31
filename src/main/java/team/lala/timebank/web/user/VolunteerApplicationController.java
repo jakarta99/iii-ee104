@@ -56,6 +56,7 @@ public class VolunteerApplicationController {
 		return orderService.findByVolunteerAndOrderStatus(principal, order, PageRequest.of(page, length.orElse(10)));
 	}
 	
+	@ResponseBody
 	@RequestMapping("/volunteerRecord/score")		//志工幫雇主評分
 	public AjaxResponse<Order> Score(@RequestParam(value="id") Long id, @RequestParam(value="score") String score) {
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
