@@ -139,7 +139,7 @@
 								</div>
 								<div class="block">
 									<label for="idDate">創立日期:</label> 
-									<input type="text" value="${param.date}" id="idDate" name="date" autocomplete="off">
+									<input type="text" value="${param.date}" id="idDate" name="date" autofocus autocomplete="off">
 									<span id="idspDate"></span>
 									<div class="remark">(1.不可空白，2.格式為yyyy/MM/dd)</div>
 								</div>
@@ -197,8 +197,10 @@
 								<div class="remark">(格式需為09XX-XXX-XXX或為0X-XXXXXXXX)</div>
 							</div>
 							<div class="block">
-								<label>網址:</label>
-								<input type="url" size="50px" value="${param.orgWebsiteLink}" id="orgWebsiteLink" name="orgWebsiteLink">
+								<label for="idOrgWebsiteLink">網址:</label>
+								<input type="url" size="50px" value="${param.orgWebsiteLink}" id="idOrgWebsiteLink" name="orgWebsiteLink" autofocus autocompelete="off">
+								<span id="idspOrgWebsiteLink"></span>
+								<div class="remark">(必須符合規則)</div>
 							</div>
 							<div class="block">
 								<label>創立宗旨:</label>
@@ -546,6 +548,60 @@
     		msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
     	}
     }
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("idOrgWebsiteLink").addEventListener("keyup", chkURL);
+    });
+    function chkURL(){
+	    var strUrl = document.getElementById("idOrgWebsiteLink").value;
+	    var msgChk = document.getElementById("idspOrgWebsiteLink");
+	    var strRegex = "^((https|http|ftp|rtsp|mms)?://)"
+    	   	+ "?(([0-9a-zA-Z_!~*'().&=+$%-]+: )?[0-9a-zA-Z_!~*'().&=+$%-]+@)?" //ftp的user@
+    	   	+ "(([0-9]{1,3}.){3}[0-9]{1,3}" // IP URL- 123.123.123.123
+    	   	+ "|" // allow IP和DOMAIN
+	    	+ "([0-9a-zA-Z_!~*'()-]+.)*" // DOMAIN- www.
+	    	+ "([0-9a-zA-Z][0-9a-zA-Z-]{0,61})?[0-9a-zA-Z]." // second DOMAIN
+	    	+ "[a-z]{2,6})" // first level domain- .com or .museum
+	    	+ "(:[0-9]{1,4})?" // port- :80
+	    	+ "((/?)|" // a slash isn't required if there is no file name
+	    	+ "(/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+/?)$";
+	   	var re = new RegExp(strRegex);
+	   	//re.test()
+	   	if (re.test(strUrl)){
+		    msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+	   	}else{
+	   		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>輸入錯誤，請重新輸入</span>";
+       	}
+    }
+    
+//     document.addEventListener("DOMContentLoaded", function () {
+//         document.getElementById("idTaxNumber").addEventListener("keyup", chkTaxNumber);
+//     });
+//     function chkTaxNumber() {
+//     	var strTaxNumber = document.getElementById("idTaxNumber").value;
+// 	    var msgChk = document.getElementById("idspTaxNumber");
+//         var invalidList = "00000000,11111111";
+//         if (/^\d{8}$/.test(strTaxNumber) == false || invalidList.indexOf(strTaxNumber) != -1) {
+//         	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>格式錯誤，請重新輸入</span>";
+//         }
+
+//         var validateOperator = [1, 2, 1, 2, 1, 2, 4, 1],
+//             sum = 0,
+//             calculate = function(product) { // 個位數 + 十位數
+//                 var ones = product % 10,
+//                     tens = (product - ones) / 10;
+//                 return ones + tens;
+//             };
+//         for (var i = 0; i < validateOperator.length; i++) {
+//             sum += calculate(strTaxNumber[i] * validateOperator[i]);
+//         }
+
+//         if( sum % 10 == 0 || (strTaxNumber[6] == "7" && (sum + 1) % 10 == 0) ){
+//         	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+//         }else{
+//         	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>輸入錯誤，請重新輸入</span>";
+//         }
+//     };
     
 		$(document).ready(function(){
 // 			$("form div").addClass("form-group");

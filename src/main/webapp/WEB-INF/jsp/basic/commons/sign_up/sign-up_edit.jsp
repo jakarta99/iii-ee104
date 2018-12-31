@@ -181,8 +181,10 @@
 								<div class="remark">(格式需為09XX-XXX-XXX或為0X-XXXXXXXX)</div>
 							</div>
 							<div class="block">
-								<label>網址:</label>
-								<input type="url" size="50px" value="${param.orgWebsiteLink}" id="orgWebsiteLink" name="orgWebsiteLink">
+								<label for="idOrgWebsiteLink">網址:</label>
+								<input type="url" size="50px" value="${param.orgWebsiteLink}" id="idOrgWebsiteLink" name="orgWebsiteLink" autofocus autocompelete="off">
+								<span id="idspOrgWebsiteLink"></span>
+								<div class="remark">(必須符合規則)</div>
 							</div>
 							<div class="block">
 								<label>創立宗旨:</label>
@@ -459,6 +461,31 @@
     	}else{
     		msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
     	}
+    }
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("idOrgWebsiteLink").addEventListener("keyup", chkURL);
+    });
+    function chkURL(){
+	    var strUrl = document.getElementById("idOrgWebsiteLink").value;
+	    var msgChk = document.getElementById("idspOrgWebsiteLink");
+	    var strRegex = "^((https|http|ftp|rtsp|mms)?://)"
+    	   	+ "?(([0-9a-zA-Z_!~*'().&=+$%-]+: )?[0-9a-zA-Z_!~*'().&=+$%-]+@)?" //ftp的user@
+    	   	+ "(([0-9]{1,3}.){3}[0-9]{1,3}" // IP URL- 123.123.123.123
+    	   	+ "|" // allow IP和DOMAIN
+	    	+ "([0-9a-zA-Z_!~*'()-]+.)*" // DOMAIN- www.
+	    	+ "([0-9a-zA-Z][0-9a-zA-Z-]{0,61})?[0-9a-zA-Z]." // second DOMAIN
+	    	+ "[a-z]{2,6})" // first level domain- .com or .museum
+	    	+ "(:[0-9]{1,4})?" // port- :80
+	    	+ "((/?)|" // a slash isn't required if there is no file name
+	    	+ "(/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+/?)$";
+	   	var re = new RegExp(strRegex);
+	   	//re.test()
+	   	if (re.test(strUrl)){
+		    msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+	   	}else{
+	   		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>輸入錯誤，請重新輸入</span>";
+       	}
     }
     
 		$(document).ready(function(){
