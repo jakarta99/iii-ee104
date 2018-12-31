@@ -54,6 +54,23 @@ public class OrderService {
 		OrderSpecification orderSpecification = new OrderSpecification(order);
 		return orderDao.findAll(orderSpecification, pageRequest);
 	}
+	
+	//志工幫雇主評分
+	public void Score(Long memberId, Integer score) {
+		Member member = memberDao.getOne(memberId);
+		if(member.getScoredTimes() == null || member.getScoredTimes() == 0) {
+			member.setScoredTimes(1);
+		} else {
+			member.setScoredTimes(member.getScoredTimes() + 1);
+		}
+		if(member.getSumScore() == null || member.getSumScore() == 0) {
+			member.setSumScore(score);
+		} else {
+			member.setSumScore(member.getSumScore() + score);			
+		}
+		member.setAverageScore(member.getSumScore() / member.getScoredTimes());
+		memberDao.save(member);
+	}
 
 	public List<Order> findAll() {
 		List<Order> orders = orderDao.findAll();

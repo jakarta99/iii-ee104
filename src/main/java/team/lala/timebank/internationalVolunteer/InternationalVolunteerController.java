@@ -14,6 +14,7 @@ import us.codecraft.webmagic.Spider;
 @RequestMapping("/commons/InternationalVolunteer")
 public class InternationalVolunteerController {
 
+	
 	@Autowired
 	private ProjectsAbroadPipeline projectsAbroadPipeline;
 	@Autowired
@@ -26,7 +27,7 @@ public class InternationalVolunteerController {
 	@ResponseBody
 	public String test() {
 		Spider.create(new ProjectsAbroadSpider())
-		.addUrl("https://www.projects-abroad.com.tw/volunteer-projects/care/")
+		.addUrl("https://www.projects-abroad.com.tw/volunteer-projects/care")
 		.addPipeline(projectsAbroadPipeline).thread(3).run();
 		String str = "程式成功執行";
 		str += internationalVolunteerService.findAll().toString();

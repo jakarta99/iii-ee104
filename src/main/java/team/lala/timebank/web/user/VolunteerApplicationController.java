@@ -31,7 +31,7 @@ public class VolunteerApplicationController {
 	
 	@RequestMapping("/volunteerRecord/RecordPage")	//進入志工媒合結果網頁
 	public String RecordPage() {
-		return "/basic/user/volunteerApplication/volunteerServiceRecordInquire";	
+		return "/basic/user/volunteerApplication/volunteerServiceRecordInquire";
 	}
 
 	@ResponseBody
@@ -55,10 +55,23 @@ public class VolunteerApplicationController {
 		int page = start.orElse(0)/length.orElse(10);
 		return orderService.findByVolunteerAndOrderStatus(principal, order, PageRequest.of(page, length.orElse(10)));
 	}
+	
+	@RequestMapping("/volunteerRecord/score")		//志工幫雇主評分
+	public AjaxResponse<Order> Score(@RequestParam(value="id") Long id, @RequestParam(value="score") String score) {
+		AjaxResponse<Order> response = new AjaxResponse<Order>();
+		try {
+			int Iscore = Integer.parseInt(score);
+			orderService.Score(id, Iscore);
+		} catch (NumberFormatException e) {
+			response.addMessage("評分失敗，" + e.getMessage());
+			e.printStackTrace();
+		}
+		return response;	
+	}
 
 	@ResponseBody
 	@RequestMapping("/volunteerApplication/delete")		//志工取消申請
-	public AjaxResponse<Order> cancelApplication(@RequestParam("id") Long id){
+	public AjaxResponse<Order> CancelApplication(@RequestParam("id") Long id){
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		try {
 			orderService.cancle(id);

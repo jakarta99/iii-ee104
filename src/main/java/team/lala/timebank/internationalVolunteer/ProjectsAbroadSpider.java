@@ -1,8 +1,7 @@
 package team.lala.timebank.internationalVolunteer;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -26,9 +25,11 @@ public class ProjectsAbroadSpider implements PageProcessor {
 	}
 	
 	public void process(Page page) {
+		System.out.println("url="+page.getUrl());
 		
 //		判斷其頁面url是否match此url:/volunteer-projects/care/...
-		if (page.getUrl().regex("https://www.projects-abroad.com.tw/volunteer-projects/care/[^0-9]{5,25}/[^0-9]{4,30}/").match()) {
+		if (page.getUrl().regex("https://www.projects-abroad.com.tw/volunteer-projects/[^0-9]{4,40}/[^0-9]{5,40}/[^0-9]{4,30}/").match()) {
+			System.out.println("putField");
 			page.putField("organization", "Projects Abroad");
 			page.putField("orgUrl", "https://www.projects-abroad.com.tw/");
 			page.putField("title", page.getHtml().xpath("//*[@id=\"content\"]/article/h1/text()").toString());
@@ -43,41 +44,43 @@ public class ProjectsAbroadSpider implements PageProcessor {
 	        }
 	        //取得div class='inner-text'內的標籤，以便取得此項目的相片Url，並將資料放入picture field
 	        
-        	String imgUrl = new Html(page.getHtml().xpath("//*[@id=\"content\"]/article/div[2]/div/div/html()").toString())
-        			.xpath("//img/@src").regex("https://photos1.projects-abroad.com.tw/projects/care.*").get().toString();
+        	String imgUrl = new Html(page.getHtml().xpath("//*[@id=\"content\"]/article/div[2]/div/html()").toString())
+        			.xpath("//img/@src").regex("https://photos1.projects-abroad.com.tw/projects/.*").get().toString();
         	
         	page.putField("picture", imgUrl);
-
-
-        					
-		
+        	System.out.println("put field end");
 		
 		}
 		//若頁面url符合下列url(關愛志工項目)，則依設定加入新的url
-		else if (page.getUrl().regex("https://www.projects-abroad.com.tw/volunteer-projects/care/").match()) {
-			System.out.println("projects/care/");
-			System.out.println("path="+ page.getHtml().css("div.box-project-row").links().all());
-			page.addTargetRequests(
-					page.getHtml().css("div.box-project-row").links().all());
-
-		}
-//		else if (page.getUrl().regex("https://www.projects-abroad.com.tw/volunteer-projects/").match()) {
+//		else if (page.getUrl().regex("https://www.projects-abroad.com.tw/volunteer-projects/care/").match()) {
+//			System.out.println("projects/care/");
+//			System.out.println("path="+ page.getHtml().css("div.box-project-row").links().all());
 //			page.addTargetRequests(
-//					page.getHtml().xpath("//*[@id=\"content\"]/article/div[8]/div/div[1]/a[1]").links().all());
-//			
+//					page.getHtml().css("div.box-project-row").links().all());			
 //		}
+		else if (page.getUrl().regex("https://www.projects-abroad.com.tw/volunteer-projects/[^0-9]{4,30}/").match()) {		
+			System.out.println("addTargetRequests");
+			page.addTargetRequests(
+					page.getHtml().css("div.box-project-row").links().all());		
+		}
 		// 列表頁 (加入新的url/頁面)
 		else {
 			// 項目url	
 			System.out.println("項目url");
-			System.out.println("path="+ page.getHtml().xpath("//*[@id=\"main-nav\"]/ul/li[3]/div/div[1]/div[1]/div[1]/ul/li[2]").links().all());		
-			page.addTargetRequests(
-					page.getHtml().xpath("//*[@id=\"main-nav\"]/ul/li[3]/div/div[1]/div[1]/div[1]/ul/li[2]").links().all());
-			System.out.println("TargetRequests=" + page.getTargetRequests());
+			String url = "https://www.projects-abroad.com.tw/volunteer-projects";
+			List<String> projectList = new ArrayList<>();
+			projectList.add(url+"/conservation-and-environment/");
+			projectList.add(url+"/sports/");
+			projectList.add(url+"/building/");
+			projectList.add(url+"/archaeology/");
+			projectList.add(url+"/agriculture-and-farming/");
+			projectList.add(url+"/culture-and-community/");
+			projectList.add(url+"/creative-and-performing-arts/");		
+			page.addTargetRequests(projectList);
 			
-		
 			
 		}
+		
 	}
 	
 

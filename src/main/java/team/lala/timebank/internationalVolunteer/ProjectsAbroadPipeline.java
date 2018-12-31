@@ -34,35 +34,39 @@ public class ProjectsAbroadPipeline implements Pipeline {
 			Iterator<Entry<String, Object>> iter = mapResults.entrySet().iterator();			
 			Map.Entry<String, Object> entry;
 			
-			
 			// 將資料依照據field設定entity屬性並存到資料庫
 			InternationalVolunteer bean = new InternationalVolunteer();
 			while (iter.hasNext()) {
-				entry = iter.next();				
+				entry = iter.next();
+				String entryValue = (String)entry.getValue();
+				if (entryValue== null) {
+					entryValue = "";
+				}
+				
 				if (entry.getKey().equalsIgnoreCase("title")) {
-					bean.setTitle((String) entry.getValue());				
+					bean.setTitle(entryValue);				
 				} else if (entry.getKey().indexOf("項目地點")!= -1) {
-					bean.setPlace((String) entry.getValue());		
+					bean.setPlace(entryValue);		
 				} else if (entry.getKey().indexOf("志工角色")!= -1) {
-					bean.setRoleDiscription((String) entry.getValue());		
+					bean.setRoleDiscription(entryValue);		
 				} else if (entry.getKey().indexOf("經驗要求")!= -1 ||entry.getKey().indexOf("參加資格")!= -1 ) {					
-					bean.setRequirement((String) entry.getValue());		
+					bean.setRequirement(entryValue);		
 				} else if (entry.getKey().indexOf("工作單位")!= -1) {					
-					bean.setWorkUnit((String) entry.getValue());		
+					bean.setWorkUnit(entryValue);		
 				} else if (entry.getKey().indexOf("項目長度")!= -1) {				
-					bean.setProjectLength((String) entry.getValue());		
+					bean.setProjectLength(entryValue);		
 				} else if (entry.getKey().indexOf("開始日期")!= -1) {				
-					bean.setStartDate((String) entry.getValue());		
+					bean.setStartDate(entryValue);		
 				} else if (entry.getKey().equalsIgnoreCase("websiteUrl")) {
-					bean.setWebsiteUrl((String) entry.getValue());		
+					bean.setWebsiteUrl(entryValue);		
 				} else if (entry.getKey().equalsIgnoreCase("picture")) {
-					bean.setPicture((String) entry.getValue());		
+					bean.setPicture(entryValue);		
 				} else if (entry.getKey().equalsIgnoreCase("logo")) {
-					bean.setOrgLogo((String) entry.getValue());		
+					bean.setOrgLogo(entryValue);		
 				} else if (entry.getKey().equalsIgnoreCase("organization")) {
-					bean.setOrganization((String) entry.getValue());		
+					bean.setOrganization(entryValue);		
 				} else if (entry.getKey().equalsIgnoreCase("orgUrl")) {
-					bean.setOrgUrl((String) entry.getValue());		
+					bean.setOrgUrl(entryValue);		
 				}					
 			}
 			internationalVolunteerService.insert(bean);

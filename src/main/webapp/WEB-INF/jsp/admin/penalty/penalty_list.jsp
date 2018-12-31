@@ -86,6 +86,9 @@
 					</select>
 					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
 					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
+					
+					<a class="btn btn-primary" href="#" 
+						role="button" id="excelButt" >產製EXCEL</a>
 					<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" 
 						role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a>
 				</div>
@@ -251,8 +254,13 @@
 			//搜尋事件
 			$("#searchButt").click(	function(){
 				dataTable.ajax.reload();
-
 			})
+			
+			//產製EXCEL報表功能之按鈕
+			$("#excelButt").click(function(){
+				$(this).attr("href", "/admin/penalty/myexcel?" + $('form').serialize())
+			})
+			
 		})
 						
 

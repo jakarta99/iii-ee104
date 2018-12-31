@@ -124,11 +124,12 @@
 	</section>
 	<!-- FOOTER -->
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
-	<script>	
+	<script>
 		var dataTable;
 		var orderStatusDetail = "MatchSuccess";
 		$(document).ready(function() {
-			dataTable = $('#table').DataTable({
+			
+		dataTable = $('#table').DataTable({
 				pageResize: true, 
 				fixedHeader: true,
 				pagingType: 'full_numbers',
@@ -180,13 +181,33 @@
 		            		return data.memberScore;							
 						}
 		            } },
-		            { data: null, render: function ( data, type, row ) {
-		            	if(data.orderStatus == "RequesterCancleActivityNoPunishMatchSuccess" || data.orderStatus.id == 9){
+		            { data: null, render: function(data, type, row ) {
+		            	if(data.orderStatus == "RequesterCancleActivityNoPunishMatchSuccess") {
 		            		var editButt = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='#?id="
 								+ data.id + "'\" value='檢舉'  />";
 		            		return editButt;
+		            	} else if (data.orderStatus == "ServiceFinishPayMatchSuccess") {
+							var score = "<input type='button' class='btn btn-primary btn-sm'  onclick=sendScore(" + data.mission.member.id +") value='評分'  />"
+		            		var select = "<select id='score' name='score'><option value=''>請評分</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option></select>"
+// 		            		var text = "<textarea cols='40' rows='5' id='text' name='text'></textarea>"
+							var modal = '<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">'+
+											  '<div class="modal-dialog modal-dialog-centered" role="document">'+
+									    '<div class="modal-content">'+
+									     '<div class="modal-header">'+
+									       '<h5 class="modal-title" id="exampleModalCenterTitle">評分系統</h5>'+
+									        '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+									          '<span aria-hidden="true">&times;</span>'+
+									        '</button></div>'+
+									      '<div class="modal-body">'+ 
+									      '<span><h5>分數</h5>' + select + '</span>' +
+// 									      '<h5>評語</h5><p>' + text +'</p>' +
+									      '</div><div class="modal-footer">'+
+									       score +
+									       '</div></div></div></div>';
+							var scoreButt = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalCenter">評分</button>'
+		            		return scoreButt + modal;		            		
 		            	} else {
-		            		return null;		            		
+		            		return null;
 		            	}
 		            } },
 				], columnDefs:[{		//禁用第0123列的搜索和排序
@@ -208,7 +229,27 @@
 	                var columnIndex = (i+pageno*length);	//行号等于 页数*每页数据长度+行号
 	                cell.innerHTML = columnIndex;
 	            });
-	        });	
+	        });
+			
+			function sendScore(memberId) {
+				if ($('#score').val() == null || $('#score').val().length == 0){
+					alert("請評分")
+				} else {			
+				$.ajax({
+					url : '/user/volunteerRecord/score?id=' + memberId+'&score=' + $('#score').val(),
+					type : 'post',
+					dataType : 'JSON'
+					}).done(function(response){
+						if (response.status =="SUCCESS"){
+							alert("評分成功");
+						} else {
+							alert("評分失敗");
+						}			
+						dataTable.ajax.reload();
+					})	
+				}
+			}
+
 			
 			new TwCitySelector();
 			
@@ -242,7 +283,9 @@
 		$("#searchButt").click(	function(){
 			dataTable.ajax.reload();
 			})
+
 		})
+		
 		//切換服務狀態
 		var Status7 = 
 			"<option value=''>選擇狀態</option>"+
@@ -285,7 +328,8 @@
 		    for (var k in o)
 		        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
 		    return fmt;
-		};
+		}
+
 	</script>
 </body>
 </html>
