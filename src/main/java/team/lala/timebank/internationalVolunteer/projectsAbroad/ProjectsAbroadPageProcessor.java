@@ -1,4 +1,4 @@
-package team.lala.timebank.internationalVolunteer;
+package team.lala.timebank.internationalVolunteer.projectsAbroad;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package team.lala.timebank.internationalVolunteer;
+package team.lala.timebank.internationalVolunteer.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

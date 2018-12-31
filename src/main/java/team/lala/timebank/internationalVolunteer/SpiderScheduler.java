@@ -3,6 +3,8 @@ package team.lala.timebank.internationalVolunteer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import team.lala.timebank.internationalVolunteer.projectsAbroad.ProjectsAbroadPageProcessor;
+import team.lala.timebank.internationalVolunteer.projectsAbroad.ProjectsAbroadPipeline;
 import us.codecraft.webmagic.Spider;
 
 //執行國際志工網路爬蟲

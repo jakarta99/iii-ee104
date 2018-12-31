@@ -1,4 +1,4 @@
-package team.lala.timebank.internationalVolunteer;
+package team.lala.timebank.internationalVolunteer.model;
 
 import java.util.List;
 

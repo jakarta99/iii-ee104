@@ -1,4 +1,4 @@
-package team.lala.timebank.internationalVolunteer;
+package team.lala.timebank.internationalVolunteer.model;
 
 import java.util.List;
 
@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import team.lala.timebank.internationalVolunteer.projectsAbroad.ProjectsAbroadPageProcessor;
+import team.lala.timebank.internationalVolunteer.projectsAbroad.ProjectsAbroadPipeline;
 import us.codecraft.webmagic.Spider;
 
 @Controller

@@ -1,4 +1,4 @@
-package team.lala.timebank.internationalVolunteer;
+package team.lala.timebank.internationalVolunteer.projectsAbroad;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
+import team.lala.timebank.internationalVolunteer.model.InternationalVolunteer;
+import team.lala.timebank.internationalVolunteer.model.InternationalVolunteerService;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
