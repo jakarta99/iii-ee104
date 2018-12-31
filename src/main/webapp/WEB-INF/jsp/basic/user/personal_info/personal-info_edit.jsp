@@ -81,7 +81,7 @@
 <%-- 							<input type="text" value="${member.password}" id="password" name="password"><br> --%>
 <!-- 						</div><hr> -->
 						<div>
-							<label>名稱:</label>
+							<label>姓名:</label>
 							<input type="text" value="${member.name}" id="name" name="name"><br>
 						</div><hr>
 						<fmt:formatDate value="${member.birthDate}" pattern="yyyy/MM/dd" var="birthDate" />

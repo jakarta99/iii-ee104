@@ -133,45 +133,57 @@
           			</fieldset>
           			<fieldset>	
 						<legend>個人資料</legend>
-						<div>
-							<label>名稱:</label>
-							<input type="text" value="${param.name}" id="name" name="name">
-						</div><hr>
+						<div class="block">
+							<label for="idName">姓名:</label>
+							<input type="text" value="${param.name}" id="idName" name="name" autofocus autocompelete="off">
+							<span id="idspName"></span>
+							<div class="remark">(1.不可空白，2.至少2個字以上，3.必須全部為中文)</div>
+						</div>
 						<c:choose>
 							<c:when test="${memberType eq 'P'}">
-								<div>
-									<label>身分證字號:</label>
-									<input type="text" value="${param.certificateIdNumber}" id="certificateIdNumber" name="certificateIdNumber">
-								</div><hr>
-								<div>
-									<label>出生日期:</label>
-									<input type="text" value="${param.birthDate}" id="birthDate" name="birthDate" autocomplete="off">
-								</div><hr>
+								<div class="block">
+									<label for="idCertificateIdNumber">身分證字號:</label>
+									<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" name="certificateIdNumber" autofocus autocompelete="off">
+									<span id="idspCertificateIdNumber"></span>
+									<div class="remark">(1.不可空白，2.必須符合規則)</div>
+								</div>
+								<div class="block">
+									<label for="idDate">出生日期:</label>
+									<input type="text" value="${param.date}" id="idDate" name="date" autofocus autocomplete="off">
+									<span id="idspDate"></span>
+									<div class="remark">(1.不可空白，2.格式為yyyy/MM/dd)</div>
+								</div>
 							</c:when>
 							<c:when test="${memberType eq 'O'}">
-								<div>
-									<label>統一編號:</label> 
-									<input type="text" value="${param.certificateIdNumber}" id="certificateIdNumber" name="certificateIdNumber">
-								</div><hr>
-								<div>
-									<label>創立日期:</label> 
-									<input type="text" value="${param.birthDate}" id="birthDate" name="birthDate" autocomplete="off">
-								</div><hr>
+								<div class="block">
+									<label for="idCertificateIdNumber">統一編號:</label> 
+									<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" name="certificateIdNumber" autofocus autocompelete="off">
+									<span id="idspCertificateIdNumber"></span>
+									<div class="remark">(1.不可空白，2.必須符合規則)</div>
+								</div>
+								<div class="block">
+									<label for="idDate">創立日期:</label> 
+									<input type="text" value="${param.date}" id="idDate" name="date" autocomplete="off">
+									<span id="idspDate"></span>
+									<div class="remark">(1.不可空白，2.格式為yyyy/MM/dd)</div>
+								</div>
 							</c:when>
 						</c:choose>
-						<div>
-							<label>email:</label> 
-							<input type="text" value="${param.email}" id="email" name="email">
-						</div><hr>
-						<div>
+						<div class="block">
+							<label for="idEmail">email:</label> 
+							<input type="text" value="${param.email}" id="idEmail" name="email" autofocus autocompelete="off">
+							<span id="idspEmail"></span>
+							<div class="remark">(1.不可空白，2.必須填入確切用戶信箱，以供驗證)</div>
+						</div>
+						<div class="block">
 							<label>住家電話:</label> 
 							<input type="text" value="${param.telephone}" id="telephone" name="telephone">
-						</div><hr>
-						<div>
+						</div>
+						<div class="block">
 							<label>手機:</label> 
 							<input type="text" value="${param.mobile}" id="mobile" name="mobile">
-						</div><hr>
-						<div>			
+						</div>
+						<div class="block">			
 							<label>住址:</label>
 							<span role="tw-city-selector" ></span>
 							<input type="text" value="${param.address}" id="address" name="address">
@@ -180,31 +192,31 @@
 					<c:if test="${memberType eq 'O' }">
 						<fieldset>
 							<legend>公司資料</legend>
-							<div>
+							<div class="block">
 								<label>創辦人:</label> 
 								<input type="text" value="${param.orgFounder}" id="orgFounder" name="orgFounder">
-							</div><hr>
-							<div>
+							</div>
+							<div class="block">
 								<label>執行長:</label>
 								<input type="text" value="${param.orgCeo}" id="orgCeo" name="orgCeo">
-							</div><hr>
-							<div>
+							</div>
+							<div class="block">
 								<label>聯絡人:</label>
 								<input type="text" value="${param.orgContactPerson}" id="orgContactPerson" name="orgContactPerson">
-							</div><hr>
-							<div>
+							</div>
+							<div class="block">
 								<label>聯絡人電話:</label> 
 								<input type="text" value="${param.orgContactPersonTel}" id="orgContactPersonTel" name="orgContactPersonTel">
-							</div><hr>
-							<div>
+							</div>
+							<div class="block">
 								<label>聯絡人手機:</label>
 								<input type="text" value="${param.orgContactPersonMobile}" id="orgContactPersonMobile" name="orgContactPersonMobile">
-							</div><hr>
-							<div>
+							</div>
+							<div class="block">
 								<label>網址:</label>
 								<input type="url" size="50px" value="${param.orgWebsiteLink}" id="orgWebsiteLink" name="orgWebsiteLink">
-							</div><hr>
-							<div>
+							</div>
+							<div class="block">
 								<label>創立宗旨:</label>
 								<textarea rows="5" cols="50" id="orgFoundPurpose" name="orgFoundPurpose">
 									${member.orgFoundPurpose}
@@ -297,71 +309,142 @@
         }
     }
     
-// 	document.addEventListener("DOMContentLoaded", function () {
-//         document.getElementById("idName").addEventListener("keyup", chkName);
-//     });
-//     function chkName() {
-//         var theName = document.getElementById("idName").value;
-//         var theNameLen = theName.length;
-//         //判斷元素值是否為空白，長度是否大於2
-//         if (theName == ""){
-//             document.getElementById("idspName").innerHTML =
-//                 "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
-//         }
-//         //如果長度是否大於2，判斷是否全部為中文字
-//         else if (theNameLen >= 2) {
-//             for (var i = 0; i < theNameLen; i++) {
-//                 var NameChr = theName.charCodeAt(i);
-//                 if (NameChr >= 0x4e00 && NameChr <= 0x9fff) {
-//                     document.getElementById("idspName").innerHTML =
-//                         "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
-//                 } else {
-//                     document.getElementById("idspName").innerHTML =
-//                         "<img src='/img/X.jpg'><span style='color:red'>必須全部為中文字</span>"
-//                 }
-//             }
-//         }
-//         else{
-//             document.getElementById("idspName").innerHTML =
-//                 "<img src='/img/X.jpg'><span style='color:red'>至少兩個字以上</span>"
-//         }
-//     }
+	document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("idName").addEventListener("keyup", chkName);
+    });
+    function chkName() {
+        var theName = document.getElementById("idName").value;
+        var theNameLen = theName.length;
+        //判斷元素值是否為空白，長度是否大於2
+        if (theName == ""){
+            document.getElementById("idspName").innerHTML =
+                "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
+        }
+        //如果長度是否大於2，判斷是否全部為中文字
+        else if (theNameLen >= 2) {
+            for (var i = 0; i < theNameLen; i++) {
+                var NameChr = theName.charCodeAt(i);
+                if (NameChr >= 0x4e00 && NameChr <= 0x9fff) {
+                    document.getElementById("idspName").innerHTML =
+                        "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
+                } else {
+                    document.getElementById("idspName").innerHTML =
+                        "<img src='/img/X.jpg'><span style='color:red'>必須全部為中文字</span>"
+                }
+            }
+        }
+        else{
+            document.getElementById("idspName").innerHTML =
+                "<img src='/img/X.jpg'><span style='color:red'>至少兩個字以上</span>"
+        }
+    }
     
-//     document.addEventListener("DOMContentLoaded", function () {
-//         document.getElementById("idDate").addEventListener("blur", chkDate);
-//     });
-//     function chkDate() {
-//         var strDate = document.getElementById("idDate").value;
-//         var msgChk = document.getElementById("idspDate");
-//         var re = /^\d{4}\/\d{1,2}\/\d{1,2}$/;
-//         var theDate = new Date(strDate);
-//         var theYear = theDate.getFullYear();
-//         var theMonth = theDate.getMonth() + 1;
-//         var theDate = theDate.getDate();
-//         var aryDate = strDate.split("/");
-//         // alert(aryDate[0]+"-"+aryDate[1]+"-"+aryDate[2]);
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("idCertificateIdNumber").addEventListener("keyup", chkCertificateIdNumber);
+    });
+    function chkCertificateIdNumber(){
+    	var theCertificateIdNumber = document.getElementById("idCertificateIdNumber").value;
+    	var msgChk = document.getElementById("idspCertificateIdNumber");
+        var theCertificateIdNumberLen = theCertificateIdNumber.length;
+        //判斷元素值是否為空白，長度是否大於6
+    	//建立字母分數陣列(A~Z)
+    	var city = new Array(
+    			 1,10,19,28,37,46,55,64,39,73,82, 2,11,
+    			20,48,29,38,47,56,65,74,83,21, 3,12,30
+    			);
+    	//判斷元素值是否為空白
+        if (theCertificateIdNumberLen != ""){
+        	// 使用「正規表達式」檢驗格式
+        	if (theCertificateIdNumber.search(/^[A-Z](1|2)\d{8}$/i) == -1) {
+        		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>格式錯誤，請重新輸入</span>";
+        	}else{
+        		//將字串分割為陣列(IE必需這麼做才不會出錯)
+        		theCertificateIdNumber = theCertificateIdNumber.split('');
+        		//計算總和
+        		var total = city[theCertificateIdNumber[0].charCodeAt(0)-65];
+        		for(var i=1; i<=8; i++){
+        			total += eval(theCertificateIdNumber[i]) * (9 - i);
+        		}
+        		//補上檢查碼(最後一碼)
+        		total += eval(theCertificateIdNumber[9]);
+        		//檢查比對碼(餘數應為0);
+        		if (total%10 == 0){
+        			msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+        		}else{
+        			msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>輸入錯誤，請重新輸入</span>";
+        		}
+        	}
+        }else{
+        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
+        }
+    	
+    }
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("idDate").addEventListener("keyup", chkDate);
+    });
+    function chkDate() {
+        var strDate = document.getElementById("idDate").value;
+        var msgChk = document.getElementById("idspDate");
+        var re = /^\d{4}\/\d{1,2}\/\d{1,2}$/;
+        var theDate = new Date(strDate);
+        var theYear = theDate.getFullYear();
+        var theMonth = theDate.getMonth() + 1;
+        var theDate = theDate.getDate();
+        var aryDate = strDate.split("/");
+        // alert(aryDate[0]+"-"+aryDate[1]+"-"+aryDate[2]);
 
-//         if (strDate != "") {
-//             if (re.test(strDate)) {
-//                 if (aryDate[0] == theYear && aryDate[1] == theMonth && aryDate[2] == theDate){
-//                     msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
-//                 }else{
-//                     msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>輸入錯誤，請重新輸入</span>";
-//                 }
-//             }else{
-//                 msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>格式錯誤，請重新輸入</span>";
-//             }
-//         }else{
-//             msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>";
-//         }
-//     }
+        if (strDate != "") {
+            if (re.test(strDate)) {
+                if (aryDate[0] == theYear && aryDate[1] == theMonth && aryDate[2] == theDate){
+                    msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+                }else{
+                    msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>輸入錯誤，請重新輸入</span>";
+                }
+            }else{
+                msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>格式錯誤，請重新輸入</span>";
+            }
+        }else{
+            msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>";
+        }
+    }
     
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("idEmail").addEventListener("keyup", chkEmail);
+    });
+    function chkEmail() {
+    	var strEmail = document.getElementById("idEmail").value;
+        var msgChk = document.getElementById("idspEmail");
+    	//Regular expression Testing
+    	var emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+    	// ^\w+：@ 之前必須以一個以上的文字&數字開頭，例如 abc
+    	// ((-\w+)：@ 之前可以出現 1 個以上的文字、數字或「-」的組合，例如 -abc-
+    	// (\.\w+))：@ 之前可以出現 1 個以上的文字、數字或「.」的組合，例如 .abc.
+    	// ((-\w+)|(\.\w+))*：以上兩個規則以 or 的關係出現，並且出現 0 次以上 (所以不能 –. 同時出現)
+    	// @：中間一定要出現一個 @
+    	// [A-Za-z0-9]+：@ 之後出現 1 個以上的大小寫英文及數字的組合
+    	// (\.|-)：@ 之後只能出現「.」或是「-」，但這兩個字元不能連續時出現
+    	// ((\.|-)[A-Za-z0-9]+)*：@ 之後出現 0 個以上的「.」或是「-」配上大小寫英文及數字的組合
+    	// \.[A-Za-z]+$/：@ 之後出現 1 個以上的「.」配上大小寫英文及數字的組合，結尾需為大小寫英文
+    	
+    	if (strEmail != "") {
+    		//validate ok or not
+        	if(strEmail.search(emailRule)!= -1){
+        		msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+        	}else{
+        		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>輸入錯誤，請重新輸入</span>";
+        	}
+    	}else{
+    		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>";
+    	}
+    }
+
 		$(document).ready(function(){
 // 			$("form div").addClass("form-group");
 // 			$("form input").addClass("form-control");
 // 			$("form textarea").addClass("form-control");
 			new TwCitySelector();	
-			$('#birthDate').datepicker({
+			$('#idDate').datepicker({
 			    format: "yyyy/mm/dd",
 			    autoclose: true,
 			    todayHighlight: true,
