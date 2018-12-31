@@ -2,6 +2,7 @@ package team.lala.timebank;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 
 
@@ -10,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * providing service timeLedger increased.
  */
 
-
+@EnableScheduling
 @SpringBootApplication
 public class TimeBankApp {
 	

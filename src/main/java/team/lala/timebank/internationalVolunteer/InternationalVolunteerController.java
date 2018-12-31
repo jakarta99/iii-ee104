@@ -15,24 +15,12 @@ import us.codecraft.webmagic.Spider;
 public class InternationalVolunteerController {
 
 	
-	@Autowired
-	private ProjectsAbroadPipeline projectsAbroadPipeline;
+	
 	@Autowired
 	private InternationalVolunteerService internationalVolunteerService;
 
 	
-	//執行網路爬蟲
-	//需用scheduler設定定期執行
-	@RequestMapping("/test")
-	@ResponseBody
-	public String test() {
-		Spider.create(new ProjectsAbroadSpider())
-		.addUrl("https://www.projects-abroad.com.tw/volunteer-projects/care")
-		.addPipeline(projectsAbroadPipeline).thread(3).run();
-		String str = "程式成功執行";
-		str += internationalVolunteerService.findAll().toString();
-		return str;
-	}
+	
 	
 	@RequestMapping("list")
 	public String listPage(Model model) {

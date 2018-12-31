@@ -14,7 +14,7 @@ import us.codecraft.webmagic.selector.Html;
 //PageProcessor負責解析頁面，抽取有用訊息，以及發現新的鍵接。
 @Slf4j
 @Component
-public class ProjectsAbroadSpider implements PageProcessor {
+public class ProjectsAbroadPageProcessor implements PageProcessor {
 	
 	
 	// 抓取網站的相關配置，包括編碼、抓取間隔、重試次數等
@@ -25,7 +25,7 @@ public class ProjectsAbroadSpider implements PageProcessor {
 	}
 	
 	public void process(Page page) {
-		System.out.println("url="+page.getUrl());
+		log.debug("page url = {}", page.getUrl());
 		
 //		判斷其頁面url是否match此url:/volunteer-projects/care/...
 		if (page.getUrl().regex("https://www.projects-abroad.com.tw/volunteer-projects/[^0-9]{4,40}/[^0-9]{5,40}/[^0-9]{4,30}/").match()) {
@@ -37,9 +37,11 @@ public class ProjectsAbroadSpider implements PageProcessor {
 			page.putField("logo", page.getHtml().xpath("//*[@id=\"logo-top\"]").toString());
 			//取得div class='country-facts-box'內的標籤，以便取得此項目的資訊(如地點、志工角色、開始日期等)，並將資料放入field內
 			String countryFactsBox =  page.getHtml().xpath("//div[@class='country-facts-box']/ul/html()").toString();	        
-	        List<String> strongTextList = new Html(countryFactsBox).xpath("//strong/text()").all();
+	        log.debug("countryFactsBox={}", countryFactsBox);
+			List<String> strongTextList = new Html(countryFactsBox).xpath("//strong/text()").all();
+			log.debug("strongTextList={}", strongTextList);
 	        List<String> spanTextList = new Html(countryFactsBox).xpath("//span/text()").all();
-	        for(int i = 0; i <strongTextList.size(); i++) {
+	        for(int i = 0; i < strongTextList.size(); i++) {
 	        	page.putField(strongTextList.get(i), spanTextList.get(i));
 	        }
 	        //取得div class='inner-text'內的標籤，以便取得此項目的相片Url，並將資料放入picture field
