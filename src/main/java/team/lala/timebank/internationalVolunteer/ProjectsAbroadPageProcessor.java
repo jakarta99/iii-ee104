@@ -38,9 +38,8 @@ public class ProjectsAbroadPageProcessor implements PageProcessor {
 			//取得div class='country-facts-box'內的標籤，以便取得此項目的資訊(如地點、志工角色、開始日期等)，並將資料放入field內
 			String countryFactsBox =  page.getHtml().xpath("//div[@class='country-facts-box']/ul/html()").toString();	        
 	        log.debug("countryFactsBox={}", countryFactsBox);
-			List<String> strongTextList = new Html(countryFactsBox).xpath("//strong/text()").all();
-			log.debug("strongTextList={}", strongTextList);
-	        List<String> spanTextList = new Html(countryFactsBox).xpath("//span/text()").all();
+			List<String> strongTextList = new Html(countryFactsBox).xpath("//li/strong/text()").all();
+	        List<String> spanTextList = new Html(countryFactsBox).xpath("//li/span/text()").all();
 	        for(int i = 0; i < strongTextList.size(); i++) {
 	        	page.putField(strongTextList.get(i), spanTextList.get(i));
 	        }
@@ -53,22 +52,13 @@ public class ProjectsAbroadPageProcessor implements PageProcessor {
         	System.out.println("put field end");
 		
 		}
-		//若頁面url符合下列url(關愛志工項目)，則依設定加入新的url
-//		else if (page.getUrl().regex("https://www.projects-abroad.com.tw/volunteer-projects/care/").match()) {
-//			System.out.println("projects/care/");
-//			System.out.println("path="+ page.getHtml().css("div.box-project-row").links().all());
-//			page.addTargetRequests(
-//					page.getHtml().css("div.box-project-row").links().all());			
-//		}
 		else if (page.getUrl().regex("https://www.projects-abroad.com.tw/volunteer-projects/[^0-9]{4,30}/").match()) {		
-			System.out.println("addTargetRequests");
 			page.addTargetRequests(
 					page.getHtml().css("div.box-project-row").links().all());		
 		}
 		// 列表頁 (加入新的url/頁面)
 		else {
 			// 項目url	
-			System.out.println("項目url");
 			String url = "https://www.projects-abroad.com.tw/volunteer-projects";
 			List<String> projectList = new ArrayList<>();
 			projectList.add(url+"/conservation-and-environment/");

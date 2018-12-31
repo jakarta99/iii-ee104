@@ -11,7 +11,13 @@
 <!-- Javascript files-->
 <jsp:include page="../commons_layout/commons_js_links.jsp" />
 
-
+<script>
+function doSpider(){
+	$.get("/commons/InternationalVolunteer/spidertest", function(msg){
+		alert(msg);
+	})
+}
+</script>
 </head>
 <body>
 	<div id="all">
@@ -29,6 +35,8 @@
 <!-- 							<div class="heading"> -->
 <!-- 								<h2>國際志工專區</h2> -->
 <!-- 							</div> -->
+							 <h4 class="h4"><a href="#" onclick="doSpider()">若無資料，請按此進行爬蟲功能	</a>
+							 	<span id="msg"></span></h4>
 							<p class="lead">TimeBank時間銀行整理了多家機構招募國際志工的資訊，
 								您可以在這裡選擇自己有興趣的範疇及時間，再到機構的官網報名參加和獲得更詳細的資訊。</p>
 						</div>
@@ -66,6 +74,12 @@
 				</section>
 			</div>
 		</div>
+		
+	
+
+		
+				
+			
 		<!-- FOOTER -->
 		<jsp:include page="../commons_layout/commons_footer.jsp" />
 	</div>
@@ -73,6 +87,7 @@
 	<script>
 		$(document).ready(function(){
 			$("#heading-breadcrumbs>div>div>div.col-md-7>h1").text("國際志工專區");
+			
 			
 		})
 	
