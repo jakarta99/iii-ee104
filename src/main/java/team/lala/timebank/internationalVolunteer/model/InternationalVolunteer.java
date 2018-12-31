@@ -66,8 +66,10 @@ public class InternationalVolunteer {
 		return "InternationalVolunteer [id=" + id + ", title=" + title + ", place=" + place + ", roleDiscription="
 				+ roleDiscription + ", requirement=" + requirement + ", workUnit=" + workUnit + ", projectLength="
 				+ projectLength + ", startDate=" + startDate + ", websiteUrl=" + websiteUrl + ", picture=" + picture
-				+ "]";
+				+ ", orgLogo=" + orgLogo + ", organization=" + organization + ", orgUrl=" + orgUrl + "]";
 	}
+
+	
 	
 	
 	
