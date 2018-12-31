@@ -176,12 +176,16 @@
 							<div class="remark">(1.不可空白，2.必須填入確切用戶信箱，以供驗證)</div>
 						</div>
 						<div class="block">
-							<label>住家電話:</label> 
-							<input type="text" value="${param.telephone}" id="telephone" name="telephone">
+							<label for="idTelephone">住家電話:</label> 
+							<input type="text" value="${param.telephone}" id="idTelephone" name="telephone" autofocus autocompelete="off">
+							<span id="idspTelephone"></span>
+							<div class="remark">(格式需為0X-XXXXXXXX)</div>
 						</div>
 						<div class="block">
-							<label>手機:</label> 
-							<input type="text" value="${param.mobile}" id="mobile" name="mobile">
+							<label for="idMobile">手機:</label> 
+							<input type="text" value="${param.mobile}" id="idMobile" name="mobile" autofocus autocompelete="off">
+							<span id="idspMobile"></span>
+							<div class="remark">(格式需為09XX-XXX-XXX)</div>
 						</div>
 						<div class="block">			
 							<label>住址:</label>
@@ -439,6 +443,34 @@
     	}
     }
 
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("idTelephone").addEventListener("keyup", chkTelephone);
+    });
+    function chkTelephone(){
+    	var strTelephone = document.getElementById("idTelephone").value;
+        var msgChk = document.getElementById("idspTelephone");
+    	var telephoneReg = /^[0-9]{2}-[0-9]{6,8}$/;
+    	if(telephoneReg.test(strTelephone)){
+    		msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+    	}else{
+    		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>電話號碼不正確，請重新輸入</span>";
+    	}
+    }
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("idMobile").addEventListener("keyup", chkMobile);
+    });
+    function chkMobile(){
+    	var strMobile = document.getElementById("idMobile").value;
+        var msgChk = document.getElementById("idspMobile");
+    	var mobileReg = /^09[0-9]{2}-[0-9]{3}-[0-9]{3}$/;
+    	if(mobileReg.test(strMobile)){
+    		msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+    	}else{
+    		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>電話號碼不正確，請重新輸入</span>";
+    	}
+    }
+    
 		$(document).ready(function(){
 // 			$("form div").addClass("form-group");
 // 			$("form input").addClass("form-control");
