@@ -214,7 +214,7 @@
 						
 									
 						{"data": function (data, type, val) {
-							if(data.orderStatus=='ServiceFinishNotPay'){
+							if(data.orderStatus=='VolunteerApply'){
 								 var acceptbutton="<button class='btn btn-outline-secondary' onclick=\"accept("+data.id+")\">接受</button>";     
 								 var rejectbutton="<button class='btn btn-outline-secondary' onclick=\"reject("+data.id+")\">拒絕</button>"; 	
 								 return acceptbutton + rejectbutton;
