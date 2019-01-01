@@ -97,8 +97,8 @@
 		<th scope="col">志工帳號</th>
 		<th scope="col">志工名字</th>
 		<th scope="col">聯絡方式</th>
-		<th scope="col">評點分數</th>
 		<th scope="col">申請時間</th>
+		<th scope="col">評點分數</th>
 		<th scope="col">時數核發</th>
 		<th scope="col">檢舉</th>
 	</tr>
@@ -215,19 +215,31 @@
 						{"data":"volunteer.account"},
 						{"data":"volunteer.name"},
 						{"data":"volunteer.telephone"},
-						{"data":"volunteer.averageScore"},
 			            {"data":null, render: function (data, type, row ) {
 			            	console.log(data)
 			                return new Date(data.volunteerApplyTime).toLocaleDateString();
 			            } },	
+						{"data":function (data, type, val) {
+							
+							var score = "<select id='score"+data.volunteer.id+"' name='timeValue' class='form-control'>"
+							for(var x = 0 ; x <=10 ; x++){
+								if(x==10){
+									score += "<option selected='true' value='" + x + "'>"+ x + "</option>"	
+								}else{
+									score += "<option value='" + x + "'>"+ x + "</option>"
+								}
+							}
+							score +='</select>'
+							
+							return score;
+							
 						
+					}
+					},					
 									
 						{"data": function (data, type, val) {
 							
 							if(data.orderStatus=="ServiceFinishNotPay"){
-// 								var ttt="<input class='ss' id='spinner' name='value'>"
-// 								var spinner = $( ".ss" ).spinner();
-// 								var aaa= ttt+spinner
 								
 								var select = "<select id='"+data.volunteer.id+"' name='timeValue' class='form-control'>"
 								for(var i = 0 ; i <= data.mission.timeValue ; i++){
@@ -242,8 +254,8 @@
 // 								var value=$("#"+data.volunteer.id+" option:selected").val()
 // 								console.log(value)
 
-								var paybutton="<button class='btn btn-outline-secondary' onclick=\"pay("+data.id+")\">時數核發</button>";     
-								return select + paybutton;
+// 								var paybutton="<button class='btn btn-outline-secondary' onclick=\"pay("+data.id+")\">時數核發</button>";     
+								return select ;
 								
 							
 							 }else {
