@@ -1,1 +1,10 @@
 /* your styles go here */
+
+
+#navbar{
+/* 	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(243,243,243,1) 50%,rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); */
+	
+	background: linear-gradient(to bottom, rgba(237,237,237,1) 0%,rgba(243,243,243,1) 50%,rgba(255,255,255,1) 100%);
+	box-shadow:3px 0 20px -4px #000;
+	
+}

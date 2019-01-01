@@ -72,6 +72,43 @@ public class InternationalVolunteerController {
 		return msg;
 	}
 	
+	//未成功
+		@Autowired
+		private VYAPipeline vyaPipeline;
+		@Autowired
+		private VYAPageProcessor vyaPageProcessor;
+		@ResponseBody
+		@RequestMapping("/spidertest4")
+		public String iVolunteerSpiderVYA(Model model) {
+			System.out.println("----開始執行VYA文章爬蟲定時任務");
+			Spider spider = Spider.create(vyaPageProcessor);
+			spider.addUrl("http://www.volunteermatch.org.tw/IW/3-1-group-pariticipant.htm")
+//					.addPipeline(vyaPipeline)
+					.thread(5).setExitWhenComplete(true).start();
+			spider.stop();
+			String msg = "爬蟲進行中，請耐心等候10秒，再重新整理頁面";
+			return msg;
+		}
+		
+		//未成功
+			@Autowired
+			private WakerPipeline wakerPipeline;
+			@Autowired
+			private WakerPageProcessor wakerPageProcessor;	
+			@ResponseBody
+			@RequestMapping("/spidertest2")
+			public String iVolunteerSpiderWaker(Model model) {
+				System.out.println("----開始執行waker文章爬蟲定時任務");
+				Spider spider = Spider.create(wakerPageProcessor);
+				spider.addUrl(
+						"https://www.waker.org.tw")
+//						.addPipeline(wakerPipeline)
+						.thread(5).setExitWhenComplete(true).start();
+				spider.stop();
+				String msg = "爬蟲進行中，請耐心等候10秒，再重新整理頁面";
+				return msg;
+			}
+			
 	
 	
 
