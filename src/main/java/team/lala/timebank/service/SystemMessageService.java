@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.SystemMessageDao;
+import team.lala.timebank.entity.Mission;
+import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.ServiceType;
 import team.lala.timebank.entity.SystemMessage;
 import team.lala.timebank.enums.SystemMessageType;
@@ -42,7 +44,6 @@ public class SystemMessageService {
 
 	// 通知志工申請已被接受
 	public SystemMessage volunteerVerify(SystemMessage systemMessage, Long memberId, String title) {
-		
 		if (systemMessage.getMessageType() == SystemMessageType.MissionAccecpt) {
 			systemMessage.setSender(null);
 			systemMessage.setReleaseTime(new Date());
@@ -65,4 +66,35 @@ public class SystemMessageService {
 
 	}
 
+	// 通知志工mission已被編輯
+	public void missionEdit(List<Order> orders) {
+		for (int i = 0; i < orders.size(); i++) {
+			SystemMessage systemMessage = new SystemMessage();
+			systemMessage.setSender(null);
+			systemMessage.setReleaseTime(new Date());
+			systemMessage.setReadStatus(YesNo.N);
+			systemMessage.setMember(orders.get(i).getVolunteer());
+			systemMessage.setMessage("您申請的志工活動:[" + orders.get(i).getMission().getTitle() + "]活動資料已被變更，請再次確認內容並決定是否參加");
+			systemMessage.setMessageType(SystemMessageType.MissionEdit);
+
+			systemMessageDao.save(systemMessage);
+
+		}
+	}
+
+	// 通知志工mission已被取消
+	public void missionCancel(List<Order> orders) {
+		for (int i = 0; i < orders.size(); i++) {
+			SystemMessage systemMessage = new SystemMessage();
+			systemMessage.setSender(null);
+			systemMessage.setReleaseTime(new Date());
+			systemMessage.setReadStatus(YesNo.N);
+			systemMessage.setMember(orders.get(i).getVolunteer());
+			systemMessage.setMessage("您申請的志工活動:[" + orders.get(i).getMission().getTitle() + "]活動資料已被取消");
+			systemMessage.setMessageType(SystemMessageType.MissionEdit);
+
+			systemMessageDao.save(systemMessage);
+
+		}
+	}
 }

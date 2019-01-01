@@ -18,9 +18,12 @@ import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.ServiceType;
+import team.lala.timebank.entity.SystemMessage;
+import team.lala.timebank.enums.SystemMessageType;
 import team.lala.timebank.service.MissionService;
 import team.lala.timebank.service.OrderService;
 import team.lala.timebank.service.ServiceTypeService;
+import team.lala.timebank.service.SystemMessageService;
 import team.lala.timebank.spec.MissionSpecification;
 
 @Slf4j
@@ -34,6 +37,9 @@ public class RecruitController {
 	private MissionService missionService;
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private SystemMessageService systemMessageService;
+
 
 	@RequestMapping("/list")
 	public String listPage() {
@@ -53,7 +59,7 @@ public class RecruitController {
 				PageRequest.of(page, length.orElse(10)));
 		return missions;
 	}
-
+	//編輯mission並發送系統訊息
 	@RequestMapping("/edit")
 	public String editRecruit(@RequestParam("id") Long id, Model model) {
 		Mission mission = missionService.getOne(id);
@@ -92,6 +98,7 @@ public class RecruitController {
 			//拒絕所有apply的order
 			List<Order> orders = orderService.findByMission(missionService.getOne(id));
 			orderService.rejectOrders(orders);
+			systemMessageService.missionCancel(orders);
 
 		} catch (Exception e) {
 			response.addMessage("取消失敗，" + e.getMessage());
@@ -113,7 +120,8 @@ public class RecruitController {
 				PageRequest.of(page, length.orElse(10)));
 		return missions;
 	}
-
+	
+	//編輯mission並發送系統訊息
 	@RequestMapping("/update")
 	@ResponseBody
 	public AjaxResponse<Mission> update(Mission mission) {
@@ -124,6 +132,9 @@ public class RecruitController {
 		try {
 			missionService.update(mission);
 			response.setObj(mission);
+			List<Order> orders = orderService.findByMission(mission);
+			systemMessageService.missionEdit(orders);
+
 		} catch (Exception e) {
 			response.addMessage("修改失敗，" + e.getMessage());
 			e.printStackTrace();

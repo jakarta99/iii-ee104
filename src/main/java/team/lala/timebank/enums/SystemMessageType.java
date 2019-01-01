@@ -5,5 +5,8 @@ public enum SystemMessageType {
 	ReplyPenaltyReport,
 	GetTimeValue,
 	MissionAccecpt,
-	MissionReject
+	MissionReject,
+	MissionEdit,
+	MissionCancel
+	
 }
