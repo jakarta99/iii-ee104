@@ -111,6 +111,13 @@ public class Mission {
 
 	@Column(name = "APPROVED_QUANTITY", nullable = false)
 	private Integer approvedQuantity;
+	
+	@Column(name = "UPDATE_DATE")
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date updateDate;
+	
+	@Column(name = "MISSION_PIC_NAME")
+	private String missionPicName;// 工作宣傳圖片名字
 
 	@Override
 	public String toString() {
