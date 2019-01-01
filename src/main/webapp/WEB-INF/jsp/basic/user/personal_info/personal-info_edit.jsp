@@ -20,15 +20,16 @@
 
 <style>
 	article {
+		font-family: 'Righteous', cursive;
 		margin-top: 30px;
 		margin-bottom: 30px;
 		padding: 10px;
 	}
 	article fieldset {
 		width: 800px;
-		border-radius: 20px;
+		border-radius: 15px;
 		padding: 20px; 
-		border: 2px solid #bebebe;
+		border: 3px solid rgb(146, 168, 209);
 		margin: auto;
 	}
 	article input, select, label {
@@ -51,6 +52,24 @@
 	.center{
 		text-align: center;
 	}
+	.myform {
+        margin: 8% 11%;
+        border-collapse: collapse;
+        font-size: 100%;
+        line-height: 200%;
+    }
+    legend{
+        font-size:150%;
+        color:rgb(193, 186, 177);
+    }
+    .block {
+        width: 650px;
+        border-bottom: 2px solid rgb(247, 202, 201);
+        margin: 20px;
+    }
+    .remark {
+        color: rgb(193, 186, 177);
+    }
 </style>
 
 </head>
@@ -80,51 +99,51 @@
 <!-- 							<label>密碼:</label> -->
 <%-- 							<input type="text" value="${member.password}" id="password" name="password"><br> --%>
 <!-- 						</div><hr> -->
-						<div>
+						<div class="block">
 							<label>姓名:</label>
 							<input type="text" value="${member.name}" id="name" name="name"><br>
-						</div><hr>
+						</div>
 						<fmt:formatDate value="${member.birthDate}" pattern="yyyy/MM/dd" var="birthDate" />
 						<c:choose>
 							<c:when test="${member.memberType eq 'P'}">
-								<div>
+								<div class="block">
 									<label>身分證字號:</label>
 									<input type="text" value="${member.certificateIdNumber}" id="certificateIdNumber" name="certificateIdNumber"><br>
-								</div><hr>
-								<div>
+								</div>
+								<div class="block">
 									<label>出生日期:</label>
 									<input type="text" value="${birthDate}" id="birthDate" name="birthDate" autocomplete="off"><br>
-								</div><hr>
+								</div>
 							</c:when>
 							<c:when test="${member.memberType eq 'O'}">
-								<div>
+								<div class="block">
 									<label>統一編號:</label> 
 									<input type="text" value="${member.certificateIdNumber}" id="certificateIdNumber" name="certificateIdNumber"><br>
-								</div><hr>
-								<div>
+								</div>
+								<div class="block">
 									<label>創立日期:</label> 
 									<input type="text" value="${birthDate}" id="birthDate" name="birthDate" autocomplete="off"><br>
-								</div><hr>
+								</div>
 							</c:when>
 						</c:choose>
-						<div>
+						<div class="block">
 							<label>email:</label> 
 							<input type="text" value="${member.email}" id="email" name="email"><br>
-						</div><hr>
-						<div>
+						</div>
+						<div class="block">
 							<label>住家電話:</label> 
 							<input type="text" value="${member.telephone}" id="telephone" name="telephone"><br>
-						</div><hr>
-						<div>
+						</div>
+						<div class="block">
 							<label>手機:</label> 
 							<input type="text" value="${member.mobile}" id="mobile" name="mobile"><br>
-						</div><hr>
-						<div>			
+						</div>
+						<div class="block">			
 							<label>住址:</label>
 							<span role="tw-city-selector"></span>
 							<input type="text" value="${member.address}" id="address" name="address"><br>
-						</div><hr>
-						<div>
+						</div>
+						<div class="block">
 							<fmt:formatDate value="${member.signUpDate}" pattern="yyyy/MM/dd" var="signUpDate" />
 							<label>註冊日期:</label> 
 							<input type="text" value="${signUpDate}" id="signUpDate" name="signUpDate" autocomplete="off"><br>
@@ -132,15 +151,15 @@
 					</fieldset>
 					<fieldset>
 						<legend>驗證資訊</legend>
-						<div>
+						<div class="block">
 							<label>Email驗證信確認(Y/N):</label>
 							<label>Y</label> 
 							<input type="radio" value="Y" name="emailVerification">
 							<label>N</label> 
 							<input type="radio" value="N" name="emailVerification"><br>
-						</div><hr>
+						</div>
 						<c:if test="${member.memberType eq 'O' }">
-							<div>
+							<div class="block">
 								<label>機構身分驗證 (Y/N):</label>
 									<label>Y</label> 
 									<input type="radio" value="Y" name="orgIdConfirmation">
@@ -152,31 +171,31 @@
 					<c:if test="${member.memberType eq 'O' }">
 						<fieldset>	
 							<legend>公司資料</legend>
-							<div >
+							<div class="block">
 								<label>創辦人:</label> 
 								<input type="text" value="${member.orgFounder}" id="orgFounder" name="orgFounder"><br>
-							</div><hr>
-							<div>
+							</div>
+							<div class="block">
 								<label>執行長:</label>
 								<input type="text" value="${member.orgCeo}" id="orgCeo" name="orgCeo"><br>
-							</div><hr>
-							<div>
+							</div>
+							<div class="block">
 								<label>聯絡人:</label>
 								<input type="text" value="${member.orgContactPerson}" id="orgContactPerson" name="orgContactPerson"><br>
-							</div><hr>
-							<div>
+							</div>
+							<div class="block">
 								<label>聯絡人電話:</label> 
 								<input type="text" value="${member.orgContactPersonTel}" id="orgContactPersonTel" name="orgContactPersonTel"><br>
-							</div><hr>
-							<div>
+							</div>
+							<div class="block">
 								<label>聯絡人手機:</label>
 								<input type="text" value="${member.orgContactPersonMobile}" id="orgContactPersonMobile" name="orgContactPersonMobile"><br>
-							</div><hr>
-							<div>
+							</div>
+							<div class="block">
 								<label>網址:</label>
 								<input type="url" size="50px" value="${member.orgWebsiteLink}" id="orgWebsiteLink" name="orgWebsiteLink"><br>
-							</div><hr>
-							<div>
+							</div>
+							<div class="block">
 								<label>創立宗旨:</label>
 								<textarea rows="5" cols="50" id="orgFoundPurpose" name="orgFoundPurpose">
 									${member.orgFoundPurpose}
