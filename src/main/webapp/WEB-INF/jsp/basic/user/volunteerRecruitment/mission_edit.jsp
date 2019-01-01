@@ -83,7 +83,7 @@
    	<input type="hidden" value="${mission.member.id}" id="member" name="member"/><p>
 	<input type="hidden" value="${publishDate}"  id="publishDate" name="publishDate"/>
 	<input type="hidden" value="${mission.approvedQuantity}"  id="approvedQuantity" name="approvedQuantity"/>
-	<input type="hidden" value="${mission.status.id}"  id="status" name="status"/>
+	<input type="hidden" value="${mission.missionstatus}"  id="missionstatus" name="missionstatus"/>
 	
 	
 	<div>			
