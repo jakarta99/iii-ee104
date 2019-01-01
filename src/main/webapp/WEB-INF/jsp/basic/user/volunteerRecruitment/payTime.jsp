@@ -142,18 +142,18 @@
 		})
 	}
 	
-	function reject(id) {
+	function penalty(orderId) {
 		$.ajax({
-			url : '/user/volunteerVerify/reject?id=' + id,
+			url : '/penalty/report?orderId=' + orderId,
 			type : 'post',
 			dataType : 'JSON',
-			success : function(rejectResult) {
-				if(rejectResult.status == "SUCCESS"){
-					alert("拒絕編號" + rejectResult.obj.id + " " + rejectResult.status);									
+			success : function(penaltyResult) {
+				if(penaltyResult.status == "SUCCESS"){
+					alert("檢舉編號" + penaltyResult.obj.id + " " + penaltyResult.status);									
 					
 				}else{
-					alert("拒絕編號" + rejectResult.obj.id + " " + rejectResult.status);
-					alert("FAIL reason:" + rejectResult.messages);	
+					alert("檢舉編號" + penaltyResult.obj.id + " " + penaltyResult.status);
+					alert("FAIL reason:" + penaltyResult.messages);	
 				}
 				dataTable.ajax.reload();
 				
@@ -268,8 +268,9 @@
 						
 								
 								
-								var paybutton="<button class='btn btn-outline-secondary' onclick=\"accept("+data.id+")\">檢舉</button>";     
-								return paybutton;
+								var penaltybutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/penalty/report?orderId="
+									+ data.id + "'\"  >檢舉</button>";     
+								return penaltybutton;
 								
 							
 						}
