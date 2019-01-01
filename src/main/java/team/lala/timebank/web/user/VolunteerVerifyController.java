@@ -16,9 +16,12 @@ import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.ServiceType;
+import team.lala.timebank.entity.SystemMessage;
+import team.lala.timebank.enums.SystemMessageType;
 import team.lala.timebank.service.MissionService;
 import team.lala.timebank.service.OrderService;
 import team.lala.timebank.service.ServiceTypeService;
+import team.lala.timebank.service.SystemMessageService;
 
 @Slf4j
 @Controller
@@ -29,6 +32,8 @@ public class VolunteerVerifyController {
 	private OrderService orderService;
 	@Autowired
 	private MissionService missionService;
+	@Autowired
+	private SystemMessageService systemMessageService;
 
 	@RequestMapping("/list")
 	public String listPage(@RequestParam(value = "id") Long id, Model model) {
@@ -52,15 +57,19 @@ public class VolunteerVerifyController {
 		Page<Order> orders = orderService.findByMission(mission, page, length);
 		return orders;
 	}
-	
-	//接受志工
+
+	// 接受志工
 	@RequestMapping("/accept")
 	@ResponseBody
-	public AjaxResponse<Order> accept(@RequestParam("id") Long id) {
+	public AjaxResponse<Order> accept(@RequestParam("id") Long orderId) {
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		try {
-			response.setObj(orderService.getById(id));
-			orderService.accept(id);
+			response.setObj(orderService.getById(orderId));
+			orderService.accept(orderId);
+			SystemMessage systemMessage = new SystemMessage();
+			systemMessage.setMessageType(SystemMessageType.MissionAccecpt);
+			systemMessageService.volunteerVerify(systemMessage, orderService.getById(orderId).getVolunteer().getId(),
+					orderService.getById(orderId).getMission().getTitle());
 
 		} catch (Exception e) {
 			response.addMessage("接受失敗，" + e.getMessage());
@@ -69,15 +78,19 @@ public class VolunteerVerifyController {
 		}
 		return response;
 	}
-	
-	//拒絕志工
+
+	// 拒絕志工
 	@RequestMapping("/reject")
 	@ResponseBody
-	public AjaxResponse<Order> reject(@RequestParam("id") Long id) {
+	public AjaxResponse<Order> reject(@RequestParam("id") Long orderId) {
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		try {
-			response.setObj(orderService.getById(id));
-			orderService.reject(id);
+			response.setObj(orderService.getById(orderId));
+			orderService.reject(orderId);
+			SystemMessage systemMessage = new SystemMessage();
+			systemMessage.setMessageType(SystemMessageType.MissionReject);
+			systemMessageService.volunteerVerify(systemMessage, orderService.getById(orderId).getVolunteer().getId(),
+					orderService.getById(orderId).getMission().getTitle());
 
 		} catch (Exception e) {
 			response.addMessage("接受失敗，" + e.getMessage());
