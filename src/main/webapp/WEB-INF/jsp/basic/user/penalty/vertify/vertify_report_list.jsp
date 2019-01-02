@@ -97,8 +97,8 @@
 		
 		<fieldset style="width:1300px">
 			<div class="btn-group" style="margin-bottom: 20px">
-			  <button type="button" class="btn btn-primary" id="vertifyingCase">審核中</button>
-			  <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="history">
+			  <button type="button" class="btn btn-info" id="vertifyingCase">審核中</button>
+			  <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="history">
 			    	審核歷史紀錄
 			  </button>
 			  <div class="dropdown-menu">
@@ -149,7 +149,7 @@
 			$("form").addClass("form-inline");
 			$("form div[id!='collapse']").addClass("form-group mx-sm-3 mb-3");
 			$("form input, select").addClass("form-control mx-3");
-			$("#searchButt, #resetButt").addClass("btn btn-outline-primary");
+			$("#searchButt, #resetButt").addClass("btn btn-outline-info");
 
 			dataTable = $('#table').DataTable({
 				pageResize: true, 
@@ -189,10 +189,10 @@
 		           		var vertifyButt = "";
 		           		//已完成審核之案件，不顯示審核按鈕
 		           		if(data.status != 1){
-		           			vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/penalty/vertify?id="
+		           			vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-info btn-sm\"  onclick=\"javascript:document.location.href='/penalty/vertify?id="
 								+ data.id + "'\" value='檢視紀錄'  /></div>";
 						}else{
-							vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/penalty/vertify?id="
+							vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-info btn-sm\"  onclick=\"javascript:document.location.href='/penalty/vertify?id="
 								+ data.id + "'\" value='審核'  /></div>";
 						}
 		               	return vertifyButt;	}
@@ -258,14 +258,14 @@
 			$("#vertifyingCase").click(	function(){
 				$('#status').val("1");
 				dataTable.ajax.reload();
-				$("#history").attr('class', 'btn btn-outline-primary dropdown-toggle');
-				$(this).attr('class', 'btn btn-primary');
+				$("#history").attr('class', 'btn btn-outline-info dropdown-toggle');
+				$(this).attr('class', 'btn btn-info');
 			})
 			
 			//按審核歷史紀錄按紐
 			$("#history").click(function(){
-				$("#vertifyingCase").attr('class', 'btn btn-outline-primary');
-				$(this).attr('class', 'btn btn-primary dropdown-toggle');
+				$("#vertifyingCase").attr('class', 'btn btn-outline-info');
+				$(this).attr('class', 'btn btn-info dropdown-toggle');
 			})
 			
 			//選擇有罪無罪
