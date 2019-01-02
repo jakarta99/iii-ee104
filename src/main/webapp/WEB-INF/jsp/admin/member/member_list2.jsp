@@ -80,7 +80,7 @@
 	<article>
 		<div class="container" style="margin-top: 140px">
 			<h2 class="text-center text-uppercase text-secondary mb-0">Member List</h2>
-	        <hr class="star-dark mb-5">
+<!-- 	        <hr class="star-dark mb-5"> -->
 		</div>
 
 <!-- 		條件搜尋表單 -->
@@ -93,18 +93,20 @@
 					<input type="text" value="${param.account }" placeholder="帳號" id="account" name="account"/>
 					<label>名字 :</label> 
 					<input type="text" value="${param.name }" placeholder="名字" id="name" name="name"/>
+					<input type="button"  value="搜尋" id="searchButt" style="margin:10px"/>
+					<input type="reset"  value="重設"  id="resetButt" style="margin:10px"/>
+				<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
+				進階查詢</a>
+				</div>
+			<div class="collapse" id="collapse">
+				<div>
 					<label>會員類型 :</label> 
 					<select  id="memberType" name="memberType">
 						<option value="">選擇會員類型</option>
 						<option value="P">一般會員</option>
 						<option value="O">機構會員</option>
 					</select>
-					<input type="button"  value="搜尋" id="searchButt" style="margin:10px"/>
-					<input type="reset"  value="重設"  id="resetButt" style="margin:10px"/>
-				<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
-				進階查詢:</a>
 				</div>
-			<div class="collapse" id="collapse">
 				<div >
 					<label>出生起始日期:</label> 
 					<input type="text" value="${param.birthDateStart }"  id="birthDateStart" name="birthDateStart" autocomplete="off" />
@@ -153,9 +155,9 @@
 			<input type="button" class="btn btn-warning btn-sm"
 					onclick="javascript:document.location.href='/admin/member/add?memberType=O'" value="新增公益團體" />
 		</div>
-		<table  id=table class="table table-striped table-bordered">				
+		<table  id=table class="table table-hover">				
 			<thead>
-				<tr>
+				<tr style="background-color: white">
 					<th scope="col"></th>
 					<th scope="col">id</th>
 					<th scope="col" width="100px"></th>

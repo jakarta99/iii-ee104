@@ -1,17 +1,12 @@
 package team.lala.timebank.config;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -20,12 +15,12 @@ import org.springframework.web.servlet.view.document.AbstractXlsxView;
 public class ExcelView extends AbstractXlsxView {
 
 	@SuppressWarnings("unchecked")
-	public void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
+	public void buildExcelDocument(Map<String, Object> excelModel, Workbook workbook, HttpServletRequest request,
 			HttpServletResponse response) {
-		// VARIABLES REQUIRED IN MODEL
-		String sheetName = (String) model.get("sheetname");
-		List<String> headers = (List<String>) model.get("headers");
-		List<List<String>> results = (List<List<String>>) model.get("results");
+		// VARIABLES REQUIRED IN EXCELMODEL
+		String sheetName = (String) excelModel.get("sheetname");
+		List<String> headers = (List<String>) excelModel.get("headers");
+		List<List<String>> results = (List<List<String>>) excelModel.get("results");
 		
 			
 		// BUILD DOC
@@ -50,7 +45,6 @@ public class ExcelView extends AbstractXlsxView {
 		currentRow++;// exclude header
 		
 		for (List<String> result : results) {
-//		for (String result : results) {
 			currentColumn = 0;
 			Row row = sheet.createRow(currentRow);
 

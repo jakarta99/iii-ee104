@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -204,15 +205,7 @@ public class PenaltyService {
 		
 		List<List<String>> results = new ArrayList<List<String>>();
 		for(Penalty p : penalties) {
-			List<String> pen = new ArrayList<>();
-			pen.add(String.valueOf(p.getOrder().getId()));
-			pen.add(String.valueOf(p.getAccuser().getId()));
-			pen.add(String.valueOf(p.getAccuser().getAccount()));
-			pen.add(String.valueOf(p.getDefendant().getId()));
-			pen.add(String.valueOf(p.getDefendant().getAccount()));
-			pen.add(String.valueOf(p.getDescription()));
-			pen.add(String.valueOf(p.getUpdateDate()));
-			pen.add(String.valueOf(p.getVertifyReason()));
+			List<String> pen = turnPenaltyIntoStringList(p);
 			results.add(pen);
 		}
 		return results;
@@ -221,18 +214,42 @@ public class PenaltyService {
 	//Excel報表用(產表頭)
 	public List<String> getPenaltyExcelHeaders(){
 		List<String> headers = new ArrayList<String>();
-		headers.add("ORDER_ID");
-		headers.add("ACCUSER_ID");
+		headers.add("PENALTY_ID");
+		headers.add("MISSION_START_DATE");
+		headers.add("MISSION_TITLE");
 		headers.add("ACCUSER_ACCOUNT");
-		headers.add("DEFENDANT_ID");
 		headers.add("DEFENDANT_ACCOUNT");
-		headers.add("DESCRIPTION");
 		headers.add("UPDATEDATE");
+		headers.add("DESCRIPTION");
+		
+		headers.add("STATUS");
+		headers.add("PENALTY_TIMEVALUE");
+		headers.add("PROOF_PICNAME");
+		
 		headers.add("VERTIFY_REASON");
 		return headers;
 	}
 	
+	//給EXCEL用
+	public List<String> turnPenaltyIntoStringList(Penalty penalty) {
+		String temp = penalty.getId() + "," 
+				+ penalty.getOrder().getMission().getStartDate() + "," + penalty.getOrder().getMission().getTitle() + ","
+				+ penalty.getAccuser().getAccount() + ","
+				+ penalty.getDefendant().getAccount() + ","
+				+ penalty.getUpdateDate() + "," + penalty.getDescription() + "," + penalty.getStatus() + ","
+				+ penalty.getPenaltyTimeValue() + "," + penalty.getProofPicName() + ","
+				+ penalty.getVertifyReason();
+		String[] array = temp.split(",");
+		List<String> result= Arrays.asList(array);
+		return result;
+	}
 	
+	
+	
+	public List<Penalty> findAllBySpecification(Specification<Penalty> specification) {
+		List<Penalty> penalties = penaltyDao.findAll(specification);
+		return penalties;
+	}
 
 	public void delete(Long penaltyListId) {
 		penaltyDao.deleteById(penaltyListId);
