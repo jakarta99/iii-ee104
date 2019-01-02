@@ -189,7 +189,10 @@
 			//暫存或完成審核結果的方法
 			function saveVertify(successMessage, errorMessage){
 				if($('#status').val() == 2 && $('#penaltyTimeValue').val() <= 0){
-					alert("處罰時數需大於0");
+					swal("處罰時數需大於0", {
+					      icon: "warning",
+					    });
+					//alert("處罰時數需大於0");
 				}else{
 					$.ajax({
 						url : "/penalty/doneVertify",
@@ -205,11 +208,16 @@
 								//alert(successMessage);
 							}
 							if(result.statusDescription != null){
-								//swal(result.statusDescription); //待改
-								
-								alert(result.statusDescription);
+								swal(result.statusDescription, {
+							    	icon: "success",
+							    }).then((result) => {
+									if (result) {
+										document.location.href="/penalty/showVertifyList";
+									}
+								});;
+								//alert(result.statusDescription);
 							}
-							document.location.href="/penalty/showVertifyList";
+							
 						},
 						error: function (result) {
 							if(result.status == "ERROR"){
@@ -232,8 +240,8 @@
 					  buttons: true,
 					  dangerMode: true,
 					})
-					.then((willDelete) => {
-					  if (willDelete) {
+					.then((result) => {
+					  if (result) {
 						  saveVertify("完成審核", "審核結果儲存失敗");
 					  } else {
 					    swal("Your imaginary file is safe!");
