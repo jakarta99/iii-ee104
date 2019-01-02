@@ -84,7 +84,7 @@ function doSpider(){
 			
 		<!-- FOOTER -->
 		<jsp:include page="../commons_layout/commons_footer.jsp" />
-		<jsp:include page="../commons_layout/member_info_sidebar.jsp" />  
+
 	</div>
 
 	<script>
