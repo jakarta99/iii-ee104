@@ -141,6 +141,7 @@
 						<div class="block">			
 							<label>住址:</label>
 							<span role="tw-city-selector"></span>
+							<span>${member.county}</span>
 							<input type="text" value="${member.address}" id="address" name="address"><br>
 						</div>
 						<div class="block">
@@ -214,14 +215,14 @@
 	</div>
 	</section>
 	<!-- FOOTER -->
-	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
+<%-- 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/> --%>
  	<script>
 		$(document).ready(function() {
 // 			$("form div").addClass("form-group");
 // 			$("form input").addClass("form-control");
 // 			$("form textarea").addClass("form-control");
 			new TwCitySelector();
-
+			
 			var datePickerSetting = {
 				format : "yyyy/mm/dd",
 				autoclose : true,
@@ -232,8 +233,8 @@
 			$('#birthDate').datepicker(datePickerSetting);
 			$('#signUpDate').datepicker(datePickerSetting);
 
-			$("div[role='tw-city-selector']").attr("data-county-value",'${member.county}');
-			$("div[role='tw-city-selector']").attr("data-district-value", '${member.district}');
+			$("span[role='tw-city-selector']").attr("data-county-value",'${member.county}');
+			$("span[role='tw-city-selector']").attr("data-district-value", '${member.district}');
 					
 			$("input[name='emailVerification'][value="+'${member.emailVerification}' + "]").prop("checked", true);
 			if ('${member.memberType }' == 'O') {
