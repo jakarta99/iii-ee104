@@ -13,7 +13,7 @@
 
 <script>
 function doSpider(){
-	$.get("/commons/InternationalVolunteer/spidertest", function(msg){
+	$.get("/commons/InternationalVolunteer/spidertest1", function(msg){
 		alert(msg);
 	})
 }
@@ -27,6 +27,8 @@ function doSpider(){
 		<jsp:include page="../commons_layout/commons_nav.jsp" />
 		<!-- heading-breadcrumbs -->
 		<jsp:include page="../commons_layout/commons_heading_breadcrumbs.jsp" />
+		
+		
 		<div id="content">
 			<div class="container">
 				<section class="bar">
@@ -82,6 +84,7 @@ function doSpider(){
 			
 		<!-- FOOTER -->
 		<jsp:include page="../commons_layout/commons_footer.jsp" />
+		<jsp:include page="../commons_layout/member_info_sidebar.jsp" />  
 	</div>
 
 	<script>
