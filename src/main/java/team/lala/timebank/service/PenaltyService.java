@@ -215,12 +215,9 @@ public class PenaltyService {
 	public List<String> getPenaltyExcelHeaders(){
 		List<String> headers = new ArrayList<String>();
 		headers.add("PENALTY_ID");
-		headers.add("ORDER_ID");
 		headers.add("MISSION_START_DATE");
 		headers.add("MISSION_TITLE");
-		headers.add("ACCUSER_ID");
 		headers.add("ACCUSER_ACCOUNT");
-		headers.add("DEFENDANT_ID");
 		headers.add("DEFENDANT_ACCOUNT");
 		headers.add("UPDATEDATE");
 		headers.add("DESCRIPTION");
@@ -236,9 +233,9 @@ public class PenaltyService {
 	//給EXCEL用
 	public List<String> turnPenaltyIntoStringList(Penalty penalty) {
 		String temp = penalty.getId() + "," 
-				+ penalty.getOrder().getId() + "," + penalty.getOrder().getMission().getStartDate() + "," + penalty.getOrder().getMission().getTitle() + ","
-				+ penalty.getAccuser().getId() + "," + penalty.getAccuser().getAccount() + ","
-				+ penalty.getDefendant().getId() + "," + penalty.getDefendant().getAccount() + ","
+				+ penalty.getOrder().getMission().getStartDate() + "," + penalty.getOrder().getMission().getTitle() + ","
+				+ penalty.getAccuser().getAccount() + ","
+				+ penalty.getDefendant().getAccount() + ","
 				+ penalty.getUpdateDate() + "," + penalty.getDescription() + "," + penalty.getStatus() + ","
 				+ penalty.getPenaltyTimeValue() + "," + penalty.getProofPicName() + ","
 				+ penalty.getVertifyReason();
