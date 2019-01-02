@@ -85,7 +85,7 @@
 					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
 					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
 					<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" 
-						role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a>
+						role="button" aria-expanded="false" aria-controls="collapse">進階查詢</a>
 				</div>
 				<div class="collapse" id="collapse">
 					<div>

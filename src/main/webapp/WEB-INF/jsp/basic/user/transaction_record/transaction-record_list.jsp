@@ -1,20 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!doctype html>
 <html>
 <head>
-<meta charset="UTF-8">
-<jsp:include page="../admin_layout/admin_css_js_links.jsp" />
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Transaction Record</title>
+<jsp:include page="../../../admin/admin_layout/admin_css_js_links.jsp" />
+<!-- css -->
+<jsp:include page="../../commons/commons_layout/commons_css_links.jsp" />
 <!-- date picker -->
 <script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 
-
-<title>TimeLedger List</title>
 <style>
 	 article{
 	 	margin-top:70px;
@@ -46,86 +46,125 @@
 	 	font-size: 30px;
 	 }
 	 
-/* 	 @font-face{ */
-/* 		font-family: custom-serif; */
-/* 	    src: local("LiSong Pro"), local("微軟正黑體"), local("PMingLiU"); */
-/* 	    unicode-range: U+4E00-9FFF; */
-/* 	 } */
-	 
-/* 	 body{ */
-/* 	 	font-family: custom-serif; */
-/* 	 } */
+/* 	article { */
+/* 		font-family: 'Righteous', cursive; */
+/* 		margin-top: 30px; */
+/* 		margin-bottom: 30px; */
+/* 		padding: 10px; */
+/* 	} */
+/* 	article fieldset { */
+/* 		width: 800px; */
+/* 		border-radius: 15px; */
+/* 		padding: 20px;  */
+/* 		border: 3px solid rgb(146, 168, 209); */
+/* 		margin: auto; */
+/* 	} */
+/* 	article input, select, label { */
+/*   		padding-left: 10px;  		    */
+/*   		line-height:center;  */
+/* 	} */
+/* 	.center{ */
+/* 		text-align: center; */
+/* 	} */
+/* 	.myform { */
+/*         margin: 8% 11%; */
+/*         border-collapse: collapse; */
+/*         font-size: 100%; */
+/*         line-height: 200%; */
+/*     } */
+/*     legend{ */
+/*         font-size:150%; */
+/*         color:rgb(193, 186, 177); */
+/*     } */
+/*     .block { */
+/*         width: 650px; */
+/*         border-bottom: 2px solid rgb(247, 202, 201); */
+/*         margin: 20px; */
+/*     } */
+/*     .remark { */
+/*         color: rgb(193, 186, 177); */
+/*     } */
 </style>
 </head>
 <body>
-	<jsp:include page="../admin_layout/nav.jsp" />
-	<article>
-		<div class="container" style="margin-top: 140px">
-			<h2 class="text-center text-uppercase text-secondary mb-0">TimeLedger List</h2>
-<!-- 	        <hr class="star-dark mb-5"> -->
-		</div>
-
-	<!-- 			<button id="findAll" onclick="findAll()" class="btn btn-outline-secondary">findAll</button> -->
-	
-		<div id="sideBar">
-			<form>
-				<fieldset style="width:1100px">
-				<legend>Search</legend>
-				<div>
-					<label>id :</label>
-					<input type="text" value="${param.id}" placeholder="id" id="id" name="id"/>
-					<label>memberId :</label>
-					<input type="text" value="${param.memberId}" placeholder="memberId" id="memberId" name="memberId"/>
-					<input type="button" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="search" id="searchButt" />
-				  	<input type="reset" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value=reset id="resetButt" />
-					<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" 
-							role="button" aria-expanded="false" aria-controls="collapse">進階查詢</a>
+	<!-- Top bar-->
+	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
+	<!-- Navbar -->
+	<jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
+	<section class="bar">
+	<div class="container">
+    	<div class="row">
+            <!-- Sidebar -->
+            <jsp:include page="../user_layout/user_sidebar.jsp"/>
+            <article>
+				<div class="container" style="margin-top: 140px">
+					<h2 class="text-center text-uppercase text-secondary mb-0">我的交易紀錄</h2>
+			        <hr class="star-dark mb-5">
 				</div>
-				
-				<div class="collapse" id="collapse">
-					<div>	
-						<label>depositValue :</label>
-						<input type="text" value="${param.depositValue}" id="depositValue" name="depositValue"/>
-						<label>withdrawalValue :</label> 
-						<input type="text" value="${param.withdrawalValue}"  id="withdrawalValue" name="withdrawalValue"/>
-					</div>
-					<div>
-					    <label>Start Date :</label>
-					    <input type="text" value="${param.transactionTimeBegin}" id="transactionTimeBegin" name="transactionTimeBegin" autocomplete="off"/>
-					    <label>End Date :</label>
-					    <input type="text" value="${param.transactionTimeEnd}" id="transactionTimeEnd" name="transactionTimeEnd" autocomplete="off"/>
-				  	</div>
-			  	</div>
-			  	</fieldset>
-			</form>
-			</div>
+		
+			<!-- 			<button id="findAll" onclick="findAll()" class="btn btn-outline-secondary">findAll</button> -->
 			
-			<fieldset style="width:1300px">
-			<div style="margin-bottom: 20px">
-				<button onclick="javascript:document.location.href='/admin/time-ledger/add'" class="btn btn-warning btn-sm">新增</button>
+				<div id="sideBar">
+					<form>
+						<fieldset style="width:1100px">
+						<legend>Search</legend>
+						<div>
+							<label>id :</label>
+							<input type="text" value="${param.id}" placeholder="id" id="id" name="id"/>
+							<label>memberId :</label>
+							<input type="text" value="${param.memberId}" placeholder="memberId" id="memberId" name="memberId"/>
+							<input type="button" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="search" id="searchButt" />
+						  	<input type="reset" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value=reset id="resetButt" />
+							<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" 
+									role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a>
+						</div>
+						
+						<div class="collapse" id="collapse">
+							<div>	
+								<label>depositValue :</label>
+								<input type="text" value="${param.depositValue}" id="depositValue" name="depositValue"/>
+								<label>withdrawalValue :</label> 
+								<input type="text" value="${param.withdrawalValue}"  id="withdrawalValue" name="withdrawalValue"/>
+							</div>
+							<div>
+							    <label>Start Date :</label>
+							    <input type="text" value="${param.transactionTimeBegin}" id="transactionTimeBegin" name="transactionTimeBegin" autocomplete="off"/>
+							    <label>End Date :</label>
+							    <input type="text" value="${param.transactionTimeEnd}" id="transactionTimeEnd" name="transactionTimeEnd" autocomplete="off"/>
+						  	</div>
+					  	</div>
+					  	</fieldset>
+					</form>
+					</div>
+					
+					<fieldset style="width:1300px">
+					<div style="margin-bottom: 20px">
+						<button onclick="javascript:document.location.href='/admin/time-ledger/add'" class="btn btn-warning btn-sm">新增</button>
+					</div>
+						<table id="table" class="table table-bordered">
+							<thead>
+								<tr>
+									<th scope="col"></th>
+									<th width="100px" scope="col">選項</th>
+									<th scope="col">id</th>
+									<th scope="col">memberId</th>
+									<th scope="col">transactionTime</th>
+			<!-- 						<th scope="col">description</th> -->
+									<th scope="col">depositValue</th>
+									<th scope="col">withdrawalValue</th>
+			<!-- 						<th scope="col">balanceValue</th> -->
+								</tr>
+							</thead>
+							<tbody id="tableBody">
+							</tbody>
+						</table>
+					</fieldset>
+				</article>
 			</div>
-				<table id="table" class="table table-hover">
-					<thead>
-						<tr style="background-color:white">
-							<th scope="col"></th>
-							<th width="100px" scope="col">選項</th>
-							<th scope="col">id</th>
-							<th scope="col">memberId</th>
-							<th scope="col">transactionTime</th>
-	<!-- 						<th scope="col">description</th> -->
-							<th scope="col">depositValue</th>
-							<th scope="col">withdrawalValue</th>
-	<!-- 						<th scope="col">balanceValue</th> -->
-						</tr>
-					</thead>
-					<tbody id="tableBody">
-					</tbody>
-				</table>
-			</fieldset>
-	</article>
-
-	
-	
+		</div>
+	</section>
+	<!-- FOOTER -->
+<%-- 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/> --%>
 	<script>
 	var dataTable;
 	$(document).ready(function() {
@@ -145,7 +184,7 @@
 			serverSide: true,  //分頁、排序都交由伺服器處理
 // 			lengthMenu: [ 3, 6, 9, 12, ],
 			ajax:{
-				url:'/admin/time-ledger/query',
+				url:'/user/transaction-record/query',
 				type:'get',
 				dataType:'json',
 				//傳送給伺服器的資料(datatable預設傳送的資料)
@@ -228,8 +267,6 @@
 		$('#transactionTimeEnd').datepicker(datePickerSetting);
 	})
 	
-		
-		
 		function deleteData(timeLedgerId){
 			$.ajax({
 				url : "/admin/time-ledger/delete?id=" + timeLedgerId,

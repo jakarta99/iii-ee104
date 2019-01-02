@@ -56,7 +56,8 @@ public class PayTimeController {
 	// 會員付款
 	@RequestMapping("/pay")
 	@ResponseBody
-	public AjaxResponse<Order> pay(@RequestParam("id") Long orderId, @RequestParam("hours") Integer hours) {
+	public AjaxResponse<Order> pay(@RequestParam("orderId") Long orderId, @RequestParam("hours") Integer hours,@RequestParam("score") Integer score) {
+		log.debug("orderId={}",orderId);
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		try {
 			response.setObj(orderService.getById(orderId));
@@ -65,7 +66,7 @@ public class PayTimeController {
 			Long payerId = orderService.getById(orderId).getMission().getMember().getId();
 			String missionTitle = orderService.getById(orderId).getMission().getTitle();
 
-			payService.transaction(hours, volunteerId, payerId, missionTitle, orderId);
+			payService.transaction(hours, volunteerId, payerId, missionTitle, orderId,score);
 
 		} catch (Exception e) {
 			response.addMessage("付款失敗，" + e.getMessage());

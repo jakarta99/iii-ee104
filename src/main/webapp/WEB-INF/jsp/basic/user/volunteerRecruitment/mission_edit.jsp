@@ -76,7 +76,7 @@
 	
 	<h1 class="s2">mission edit(after login)</h1>
 	
-	<form action="/user/volunteerRecruitment/update" method="post">
+	<form enctype="multipart/form-data" action="/user/volunteerRecruitment/update" method="post">
 	<fieldset>
 	
 	<input type="hidden" value="${mission.id}" id="id" name="id"/>
@@ -143,19 +143,23 @@
     
     <div class="form-group">
     contactEmail:<input type="email" value="${mission.contactEmail}" id="contactEmail" name="contactEmail" class="form-control"/>
-    </div> 
+    </div>
     
     <div class="form-group">
-     discription:<input type="text" value="${mission.discription}" id="discription" name="discription" class="form-control"/>
-    </div> 
+     missionPicture:<a id="missionPicName" href="/../img/${mission.missionPicName}" target="_blank">原上傳圖片</a>
+     <input type="file" id="missionPicture" name="missionPicture" accept="image/*" class="form-control" />
+    </div>
+      
+    
+    <div class="form-group">
+     description:<input type="text" value="${mission.discription}" id="discription" name="discription" class="form-control"/>
+    </div>
 	
 	
 	
 	<div>
-	<button type="button" onclick="updateRequest()"
-					class="btn btn-outline-secondary">Update</button>
+	<button id="add" class="btn btn-outline-secondary" >更新</button>
 	<input type="reset" class="btn btn-outline-secondary" />
-	
 	</div>
 	<div>
 	<input type="button" class="btn btn-outline-secondary" onclick="javascript:document.location.href='/user/volunteerRecruitment/list'" value="回列表頁"/>
@@ -166,6 +170,15 @@
 	</form>
 	
 	<script>
+		var missionPicName = '${mission.missionPicName}';
+		if(missionPicName.length == 0){
+			$("#missionPicName").html("");
+			$("#missionPicName").prop("hidden", true);
+		}
+	
+	
+	
+	
 		jQuery(document).ready(function(){
 			
 			new TwCitySelector();
@@ -208,24 +221,24 @@
 			
 		});
 		
-		function updateRequest() {
-			$.ajax({
-				url : '/user/volunteerRecruitment/update',
-				type : 'post',
-				data : $('form').serialize(),
-				dataType : 'JSON',
-				success : function(editResult) {
-					if(editResult.status == "SUCCESS"){
-						alert("更新編號" + editResult.obj.id + " " + editResult.status);
-						document.location.href="/user/volunteerRecruitment/list";
-					}else{
-						alert("更新編號" + editResult.obj.id + " " + editResult.status);
-						alert("失敗原因" + editResult.messages);
-					}
+// 		function updateRequest() {
+// 			$.ajax({
+// 				url : '/user/volunteerRecruitment/update',
+// 				type : 'post',
+// 				data : $('form').serialize(),
+// 				dataType : 'JSON',
+// 				success : function(editResult) {
+// 					if(editResult.status == "SUCCESS"){
+// 						alert("更新編號" + editResult.obj.id + " " + editResult.status);
+// 						document.location.href="/user/volunteerRecruitment/list";
+// 					}else{
+// 						alert("更新編號" + editResult.obj.id + " " + editResult.status);
+// 						alert("失敗原因" + editResult.messages);
+// 					}
 	
-				},
-			})
-		}
+// 				},
+// 			})
+// 		}
 	</script>
 
 </body>

@@ -79,8 +79,7 @@
 	 <section class="bar">
         <div class="container">
           <div class="row">
-            <jsp:include page="../user_layout/user_sidebar.jsp" />
-    <div style="width:850px">
+    <div >
 	<h1 class="s2">時數核發</h1>
 	
 	<fieldset >
@@ -100,6 +99,7 @@
 		<th scope="col">申請時間</th>
 		<th scope="col">評點分數</th>
 		<th scope="col">時數核發</th>
+		<th scope="col">時數核發與評分</th>
 		<th scope="col">檢舉</th>
 	</tr>
 	 </thead>	
@@ -123,17 +123,18 @@
 	
 	
 	
-	function pay(orderId,hours) {
+	function pay(orderId,volunteerId) {
+		
 		$.ajax({
-			url : '/user/payTime/pay?orderId=' + orderId+'&hours='+hours,
-			type : 'post',
+			url : '/user/payTime/pay?orderId=' + orderId+'&hours='+$("#"+volunteerId+" option:selected").val()+'&score='+$("#score"+volunteerId+" option:selected").val(),
+			type : 'get',
 			dataType : 'JSON',
 			success : function(payResult) {
 				if(payResult.status == "SUCCESS"){
-					alert("接受編號" + payResult.obj.id + " " + payResult.status);									
+					alert("審核編號" + payResult.obj.id + " " + payResult.status);									
 					
 				}else{
-					alert("接受編號" + payResult.obj.id + " " + payResult.status);
+					alert("審核編號" + payResult.obj.id + " " + payResult.status);
 					alert("FAIL reason:" + payResult.messages);	
 				}
 				dataTable.ajax.reload();
@@ -216,14 +217,14 @@
 						{"data":"volunteer.name"},
 						{"data":"volunteer.telephone"},
 			            {"data":null, render: function (data, type, row ) {
-			            	console.log(data)
+// 			            	console.log(data)
 			                return new Date(data.volunteerApplyTime).toLocaleDateString();
 			            } },	
 						{"data":function (data, type, val) {
-							
+							if(data.orderStatus=="ServiceFinishNotPay"){
 							var score = "<select id='score"+data.volunteer.id+"' name='timeValue' class='form-control'>"
-							for(var x = 0 ; x <=10 ; x++){
-								if(x==10){
+							for(var x = 1 ; x <=5 ; x++){
+								if(x==5){
 									score += "<option selected='true' value='" + x + "'>"+ x + "</option>"	
 								}else{
 									score += "<option value='" + x + "'>"+ x + "</option>"
@@ -232,6 +233,12 @@
 							score +='</select>'
 							
 							return score;
+							}else if(data.orderStatus=="ServiceFinishPayMatchSuccess"){
+								 var vbutton="<span class='badge badge-success'>已評分</span>"
+									 return vbutton;
+								 }else{
+									 return "不應該出現的狀態";
+								 }
 							
 						
 					}
@@ -251,19 +258,42 @@
 								}
 								select +='</select>'
 								
-// 								var value=$("#"+data.volunteer.id+" option:selected").val()
-// 								console.log(value)
+								var value=$("#"+data.volunteer.id+" option:selected").val()
+								console.log("id="+data.volunteer.id)
+								console.log(value)
 
-// 								var paybutton="<button class='btn btn-outline-secondary' onclick=\"pay("+data.id+")\">時數核發</button>";     
+// 								var paybutton="<button class='btn btn-outline-secondary' onclick=\"pay("+data.id+","+data.volunteer.id+")\">時數核發</button>";     
 								return select ;
 								
 							
-							 }else {
+							 }else if(data.orderStatus=="ServiceFinishPayMatchSuccess"){
+								 var vbutton="<span class='badge badge-success'>已審核時數</span>"
+								 return vbutton;
+							 }else{
 								 return "不應該出現的狀態";
 							 }
 						}
-						},					 
-					
+						},
+						
+						
+						{"data":function (data, type, val) {
+							if(data.orderStatus=="ServiceFinishNotPay"){
+							
+							
+							var paybutton="<button class='btn btn-outline-secondary' onclick=\"pay("+data.id+","+data.volunteer.id+")\">時數核發與評分</button>";     
+							return paybutton ;
+							}else if(data.orderStatus=="ServiceFinishPayMatchSuccess"){
+								 var vbutton="<span class='badge badge-success'>已審核時數與評分</span>"
+									 return vbutton;
+								 }else{
+									 return "不應該出現的狀態";
+								 }
+							
+						
+					}
+					},				
+						
+						
 			            {"data":function (data, type, val) {
 						
 								

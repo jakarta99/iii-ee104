@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <jsp:include page="../../../../admin/admin_layout/admin_css_js_links.jsp" />
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <title>檢舉案件審核</title>
 <style>
 	fieldset {
@@ -131,7 +132,6 @@
 				<div class="form-group col-md-6">
 					<label>懲罰時數:</label>
 					<select class="custom-select my-1 mr-sm-2" id="penaltyTimeValue">
-					  <option>Choose...</option>
 					  <option value="0">0</option>
 					  <option value="1">1</option>
 					  <option value="2">2</option>
@@ -149,8 +149,8 @@
 				</div>
 			</div>
 			
-			<input type="button" class="btn btn-primary" id="vertifyFinish" value="完成審核" disabled>
-			<input type="button" class="btn btn-primary" id="vertifyTemp" value="暫時儲存"><p>
+			<input type="button" class="btn btn-info" id="vertifyFinish" value="完成審核" disabled>
+			<input type="button" class="btn btn-info" id="vertifyTemp" value="暫時儲存"><p>
 		</fieldset>
 	</form>
 
@@ -189,7 +189,10 @@
 			//暫存或完成審核結果的方法
 			function saveVertify(successMessage, errorMessage){
 				if($('#status').val() == 2 && $('#penaltyTimeValue').val() <= 0){
-					alert("處罰時數需大於0");
+					swal("處罰時數需大於0", {
+					      icon: "warning",
+					    });
+					//alert("處罰時數需大於0");
 				}else{
 					$.ajax({
 						url : "/penalty/doneVertify",
@@ -199,12 +202,22 @@
 							"penaltyTimeValue":$('#penaltyTimeValue').val(),"vertifyReason":$('#vertifyReason').val()},
 						success : function(result) {
 							if(result.status == "SUCCESS"){
-								alert(successMessage);
+								swal(successMessage, {
+								      icon: "success",
+								    });
+								//alert(successMessage);
 							}
 							if(result.statusDescription != null){
-								alert(result.statusDescription);
+								swal(result.statusDescription, {
+							    	icon: "success",
+							    }).then((result) => {
+									if (result) {
+										document.location.href="/penalty/showVertifyList";
+									}
+								});;
+								//alert(result.statusDescription);
 							}
-							document.location.href="/penalty/showVertifyList";
+							
 						},
 						error: function (result) {
 							if(result.status == "ERROR"){
@@ -220,10 +233,26 @@
 			
 			//完成審核
 			$('#vertifyFinish').click(function() {
-				var conf = confirm("確定送出審核結果? 送出後將無法更改");
-				if(conf == true){
-					saveVertify("完成審核", "審核結果儲存失敗");
-				}
+				swal({
+					  title: "確定送出審核結果?",
+					  text: "送出後將無法更改!",
+					  icon: "warning",
+					  buttons: true,
+					  dangerMode: true,
+					})
+					.then((result) => {
+					  if (result) {
+						  saveVertify("完成審核", "審核結果儲存失敗");
+					  } else {
+					    swal("Your imaginary file is safe!");
+					  }
+					});
+				
+				
+// 				var conf = confirm("確定送出審核結果? 送出後將無法更改");
+// 				if(conf == true){
+// 					saveVertify("完成審核", "審核結果儲存失敗");
+// 				}
 			})
 			
 			//暫存審核結果

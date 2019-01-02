@@ -15,8 +15,10 @@
 <body>
 	  <!-- Top bar-->
       <jsp:include page="commons_layout/commons_top-bar.jsp"/>
- 	
-	<div id="all">    
+ 		<!-- Navbar -->
+		<jsp:include page="commons_layout/commons_nav.jsp" />
+	<div id="all">  
+
 <!--       <div id="heading-breadcrumbs"> -->
 <!--         <div class="container"> -->
 <!--           <div class="row d-flex align-items-center flex-wrap"> -->
@@ -32,10 +34,10 @@
 <!--           </div> -->
 <!--         </div> -->
 <!--       </div> -->
-      <div id="content">
+      <div id="content" >
         <div class="container">
           <div class="row">           
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="margin:auto">
               <div class="box">
                 <h2 class="text-uppercase">Login</h2>
                 <p class="lead">Already our customer?</p>
