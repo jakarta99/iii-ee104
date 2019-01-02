@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.TimeLedgerDao;
+import team.lala.timebank.entity.Mission;
+import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.entity.TimeLedger;
 
@@ -186,5 +188,10 @@ public class TimeLedgerService {
 	public Page<TimeLedger> findBySpecification(Specification<TimeLedger> specification, PageRequest pageRequest) {
 		return timeLedgerDao.findAll(specification, pageRequest);
 	}
-
+	
+	// 根據memberId找出所有的timeLedger
+	public List<TimeLedger> findAllByMemberId(Long memberId) {
+		List<TimeLedger> timeLedgers = timeLedgerDao.findByMemberId(memberId);
+		return timeLedgers;
+	}
 }
