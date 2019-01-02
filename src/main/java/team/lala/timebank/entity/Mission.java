@@ -79,7 +79,7 @@ public class Mission {
 
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
 	@Column(name = "END_DATE")
-	private Date endDate;// 工作開始時間
+	private Date endDate;// 工作結束時間
 
 	@Column(name = "PEOPLE_NEEDED", nullable = false)
 	private Integer peopleNeeded;
@@ -115,6 +115,10 @@ public class Mission {
 	@Column(name = "UPDATE_DATE")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date updateDate;
+	
+	@Column(name = "FINISH_DATE")
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date finishDate;// 結案時間
 	
 	@Column(name = "MISSION_PIC_NAME")
 	private String missionPicName;// 工作宣傳圖片名字

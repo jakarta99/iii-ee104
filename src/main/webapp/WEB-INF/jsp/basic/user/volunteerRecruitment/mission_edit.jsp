@@ -148,7 +148,8 @@
     <div class="form-group">
      missionPicture:<a id="missionPicName" href="/../img/${mission.missionPicName}" target="_blank">原上傳圖片</a>
      <input type="file" id="missionPicture" name="missionPicture" accept="image/*" class="form-control" />
-    </div>  
+    </div>
+      
     
     <div class="form-group">
      description:<input type="text" value="${mission.discription}" id="discription" name="discription" class="form-control"/>
@@ -169,6 +170,15 @@
 	</form>
 	
 	<script>
+		var missionPicName = '${mission.missionPicName}';
+		if(missionPicName.length == 0){
+			$("#missionPicName").html("");
+			$("#missionPicName").prop("hidden", true);
+		}
+	
+	
+	
+	
 		jQuery(document).ready(function(){
 			
 			new TwCitySelector();
