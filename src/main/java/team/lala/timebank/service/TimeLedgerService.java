@@ -1,5 +1,6 @@
 package team.lala.timebank.service;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -15,8 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.TimeLedgerDao;
 import team.lala.timebank.entity.Member;
+import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.entity.TimeLedger;
+import team.lala.timebank.spec.TimeLedgerSpecification;
 
 @Slf4j
 @Service
@@ -185,6 +188,14 @@ public class TimeLedgerService {
 	// 尋找一名會員所有資料 更新by Anchor
 	public Page<TimeLedger> findByMemberId(Member member, int page, Optional<Integer> length) {
 		Page<TimeLedger> timeLedgers = timeLedgerDao.findByMemberId(member,PageRequest.of(page, length.orElse(10)));
+		return timeLedgers;
+	}
+	
+	// list for user
+	public Page<TimeLedger> findByMemberIdAndSpecification(Principal principal, TimeLedger timeLedger, PageRequest pageRequest) {
+		timeLedger.setMemberId(memberDao.findByAccount(principal.getName()));
+		TimeLedgerSpecification timeLedgerSpec = new TimeLedgerSpecification(timeLedger);
+		Page<TimeLedger> timeLedgers = this.findBySpecification(timeLedgerSpec, pageRequest);
 		return timeLedgers;
 	}
 	
