@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="../../../../admin/admin_layout/admin_css_js_links.jsp" />
+<%-- <jsp:include page="../../../../admin/admin_layout/admin_css_js_links.jsp" /> --%>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <title>站內信</title>
 <style>
@@ -27,7 +27,7 @@
 <body>
 
 	<!-- 加入nav.html(放在static/html) -->
-	<jsp:include page="../../../../admin/admin_layout/nav.jsp" />
+<%-- 	<jsp:include page="../../../../admin/admin_layout/nav.jsp" /> --%>
 	
 	<div class="container" style="margin-top: 140px">
 		<h2 class="text-center text-uppercase text-secondary mb-0" style="font-family: '微軟正黑體'" id="topic">檢舉案件審核</h2>
@@ -36,84 +36,28 @@
 
 	<form>
 		<fieldset style="width:1300px">
-		<legend>第${penalty.id}號站內信</legend>
-			<input type="hidden" value="${penalty.id}" id="penaltyId" name="penaltyId" />
+		<legend>第${systemMessage.id}號站內信</legend>
+
 			<div class="form-row">
-				<div class="form-group col-md-3">
-					<label>媒合案件編號</label>
-					<input type="text" id="orderId" name="orderId"
-								 class="form-control" value="${penalty.order.id}" readonly />
-				</div>	
-				<div class="form-group col-md-3">		
-					<label>活動編號</label>
-					<input type="text" id="missionId" name="missionId"
-								 class="form-control" value="${penalty.order.mission.id}" readonly />
-				</div>
-			</div>
-	
-			<div class="form-row">
-				<div class="form-group col-md-3">	
-					<label>檢舉人會員編號</label>
-					<input type="text" id="accuserId" name="accuserId"
-								class="form-control" value="${penalty.accuser.id}" readonly />
-				</div>	
-				<div class="form-group col-md-3">
-					<label>檢舉人帳號</label>
-					<input type="text" id="accuserAccount" name="accuserAccount"
-								class="form-control" value="${penalty.accuser.account}" readonly />
-				</div>
-				
-				<div class="form-group col-md-3">
-					<label>被檢舉人會員編號</label>
-					<input type="text" id="defendantId" name="defendantId"
-								class="form-control" value="${penalty.defendant.id}" readonly />
-				</div>
-				<div class="form-group col-md-3">		
-					<label>被檢舉人帳號</label>
-					<input type="text" id="defendantAccount" name="defendantAccount"
-								class="form-control" value="${penalty.defendant.account}" readonly />
-				</div>
-			</div>
-			
-			<div class="form-row">
-				<div class="form-group col-md-3">
-					<label>活動時間起迄</label>
-					<input type="text" id="missionDateRange" name="missionDateRange"
-								class="form-control" value="${penalty.order.mission.startDate}~${penalty.order.mission.endDate}" readonly />
-				</div>
-				
-				<div class="form-group col-md-3">			
-					<label>活動名稱</label>
-					<input type="text" id="missionTitle" name="missionTitle"
-								class="form-control" value="${penalty.order.mission.title}" readonly />
-				</div>
-				
 				<div class="form-group col-md-6">
-					<label>活動描述</label>
+					<label>訊息時間</label>
 					<input type="text" id="missionDiscription" name="missionDiscription"
-								class="form-control" value="${penalty.order.mission.discription}" readonly />
+								class="form-control" value="${systemMessage.releaseTime}" readonly />
+				</div>
+				<div class="form-group col-md-6">
+					<label>訊息類型</label>
+					<input type="text" id="missionDiscription" name="missionDiscription"
+								class="form-control" value="${systemMessage.messageType}" readonly />
 				</div>	
 			</div>
 			
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label>檢舉內容描述</label>
-					<input type="text" id="PenaltyDescription" name="PenaltyDescription"
-								class="form-control" value="${penalty.description}" readonly/>
+					<label>訊息內容</label>
+					<input type="text" name="systemMessage"
+								class="form-control" value="${systemMessage.message}" readonly/>
 				</div>
-				<div class="form-group col-md-6">
-					<label>是否檢附佐證資料</label>
-					<div class="custom-control custom-radio">
-						<input type="radio" id="proofRadio1" name="proofRadio" class="custom-control-input" readonly>
-						<label class="custom-control-label" for="customRadio1">是</label>
-						<a id="proofPic" href="../img/${penalty.proofPicName}" target="_blank">佐證資料檢視</a>
-					</div>
-					<div class="custom-control custom-radio">
-						<input type="radio" id="proofRadio2" name="proofRadio" class="custom-control-input" readonly>
-						<label class="custom-control-label" for="customRadio2">否</label>
-					</div>
-					
-				</div>
+				
 			</div>
 		</fieldset>
 		

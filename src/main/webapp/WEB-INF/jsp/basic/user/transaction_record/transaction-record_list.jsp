@@ -6,11 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Transaction Record</title>
-<jsp:include page="../../../admin/admin_layout/admin_css_js_links.jsp" />
 <!-- css -->
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp" />
-<!-- Javascript files-->
-<%-- <jsp:include page="../../commons/commons_layout/commons_js_links.jsp" /> --%>
+<!-- Javascript files -->
+<jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
+<script defer
+	src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
 <!-- date picker -->
 <script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
@@ -18,34 +20,19 @@
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 
 <style>
-	article{
-	 	margin-top:70px;
-	 }
-	 article fieldset {
- 		border-radius: 20px; 
- 		padding: 20px 20px 0px 20px;  
-/*  		border: 3px double #bebebe;  */
-		background-color:#ffeecc;
-		margin: auto; 
- 		margin-top: 10px;  
- 		margin-bottom: 20px;  
- 		
-	}
-
-	 table tr td, button{
-	 	text-align:center;
-	 	line-height:center; 
-	 }
-	 
-	 article .btn{
-	 	margin-left:3px;
-	 	margin-right:3px
-	 }
-	 
-	 legend{
-	 	color:#2c3e50;
-	 	font-size: 30px;
-	 }
+        fieldset {
+            width: 100%;
+            border: 3px solid rgba(0,0,0,0);
+            padding: 20px;
+            margin: 20px;
+            margin: auto
+        }
+        .s2{
+            text-align: center
+        }
+        .margintop{
+			 margin-top:70px;
+		}
 </style>
 </head>
 <body>
@@ -75,7 +62,7 @@
 	<div class="container">
     	<div class="row">
             <article>
-				<div class="container" style="margin-top: 140px">
+				<div class="container">
 					<h2 class="text-center text-uppercase text-secondary mb-0">我的交易紀錄</h2>
 			        <hr class="star-dark mb-5">
 				</div>
@@ -97,18 +84,15 @@
 							    <input type="text" value="${param.transactionTimeEnd}" id="transactionTimeEnd" name="transactionTimeEnd" autocomplete="off"/>
 						  	</div>
 							<input type="button" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="search" id="searchButt" />
-						  	<input type="reset" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value=reset id="resetButt" />
+						  	<input type="reset" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="reset" id="resetButt" />
 						</div>
 					  	</fieldset>
 					</form>
 					</div>
 					
-					<fieldset style="width:1300px">
-					<div style="margin-bottom: 20px">
-						<button onclick="javascript:document.location.href='/admin/time-ledger/add'" class="btn btn-warning btn-sm">新增</button>
-					</div>
-						<table id="table" class="table table-bordered">
-							<thead>
+					<fieldset>
+						<table id="table" class="table table-hover">
+							<thead class="thead-dark">
 								<tr>
 									<th scope="col"></th>
 									<th scope="col">transactionTime</th>
@@ -128,6 +112,7 @@
 	</section>
 	<!-- FOOTER -->
 <%-- 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/> --%>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 	<script>
 	var dataTable;
 	$(document).ready(function() {
@@ -143,7 +128,7 @@
 			searching: false,				
 		 	processing: true,
 			serverSide: true,  //分頁、排序都交由伺服器處理
-// 			lengthMenu: [ 3, 6, 9, 12, ],
+			lengthMenu: [ 3, 6, 9, 12, ],
 			ajax:{
 				url:'/user/transaction-record/query',
 				type:'get',
@@ -188,7 +173,7 @@
 			columnDefs: [{
 	            "searchable": false,
 	            "orderable": false,
-	            "targets": [0, 1, 2],
+	            "targets": [0],
 	        }],
 	        order:[[1, 'asc']]
 		});
