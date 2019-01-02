@@ -71,7 +71,6 @@
 		<section class="bar">
         	<div class="container">
           	<div class="row">
-            	<jsp:include page="../user_layout/user_sidebar.jsp" />
 				<fieldset>
            			<h1 class="s2">mission add(after login)</h1>
            			
@@ -137,7 +136,7 @@
     </div>
     
     <div class="form-group">
-          上傳圖片:<input type="file" id="missionPicture" name="missionPicture" accept="image/*" class="form-control" />
+    missionPicture:<input type="file" id="missionPicture" name="missionPicture" accept="image/*" class="form-control" />
     </div>  
     
     <div class="form-group">

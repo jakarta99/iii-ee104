@@ -80,7 +80,6 @@
 	 <section class="bar">
         <div class="container">
           <div class="row">
-            <jsp:include page="../user_layout/user_sidebar.jsp" />
     <div style="width:850px">
 	<h1 class="s2">志工審核</h1>
 	
