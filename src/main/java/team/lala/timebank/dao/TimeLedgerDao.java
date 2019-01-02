@@ -18,6 +18,6 @@ public interface TimeLedgerDao extends JpaRepository<TimeLedger, Long>, JpaSpeci
 			LocalDateTime transactionTimeEnd);
 
 	// 查詢某人的所有交易紀錄(by Anchor)
-	public List<TimeLedger> findAllByMemberId(Long memberId);
+	public List<TimeLedger> findByMemberId(Long memberId);
 
 }

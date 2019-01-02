@@ -47,6 +47,43 @@ public class MissionService {
 		Page<Mission> missions = this.findBySpecification(missionSpec, pageRequest);
 		return missions;
 	}
+	//insert for user
+		public Mission insertMissionAndPicture(MultipartFile missionPicture, Mission mission, HttpServletRequest request) {
+			try {
+				mission = insert(mission);
+				mission.setUpdateDate(new java.util.Date());
+				mission = missionDao.save(mission);
+				
+				// 如果有上傳圖片，才存檔案到Server，及存路徑到DB
+				if (missionPicture.getOriginalFilename().length() > 0) {
+					// 取得應用程式根目錄中圖片之路徑
+					String realPath = request.getServletContext().getRealPath("/") + "..\\resources\\static\\img\\";
+					System.out.println(realPath + "***************************");
+					// 確認是否有此資料夾，如無則建資料夾
+					File dir = new File(realPath);
+					if (!dir.exists()) {
+						dir.mkdirs();
+					}
+					// 檔名
+					String location = realPath + "missionPicture_" + mission.getId() + ".jpg";
+
+					// 寫出檔案到Server
+					FileOutputStream fos = new FileOutputStream(location);
+					fos.write(missionPicture.getBytes());
+					fos.close();
+			
+					// 將檔名存入DB
+					mission.setMissionPicName("missionPicture_" + mission.getId() + ".jpg");
+					mission = missionDao.save(mission);
+
+				}
+				return mission;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				return mission;
+			}
+		}
 
 	// insert for Admin
 	public Mission insert(Mission mission) {
@@ -113,7 +150,38 @@ public class MissionService {
 		mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
 		return missionDao.save(mission);
 	}
+	
+	public Mission update(Mission mission, MultipartFile missionPicture, HttpServletRequest request) {
+		mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
+		try {	
+			// 如果有上傳圖片，才存檔案到Server，及存路徑到DB
+			if (missionPicture.getOriginalFilename().length() > 0) {
+				// 取得應用程式根目錄中圖片之路徑
+				String realPath = request.getServletContext().getRealPath("/") + "..\\resources\\static\\img\\";
+				// 確認是否有此資料夾，如無則建資料夾
+				File dir = new File(realPath);
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+				// 檔名
+				String location = realPath + "missionPicture_" + mission.getId() + ".jpg";
 
+				// 寫出檔案到Server
+				FileOutputStream fos = new FileOutputStream(location);
+				fos.write(missionPicture.getBytes());
+				fos.close();
+
+				// 將檔名存入DB
+				mission.setMissionPicName("missionPicture_" + mission.getId() + ".jpg");
+				mission = missionDao.save(mission);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return mission;
+		}
+		return missionDao.save(mission);
+	}
+	
 	// cancel for user
 	public Mission cancel(Long id) {
 		Mission mission = missionDao.getOne(id);
@@ -146,45 +214,7 @@ public class MissionService {
 		Page<Mission> missions = missionDao.findByMember(memberDao.findByAccount(principal.getName()), pageable);
 		return missions;
 	}
-	//update for user
-	public Mission saveMissionAndPicture(MultipartFile missionPicture, Mission mission, HttpServletRequest request) {
-		try {
-			
-			mission.setUpdateDate(new java.util.Date());
-			mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
-			mission = missionDao.save(mission);
-			
-			// 如果有上傳圖片，才存檔案到Server，及存路徑到DB
-			if (missionPicture.getOriginalFilename().length() > 0) {
-				// 取得應用程式根目錄中圖片之路徑
-				String realPath = request.getServletContext().getRealPath("/") + "..\\resources\\static\\img\\";
-				System.out.println(realPath + "***************************");
-				// 確認是否有此資料夾，如無則建資料夾
-				File dir = new File(realPath);
-				if (!dir.exists()) {
-					dir.mkdirs();
-				}
-				// 檔名
-				String location = realPath + "missionPicture_" + mission.getId() + ".jpg";
-
-				// 寫出檔案到Server
-				FileOutputStream fos = new FileOutputStream(location);
-				fos.write(missionPicture.getBytes());
-				fos.close();
-
-				// 將檔名存入DB
-				mission.setMissionPicName("missionPicture_" + mission.getId() + ".jpg");
-				mission = missionDao.save(mission);
-
-			}
-			return mission;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return mission;
-		}
-	}
-
+	
 	public Mission getOne(Long id) {
 
 		Mission mission = missionDao.getOne(id);

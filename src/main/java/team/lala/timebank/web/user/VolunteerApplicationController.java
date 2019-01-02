@@ -58,11 +58,10 @@ public class VolunteerApplicationController {
 	
 	@ResponseBody
 	@RequestMapping("/volunteerRecord/score")		//志工幫雇主評分
-	public AjaxResponse<Order> Score(@RequestParam(value="id") Long id, @RequestParam(value="score") String score) {
+	public AjaxResponse<Order> Score(@RequestParam(value="orderId") Long orderId, @RequestParam(value="score") int score) {
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		try {
-			int Iscore = Integer.parseInt(score);
-			orderService.Score(id, Iscore);
+			orderService.Score(orderId, score);
 		} catch (NumberFormatException e) {
 			response.addMessage("評分失敗，" + e.getMessage());
 			e.printStackTrace();

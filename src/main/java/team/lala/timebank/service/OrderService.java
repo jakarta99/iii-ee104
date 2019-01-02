@@ -60,8 +60,9 @@ public class OrderService {
 	}
 	
 	//志工幫雇主評分
-	public void Score(Long memberId, Integer score) {
-		Member member = memberDao.getOne(memberId);
+	public void Score(Long orderId, Integer score) {
+		Order order = orderDao.getOne(orderId);
+		Member member = order.getMission().getMember();
 		if(member.getScoredTimes() == null || member.getScoredTimes() == 0) {
 			member.setScoredTimes(1);
 		} else {
@@ -72,8 +73,10 @@ public class OrderService {
 		} else {
 			member.setSumScore(member.getSumScore() + score);			
 		}
-		member.setAverageScore(member.getSumScore() / member.getScoredTimes());
+		member.setAverageScore(new Double(member.getSumScore() / member.getScoredTimes()));	
 		memberDao.save(member);
+		order.setOrderStatus(OrderStatus.ServiceFinishPayAndScoreMatchSuccess);		//修改order狀態
+		orderDao.save(order);
 	}
 	
 	//志工檢舉雇主
@@ -87,7 +90,8 @@ public class OrderService {
 		penalty.setDescription(description);
 		penalty.setStatus(new Integer(1));
 		penaltyDao.save(penalty);
-		
+		order.setOrderStatus(OrderStatus.VolunteerReportRequestMatchSuccess);
+		orderDao.save(order);
 	}
 
 	public List<Order> findAll() {

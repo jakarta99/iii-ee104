@@ -68,8 +68,7 @@ public class VolunteerVerifyController {
 			orderService.accept(orderId);
 			SystemMessage systemMessage = new SystemMessage();
 			systemMessage.setMessageType(SystemMessageType.MissionAccecpt);
-			systemMessageService.volunteerVerify(systemMessage, orderService.getById(orderId).getVolunteer().getId(),
-					orderService.getById(orderId).getMission().getTitle());
+			systemMessageService.volunteerVerify(systemMessage, orderService.getById(orderId));
 
 		} catch (Exception e) {
 			response.addMessage("接受失敗，" + e.getMessage());
@@ -89,8 +88,7 @@ public class VolunteerVerifyController {
 			orderService.reject(orderId);
 			SystemMessage systemMessage = new SystemMessage();
 			systemMessage.setMessageType(SystemMessageType.MissionReject);
-			systemMessageService.volunteerVerify(systemMessage, orderService.getById(orderId).getVolunteer().getId(),
-					orderService.getById(orderId).getMission().getTitle());
+			systemMessageService.volunteerVerify(systemMessage, orderService.getById(orderId));
 
 		} catch (Exception e) {
 			response.addMessage("接受失敗，" + e.getMessage());

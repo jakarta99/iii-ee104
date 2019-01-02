@@ -70,7 +70,6 @@
 			    <button type="button" id="orderStatus7" class="btn btn-primary">媒合成功紀錄</button>
 			    <button type="button" id="orderStatus3" class="btn btn-secondary">媒合失敗紀錄</button>
 					<form>
-						<div>基本查詢:</div>
 						<label>活動地址:</label>
 						<div role="tw-city-selector" ></div>
 						<label>開始日期:</label>
@@ -201,7 +200,7 @@
 		            		var reportButt = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reportModalCenter">檢舉</button>'
 		            		return reportButt + reportModal;
 		            	} else if (data.orderStatus == "ServiceFinishPayMatchSuccess") {
-							var score = "<input type='button' class='btn btn-primary btn-sm'  onclick=sendScore(" + data.mission.member.id +") value='評分'  />"
+							var score = "<input type='button' class='btn btn-primary btn-sm'  onclick=sendScore(" + data.id +") value='評分'  />"
 		            		var select = "<select id='score' name='score'><option value=''>請評分</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option></select>"
 							var scoreModal = '<div class="modal fade" id="scoreModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">'+
 											  '<div class="modal-dialog modal-dialog-centered" role="document">'+
@@ -217,6 +216,10 @@
 									       score + '</div></div></div></div>';
 							var scoreButt = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#scoreModalCenter">評分</button>'
 		            		return scoreButt + scoreModal;		            		
+		            	} else if (data.orderStatus == "ServiceFinishPayAndScoreMatchSuccess"){
+		            		return '<button type="button" class="btn btn-primary btn-sm">已評分</button>'
+		            	} else if (data.orderStatus == "VolunteerReportRequestMatchSuccess" || data.orderStatus == "RequesterCancleActivityPunishMatchSuccess"){
+		            		return '<button type="button" class="btn btn-primary btn-sm">已檢舉</button>'
 		            	} else {
 		            		return null;
 		            	}
@@ -278,12 +281,12 @@
 		})
 		
 		//評分
-		function sendScore(memberId) {
+		function sendScore(orderId) {
 			if ($('#score').val() == null || $('#score').val().length == 0){
 				alert("請評分")
 			} else {			
 				$.ajax({
-					url : '/user/volunteerRecord/score?id=' + memberId+'&score=' + $('#score').val(),
+					url : '/user/volunteerRecord/score?orderId=' + orderId +'&score=' + $('#score').val(),
 					type : 'get',
 					dataType : 'JSON'
 				}).done(function(response){

@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
@@ -40,13 +43,11 @@ public class RecruitController {
 	@Autowired
 	private SystemMessageService systemMessageService;
 
-
 	@RequestMapping("/list")
 	public String listPage() {
 
 		return "/basic/user/volunteerRecruitment/mission_list";
 	}
-	
 
 	@RequestMapping("/query")
 	@ResponseBody
@@ -59,7 +60,8 @@ public class RecruitController {
 				PageRequest.of(page, length.orElse(10)));
 		return missions;
 	}
-	//編輯mission並發送系統訊息
+
+	// 編輯mission並發送系統訊息
 	@RequestMapping("/edit")
 	public String editRecruit(@RequestParam("id") Long id, Model model) {
 		Mission mission = missionService.getOne(id);
@@ -84,18 +86,18 @@ public class RecruitController {
 		}
 		return response;
 	}
-	
-	//取消mission並拒絕所有apply的order
+
+	// 取消mission並拒絕所有apply的order
 	@RequestMapping("/cancel")
 	@ResponseBody
 	public AjaxResponse<Mission> cancel(@RequestParam("id") Long id) {
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
 		try {
-			
+
 			response.setObj(missionService.getOne(id));
-			//更改mission狀態為5
+			// 更改mission狀態為5
 			missionService.cancel(id);
-			//拒絕所有apply的order
+			// 拒絕所有apply的order
 			List<Order> orders = orderService.findByMission(missionService.getOne(id));
 			orderService.rejectOrders(orders);
 			systemMessageService.missionCancel(orders);
@@ -108,7 +110,6 @@ public class RecruitController {
 		return response;
 	}
 
-	// 進行中
 	@RequestMapping("/recruiting")
 	@ResponseBody
 	public Page<Mission> recruiting(Mission inputMission, Principal principal,
@@ -120,41 +121,28 @@ public class RecruitController {
 				PageRequest.of(page, length.orElse(10)));
 		return missions;
 	}
-	
-	//編輯mission並發送系統訊息
+
+	// 編輯mission並發送系統訊息
 	@RequestMapping("/update")
-	@ResponseBody
-	public AjaxResponse<Mission> update(Mission mission) {
+
+	public String update(Mission mission, @RequestParam("missionPicture") MultipartFile missionPicture,
+			HttpServletRequest request, Model model) {
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
 
 		log.debug("mission.getMember()={}", mission.getMember());
 
 		try {
-			missionService.update(mission);
-			response.setObj(mission);
+			missionService.update(mission, missionPicture, request);
 			List<Order> orders = orderService.findByMission(mission);
 			systemMessageService.missionEdit(orders);
-
+			response.addMessage("修改成功");
+			
 		} catch (Exception e) {
 			response.addMessage("修改失敗，" + e.getMessage());
 			e.printStackTrace();
 		}
 
-		return response;
+		return "/basic/user/volunteerRecruitment/mission_list";
 	}
 
-	// // order
-	// @RequestMapping("/")
-	// @ResponseBody
-	// public Page<Order> queryOrder(Mission inputMission, Principal principal,
-	// @RequestParam(value = "start", required = false) Optional<Integer> start,
-	// @RequestParam(value = "length", required = false) Optional<Integer> length) {
-	// int page = start.orElse(0) / length.orElse(10);
-	//
-	// MissionSpecification missionSpec = new MissionSpecification(
-	// missionService.findByAccount(principal, inputMission));
-	// Page<Order> missions = missionService.findBySpecification(missionSpec,
-	// PageRequest.of(page, length.orElse(10)));
-	// return missions;
-	// }
 }

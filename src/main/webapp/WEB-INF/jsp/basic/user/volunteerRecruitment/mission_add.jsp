@@ -29,7 +29,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/i18n/jquery-ui-timepicker-zh-TW.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
 
-
+<meta http-equiv="Content-Type" content="multipart/form-data;charset=utf-8" />
 
 <title>mission add</title>
 <style>
@@ -71,12 +71,12 @@
 		<section class="bar">
         	<div class="container">
           	<div class="row">
-            	<jsp:include page="../user_layout/user_sidebar.jsp" />
 				<fieldset>
            			<h1 class="s2">mission add(after login)</h1>
-					<form action="/user/missionPublish/insert" method="post">
-	
-	
+           			
+           			
+           			
+	<form id=missionForm action="/user/missionPublish/insert" method="post" enctype="multipart/form-data">
 	<div>		
 		<label>活動縣市:</label> <br>
 		<div role="tw-city-selector" ></div>
@@ -133,16 +133,18 @@
     
     <div class="form-group">
     contactEmail:<input type="email" value="" id="contactEmail" name="contactEmail" class="form-control"/>
-    </div> 
+    </div>
+    
+    <div class="form-group">
+    missionPicture:<input type="file" id="missionPicture" name="missionPicture" accept="image/*" class="form-control" />
+    </div>  
     
     <div class="form-group">
     <label for="discription">discription:</label>
      <textarea class="form-control"  id="discription" name="discription" rows="3"></textarea>
     </div> 
-     
+     <button id="add" class="btn btn-outline-secondary" >提交</button>
      <div class="form-group">
-	<button type="button" onclick="addMission()"
-					class="btn btn-outline-secondary">提交</button>
 	<input type="reset"  class="btn btn-outline-secondary"/>
 	</div>
 	</form>
@@ -159,24 +161,47 @@
 	  
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script>
+// 	$(function(){
+// 		  $("#missionForm").submit(function(e){
+// 		    e.preventDefault(); // 停止觸發submit
+// 		    console.log("upload");
+// 		    var formData = new FormData($("#myForm")[0]); // 使用FormData包裝form表單來傳輸資料
+// 		    $.ajax({
+// 		      type: "POST",
+// 		      url: "upload",
+// 		      data:formData,
+// 		      cache:false, // 不需要cache
+// 		      processData: false, // jQuery預設會把data轉為query String, 所以要停用
+// 		      contentType: false, // jQuery預設contentType為'application/x-www-form-urlencoded; charset=UTF-8', 且不用自己設定為'multipart/form-data'
+// 		      dataType: 'text',
+// 		      success: function (data){
+// 		        console.log(data);
+// 		      }      
+// 		    });
+// 		  });
+// 		});
 	
-		function addMission() {
-			$.ajax({
-				url : "/user/missionPublish/insert",				
-				type : 'post',
-				data : $('form').serialize(),
-				dataType : 'JSON',
-				success : function(addResult) {
-					if(addResult.status == "SUCCESS"){
-						alert("新增編號" + addResult.obj.id + " "+ addResult.status);
-						document.location.href = "/user/missionPublish/add"
-					}else{
-						alert("新增編號" + addResult.obj.id + " " + addResult.status);
-						alert("FAIL reason:" + addResult.messages);
-					}
-				},
-			})
-		}
+// 		function addMission() {
+// 			var formdata = new FormData($("#missionForm"));  
+// 			$.ajax({
+// 				data : formdata,
+// 				url : "/user/missionPublish/insert",				
+// 				type : 'post',
+// 				cache:false,
+// 				traditional: true,
+// 				contentType: false,
+// 				processData: false,
+// 				success : function(addResult) {
+// 					if(addResult.status == "SUCCESS"){
+// 						alert("新增編號" + addResult.obj.id + " "+ addResult.status);
+// 						document.location.href = "/user/missionPublish/add"
+// 					}else{
+// 						alert("新增編號" + addResult.obj.id + " " + addResult.status);
+// 						alert("FAIL reason:" + addResult.messages);
+// 					}
+// 				},
+// 			})
+// 		}
 		$(document).ready(function() {
 			
 			
@@ -218,7 +243,7 @@
 			
 		
 		})
-
+		
 
 
 </script>

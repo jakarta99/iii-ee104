@@ -328,11 +328,11 @@
 								return vbutton;
 
 							}else if(data.missionstatus=="C_Cancel"){
-								var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">取消紀錄</button>";   
+								var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/closed/list?id="+data.id+"'\">取消紀錄</button>";   
 								return vbutton;	
 							
 							}else if(data.missionstatus=="C_Finish"){
-								var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">結案紀錄</button>";   
+								var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/closed/list?id="+data.id+"'\">結案紀錄</button>";   
 								return vbutton;	
 							
 							}else{

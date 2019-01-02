@@ -71,7 +71,7 @@
 	<div class="margintop"></div>
 	<div class="container" style="margin-top: 140px">
 		<h2 class="text-center text-uppercase text-secondary mb-0">mission list</h2>
-        <hr class="star-dark mb-5">
+<!--         <hr class="star-dark mb-5"> -->
 	</div>
 	
 	<div id="sideBar">
@@ -99,18 +99,22 @@
 					        <option value="宗教信仰">宗教信仰</option>
 						</select>
 						
-					<label>長短期 :</label> 
+					
+					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
+					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
+					<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" 
+						role="button" aria-expanded="false" aria-controls="collapse">進階查詢</a>
+				</div> 
+				<div class="collapse" id="collapse">
+					<div>
+						<label>長短期 :</label> 
 						<select  id="termType" name="termType">
 							<option value="">請選擇</option>
 							<option value="L">長期</option>
 					        <option value="S">短期</option>
 						</select>
-					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
-					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
-					<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" 
-						role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a>
-				</div> 
-				<div class="collapse" id="collapse">
+					</div>
+					
 					<div>
 						<label>縣市:</label> 
 						<div id="twCitySelector" style='display:inline' role="tw-city-selector"></div>
@@ -143,7 +147,7 @@
 		</div>
 		<table id="table" class="table table-hover">
 			<thead>
-				<tr>
+				<tr style="background-color: white">
 					<th width="100px">選項</th>
 					<th scope="col">會員編號</th>
 					<th scope="col">會員帳號</th>
