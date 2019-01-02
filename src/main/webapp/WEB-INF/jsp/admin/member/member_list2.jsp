@@ -93,18 +93,20 @@
 					<input type="text" value="${param.account }" placeholder="帳號" id="account" name="account"/>
 					<label>名字 :</label> 
 					<input type="text" value="${param.name }" placeholder="名字" id="name" name="name"/>
+					<input type="button"  value="搜尋" id="searchButt" style="margin:10px"/>
+					<input type="reset"  value="重設"  id="resetButt" style="margin:10px"/>
+				<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
+				進階查詢</a>
+				</div>
+			<div class="collapse" id="collapse">
+				<div>
 					<label>會員類型 :</label> 
 					<select  id="memberType" name="memberType">
 						<option value="">選擇會員類型</option>
 						<option value="P">一般會員</option>
 						<option value="O">機構會員</option>
 					</select>
-					<input type="button"  value="搜尋" id="searchButt" style="margin:10px"/>
-					<input type="reset"  value="重設"  id="resetButt" style="margin:10px"/>
-				<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
-				進階查詢:</a>
 				</div>
-			<div class="collapse" id="collapse">
 				<div >
 					<label>出生起始日期:</label> 
 					<input type="text" value="${param.birthDateStart }"  id="birthDateStart" name="birthDateStart" autocomplete="off" />

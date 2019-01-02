@@ -79,7 +79,7 @@
 					<input type="button" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="search" id="searchButt" />
 				  	<input type="reset" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value=reset id="resetButt" />
 					<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" 
-							role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a>
+							role="button" aria-expanded="false" aria-controls="collapse">進階查詢</a>
 				</div>
 				
 				<div class="collapse" id="collapse">

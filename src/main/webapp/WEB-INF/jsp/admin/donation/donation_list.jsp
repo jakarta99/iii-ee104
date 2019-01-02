@@ -74,14 +74,15 @@
 			    <input type="text" value="${param.id}" id="id" name="id"/>
 			    <label>donator:</label>
 			    <input type="text" value="${param.donator}" id="donatorAccount" name="donatorAccount"/>
-			    <label>orgDonee:</label>
-			    <input type="text" value="${param.orgDonee}" id="orgDoneeAccount" name="orgDoneeAccount"/>
+			    
 		    	<input type="button" value="搜尋"  id="searchButt" style="margin:10px" onclick="dataTable.ajax.reload()"/> 
 				<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
 				<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" 
-						role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a>
+						role="button" aria-expanded="false" aria-controls="collapse">進階查詢</a>
 		    </div>
 		    <div class="collapse" id="collapse">
+			    <label>orgDonee:</label>
+			    <input type="text" value="${param.orgDonee}" id="orgDoneeAccount" name="orgDoneeAccount"/>
 			    <label>起始日期</label>
 			    <input type="text" value="${param.donateTimeBegin}" id="donateTimeBegin" name="donateTimeBegin" autocomplete="off"/>
 			    <label>結束日期</label>

@@ -99,18 +99,22 @@
 					        <option value="宗教信仰">宗教信仰</option>
 						</select>
 						
-					<label>長短期 :</label> 
+					
+					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
+					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
+					<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" 
+						role="button" aria-expanded="false" aria-controls="collapse">進階查詢</a>
+				</div> 
+				<div class="collapse" id="collapse">
+					<div>
+						<label>長短期 :</label> 
 						<select  id="termType" name="termType">
 							<option value="">請選擇</option>
 							<option value="L">長期</option>
 					        <option value="S">短期</option>
 						</select>
-					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
-					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
-					<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" 
-						role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a>
-				</div> 
-				<div class="collapse" id="collapse">
+					</div>
+					
 					<div>
 						<label>縣市:</label> 
 						<div id="twCitySelector" style='display:inline' role="tw-city-selector"></div>
