@@ -157,7 +157,7 @@
 		<th scope="col">活動名稱</th>
 		<th scope="col">需求人數</th>
 		<th scope="col">地點</th>
-		<th scope="col">時間</th>
+		<th id="time" scope="col">開始時間</th>
 		<th id="statusField" scope="col">志工審核</th>
 		<th scope="col">狀態</th>
 	</tr>
@@ -189,30 +189,33 @@
 	})
 	
 	$("#status12Butt").click(function(){
-		$("#statusField").empty().append("志工審核")
-		$("#status12Butt").attr('class',"btn btn-outline-primary")
-		$("#status3Butt").attr('class',"btn btn-outline-secondary")
-		$("#status4Butt").attr('class',"btn btn-outline-secondary")
+		$("#time").empty().append("開始時間");
+		$("#statusField").empty().append("志工審核");
+		$("#status12Butt").attr('class',"btn btn-outline-primary");
+		$("#status3Butt").attr('class',"btn btn-outline-secondary");
+		$("#status4Butt").attr('class',"btn btn-outline-secondary");
 		$("#missionstatus").val("A_VolunteerApproved");
 		dataTable.ajax.reload();
 		
 	})
 	
 	$("#status3Butt").click(function(){
-		$("#statusField").empty().append("時數核發")
-		$("#status12Butt").attr('class',"btn btn-outline-secondary")
-		$("#status3Butt").attr('class',"btn btn-outline-primary")
-		$("#status4Butt").attr('class',"btn btn-outline-secondary")
+		$("#time").empty().append("結束時間");
+		$("#statusField").empty().append("時數核發");
+		$("#status12Butt").attr('class',"btn btn-outline-secondary");
+		$("#status3Butt").attr('class',"btn btn-outline-primary");
+		$("#status4Butt").attr('class',"btn btn-outline-secondary");
 		$("#missionstatus").val('B_AccountsPayable');
 		dataTable.ajax.reload();
 		
 	})
 	
 	$("#status4Butt").click(function(){
-		$("#statusField").empty().append("結案紀錄")
-		$("#status12Butt").attr('class',"btn btn-outline-secondary")
-		$("#status3Butt").attr('class',"btn btn-outline-secondary")
-		$("#status4Butt").attr('class',"btn btn-outline-primary")
+		$("#time").empty().append("結案時間");
+		$("#statusField").empty().append("結案紀錄");
+		$("#status12Butt").attr('class',"btn btn-outline-secondary");
+		$("#status3Butt").attr('class',"btn btn-outline-secondary");
+		$("#status4Butt").attr('class',"btn btn-outline-primary");
 		$("#missionstatus").val('C_Finish');
 		dataTable.ajax.reload();
 		
@@ -303,8 +306,10 @@
 							 var editbutton="<button class='btn btn-outline-primary' onclick=\"javascript:document.location.href='/user/volunteerRecruitment/edit?id="+data.id+"'\">編輯</button>";     
 							 var cancelbutton="<button class='btn btn-outline-danger' onclick=\"cancelMission("+data.id+")\">取消</button>"; 	
 							 return editbutton + cancelbutton;
-							 }else{
-								 return "活動進行中" ;
+							 }else if(data.missionstatus == "B_AccountsPayable"){
+								 return "待核發" ;
+							 }else if(data.missionstatus == "C_Finish" || data.missionstatus == "C_Cancel"){
+								 return "結案活動" ;
 							 }
 						}
 						},					 
@@ -315,7 +320,15 @@
 			            }},						
 						
 			            {"data":null, render: function ( data, type, row ) {
-			                return new Date(data.startDate).toLocaleDateString();
+			            	if(data.missionstatus == "A_New" || data.missionstatus == "A_VolunteerApproved"){
+			            		return new Date(data.startDate).toLocaleDateString();
+			            	}else if(data.missionstatus == "B_AccountsPayable"){
+			            		return new Date(data.endDate).toLocaleDateString();
+			            	}else if(data.missionstatus == "C_Finish" || data.missionstatus == "C_Cancel"){
+			            		return new Date(data.finishDate).toLocaleDateString();
+			            	}
+			            	return new Date(data.startDate).toLocaleDateString();
+			                
 			            }},	
 					
 						{"data":function (data, type, val) {
