@@ -63,7 +63,7 @@
 <article>
 	<div class="container" style="margin-top: 140px">
 		<h2 class="text-center text-uppercase text-secondary mb-0">donation list</h2>
-        <hr class="star-dark mb-5">
+<!--         <hr class="star-dark mb-5"> -->
 	</div>
 	<div id="sideBar">
 		<form>

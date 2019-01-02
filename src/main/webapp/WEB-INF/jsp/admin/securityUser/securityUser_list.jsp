@@ -55,7 +55,7 @@
 	<article>
 	<div class="container" style="margin-top: 140px">
 		<h2 class="text-center text-uppercase text-secondary mb-0">securityUser List</h2>
-        <hr class="star-dark mb-5">
+<!--         <hr class="star-dark mb-5"> -->
 	</div>
 	<fieldset style="width:700px">
 		<input type="button" class="btn btn-warning btn-sm" id="editButt3" onclick="editRow()" value="更新-2"/>
