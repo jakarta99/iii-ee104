@@ -9,11 +9,15 @@ import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.MissionDao;
 import team.lala.timebank.dao.OrderDao;
+import team.lala.timebank.dao.SystemMessageDao;
 import team.lala.timebank.dao.TimeLedgerDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
+import team.lala.timebank.entity.SystemMessage;
 import team.lala.timebank.entity.TimeLedger;
 import team.lala.timebank.enums.OrderStatus;
+import team.lala.timebank.enums.SystemMessageType;
+import team.lala.timebank.enums.YesNo;
 
 @Slf4j
 @Service
@@ -29,11 +33,14 @@ public class PayService {
 
 	@Autowired
 	private MissionDao missionDao;
+	@Autowired
+	private SystemMessageDao systemMessageDao;
 
 	// 交易
-	public Order transaction(Integer hours, Long volunteerId, Long payerId, String missionTitle, Long orderId,Integer score) {
+	public Order transaction(Integer hours, Long volunteerId, Long payerId, String missionTitle, Long orderId,
+			Integer score) {
 
-		//變更order 狀態
+		// 變更order 狀態
 		Order order = orderDao.getOne(orderId);
 		if (order.getOrderStatus() == OrderStatus.ServiceFinishNotPay) {
 
@@ -82,16 +89,35 @@ public class PayService {
 			// 2.3 insert
 			timeLedgerDao.save(volunteerTimeLedger);
 			order.setOrderStatus(OrderStatus.ServiceFinishPayMatchSuccess);
-			
-			Member volunteer=memberDao.getOne(volunteerId);
-			volunteer.setSumScore(volunteer.getSumScore()+score);			
-			volunteer.setScoredTimes(volunteer.getScoredTimes()+1);
-			volunteer.setAverageScore(new Double(volunteer.getSumScore()/volunteer.getScoredTimes()));
-			
-			
+
+			// 3 評分
+			Member volunteer = memberDao.getOne(volunteerId);
+			volunteer.setSumScore(volunteer.getSumScore() + score);
+			volunteer.setScoredTimes(volunteer.getScoredTimes() + 1);
+			volunteer.setAverageScore(new Double(volunteer.getSumScore() / volunteer.getScoredTimes()));
+			// 4系統訊息
+			// 付款後收到的訊息
+			SystemMessage pay = new SystemMessage();
+			pay.setSender(order.getMission().getMember());
+			pay.setReleaseTime(new Date());
+			pay.setReadStatus(YesNo.N);
+			pay.setMember(order.getMission().getMember());
+			pay.setMessage("您因為志工活動:[" + order.getMission().getTitle() + "]付款給:["
+					+ memberDao.getOne(volunteerId).getName() + "]共" + hours + "小時已成功");
+			pay.setMessageType(SystemMessageType.PayTimeValue);
+			systemMessageDao.save(pay);
+			// 入賬後收到的訊息
+			SystemMessage earn = new SystemMessage();
+			earn.setSender(order.getMission().getMember());
+			earn.setReleaseTime(new Date());
+			earn.setReadStatus(YesNo.N);
+			earn.setMember(order.getVolunteer());
+			earn.setMessage("您參加志工活動:[" + order.getMission().getTitle() + "]獲得" + hours + "小時已入帳");
+			earn.setMessageType(SystemMessageType.PayTimeValue);
+			systemMessageDao.save(earn);
+
 			return orderDao.save(order);
-			
-			
+
 		}
 		return null;
 	}
