@@ -10,6 +10,7 @@ import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.MissionDao;
 import team.lala.timebank.dao.OrderDao;
 import team.lala.timebank.dao.TimeLedgerDao;
+import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.TimeLedger;
 import team.lala.timebank.enums.OrderStatus;
@@ -30,7 +31,7 @@ public class PayService {
 	private MissionDao missionDao;
 
 	// 交易
-	public Order transaction(Integer hours, Long volunteerId, Long payerId, String missionTitle, Long orderId) {
+	public Order transaction(Integer hours, Long volunteerId, Long payerId, String missionTitle, Long orderId,Integer score) {
 
 		//變更order 狀態
 		Order order = orderDao.getOne(orderId);
@@ -46,6 +47,7 @@ public class PayService {
 			if (payerLastTimeLedger != null && payerLastTimeLedger.getBalanceValue() >= hours) {
 				// 1.2 prepare timeledger data
 				payerTimeLedger = new TimeLedger();
+				payerTimeLedger.setDepositValue(0);
 				payerTimeLedger.setMemberId(memberDao.getOne(payerId));
 				payerTimeLedger.setWithdrawalValue(hours);
 				payerTimeLedger.setTransactionTime(new Date());
@@ -70,6 +72,7 @@ public class PayService {
 
 			// 2.2 prepare timeledger data
 			TimeLedger volunteerTimeLedger = new TimeLedger();
+			volunteerTimeLedger.setWithdrawalValue(0);
 			volunteerTimeLedger.setMemberId(memberDao.getOne(volunteerId));
 			volunteerTimeLedger.setDepositValue(hours);
 			volunteerTimeLedger.setBalanceValue(volunteerLastTimeLedger.getBalanceValue() + hours);
@@ -79,8 +82,16 @@ public class PayService {
 			// 2.3 insert
 			timeLedgerDao.save(volunteerTimeLedger);
 			order.setOrderStatus(OrderStatus.ServiceFinishPayMatchSuccess);
-
+			
+			Member volunteer=memberDao.getOne(volunteerId);
+			volunteer.setSumScore(volunteer.getSumScore()+score);			
+			volunteer.setScoredTimes(volunteer.getScoredTimes()+1);
+			volunteer.setAverageScore(new Double(volunteer.getSumScore()/volunteer.getScoredTimes()));
+			
+			
 			return orderDao.save(order);
+			
+			
 		}
 		return null;
 	}

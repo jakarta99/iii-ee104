@@ -180,7 +180,7 @@ public class Member implements UserDetails {
 	private Integer scoredTimes;
 	
 	@Column(name = "AVERAGE_SCORE")
-	private Integer averageScore;
+	private Double averageScore;
 	
 //	 public void addRole(Role role) {
 //	       if (!getRoles().contains(role)) {

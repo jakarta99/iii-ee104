@@ -43,22 +43,22 @@ public class SystemMessageService {
 	}
 
 	// 通知志工申請已被接受
-	public SystemMessage volunteerVerify(SystemMessage systemMessage, Long memberId, String title) {
+	public SystemMessage volunteerVerify(SystemMessage systemMessage, Order order) {
 		if (systemMessage.getMessageType() == SystemMessageType.MissionAccecpt) {
-			systemMessage.setSender(null);
+			systemMessage.setSender(order.getMission().getMember());
 			systemMessage.setReleaseTime(new Date());
 			systemMessage.setReadStatus(YesNo.N);
-			systemMessage.setMember(memberDao.getOne(memberId));
-			systemMessage.setMessage("您申請的志工活動:[" + title + "]已被接受");
+			systemMessage.setMember(order.getVolunteer());
+			systemMessage.setMessage("您申請的志工活動:[" + order.getMission().getTitle() + "]已被接受");
 			systemMessage.setMessageType(systemMessage.getMessageType());
 
 			return systemMessageDao.save(systemMessage);
 		} else {
-			systemMessage.setSender(null);
+			systemMessage.setSender(order.getMission().getMember());
 			systemMessage.setReleaseTime(new Date());
 			systemMessage.setReadStatus(YesNo.N);
-			systemMessage.setMember(memberDao.getOne(memberId));
-			systemMessage.setMessage("您申請的志工活動:[" + title + "]已被拒絕");
+			systemMessage.setMember(order.getVolunteer());
+			systemMessage.setMessage("您申請的志工活動:[" + order.getMission().getTitle() + "]已被拒絕");
 			systemMessage.setMessageType(systemMessage.getMessageType());
 
 			return systemMessageDao.save(systemMessage);
@@ -70,7 +70,7 @@ public class SystemMessageService {
 	public void missionEdit(List<Order> orders) {
 		for (int i = 0; i < orders.size(); i++) {
 			SystemMessage systemMessage = new SystemMessage();
-			systemMessage.setSender(null);
+			systemMessage.setSender(orders.get(i).getMission().getMember());
 			systemMessage.setReleaseTime(new Date());
 			systemMessage.setReadStatus(YesNo.N);
 			systemMessage.setMember(orders.get(i).getVolunteer());
@@ -86,7 +86,7 @@ public class SystemMessageService {
 	public void missionCancel(List<Order> orders) {
 		for (int i = 0; i < orders.size(); i++) {
 			SystemMessage systemMessage = new SystemMessage();
-			systemMessage.setSender(null);
+			systemMessage.setSender(orders.get(i).getMission().getMember());
 			systemMessage.setReleaseTime(new Date());
 			systemMessage.setReadStatus(YesNo.N);
 			systemMessage.setMember(orders.get(i).getVolunteer());
