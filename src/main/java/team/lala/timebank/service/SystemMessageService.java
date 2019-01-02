@@ -1,5 +1,6 @@
 package team.lala.timebank.service;
 
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
@@ -8,16 +9,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.SystemMessageDao;
-import team.lala.timebank.entity.Mission;
+import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
-import team.lala.timebank.entity.ServiceType;
 import team.lala.timebank.entity.SystemMessage;
 import team.lala.timebank.enums.SystemMessageType;
 import team.lala.timebank.enums.YesNo;
+import team.lala.timebank.web.user.SystemMessageController;
 
 @Service
+@Slf4j
 public class SystemMessageService {
 
 	@Autowired
@@ -44,15 +47,29 @@ public class SystemMessageService {
 		systemMessageDao.deleteById(id);
 	}
 	
-	public Page<SystemMessage> findByReadStatus(YesNo readStatus, Pageable Pageable) {
-		Page<SystemMessage> systemMessages = systemMessageDao.findByReadStatus(readStatus, Pageable);
+	//Jasmine
+	public Page<SystemMessage> findByReadStatusAndMember(YesNo readStatus, Principal principal, Pageable Pageable) {
+		
+		Member member = memberDao.findByAccount(principal.getName());
+		Page<SystemMessage> systemMessages = systemMessageDao.findByReadStatusAndMember(readStatus, member, Pageable);
 		return systemMessages;
 	};
 	
-	public Page<SystemMessage> findAllByPage(Pageable Pageable) {
-		Page<SystemMessage> systemMessages = systemMessageDao.findAll(Pageable);
+	//Jasmine
+	public Page<SystemMessage> findAllByPageAndMember(Principal principal, Pageable Pageable) {
+		Member member = memberDao.findByAccount(principal.getName());
+		Page<SystemMessage> systemMessages = systemMessageDao.findByMember(member, Pageable);
 		return systemMessages;
 	};
+	
+	//Jasmine
+	//讀系統訊息後，變更狀態為已讀
+	public SystemMessage changeReadStatusAndGetSystemMessage(Long id) {
+		SystemMessage systemMessage = systemMessageDao.getOne(id);
+		systemMessage.setReadStatus(YesNo.Y);
+		SystemMessage result = systemMessageDao.save(systemMessage);
+		return result;
+	}
 	
 	
 	// 通知志工申請已被接受
