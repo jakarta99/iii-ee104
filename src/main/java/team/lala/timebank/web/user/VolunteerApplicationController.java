@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,7 +17,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Order;
+import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.service.OrderService;
+import team.lala.timebank.service.PenaltyService;
 
 @Slf4j
 @Controller
@@ -25,6 +28,9 @@ public class VolunteerApplicationController {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private PenaltyService penaltyService;
 
 	@RequestMapping("/volunteerApplication/applicationPage")	//進入志工申請中網頁
 	public String ApplicationPage() {
@@ -71,16 +77,26 @@ public class VolunteerApplicationController {
 		return response;	
 	}
 	
-	@ResponseBody
+//	@ResponseBody
 	@RequestMapping("/volunteerRecord/report")		//志工檢舉雇主
-	public AjaxResponse<Order> Report(@RequestParam(value="id") Long orderId,
+	public String Report(@RequestParam(value="orderId") Long orderId,
 			@RequestParam(value="description") String description,
 			@RequestParam("proofPic") MultipartFile proofPic
-			, MultipartHttpServletRequest request){
-		AjaxResponse<Order> response = new AjaxResponse<Order>();
-		orderService.Report(orderId, description, proofPic, request);
-
-		return response;
+			, MultipartHttpServletRequest request, Model model){
+		AjaxResponse<Order> ajaxResponse = new AjaxResponse<Order>();
+		
+		try {
+			orderService.Report(orderId, description, proofPic, request);
+			model.addAttribute("reportResult", ajaxResponse);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			ajaxResponse.addMessage(e.getMessage());
+			model.addAttribute("reportResult", ajaxResponse);
+			return "/basic/user/volunteerApplication/volunteerServiceRecordInquire";
+		} 
+		
+		return "/basic/user/volunteerApplication/volunteerServiceRecordInquire";
 	}
 
 	@ResponseBody

@@ -204,12 +204,68 @@
 	 		</div>
 	 	</div>
 	</section>
+
+
+<!-- Jasmine -->
+	<div class="modal fade" id="reportModalCenter" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalCenterTitle">檢舉系統</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<form enctype="multipart/form-data" onSubmit="return confirmReport();" action="/user/volunteerRecord/report" method="post">
+						<input type="hidden" id="orderListId" name="orderId"/>
+						
+						<h5>檢舉人名</h5>
+						<p>data.mission.member.account</p>
+		
+						<h5>檢舉原因</h5>
+						<textarea  id="description" name="description" cols="50" rows="5"></textarea>
+	
+						<input type="file" id="proofPic" name="proofPic"
+								accept="image/*">
+						<p>請選擇圖檔，如無佐證資料，則直接送出審核</p>
+						<input id="submit" type="submit" value="送出檢舉" class="btn btn-primary mb-2" />
+					</form>
+					
+				</div>
+				<div class="modal-footer"></div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
 	<!-- FOOTER -->
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
 	<script>
 		var dataTable;
 		var orderStatusDetail = "MatchSuccess";
+		
+		//Jasmine
+		function getReportData(id){
+			$("#orderListId").val(id);
+		}
+		
+		//Jasmine
 		$(document).ready(function() {
+			var reportResult = "${reportResult.status}";
+			if(reportResult == "SUCCESS"){
+				alert("檢舉成功");
+				reportResult = "";
+			}else if(reportResult == "ERROR"){
+				alert("檢舉失敗");
+				reportResult = "";
+			}
 			
 		dataTable = $('#table').DataTable({
 				pageResize: true, 
@@ -264,24 +320,26 @@
 		            } },
 		            { data: null, render: function(data, type, row ) {
 		            	if(data.orderStatus == "RequesterCancleActivityNoPunishMatchSuccess") {
-		            		var report = "<input type='button' class=\"btn btn-primary btn-sm\" onclick=report(" + data.id + ") value='檢舉'  />";
-		            		var text = "<textarea cols='40' rows='5' id='text' name='text'></textarea>"
-							var reportModal = '<div class="modal fade" id="reportModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">'+
-											  '<div class="modal-dialog modal-dialog-centered" role="document">'+
-									    '<div class="modal-content">'+
-									     '<div class="modal-header">'+
-									       '<h5 class="modal-title" id="exampleModalCenterTitle">檢舉系統</h5>'+
-									        '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
-									          '<span aria-hidden="true">&times;</span>'+
-									        '</button></div>'+
-									      '<div class="modal-body">'+ 
-									      '<h5>檢舉人名<h5><p>' + data.mission.member.account + '</p>' +
- 									      '<h5>檢舉原因</h5><p>' + text +'</p>' +
- 									      '<input type="file" id="proofPic" name="proofPic"  accept="image/*"><p>請選擇圖檔，如無佐證資料，則直接送出審核<p>' +
-									      '</div><div class="modal-footer">'+
-									      report + '</div></div></div></div>';
-		            		var reportButt = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reportModalCenter">檢舉</button>'
-		            		return reportButt + reportModal;
+		            		//var report = "<input type='button' class=\"btn btn-primary btn-sm\" onclick=report(" + data.id + ") value='檢舉'  />";
+// 		            		var text = "<textarea cols='40' rows='5' id='text' name='text'></textarea>"
+// 							var reportModal = '<div class="modal fade" id="reportModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">'+
+// 											  '<div class="modal-dialog modal-dialog-centered" role="document">'+
+// 									    '<div class="modal-content">'+
+// 									     '<div class="modal-header">'+
+// 									       '<h5 class="modal-title" id="exampleModalCenterTitle">檢舉系統</h5>'+
+// 									        '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+// 									          '<span aria-hidden="true">&times;</span>'+
+// 									        '</button></div>'+
+// 									      '<div class="modal-body">'+ 
+// 									      '<h5>檢舉人名<h5><p>' + data.mission.member.account + '</p>' +
+//  									      '<h5>檢舉原因</h5><p>' + text +'</p>' +
+//  									      '<input type="file" id="proofPic" name="proofPic"  accept="image/*"><p>請選擇圖檔，如無佐證資料，則直接送出審核<p>' +
+// 									      '</div><div class="modal-footer">'+
+// 									      report + '</div></div></div></div>';
+							var account = data.mission.member.account;
+		            		var reportButt = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reportModalCenter" '
+		            						+'onclick="getReportData(' + data.id + ')">檢舉</button>'
+		            		return reportButt; // + reportModal;
 		            	} else if (data.orderStatus == "ServiceFinishPayMatchSuccess") {
 							var score = "<input type='button' class='btn btn-primary btn-sm'  onclick=sendScore(" + data.id +") value='評分'  />"
 		            		var select = "<select id='score' name='score'><option value=''>請評分</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option></select>"
@@ -384,24 +442,17 @@
 		}
 		
 		//檢舉
-		function report(orderId) {
+		//Jasmine
+		function confirmReport() {
 			if(confirm("確認要送出檢舉嗎？")==true) {
-				$.ajax({
-					url : '/user/volunteerRecord/report?id='+ orderId+'&description=' + $('#text').val(),
-					type : 'get',
-					dataType : 'JSON'
-				}).done(function(response){
-					if (response.status =="SUCCESS"){
-						alert("檢舉成功");
-					} else {
-						alert("檢舉失敗");
-					}			
-					window.location.reload();
-				})	
+				return true;
 			} else {
 				return false;
 			}
 		}
+
+		
+		
 		
 		//切換服務狀態
 		var Status7 = 
