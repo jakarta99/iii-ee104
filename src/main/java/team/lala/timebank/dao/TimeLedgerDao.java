@@ -3,6 +3,8 @@ package team.lala.timebank.dao;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -18,6 +20,8 @@ public interface TimeLedgerDao extends JpaRepository<TimeLedger, Long>, JpaSpeci
 			LocalDateTime transactionTimeEnd);
 
 	// 查詢某人的所有交易紀錄(by Anchor)
-	public List<TimeLedger> findByMemberId(Long memberId);
+	public List<TimeLedger> findByMemberId(Member memberId);
+	
+	public Page<TimeLedger> findByMemberId(Member memberId, Pageable pageable);
 
 }

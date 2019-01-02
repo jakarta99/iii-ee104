@@ -137,7 +137,13 @@ public class MemberService {
 		Member member = null;
 		member = memberDao.findByAccount(m.getAccount());
 		return member;
-
+	}
+	
+	
+	public Member findByAccount(String s) {
+		Member member = null;
+		member = memberDao.findByAccount(s);
+		return member;
 	}
 
 
