@@ -40,9 +40,9 @@
 	<article>
 	<h2>serviceType List</h2>
 	<fieldset style="width:700px">
-		<table  id=table class="table table-striped table-bordered">				
+		<table  id=table class="table table-hover">				
 			<thead>
-				<tr>
+				<tr style="background-color:white">
 <!-- 					<th scope="col"></th> -->
 					<th scope="col" width="100px"></th>
 					<th scope="col">id</th>

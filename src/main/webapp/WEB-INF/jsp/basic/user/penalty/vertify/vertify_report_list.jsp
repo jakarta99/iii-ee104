@@ -48,7 +48,7 @@
 	<article>
 		<div class="container" style="margin-top: 140px">
 			<h2 class="text-center text-uppercase text-secondary mb-0" style="font-family: '微軟正黑體'">檢舉案件列表</h2>
-		    <hr class="star-dark mb-5">
+<!-- 		    <hr class="star-dark mb-5"> -->
 		</div>
 		<!-- 條件搜尋表單 -->
 		<div id="sideBar">
@@ -108,21 +108,20 @@
 			</div>
 	
 			
-			<table id="table" class="table table-striped table-bordered">
+			<table id="table" class="table table-hover">
 				<thead>
-					<tr>
+					<tr style="background-color: white">
 						<th scope="col"></th>
 						<th scope="col" width="50px"></th>
 						<th scope="col">檢舉案件編號</th>
-						<th scope="col">媒合案件編號</th>
+<!-- 						<th scope="col">媒合案件編號</th> -->
 						<th scope="col">檢舉案件活動名稱</th>
 						
 						<th scope="col">提出檢舉時間</th>
-						<th scope="col">檢舉人ID</th>
+<!-- 						<th scope="col">檢舉人ID</th> -->
 						<th scope="col">檢舉人帳號</th>
-						<th scope="col">被檢舉者ID</th>
+<!-- 						<th scope="col">被檢舉者ID</th> -->
 						<th scope="col">被檢舉者帳號</th>
-	<!-- 					<th scope="col">被檢舉者帳戶餘額(timeledger)(debug用)</th> -->
 						
 						<th scope="col">檢舉事由</th>
 						<th scope="col">懲罰額度(小時)</th>
@@ -199,15 +198,15 @@
 		               	return vertifyButt;	}
 		           	},
 		           	{data:"id" },
-					{data:"order.id"},
+// 					{data:"order.id"},
 					{data:"order.mission.title"},
 					{data:null, render:function(data, type, row){
 						return new Date(data.updateDate).toLocaleDateString();
 						}
 					},
-					{data:"accuser.id"},
+// 					{data:"accuser.id"},
 					{data:"accuser.account"},
-					{data:"defendant.id"},
+// 					{data:"defendant.id"},
 					{data:"defendant.account"},
 					{data:"description"},
 					{data:"penaltyTimeValue"},

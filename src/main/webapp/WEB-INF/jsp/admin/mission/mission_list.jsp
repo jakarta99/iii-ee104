@@ -71,7 +71,7 @@
 	<div class="margintop"></div>
 	<div class="container" style="margin-top: 140px">
 		<h2 class="text-center text-uppercase text-secondary mb-0">mission list</h2>
-        <hr class="star-dark mb-5">
+<!--         <hr class="star-dark mb-5"> -->
 	</div>
 	
 	<div id="sideBar">
@@ -143,7 +143,7 @@
 		</div>
 		<table id="table" class="table table-hover">
 			<thead>
-				<tr>
+				<tr style="background-color: white">
 					<th width="100px">選項</th>
 					<th scope="col">會員編號</th>
 					<th scope="col">會員帳號</th>

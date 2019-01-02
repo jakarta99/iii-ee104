@@ -62,7 +62,7 @@
 	<article>
 		<div class="container" style="margin-top: 140px">
 			<h2 class="text-center text-uppercase text-secondary mb-0">TimeLedger List</h2>
-	        <hr class="star-dark mb-5">
+<!-- 	        <hr class="star-dark mb-5"> -->
 		</div>
 
 	<!-- 			<button id="findAll" onclick="findAll()" class="btn btn-outline-secondary">findAll</button> -->
@@ -104,9 +104,9 @@
 			<div style="margin-bottom: 20px">
 				<button onclick="javascript:document.location.href='/admin/time-ledger/add'" class="btn btn-warning btn-sm">新增</button>
 			</div>
-				<table id="table" class="table table-bordered">
+				<table id="table" class="table table-hover">
 					<thead>
-						<tr>
+						<tr style="background-color:white">
 							<th scope="col"></th>
 							<th width="100px" scope="col">選項</th>
 							<th scope="col">id</th>

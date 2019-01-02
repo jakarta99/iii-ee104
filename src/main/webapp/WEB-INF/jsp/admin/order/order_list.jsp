@@ -65,7 +65,7 @@
 	<article>
 		<div class="container" style="margin-top: 140px">
 			<h2 class="text-center text-uppercase text-secondary mb-0">Order List</h2>
-	        <hr class="star-dark mb-5">
+<!-- 	        <hr class="star-dark mb-5"> -->
 		</div>
 
 		<!-- 條件搜尋表單 -->
@@ -111,9 +111,9 @@
 		<div style="margin-bottom: 20px">
 			<button onclick="javascript:document.location.href='/admin/order/add'" class="btn btn-warning btn-sm">新增</button>
 		</div>
-		<table id="table" class="table table-striped table-bordered">
+		<table id="table" class="table table-hover">
 			<thead>
-				<tr>
+				<tr style="background-color: white">
 					<th scope="col"></th>
 					<th scope="col" width="100px"></th>
 					<th scope="col">ID</th>			

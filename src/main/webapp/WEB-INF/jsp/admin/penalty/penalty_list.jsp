@@ -66,7 +66,7 @@
 	<article>
 		<div class="container" style="margin-top: 140px">
 			<h2 class="text-center text-uppercase text-secondary mb-0">Penalty List</h2>
-	        <hr class="star-dark mb-5">
+<!-- 	        <hr class="star-dark mb-5"> -->
 		</div>
 		
 		<!-- 條件搜尋表單 -->
@@ -118,9 +118,9 @@
 		<div style="margin-bottom: 20px">
 			<button onclick="javascript:document.location.href='/admin/penalty/add'" class="btn btn-warning btn-sm">新增</button>
 		</div>
-		<table id="table" class="table table-bordered">
+		<table id="table" class="table table-hover">
 			<thead>
-				<tr style="background-color:#ECFBFD">
+				<tr style="background-color:white">
 					<th scope="col"></th>
 					<th scope="col">ID</th>
 					<th scope="col" width="100px"></th>
@@ -258,7 +258,7 @@
 			
 			//產製EXCEL報表功能之按鈕
 			$("#excelButt").click(function(){
-				$(this).attr("href", "/admin/penalty/myexcel?" + $('form').serialize())
+				$(this).attr("href", "/admin/penalty/penaltyExcel?" + $('form').serialize())
 			})
 			
 		})

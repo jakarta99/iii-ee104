@@ -30,7 +30,7 @@
 	
 	<div class="container" style="margin-top: 140px">
 		<h2 class="text-center text-uppercase text-secondary mb-0" style="font-family: '微軟正黑體'" id="topic">檢舉案件審核</h2>
-	    <hr class="star-dark mb-5">
+<!-- 	    <hr class="star-dark mb-5"> -->
 	</div>
 
 	<form>

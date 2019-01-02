@@ -1,7 +1,8 @@
 package team.lala.timebank.web.admin;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,10 +11,13 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -107,30 +111,54 @@ public class AdminPenaltyController {
 		return penalties;
 
 	}
+	
 
+	
+	//Jasmine
 	// 嘗試印Excel報表
-	// 有成功下載EXCEL
-	@RequestMapping(value = "/myexcel", method = RequestMethod.GET)
+	@RequestMapping(value = "/penaltyExcel", method = RequestMethod.GET)
 	public ModelAndView getMyData(Penalty inputPenalty, HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		
-		Map<String, Object> model = new HashMap<String, Object>();
+		Map<String, Object> excelModel = new HashMap<String, Object>();
 		
 		// Sheet Name
-		model.put("sheetname", "PenaltiesSheet");
+		excelModel.put("sheetname", "PenaltiesSheet");
 		
 		// Headers List
 		List<String> headers = penaltyService.getPenaltyExcelHeaders();
-		model.put("headers", headers);
+		excelModel.put("headers", headers);
 		
 		// Results Table (List<Object[]>)
 		PenaltySpecification penaltySpec = new PenaltySpecification(inputPenalty);
 		List<List<String>> results= penaltyService.findAllBySpecificationForExcel(penaltySpec);
-		model.put("results", results);
+		excelModel.put("results", results);
 		
 		response.setContentType("application/ms-excel");
 		response.setHeader("Content-disposition", "attachment; filename=penaltiesFile.xlsx");
 
-		return new ModelAndView(new ExcelView(), model);
+		return new ModelAndView(new ExcelView(), excelModel);
 	}
-
+	
+//	//測PDF
+//	@RequestMapping(value = "/pdfreport", method = RequestMethod.GET,
+//            produces = MediaType.APPLICATION_PDF_VALUE)
+//    public ResponseEntity<InputStreamResource> citiesReport(Penalty inputPenalty) throws IOException {
+//
+////        List<City> cities = (List<City>) cityService.findAll();
+//        PenaltySpecification penaltySpec = new PenaltySpecification(inputPenalty);
+////		List<String> results= penaltyService.findAllBySpecificationForExcel(penaltySpec);
+//		
+//		
+////        ByteArrayInputStream bis = GeneratePdfReport.citiesReport(cities);
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.add("Content-Disposition", "inline; filename=citiesreport.pdf");
+//
+////        return ResponseEntity
+////                .ok()
+////                .headers(headers)
+////                .contentType(MediaType.APPLICATION_PDF)
+////                .body(new InputStreamResource(bis));
+//    }
+//
 }
