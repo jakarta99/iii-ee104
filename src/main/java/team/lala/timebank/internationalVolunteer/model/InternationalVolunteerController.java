@@ -101,7 +101,7 @@ public class InternationalVolunteerController {
 				System.out.println("----開始執行waker文章爬蟲定時任務");
 				Spider spider = Spider.create(wakerPageProcessor);
 				spider.addUrl(
-						"https://www.waker.org.tw")
+						"https://www.waker.org.tw/LocationList.aspx?nowPage=1&id=&tid=8")
 //						.addPipeline(wakerPipeline)
 						.thread(5).setExitWhenComplete(true).start();
 				spider.stop();

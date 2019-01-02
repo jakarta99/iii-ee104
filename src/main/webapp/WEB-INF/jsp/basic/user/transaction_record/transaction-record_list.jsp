@@ -45,45 +45,6 @@
 	 	color:#2c3e50;
 	 	font-size: 30px;
 	 }
-	 
-/* 	article { */
-/* 		font-family: 'Righteous', cursive; */
-/* 		margin-top: 30px; */
-/* 		margin-bottom: 30px; */
-/* 		padding: 10px; */
-/* 	} */
-/* 	article fieldset { */
-/* 		width: 800px; */
-/* 		border-radius: 15px; */
-/* 		padding: 20px;  */
-/* 		border: 3px solid rgb(146, 168, 209); */
-/* 		margin: auto; */
-/* 	} */
-/* 	article input, select, label { */
-/*   		padding-left: 10px;  		    */
-/*   		line-height:center;  */
-/* 	} */
-/* 	.center{ */
-/* 		text-align: center; */
-/* 	} */
-/* 	.myform { */
-/*         margin: 8% 11%; */
-/*         border-collapse: collapse; */
-/*         font-size: 100%; */
-/*         line-height: 200%; */
-/*     } */
-/*     legend{ */
-/*         font-size:150%; */
-/*         color:rgb(193, 186, 177); */
-/*     } */
-/*     .block { */
-/*         width: 650px; */
-/*         border-bottom: 2px solid rgb(247, 202, 201); */
-/*         margin: 20px; */
-/*     } */
-/*     .remark { */
-/*         color: rgb(193, 186, 177); */
-/*     } */
 </style>
 </head>
 <body>
@@ -91,35 +52,37 @@
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
+	<div id="heading-breadcrumbs">
+    	<div class="container">
+        	<div class="row d-flex align-items-center flex-wrap">
+            	<div class="col-md-7">
+              		<h1 class="h2">我的交易紀錄</h1>
+            	</div>
+<!-- 	            <div class="col-md-5"> -->
+<!-- 	              	<ul class="breadcrumb d-flex justify-content-end"> -->
+<!-- 	                	<li class="breadcrumb-item"><a href="index.html">Home</a></li> -->
+<!-- 	                	<li class="breadcrumb-item"><a href="team.html">Our Team</a></li> -->
+<!-- 	                	<li class="breadcrumb-item active">Team Member</li> -->
+<!-- 	              	</ul> -->
+<!-- 	            </div> -->
+        	</div>
+        </div>
+    </div>
+	<!-- Sidebar -->
+    <jsp:include page="../user_layout/user_sidebar.jsp"/>
 	<section class="bar">
 	<div class="container">
     	<div class="row">
-            <!-- Sidebar -->
-            <jsp:include page="../user_layout/user_sidebar.jsp"/>
             <article>
 				<div class="container" style="margin-top: 140px">
 					<h2 class="text-center text-uppercase text-secondary mb-0">我的交易紀錄</h2>
 			        <hr class="star-dark mb-5">
 				</div>
-		
-			<!-- 			<button id="findAll" onclick="findAll()" class="btn btn-outline-secondary">findAll</button> -->
-			
 				<div id="sideBar">
 					<form>
 						<fieldset style="width:1100px">
 						<legend>Search</legend>
 						<div>
-							<label>id :</label>
-							<input type="text" value="${param.id}" placeholder="id" id="id" name="id"/>
-							<label>memberId :</label>
-							<input type="text" value="${param.memberId}" placeholder="memberId" id="memberId" name="memberId"/>
-							<input type="button" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="search" id="searchButt" />
-						  	<input type="reset" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value=reset id="resetButt" />
-							<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" 
-									role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a>
-						</div>
-						
-						<div class="collapse" id="collapse">
 							<div>	
 								<label>depositValue :</label>
 								<input type="text" value="${param.depositValue}" id="depositValue" name="depositValue"/>
@@ -132,7 +95,9 @@
 							    <label>End Date :</label>
 							    <input type="text" value="${param.transactionTimeEnd}" id="transactionTimeEnd" name="transactionTimeEnd" autocomplete="off"/>
 						  	</div>
-					  	</div>
+							<input type="button" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="search" id="searchButt" />
+						  	<input type="reset" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value=reset id="resetButt" />
+						</div>
 					  	</fieldset>
 					</form>
 					</div>
@@ -145,9 +110,6 @@
 							<thead>
 								<tr>
 									<th scope="col"></th>
-									<th width="100px" scope="col">選項</th>
-									<th scope="col">id</th>
-									<th scope="col">memberId</th>
 									<th scope="col">transactionTime</th>
 			<!-- 						<th scope="col">description</th> -->
 									<th scope="col">depositValue</th>
@@ -172,8 +134,6 @@
 		$("form div[id!='collapse']").addClass("form-group mx-sm-3 mb-3");
 		$("form input, select").addClass("form-control mx-3");
 		$("#searchButt, #resetButt").addClass("btn btn-outline-secondary");
-		
-		
 		
 		dataTable = $('#table').DataTable({
 			pageResize: true, 
@@ -216,13 +176,6 @@
 			//設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
 			columns:[
 				{data:null},
-				{data:function(data, type, row){
-					var editButton = "<input type='button' class=\"btn btn-warning btn-sm\" onclick=\"javascript:document.location.href='/admin/time-ledger/edit?id=" + data.id + "'\" value='修改'/>";
-					var deleteButton = "<input type='button' class=\"btn btn-warning btn-sm\" onclick=\"deleteData(" + data.id + ")\" value='刪除' />";
-					return editButton + deleteButton;
-				}},	
-				{data:'id'},
-				{data:"memberId.account"},
 				{data: null, render: function ( data, type, row ) {
 	                return new Date(data.transactionTime).toLocaleDateString();
 	            }},
@@ -253,7 +206,6 @@
             });
         });	
 		
-		
 		var datePickerSetting = {
 				format : "yyyy/mm/dd",
 				autoclose : true,
@@ -266,29 +218,6 @@
 		$('#transactionTimeBegin').datepicker(datePickerSetting);
 		$('#transactionTimeEnd').datepicker(datePickerSetting);
 	})
-	
-		function deleteData(timeLedgerId){
-			$.ajax({
-				url : "/admin/time-ledger/delete?id=" + timeLedgerId,
-				type : "delete",
-				dataType : 'json',
-				success : function(response){
-					if(response.status == "SUCCESS"){
-						alert("Success to delete.");
-					}
-					else{
-						$.each(response.message, function(idx, message){
-							alert(message);
-						});
-					}
-					dataTable.draw('page');
-					if ($("table tbody tr").length < 2){
-						dataTable.page( 'previous' ).draw('page');;
-					} 
-// 					dataTable.ajax.reload();
-				}
-			})
-		}
 		
 	</script>
 </body>

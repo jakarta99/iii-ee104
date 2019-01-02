@@ -30,12 +30,6 @@
 	.nav-link{
 		font-weight: bold;
 	}
-	tr {
-    	background: #CCC
-	}
-	td {
-	    background-color: #FAFAFA;
-	}
 	
     </style>
 </head>

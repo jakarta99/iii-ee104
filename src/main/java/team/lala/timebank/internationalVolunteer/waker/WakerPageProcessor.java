@@ -29,7 +29,7 @@ public class WakerPageProcessor implements PageProcessor {
 		log.debug("page url = {}", page.getUrl());
 		
 //		判斷其頁面url是否match此url 
-		if (page.getUrl().toString().equals("https://www.waker.org.tw/LocationList.aspx?nowPage=1&id=&tid=8")) {
+//		if (page.getUrl().toString().equals("https://www.waker.org.tw/LocationList.aspx?nowPage=1&id=&tid=8")) {
 			System.out.println("putField");
 			page.putField("organization", "微客公益行動協會");
 			page.putField("orgUrl", "https://www.waker.org.tw/");
@@ -50,19 +50,19 @@ public class WakerPageProcessor implements PageProcessor {
         	page.putField("picture", page.getHtml().xpath("//*[@id=\"form\"]/div[3]/div[2]/div[1]/div/div[1]/img/@src").toString());
         	System.out.println("put field end");
         	
-		}
+//		}
 
 		// 列表頁 (加入新的url/頁面)
-		else {
-			// 項目url		
-			System.out.println("項目url");
-			for (int i = 1; i <= 5; i++) {
-						
-				page.addTargetRequest(new Request(UrlUtils.canonicalizeUrl("?nowPage="+i+"&id=&tid=8", "https://www.waker.org.tw/LocationList.aspx")));
-			}
-			System.out.println("targetRequests=" + page.getTargetRequests());
-			
-		}
+//		else {
+//			// 項目url		
+//			System.out.println("項目url");
+//			for (int i = 1; i <= 5; i++) {
+//						
+//				page.addTargetRequest(new Request(UrlUtils.canonicalizeUrl("?nowPage="+i+"&id=&tid=8", "https://www.waker.org.tw/LocationList.aspx")));
+//			}
+//			System.out.println("targetRequests=" + page.getTargetRequests());
+//			
+//		}
 		
 	}
 	
