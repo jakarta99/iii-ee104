@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,25 +29,25 @@ public class SystemMessage {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="MEMBER_ID",
 				referencedColumnName="id",  
 				insertable=true, updatable=true) 
 	private Member member;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="SENDER_ID",
 				referencedColumnName="id",  
 				insertable=true, updatable=true) 
-	private Member Sender;
+	private Member sender;
 	
 	
 	@Column(name="RELEASE_TIME")
-	private Date ReleaseTime;
+	private Date releaseTime;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="MESSAGE_TYPE")
-	private SystemMessageType MessageType;//之後改ENUM，還沒完全確定訊息類型種類(懲罰、核發時數通知、申訴結果)
+	private SystemMessageType messageType;//之後改ENUM，還沒完全確定訊息類型種類(懲罰、核發時數通知、申訴結果)
 	
 	@Column(name="MESSAGE")
 	private String message;
@@ -57,8 +58,8 @@ public class SystemMessage {
 	
 	@Override
 	public String toString() {
-		return "SystemMessage [id=" + id + ", member=" + member + ", Sender=" + Sender + ", ReleaseTime=" + ReleaseTime
-				+ ", MessageType=" + MessageType + ", message=" + message + ", readStatus=" + readStatus + "]";
+		return "SystemMessage [id=" + id + ", member=" + member + ", Sender=" + sender + ", ReleaseTime=" + releaseTime
+				+ ", MessageType=" + messageType + ", message=" + message + ", readStatus=" + readStatus + "]";
 	}
 
 }

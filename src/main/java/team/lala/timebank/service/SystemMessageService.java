@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.MemberDao;
@@ -41,7 +43,18 @@ public class SystemMessageService {
 	public void deleteById(Long id) {
 		systemMessageDao.deleteById(id);
 	}
-
+	
+	public Page<SystemMessage> findByReadStatus(YesNo readStatus, Pageable Pageable) {
+		Page<SystemMessage> systemMessages = systemMessageDao.findByReadStatus(readStatus, Pageable);
+		return systemMessages;
+	};
+	
+	public Page<SystemMessage> findAllByPage(Pageable Pageable) {
+		Page<SystemMessage> systemMessages = systemMessageDao.findAll(Pageable);
+		return systemMessages;
+	};
+	
+	
 	// 通知志工申請已被接受
 	public SystemMessage volunteerVerify(SystemMessage systemMessage, Order order) {
 		if (systemMessage.getMessageType() == SystemMessageType.MissionAccecpt) {
