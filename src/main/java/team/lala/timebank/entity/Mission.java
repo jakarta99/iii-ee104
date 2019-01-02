@@ -122,7 +122,10 @@ public class Mission {
 	
 	@Column(name = "MISSION_PIC_NAME")
 	private String missionPicName;// 工作宣傳圖片名字
-
+	
+	@Transient
+	private String missionStatusTransient;
+	
 	@Override
 	public String toString() {
 		return "Mission [id=" + id + ", member=" + member + ", memberAccount=" + memberAccount + ", title=" + title
