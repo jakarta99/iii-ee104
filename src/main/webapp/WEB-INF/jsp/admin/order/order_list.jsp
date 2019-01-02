@@ -111,9 +111,9 @@
 		<div style="margin-bottom: 20px">
 			<button onclick="javascript:document.location.href='/admin/order/add'" class="btn btn-warning btn-sm">新增</button>
 		</div>
-		<table id="table" class="table table-striped table-bordered">
+		<table id="table" class="table table-hover">
 			<thead>
-				<tr>
+				<tr style="background-color: white">
 					<th scope="col"></th>
 					<th scope="col" width="100px"></th>
 					<th scope="col">ID</th>			

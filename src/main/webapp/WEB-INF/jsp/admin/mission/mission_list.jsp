@@ -143,7 +143,7 @@
 		</div>
 		<table id="table" class="table table-hover">
 			<thead>
-				<tr>
+				<tr style="background-color: white">
 					<th width="100px">選項</th>
 					<th scope="col">會員編號</th>
 					<th scope="col">會員帳號</th>

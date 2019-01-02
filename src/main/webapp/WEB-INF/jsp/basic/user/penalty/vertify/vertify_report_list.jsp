@@ -108,9 +108,9 @@
 			</div>
 	
 			
-			<table id="table" class="table table-striped table-bordered">
+			<table id="table" class="table table-hover">
 				<thead>
-					<tr>
+					<tr style="background-color: white">
 						<th scope="col"></th>
 						<th scope="col" width="50px"></th>
 						<th scope="col">檢舉案件編號</th>

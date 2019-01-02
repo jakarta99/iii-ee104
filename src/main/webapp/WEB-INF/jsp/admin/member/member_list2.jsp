@@ -153,9 +153,9 @@
 			<input type="button" class="btn btn-warning btn-sm"
 					onclick="javascript:document.location.href='/admin/member/add?memberType=O'" value="新增公益團體" />
 		</div>
-		<table  id=table class="table table-striped table-bordered">				
+		<table  id=table class="table table-hover">				
 			<thead>
-				<tr>
+				<tr style="background-color: white">
 					<th scope="col"></th>
 					<th scope="col">id</th>
 					<th scope="col" width="100px"></th>

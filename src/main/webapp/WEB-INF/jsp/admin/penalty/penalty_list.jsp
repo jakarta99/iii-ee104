@@ -118,9 +118,9 @@
 		<div style="margin-bottom: 20px">
 			<button onclick="javascript:document.location.href='/admin/penalty/add'" class="btn btn-warning btn-sm">新增</button>
 		</div>
-		<table id="table" class="table table-bordered">
+		<table id="table" class="table table-hover">
 			<thead>
-				<tr style="background-color:#ECFBFD">
+				<tr style="background-color:white">
 					<th scope="col"></th>
 					<th scope="col">ID</th>
 					<th scope="col" width="100px"></th>
