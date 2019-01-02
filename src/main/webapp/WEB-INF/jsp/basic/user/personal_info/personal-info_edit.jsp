@@ -78,11 +78,13 @@
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
+	 <!-- Sidebar -->
+	 <jsp:include page="../user_layout/user_sidebar.jsp"/>
 	<section class="bar">
 	<div class="container">
     	<div class="row">
-            <!-- Sidebar -->
-            <jsp:include page="../user_layout/user_sidebar.jsp"/>
+            
+           
             <article>
 				<h2 class=center>個人資訊</h2>
 				<div class=center>您在 TimeBank中使用的基本資訊</div>
