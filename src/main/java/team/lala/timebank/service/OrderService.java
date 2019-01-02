@@ -73,7 +73,7 @@ public class OrderService {
 		} else {
 			member.setSumScore(member.getSumScore() + score);			
 		}
-		member.setAverageScore(member.getSumScore() / member.getScoredTimes());	
+		member.setAverageScore(new Double(member.getSumScore() / member.getScoredTimes()));	
 		memberDao.save(member);
 		order.setOrderStatus(OrderStatus.ServiceFinishPayAndScoreMatchSuccess);		//修改order狀態
 		orderDao.save(order);
