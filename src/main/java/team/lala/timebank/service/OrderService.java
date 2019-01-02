@@ -1,8 +1,14 @@
 package team.lala.timebank.service;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
@@ -80,7 +87,7 @@ public class OrderService {
 	}
 	
 	//志工檢舉雇主
-	public void Report(Long orderId, String description) {
+	public void Report(Long orderId, String description, MultipartFile proofPic, HttpServletRequest request) {
 		Order order = orderDao.getOne(orderId);
 		Penalty penalty = new Penalty();
 		penalty.setOrder(order);
@@ -92,6 +99,36 @@ public class OrderService {
 		penaltyDao.save(penalty);
 		order.setOrderStatus(OrderStatus.VolunteerReportRequestMatchSuccess);
 		orderDao.save(order);
+		// 如果有上傳圖片，才存檔案到Server，及存路徑到DB
+		if (proofPic.getOriginalFilename().length() > 0) {
+			// 取得應用程式根目錄中圖片之路徑
+			String realPath = request.getServletContext().getRealPath("/") + "..\\resources\\static\\img\\";
+			System.out.println(realPath + "***************************");
+			// 確認是否有此資料夾，如無則建資料夾
+			File dir = new File(realPath);
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+
+			// 檔名
+			String location = realPath + "penaltyProof_" + penalty.getId() + ".jpg";
+
+			// 寫出檔案到Server
+			try {
+				FileOutputStream fos = new FileOutputStream(location);
+				fos.write(proofPic.getBytes());
+				fos.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			// 將檔名存入DB
+			penalty.setProofPicName("penaltyProof_" + penalty.getId() + ".jpg");
+			penalty = penaltyDao.save(penalty);
+
+		}
 	}
 
 	public List<Order> findAll() {

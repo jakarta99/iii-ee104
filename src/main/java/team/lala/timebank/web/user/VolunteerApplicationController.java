@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
@@ -72,9 +74,12 @@ public class VolunteerApplicationController {
 	@ResponseBody
 	@RequestMapping("/volunteerRecord/report")		//志工檢舉雇主
 	public AjaxResponse<Order> Report(@RequestParam(value="id") Long orderId,
-			@RequestParam(value="description") String description){
+			@RequestParam(value="description") String description,
+			@RequestParam("proofPic") MultipartFile proofPic
+			, MultipartHttpServletRequest request){
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
-		orderService.Report(orderId, description);
+		orderService.Report(orderId, description, proofPic, request);
+
 		return response;
 	}
 

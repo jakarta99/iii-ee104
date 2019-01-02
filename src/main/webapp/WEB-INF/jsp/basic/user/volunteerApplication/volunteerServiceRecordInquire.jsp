@@ -51,7 +51,89 @@
 	  border-radius: 0.25rem;
 	  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	}
- 
+	.smart-green {
+	margin-left:auto;
+	margin-right:auto;
+	max-width: 500px;
+	background: #F8F8F8;
+	padding: 30px 30px 20px 30px;
+	font: 12px Arial, Helvetica, sans-serif;
+	color: #666;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	}
+	.smart-green h1 {
+	font: 24px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	padding: 20px 0px 20px 40px;
+	display: block;
+	margin: -30px -30px 10px -30px;
+	color: #FFF;
+	background: #9DC45F;
+	text-shadow: 1px 1px 1px #949494;
+	border-radius: 5px 5px 0px 0px;
+	-webkit-border-radius: 5px 5px 0px 0px;
+	-moz-border-radius: 5px 5px 0px 0px;
+	border-bottom:1px solid #89AF4C;
+	
+	}
+	.smart-green h1>span {
+	display: block;
+	font-size: 11px;
+	color: #FFF;
+	}
+	
+	.smart-green label {
+	display: block;
+	margin: 0px 0px 5px;
+	}
+	.smart-green label>span {
+	float: left;
+	margin-top: 10px;
+	color: #5E5E5E;
+	}
+	.smart-green input[type="text"], .smart-green input[type="email"], .smart-green textarea, .smart-green select {
+	color: #555;
+	height: 30px;
+	line-height:15px;
+	width: 100%;
+	padding: 0px 0px 0px 10px;
+	margin-top: 2px;
+	border: 1px solid #E5E5E5;
+	background: #FBFBFB;
+	outline: 0;
+	-webkit-box-shadow: inset 1px 1px 2px rgba(238, 238, 238, 0.2);
+	box-shadow: inset 1px 1px 2px rgba(238, 238, 238, 0.2);
+	font: normal 14px/14px Arial, Helvetica, sans-serif;
+	}
+	.smart-green textarea{
+	height:100px;
+	padding-top: 10px;
+	}
+	.smart-green select {
+	background: url('down-arrow.png') no-repeat right, -moz-linear-gradient(top, #FBFBFB 0%, #E9E9E9 100%);
+	background: url('down-arrow.png') no-repeat right, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FBFBFB), color-stop(100%,#E9E9E9));
+	appearance:none;
+	-webkit-appearance:none;
+	-moz-appearance: none;
+	text-indent: 0.01px;
+	text-overflow: '';
+	width:100%;
+	height:30px;
+	}
+	.smart-green .button {
+	background-color: #9DC45F;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-border-radius: 5px;
+	border: none;
+	padding: 10px 25px 10px 25px;
+	color: #FFF;
+	text-shadow: 1px 1px 1px #949494;
+	}
+	.smart-green .button:hover {
+	background-color:#80A24A;
+	}
     </style>
     <meta charset="UTF-8">
 </head>
@@ -182,7 +264,7 @@
 		            } },
 		            { data: null, render: function(data, type, row ) {
 		            	if(data.orderStatus == "RequesterCancleActivityNoPunishMatchSuccess") {
-		            		var report = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=report(" + data.id + ") value='檢舉'  />";
+		            		var report = "<input type='button' class=\"btn btn-primary btn-sm\" onclick=report(" + data.id + ") value='檢舉'  />";
 		            		var text = "<textarea cols='40' rows='5' id='text' name='text'></textarea>"
 							var reportModal = '<div class="modal fade" id="reportModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">'+
 											  '<div class="modal-dialog modal-dialog-centered" role="document">'+
@@ -195,6 +277,7 @@
 									      '<div class="modal-body">'+ 
 									      '<h5>檢舉人名<h5><p>' + data.mission.member.account + '</p>' +
  									      '<h5>檢舉原因</h5><p>' + text +'</p>' +
+ 									      '<input type="file" id="proofPic" name="proofPic"  accept="image/*"><p>請選擇圖檔，如無佐證資料，則直接送出審核<p>' +
 									      '</div><div class="modal-footer">'+
 									      report + '</div></div></div></div>';
 		            		var reportButt = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reportModalCenter">檢舉</button>'
@@ -211,7 +294,7 @@
 									          '<span aria-hidden="true">&times;</span>'+
 									        '</button></div>'+
 									      '<div class="modal-body">'+ 
-									      '<span><h5>分數</h5>' + select + '</span>' +
+								   			'<label><span>分數</span>' + select + '</label>' +
 									      '</div><div class="modal-footer">'+
 									       score + '</div></div></div></div>';
 							var scoreButt = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#scoreModalCenter">評分</button>'
@@ -302,20 +385,23 @@
 		
 		//檢舉
 		function report(orderId) {
-			$.ajax({
-				url : '/user/volunteerRecord/report?id='+ orderId+'&description=' + $('#text').val(),
-				type : 'get',
-				dataType : 'JSON'
-			}).done(function(response){
-				if (response.status =="SUCCESS"){
-					alert("檢舉成功");
-				} else {
-					alert("檢舉失敗");
-				}			
-				window.location.reload();
-			})			
+			if(confirm("確認要送出檢舉嗎？")==true) {
+				$.ajax({
+					url : '/user/volunteerRecord/report?id='+ orderId+'&description=' + $('#text').val(),
+					type : 'get',
+					dataType : 'JSON'
+				}).done(function(response){
+					if (response.status =="SUCCESS"){
+						alert("檢舉成功");
+					} else {
+						alert("檢舉失敗");
+					}			
+					window.location.reload();
+				})	
+			} else {
+				return false;
+			}
 		}
-
 		
 		//切換服務狀態
 		var Status7 = 
