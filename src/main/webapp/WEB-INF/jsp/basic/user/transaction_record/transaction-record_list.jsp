@@ -9,6 +9,8 @@
 <jsp:include page="../../../admin/admin_layout/admin_css_js_links.jsp" />
 <!-- css -->
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp" />
+<!-- Javascript files-->
+<%-- <jsp:include page="../../commons/commons_layout/commons_js_links.jsp" /> --%>
 <!-- date picker -->
 <script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
@@ -16,10 +18,9 @@
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 
 <style>
-	 article{
+	article{
 	 	margin-top:70px;
 	 }
-	 
 	 article fieldset {
  		border-radius: 20px; 
  		padding: 20px 20px 0px 20px;  
