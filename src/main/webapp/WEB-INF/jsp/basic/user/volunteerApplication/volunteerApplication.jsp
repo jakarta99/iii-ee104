@@ -18,35 +18,25 @@
 <meta charset="UTF-8">
 <title>mission list(login)</title>
 <style>
-
-	 	
-        fieldset {
-            width: 80%;
-            border-radius: 20px;
-            padding: 20px;
-            margin: 20px;
-            border: 3px double #bebebe;
-            margin: auto
-        }
-        .s2{
-            text-align: center
-        }
-        .margintop{
-			 margin-top:70px;
-		}
-		.county,.district {
-	  padding: 0.375rem 0.75rem;
-	  font-size: 1rem;
-	  line-height: 1.5;
-	  color: #495057;
-	  background-color: #fff;
-	  background-image: none;
-	  background-clip: padding-box;
-	  border: 1px solid #ced4da;
-	  border-radius: 0.25rem;
-	  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	fieldset {
+		width: 100%;
+		margin: 20px;
+		border: 3px solid rgba(0,0,0,0);
+		margin: auto
 	}
- 
+	table {
+		padding: 20px;
+	}
+	.nav-link{
+		font-weight: bold;
+	}
+	tr {
+    	background: #CCC
+	}
+	td {
+	    background-color: #FAFAFA;
+	}
+	
     </style>
 </head>
 <body>
@@ -54,33 +44,45 @@
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp" />
 	<!-- Navbar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />
+	  <div id="heading-breadcrumbs">
+        <div class="container">
+          <div class="row d-flex align-items-center flex-wrap">
+            <div class="col-md-7">
+              <h1 class="h2">進行中的活動</h1>
+            </div>
+          </div>
+        </div>
+      </div>
 	
 	<section class="bar">
         <div class="container">
         	<div class="row">
+        	<fieldset>
 <%-- 			<jsp:include page="../user_layout/user_sidebar.jsp" /> --%>
-				<fieldset>
-		        <button type="button" id="orderStatus1" name="orderStatus" class="btn btn-primary">申請中</button>
-		        <button type="button" id="orderStatus2" name="orderStatus" class="btn btn-secondary ">機構接受服務</button>
-		        <button type="button" id="orderStatus6" name="orderStatus" class="btn btn-secondary ">活動時間結束，未發時數</button>
-					<table id="table" class="table table-bordered">
-						<thead class="thead-light">
-							<tr>
-								<th scope="col"></th>
-								<th scope="col">活動名稱</th>
-								<th scope="col">地點</th>
-								<th scope="col">活動開始時間</th>
-								<th scope="col">活動結束時間</th>
-								<th scope="col">時數</th>
-								<th scope="col">申請時間</th>
-								<th scope="col">狀態</th>
-								<th scope="col" width="50px"></th>
-							</tr>
-						</thead>
-						<tbody id="tableBody" class="table table-striped">
-							<!-- 會員資料 -->
-						</tbody>
-					</table>
+				<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
+	                <li class="nav-item"><a id="orderStatus1" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active">申請中</a></li>
+	                <li class="nav-item"><a id="orderStatus2" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">機構接受服務</a></li>
+	                <li class="nav-item"><a id="orderStatus6" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" class="nav-link">活動時間結束，未發時數</a></li>
+              	</ul>
+              	<hr>
+				<table id="table" class="table table-bordered table-hover">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col"></th>
+							<th scope="col">活動名稱</th>
+							<th scope="col">地點</th>
+							<th scope="col">活動開始時間</th>
+							<th scope="col">活動結束時間</th>
+							<th scope="col">時數</th>
+							<th scope="col">申請時間</th>
+							<th scope="col">狀態</th>
+							<th scope="col" width="50px"></th>
+						</tr>
+					</thead>
+					<tbody id="tableBody" class="table table-striped">
+						<!-- 會員資料 -->
+					</tbody>
+				</table>
 				</fieldset>
 	 		</div>
 	 	</div>
@@ -139,15 +141,14 @@
 		            } },
 					{data:"orderStatus"},
 		           	{data: function (data, type, row ) {
-		           		if(data.orderStatus == "ServiceFinishNotPay"){
-		           			return null;
+		           		if(data.orderStatus == "VolunteerApply"){
+		           			var cancelButt="<input type='button' class=\"btn btn-outline-danger btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='取消' />"
+		           			return cancelButt	           		
 		           		} else {
-		           			var cancelButt="<input type='button' class=\"btn btn-primary btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='取消' />"
-			               	return cancelButt
+		           			return null;
 		           		}
 		           		}
-		           	},
-							
+		           	},							
 				], columnDefs:[{		//禁用第0123列的搜索和排序
 					"searchable": false,
 	                "orderable": false,
@@ -171,23 +172,14 @@
 		//切換服務狀態
 		$('#orderStatus1').click(function(){
 			orderStatusDetail = "VolunteerApply";
-			$('#orderStatus1').attr('class','btn btn-primary')
-			$('#orderStatus2').attr('class','btn btn-secondary')
-			$('#orderStatus6').attr('class','btn btn-secondary')
 			dataTable.ajax.reload();
 		})
 		$('#orderStatus2').click(function(){
 			orderStatusDetail = "RequesterAcceptService";
-			$('#orderStatus1').attr('class','btn btn-secondary')
-			$('#orderStatus2').attr('class','btn btn-primary')
-			$('#orderStatus6').attr('class','btn btn-secondary')
 			dataTable.ajax.reload();
 		})
 		$('#orderStatus6').click(function(){
 			orderStatusDetail = "ServiceFinishNotPay";
-			$('#orderStatus1').attr('class','btn btn-secondary')
-			$('#orderStatus2').attr('class','btn btn-secondary')
-			$('#orderStatus6').attr('class','btn btn-primary')
 			dataTable.ajax.reload();
 		})
 		//刪除事件方法
