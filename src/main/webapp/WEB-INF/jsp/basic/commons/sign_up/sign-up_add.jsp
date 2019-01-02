@@ -84,8 +84,6 @@
 	<section class="bar">
 	<div class="container">
     	<div class="row">
-    		<!-- Sidebar -->
-            <jsp:include page="../../user/user_layout/user_sidebar.jsp"/>
           	<article>
           		<h2 class=center>建立您的TimeBank帳戶</h2>
           		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/commons/sign-up/type'" value="回前頁">  
@@ -241,7 +239,12 @@
             for (var i = 0; i < theAccountLen; i++) {
             	var AccountChr = theAccount.charAt(i).toUpperCase();//轉換為大寫
                 if (AccountChr >= "A" && AccountChr <= "Z" || AccountChr >= "0" && AccountChr <= "9") {
-                    document.getElementById("idspAccount").innerHTML =
+                    $.get()
+                	
+//                 	if(){
+                    	
+//                     }
+                	document.getElementById("idspAccount").innerHTML =
                         "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
                 } else {
                     document.getElementById("idspAccount").innerHTML =

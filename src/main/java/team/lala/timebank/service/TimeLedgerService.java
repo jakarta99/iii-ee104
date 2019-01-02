@@ -14,8 +14,7 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.TimeLedgerDao;
-import team.lala.timebank.entity.Mission;
-import team.lala.timebank.entity.Order;
+import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.entity.TimeLedger;
 
@@ -168,12 +167,6 @@ public class TimeLedgerService {
 		}
 		return timeLedger;
 	}
-
-	// 尋找一名會員所有資料 更新by Anchor
-//	public List<TimeLedger> findAllByMemberId(Long memberId) {
-//		List<TimeLedger> timeLedgers = timeLedgerDao.findAllByMemberId(memberId);
-//		return timeLedgers;
-//	}
 	
 	public TimeLedger findById(Long id) {
 		Optional<TimeLedger> t = timeLedgerDao.findById(id);
@@ -189,8 +182,14 @@ public class TimeLedgerService {
 		return timeLedgerDao.findAll(specification, pageRequest);
 	}
 	
+	// 尋找一名會員所有資料 更新by Anchor
+	public Page<TimeLedger> findByMemberId(Member member, int page, Optional<Integer> length) {
+		Page<TimeLedger> timeLedgers = timeLedgerDao.findByMemberId(member,PageRequest.of(page, length.orElse(10)));
+		return timeLedgers;
+	}
+	
 	// 根據memberId找出所有的timeLedger
-	public List<TimeLedger> findAllByMemberId(Long memberId) {
+	public List<TimeLedger> findByMemberId(Member memberId) {
 		List<TimeLedger> timeLedgers = timeLedgerDao.findByMemberId(memberId);
 		return timeLedgers;
 	}

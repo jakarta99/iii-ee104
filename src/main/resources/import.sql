@@ -94,29 +94,29 @@ VALUES (1,'一起照顧小孩5',3,'L',1,'1970/5/15','2018/11/11 17:00','2018/12/
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY) 
 VALUES (1,'一起照顧小孩6',3,'L',1,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','大安區','復興南路一段390號15樓','B_AccountsPayable','2018/12/31',0);
 
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY) 
-VALUES (1,'一起照顧動物2',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Finish','2018/12/31',0);
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,FINISH_DATE) 
+VALUES (1,'一起照顧動物2',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Finish','2018/12/31',0,'2019/01/01');
 
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY) 
-VALUES (1,'一起照顧動物3',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Finish','2018/12/31',0);
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,FINISH_DATE) 
+VALUES (1,'一起照顧動物3',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Finish','2018/12/31',0,'2019/01/01');
 
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY) 
-VALUES (1,'一起照顧動物4',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','樹林區','復興南路一段390號15樓','C_Finish','2018/12/31',0);
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,FINISH_DATE) 
+VALUES (1,'一起照顧動物4',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','樹林區','復興南路一段390號15樓','C_Finish','2018/12/31',0,'2019/01/01');
 
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY) 
-VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Finish','2018/12/31',0);
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,FINISH_DATE) 
+VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Finish','2018/12/31',0,'2019/01/01');
 
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY) 
-VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Cancel','2018/12/31',0);
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,FINISH_DATE) 
+VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Cancel','2018/12/31',0,'2019/01/01');
 
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY) 
-VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Cancel','2018/12/31',0);
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,FINISH_DATE) 
+VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Cancel','2018/12/31',0,'2019/01/01');
 
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY) 
-VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Cancel','2018/12/31',0);
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,FINISH_DATE) 
+VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Cancel','2018/12/31',0,'2019/01/01');
 
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY) 
-VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Cancel','2018/12/31',0);
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,FINISH_DATE) 
+VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Cancel','2018/12/31',0,'2019/01/01');
 
 --ORDER_LIST
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
@@ -392,3 +392,16 @@ VALUES(1,1,'2018/12/11','ORDER','不滿');
 
 INSERT INTO COMPLAINT(ORDER_ID,MEMBER_ID,COMPLAINTTIME,COMPLAINTTYPE,DESCRIPTION)
 VALUES(2,3,'2018/12/13','PENALTY','處罰太重');
+
+--SYSTEM_MESSAGE
+INSERT INTO SYSTEM_MESSAGE(MESSAGE_TYPE,RELEASE_TIME,[MESSAGE],READ_STATUS,SENDER_ID,MEMBER_ID)
+VALUES('GetTimeValue','2018/8/15 17:00','加值禮包來囉!!打開送您100點','N',2,1);
+
+INSERT INTO SYSTEM_MESSAGE(MESSAGE_TYPE,RELEASE_TIME,[MESSAGE],READ_STATUS,SENDER_ID,MEMBER_ID)
+VALUES('Penalty','2018/8/15 21:35','您被懲罰了!!!!','N',2,1);
+
+INSERT INTO SYSTEM_MESSAGE(MESSAGE_TYPE,RELEASE_TIME,[MESSAGE],READ_STATUS,SENDER_ID,MEMBER_ID)
+VALUES('GetTimeValue','2018/9/21 10:00','加值禮包來囉!!打開送您100點','N',2,1);
+
+INSERT INTO SYSTEM_MESSAGE(MESSAGE_TYPE,RELEASE_TIME,[MESSAGE],READ_STATUS,SENDER_ID,MEMBER_ID)
+VALUES('Penalty','2018/10/18 14:20','您被懲罰了!!!!','N',2,1);
