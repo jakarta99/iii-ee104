@@ -1,7 +1,6 @@
 package team.lala.timebank.web.user;
 
 import java.security.Principal;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.entity.Member;
-import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.TimeLedger;
 import team.lala.timebank.service.MemberService;
 import team.lala.timebank.service.TimeLedgerService;
-import team.lala.timebank.spec.TimeLedgerSpecification;
 
 @Slf4j
 @Controller
@@ -52,7 +49,7 @@ public class UserTransactionRecordController {
 	public Page<TimeLedger> queryTimeLedger(TimeLedger inputTimeLedger, Principal principal,
 			@RequestParam(name = "start", required = false) Optional<Integer> start, 
 			@RequestParam(name = "length", required = false) Optional<Integer> length){
-		int page = start.orElse(0)/length.orElse(10);
+		int page = start.orElse(0) / length.orElse(10);
 		Page<TimeLedger> timeLedgers = timeLedgerService.findByMemberId(memberService.findByAccount(principal.getName()), page, length);
 //		Page<TimeLedger> timeLedgers = timeLedgerService.findByMemberIdAndSpecification(principal, inputTimeLedger,
 //				PageRequest.of(page, length.orElse(10)));
