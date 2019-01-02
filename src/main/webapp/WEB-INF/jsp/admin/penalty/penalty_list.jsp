@@ -258,7 +258,7 @@
 			
 			//產製EXCEL報表功能之按鈕
 			$("#excelButt").click(function(){
-				$(this).attr("href", "/admin/penalty/myexcel?" + $('form').serialize())
+				$(this).attr("href", "/admin/penalty/penaltyExcel?" + $('form').serialize())
 			})
 			
 		})
