@@ -34,7 +34,7 @@ public class ProjectsAbroadPageProcessor implements PageProcessor {
 			page.putField("orgUrl", "https://www.projects-abroad.com.tw/");
 			page.putField("title", page.getHtml().xpath("//*[@id=\"content\"]/article/h1/text()").toString());
 			page.putField("websiteUrl", page.getUrl().toString());
-			page.putField("logo", page.getHtml().xpath("//*[@id=\"logo-top\"]").toString());
+			page.putField("logo", page.getHtml().xpath("//*[@id=\"logo-top\"]/img/@src").replace("/_design", "https://www.projects-abroad.com.tw/_design").toString());
 			//取得div class='country-facts-box'內的標籤，以便取得此項目的資訊(如地點、志工角色、開始日期等)，並將資料放入field內
 			String countryFactsBox =  page.getHtml().xpath("//div[@class='country-facts-box']/ul/html()").toString();	        
 //	        log.debug("countryFactsBox={}", countryFactsBox);
