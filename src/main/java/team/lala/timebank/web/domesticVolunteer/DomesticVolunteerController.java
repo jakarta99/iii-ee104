@@ -55,7 +55,6 @@ public class DomesticVolunteerController {
 	}
 	
 	@RequestMapping("/apply")
-	@ResponseBody
 	public String missionDetail (@RequestParam Long missionId, Model model) {
 
 		log.debug("inputMission={}", missionId);
