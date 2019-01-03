@@ -36,14 +36,15 @@
 <meta charset="UTF-8">
 <title>mission list(login)</title>
 <style>
-
-	 	
+		
         fieldset {
+        	background-color:#CCEEFF;
             width: 100%;
-            border: 3px solid rgba(0,0,0,0);
-            padding: 20px;
-            margin: 20px;
-            margin: auto
+            border-radius: 20px;
+            padding: 20px 20px 0px 20px;
+            margin: auto;
+            margin-top: 10px;
+            margin-bottom: 20px;
         }
         .s2{
             text-align: center
@@ -93,7 +94,18 @@
 	<fieldset>
 		<legend>基本查詢</legend>
 			<div class="form-group mx-sm-3 mb-3">
-				<div class="form-group mx-sm-3 mb-3">
+			<label>活動名稱 :</label> 
+			<input type="text" value="" placeholder="" id="title" name="title"/>
+			
+			<input type="button" value="搜尋" id="searchButt" />
+			<div>
+			
+			<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+			進階查詢:
+  			</a>
+  			</div> 
+			<div class="collapse" id="collapse">
+			<div class="form-group mx-sm-3 mb-3">
 					<label>縣市:</label> 	
 					<div role="tw-city-selector"></div>
 				</div>
@@ -118,31 +130,17 @@
 					<option value="L">長期</option>
 			        <option value="S">短期</option>
 				</select>
-				
-				
-			<label>開始日期:</label>
-			<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
-			<label>結束日期:</label>
-			<input type="text"  id="endDate" name="endDate" autocomplete="off"/>
-			
-			
-			<input type="button" value="搜尋" id="searchButt" />
-			<div>
-			
-			<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
-			進階查詢:
-  			</a>
-  			</div> 
-			<div class="collapse" id="collapse">
-			
 			<label>時數 :</label> 
 			<input type="text" value="" placeholder="timeValue" id="timeValue" name="timeValue"/>
+			<div>	
+				<label>開始日期:</label>
+				<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
+				<label>結束日期:</label>
+				<input type="text"  id="endDate" name="endDate" autocomplete="off"/>
+			</div>
 			
-			<label>活動名稱 :</label> 
-			<input type="text" value="" placeholder="title" id="title" name="title"/>
 			
 			
-			<label>missionStatus :</label> 
 			<input type="hidden" value="" placeholder="missionstatus" id="missionstatus" name="missionstatus"/>
 			
 			
@@ -206,7 +204,6 @@
 	$("#status3Butt").click(function(){
 		$("#time").empty().append("結束時間");
 		$("#statusField").empty().append("時數核發");
- 		$("#status4Butt").attr('class',"btn btn-outline-secondary");
 		$("#missionstatus").val('B_AccountsPayable');
 		dataTable.ajax.reload();
 		
@@ -215,7 +212,6 @@
 	$("#status4Butt").click(function(){
 		$("#time").empty().append("結案時間");
 		$("#statusField").empty().append("結案紀錄");
- 		$("#status4Butt").attr('class',"btn btn-outline-primary");
 		$("#missionstatus").val('C_Finish');
 		dataTable.ajax.reload();
 		

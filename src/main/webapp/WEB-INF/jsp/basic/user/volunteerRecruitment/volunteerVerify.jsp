@@ -178,7 +178,7 @@
 		 			   api.rows( {page:'current'} ).data()
 		 			    return '顯示第 '+(pageInfo.start+1)+' 筆到第  '+(pageInfo.end)+' 筆 共 '+ pageInfo.recordsTotal+' 筆資料 ';
 		 			 },	
-				"lengthMenu": [ 3, 6, 9, 12, ],
+				"lengthMenu": [  6, 9, 12, ],
 				ajax:{
 					url:"/user/volunteerVerify/query",
 					type: "get",
@@ -218,10 +218,10 @@
 								 var rejectbutton="<button class='btn btn-outline-secondary' onclick=\"reject("+data.id+")\">拒絕</button>"; 	
 								 return acceptbutton + rejectbutton;
 							 }else if(data.orderStatus=='RequesterAcceptService'){
-								 return "以接受";
+								 return "已接受";
 								 
 							 }else if(data.orderStatus=='RequesterRefuceServiceMatchFail'){
-								 return "以拒絕";
+								 return "已拒絕";
 							 }else {
 								 return "不應該出現的狀態";
 							 }
