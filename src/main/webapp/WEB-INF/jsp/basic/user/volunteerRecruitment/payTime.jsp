@@ -74,13 +74,20 @@
  	
 	  <!-- Navbar -->
       <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-
+	<div id="heading-breadcrumbs">
+       <div class="container">
+          <div class="row d-flex align-items-center flex-wrap">
+            <div class="col-md-7">
+              <h1 class="h2">時數核發</h1>
+            </div>
+          </div>
+        </div>
+      </div>
 	
 	 <section class="bar">
         <div class="container">
           <div class="row">
     <div >
-	<h1 class="s2">時數核發</h1>
 	
 	<fieldset >
 	
@@ -188,7 +195,7 @@
 		 			   api.rows( {page:'current'} ).data()
 		 			    return '顯示第 '+(pageInfo.start+1)+' 筆到第  '+(pageInfo.end)+' 筆 共 '+ pageInfo.recordsTotal+' 筆資料 ';
 		 			 },	
-				"lengthMenu": [ 3, 6, 9, 12, ],
+				"lengthMenu": [ 6, 9, 12, ],
 				ajax:{
 					url:"/user/volunteerVerify/query",
 					type: "get",
