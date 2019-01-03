@@ -8,8 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class TimeSchedule {
-	@Scheduled(cron = "0/5 * * * * *")
-	public void updateStatus() {
-		log.debug("123={}","123");
-	}
+//	@Scheduled(cron = "0/5 * * * * *")
+//	public void updateStatus() {
+//		log.debug("123={}","123");
+//	}
 }
