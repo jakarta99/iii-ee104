@@ -5,29 +5,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Javascript files-->
+<jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" 
-		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" 
-		crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" 
-		integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" 
-		crossorigin="anonymous"></script>
-<link rel="stylesheet" 
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" 
-		integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" 
-		crossorigin="anonymous"><meta charset="UTF-8">
-<script defer
-	src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<!-- data table -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/js/dataTable_full_numbers_no_ellipses.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
+<script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
+<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
-
 <!-- date picker -->
 <script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
-
+	
+<jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 <!-- DateTimePicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet" />
