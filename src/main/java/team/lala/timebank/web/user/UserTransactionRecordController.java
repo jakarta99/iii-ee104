@@ -50,9 +50,9 @@ public class UserTransactionRecordController {
 			@RequestParam(name = "start", required = false) Optional<Integer> start, 
 			@RequestParam(name = "length", required = false) Optional<Integer> length){
 		int page = start.orElse(0) / length.orElse(10);
-		Page<TimeLedger> timeLedgers = timeLedgerService.findByMemberId(memberService.findByAccount(principal.getName()), page, length);
-//		Page<TimeLedger> timeLedgers = timeLedgerService.findByMemberIdAndSpecification(principal, inputTimeLedger,
-//				PageRequest.of(page, length.orElse(10)));
+//		Page<TimeLedger> timeLedgers = timeLedgerService.findByMemberId(memberService.findByAccount(principal.getName()), page, length);
+		Page<TimeLedger> timeLedgers = timeLedgerService.findByMemberIdAndSpecification(principal, inputTimeLedger,
+				PageRequest.of(page, length.orElse(10)));
 		return timeLedgers;
 	}
 	
