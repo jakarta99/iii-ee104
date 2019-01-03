@@ -59,20 +59,33 @@ public class SystemMessageController {
 	//讀取訊息，並將系統訊息狀態改為已讀
 	@RequestMapping("/readMessage")
 	@ResponseBody
-	public SystemMessage readMessage(Model model, @RequestParam("id") Long id) {
+	public SystemMessage readMessage( @RequestParam("id") Long id) {
 		SystemMessage systemMessage = systemMessageService.changeReadStatusAndGetSystemMessage(id);
 		
 		return systemMessage; 
 	}
 	
 	//Jasmine
-	//
+	//查詢未讀訊息筆數 //效能不好，之後再調
 	@RequestMapping("/countNotReadMessage")
 	@ResponseBody
 	public Integer countNotReadMessage(Model model, Principal principal) {
 		Integer notReadMsgSize = systemMessageService.countNotReadMessages(principal);
 		model.addAttribute("notReadMsgSize", notReadMsgSize);
 		return notReadMsgSize; 
+	}
+	
+	//Jasmine
+	@RequestMapping("/selectMsgsAsRead")
+	public String selectMsgsAsRead(Principal principal, @RequestParam("msgChecked[]") Long[] msgChecked) {
+		if(msgChecked.length > 0) {
+			for(Long id : msgChecked) {
+				log.debug("checkBoxId={}", id);
+				systemMessageService.changeReadStatusAndGetSystemMessage(id);
+			}
+		}
+		
+		return listPage();
 	}
 	
 	

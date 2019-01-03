@@ -77,23 +77,29 @@
 			  <button type="button" class="btn btn-outline-info" id="allMessages">全部訊息</button>
 			</div>
 	
-			
-			<table id="table" class="table table-hover">
-				<thead>
-					<tr style="background-color: white">
-						<th scope="col"></th>
-						<th scope="col" width="50px"></th>
-						<th scope="col">訊息時間</th>
-						<th scope="col">訊息類型</th>
-						<th scope="col">訊息內容</th>
-						<th scope="col">是否已讀</th>
-						<th scope="col">會員帳號(debug用)</th>
-					</tr>
-				</thead>
-				<tbody id="tableBody">
-					<!-- 會員資料 -->
-				</tbody>
-			</table>
+			<form action="/system-message/selectMsgsAsRead" method="post" onSubmit="return checkForm();">
+				<table id="table" class="table table-hover">
+					<thead>
+						<tr style="background-color: white">
+							<th scope="col"></th>
+							<th scope="col" width="50px">
+								<input type="checkbox" style="display:inline;" name="CheckAll" value="全選" id="CheckAll" />
+							</th>
+							<th scope="col" width="50px">
+								<input id="submit" style="display:inline;" type="submit" value="標記已讀" class="btn btn-outline-info btn-sm"/>
+							</th>
+							<th scope="col">訊息時間</th>
+							<th scope="col">訊息類型</th>
+							<th scope="col">訊息內容</th>
+							<th scope="col">是否已讀</th>
+							<th scope="col">會員帳號(debug用)</th>
+						</tr>
+					</thead>
+					<tbody id="tableBody">
+						<!-- 會員資料 -->
+					</tbody>
+				</table>
+			</form>
 		</fieldset>
 	</article>
 	<!-- FOOTER -->
@@ -177,6 +183,13 @@
 					$('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
 				}, columns: [ 		//DataTable:設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
 		     		{data:null},
+		     		{data:function(data){
+		     			var checkBox = ""
+		     			if(data.readStatus=="N"){
+		     				checkBox = "<input type='checkbox' name='msgChecked[]' value='" + data.id +"'>";
+		     			}
+		     			return checkBox;} 
+		     		},//勾選欄位
 		           	{data: function (data) {
 		           		var readButt = "";
 		           		readButt = "<input type='button' class=\"btn btn-info btn-sm\" name='readButt'"+
@@ -194,7 +207,7 @@
 					
 				], columnDefs:[{		//DataTable:禁用第0123列的搜索和排序
 					"searchable": false,
-	                "orderable": true,
+	                "orderable": false,
 	                "targets": [0, 1],
 				}], order: [[1, 'asc']]   
 			 });
@@ -258,18 +271,38 @@
 			})
 			
 			
+			//全選訊息
+			$("#CheckAll").click(function(){
+				   if($("#CheckAll").prop("checked")){//如果全選按鈕有被選擇的話（被選擇是true）
+					    $("input[name='msgChecked[]']").each(function(){
+					    	 $(this).prop("checked",true);//把所有的核取方框的property都變成勾選
+					    })
+				   }else{
+					    $("input[name='msgChecked[]']").each(function(){
+					    	 $(this).prop("checked",false);//把所有的核方框的property都取消勾選
+					    })
+				   }
+			  })
 			
-			
-			
-			
-			
-			
-			
-			
+
 
 		})
 						
-
+		
+		//如果未勾選任何一筆訊息，則按下"標記已讀"不會呼叫controller
+		function checkForm(){
+			var checkItemNum = 0;
+			$("input[name='msgChecked[]']").each(function(){
+		    	if($(this).prop("checked") == true) {
+		    		checkItemNum ++;
+		    	}
+		    })
+			if(checkItemNum == 0){
+				return false;
+			}else{
+				return true;
+			}
+		}
 	</script>
 
 </body>
