@@ -125,6 +125,13 @@ public class PayService {
 	            	if(payOrderCounter == mission.getOrders().size()) {
 	            		mission.setMissionstatus(MissionStatus.C_Finish);
 	            		mission.setFinishDate(new Date());
+	            		SystemMessage finishMessage = new SystemMessage();
+	            		finishMessage.setReleaseTime(new Date());
+	            		finishMessage.setReadStatus(YesNo.N);
+	            		finishMessage.setMember(order.getMission().getMember());
+	            		finishMessage.setMessage("您刊登的志工活動:[" + order.getMission().getTitle() + "]已結案");
+	            		finishMessage.setMessageType(SystemMessageType.MissionFinish);
+	        			systemMessageDao.save(finishMessage);
 	            	}
 	            }
 	        }
