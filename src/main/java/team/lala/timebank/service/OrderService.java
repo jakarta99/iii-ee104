@@ -67,7 +67,7 @@ public class OrderService {
 	}
 	
 	//志工幫雇主評分
-	public void Score(Long orderId, Integer score) {
+	public void score(Long orderId, Integer score) {
 		Order order = orderDao.getOne(orderId);
 		Member member = order.getMission().getMember();
 		if(member.getScoredTimes() == null || member.getScoredTimes() == 0) {
@@ -87,7 +87,7 @@ public class OrderService {
 	}
 	
 	//志工檢舉雇主
-	public void Report(Long orderId, String description, MultipartFile proofPic, HttpServletRequest request) {
+	public void report(Long orderId, String description, MultipartFile proofPic, HttpServletRequest request) {
 		Order order = orderDao.getOne(orderId);
 		Penalty penalty = new Penalty();
 		penalty.setOrder(order);
