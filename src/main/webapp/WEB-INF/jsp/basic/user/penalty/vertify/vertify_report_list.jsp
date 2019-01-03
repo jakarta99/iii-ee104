@@ -81,6 +81,8 @@
 					</div>
 					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
 					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
+					
+					
 <!-- 					<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse"  -->
 <!-- 						role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a> -->
 				</div>
@@ -98,6 +100,7 @@
 		<fieldset style="width:1300px">
 			<div class="btn-group" style="margin-bottom: 20px">
 			  <button type="button" class="btn btn-info" id="vertifyingCase">審核中</button>
+			  <button type="button" class="btn btn-outline-info" id="allCases">所有案件</button>
 			  <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="history">
 			    	審核歷史紀錄
 			  </button>
@@ -105,8 +108,14 @@
 			    	<a class="dropdown-item" href="#" id="vertified2">有罪</a>
 			    	<a class="dropdown-item" href="#" id="vertified3">無罪</a>
 			  </div>
+			  <div>
+			  	<a class="btn btn-secondary" href="#" 
+						id="excelButt" >產製報表(EXCEL)</a>
+			  </div>
+			  
 			</div>
-	
+			
+
 			
 			<table id="table" class="table table-hover">
 				<thead>
@@ -259,12 +268,23 @@
 				$('#status').val("1");
 				dataTable.ajax.reload();
 				$("#history").attr('class', 'btn btn-outline-info dropdown-toggle');
+				$("#allCases").attr('class', 'btn btn-outline-info');
+				$(this).attr('class', 'btn btn-info');
+			})
+			
+			//按下所有案件按鈕
+			$("#allCases").click(function(){
+				$('#status').val("");
+				dataTable.ajax.reload();
+				$("#vertifyingCase").attr('class', 'btn btn-outline-info');
+				$("#history").attr('class', 'btn btn-outline-info dropdown-toggle');
 				$(this).attr('class', 'btn btn-info');
 			})
 			
 			//按審核歷史紀錄按紐
 			$("#history").click(function(){
 				$("#vertifyingCase").attr('class', 'btn btn-outline-info');
+				$("#allCases").attr('class', 'btn btn-outline-info');
 				$(this).attr('class', 'btn btn-info dropdown-toggle');
 			})
 			
@@ -278,7 +298,10 @@
 				dataTable.ajax.reload();
 			})
 			
-			
+			//產製EXCEL報表功能之按鈕
+			$("#excelButt").click(function(){
+				$(this).attr("href", "/penalty/penaltyExcel?" + $('form').serialize())
+			})
 			
 
 		})

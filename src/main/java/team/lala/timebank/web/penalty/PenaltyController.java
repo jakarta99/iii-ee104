@@ -1,7 +1,14 @@
 package team.lala.timebank.web.penalty;
 
 import java.security.Principal;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,9 +24,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
+import team.lala.timebank.config.ExcelView;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
@@ -117,6 +126,33 @@ public class PenaltyController {
 	}
 	
 	//*************************************************
+	
+	//Jasmine
+	// 嘗試印Excel報表
+	@RequestMapping(value = "/penaltyExcel", method = RequestMethod.GET)
+	public ModelAndView getMyData(Penalty inputPenalty, HttpServletRequest request, HttpServletResponse response) throws SQLException {
+		
+		Map<String, Object> excelModel = new HashMap<String, Object>();
+		
+		// Sheet Name
+		excelModel.put("sheetname", "PenaltiesSheet");
+		
+		// Headers List
+		List<String> headers = penaltyService.getPenaltyExcelHeaders();
+		excelModel.put("headers", headers);
+		
+		// Results Table (List<Object[]>)
+		PenaltySpecification penaltySpec = new PenaltySpecification(inputPenalty);
+		List<List<String>> results= penaltyService.findAllBySpecificationForExcel(penaltySpec);
+		excelModel.put("results", results);
+		
+		response.setContentType("application/ms-excel");
+		response.setHeader("Content-disposition", "attachment; filename=penaltiesFile.xlsx");
+
+		return new ModelAndView(new ExcelView(), excelModel);
+	}
+	
+	
 	
 	//跳轉審查列表
 	@RequestMapping("/showVertifyList")
