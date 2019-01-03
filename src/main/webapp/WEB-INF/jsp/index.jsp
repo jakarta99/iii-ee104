@@ -6,7 +6,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Timebank</title>
+<!--     css links -->
     <jsp:include page="basic/commons/commons_layout/commons_css_links.jsp"/>
+    <!-- Javascript files-->
+    <jsp:include page="basic/commons/commons_layout/commons_js_links.jsp"/>
+    
   </head>
   <body>
     <div id="all">
@@ -311,11 +315,11 @@
       </section>
       <!-- FOOTER -->
       <jsp:include page="basic/commons/commons_layout/commons_footer.jsp"/>
-      
+      <jsp:include page="basic/commons/commons_layout/back-to-top_button.jsp"/>
+
     </div>
     
-    <!-- Javascript files-->
-    <jsp:include page="basic/commons/commons_layout/commons_js_links.jsp"/>
+   
     
   </body>
 </html>
