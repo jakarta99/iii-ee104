@@ -114,11 +114,12 @@
 				success : function(result) {
 					swal({
 						  title: "訊息類型-" + result.messageType ,
-						  text: "[訊息時間:" + result.releaseTime + "]" + result.message,
+						  text: "[訊息時間:" + result.releaseTime + "] " + result.message,
 						  button: "確定",
 						}).then((result) => {
 							if (result) {
 								dataTable.ajax.reload(); //讀完要再重新刷一次未讀清單
+								checkMailBox(); //刷新nav的系統訊息未讀數量
 							}
 						});
 
