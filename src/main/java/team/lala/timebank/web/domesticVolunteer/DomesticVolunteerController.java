@@ -42,14 +42,15 @@ public class DomesticVolunteerController {
 	@RequestMapping("/query")
 	@ResponseBody
 	public Page<Mission> query(Mission inputMission,
-			@RequestParam(value = "start", required = false) Optional<Integer> start,
+			@RequestParam(value = "page", required = false) Optional<Integer> page,
 			@RequestParam(value = "length", required = false) Optional<Integer> length) {
-
+	
 		log.debug("inputMission={}", inputMission);
-		int page = start.orElse(0) / length.orElse(10);
+
+		log.debug("page={}", page);
 
 		Page<Mission> missions = missionService.findByStatusAndSpecification(inputMission,
-				PageRequest.of(page, length.orElse(10)));
+				PageRequest.of(page.orElse(0), length.orElse(10)));
 
 		return missions;
 	}

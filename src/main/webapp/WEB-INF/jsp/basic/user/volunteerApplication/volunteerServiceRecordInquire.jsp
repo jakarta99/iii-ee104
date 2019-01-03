@@ -285,12 +285,12 @@
 									          '<span aria-hidden="true">&times;</span>'+
 									        '</button></div>'+
 									      '<div class="modal-body">'+ 
-									      '<form enctype="multipart/form-data" action="/user/volunteerRecord/report" onSubmit="return CheckForm();" method="post">' +
+									      '<form id="reportForm" enctype="multipart/form-data">' +
 									      '<input type="hidden" id="orderId" name="orderId" value="' + data.id + '" /><p>' +
 									      '<h5>檢舉人名<h5><p>' + data.mission.member.account + '</p>' +
  									      '<h5>檢舉原因</h5><p>' + text +'</p>' +
- 									     '<input type="file" id="proofPic" name="proofPic"  accept="image/*"><p>請選擇圖檔，如無佐證資料，則直接送出審核<p><input type="submit" id="add" value="送出檢舉" class="btn btn-primary mb-2" /></form>' +
-									      '</div><div class="modal-footer">'+
+ 									     '<input type="file" id="proofPic" name="proofPic"  accept="image/*"><p>請選擇圖檔，如無佐證資料，則直接送出審核<p>' + 
+									      '</form></div><div class="modal-footer">'+ report + 
 									      '</div></div></div></div>';
 									      
 		            		var reportButt = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reportModalCenter">檢舉</button>'
@@ -389,8 +389,9 @@
 						alert("評分成功");
 					} else {
 						alert("評分失敗");
-					}			
-					window.location.reload();
+					}
+					$('#scoreModalCenter').modal('hide')
+					dataTable.ajax.reload();
 				})	
 			}
 		}
@@ -398,17 +399,23 @@
 		//檢舉
 		function report(orderId) {
 			if(confirm("確認要送出檢舉嗎？")==true) {
+				var data = new FormData($('#reportForm')[0]);
 				$.ajax({
-					url : '/user/volunteerRecord/report?id='+ orderId+'&description=' + $('#text').val(),
-					type : 'get',
-					dataType : 'JSON'
+					url : '/user/volunteerRecord/report' ,
+					type : 'post',
+					cache: false,
+					data : data,
+					processData: false,
+					contentType: false
 				}).done(function(response){
+					console.log(response)
 					if (response.status =="SUCCESS"){
 						alert("檢舉成功");
 					} else {
 						alert("檢舉失敗");
-					}			
-					window.location.reload();
+					}
+					$('#reportModalCenter').modal('hide')
+					dataTable.ajax.reload();
 				})	
 			} else {
 				return false;
