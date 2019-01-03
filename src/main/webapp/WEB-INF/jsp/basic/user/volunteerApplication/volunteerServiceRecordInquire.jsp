@@ -162,7 +162,7 @@
 	                <li class="nav-item"><a id="orderStatus7" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active">媒合成功紀錄</a></li>
 	                <li class="nav-item"><a id="orderStatus3" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">媒合失敗紀錄</a></li>
               	</ul>
-					<form>
+					<form id="form">
 						<label><span>活動地址:</span><div role="tw-city-selector" ></div></label>						
 						<label>開始日期:</label>
 						<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
@@ -235,7 +235,7 @@
 					data:function(d){ 				//傳送給伺服器的資料(datatable預設會傳送d的資料)
 						var start = d.start;
 						var length = d.length;
-						var request =  $("form").serialize() + "&orderStatusDetail=" + orderStatusDetail +
+						var request =  $("#form").serialize() + "&orderStatusDetail=" + orderStatusDetail +
 											"&start=" + start + "&length="+ length;
 						return request;
 					},

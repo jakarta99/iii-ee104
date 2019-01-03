@@ -51,25 +51,24 @@ public class OrderSpecification implements Specification<Order>  {
 		}
 		
 		if (!StringUtils.isEmpty(inputOrder.getStartDate())) {
-			log.debug("startDate={}", inputOrder.getStartDate());
-			Join<Mission, Order> join = root.join("startDate", JoinType.LEFT);
+			Join<Mission, Order> join = root.join("mission", JoinType.LEFT);
 			list.add(criteriaBuilder.greaterThanOrEqualTo(join.get("startDate").as(java.util.Date.class),
 					inputOrder.getStartDate()));
 		}
 		
 		if (!StringUtils.isEmpty(inputOrder.getEndDate())) {
-			Join<Mission, Order> join = root.join("endDate", JoinType.LEFT);
+			Join<Mission, Order> join = root.join("mission", JoinType.LEFT);
 			list.add(criteriaBuilder.greaterThanOrEqualTo(join.get("endDate").as(java.util.Date.class),
 					inputOrder.getEndDate()));
 		}
 		
 		if(!StringUtils.isEmpty(inputOrder.getCounty())) {
-			Join<Mission, Order> join = root.join("county", JoinType.LEFT);
+			Join<Mission, Order> join = root.join("mission", JoinType.LEFT);
 			list.add(criteriaBuilder.equal(join.get("county").as(String.class), inputOrder.getCounty()));
 		}
 		
 		if(!StringUtils.isEmpty(inputOrder.getDistrict())) {
-			Join<Mission, Order> join = root.join("district", JoinType.LEFT);
+			Join<Mission, Order> join = root.join("mission", JoinType.LEFT);
 			list.add(criteriaBuilder.equal(join.get("district").as(String.class), inputOrder.getDistrict()));
 		}
 		

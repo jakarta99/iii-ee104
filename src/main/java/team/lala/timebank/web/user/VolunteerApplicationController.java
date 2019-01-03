@@ -53,7 +53,6 @@ public class VolunteerApplicationController {
 			@RequestParam(value="orderStatusDetail") String orderStatusDetail,
 			@RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
-		log.debug("order={}", order);
 		int page = start.orElse(0)/length.orElse(10);
 		return orderService.findByVolunteerAndOrderStatus(principal, order, PageRequest.of(page, length.orElse(10)));
 	}
