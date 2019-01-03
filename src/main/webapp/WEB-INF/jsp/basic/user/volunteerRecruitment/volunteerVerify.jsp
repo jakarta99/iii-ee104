@@ -75,13 +75,21 @@
  	
 	  <!-- Navbar -->
       <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-
+		<div id="heading-breadcrumbs">
+       <div class="container">
+          <div class="row d-flex align-items-center flex-wrap">
+            <div class="col-md-7">
+              <h1 class="h2">志工審核</h1>
+            </div>
+          </div>
+        </div>
+      </div>
 	
 	 <section class="bar">
         <div class="container">
           <div class="row">
     <div style="width:850px">
-	<h1 class="s2">志工審核</h1>
+
 	
 	<fieldset >
 	

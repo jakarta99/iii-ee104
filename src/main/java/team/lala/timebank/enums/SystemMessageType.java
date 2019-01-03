@@ -8,6 +8,6 @@ public enum SystemMessageType {
 	MissionAccecpt,
 	MissionReject,
 	MissionEdit,
-	MissionCancel
-	
+	MissionCancel,
+	MissionFinish
 }

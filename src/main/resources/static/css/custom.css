@@ -8,3 +8,19 @@
 	box-shadow:3px 0 20px -4px #000;
 	
 }
+
+.back-to-top {
+    cursor: pointer;
+    position: fixed;
+    bottom: 50px;
+    right: 100px;
+    display:none;
+    width: 40px;
+    height:40px;
+    padding: 8px ;
+    background: #4fbfa8;
+    color: #fff;
+    border-radius: 4px;
+    border:none;
+    margin-top: 10px;
+}
