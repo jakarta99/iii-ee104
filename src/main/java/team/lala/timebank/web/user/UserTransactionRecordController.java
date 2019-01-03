@@ -27,9 +27,6 @@ public class UserTransactionRecordController {
 	@Autowired
 	private TimeLedgerService timeLedgerService;
 	
-	@Autowired
-	private MemberService memberService;
-	
 	@RequestMapping("/list")
 	public String listPage(Model model) {
 //		Member userDetails = (Member) SecurityContextHolder.getContext()  
@@ -38,7 +35,6 @@ public class UserTransactionRecordController {
 //		log.debug("USERID={}", userDetails.getId());
 //		Member member = memberService.getOne(userDetails.getId());
 //		List<TimeLedger> timeLedgers = timeLedgerService.findByMemberId(member);
-//		System.out.println(timeLedgers);
 //		model.addAttribute("member", member);
 //		model.addAttribute("timeLedgers", timeLedgers);
 		return "/basic/user/transaction_record/transaction-record_list";

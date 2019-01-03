@@ -196,10 +196,11 @@ public class MissionService {
 	// cancel for user
 	public Mission cancel(Long id) {
 		Mission mission = missionDao.getOne(id);
-
+		
 		if (mission.getMissionstatus() == MissionStatus.A_New
 				|| mission.getMissionstatus() == MissionStatus.A_VolunteerApproved) {
 			mission.setMissionstatus(MissionStatus.C_Cancel);
+			mission.setFinishDate(new Date());
 			return missionDao.save(mission);
 		}
 		return null;
