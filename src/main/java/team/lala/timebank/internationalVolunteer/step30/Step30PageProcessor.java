@@ -87,12 +87,11 @@ public class Step30PageProcessor implements PageProcessor {
 			// iVolunteer.setProjectLength("");
 			iVolunteer.setRequirement("無須經驗，沒有特別要求");
 			iVolunteer.setRoleDiscription(discriptionList.get(i));
-			iVolunteer.setStartDate(startDateList.get(i) + "到" + endDateList.get(i));
+			iVolunteer.setStartDate(startDateList.get(i) + " - " + endDateList.get(i));
 			iVolunteer.setTitle(titleList.get(i));
 			iVolunteer.setOrganization("Step30  舊鞋。救命");
 			iVolunteer.setOrgLogo(page.getHtml().xpath("/html/body/div[1]/header/nav/div/div[1]/a/img/@src")
 					.replace("images", "https://www.step30.org/images").toString());
-			iVolunteer.setOrgUrl("https://www.step30.org/story.php/");
 			iVolunteer.setWebsiteUrl(page.getUrl().toString());
 			System.out.println(iVolunteer);
 			internationalVolunteerService.insert(iVolunteer);

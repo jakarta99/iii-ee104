@@ -67,9 +67,7 @@ public class ProjectsAbroadPipeline implements Pipeline {
 					bean.setOrgLogo(entryValue);		
 				} else if (entry.getKey().equalsIgnoreCase("organization")) {
 					bean.setOrganization(entryValue);		
-				} else if (entry.getKey().equalsIgnoreCase("orgUrl")) {
-					bean.setOrgUrl(entryValue);		
-				}					
+				} 				
 			}
 			internationalVolunteerService.insert(bean);
 			

@@ -45,31 +45,29 @@ public class VYAPipeline implements Pipeline {
 					entryValue = "";
 				}
 				
-				if (entry.getKey().equalsIgnoreCase("title")) {
-					bean.setTitle(entryValue);				
-				} else if (entry.getKey().indexOf("項目地點")!= -1) {
-					bean.setPlace(entryValue);		
-				} else if (entry.getKey().indexOf("志工角色")!= -1) {
-					bean.setRoleDiscription(entryValue);		
-				} else if (entry.getKey().indexOf("經驗要求")!= -1 ||entry.getKey().indexOf("參加資格")!= -1 ) {					
-					bean.setRequirement(entryValue);		
-				} else if (entry.getKey().indexOf("工作單位")!= -1) {					
-					bean.setWorkUnit(entryValue);		
-				} else if (entry.getKey().indexOf("項目長度")!= -1) {				
-					bean.setProjectLength(entryValue);		
-				} else if (entry.getKey().indexOf("開始日期")!= -1) {				
-					bean.setStartDate(entryValue);		
-				} else if (entry.getKey().equalsIgnoreCase("websiteUrl")) {
-					bean.setWebsiteUrl(entryValue);		
-				} else if (entry.getKey().equalsIgnoreCase("picture")) {
-					bean.setPicture(entryValue);		
-				} else if (entry.getKey().equalsIgnoreCase("logo")) {
-					bean.setOrgLogo(entryValue);		
-				} else if (entry.getKey().equalsIgnoreCase("organization")) {
-					bean.setOrganization(entryValue);		
-				} else if (entry.getKey().equalsIgnoreCase("orgUrl")) {
-					bean.setOrgUrl(entryValue);		
-				}					
+//				if (entry.getKey().equalsIgnoreCase("title")) {
+//					bean.setTitle(entryValue);				
+//				} else if (entry.getKey().indexOf("項目地點")!= -1) {
+//					bean.setPlace(entryValue);		
+//				} else if (entry.getKey().indexOf("志工角色")!= -1) {
+//					bean.setRoleDiscription(entryValue);		
+//				} else if (entry.getKey().indexOf("經驗要求")!= -1 ||entry.getKey().indexOf("參加資格")!= -1 ) {					
+//					bean.setRequirement(entryValue);		
+//				} else if (entry.getKey().indexOf("工作單位")!= -1) {					
+//					bean.setWorkUnit(entryValue);		
+//				} else if (entry.getKey().indexOf("項目長度")!= -1) {				
+//					bean.setProjectLength(entryValue);		
+//				} else if (entry.getKey().indexOf("開始日期")!= -1) {				
+//					bean.setStartDate(entryValue);		
+//				} else if (entry.getKey().equalsIgnoreCase("websiteUrl")) {
+//					bean.setWebsiteUrl(entryValue);		
+//				} else if (entry.getKey().equalsIgnoreCase("picture")) {
+//					bean.setPicture(entryValue);		
+//				} else if (entry.getKey().equalsIgnoreCase("logo")) {
+//					bean.setOrgLogo(entryValue);		
+//				} else if (entry.getKey().equalsIgnoreCase("organization")) {
+//					bean.setOrganization(entryValue);		
+//				} 				
 			}
 			internationalVolunteerService.insert(bean);
 			

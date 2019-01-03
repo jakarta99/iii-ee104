@@ -27,8 +27,7 @@ public class InternationalVolunteer {
 	@Column(name="PLACE")
 	private String place; //項目地點
 	
-//	@Column(name="projectType")
-//	private String projectType;
+
 
 	@Column(name="ROLE_DISCRIPTION")
 	private String roleDiscription;
@@ -37,7 +36,7 @@ public class InternationalVolunteer {
 	private String requirement; //經驗要求
 	
 	@Column(name="WORK_UNIT")
-	private String workUnit; //工作單位
+	private String workUnit; //工作單位//可刪
 	
 	@Column(name="PROJECT_LENGTH")
 	private String projectLength; //項目長度
@@ -57,18 +56,17 @@ public class InternationalVolunteer {
 	
 	@Column(name="ORGANIZATION")
 	private String organization;
-	
-	@Column(name="ORGANIZATION_URL")
-	private String orgUrl;
 
 	@Override
 	public String toString() {
 		return "InternationalVolunteer [id=" + id + ", title=" + title + ", place=" + place + ", roleDiscription="
 				+ roleDiscription + ", requirement=" + requirement + ", workUnit=" + workUnit + ", projectLength="
 				+ projectLength + ", startDate=" + startDate + ", websiteUrl=" + websiteUrl + ", picture=" + picture
-				+ ", orgLogo=" + orgLogo + ", organization=" + organization + ", orgUrl=" + orgUrl + "]";
+				+ ", orgLogo=" + orgLogo + ", organization=" + organization + "]";
 	}
+	
 
+	
 	
 	
 	

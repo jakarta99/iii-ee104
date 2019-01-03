@@ -32,7 +32,6 @@ public class WakerPageProcessor implements PageProcessor {
 //		if (page.getUrl().toString().equals("https://www.waker.org.tw/LocationList.aspx?nowPage=1&id=&tid=8")) {
 			System.out.println("putField");
 			page.putField("organization", "微客公益行動協會");
-			page.putField("orgUrl", "https://www.waker.org.tw/");
 			page.putField("websiteUrl", page.getUrl().toString());
 			page.putField("logo", page.getHtml().xpath("//*[@id=\"IMG_com_logo\"]").toString());
 

@@ -13,7 +13,7 @@
 
 <script>
 function doSpider(){
-	$.get("/commons/InternationalVolunteer/spidertest1", function(msg){
+	$.get("/commons/InternationalVolunteer/spidertest", function(msg){
 		alert(msg);
 	})
 }
@@ -49,7 +49,7 @@ function doSpider(){
 								<div class="home-blog-post">
 								<div class="product">
 									<div class="image">
-										<a href="#" class="btn btn-template-outlined-white">			
+										<a href="${volunteer.websiteUrl}" class="btn btn-template-outlined-white">			
 											<img src="${volunteer.picture}" alt="..." class="image1" width="300px"  height="230px" >
 										</a>
 										
@@ -57,17 +57,18 @@ function doSpider(){
 									</div>
 									<div class="text">
 										<h4>
-											<a href="#">${volunteer.title} </a>
+											<a href="${volunteer.websiteUrl}">${volunteer.title} </a>
 										</h4>
 										<p class="author-category" >
-											<a href="${volunteer.websiteUrl}" style="color:#999">${volunteer.organization}</a>
+											<span  style="color:#999">${volunteer.organization}</span>
 										</p>
 										<p>
 											<table style="margin:auto;">
-												<tr><td width="70px">服務地點: </td><td width="200px"> ${volunteer.place}</td></tr>
+												<tr><td width="70px">服務地區: </td><td width="200px"> ${volunteer.place}</td></tr>
+												<tr><td width="70px">服務時間: </td><td width="200px"> ${volunteer.startDate}</td></tr>
 											</table>
 										</p>
-										<a href="#" class="btn btn-template-outlined">更多資訊</a>
+										<a href="${volunteer.websiteUrl}" class="btn btn-template-outlined">更多資訊</a>
 									</div>							
 								</div>
 							</div>
@@ -84,14 +85,12 @@ function doSpider(){
 			
 		<!-- FOOTER -->
 		<jsp:include page="../commons_layout/commons_footer.jsp" />
-
+ 		<jsp:include page="../commons_layout/back-to-top_button.jsp"/>
 	</div>
 
 	<script>
 		$(document).ready(function(){
-			$("#heading-breadcrumbs>div>div>div.col-md-7>h1").text("國際志工專區");
-			
-			
+			$("#heading-breadcrumbs>div>div>div.col-md-7>h1").text("國際志工專區");			
 		})
 	
 	</script>

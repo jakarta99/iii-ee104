@@ -31,7 +31,6 @@ public class ProjectsAbroadPageProcessor implements PageProcessor {
 		if (page.getUrl().regex("https://www.projects-abroad.com.tw/volunteer-projects/[^0-9]{4,40}/[^0-9]{5,40}/[^0-9]{4,30}/").match()) {
 			System.out.println("put field");
 			page.putField("organization", "Projects Abroad");
-			page.putField("orgUrl", "https://www.projects-abroad.com.tw/");
 			page.putField("title", page.getHtml().xpath("//*[@id=\"content\"]/article/h1/text()").toString());
 			page.putField("websiteUrl", page.getUrl().toString());
 			page.putField("logo", page.getHtml().xpath("//*[@id=\"logo-top\"]/img/@src").replace("/_design", "https://www.projects-abroad.com.tw/_design").toString());
