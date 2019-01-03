@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>       
+
  <header class="nav-holder make-sticky">
         <div id="navbar" role="navigation" class="navbar navbar-expand-lg">
-          <div class="container"><a href="/" class="navbar-brand home"><img src="/img/logo.png" alt="Universal logo" class="d-none d-md-inline-block"><img src="/img/logo-small.png" alt="Universal logo" class="d-inline-block d-md-none"><span class="sr-only">Universal - go to homepage</span></a>
+          <div class="container"><a href="/" class="navbar-brand home"><img src="/img/logo.png" alt="Universal logo" class="d-none d-md-inline-block" width="50"><img src="/img/logo-small.png" alt="Universal logo" class="d-inline-block d-md-none"><span class="sr-only">Universal - go to homepage</span></a>
             <button type="button" data-toggle="collapse" data-target="#navigation" class="navbar-toggler btn-template-outlined"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
             <div id="navigation" class="navbar-collapse collapse">
               <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item"><a href="javascript: void(0)">公益團體 <b class="caret"></b></a>
                 </li>
-                <li class="nav-item menu-large"><a href="#" >志工招募<b class="caret"></b></a>
+                <li class="nav-item menu-large"><a href="/commons/domesticVolunteer/list" >志工招募<b class="caret"></b></a>
                 </li>
               	<li class="nav-item dropdown menu-large" ><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">會員專區 <b class="caret"></b></a>
                   <ul class="dropdown-menu megamenu" style="width:450px;">
@@ -18,7 +19,7 @@
 
                         <div class="col-md-6 col-lg-3">
                            <h5><a href="#" >行事曆</a></h5>                      
-                          <h5><a href="/system-message/list" >系統訊息</a></h5>
+                          <h5><a href="/system-message/list" id="systemMessage">系統訊息</a></h5>
                           <h5><a href="/user/personal-info/edit" >我的個人資訊</a></h5>                          
                         </div>
                         <div class="col-md-6 col-lg-3">
@@ -181,3 +182,21 @@
           </div>
         </div>
       </header>
+ 
+ <script>
+	//顯示系統訊息未讀數量
+ 	checkMailBox();
+	function checkMailBox(){
+		$.ajax({
+			type:"get",
+			url:"/system-message/countNotReadMessage",
+		}).done(function(notReadMsgNum){
+			if(notReadMsgNum > 0){
+				$("#systemMessage").html("系統訊息<font size='2' color='red'>("+ notReadMsgNum +")</font>")
+			}else{
+				$("#systemMessage").html("系統訊息")
+			}
+			
+		})
+	}
+</script>

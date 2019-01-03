@@ -115,7 +115,7 @@ public class AdminPenaltyController {
 
 	
 	//Jasmine
-	// 嘗試印Excel報表
+	//印Excel報表
 	@RequestMapping(value = "/penaltyExcel", method = RequestMethod.GET)
 	public ModelAndView getMyData(Penalty inputPenalty, HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		

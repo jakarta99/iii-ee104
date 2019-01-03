@@ -1,7 +1,14 @@
 package team.lala.timebank.web.penalty;
 
 import java.security.Principal;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,9 +24,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
+import team.lala.timebank.config.ExcelView;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
@@ -43,15 +52,17 @@ public class PenaltyController {
 	
 	@Autowired
 	private OrderService orderService;
-
-	//basic/user
+	
+	
+	
+	//Jasmine
 	//模擬檢視會員媒合清單(開發debug用，之後要刪)
 	@RequestMapping("/tempPenaltyEntrance")
 	public String listPage() {
 		return "/basic/user/penalty/temp_order_list"; // getRequestDispatcher("/WEB-INF/jsp/order_list.jsp").forward(request,
 									// response);
 	}
-	
+	//Jasmine
 	//模擬檢視會員媒合清單(開發debug用，之後要刪)
 	@RequestMapping("/tempOrders")
 	@ResponseBody
@@ -67,7 +78,7 @@ public class PenaltyController {
 	}
 	
 	
-	
+	//Jasmine
 	//針對order按檢舉按鍵後，呼叫這支
 	@RequestMapping("/report")
 	public String report(@RequestParam("orderId")Long orderId, Model model, Principal principal) {  
@@ -85,6 +96,7 @@ public class PenaltyController {
 		return "/basic/user/penalty/violation_report";
 	}
 	
+	//Jasmine
 	//提出檢舉時呼叫的方法
 	//前端用ajax無法同時送檔案和表單，故此處暫不用@ResponseBody，待處理。
 	@RequestMapping(value="/doReport", method = RequestMethod.POST)
@@ -118,12 +130,39 @@ public class PenaltyController {
 	
 	//*************************************************
 	
+	//Jasmine
+	// 嘗試印Excel報表
+	@RequestMapping(value = "/penaltyExcel", method = RequestMethod.GET)
+	public ModelAndView getMyData(Penalty inputPenalty, HttpServletRequest request, HttpServletResponse response) throws SQLException {
+		
+		Map<String, Object> excelModel = new HashMap<String, Object>();
+		
+		// Sheet Name
+		excelModel.put("sheetname", "PenaltiesSheet");
+		
+		// Headers List
+		List<String> headers = penaltyService.getPenaltyExcelHeaders();
+		excelModel.put("headers", headers);
+		
+		// Results Table (List<Object[]>)
+		PenaltySpecification penaltySpec = new PenaltySpecification(inputPenalty);
+		List<List<String>> results= penaltyService.findAllBySpecificationForExcel(penaltySpec);
+		excelModel.put("results", results);
+		
+		response.setContentType("application/ms-excel");
+		response.setHeader("Content-disposition", "attachment; filename=penaltiesFile.xlsx");
+
+		return new ModelAndView(new ExcelView(), excelModel);
+	}
+	
+	
+	//Jasmine
 	//跳轉審查列表
 	@RequestMapping("/showVertifyList")
 	public String showVertifyList() {
 		return "/basic/user/penalty/vertify/vertify_report_list";
 	}
-	
+	//Jasmine
 	//查出所有待審查列表
 	@RequestMapping("/getVertifyList")
 	@ResponseBody
@@ -141,6 +180,7 @@ public class PenaltyController {
 		return penalties;
 	}
 	
+	//Jasmine
 	//點選個案後呼叫此controller，進入個案審查畫面
 	@RequestMapping("/vertify")
 	public String vertify(@RequestParam("id") Long orderId, Model model) {
@@ -149,6 +189,7 @@ public class PenaltyController {
 		return "/basic/user/penalty/vertify/penalty_vertifying";
 	}
 	
+	//Jasmine
 	//呼叫審查service(扣違規會員時數)，完成審查(update成功)後跳出成功對話框(SUCCESS)，轉回所有待審查清單
 	@RequestMapping("/doneVertify")
 	@ResponseBody

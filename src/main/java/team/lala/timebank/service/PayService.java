@@ -12,9 +12,11 @@ import team.lala.timebank.dao.OrderDao;
 import team.lala.timebank.dao.SystemMessageDao;
 import team.lala.timebank.dao.TimeLedgerDao;
 import team.lala.timebank.entity.Member;
+import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.SystemMessage;
 import team.lala.timebank.entity.TimeLedger;
+import team.lala.timebank.enums.MissionStatus;
 import team.lala.timebank.enums.OrderStatus;
 import team.lala.timebank.enums.SystemMessageType;
 import team.lala.timebank.enums.YesNo;
@@ -30,16 +32,16 @@ public class PayService {
 
 	@Autowired
 	private OrderDao orderDao;
-
+	
 	@Autowired
 	private MissionDao missionDao;
 	@Autowired
 	private SystemMessageDao systemMessageDao;
 
 	// 交易
-	public Order transaction(Integer hours, Long volunteerId, Long payerId, String missionTitle, Long orderId,
+	public Order transaction(Integer hours, Long volunteerId, Long payerId, Mission mission, Long orderId,
 			Integer score) {
-
+		String missionTitle = mission.getTitle();
 		// 變更order 狀態
 		Order order = orderDao.getOne(orderId);
 		if (order.getOrderStatus() == OrderStatus.ServiceFinishNotPay) {
@@ -89,7 +91,7 @@ public class PayService {
 			// 2.3 insert
 			timeLedgerDao.save(volunteerTimeLedger);
 			order.setOrderStatus(OrderStatus.ServiceFinishPayMatchSuccess);
-
+			orderDao.save(order);
 			// 3 評分
 			Member volunteer = memberDao.getOne(volunteerId);
 			volunteer.setSumScore(volunteer.getSumScore() + score);
@@ -115,7 +117,25 @@ public class PayService {
 			earn.setMessage("您參加志工活動:[" + order.getMission().getTitle() + "]獲得" + hours + "小時已入帳");
 			earn.setMessageType(SystemMessageType.PayTimeValue);
 			systemMessageDao.save(earn);
-
+			//使用for-each取值 檢查mission中的所有order 若全付款則將 mission 狀態改變
+			int payOrderCounter = 0;
+			for (Order checkOrder: mission.getOrders()){
+	            if(checkOrder.getOrderStatus() == OrderStatus.ServiceFinishPayMatchSuccess) {
+	            	payOrderCounter++;
+	            	if(payOrderCounter == mission.getOrders().size()) {
+	            		mission.setMissionstatus(MissionStatus.C_Finish);
+	            		mission.setFinishDate(new Date());
+	            		SystemMessage finishMessage = new SystemMessage();
+	            		finishMessage.setReleaseTime(new Date());
+	            		finishMessage.setReadStatus(YesNo.N);
+	            		finishMessage.setMember(order.getMission().getMember());
+	            		finishMessage.setMessage("您刊登的志工活動:[" + order.getMission().getTitle() + "]已結案");
+	            		finishMessage.setMessageType(SystemMessageType.MissionFinish);
+	        			systemMessageDao.save(finishMessage);
+	            	}
+	            }
+	        }
+			
 			return orderDao.save(order);
 
 		}

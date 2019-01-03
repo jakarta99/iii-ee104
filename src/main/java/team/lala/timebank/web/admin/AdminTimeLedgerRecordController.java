@@ -110,6 +110,7 @@ public class AdminTimeLedgerRecordController {
 		TimeLedgerSpecification timeLedgerSpec = new TimeLedgerSpecification(inputTimeLedger);
 		Page<TimeLedger> timeLedgers = timeLedgerService.findBySpecification(
 				timeLedgerSpec, PageRequest.of(page, length.orElse(10)));
+		log.debug("queryMember={}",timeLedgers.getContent());
 		return timeLedgers;
 	}
 }

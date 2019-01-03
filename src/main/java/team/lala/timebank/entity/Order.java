@@ -62,7 +62,7 @@ public class Order{
 	private Mission mission;
 	
 	@Column(name="MEMBER_SCORE")
-	private Long memberScore;	//獲得時間
+	private Long memberScore;	//志工獲得時間
 	
 	@Column(name="FEEDBACK_SCORE")
 	private Long feedBackScore;

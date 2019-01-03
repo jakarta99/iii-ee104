@@ -1,5 +1,7 @@
 package team.lala.timebank.dao;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +13,8 @@ import team.lala.timebank.enums.YesNo;
 
 public interface SystemMessageDao extends JpaRepository<SystemMessage, Long>, JpaSpecificationExecutor<SystemMessage>  {
 	public Page<SystemMessage> findByReadStatusAndMember(YesNo readStatus, Member member, Pageable Pageable);
+	
+	public List<SystemMessage> findByReadStatusAndMember(YesNo readStatus, Member member);
 	
 	public Page<SystemMessage> findByMember(Member member, Pageable Pageable);
 

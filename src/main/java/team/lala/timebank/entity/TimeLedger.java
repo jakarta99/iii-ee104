@@ -42,7 +42,10 @@ public class TimeLedger {
 //	@BatchSize(size=30)
 	@JoinColumn(name="MEMBER_ID",    
 			referencedColumnName="id") 
-	private Member memberId;
+	private Member memberId;	//之後改member
+	//為了前端接收(字串)，傳入memberId(member)，與member的account欄位join
+	@Transient
+	private String memberAccount;
 	
 	@Column(name="TRANSACTION_TIME")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
@@ -68,14 +71,13 @@ public class TimeLedger {
 	@Column(name="DESCRIPTION")
 	private String description;
 
-	
-
 	@Override
 	public String toString() {
-		return "TimeLedger [id=" + id + ", memberId=" + memberId + ", transactionTime=" + transactionTime
-				+ ", transactionTimeBegin=" + transactionTimeBegin + ", transactionTimeEnd=" + transactionTimeEnd
-				+ ", depositValue=" + depositValue + ", withdrawalValue=" + withdrawalValue + ", balanceValue="
-				+ balanceValue + ", description=" + description + "]";
+		return "TimeLedger [id=" + id + ", memberId=" + memberId + ", memberAccount=" + memberAccount
+				+ ", transactionTime=" + transactionTime + ", transactionTimeBegin=" + transactionTimeBegin
+				+ ", transactionTimeEnd=" + transactionTimeEnd + ", depositValue=" + depositValue + ", withdrawalValue="
+				+ withdrawalValue + ", balanceValue=" + balanceValue + ", description=" + description + "]";
 	}
+
 
 }

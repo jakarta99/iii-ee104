@@ -6,11 +6,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Timebank</title>
-<!--     css links -->
+	<!--     css links -->
     <jsp:include page="basic/commons/commons_layout/commons_css_links.jsp"/>
     <!-- Javascript files-->
     <jsp:include page="basic/commons/commons_layout/commons_js_links.jsp"/>
-    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
   </head>
   <body>
     <div id="all">

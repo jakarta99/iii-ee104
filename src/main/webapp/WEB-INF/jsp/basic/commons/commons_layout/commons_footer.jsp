@@ -23,19 +23,19 @@
               <h4 class="h6">Blog</h4>
               <ul class="list-unstyled footer-blog-list">
                 <li class="d-flex align-items-center">
-                  <div class="image"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></div>
+                  <div class="image"><img src="/img/detailsquare.jpg" alt="..." class="img-fluid"></div>
                   <div class="text">
                     <h5 class="mb-0"> <a href="post.html">Blog post name</a></h5>
                   </div>
                 </li>
                 <li class="d-flex align-items-center">
-                  <div class="image"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></div>
+                  <div class="image"><img src="/img/detailsquare.jpg" alt="..." class="img-fluid"></div>
                   <div class="text">
                     <h5 class="mb-0"> <a href="post.html">Blog post name</a></h5>
                   </div>
                 </li>
                 <li class="d-flex align-items-center">
-                  <div class="image"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></div>
+                  <div class="image"><img src="/img/detailsquare.jpg" alt="..." class="img-fluid"></div>
                   <div class="text">
                     <h5 class="mb-0"> <a href="post.html">Very very long blog post name</a></h5>
                   </div>
@@ -50,12 +50,12 @@
             </div>
             <div class="col-lg-3">
               <ul class="list-inline photo-stream">
-                <li class="list-inline-item"><a href="#"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></a></li>
-                <li class="list-inline-item"><a href="#"><img src="img/detailsquare2.jpg" alt="..." class="img-fluid"></a></li>
-                <li class="list-inline-item"><a href="#"><img src="img/detailsquare3.jpg" alt="..." class="img-fluid"></a></li>
-                <li class="list-inline-item"><a href="#"><img src="img/detailsquare3.jpg" alt="..." class="img-fluid"></a></li>
-                <li class="list-inline-item"><a href="#"><img src="img/detailsquare2.jpg" alt="..." class="img-fluid"></a></li>
-                <li class="list-inline-item"><a href="#"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></a></li>
+                <li class="list-inline-item"><a href="#"><img src="/img/detailsquare.jpg" alt="..." class="img-fluid"></a></li>
+                <li class="list-inline-item"><a href="#"><img src="/img/detailsquare2.jpg" alt="..." class="img-fluid"></a></li>
+                <li class="list-inline-item"><a href="#"><img src="/img/detailsquare3.jpg" alt="..." class="img-fluid"></a></li>
+                <li class="list-inline-item"><a href="#"><img src="/img/detailsquare3.jpg" alt="..." class="img-fluid"></a></li>
+                <li class="list-inline-item"><a href="#"><img src="/img/detailsquare2.jpg" alt="..." class="img-fluid"></a></li>
+                <li class="list-inline-item"><a href="#"><img src="/img/detailsquare.jpg" alt="..." class="img-fluid"></a></li>
               </ul>
             </div>
           </div>

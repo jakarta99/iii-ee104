@@ -101,8 +101,8 @@
 						<div class="block">
 							<label for="idPassword">密碼:</label>
 							<input type="text" value="${param.password}" id="idPassword" placeholder="請輸入密碼" name="password" autofocus autocompelete="off">
-							<span id="idspPassword"></span>
-							<div class="remark">(1.不可空白，2.至少6個字且必須包含字母、數字、特殊符號[!@#$%^&*])</div>
+							<span id="idspPassword" style='color:red'></span>
+							<div class="remark">(1.不可空白，2.至少8個字且必須包含字母、數字、特殊符號[!@#$%^&*])</div>
 						</div>
           			</fieldset>
           			<fieldset>	
@@ -110,7 +110,7 @@
 						<div class="block">
 							<label for="idName">姓名:</label>
 							<input type="text" value="${param.name}" id="idName" name="name" autofocus autocompelete="off">
-							<span id="idspName"></span>
+							<span id="idspName" style='color:red'></span>
 							<div class="remark">(1.不可空白，2.至少2個字以上，3.必須全部為中文)</div>
 						</div>
 						<c:choose>
@@ -118,13 +118,13 @@
 								<div class="block">
 									<label for="idCertificateIdNumber">身分證字號:</label>
 									<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" name="certificateIdNumber" autofocus autocompelete="off">
-									<span id="idspCertificateIdNumber"></span>
+									<span id="idspCertificateIdNumber" style='color:red'></span>
 									<div class="remark">(1.不可空白，2.必須符合規則)</div>
 								</div>
 								<div class="block">
 									<label for="idDate">出生日期:</label>
 									<input type="text" value="${param.date}" id="idDate" name="date" autofocus autocomplete="off">
-									<span id="idspDate"></span>
+									<span id="idspDate" style='color:red'></span>
 									<div class="remark">(1.不可空白，2.格式為yyyy/MM/dd)</div>
 								</div>
 							</c:when>
@@ -132,13 +132,13 @@
 								<div class="block">
 									<label for="idCertificateIdNumber">統一編號:</label> 
 									<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" name="certificateIdNumber" autofocus autocompelete="off">
-									<span id="idspCertificateIdNumber"></span>
+									<span id="idspCertificateIdNumber" style='color:red'></span>
 									<div class="remark">(1.不可空白，2.必須符合規則)</div>
 								</div>
 								<div class="block">
 									<label for="idDate">創立日期:</label> 
 									<input type="text" value="${param.date}" id="idDate" name="date" autofocus autocomplete="off">
-									<span id="idspDate"></span>
+									<span id="idspDate" style='color:red'></span>
 									<div class="remark">(1.不可空白，2.格式為yyyy/MM/dd)</div>
 								</div>
 							</c:when>
@@ -146,24 +146,24 @@
 						<div class="block">
 							<label for="idEmail">email:</label> 
 							<input type="text" value="${param.email}" id="idEmail" name="email" autofocus autocompelete="off">
-							<span id="idspEmail"></span>
+							<span id="idspEmail" style='color:red'></span>
 							<div class="remark">(1.不可空白，2.必須填入確切用戶信箱，以供驗證)</div>
 						</div>
 						<div class="block">
-							<label for="idTelephone">住家電話:</label> 
+							<label for="idTelephone">電話:</label> 
 							<input type="text" value="${param.telephone}" id="idTelephone" name="telephone" autofocus autocompelete="off">
-							<span id="idspTelephone"></span>
+							<span id="idspTelephone" style='color:red'></span>
 							<div class="remark">(格式需為0X-XXXXXXXX)</div>
 						</div>
 						<div class="block">
 							<label for="idMobile">手機:</label> 
 							<input type="text" value="${param.mobile}" id="idMobile" name="mobile" autofocus autocompelete="off">
-							<span id="idspMobile"></span>
+							<span id="idspMobile" style='color:red'></span>
 							<div class="remark">(格式需為09XX-XXX-XXX)</div>
 						</div>
 						<div class="block">			
 							<label>住址:</label>
-							<span role="tw-city-selector" ></span>
+							<span role="tw-city-selector"></span>
 							<input type="text" value="${param.address}" id="address" name="address">
 						</div>
 					</fieldset>
@@ -173,31 +173,31 @@
 							<div class="block">
 								<label for="idOrgFounder">創辦人:</label> 
 								<input type="text" value="${param.orgFounder}" id="idOrgFounder" name="orgFounder" autofocus autocompelete="off">
-								<span id="idspOrgFounder"></span>
+								<span id="idspOrgFounder" style='color:red'></span>
 								<div class="remark">(1.不可空白，2.至少2個字以上，3.必須全部為中文)</div>
 							</div>
 							<div class="block">
 								<label for="idOrgCeo">執行長:</label>
 								<input type="text" value="${param.orgCeo}" id="idOrgCeo" name="orgCeo" autofocus autocompelete="off">
-								<span id="idspOrgCeo"></span>
+								<span id="idspOrgCeo" style='color:red'></span>
 								<div class="remark">(1.不可空白，2.至少2個字以上，3.必須全部為中文)</div>
 							</div>
 							<div class="block">
 								<label for="idOrgContactPerson">聯絡人:</label>
 								<input type="text" value="${param.orgContactPerson}" id="idOrgContactPerson" name="orgContactPerson" autofocus autocompelete="off">
-								<span id="idspOrgContactPerson"></span>
+								<span id="idspOrgContactPerson" style='color:red'></span>
 								<div class="remark">(1.不可空白，2.至少2個字以上，3.必須全部為中文)</div>
 							</div>
 							<div class="block">
 								<label for="idOrgContactPersonPhone">聯絡人電話:</label> 
 								<input type="text" value="${param.orgContactPersonPhone}" id="idOrgContactPersonPhone" name="orgContactPersonPhone" autofocus autocompelete="off">
-								<span id="idspOrgContactPersonPhone"></span>
+								<span id="idspOrgContactPersonPhone" style='color:red'></span>
 								<div class="remark">(格式需為09XX-XXX-XXX或為0X-XXXXXXXX)</div>
 							</div>
 							<div class="block">
 								<label for="idOrgWebsiteLink">網址:</label>
 								<input type="url" size="50px" value="${param.orgWebsiteLink}" id="idOrgWebsiteLink" name="orgWebsiteLink" autofocus autocompelete="off">
-								<span id="idspOrgWebsiteLink"></span>
+								<span id="idspOrgWebsiteLink" style='color:red'></span>
 								<div class="remark">(必須符合規則)</div>
 							</div>
 							<div class="block">
@@ -212,6 +212,7 @@
 						<div>
 							<input type="button" class="btn btn-primary btn-sm" id="submit" value="確定送出" />
 					        <input type="reset" class="btn btn-primary btn-sm" value="清除重填" />
+					        <span id="error" style='color:red'></span>
 						</div>
 					</fieldset>
           		</form>
@@ -254,7 +255,7 @@
         }
         else{
             document.getElementById("idspAccount").innerHTML =
-                "<img src='/img/X.jpg'><span style='color:red'>至少六個字以上</span>"
+                "<img src='/img/X.jpg'><span style='color:red'>至少6個字以上</span>"
         }
     }
 	
@@ -265,13 +266,13 @@
         var thePassword = document.getElementById("idPassword").value;
         var thePasswordLen = thePassword.length;
         var flag1 = false, flag2 = false, flag3 = false;
-        //判斷元素值是否為空白，長度是否大於6
+        //判斷元素值是否為空白，長度是否大於8
         if (thePassword == ""){
             document.getElementById("idspPassword").innerHTML =
                 "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
         }
-        //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
-        else if (thePasswordLen >= 6) {
+        //如果長度是否大於8，判斷是否包含字母、數字、特殊符號
+        else if (thePasswordLen >= 8 && thePasswordLen <= 16) {
             for (var i = 0; i < thePasswordLen; i++) {
                 var PasswordChr = thePassword.charAt(i).toUpperCase();//轉換為大寫
                 if (PasswordChr >= "A" && PasswordChr <= "Z") {
@@ -294,7 +295,7 @@
             }
         }else{
             document.getElementById("idspPassword").innerHTML =
-                "<img src='/img/X.jpg'><span style='color:red'>至少6個字</span>"
+                "<img src='/img/X.jpg'><span style='color:red'>至少8個字，最多16個字</span>"
         }
     }
     
@@ -637,8 +638,44 @@
 // 						window.location.replace("/commons/sign-up/edit");	//edit頁面
 					} else {
 						$.each(response.messages, function(idx, message){
-							alert("the "+idx+"th ERROR, because "+message);
-							$("#idspAccount").html(message);
+// 							alert("the "+idx+"th ERROR, because "+message);
+							if (message =="帳號格式錯誤"){
+								$("#idspAccount").html(message);
+							}
+							if (message =="帳號重複"){
+								$("#idspAccount").html(message);
+							}
+							if (message =="密碼格式錯誤"){
+								$("#idspPassword").html(message);
+							}
+							if (message =="姓名格式錯誤"){
+								$("#idspName").html(message);
+							}
+							if (message =="身分證字號格式錯誤"){
+								$("#idspCertificateIdNumber").html(message);
+							}
+							if (message =="統一編號格式錯誤"){
+								$("#idspCertificateIdNumber").html(message);
+							}
+							if (message =="出生日期格式錯誤"){
+								$("#idspDate").html(message);
+							}
+							if (message =="創立日期格式錯誤"){
+								$("#idspDate").html(message);
+							}
+							if (message =="email格式錯誤"){
+								$("#idspEmail").html(message);
+							}
+							if (message =="電話格式錯誤"){
+								$("#idspTelephone").html(message);
+							}
+							if (message =="手機格式錯誤"){
+								$("#idspMobile").html(message);
+							}
+							
+							if (message == "資料有誤"){
+								$("#error").html(message);								
+							}								
 						})
 // 						console.log(response.messages);
 // 						$.each(response.messages, function(idx, message) {
