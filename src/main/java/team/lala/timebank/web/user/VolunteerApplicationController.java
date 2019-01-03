@@ -71,16 +71,13 @@ public class VolunteerApplicationController {
 		return response;	
 	}
 	
-	@ResponseBody
 	@RequestMapping("/volunteerRecord/report")		//志工檢舉雇主
-	public AjaxResponse<Order> Report(@RequestParam(value="id") Long orderId,
+	public String Report(@RequestParam(value="orderId") Long orderId,
 			@RequestParam(value="description") String description,
 			@RequestParam("proofPic") MultipartFile proofPic
 			, MultipartHttpServletRequest request){
-		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		orderService.Report(orderId, description, proofPic, request);
-
-		return response;
+		return "/basic/user/volunteerApplication/volunteerServiceRecordInquire";
 	}
 
 	@ResponseBody

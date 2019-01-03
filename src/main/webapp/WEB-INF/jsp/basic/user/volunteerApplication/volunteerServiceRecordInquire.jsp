@@ -275,7 +275,7 @@
 		            { data: null, render: function(data, type, row ) {
 		            	if(data.orderStatus == "RequesterCancleActivityNoPunishMatchSuccess") {
 		            		var report = "<input type='button' class=\"btn btn-primary btn-sm\" onclick=report(" + data.id + ") value='檢舉'  />";
-		            		var text = "<textarea cols='40' rows='5' id='text' name='text'></textarea>"
+		            		var text = "<textarea cols='40' rows='5' id='description' name='description'></textarea>"
 							var reportModal = '<div class="modal fade" id="reportModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">'+
 											  '<div class="modal-dialog modal-dialog-centered" role="document">'+
 									    '<div class="modal-content">'+
@@ -285,13 +285,13 @@
 									          '<span aria-hidden="true">&times;</span>'+
 									        '</button></div>'+
 									      '<div class="modal-body">'+ 
-									      '<form enctype="multipart/form-data" action="/user/volunteerRecord/score" method="post">' +
+									      '<form enctype="multipart/form-data" action="/user/volunteerRecord/report" onSubmit="return CheckForm();" method="post">' +
 									      '<input type="hidden" id="orderId" name="orderId" value="' + data.id + '" /><p>' +
 									      '<h5>檢舉人名<h5><p>' + data.mission.member.account + '</p>' +
  									      '<h5>檢舉原因</h5><p>' + text +'</p>' +
- 									     '<input type="file" id="proofPic" name="proofPic"  accept="image/*"><p>請選擇圖檔，如無佐證資料，則直接送出審核<p></form>' +
+ 									     '<input type="file" id="proofPic" name="proofPic"  accept="image/*"><p>請選擇圖檔，如無佐證資料，則直接送出審核<p><input type="submit" id="add" value="送出檢舉" class="btn btn-primary mb-2" /></form>' +
 									      '</div><div class="modal-footer">'+
-									      report + '</div></div></div></div>';
+									      '</div></div></div></div>';
 									      
 		            		var reportButt = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reportModalCenter">檢舉</button>'
 		            		return reportButt + reportModal;
@@ -415,6 +415,14 @@
 				return false;
 			}
 		}
+		
+		function CheckForm(){
+			if(confirm("確認要送出檢舉嗎？")==true) {
+				return true;
+			} else {
+				return false;
+			}
+		} 
 		
 		//切換服務狀態
 		var Status7 = 
