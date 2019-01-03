@@ -192,7 +192,8 @@ public class TimeLedgerService {
 	
 	// list for user
 	public Page<TimeLedger> findByMemberIdAndSpecification(Principal principal, TimeLedger timeLedger, PageRequest pageRequest) {
-		timeLedger.setMemberId(memberDao.findByAccount(principal.getName()));
+//		timeLedger.setMemberId(memberDao.findByAccount(principal.getName()));
+		timeLedger.setMemberAccount(principal.getName());	//可共用spec中的setMemberAccount判斷
 		TimeLedgerSpecification timeLedgerSpec = new TimeLedgerSpecification(timeLedger);
 		Page<TimeLedger> timeLedgers = this.findBySpecification(timeLedgerSpec, pageRequest);
 		return timeLedgers;

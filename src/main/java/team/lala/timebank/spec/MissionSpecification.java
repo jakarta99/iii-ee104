@@ -34,7 +34,9 @@ public class MissionSpecification implements Specification<Mission> {
 		List<Predicate> list = new ArrayList<Predicate>();
 
 		if (!StringUtils.isEmpty(inputMission.getMissionstatus())) {
-			if(inputMission.getMissionstatus()==MissionStatus.A_New||inputMission.getMissionstatus()==MissionStatus.A_VolunteerApproved) {
+			
+			
+			if(inputMission.getMissionstatus() == MissionStatus.A_New||inputMission.getMissionstatus()==MissionStatus.A_VolunteerApproved) {
 				list.add(criteriaBuilder.in(root.get("missionstatus").as(MissionStatus.class)).value(MissionStatus.A_New).value(MissionStatus.A_VolunteerApproved));
 			}else if (inputMission.getMissionstatus()==MissionStatus.B_AccountsPayable) {
 				list.add(criteriaBuilder.equal(root.get("missionstatus").as(MissionStatus.class), inputMission.getMissionstatus()));
@@ -46,6 +48,10 @@ public class MissionSpecification implements Specification<Mission> {
 
 		if (!StringUtils.isEmpty(inputMission.getTitle())) {
 			list.add(criteriaBuilder.like(root.get("title").as(String.class), "%" + inputMission.getTitle() + "%"));
+		}
+		
+		if (!StringUtils.isEmpty(inputMission.getMissionStatusTransient())) {
+			list.add(criteriaBuilder.in(root.get("missionstatus").as(MissionStatus.class)).value(MissionStatus.A_New));
 		}
 
 		if (!StringUtils.isEmpty(inputMission.getMemberAccount())) {

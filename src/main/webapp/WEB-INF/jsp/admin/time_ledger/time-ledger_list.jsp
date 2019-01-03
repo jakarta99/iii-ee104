@@ -74,8 +74,8 @@
 				<div>
 					<label>id :</label>
 					<input type="text" value="${param.id}" placeholder="id" id="id" name="id"/>
-					<label>memberId :</label>
-					<input type="text" value="${param.memberId}" placeholder="memberId" id="memberId" name="memberId"/>
+					<label>memberAccount :</label>
+					<input type="text" value="${param.memberAccount}" placeholder="memberAccount" id="memberAccount" name="memberAccount"/>
 					<input type="button" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="search" id="searchButt" />
 				  	<input type="reset" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value=reset id="resetButt" />
 					<a class="btn btn-secondary" data-toggle="collapse" href="#collapse" 
@@ -110,7 +110,7 @@
 							<th scope="col"></th>
 							<th width="100px" scope="col">選項</th>
 							<th scope="col">id</th>
-							<th scope="col">memberId</th>
+							<th scope="col">memberAccount</th>
 							<th scope="col">transactionTime</th>
 	<!-- 						<th scope="col">description</th> -->
 							<th scope="col">depositValue</th>

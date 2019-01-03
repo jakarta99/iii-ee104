@@ -70,7 +70,7 @@
 							<th scope="col">時數</th>
 							<th scope="col">申請時間</th>
 							<th scope="col">狀態</th>
-							<th scope="col" width="50px"></th>
+							<th scope="col" width="50px">備註</th>
 						</tr>
 					</thead>
 					<tbody id="tableBody" class="table table-striped">
@@ -135,12 +135,18 @@
 		            } },
 					{data:"orderStatus"},
 		           	{data: function (data, type, row ) {
+		           		var cancelButt="<input type='button' class=\"btn btn-outline-danger btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='取消' />"
 		           		if(data.orderStatus == "VolunteerApply"){
-		           			var cancelButt="<input type='button' class=\"btn btn-outline-danger btn-sm\" onclick=\"deleteRow("+data.id+")\" id='deleteButt"+ data.id +"' value='取消' />"
-		           			return cancelButt	           		
-		           		} else {
-		           			return null;
-		           		}
+		           			return cancelButt;
+			           		} else if (data.orderStatus == "RequesterAcceptService"){
+			           			if(Date.parse(new Date()).valueOf() > Date.parse(data.mission.deadline).valueOf()){
+				           			return cancelButt;
+			           			} else {
+			           				return null;
+			           			}
+			           		} else {
+			           			return null;
+			           		}
 		           		}
 		           	},							
 				], columnDefs:[{		//禁用第0123列的搜索和排序

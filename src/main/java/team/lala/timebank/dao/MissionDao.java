@@ -10,11 +10,14 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
+import team.lala.timebank.enums.MissionStatus;
 
 public interface MissionDao extends JpaRepository<Mission, Long>, JpaSpecificationExecutor<Mission> {
 
 	public List<Mission> findByMember(Member member);
 	
 	public Page<Mission> findByMember(Member member, Pageable pageable);
+	
+	public Page<Mission> findByMissionstatus(MissionStatus missionstatus, Pageable pageable);
 			
 }

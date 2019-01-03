@@ -64,9 +64,8 @@ public class PayTimeController {
 
 			Long volunteerId = orderService.getById(orderId).getVolunteer().getId();
 			Long payerId = orderService.getById(orderId).getMission().getMember().getId();
-			String missionTitle = orderService.getById(orderId).getMission().getTitle();
-
-			payService.transaction(hours, volunteerId, payerId, missionTitle, orderId,score);
+			Mission mission = orderService.getById(orderId).getMission();
+			payService.transaction(hours, volunteerId, payerId, mission, orderId,score);
 
 		} catch (Exception e) {
 			response.addMessage("付款失敗，" + e.getMessage());
