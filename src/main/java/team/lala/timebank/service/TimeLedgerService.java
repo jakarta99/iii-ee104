@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.TimeLedgerDao;
 import team.lala.timebank.entity.Member;
-import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.entity.TimeLedger;
 import team.lala.timebank.spec.TimeLedgerSpecification;

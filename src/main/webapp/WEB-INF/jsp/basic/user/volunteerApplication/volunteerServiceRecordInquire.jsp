@@ -30,7 +30,7 @@
             border-radius: 20px;
             padding: 20px;
             margin: 20px;
-            border: 3px double #bebebe;
+            border: 3px solid rgba(0,0,0,0);
             margin: auto
         }
         .s2{
@@ -141,7 +141,16 @@
 	<!-- Top bar-->
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp" />
 	<!-- Navbar -->
-	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />	
+	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />
+	 <div id="heading-breadcrumbs">
+        <div class="container">
+          <div class="row d-flex align-items-center flex-wrap">
+            <div class="col-md-7">
+              <h1 class="h2">媒合紀錄查詢</h1>
+            </div>
+          </div>
+        </div>
+      </div>
 	<section class="bar">
         <div class="container">
         	<div class="row">
@@ -149,17 +158,18 @@
         			<!-- 條件搜尋表單 -->
         		<div>
 				<fieldset>
-			    <button type="button" id="orderStatus7" class="btn btn-primary">媒合成功紀錄</button>
-			    <button type="button" id="orderStatus3" class="btn btn-secondary">媒合失敗紀錄</button>
+				<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
+	                <li class="nav-item"><a id="orderStatus7" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active">媒合成功紀錄</a></li>
+	                <li class="nav-item"><a id="orderStatus3" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">媒合失敗紀錄</a></li>
+              	</ul>
 					<form>
-						<label>活動地址:</label>
-						<div role="tw-city-selector" ></div>
+						<label><span>活動地址:</span><div role="tw-city-selector" ></div></label>						
 						<label>開始日期:</label>
 						<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
 						<label>結束日期:</label>
 						<input type="text"  id="endDate" name="endDate" autocomplete="off"/>
-						<input type="button" value="搜尋" id="searchButt" />
-						<input type="reset"  value="清除重填" />
+						<input type="button" value="搜尋"  class="btn btn-outline-secondary" id="searchButt" />
+						<input type="reset"  value="清除重填" class="btn btn-outline-secondary" />
 						<div>	
 						<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
 						進階查詢:
@@ -204,68 +214,12 @@
 	 		</div>
 	 	</div>
 	</section>
-
-
-<!-- Jasmine -->
-	<div class="modal fade" id="reportModalCenter" tabindex="-1"
-		role="dialog" aria-labelledby="exampleModalCenterTitle"
-		aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalCenterTitle">檢舉系統</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-
-				<div class="modal-body">
-					<form enctype="multipart/form-data" onSubmit="return confirmReport();" action="/user/volunteerRecord/report" method="post">
-						<input type="hidden" id="orderListId" name="orderId"/>
-						
-						<h5>檢舉人名</h5>
-						<p>data.mission.member.account</p>
-		
-						<h5>檢舉原因</h5>
-						<textarea  id="description" name="description" cols="50" rows="5"></textarea>
-	
-						<input type="file" id="proofPic" name="proofPic"
-								accept="image/*">
-						<p>請選擇圖檔，如無佐證資料，則直接送出審核</p>
-						<input id="submit" type="submit" value="送出檢舉" class="btn btn-primary mb-2" />
-					</form>
-					
-				</div>
-				<div class="modal-footer"></div>
-			</div>
-		</div>
-	</div>
-	
-	
-	
-	
 	<!-- FOOTER -->
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
 	<script>
 		var dataTable;
 		var orderStatusDetail = "MatchSuccess";
-		
-		//Jasmine
-		function getReportData(id){
-			$("#orderListId").val(id);
-		}
-		
-		//Jasmine
 		$(document).ready(function() {
-			var reportResult = "${reportResult.status}";
-			if(reportResult == "SUCCESS"){
-				alert("檢舉成功");
-				reportResult = "";
-			}else if(reportResult == "ERROR"){
-				alert("檢舉失敗");
-				reportResult = "";
-			}
 			
 		dataTable = $('#table').DataTable({
 				pageResize: true, 
@@ -320,26 +274,27 @@
 		            } },
 		            { data: null, render: function(data, type, row ) {
 		            	if(data.orderStatus == "RequesterCancleActivityNoPunishMatchSuccess") {
-		            		//var report = "<input type='button' class=\"btn btn-primary btn-sm\" onclick=report(" + data.id + ") value='檢舉'  />";
-// 		            		var text = "<textarea cols='40' rows='5' id='text' name='text'></textarea>"
-// 							var reportModal = '<div class="modal fade" id="reportModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">'+
-// 											  '<div class="modal-dialog modal-dialog-centered" role="document">'+
-// 									    '<div class="modal-content">'+
-// 									     '<div class="modal-header">'+
-// 									       '<h5 class="modal-title" id="exampleModalCenterTitle">檢舉系統</h5>'+
-// 									        '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
-// 									          '<span aria-hidden="true">&times;</span>'+
-// 									        '</button></div>'+
-// 									      '<div class="modal-body">'+ 
-// 									      '<h5>檢舉人名<h5><p>' + data.mission.member.account + '</p>' +
-//  									      '<h5>檢舉原因</h5><p>' + text +'</p>' +
-//  									      '<input type="file" id="proofPic" name="proofPic"  accept="image/*"><p>請選擇圖檔，如無佐證資料，則直接送出審核<p>' +
-// 									      '</div><div class="modal-footer">'+
-// 									      report + '</div></div></div></div>';
-							var account = data.mission.member.account;
-		            		var reportButt = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reportModalCenter" '
-		            						+'onclick="getReportData(' + data.id + ')">檢舉</button>'
-		            		return reportButt; // + reportModal;
+		            		var report = "<input type='button' class=\"btn btn-primary btn-sm\" onclick=report(" + data.id + ") value='檢舉'  />";
+		            		var text = "<textarea cols='40' rows='5' id='description' name='description'></textarea>"
+							var reportModal = '<div class="modal fade" id="reportModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">'+
+											  '<div class="modal-dialog modal-dialog-centered" role="document">'+
+									    '<div class="modal-content">'+
+									     '<div class="modal-header">'+
+									       '<h5 class="modal-title" id="exampleModalCenterTitle">檢舉系統</h5>'+
+									        '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+									          '<span aria-hidden="true">&times;</span>'+
+									        '</button></div>'+
+									      '<div class="modal-body">'+ 
+									      '<form enctype="multipart/form-data" action="/user/volunteerRecord/report" onSubmit="return CheckForm();" method="post">' +
+									      '<input type="hidden" id="orderId" name="orderId" value="' + data.id + '" /><p>' +
+									      '<h5>檢舉人名<h5><p>' + data.mission.member.account + '</p>' +
+ 									      '<h5>檢舉原因</h5><p>' + text +'</p>' +
+ 									     '<input type="file" id="proofPic" name="proofPic"  accept="image/*"><p>請選擇圖檔，如無佐證資料，則直接送出審核<p><input type="submit" id="add" value="送出檢舉" class="btn btn-primary mb-2" /></form>' +
+									      '</div><div class="modal-footer">'+
+									      '</div></div></div></div>';
+									      
+		            		var reportButt = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reportModalCenter">檢舉</button>'
+		            		return reportButt + reportModal;
 		            	} else if (data.orderStatus == "ServiceFinishPayMatchSuccess") {
 							var score = "<input type='button' class='btn btn-primary btn-sm'  onclick=sendScore(" + data.id +") value='評分'  />"
 		            		var select = "<select id='score' name='score'><option value=''>請評分</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option></select>"
@@ -418,7 +373,6 @@
 		$("#searchButt").click(	function(){
 			dataTable.ajax.reload();
 			})
-
 		})
 		
 		//評分
@@ -442,17 +396,32 @@
 		}
 		
 		//檢舉
-		//Jasmine
-		function confirmReport() {
+		function report(orderId) {
+			if(confirm("確認要送出檢舉嗎？")==true) {
+				$.ajax({
+					url : '/user/volunteerRecord/report?id='+ orderId+'&description=' + $('#text').val(),
+					type : 'get',
+					dataType : 'JSON'
+				}).done(function(response){
+					if (response.status =="SUCCESS"){
+						alert("檢舉成功");
+					} else {
+						alert("檢舉失敗");
+					}			
+					window.location.reload();
+				})	
+			} else {
+				return false;
+			}
+		}
+		
+		function CheckForm(){
 			if(confirm("確認要送出檢舉嗎？")==true) {
 				return true;
 			} else {
 				return false;
 			}
-		}
-
-		
-		
+		} 
 		
 		//切換服務狀態
 		var Status7 = 
@@ -469,15 +438,11 @@
 			"<option value='VolunteerCancleTransactionMatchFail'>志工 取消交易</option>";    
 		$('#orderStatus7').click(function(){
 			orderStatusDetail = "MatchSuccess";
-			$('#orderStatus7').attr('class','btn btn-primary')
-			$('#orderStatus3').attr('class','btn btn-secondary')
 			$('#orderStatus').html(Status7);
 			dataTable.ajax.reload();
 		})
 		$('#orderStatus3').click(function(){
 			orderStatusDetail = "MatchFail";
-			$('#orderStatus7').attr('class','btn btn-secondary')
-			$('#orderStatus3').attr('class','btn btn-primary')
 			$('#orderStatus').html(Status3);
 			dataTable.ajax.reload();
 		})
@@ -497,7 +462,6 @@
 		        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
 		    return fmt;
 		}
-
 	</script>
 </body>
 </html>
