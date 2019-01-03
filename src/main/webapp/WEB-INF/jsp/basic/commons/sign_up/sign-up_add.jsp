@@ -102,7 +102,7 @@
 							<label for="idPassword">密碼:</label>
 							<input type="text" value="${param.password}" id="idPassword" placeholder="請輸入密碼" name="password" autofocus autocompelete="off">
 							<span id="idspPassword" style='color:red'></span>
-							<div class="remark">(1.不可空白，2.至少8個字且必須包含字母、數字、特殊符號[!@#$%^&*])</div>
+							<div class="remark">(1.不可空白，2.至少8個字且必須包含字母、數字、特殊符號[~!@#$%^&*])</div>
 						</div>
           			</fieldset>
           			<fieldset>	
@@ -123,7 +123,7 @@
 								</div>
 								<div class="block">
 									<label for="idDate">出生日期:</label>
-									<input type="text" value="${param.date}" id="idDate" name="date" autofocus autocomplete="off">
+									<input type="text" value="${param.date}" id="idDate" name="birthDate" autofocus autocomplete="off">
 									<span id="idspDate" style='color:red'></span>
 									<div class="remark">(1.不可空白，2.格式為yyyy/MM/dd)</div>
 								</div>
@@ -137,7 +137,8 @@
 								</div>
 								<div class="block">
 									<label for="idDate">創立日期:</label> 
-									<input type="text" value="${param.date}" id="idDate" name="date" autofocus autocomplete="off">
+									<input type="text" value="${param.date}" id="idDate" name="birthDate" autofocus autocomplete="off">
+<!-- 									name需與entity相同 -->
 									<span id="idspDate" style='color:red'></span>
 									<div class="remark">(1.不可空白，2.格式為yyyy/MM/dd)</div>
 								</div>
@@ -279,7 +280,7 @@
                     flag1 = true;
                 } else if (PasswordChr >= "0" && PasswordChr <= "9") {
                     flag2 = true;
-                } else if (PasswordChr == "!" || "@" || "#" || "$" || "%" || "^" || "&" || "*") {
+                } else if (PasswordChr == "~" || "!" || "@" || "#" || "$" || "%" || "^" || "&" || "*") {
                     flag3 = true;
                 }
                 if (flag1 && flag2 && flag3) {
@@ -291,7 +292,7 @@
                     "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
             }else{
                 document.getElementById("idspPassword").innerHTML =
-                    "<img src='/img/X.jpg'><span style='color:red'>必須包含字母、數字、特殊符號[!@#$%^&*]</span>"
+                    "<img src='/img/X.jpg'><span style='color:red'>必須包含字母、數字、特殊符號[~!@#$%^&*]</span>"
             }
         }else{
             document.getElementById("idspPassword").innerHTML =
@@ -344,25 +345,50 @@
     			);
     	//判斷元素值是否為空白
         if (theCertificateIdNumberLen != ""){
-        	// 使用「正規表達式」檢驗格式
-        	if (theCertificateIdNumber.search(/^[A-Z](1|2)\d{8}$/i) == -1) {
-        		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>格式錯誤，請重新輸入</span>";
-        	}else{
-        		//將字串分割為陣列(IE必需這麼做才不會出錯)
-        		theCertificateIdNumber = theCertificateIdNumber.split('');
-        		//計算總和
-        		var total = city[theCertificateIdNumber[0].charCodeAt(0)-65];
-        		for(var i=1; i<=8; i++){
-        			total += eval(theCertificateIdNumber[i]) * (9 - i);
-        		}
-        		//補上檢查碼(最後一碼)
-        		total += eval(theCertificateIdNumber[9]);
-        		//檢查比對碼(餘數應為0);
-        		if (total%10 == 0){
-        			msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
-        		}else{
-        			msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>輸入錯誤，請重新輸入</span>";
-        		}
+        	if(${memberType eq 'P' }){
+	        	// 使用「正規表達式」檢驗格式
+	        	if (theCertificateIdNumber.search(/^[A-Z](1|2)\d{8}$/i) == -1) {
+	        		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>請輸入正確身分證字號格式</span>";
+	        	}else{
+	        		//將字串分割為陣列(IE必需這麼做才不會出錯)
+	        		theCertificateIdNumber = theCertificateIdNumber.split('');
+	        		//計算總和
+	        		var total = city[theCertificateIdNumber[0].charCodeAt(0)-65];
+	        		for(var i=1; i<=8; i++){
+	        			total += eval(theCertificateIdNumber[i]) * (9 - i);
+	        		}
+	        		//補上檢查碼(最後一碼)
+	        		total += eval(theCertificateIdNumber[9]);
+	        		//檢查比對碼(餘數應為0);
+	        		if (total%10 == 0){
+	        			msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+	        		}else{
+	        			msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>驗證失敗，請輸入正確身分證字號格式</span>";
+	        		}
+	        	}
+        	}
+        	if(${memberType eq 'O' }){
+        		var invalidList = "00000000,11111111";
+        	    if (/^\d{8}$/.test(theCertificateIdNumber) == false || invalidList.indexOf(theCertificateIdNumber) != -1) {
+        	    	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>請輸入正確統一編號格式</span>";
+        	    }
+
+        	    var validateOperator = [1, 2, 1, 2, 1, 2, 4, 1],
+        	        sum = 0,
+        	        calculate = function (product) { // 個位數 + 十位數
+        	            var ones = product % 10,
+        	                tens = (product - ones) / 10;
+        	            return ones + tens;
+        	        };
+        	    for (var i = 0; i < validateOperator.length; i++) {
+        	        sum += calculate(theCertificateIdNumber[i] * validateOperator[i]);
+        	    }
+
+        	    if (sum % 10 == 0 || (theCertificateIdNumber[6] == "7" && (sum + 1) % 10 == 0)) {
+        	    	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+        	    } else {
+        	    	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>驗證失敗，請輸入正確統一編號格式</span>";
+        	    }
         	}
         }else{
         	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
@@ -457,155 +483,130 @@
     	}
     }
     
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("idOrgFounder").addEventListener("keyup", chkOrgFounder);
-    });
-    function chkOrgFounder() {
-        var theName = document.getElementById("idOrgFounder").value;
-        var msgChk = document.getElementById("idspOrgFounder");
-        var theNameLen = theName.length;
-        //判斷元素值是否為空白，長度是否大於2
-        if (theName == ""){
-        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
-        }
-        //如果長度是否大於2，判斷是否全部為中文字
-        else if (theNameLen >= 2) {
-            for (var i = 0; i < theNameLen; i++) {
-                var NameChr = theName.charCodeAt(i);
-                if (NameChr >= 0x4e00 && NameChr <= 0x9fff) {
-                	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
-                } else {
-                	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>必須全部為中文字</span>"
-                }
-            }
-        }
-        else{
-        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>至少兩個字以上</span>"
-        }
-    }
+    if(${memberType eq 'O' }){
+    	    
+	    document.addEventListener("DOMContentLoaded", function () {
+	        document.getElementById("idOrgFounder").addEventListener("keyup", chkOrgFounder);
+	    });
+	    function chkOrgFounder() {
+	        var theName = document.getElementById("idOrgFounder").value;
+	        var msgChk = document.getElementById("idspOrgFounder");
+	        var theNameLen = theName.length;
+	        //判斷元素值是否為空白，長度是否大於2
+	        if (theName == ""){
+	        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
+	        }
+	        //如果長度是否大於2，判斷是否全部為中文字
+	        else if (theNameLen >= 2) {
+	            for (var i = 0; i < theNameLen; i++) {
+	                var NameChr = theName.charCodeAt(i);
+	                if (NameChr >= 0x4e00 && NameChr <= 0x9fff) {
+	                	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
+	                } else {
+	                	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>必須全部為中文字</span>"
+	                }
+	            }
+	        }
+	        else{
+	        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>至少兩個字以上</span>"
+	        }
+	    }
+	    
+	    document.addEventListener("DOMContentLoaded", function () {
+	        document.getElementById("idOrgCeo").addEventListener("keyup", chkOrgCeo);
+	    });
+	    function chkOrgCeo() {
+	        var theName = document.getElementById("idOrgCeo").value;
+	        var msgChk = document.getElementById("idspOrgCeo");
+	        var theNameLen = theName.length;
+	        //判斷元素值是否為空白，長度是否大於2
+	        if (theName == ""){
+	        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
+	        }
+	        //如果長度是否大於2，判斷是否全部為中文字
+	        else if (theNameLen >= 2) {
+	            for (var i = 0; i < theNameLen; i++) {
+	                var NameChr = theName.charCodeAt(i);
+	                if (NameChr >= 0x4e00 && NameChr <= 0x9fff) {
+	                	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
+	                } else {
+	                	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>必須全部為中文字</span>"
+	                }
+	            }
+	        }
+	        else{
+	        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>至少兩個字以上</span>"
+	        }
+	    }
+	    
+	    document.addEventListener("DOMContentLoaded", function () {
+	        document.getElementById("idOrgContactPerson").addEventListener("keyup", chkOrgContactPerson);
+	    });
+	    function chkOrgContactPerson() {
+	        var theName = document.getElementById("idOrgContactPerson").value;
+	        var msgChk = document.getElementById("idspOrgContactPerson");
+	        var theNameLen = theName.length;
+	        //判斷元素值是否為空白，長度是否大於2
+	        if (theName == ""){
+	        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
+	        }
+	        //如果長度是否大於2，判斷是否全部為中文字
+	        else if (theNameLen >= 2) {
+	            for (var i = 0; i < theNameLen; i++) {
+	                var NameChr = theName.charCodeAt(i);
+	                if (NameChr >= 0x4e00 && NameChr <= 0x9fff) {
+	                	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
+	                } else {
+	                	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>必須全部為中文字</span>"
+	                }
+	            }
+	        }
+	        else{
+	        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>至少兩個字以上</span>"
+	        }
+	    }
+	    
+	    document.addEventListener("DOMContentLoaded", function () {
+	        document.getElementById("idOrgContactPersonPhone").addEventListener("keyup", chkPhone);
+	    });
+	    function chkPhone(){
+	    	var strPhone = document.getElementById("idOrgContactPersonPhone").value;
+	        var msgChk = document.getElementById("idspOrgContactPersonPhone");
+	        var mobileReg = /^09[0-9]{2}-[0-9]{3}-[0-9]{3}$/;
+	    	var telephoneReg = /^[0-9]{2}-[0-9]{6,8}$/;
+	    	if(!mobileReg.test(strPhone) && !telephoneReg.test(strPhone)){
+	    		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>電話號碼不正確，請重新輸入</span>";
+	    	}else{
+	    		msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+	    	}
+	    }
+	    
+	    document.addEventListener("DOMContentLoaded", function () {
+	        document.getElementById("idOrgWebsiteLink").addEventListener("keyup", chkURL);
+	    });
+	    function chkURL(){
+		    var strUrl = document.getElementById("idOrgWebsiteLink").value;
+		    var msgChk = document.getElementById("idspOrgWebsiteLink");
+		    var strRegex = "^((https|http|ftp|rtsp|mms)?://)"
+	    	   	+ "?(([0-9a-zA-Z_!~*'().&=+$%-]+: )?[0-9a-zA-Z_!~*'().&=+$%-]+@)?" //ftp的user@
+	    	   	+ "(([0-9]{1,3}.){3}[0-9]{1,3}" // IP URL- 123.123.123.123
+	    	   	+ "|" // allow IP和DOMAIN
+		    	+ "([0-9a-zA-Z_!~*'()-]+.)*" // DOMAIN- www.
+		    	+ "([0-9a-zA-Z][0-9a-zA-Z-]{0,61})?[0-9a-zA-Z]." // second DOMAIN
+		    	+ "[a-z]{2,6})" // first level domain- .com or .museum
+		    	+ "(:[0-9]{1,4})?" // port- :80
+		    	+ "((/?)|" // a slash isn't required if there is no file name
+		    	+ "(/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+/?)$";
+		   	var re = new RegExp(strRegex);
+		   	//re.test()
+		   	if (re.test(strUrl)){
+			    msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+		   	}else{
+		   		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>輸入錯誤，請重新輸入</span>";
+	       	}
+	    }
     
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("idOrgCeo").addEventListener("keyup", chkOrgCeo);
-    });
-    function chkOrgCeo() {
-        var theName = document.getElementById("idOrgCeo").value;
-        var msgChk = document.getElementById("idspOrgCeo");
-        var theNameLen = theName.length;
-        //判斷元素值是否為空白，長度是否大於2
-        if (theName == ""){
-        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
-        }
-        //如果長度是否大於2，判斷是否全部為中文字
-        else if (theNameLen >= 2) {
-            for (var i = 0; i < theNameLen; i++) {
-                var NameChr = theName.charCodeAt(i);
-                if (NameChr >= 0x4e00 && NameChr <= 0x9fff) {
-                	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
-                } else {
-                	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>必須全部為中文字</span>"
-                }
-            }
-        }
-        else{
-        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>至少兩個字以上</span>"
-        }
     }
-    
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("idOrgContactPerson").addEventListener("keyup", chkOrgContactPerson);
-    });
-    function chkOrgContactPerson() {
-        var theName = document.getElementById("idOrgContactPerson").value;
-        var msgChk = document.getElementById("idspOrgContactPerson");
-        var theNameLen = theName.length;
-        //判斷元素值是否為空白，長度是否大於2
-        if (theName == ""){
-        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
-        }
-        //如果長度是否大於2，判斷是否全部為中文字
-        else if (theNameLen >= 2) {
-            for (var i = 0; i < theNameLen; i++) {
-                var NameChr = theName.charCodeAt(i);
-                if (NameChr >= 0x4e00 && NameChr <= 0x9fff) {
-                	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
-                } else {
-                	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>必須全部為中文字</span>"
-                }
-            }
-        }
-        else{
-        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>至少兩個字以上</span>"
-        }
-    }
-    
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("idOrgContactPersonPhone").addEventListener("keyup", chkPhone);
-    });
-    function chkPhone(){
-    	var strPhone = document.getElementById("idOrgContactPersonPhone").value;
-        var msgChk = document.getElementById("idspOrgContactPersonPhone");
-        var mobileReg = /^09[0-9]{2}-[0-9]{3}-[0-9]{3}$/;
-    	var telephoneReg = /^[0-9]{2}-[0-9]{6,8}$/;
-    	if(!mobileReg.test(strPhone) && !telephoneReg.test(strPhone)){
-    		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>電話號碼不正確，請重新輸入</span>";
-    	}else{
-    		msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
-    	}
-    }
-    
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("idOrgWebsiteLink").addEventListener("keyup", chkURL);
-    });
-    function chkURL(){
-	    var strUrl = document.getElementById("idOrgWebsiteLink").value;
-	    var msgChk = document.getElementById("idspOrgWebsiteLink");
-	    var strRegex = "^((https|http|ftp|rtsp|mms)?://)"
-    	   	+ "?(([0-9a-zA-Z_!~*'().&=+$%-]+: )?[0-9a-zA-Z_!~*'().&=+$%-]+@)?" //ftp的user@
-    	   	+ "(([0-9]{1,3}.){3}[0-9]{1,3}" // IP URL- 123.123.123.123
-    	   	+ "|" // allow IP和DOMAIN
-	    	+ "([0-9a-zA-Z_!~*'()-]+.)*" // DOMAIN- www.
-	    	+ "([0-9a-zA-Z][0-9a-zA-Z-]{0,61})?[0-9a-zA-Z]." // second DOMAIN
-	    	+ "[a-z]{2,6})" // first level domain- .com or .museum
-	    	+ "(:[0-9]{1,4})?" // port- :80
-	    	+ "((/?)|" // a slash isn't required if there is no file name
-	    	+ "(/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+/?)$";
-	   	var re = new RegExp(strRegex);
-	   	//re.test()
-	   	if (re.test(strUrl)){
-		    msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
-	   	}else{
-	   		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>輸入錯誤，請重新輸入</span>";
-       	}
-    }
-    
-//     document.addEventListener("DOMContentLoaded", function () {
-//         document.getElementById("idTaxNumber").addEventListener("keyup", chkTaxNumber);
-//     });
-//     function chkTaxNumber() {
-//     	var strTaxNumber = document.getElementById("idTaxNumber").value;
-// 	    var msgChk = document.getElementById("idspTaxNumber");
-//         var invalidList = "00000000,11111111";
-//         if (/^\d{8}$/.test(strTaxNumber) == false || invalidList.indexOf(strTaxNumber) != -1) {
-//         	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>格式錯誤，請重新輸入</span>";
-//         }
-
-//         var validateOperator = [1, 2, 1, 2, 1, 2, 4, 1],
-//             sum = 0,
-//             calculate = function(product) { // 個位數 + 十位數
-//                 var ones = product % 10,
-//                     tens = (product - ones) / 10;
-//                 return ones + tens;
-//             };
-//         for (var i = 0; i < validateOperator.length; i++) {
-//             sum += calculate(strTaxNumber[i] * validateOperator[i]);
-//         }
-
-//         if( sum % 10 == 0 || (strTaxNumber[6] == "7" && (sum + 1) % 10 == 0) ){
-//         	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
-//         }else{
-//         	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>輸入錯誤，請重新輸入</span>";
-//         }
-//     };
     
 		$(document).ready(function(){
 // 			$("form div").addClass("form-group");
@@ -655,6 +656,9 @@
 								$("#idspCertificateIdNumber").html(message);
 							}
 							if (message =="統一編號格式錯誤"){
+								$("#idspCertificateIdNumber").html(message);
+							}
+							if (message =="IdNumber格式錯誤"){
 								$("#idspCertificateIdNumber").html(message);
 							}
 							if (message =="出生日期格式錯誤"){
