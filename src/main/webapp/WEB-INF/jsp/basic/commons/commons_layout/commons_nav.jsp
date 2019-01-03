@@ -9,7 +9,7 @@
               <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item"><a href="javascript: void(0)">公益團體 <b class="caret"></b></a>
                 </li>
-                <li class="nav-item menu-large"><a href="#" >志工招募<b class="caret"></b></a>
+                <li class="nav-item menu-large"><a href="/commons/domesticVolunteer/list" >志工招募<b class="caret"></b></a>
                 </li>
               	<li class="nav-item dropdown menu-large" ><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">會員專區 <b class="caret"></b></a>
                   <ul class="dropdown-menu megamenu" style="width:450px;">
@@ -18,7 +18,7 @@
 
                         <div class="col-md-6 col-lg-3">
                            <h5><a href="#" >行事曆</a></h5>                      
-                          <h5><a href="#" >系統訊息</a></h5>
+                          <h5><a href="/system-message/list" >系統訊息</a></h5>
                           <h5><a href="/user/personal-info/edit" >我的個人資訊</a></h5>                          
                         </div>
                         <div class="col-md-6 col-lg-3">

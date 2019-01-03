@@ -4,8 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%-- <jsp:include page="../../../../admin/admin_layout/admin_css_js_links.jsp" /> --%>
+<!-- Javascript、css files-->
+<jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <!-- date picker -->
 <script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
@@ -17,9 +21,13 @@
 <script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
 <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>	
 
+<!-- sweetAlert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 <style>
 	 article{
-	 	margin-top:70px;
+	 	
 	 	font-family: 微軟正黑體;
 	 }
 	 
@@ -28,7 +36,7 @@
  		border-radius: 20px; 
  		padding: 20px 20px 0px 20px;  
 /*  		border: 3px double #bebebe;  */
-		background-color:#d1e9e9;
+/* 		background-color:#d1e9e9; */
 		margin: auto; 
  		margin-top: 10px;  
  		margin-bottom: 20px;  
@@ -48,18 +56,25 @@
 <title>站內信清單</title>
 </head>
 <body>
-	<!-- 加入nav.html -->
-<%-- 	<jsp:include page="../../../../admin/admin_layout/nav.jsp" /> --%>
+	<!-- Top bar-->
+	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp" />
+	<!-- Navbar -->
+	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />	
+	 <div id="heading-breadcrumbs">
+        <div class="container">
+          <div class="row d-flex align-items-center flex-wrap">
+            <div class="col-md-7">
+              <h1 class="h2" style="font-family: '微軟正黑體'">系統訊息</h1>
+            </div>
+          </div>
+        </div>
+      </div>
 	<article>
-		<div class="container" style="margin-top: 140px">
-			<h2 class="text-center text-uppercase text-secondary mb-0" style="font-family: '微軟正黑體'">站內信列表</h2>
-		</div>
-		
 		<fieldset style="width:1300px">
 			<div class="btn-group" style="margin-bottom: 20px">
-			  <button type="button" class="btn btn-info" id="allMessages">全部訊息</button>
 			  <button type="button" class="btn btn-info" id="notRead">未讀</button>
-			  <button type="button" class="btn btn-outline-info dropdown-toggle" id="alreadyRead">已讀</button>
+			  <button type="button" class="btn btn-outline-info" id="alreadyRead" name="HI">已讀</button>
+			  <button type="button" class="btn btn-outline-info" id="allMessages">全部訊息</button>
 			</div>
 	
 			
@@ -72,6 +87,7 @@
 						<th scope="col">訊息類型</th>
 						<th scope="col">訊息內容</th>
 						<th scope="col">是否已讀</th>
+						<th scope="col">會員帳號(debug用)</th>
 					</tr>
 				</thead>
 				<tbody id="tableBody">
@@ -80,12 +96,45 @@
 			</table>
 		</fieldset>
 	</article>
+	<!-- FOOTER -->
+	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
+
+	
 	
 	<script>
 
 		var dataTable;
-		var readStatus = "";
+		var readStatus = "N";
+		function getMessageId(msgId){
+			$.ajax({
+				url : "/system-message/readMessage",
+				method : "put",
+				dataType : "json",
+				data : {"id":msgId},
+				success : function(result) {
+					swal({
+						  title: "訊息類型-" + result.messageType ,
+						  text: "[訊息時間:" + result.releaseTime + "]" + result.message,
+						  button: "確定",
+						}).then((result) => {
+							if (result) {
+								dataTable.ajax.reload(); //讀完要再重新刷一次未讀清單
+							}
+						});
 
+				},
+				error: function (result) {
+					swal({
+						  title: "ERROR",
+						  text: "查詢失敗",
+						  button: "確定",
+						});
+			    }
+			})
+			
+		}
+		
+		
 		$(document).ready(function() {
 
 			$("form").addClass("form-inline");
@@ -100,7 +149,7 @@
 				searching: false,				
 			 	processing: true,
 				serverSide: true,  //DataTable:分頁、排序都交由伺服器處理
-				lengthMenu: [ 3, 6, 9, 12, ],
+				lengthMenu: [ 10, 15, 20, 25, ],
 				ajax:{
 					url:"/system-message/getSystemMessages",
 					type:"get",
@@ -128,16 +177,10 @@
 				}, columns: [ 		//DataTable:設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
 		     		{data:null},
 		           	{data: function (data) {
-		           		var vertifyButt = "";
-		           		
-// 		           		if(data.status != 1){
-// 		           			vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-info btn-sm\"  onclick=\"javascript:document.location.href='/penalty/vertify?id="
-// 								+ data.id + "'\" value='檢視紀錄'  /></div>";
-// 						}else{
-// 							vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-info btn-sm\"  onclick=\"javascript:document.location.href='/penalty/vertify?id="
-// 								+ data.id + "'\" value='審核'  /></div>";
-// 						}
-		               	return vertifyButt;	}
+		           		var readButt = "";
+		           		readButt = "<input type='button' class=\"btn btn-info btn-sm\" name='readButt'"+
+		           					"value='閱讀訊息' onclick='getMessageId(" + data.id + ")'/>";
+		               	return readButt;	}
 		           	},
 		           	{data:null, render:function(data, type, row){
 						return new Date(data.releaseTime).toLocaleDateString();
@@ -146,7 +189,7 @@
 		           	{data:"messageType" },
 					{data:"message"},
 					{data:"readStatus"},
-					
+					{data:"member.account"},
 					
 				], columnDefs:[{		//DataTable:禁用第0123列的搜索和排序
 					"searchable": false,
@@ -186,59 +229,39 @@
 			
 			
 			//按下已讀未讀信件
-// 			<button type="button" class="btn btn-info" id="allMessages">全部訊息</button>
-// 			  <button type="button" class="btn btn-info" id="notRead">未讀</button>
-// 			  <button type="button" class="btn btn-outline-info dropdown-toggle" id="alreadyRead">已讀</button>
 			$("#allMessages").click(function(){
 				readStatus="";
-				alert("allMessages");
 				dataTable.ajax.reload();
+				
+				$(this).attr('class', 'btn btn-info');
+				$("#notRead").attr('class', 'btn btn-outline-info');
+				$("#alreadyRead").attr('class', 'btn btn-outline-info');
 			})
 			
 			$("#notRead").click(function(){
 				readStatus="N";
-				alert("notRead");
 				dataTable.ajax.reload();
+				
+				$(this).attr('class', 'btn btn-info');
+				$("#allMessages").attr('class', 'btn btn-outline-info');
+				$("#alreadyRead").attr('class', 'btn btn-outline-info');
 			})
 			
 			$("#alreadyRead").click(function(){
 				readStatus="Y";
-				alert("alreadyRead");
 				dataTable.ajax.reload();
-			})
-			
-			
-			
-			
-			
-			//搜尋
-			$("#searchButt").click(	function(){
-				dataTable.ajax.reload();
-			})
-			
-			//按下審核中的按鍵
-			$("#vertifyingCase").click(	function(){
-				$('#status').val("1");
-				dataTable.ajax.reload();
-				$("#history").attr('class', 'btn btn-outline-info dropdown-toggle');
+				
 				$(this).attr('class', 'btn btn-info');
+				$("#allMessages").attr('class', 'btn btn-outline-info');
+				$("#notRead").attr('class', 'btn btn-outline-info');
 			})
 			
-			//按審核歷史紀錄按紐
-			$("#history").click(function(){
-				$("#vertifyingCase").attr('class', 'btn btn-outline-info');
-				$(this).attr('class', 'btn btn-info dropdown-toggle');
-			})
 			
-			//選擇有罪無罪
-			$("#vertified2").click(function(){
-				$('#status').val("2");
-				dataTable.ajax.reload();
-			})
-			$("#vertified3").click(function(){
-				$('#status').val("3");
-				dataTable.ajax.reload();
-			})
+			
+			
+			
+			
+			
 			
 			
 			

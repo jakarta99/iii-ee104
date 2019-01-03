@@ -32,7 +32,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="Time_Ledger")
+@Table(name="TIME_LEDGER")
 public class TimeLedger {
 	@GeneratedValue(strategy=GenerationType.IDENTITY) //ID生成的策略
 	@Id
@@ -40,11 +40,14 @@ public class TimeLedger {
 	
 	@ManyToOne
 //	@BatchSize(size=30)
-	@JoinColumn(name="member_Id",    
+	@JoinColumn(name="MEMBER_ID",    
 			referencedColumnName="id") 
-	private Member memberId;
+	private Member memberId;	//之後改member
+	//為了前端接收(字串)，傳入memberId(member)，與member的account欄位join
+	@Transient
+	private String memberAccount;
 	
-	@Column(name="transaction_Time")
+	@Column(name="TRANSACTION_TIME")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date transactionTime;
 	
@@ -56,26 +59,25 @@ public class TimeLedger {
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date transactionTimeEnd;
 	
-	@Column(name="deposit_Value")
+	@Column(name="DEPOSIT_VALUE")
 	private Integer depositValue;
 	
-	@Column(name="withdrawal_Value")
+	@Column(name="WITHDRAWAL_VALUE")
 	private Integer withdrawalValue;
 	
-	@Column(name="balance_Value")
+	@Column(name="BALANCE_VALUE")
 	private Integer balanceValue;
 	
-	@Column(name="description")
+	@Column(name="DESCRIPTION")
 	private String description;
-
-	
 
 	@Override
 	public String toString() {
-		return "TimeLedger [id=" + id + ", memberId=" + memberId + ", transactionTime=" + transactionTime
-				+ ", transactionTimeBegin=" + transactionTimeBegin + ", transactionTimeEnd=" + transactionTimeEnd
-				+ ", depositValue=" + depositValue + ", withdrawalValue=" + withdrawalValue + ", balanceValue="
-				+ balanceValue + ", description=" + description + "]";
+		return "TimeLedger [id=" + id + ", memberId=" + memberId + ", memberAccount=" + memberAccount
+				+ ", transactionTime=" + transactionTime + ", transactionTimeBegin=" + transactionTimeBegin
+				+ ", transactionTimeEnd=" + transactionTimeEnd + ", depositValue=" + depositValue + ", withdrawalValue="
+				+ withdrawalValue + ", balanceValue=" + balanceValue + ", description=" + description + "]";
 	}
+
 
 }
