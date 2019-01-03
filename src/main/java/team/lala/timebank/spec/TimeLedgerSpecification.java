@@ -6,12 +6,16 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
+import team.lala.timebank.entity.Donation;
+import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.TimeLedger;
 
 @SuppressWarnings("serial")
@@ -46,8 +50,19 @@ public class TimeLedgerSpecification implements Specification<TimeLedger> {
 			list.add(cb.equal(root.get("id").as(Long.class), inputTimeLedger.getId()));
 		}
 		
-		if(!StringUtils.isEmpty(inputTimeLedger.getMemberId())) {
-			list.add(cb.equal(root.get("memberId").as(Long.class), inputTimeLedger.getMemberId()));
+//		//user transaction-record
+//		if(!StringUtils.isEmpty(inputTimeLedger.getMemberId())) {
+//			
+////			Join<Member, TimeLedger> join = root.join("memberId", JoinType.LEFT);
+////			list.add(cb.equal(join.get("account"),  inputTimeLedger.getMemberId()));
+//			
+//			list.add(cb.equal(root.get("memberId").as(Member.class), inputTimeLedger.getMemberId()));
+//		}
+		
+		//前端接收MemberAccount，傳入memberId(member)，與member的account欄位join
+		if(!StringUtils.isEmpty(inputTimeLedger.getMemberAccount())) {
+			Join<Member, TimeLedger> join = root.join("memberId", JoinType.LEFT);
+			list.add(cb.equal(join.get("account"),  inputTimeLedger.getMemberAccount()));
 		}
 		
 		if(!StringUtils.isEmpty(inputTimeLedger.getDescription())) {
