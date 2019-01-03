@@ -8,10 +8,10 @@
     <title>Timebank</title>
 	<!--     css links -->
     <jsp:include page="basic/commons/commons_layout/commons_css_links.jsp"/>
-    <!-- Javascript files-->
-    <jsp:include page="basic/commons/commons_layout/commons_js_links.jsp"/>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Javascript files-->
+    <jsp:include page="basic/commons/commons_layout/commons_js_links.jsp"/>
 
   </head>
   <body>
