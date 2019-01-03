@@ -40,10 +40,9 @@
 	 	
         fieldset {
             width: 100%;
-            border-radius: 20px;
+            border: 3px solid rgba(0,0,0,0);
             padding: 20px;
             margin: 20px;
-            border: 3px double #bebebe;
             margin: auto
         }
         .s2{
@@ -68,29 +67,36 @@
     </style>
 </head>
 <body>
-
+	  
  <!-- Top bar-->
       <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
  	
 	  <!-- Navbar -->
       <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-
+	<div id="heading-breadcrumbs">
+       <div class="container">
+          <div class="row d-flex align-items-center flex-wrap">
+            <div class="col-md-7">
+              <h1 class="h2">招募清單</h1>
+            </div>
+          </div>
+        </div>
+      </div>
 	
 	 <section class="bar">
         <div class="container">
           <div class="row">
             
-    <div >
-	<h1 class="s2">我的招募清單</h1>
-	<fieldset>
+    <div>
+	
 	<form>
-			<div>
-			基本查詢:
-			</div >
-			<label>縣市:</label> 
-
-			<div   role="tw-city-selector"></div>
-			
+	<fieldset>
+		<legend>基本查詢</legend>
+			<div class="form-group mx-sm-3 mb-3">
+				<div class="form-group mx-sm-3 mb-3">
+					<label>縣市:</label> 	
+					<div role="tw-city-selector"></div>
+				</div>
 			<label>會員類型 :</label> 
 				<select  id="serviceTypeDetail" name="serviceTypeDetail">
 					<option value="">選擇服務類型</option>
@@ -136,19 +142,22 @@
 			<input type="text" value="" placeholder="title" id="title" name="title"/>
 			
 			
-			<label>missionstatus :</label> 
+			<label>missionStatus :</label> 
 			<input type="hidden" value="" placeholder="missionstatus" id="missionstatus" name="missionstatus"/>
 			
 			
 			</div>
+			</div>
+			</fieldset>
 		</form>
-	</fieldset>
+	
 	
 	<fieldset >
-	
-	<button class="btn btn-outline-primary" id="status12Butt" >未開始</button>
-	<button class="btn btn-outline-secondary" id="status3Butt" >時數未核發</button>
-	<button class="btn btn-outline-secondary" id="status4Butt" >歷史紀錄</button>
+	<ul  id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
+       <li class="nav-item"><a id="status12Butt" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active">未開始</a></li>
+       <li class="nav-item"><a id="status3Butt" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">時數未核發</a></li>
+       <li class="nav-item"><a id="status4Butt" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" class="nav-link">歷史紀錄</a></li>
+    </ul>
 	
 	<table id="table" class="table table-hover">
 	<thead class="thead-dark">
@@ -179,9 +188,7 @@
 	<script>
 	
 	var dataTable;
-// 	<button class="btn btn-outline-primary" id="status1Butt" >進行中</button>
-// 	<button class="btn btn-outline-secondary" id="status23Butt" >時數代核發</button>
-// 	<button class="btn btn-outline-secondary" id="status4Butt" >歷史紀錄</button>
+
 	
  	$("#searchButt").click(function(){
 		
@@ -191,9 +198,6 @@
 	$("#status12Butt").click(function(){
 		$("#time").empty().append("開始時間");
 		$("#statusField").empty().append("志工審核");
-		$("#status12Butt").attr('class',"btn btn-outline-primary");
-		$("#status3Butt").attr('class',"btn btn-outline-secondary");
-		$("#status4Butt").attr('class',"btn btn-outline-secondary");
 		$("#missionstatus").val("A_VolunteerApproved");
 		dataTable.ajax.reload();
 		
@@ -202,9 +206,7 @@
 	$("#status3Butt").click(function(){
 		$("#time").empty().append("結束時間");
 		$("#statusField").empty().append("時數核發");
-		$("#status12Butt").attr('class',"btn btn-outline-secondary");
-		$("#status3Butt").attr('class',"btn btn-outline-primary");
-		$("#status4Butt").attr('class',"btn btn-outline-secondary");
+ 		$("#status4Butt").attr('class',"btn btn-outline-secondary");
 		$("#missionstatus").val('B_AccountsPayable');
 		dataTable.ajax.reload();
 		
@@ -213,9 +215,7 @@
 	$("#status4Butt").click(function(){
 		$("#time").empty().append("結案時間");
 		$("#statusField").empty().append("結案紀錄");
-		$("#status12Butt").attr('class',"btn btn-outline-secondary");
-		$("#status3Butt").attr('class',"btn btn-outline-secondary");
-		$("#status4Butt").attr('class',"btn btn-outline-primary");
+ 		$("#status4Butt").attr('class',"btn btn-outline-primary");
 		$("#missionstatus").val('C_Finish');
 		dataTable.ajax.reload();
 		
@@ -279,7 +279,7 @@
 		 			   api.rows( {page:'current'} ).data()
 		 			    return '顯示第 '+(pageInfo.start+1)+' 筆到第  '+(pageInfo.end)+' 筆 共 '+ pageInfo.recordsTotal+' 筆資料 ';
 		 			 },	
-				"lengthMenu": [ 3, 6, 9, 12, ],
+				"lengthMenu": [  6, 9, 12, ],
 				ajax:{
 					url:"/user/volunteerRecruitment/query",
 					type: "get",
