@@ -52,15 +52,17 @@ public class PenaltyController {
 	
 	@Autowired
 	private OrderService orderService;
-
-	//basic/user
+	
+	
+	
+	//Jasmine
 	//模擬檢視會員媒合清單(開發debug用，之後要刪)
 	@RequestMapping("/tempPenaltyEntrance")
 	public String listPage() {
 		return "/basic/user/penalty/temp_order_list"; // getRequestDispatcher("/WEB-INF/jsp/order_list.jsp").forward(request,
 									// response);
 	}
-	
+	//Jasmine
 	//模擬檢視會員媒合清單(開發debug用，之後要刪)
 	@RequestMapping("/tempOrders")
 	@ResponseBody
@@ -76,7 +78,7 @@ public class PenaltyController {
 	}
 	
 	
-	
+	//Jasmine
 	//針對order按檢舉按鍵後，呼叫這支
 	@RequestMapping("/report")
 	public String report(@RequestParam("orderId")Long orderId, Model model, Principal principal) {  
@@ -94,6 +96,7 @@ public class PenaltyController {
 		return "/basic/user/penalty/violation_report";
 	}
 	
+	//Jasmine
 	//提出檢舉時呼叫的方法
 	//前端用ajax無法同時送檔案和表單，故此處暫不用@ResponseBody，待處理。
 	@RequestMapping(value="/doReport", method = RequestMethod.POST)
@@ -153,13 +156,13 @@ public class PenaltyController {
 	}
 	
 	
-	
+	//Jasmine
 	//跳轉審查列表
 	@RequestMapping("/showVertifyList")
 	public String showVertifyList() {
 		return "/basic/user/penalty/vertify/vertify_report_list";
 	}
-	
+	//Jasmine
 	//查出所有待審查列表
 	@RequestMapping("/getVertifyList")
 	@ResponseBody
@@ -177,6 +180,7 @@ public class PenaltyController {
 		return penalties;
 	}
 	
+	//Jasmine
 	//點選個案後呼叫此controller，進入個案審查畫面
 	@RequestMapping("/vertify")
 	public String vertify(@RequestParam("id") Long orderId, Model model) {
@@ -185,6 +189,7 @@ public class PenaltyController {
 		return "/basic/user/penalty/vertify/penalty_vertifying";
 	}
 	
+	//Jasmine
 	//呼叫審查service(扣違規會員時數)，完成審查(update成功)後跳出成功對話框(SUCCESS)，轉回所有待審查清單
 	@RequestMapping("/doneVertify")
 	@ResponseBody

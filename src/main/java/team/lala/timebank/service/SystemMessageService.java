@@ -46,32 +46,38 @@ public class SystemMessageService {
 	public void deleteById(Long id) {
 		systemMessageDao.deleteById(id);
 	}
-	
-	//Jasmine
+
+	// Jasmine
 	public Page<SystemMessage> findByReadStatusAndMember(YesNo readStatus, Principal principal, Pageable Pageable) {
-		
 		Member member = memberDao.findByAccount(principal.getName());
 		Page<SystemMessage> systemMessages = systemMessageDao.findByReadStatusAndMember(readStatus, member, Pageable);
 		return systemMessages;
 	};
-	
-	//Jasmine
+
+	// Jasmine
 	public Page<SystemMessage> findAllByPageAndMember(Principal principal, Pageable Pageable) {
 		Member member = memberDao.findByAccount(principal.getName());
 		Page<SystemMessage> systemMessages = systemMessageDao.findByMember(member, Pageable);
 		return systemMessages;
 	};
-	
-	//Jasmine
-	//讀系統訊息後，變更狀態為已讀
+
+	// Jasmine
+	// 讀系統訊息後，變更狀態為已讀
 	public SystemMessage changeReadStatusAndGetSystemMessage(Long id) {
 		SystemMessage systemMessage = systemMessageDao.getOne(id);
 		systemMessage.setReadStatus(YesNo.Y);
 		SystemMessage result = systemMessageDao.save(systemMessage);
 		return result;
 	}
-	
-	
+	// Jasmine
+	//計算未讀之訊息數量
+	public int countNotReadMessages(Principal principal) {
+		Member member = memberDao.findByAccount(principal.getName());
+		List<SystemMessage> systemMessages = systemMessageDao.findByReadStatusAndMember(YesNo.N, member);
+		int count = systemMessages.size();
+		return count;
+	};
+
 	// 通知志工申請已被接受
 	public SystemMessage volunteerVerify(SystemMessage systemMessage, Order order) {
 		if (systemMessage.getMessageType() == SystemMessageType.MissionAccecpt) {
