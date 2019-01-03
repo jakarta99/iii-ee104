@@ -182,10 +182,11 @@
                
                
                	 <nav aria-label="Page navigation example">
-                      <ul class="pagination pagination-lg">
-                        <li class="page-item"><a href="#" class="page-link">«</a></li>
-                        <li class="page-item"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">»</a></li>
+                      <ul id ="pagebox" class="pagination pagination-lg">
+<!--                         <li class="page-item" id="backli"><a id="backa"  class="page-link">«</a></li>                       -->
+                     
+                        
+<!--                         <li class="page-item" id="nextli"><a id="nexta"  class="page-link">»</a></li> -->
                       </ul>
                   </nav>
             </div>
@@ -202,34 +203,98 @@
 	
 	
 	<script>
+	var length=9
+	var page=0
+
+	
+
+	
+	
+	function list(){
+		$.ajax({
+			url:"/commons/domesticVolunteer/query?"+$('form').serialize()+"&page="+page+"&length="+length,
+			type: "get",
+		    dataType : "json",
+		    
+	        }).done(function(missions){
+	        	$("#boxbox").text("");
+	        	$("#pagebox").text("");
+	        	console.log(missions);
+	        	var totalElements=missions.totalElements;
+	        	console.log(totalElements);
+	        	var totalPages=missions.totalPages;
+	        	console.log(totalElements);
+	        	var first=missions.first;
+	        	console.log(first);
+	        	var last=missions.last;
+	        	console.log(last);
+	        	
+	        	$.each(missions.content,function(index, mission){
+	        		var box1="<div class='col-lg-4 col-md-6'>";
+	        		var box2="<div class='home-blog-post'>";
+	        		var box3="<div class='image'><img src=../../img/"+mission.missionPicName+" alt='...' class='img-fluid'  height='300'>";
+	        		var box4="<div class='overlay d-flex align-items-center justify-content-center'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"' class='btn btn-template-outlined-white'><i class='fa fa-chain'> </i> Read More</a></div>";
+	        		var box5="</div><div class='text'><h4><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'>"+ mission.title + "</a></h4>";
+	        		var box6="<p class='author-category'>活動時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>";
+	        		var box7="<p class='author-category'>活動地點:"+mission.county+mission.district+"</p>";
+	        		var box8="<p class='intro'>"+mission.discription+"</p><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"' class='btn btn-template-outlined'>Continue Reading</a>";        	
+	        		var box9="</div></div></div>";        		
+	        		var boxbox=$("#boxbox").append([box1+box2+box3+box4+box5+box6+box7+box8+box9]); 
+	        		
+	        		
+	        		
+	        	})
+	        		$("#pagebox").append("<li class=\"page-item\" id=\"backli\"><a id=\"backa\"  class=\"page-link\">«</a></li><li class=\"page-item\" id=\"nextli\"><a id=\"nexta\"  class=\"page-link\">»</a></li>");
+	        	for (var index = 1; index <= totalPages ; index++) {
+	        		$("#nextli").before("<li class='page-item'><a  id="+index+" class='page-link'>"+index+"</a></li>")
+				}
+	        	
+	        	
+	        	
+//	         	$.each(missions.content,function(index, mission){
+//	         	$("#pagebox").append("<li class='page-item'><a  class='page-link'>"+page+1+"</a></li>")
+//	         	})
+	    
+	        })
+	        
+			}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	$(document).ready( function () {
 		
 		
+	
+		list();
 		
 	
 		
-	
-	$.ajax({
-		url:"/commons/domesticVolunteer/query",
-		type: "get",
-	    dataType : "json",
-        }).done(function(missions){
-        	console.log(missions.pageable);
-        	$.each(missions.content,function(index, mission){
-        		var box1="<div class='col-lg-4 col-md-6'>";
-        		var box2="<div class='home-blog-post'>";
-        		var box3="<div class='image'><img src=../../img/"+mission.missionPicName+" alt='...' class='img-fluid' width='300' height='150'>";
-        		var box4="<div class='overlay d-flex align-items-center justify-content-center'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"' class='btn btn-template-outlined-white'><i class='fa fa-chain'> </i> Read More</a></div>";
-        		var box5="</div><div class='text'><h4><a href='blog-post.html'>"+ mission.title + "</a></h4>";
-        		var box6="<p class='author-category'>活動時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>";
-        		var box7="<p class='author-category'>活動地點:"+mission.county+mission.district+"</p>";
-        		var box8="<p class='intro'>"+mission.discription+"</p><a href='blog-post.html' class='btn btn-template-outlined'>Continue Reading</a>";        	
-        		var box9="</div></div></div>";        		
-        		var boxbox=$("#boxbox").append([box1+box2+box3+box4+box5+box6+box7+box8+box9]);         		
-        		
-        	})
-        	
-        })
+		
+		$("#back").click(function(){
+			
+	 		
+		}) 
+		
+    	$("#next").click(function(){
+    			
+    	 		
+    		})
+    		
+    	$("#pagebox").on("click","li>a", function(){			
+    		page=$(this).text()-1;
+    		list();
+    		 $('body,html').animate({
+                 scrollTop: 0 }, 1);
+    	})
+    	
 	
 	})
 	</script>
