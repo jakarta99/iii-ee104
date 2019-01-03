@@ -236,8 +236,9 @@
 	        		var box6="<p class='author-category'>活動時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>";
 	        		var box7="<p class='author-category'>活動地點:"+mission.county+mission.district+"</p>";
 	        		var box8="<p class='intro'>"+mission.discription+"</p><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"' class='btn btn-template-outlined'>Continue Reading</a>";        	
-	        		var box9="</div></div></div>";        		
+	        		var box9="</div></div></div>";   
 	        		var boxbox=$("#boxbox").append([box1+box2+box3+box4+box5+box6+box7+box8+box9]); 
+	        		//https://css-tricks.com/html-templates-via-javascript-template-literals/
 	        		
 	        		
 	        		
@@ -259,8 +260,7 @@
 	
 	
 	
-	
-	
+
 	
 	
 	
@@ -274,17 +274,24 @@
 		list();
 		
 	
-		
-		
-		$("#back").click(function(){
-			
-	 		
+		$("#backa").on('click', function(){
+			alert(first);
+			if(first == false){
+				page = page - 1;
+				list();
+			}
 		}) 
 		
-    	$("#next").click(function(){
-    			
-    	 		
-    		})
+		$("#nexta").on('click', function(){
+			alert(last);
+				if(last == false){
+					page = page + 1;
+					list();
+				}
+		 })
+		
+		
+
     		
     	$("#pagebox").on("click","li>a", function(){			
     		page=$(this).text()-1;
