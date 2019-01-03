@@ -27,18 +27,18 @@ public class VolunteerApplicationController {
 	private OrderService orderService;
 
 	@RequestMapping("/volunteerApplication/applicationPage")	//進入志工申請中網頁
-	public String ApplicationPage() {
+	public String applicationPage() {
 		return "/basic/user/volunteerApplication/volunteerApplication";
 	}
 	
 	@RequestMapping("/volunteerRecord/RecordPage")	//進入志工媒合結果網頁
-	public String RecordPage() {
+	public String recordPage() {
 		return "/basic/user/volunteerApplication/volunteerServiceRecordInquire";
 	}
 
 	@ResponseBody
 	@RequestMapping("/volunteerApplication/queryApplication")	//查詢申請中網頁的資料
-	public Page<Order> QueryApplication(Principal principal, @RequestParam(value="orderStatusDetail") String orderStatusDetail,
+	public Page<Order> queryApplication(Principal principal, @RequestParam(value="orderStatusDetail") String orderStatusDetail,
 			@RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
 		Order order = new Order();
@@ -49,7 +49,7 @@ public class VolunteerApplicationController {
 	
 	@ResponseBody
 	@RequestMapping("/volunteerRecord/queryRecord")		//查詢媒合紀錄資料
-	public Page<Order> QueryRecord(Principal principal, Order order, 
+	public Page<Order> queryRecord(Principal principal, Order order, 
 			@RequestParam(value="orderStatusDetail") String orderStatusDetail,
 			@RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
@@ -59,10 +59,10 @@ public class VolunteerApplicationController {
 	
 	@ResponseBody
 	@RequestMapping("/volunteerRecord/score")		//志工幫雇主評分
-	public AjaxResponse<Order> Score(@RequestParam(value="orderId") Long orderId, @RequestParam(value="score") int score) {
+	public AjaxResponse<Order> score(@RequestParam(value="orderId") Long orderId, @RequestParam(value="score") int score) {
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		try {
-			orderService.Score(orderId, score);
+			orderService.score(orderId, score);
 		} catch (NumberFormatException e) {
 			response.addMessage("評分失敗，" + e.getMessage());
 			e.printStackTrace();
@@ -71,18 +71,18 @@ public class VolunteerApplicationController {
 	}
 	@ResponseBody
 	@RequestMapping("/volunteerRecord/report")		//志工檢舉雇主
-	public AjaxResponse<Order> Report(@RequestParam(value="orderId") Long orderId,
+	public AjaxResponse<Order> report(@RequestParam(value="orderId") Long orderId,
 			@RequestParam(value="description") String description,
 			@RequestParam("proofPic") MultipartFile proofPic
 			, MultipartHttpServletRequest request){
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
-		orderService.Report(orderId, description, proofPic, request);
+		orderService.report(orderId, description, proofPic, request);
 		return response;
 	}
 
 	@ResponseBody
 	@RequestMapping("/volunteerApplication/delete")		//志工取消申請
-	public AjaxResponse<Order> CancelApplication(@RequestParam("id") Long id){
+	public AjaxResponse<Order> cancelApplication(@RequestParam("id") Long id){
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		try {
 			orderService.cancle(id);

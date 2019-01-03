@@ -4,18 +4,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- css -->
-<jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
-
 <!-- Javascript files-->
 <jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
 
-<script defer
-	src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-
-
+<!-- data table -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/js/dataTable_full_numbers_no_ellipses.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
-				
+<script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
+<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
 <!-- date picker -->
@@ -23,7 +20,8 @@
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
-
+	
+<jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 <!-- DateTimePicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet" />
@@ -70,7 +68,7 @@
 </head>
 <body>
 
- <!-- Top bar-->
+ 	<!-- Top bar-->
       <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
  	
 	  <!-- Navbar -->
@@ -238,8 +236,9 @@
 	        		var box6="<p class='author-category'>活動時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>";
 	        		var box7="<p class='author-category'>活動地點:"+mission.county+mission.district+"</p>";
 	        		var box8="<p class='intro'>"+mission.discription+"</p><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"' class='btn btn-template-outlined'>Continue Reading</a>";        	
-	        		var box9="</div></div></div>";        		
+	        		var box9="</div></div></div>";   
 	        		var boxbox=$("#boxbox").append([box1+box2+box3+box4+box5+box6+box7+box8+box9]); 
+	        		//https://css-tricks.com/html-templates-via-javascript-template-literals/
 	        		
 	        		
 	        		
@@ -261,8 +260,7 @@
 	
 	
 	
-	
-	
+
 	
 	
 	
@@ -276,17 +274,24 @@
 		list();
 		
 	
-		
-		
-		$("#back").click(function(){
-			
-	 		
+		$("#backa").on('click', function(){
+			alert(first);
+			if(first == false){
+				page = page - 1;
+				list();
+			}
 		}) 
 		
-    	$("#next").click(function(){
-    			
-    	 		
-    		})
+		$("#nexta").on('click', function(){
+			alert(last);
+				if(last == false){
+					page = page + 1;
+					list();
+				}
+		 })
+		
+		
+
     		
     	$("#pagebox").on("click","li>a", function(){			
     		page=$(this).text()-1;
