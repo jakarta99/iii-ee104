@@ -4,18 +4,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- css -->
-<jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
-
 <!-- Javascript files-->
 <jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
 
-<script defer
-	src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-
-
+<!-- data table -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/js/dataTable_full_numbers_no_ellipses.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
-				
+<script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
+<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
 <!-- date picker -->
@@ -23,7 +20,8 @@
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
-
+	
+<jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 <!-- DateTimePicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet" />
@@ -70,7 +68,7 @@
 </head>
 <body>
 
- <!-- Top bar-->
+ 	<!-- Top bar-->
       <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
  	
 	  <!-- Navbar -->
