@@ -64,10 +64,10 @@ public class ProjectsAbroadPageProcessor implements PageProcessor {
 			targetRequest.add(url+"/conservation-and-environment/");
 			targetRequest.add(url+"/sports/");
 			targetRequest.add(url+"/building/");
-			targetRequest.add(url+"/archaeology/");
 			targetRequest.add(url+"/agriculture-and-farming/");
 			targetRequest.add(url+"/culture-and-community/");
 			targetRequest.add(url+"/creative-and-performing-arts/");		
+			targetRequest.add(url+"/archaeology/");
 			page.addTargetRequests(targetRequest);
 			System.out.println(page.getTargetRequests());
 			

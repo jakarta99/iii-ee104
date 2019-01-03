@@ -23,11 +23,16 @@ public class InternationalVolunteerController {
 
 	@Autowired
 	private InternationalVolunteerService internationalVolunteerService;
+	
+	@RequestMapping("search")
+	public String searchPage() {
+		return "/basic/commons/internationalVolunteer/iVolunteer_search";
+	}
 
 	@RequestMapping("/list")
 	public String listPage(Model model) {
 		model.addAttribute("IVolunteers", internationalVolunteerService.findAll());
-		return "/basic/commons/internationalVolunteer/internationalVolunteer_list";
+		return "/basic/commons/internationalVolunteer/iVolunteer_list";
 	}
 
 	@RequestMapping("/query")

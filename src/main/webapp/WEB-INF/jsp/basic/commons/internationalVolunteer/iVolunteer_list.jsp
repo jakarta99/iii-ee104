@@ -90,7 +90,12 @@ function doSpider(){
 
 	<script>
 		$(document).ready(function(){
-			$("#heading-breadcrumbs>div>div>div.col-md-7>h1").text("國際志工專區");			
+			$("#heading-breadcrumbs>div>div>div.col-md-7>h1").text("國際志工專區");	
+			
+			$(".image img").click(function(){
+				
+				
+			})
 		})
 	
 	</script>
