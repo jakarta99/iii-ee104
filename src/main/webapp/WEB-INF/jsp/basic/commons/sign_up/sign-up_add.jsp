@@ -222,7 +222,7 @@
     </div>
     </section>
 	<!-- FOOTER -->
-<%-- 	<jsp:include page="../commons_layout/commons_footer.jsp"/> --%>
+	<jsp:include page="../commons_layout/commons_footer.jsp"/>
 	
 	<script>
 	document.addEventListener("DOMContentLoaded", function () {

@@ -10,6 +10,11 @@
 <jsp:include page="../../../admin/admin_layout/admin_css_js_links.jsp" />
 <!-- css -->
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp" />
+<!-- Javascript files -->
+<jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
+<script defer
+	src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
 <!-- date picker -->
@@ -19,57 +24,70 @@
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 
 <style>
-	article {
-		font-family: 'Righteous', cursive;
-		margin-top: 30px;
-		margin-bottom: 30px;
-		padding: 10px;
-	}
-	article fieldset {
-		width: 800px;
-		border-radius: 15px;
-		padding: 20px; 
-		border: 3px solid rgb(146, 168, 209);
-		margin: auto;
-	}
-	article input, select, label {
-  		padding-left: 10px;  		   
-  		line-height:center; 
-	}
-/* 	設定縣市地區選擇器的css樣式 */
-	.county,.district {
-	  padding: 0.375rem 0.75rem;
-	  font-size: 1rem;
-	  line-height: 1.5;
-	  color: #495057;
-	  background-color: #fff;
-	  background-image: none;
-	  background-clip: padding-box;
-	  border: 1px solid #ced4da;
-	  border-radius: 0.25rem;
-	  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-	}
-	.center{
-		text-align: center;
-	}
-	.myform {
-        margin: 8% 11%;
-        border-collapse: collapse;
-        font-size: 100%;
-        line-height: 200%;
-    }
-    legend{
-        font-size:150%;
-        color:rgb(193, 186, 177);
-    }
-    .block {
-        width: 650px;
-        border-bottom: 2px solid rgb(247, 202, 201);
-        margin: 20px;
-    }
-    .remark {
-        color: rgb(193, 186, 177);
-    }
+		fieldset {
+            width: 100%;
+            border: 3px solid rgba(0,0,0,0);
+            padding: 20px;
+            margin: 20px;
+            margin: auto
+    	}
+        .s2{
+            text-align: center
+        }
+        .margintop{
+			 margin-top:70px;
+		}
+ 	article { 
+ 		font-family: 'Righteous', cursive;
+ 		margin-top: 30px; 
+ 		margin-bottom: 30px; 
+ 		padding: 10px; 
+ 	} */
+ 	article fieldset { 
+ 		width: 800px; 
+ 		border-radius: 15px; 
+ 		padding: 20px;  
+ 		border: 3px solid rgb(146, 168, 209);
+ 		margin: auto;
+ 	} *
+ 	article input, select, label { 
+   		padding-left: 10px;  		 
+   		line-height:center; 
+ 	} 
+ /* 	設定縣市地區選擇器的css樣式 */
+ 	.county,.district { 
+ 	  padding: 0.375rem 0.75rem;
+ 	  font-size: 1rem;
+ 	  line-height: 1.5;
+ 	  color: #495057;
+ 	  background-color: #fff;
+ 	  background-image: none;
+ 	  background-clip: padding-box;
+ 	  border: 1px solid #ced4da; 
+ 	  border-radius: 0.25rem; 
+ 	  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; 
+ 	} 
+ 	.center{ 
+ 		text-align: center; 
+ 	} 
+ 	.myform { 
+         margin: 8% 11%; 
+         border-collapse: collapse; 
+         font-size: 100%; 
+         line-height: 200%; 
+     } 
+     legend{ 
+         font-size:150%; 
+         color:rgb(193, 186, 177); 
+     } 
+     .block { 
+         width: 650px; 
+         border-bottom: 2px solid rgb(247, 202, 201); 
+         margin: 20px; 
+     } 
+     .remark { 
+         color: rgb(193, 186, 177); 
+     } 
 </style>
 
 </head>
@@ -78,6 +96,22 @@
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
+	<div id="heading-breadcrumbs">
+    	<div class="container">
+        	<div class="row d-flex align-items-center flex-wrap">
+            	<div class="col-md-7">
+              		<h1 class="h2">我的個人資訊</h1>
+            	</div>
+<!-- 	            <div class="col-md-5"> -->
+<!-- 	              	<ul class="breadcrumb d-flex justify-content-end"> -->
+<!-- 	                	<li class="breadcrumb-item"><a href="index.html">Home</a></li> -->
+<!-- 	                	<li class="breadcrumb-item"><a href="team.html">Our Team</a></li> -->
+<!-- 	                	<li class="breadcrumb-item active">Team Member</li> -->
+<!-- 	              	</ul> -->
+<!-- 	            </div> -->
+        	</div>
+        </div>
+    </div>
 	<!-- Sidebar -->
 	<jsp:include page="../user_layout/user_sidebar.jsp"/>
 	<section class="bar">
@@ -215,7 +249,8 @@
 	</div>
 	</section>
 	<!-- FOOTER -->
-<%-- 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/> --%>
+	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
  	<script>
 		$(document).ready(function() {
 // 			$("form div").addClass("form-group");
