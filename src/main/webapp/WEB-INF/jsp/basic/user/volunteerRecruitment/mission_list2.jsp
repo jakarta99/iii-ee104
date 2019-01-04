@@ -31,8 +31,6 @@
 <!-- sweetalert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></script>
-
 <meta charset="UTF-8">
 <title>mission list(login)</title>
 <style>
@@ -74,118 +72,6 @@
  	
 	  <!-- Navbar -->
       <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-      
-      
-        <div id="content">
-        <div class="container">
-          <div class="row bar">
-            <div id="blog-listing-medium" class="col-md-9">
-          
-          
-              <section class="post">
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="video">
-                      <div class="embed-responsive embed-responsive-4by3">
-                        <img src="../../img/detailsquare.jpg" class="embed-responsive-item"></img>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <h2 class="h3 mt-0"><a href="post.htmls">活動名稱</a></h2>
-                    <div class="d-flex flex-wrap justify-content-between text-xs">
-                      <p class="author-category_1">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a></p>
-                      <p class="date-comments_1"><a href="blog-post.html"><i class="fa fa-edit"></i> 編輯</a><a href="blog-post.html"><i class="fa fa-trash"></i> 取消</a></p>
-                    </div>
-                   
-                    <p class="intro">活動地點:1111111111111</p>
-                    <p class="intro">開始時間:1111111111111</p>
-                    <p class="intro">需求人數:1111111111111</p>
-                    <p class="read-more text-right"><a href="blog-post.html" class="btn btn-template-outlined">志工審核</a></p>
-                  </div>
-                </div>
-              </section>
-             
-             
-             
-              <ul class="pager d-flex align-items-center justify-content-between list-unstyled">
-                <li class="previous"><a href="#" class="btn btn-template-outlined">← Older</a></li>
-                <li class="next disabled"><a href="#" class="btn btn-template-outlined">Newer →</a></li>
-              </ul>
-            </div>
-            <div class="col-md-3">
-              <div class="panel panel-default sidebar-menu">
-                <div class="panel-heading">
-                  <h3 class="h4 panel-title">Text widget</h3>
-                </div>
-                <div class="panel-body text-widget">
-                  <p>Improved own provided blessing may peculiar domestic. Sight house has never. No visited raising gravity outward subject my cottage mr be. Hold do at tore in park feet near my case.</p>
-                </div>
-              </div>
-              <div class="panel panel-default sidebar-menu">
-                <div class="panel-heading">
-                  <h3 class="h4 panel-title">Search</h3>
-                </div>
-                <div class="panel-body">
-                  <form role="search">
-                    <div class="input-group">
-                      <input type="text" placeholder="Search" class="form-control"><span class="input-group-btn">
-                        <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button></span>
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <div class="panel panel-default sidebar-menu">
-                <div class="panel-heading">
-                  <h3 class="h4 panel-title">Categories</h3>
-                </div>
-                <div class="panel-body">
-                  <ul class="nav nav-pills flex-column text-sm">
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Webdesign</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link active">Tutorials</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Print</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Our tips</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="panel sidebar-menu">
-                <div class="panel-heading">
-                  <h3 class="h4 panel-title">Tags</h3>
-                </div>
-                <div class="panel-body">
-                  <ul class="tag-cloud list-inline">
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-tags"></i> html5</a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-tags"></i> css3</a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-tags"></i> jquery</a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-tags"></i> ajax</a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-tags"></i> php</a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-tags"></i> responsive</a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-tags"></i> visio</a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-tags"></i> bootstrap</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- GET IT-->
-      <div class="get-it">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-8 text-center p-3">
-              <h3>Do you want cool website like this one?</h3>
-            </div>
-            <div class="col-lg-4 text-center p-3">   <a href="#" class="btn btn-template-outlined-white">Buy this template now</a></div>
-          </div>
-        </div>
-      </div>
-      
-      
-      
-      
-      
-      
 	<div id="heading-breadcrumbs">
        <div class="container">
           <div class="row d-flex align-items-center flex-wrap">

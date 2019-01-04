@@ -1175,6 +1175,12 @@ header.nav-holder.sticky {
   font-weight: 500;
   margin-bottom: 0;
 }
+#blog-listing-big .author-category a, #blog-listing-medium .author-category_1 a {
+  font-weight: 500;
+  margin-bottom: 0;
+  font-size: 20px;
+  
+}
 
 #blog-listing-big .date-comments, #blog-listing-medium .date-comments {
   margin-bottom: 0;
@@ -1183,6 +1189,11 @@ header.nav-holder.sticky {
 #blog-listing-big .date-comments a, #blog-listing-medium .date-comments a {
   color: #999;
   margin-left: 25px;
+}
+#blog-listing-big .date-comments a, #blog-listing-medium .date-comments_1 a {
+  color: #999;
+  margin-left: 25px;
+  font-size: 20px;
 }
 
 #blog-listing-big .date-comments i, #blog-listing-medium .date-comments i {
