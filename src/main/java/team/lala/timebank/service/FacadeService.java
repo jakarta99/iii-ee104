@@ -32,16 +32,26 @@ public class FacadeService {
 
 	@Autowired
 	private OrderDao orderDao;
-	
+
 	@Autowired
 	private MissionDao missionDao;
+	
 	@Autowired
 	private SystemMessageDao systemMessageDao;
+	
+	@Autowired
+	private OrderService orderService;
 
 	// 交易
-	public Order transaction(Integer hours, Long volunteerId, Long payerId, Mission mission, Long orderId,
-			Integer score) {
+	public Order transaction(Integer hours, Long orderId,Integer score) {
+		
+		
+		Member volunteer = orderService.getById(orderId).getVolunteer();
+		Member payer = orderService.getById(orderId).getMission().getMember();
+		Mission mission = orderService.getById(orderId).getMission();
 		String missionTitle = mission.getTitle();
+		
+		
 		// 變更order 狀態
 		Order order = orderDao.getOne(orderId);
 		if (order.getOrderStatus() == OrderStatus.ServiceFinishNotPay) {
@@ -49,7 +59,7 @@ public class FacadeService {
 			// 1 payer扣錢
 			// 1.1 找出payer
 			TimeLedger payerLastTimeLedger = timeLedgerDao
-					.findTop1ByMemberIdOrderByTransactionTimeDesc(memberDao.getOne(payerId));
+					.findTop1ByMemberIdOrderByTransactionTimeDesc(payer);
 			TimeLedger payerTimeLedger = null;
 
 			// 尚無交易紀錄，或帳戶餘額小於本次提款時數者，不得提款
@@ -57,7 +67,7 @@ public class FacadeService {
 				// 1.2 prepare timeledger data
 				payerTimeLedger = new TimeLedger();
 				payerTimeLedger.setDepositValue(0);
-				payerTimeLedger.setMemberId(memberDao.getOne(payerId));
+				payerTimeLedger.setMemberId(payer);
 				payerTimeLedger.setWithdrawalValue(hours);
 				payerTimeLedger.setTransactionTime(new Date());
 				payerTimeLedger.setBalanceValue(payerLastTimeLedger.getBalanceValue() - hours);
@@ -70,7 +80,7 @@ public class FacadeService {
 			// 2 volunteer加錢
 			// 2.1 找出volunteer
 			TimeLedger volunteerLastTimeLedger = timeLedgerDao
-					.findTop1ByMemberIdOrderByTransactionTimeDesc(memberDao.getOne(volunteerId));
+					.findTop1ByMemberIdOrderByTransactionTimeDesc(volunteer);
 
 			// 尚無交易紀錄者，先將存款餘額設為0
 			if (volunteerLastTimeLedger == null) {
@@ -82,7 +92,7 @@ public class FacadeService {
 			// 2.2 prepare timeledger data
 			TimeLedger volunteerTimeLedger = new TimeLedger();
 			volunteerTimeLedger.setWithdrawalValue(0);
-			volunteerTimeLedger.setMemberId(memberDao.getOne(volunteerId));
+			volunteerTimeLedger.setMemberId(volunteer);
 			volunteerTimeLedger.setDepositValue(hours);
 			volunteerTimeLedger.setBalanceValue(volunteerLastTimeLedger.getBalanceValue() + hours);
 			volunteerTimeLedger.setTransactionTime(new Date());
@@ -93,49 +103,49 @@ public class FacadeService {
 			order.setOrderStatus(OrderStatus.ServiceFinishPayMatchSuccess);
 			orderDao.save(order);
 			// 3 評分
-			Member volunteer = memberDao.getOne(volunteerId);
+			
 			volunteer.setSumScore(volunteer.getSumScore() + score);
 			volunteer.setScoredTimes(volunteer.getScoredTimes() + 1);
 			volunteer.setAverageScore(new Double(volunteer.getSumScore() / volunteer.getScoredTimes()));
 			// 4系統訊息
 			// 付款後收到的訊息
 			SystemMessage pay = new SystemMessage();
-			pay.setSender(order.getMission().getMember());
+			pay.setSender(payer);
 			pay.setReleaseTime(new Date());
 			pay.setReadStatus(YesNo.N);
-			pay.setMember(order.getMission().getMember());
-			pay.setMessage("您因為志工活動:[" + order.getMission().getTitle() + "]付款給:["
-					+ memberDao.getOne(volunteerId).getName() + "]共" + hours + "小時已成功");
+			pay.setMember(payer);
+			pay.setMessage("您因為志工活動:[" + missionTitle + "]付款給:["
+					+ volunteer.getName() + "]共" + hours + "小時已成功");
 			pay.setMessageType(SystemMessageType.PayTimeValue);
 			systemMessageDao.save(pay);
 			// 入賬後收到的訊息
 			SystemMessage earn = new SystemMessage();
-			earn.setSender(order.getMission().getMember());
+			earn.setSender(payer);
 			earn.setReleaseTime(new Date());
 			earn.setReadStatus(YesNo.N);
-			earn.setMember(order.getVolunteer());
-			earn.setMessage("您參加志工活動:[" + order.getMission().getTitle() + "]獲得" + hours + "小時已入帳");
+			earn.setMember(volunteer);
+			earn.setMessage("您參加志工活動:[" + missionTitle + "]獲得" + hours + "小時已入帳");
 			earn.setMessageType(SystemMessageType.PayTimeValue);
 			systemMessageDao.save(earn);
-			//使用for-each取值 檢查mission中的所有order 若全付款則將 mission 狀態改變
+			// 使用for-each取值 檢查mission中的所有order 若全付款則將 mission 狀態改變
 			int payOrderCounter = 0;
-			for (Order checkOrder: mission.getOrders()){
-	            if(checkOrder.getOrderStatus() == OrderStatus.ServiceFinishPayMatchSuccess) {
-	            	payOrderCounter++;
-	            	if(payOrderCounter == mission.getOrders().size()) {
-	            		mission.setMissionstatus(MissionStatus.C_Finish);
-	            		mission.setFinishDate(new Date());
-	            		SystemMessage finishMessage = new SystemMessage();
-	            		finishMessage.setReleaseTime(new Date());
-	            		finishMessage.setReadStatus(YesNo.N);
-	            		finishMessage.setMember(order.getMission().getMember());
-	            		finishMessage.setMessage("您刊登的志工活動:[" + order.getMission().getTitle() + "]已結案");
-	            		finishMessage.setMessageType(SystemMessageType.MissionFinish);
-	        			systemMessageDao.save(finishMessage);
-	            	}
-	            }
-	        }
-			
+			for (Order checkOrder : mission.getOrders()) {
+				if (checkOrder.getOrderStatus() == OrderStatus.ServiceFinishPayMatchSuccess) {
+					payOrderCounter++;
+					if (payOrderCounter == mission.getOrders().size()) {
+						mission.setMissionstatus(MissionStatus.C_Finish);
+						mission.setFinishDate(new Date());
+						SystemMessage finishMessage = new SystemMessage();
+						finishMessage.setReleaseTime(new Date());
+						finishMessage.setReadStatus(YesNo.N);
+						finishMessage.setMember(payer);
+						finishMessage.setMessage("您刊登的志工活動:[" + missionTitle + "]已結案");
+						finishMessage.setMessageType(SystemMessageType.MissionFinish);
+						systemMessageDao.save(finishMessage);
+					}
+				}
+			}
+
 			return orderDao.save(order);
 
 		}
