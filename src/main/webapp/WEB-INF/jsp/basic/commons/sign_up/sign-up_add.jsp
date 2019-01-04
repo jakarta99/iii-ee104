@@ -21,6 +21,9 @@
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 
+<!-- sweetAlert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <style>
 	article {
 		font-family: 'Righteous', cursive;
@@ -325,19 +328,25 @@
     function chkPasswordCheck(){
     	var thePassword = document.getElementById("idPassword").value;
     	var thePasswordCheck = document.getElementById("idPasswordCheck").value;
-        var thePasswordCheckLen = thePasswordCheck.length;
         var msgChk = document.getElementById("idspPasswordCheck")
         if (thePasswordCheck == ""){
         	msgChk.innerHTML =
                 "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
-        }else if(thePassword != idPasswordCheck.value){
-        	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:red'>輸入錯誤</span>";
-//         	idPassword.value = "";
-//         	idPasswordCheck.value = "";
-        }else{
-        	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
         }
-        
+        else {
+        	$.ajax({
+				method:"post",
+				dataType: "text",        
+				url:"/commons/sign-up/checkPassword",
+				data: {passwordCheck:$("#idPasswordCheck").val(),password:$("#idPassword").val()}
+			}).done(function(response){
+				if(response == "正確"){
+					msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+				}else{
+					msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>密碼不一致</span>";
+				}
+			})
+        }      
     }
     
 	document.addEventListener("DOMContentLoaded", function () {
@@ -675,7 +684,17 @@
 // 					console.log("message="+response.message);
 					
 					if(response.status == "SUCCESS") {
-						alert("會員新增成功");
+						swal({
+							  title: "SUCCESS",
+							  text: "註冊成功",
+							  icon: "success",
+							  button: "確定",
+						}).then((result) => {
+							if (result) {
+								window.location.replace("/login");	//讀完導至LOGIN(之後至驗證信!)
+							}
+						});
+// 						alert("會員新增成功");
 // 						window.location.replace("/commons/sign-up/edit");	//edit頁面
 					} else {
 						$.each(response.messages, function(idx, message){
@@ -688,6 +707,9 @@
 							}
 							if (message =="密碼格式錯誤"){
 								$("#idspPassword").html(message);
+							}
+							if (message =="密碼不一致"){
+								$("#idspPasswordCheck").html(message);
 							}
 							if (message =="姓名格式錯誤"){
 								$("#idspName").html(message);
@@ -718,7 +740,13 @@
 							}
 							
 							if (message == "資料有誤"){
-								$("#error").html(message);								
+								$("#error").html(message);
+								swal({
+									  title: "ERROR",
+									  text: "註冊失敗，資料有誤",
+									  icon: "warning",
+									  button: "確定",
+								})
 							}								
 						})
 // 						console.log(response.messages);

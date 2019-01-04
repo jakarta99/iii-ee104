@@ -72,7 +72,6 @@ public class CommonsSignUpController {
 		boolean fPassword1 = false;
 		boolean fPassword2 = false;
 		boolean fPassword3 = false;
-		boolean fPasswordCheck = false;
 		boolean fName = false;
 		boolean fIdNumber = false;
 		boolean fDate = false;
@@ -141,9 +140,6 @@ public class CommonsSignUpController {
 			log.debug("密碼XXX");
 			response.addMessage("密碼格式錯誤");
 		}
-		
-		//檢查確認密碼 不可空白，與密碼相同
-		
 		
 		//檢查Name 不可空白，至少2個字以上
 		if (member.getName() != null && member.getName().trim().length() >= 2) {
@@ -292,7 +288,7 @@ public class CommonsSignUpController {
 
 		
 		//要放在驗證資料之後
-		if( fAccount && fAccountD && fPassword && fPasswordCheck && fName && fIdNumber 
+		if( fAccount && fAccountD && fPassword && fName && fIdNumber 
 				/*&& fDate*/ && fEmail && fTelephone && fMobile) {
 			try {
 				member.setPassword(encoder.encode(member.getPassword()));
@@ -327,10 +323,21 @@ public class CommonsSignUpController {
 	@RequestMapping("/checkAccount")
 	@ResponseBody
 	public String accountCheck(@RequestParam("account") String account){
-//		AjaxResponse<Member> response = new AjaxResponse<Member>();
 		String result = "帳號可使用";
 		if (memberService.findByAccount(account) != null) {
 			result = "已有此帳號";
+		}
+		return result;
+	}
+	
+	@RequestMapping("/checkPassword")
+	@ResponseBody
+	public String passwordCheck(@RequestParam("passwordCheck") String passwordCheck,
+			@RequestParam("password") String password){
+		//檢查確認密碼，與密碼相同
+		String result = "密碼不一致";
+		if(passwordCheck.equals(password)) {
+			result = "正確";
 		}
 		return result;
 	}
