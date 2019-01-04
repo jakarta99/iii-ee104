@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
@@ -74,5 +76,14 @@ public class PayTimeController {
 		}
 		return response;
 	}
-
+	@ResponseBody
+	@RequestMapping("/report")		//雇主檢舉志工
+	public AjaxResponse<Order> Report(@RequestParam(value="orderId") Long orderId,
+			@RequestParam(value="description") String description,
+			@RequestParam("proofPic") MultipartFile proofPic
+			, MultipartHttpServletRequest request){
+		AjaxResponse<Order> response = new AjaxResponse<Order>();
+		orderService.report(orderId, description, proofPic, request);
+		return response;
+	}
 }
