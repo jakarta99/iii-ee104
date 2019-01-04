@@ -209,10 +209,10 @@
 		dataTable.ajax.reload();		
 	})
 		
-	function cancelMission(id) { 		
+	function cancelMission(id,title) { 		
  		swal({
- 			  title: "確定本次招募?",
- 			  text: "取消後將無法回復",
+ 			  title: "確定取消"+title+"的招募刊登?",
+ 			  text: "取消招募刊登後將無法回復",
  			  icon: "warning",
  			  buttons: true,
  			  dangerMode: true,
@@ -227,13 +227,13 @@
  					success : function(cancelResult) {
  						if(cancelResult.status == "SUCCESS"){
  							
- 							 swal("取消"+cancelResult.obj.title+"成功", {
+ 							 swal("取消"+cancelResult.obj.title+"的招募計畫成功", {
  				 			      icon: "success",
  				 			 });
  							
  						}else{
  							
- 							swal("取消"+cancelResult.obj.title+"失敗，因為"+cancelResult.messages+"", {
+ 							swal("取消"+cancelResult.obj.title+"的招募計畫失敗，因為"+cancelResult.messages+"", {
 				 			      icon: "error",
 				 			});
  							
@@ -243,7 +243,7 @@
  				})
  				   			   
  			  } else {
- 			    swal("本次招募仍繼續進行");
+ 			    swal(""+title+"的招募計畫仍繼續進行");
  			  }
  			}); 	
 	}
@@ -308,7 +308,7 @@
 						{"data": function (data, type, val) {
 							if(data.missionstatus=="A_New"||data.missionstatus=="A_VolunteerApproved"){
 							 var editbutton="<button class='btn btn-outline-primary' onclick=\"javascript:document.location.href='/user/volunteerRecruitment/edit?id="+data.id+"'\">編輯</button>";     
-							 var cancelbutton="<button class='btn btn-outline-danger' onclick=\"cancelMission("+data.id+")\">取消</button>"; 	
+							 var cancelbutton="<button class='btn btn-outline-danger' onclick=\"cancelMission("+data.id+",'"+data.title+"')\">取消</button>"; 	
 							 return editbutton + cancelbutton;
 							 }else if(data.missionstatus == "B_AccountsPayable"){
 								 return "待核發" ;

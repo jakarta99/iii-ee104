@@ -125,10 +125,10 @@
 <script>	
 	var dataTable;
 	
-	function accept(id) {
+	function accept(id,name) {
 		swal({
-			  title: "確定招募此人擔任志工?",
-			  text: "招募後此人將成為您的志工",
+			  title: "確定招募"+name+"擔任志工?",
+			  text: "招募後"+name+"將成為您的志工",
 			  icon: "warning",
 			  buttons: true,
 			  dangerMode: true,
@@ -143,7 +143,7 @@
 					success : function(acceptResult) {
 						if(acceptResult.status == "SUCCESS"){
 							
-							swal("接受"+acceptResult.obj.volunteer.name+"成功", {
+							swal("接受"+acceptResult.obj.volunteer.name+"的志工申請成功", {
 				 			      icon: "success",
 				 			 });
 							
@@ -159,16 +159,16 @@
 				})
 			
 			  } else {
-	 				swal("未接受");
+	 				swal("未接受"+name+"成為您的志工");
 	 			 }
 	 		}); 	
 	}
 	
-	function reject(id) {
+	function reject(id,name) {
 		
 		swal({
-			  title: "確定拒絕此人擔任您的志工?",
-			  text: "拒絕後此人將無法為您服務",
+			  title: "確定拒絕"+name+"擔任您的志工?",
+			  text: "拒絕後"+name+"將無法為您服務",
 			  icon: "warning",
 			  buttons: true,
 			  dangerMode: true,
@@ -183,7 +183,7 @@
 					success : function(rejectResult) {
 						if(rejectResult.status == "SUCCESS"){
 // 							alert("拒絕編號" + rejectResult.obj.id + " " + rejectResult.status);									
-							swal("拒絕"+rejectResult.obj.volunteer.name+"成功", {
+							swal("拒絕"+rejectResult.obj.volunteer.name+"的志工申請成功", {
 				 			      icon: "success",
 				 			 });
 							
@@ -200,7 +200,7 @@
 				})
 
 			  } else {
-	 				swal("未接受");
+	 				swal("未接受"+name+"擔任您的志工");
 	 			 }
 	 		}); 	
 	}
@@ -262,8 +262,8 @@
 									
 						{"data": function (data, type, val) {
 							if(data.orderStatus=='VolunteerApply'){
-								 var acceptbutton="<button class='btn btn-outline-primary' onclick=\"accept("+data.id+")\">接受</button>";     
-								 var rejectbutton="<button class='btn btn-outline-danger' onclick=\"reject("+data.id+")\">拒絕</button>"; 	
+								 var acceptbutton="<button class='btn btn-outline-primary' onclick=\"accept("+data.id+",'"+data.volunteer.name+"')\">接受</button>";     
+								 var rejectbutton="<button class='btn btn-outline-danger' onclick=\"reject("+data.id+",'"+data.volunteer.name+"')\">拒絕</button>"; 	
 								 return acceptbutton + rejectbutton;
 							 }else if(data.orderStatus=='RequesterAcceptService'){
 								 var vbutton="<span class='badge badge-success'>已接受</span>"
