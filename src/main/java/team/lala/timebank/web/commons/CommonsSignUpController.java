@@ -1,7 +1,5 @@
 package team.lala.timebank.web.commons;
 
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Member;
-import team.lala.timebank.entity.Role;
 import team.lala.timebank.enums.MemberType;
 import team.lala.timebank.service.MemberService;
 
@@ -75,6 +72,7 @@ public class CommonsSignUpController {
 		boolean fPassword1 = false;
 		boolean fPassword2 = false;
 		boolean fPassword3 = false;
+		boolean fPasswordCheck = false;
 		boolean fName = false;
 		boolean fIdNumber = false;
 		boolean fDate = false;
@@ -117,8 +115,8 @@ public class CommonsSignUpController {
 			fAccountD = true;
 		}else {
 //			errors.put("account", "帳號重複(測)");
-			log.debug("wrong!!!帳號重複");
-			response.addMessage("帳號重複");
+			log.debug("wrong!!!已有此帳號");
+			response.addMessage("已有此帳號");
 		}
 		
 		// 檢查密碼  不可空白，長度必須大於等於8小於等於16
@@ -143,6 +141,9 @@ public class CommonsSignUpController {
 			log.debug("密碼XXX");
 			response.addMessage("密碼格式錯誤");
 		}
+		
+		//檢查確認密碼 不可空白，與密碼相同
+		
 		
 		//檢查Name 不可空白，至少2個字以上
 		if (member.getName() != null && member.getName().trim().length() >= 2) {
@@ -291,11 +292,14 @@ public class CommonsSignUpController {
 
 		
 		//要放在驗證資料之後
-		if( fAccount && fAccountD && fPassword && fName && fIdNumber 
+		if( fAccount && fAccountD && fPassword && fPasswordCheck && fName && fIdNumber 
 				/*&& fDate*/ && fEmail && fTelephone && fMobile) {
 			try {
 				member.setPassword(encoder.encode(member.getPassword()));
 				Member newMember = memberService.insert(member);
+				log.debug("newMember.getId()={}", newMember.getId());
+				memberService.addRole(newMember.getId(), 2L);	//新增完會員，取得id，才能新增角色
+				
 //				Set<Role> roles = new TreeSet<Role>();
 //				Role role = new Role();
 //				role.setRoleName("user");
@@ -305,12 +309,10 @@ public class CommonsSignUpController {
 //				result.put("member", newMember);
 //				response.setObj(result);
 				response.setObj(newMember);
-				
 				log.debug("新增成功");
 			} catch (Exception e) {
 				response.addMessage("新增失敗" + e.getMessage());
 				e.printStackTrace();
-				
 			}
 		}else {
 			response.addMessage("資料有誤");
@@ -322,9 +324,20 @@ public class CommonsSignUpController {
 		return response;
 	}
 	
+	@RequestMapping("/checkAccount")
+	@ResponseBody
+	public String accountCheck(@RequestParam("account") String account){
+//		AjaxResponse<Member> response = new AjaxResponse<Member>();
+		String result = "帳號可使用";
+		if (memberService.findByAccount(account) != null) {
+			result = "已有此帳號";
+		}
+		return result;
+	}
+	
 	@RequestMapping("/update")
 	@ResponseBody
-	public AjaxResponse<Member> update(Member member, Model model) {
+	public AjaxResponse<Member> update(Member member) {
 		AjaxResponse<Member> response = new AjaxResponse<Member>();
 		try {
 			memberService.update(member);

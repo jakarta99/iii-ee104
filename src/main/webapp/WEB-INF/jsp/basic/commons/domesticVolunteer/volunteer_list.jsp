@@ -95,97 +95,67 @@
           
           
           
-          <form>
-	<fieldset>
-		<legend>基本查詢</legend>
-			<div class="form-group mx-sm-3 mb-3">
-				<div class="form-group mx-sm-3 mb-3">
-					<label>縣市:</label> 	
-					<div role="tw-city-selector"></div>
-				</div>
-			<label>會員類型 :</label> 
-				<select  id="serviceTypeDetail" name="serviceTypeDetail">
-					<option value="">選擇服務類型</option>
-					<option value="婦幼關懷">婦幼關懷</option>
-			        <option value="身心障礙">身心障礙</option>
-			        <option value="老人服務">老人服務</option>
-			        <option value="社會服務">社會服務</option>
-			        <option value="動物保護">動物保護</option>
-			        <option value="國際救援">國際救援</option>
-			        <option value="環境保護">環境保護</option>
-			        <option value="文教藝術">文教藝術</option>
-			        <option value="醫療服務">醫療服務</option>
-			        <option value="宗教信仰">宗教信仰</option>
-				</select>
-				
-			<label>長短期 :</label> 
-				<select  id="termType" name="termType">
-					<option value="">選擇長短期</option>
-					<option value="L">長期</option>
-			        <option value="S">短期</option>
-				</select>
-				
-				
-			<label>開始日期:</label>
-			<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
-			<label>結束日期:</label>
-			<input type="text"  id="endDate" name="endDate" autocomplete="off"/>
-			
-			
-			<input type="button" value="搜尋" id="searchButt" />
-			<div>
-			
-			<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
-			進階查詢:
-  			</a>
-  			</div> 
-			<div class="collapse" id="collapse">
-			
-			<label>時數 :</label> 
-			<input type="text" value="" placeholder="timeValue" id="timeValue" name="timeValue"/>
-			
-			<label>活動名稱 :</label> 
-			<input type="text" value="" placeholder="title" id="title" name="title"/>
-			
-			
-			<label>missionStatus :</label> 
-			<input type="hidden" value="" placeholder="missionstatus" id="missionstatus" name="missionstatus"/>
-			
-			
-			</div>
-			</div>
-			</fieldset>
-		</form>
           
           
-                
+		<!--查詢 -->
+          <div class="panel panel-default sidebar-menu">
+          	<div class="panel-heading">
+            	<h2 class="h2 panel-title">志工招募</h2>
+            </div>
+            <div class="panel-body">
+            	<form role="search">
+                	<div class="input-group">
+                                        
+                    	<div  role="tw-city-selector"></div>                    
+                    
+	                    <div class="form-group">
+		                    <select  id="serviceTypeDetail" name="serviceTypeDetail" class="form-control">
+								<option value="">服務類型</option>
+								<option value="婦幼關懷">婦幼關懷</option>
+						        <option value="身心障礙">身心障礙</option>
+						        <option value="老人服務">老人服務</option>
+						        <option value="社會服務">社會服務</option>
+						        <option value="動物保護">動物保護</option>
+						        <option value="國際救援">國際救援</option>
+						        <option value="環境保護">環境保護</option>
+						        <option value="文教藝術">文教藝術</option>
+						        <option value="醫療服務">醫療服務</option>
+						        <option value="宗教信仰">宗教信仰</option>
+							</select>
+						</div>
+					
+						<div class="form-group">
+							<select  id="termType" name="termType" class="form-control">
+								<option value="">長短期</option>
+								<option value="L">長期</option>
+						        <option value="S">短期</option>
+							</select>
+						</div>
+					
+	                    <div class="form-group">
+	                    	<input type="text" value="" placeholder="請輸入關鍵字" id="title" name="title" class="form-control">
+	                    </div>
+                    
+	                    <span class="input-group-btn">
+	                    
+	                    	<input  type="button" value="搜尋" id="searchButt" class="btn btn-outline-primary" >               
+<!-- 	                    	<button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button> -->
+	                    </span>
+                    </div>
+                  </form>
+                </div>
+              </div>
           
-          
-            <!-- LEFT COLUMN _________________________________________________________-->
+			<!--志工招募清單 -->
             <div>
               <div id="boxbox" class="row">
-<!--                 <div class="col-lg-4 col-md-6"> -->
-<!--                   <div class="home-blog-post"> -->
-<!--                     <div class="image"><img src="/img/portfolio-4.jpg" alt="..." class="img-fluid"> -->
-<!--                       <div class="overlay d-flex align-items-center justify-content-center"><a href="blog-post.html" class="btn btn-template-outlined-white"><i class="fa fa-chain"> </i> Read More</a></div> -->
-<!--                     </div> -->
-<!--                     <div class="text"> -->
-<!--                       <h4><a href="blog-post.html">125542</a></h4> -->
-<!--                       <p class="author-category">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a></p> -->
-<!--                       <p class="intro">Fifth abundantly made Give sixth hath. Cattle creature i be don't them behold green moved fowl Moved life us beast good yielding. Have bring.</p><a href="blog-post.html" class="btn btn-template-outlined">Continue Reading</a> -->
-<!--                     </div> -->
-<!--                   </div> -->
-<!--                  </div> -->
+
                </div>
                
                
                	 <nav aria-label="Page navigation example">
-                      <ul id ="pagebox" class="pagination pagination-lg">
-<!--                         <li class="page-item" id="backli"><a id="backa"  class="page-link">«</a></li>                       -->
-                     
-                        
-<!--                         <li class="page-item" id="nextli"><a id="nexta"  class="page-link">»</a></li> -->
-                      </ul>
+                    <ul id ="pagebox" class="pagination pagination-lg">
+              		</ul>
                   </nav>
             </div>
           </div>
@@ -201,10 +171,15 @@
 	
 	
 	<script>
-	var length=9
-	var page=0
-
+	var length=9;
+	var page=0;
+	var first;
+	var last;
 	
+$("#searchButt").click(function(){
+	list();
+ 		
+	})
 
 	
 	
@@ -218,14 +193,21 @@
 	        	$("#boxbox").text("");
 	        	$("#pagebox").text("");
 	        	console.log(missions);
+	        	
 	        	var totalElements=missions.totalElements;
 	        	console.log(totalElements);
+	        	
 	        	var totalPages=missions.totalPages;
-	        	console.log(totalElements);
-	        	var first=missions.first;
+	        	console.log(totalPages);
+	        	
+	        	first=missions.first;
 	        	console.log(first);
-	        	var last=missions.last;
+	        	
+	        	last=missions.last;
 	        	console.log(last);
+	        	
+	        	page=missions.number;
+	        	
 	        	
 	        	$.each(missions.content,function(index, mission){
 	        		var box1="<div class='col-lg-4 col-md-6'>";
@@ -243,62 +225,48 @@
 	        		
 	        		
 	        	})
-	        		$("#pagebox").append("<li class=\"page-item\" id=\"backli\"><a id=\"backa\"  class=\"page-link\">«</a></li><li class=\"page-item\" id=\"nextli\"><a id=\"nexta\"  class=\"page-link\">»</a></li>");
+	        	
+	        		$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
 	        	for (var index = 1; index <= totalPages ; index++) {
-	        		$("#nextli").before("<li class='page-item'><a  id="+index+" class='page-link'>"+index+"</a></li>")
+	        		$("#nextli").before("<li class='page-item'><a name='count' id="+index+" class='page-link'>"+index+"</a></li>")
 				}
-	        	
-	        	
-	        	
-//	         	$.each(missions.content,function(index, mission){
-//	         	$("#pagebox").append("<li class='page-item'><a  class='page-link'>"+page+1+"</a></li>")
-//	         	})
+	    
 	    
 	        })
 	        
 			}
 	
-	
-	
 
-	
-	
-	
-	
-	
-	
-	$(document).ready( function () {
-		
-		
-	
+	$(document).ready( function () {		
+		new TwCitySelector();	
 		list();
 		
-	
-		$("#backa").on('click', function(){
-			alert(first);
+		$("#pagebox").on("click","li>a[name='backa']", function(){
 			if(first == false){
 				page = page - 1;
 				list();
 			}
+			 $('body,html').animate({
+                 scrollTop: 0 }, 1);
 		}) 
 		
-		$("#nexta").on('click', function(){
-			alert(last);
+		$("#pagebox").on("click","li>a[name='nexta']", function(){
 				if(last == false){
 					page = page + 1;
 					list();
 				}
+				 $('body,html').animate({
+	                 scrollTop: 0 }, 1);
 		 })
-		
-		
 
-    		
-    	$("#pagebox").on("click","li>a", function(){			
+    	$("#pagebox").on("click","li>a[name='count']", function(){			
     		page=$(this).text()-1;
     		list();
     		 $('body,html').animate({
                  scrollTop: 0 }, 1);
     	})
+    	
+    	
     	
 	
 	})

@@ -18,9 +18,6 @@ public class RoleService {
 	@Autowired
 	private RoleDao roleDao ;
 	
-	@Autowired
-	private MemberDao memberDao;
-	
 	public Role insert(Role r) {
 		//FIXME		
 		return r; 
@@ -50,17 +47,6 @@ public class RoleService {
 	public void deleteById(Long id) {
 		roleDao.deleteById(id);
 	}
-	
-	public void deleteMemberRole(Long memberId, Long roleId) {
-		 Role role = roleDao.getOne(roleId);
-		 Member member = memberDao.getOne(memberId);
-		 role.deleteMember(member);
-		 roleDao.save(role);
-		 memberDao.save(member);
-		 
-		 System.out.println("role:deleteMember");
-	 }
-	
 	
 	
 }

@@ -43,6 +43,13 @@ public class InternationalVolunteerController {
 	
 	
 	
+	
+	@RequestMapping("/test")
+	public String test() {
+		return "/basic/commons/internationalVolunteer/test";
+	}
+	
+	
 	//此方法作用spiderScheduler的方法相同，爬蟲功能透過url執行
 	//成功
 	@Autowired

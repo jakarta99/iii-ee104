@@ -28,8 +28,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/i18n/jquery-ui-timepicker-zh-TW.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
-
-
+<!-- sweetalert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <meta charset="UTF-8">
 <title>mission list(login)</title>
@@ -184,10 +184,7 @@
 	<script>
 	
 	var dataTable;
-
-	
  	$("#searchButt").click(function(){
-		
  		dataTable.ajax.reload();
 	})
 	
@@ -195,49 +192,62 @@
 		$("#time").empty().append("開始時間");
 		$("#statusField").empty().append("志工審核");
 		$("#missionstatus").val("A_VolunteerApproved");
-		dataTable.ajax.reload();
-		
+		dataTable.ajax.reload();		
 	})
 	
 	$("#status3Butt").click(function(){
 		$("#time").empty().append("結束時間");
 		$("#statusField").empty().append("時數核發");
 		$("#missionstatus").val('B_AccountsPayable');
-		dataTable.ajax.reload();
-		
+		dataTable.ajax.reload();		
 	})
 	
 	$("#status4Butt").click(function(){
 		$("#time").empty().append("結案時間");
 		$("#statusField").empty().append("結案紀錄");
 		$("#missionstatus").val('C_Finish');
-		dataTable.ajax.reload();
-		
+		dataTable.ajax.reload();		
 	})
-	
-	
-	function cancelMission(id) {
-		$.ajax({
-			url : '/user/volunteerRecruitment/cancel?id=' + id,
-			type : 'post',
-			dataType : 'JSON',
-			success : function(cancelResult) {
-//  				alert(cancelResult);
-				if(cancelResult.status == "SUCCESS"){
-					alert("取消編號" + cancelResult.obj.id + " " + cancelResult.status);									
-					
-				}else{
-					alert("取消編號" + cancelResult.obj.id + " " + cancelResult.status);
-					alert("FAIL reason:" + cancelResult.messages);	
-				}
-				dataTable.ajax.reload();
-				
-			},
-		})
-	}
 		
-	
-
+	function cancelMission(id) { 		
+ 		swal({
+ 			  title: "確定本次招募?",
+ 			  text: "取消後將無法回復",
+ 			  icon: "warning",
+ 			  buttons: true,
+ 			  dangerMode: true,
+ 			})
+ 			.then((willcancel) => {
+ 			  if (willcancel) {
+ 				   				  
+ 				 $.ajax({
+ 					url : '/user/volunteerRecruitment/cancel?id=' + id,
+ 					type : 'post',
+ 					dataType : 'JSON',
+ 					success : function(cancelResult) {
+ 						if(cancelResult.status == "SUCCESS"){
+ 							
+ 							 swal("取消"+cancelResult.obj.title+"成功", {
+ 				 			      icon: "success",
+ 				 			 });
+ 							
+ 						}else{
+ 							
+ 							swal("取消"+cancelResult.obj.title+"失敗，因為"+cancelResult.messages+"", {
+				 			      icon: "error",
+				 			});
+ 							
+ 						} 						
+ 						dataTable.ajax.reload();						
+ 					},
+ 				})
+ 				   			   
+ 			  } else {
+ 			    swal("本次招募仍繼續進行");
+ 			  }
+ 			}); 	
+	}
+			
 	$(document).ready( function () {
 
 		new TwCitySelector();

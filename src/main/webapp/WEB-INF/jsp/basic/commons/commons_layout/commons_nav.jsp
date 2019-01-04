@@ -18,7 +18,7 @@
                       <div class="row">
 
                         <div class="col-md-6 col-lg-3">
-                           <h5><a href="#" >行事曆</a></h5>                      
+                           <h5><a href="/user/calendar" >行事曆</a></h5>                      
                           <h5><a href="/system-message/list" id="systemMessage">系統訊息</a></h5>
                           <h5><a href="/user/personal-info/edit" >我的個人資訊</a></h5>                          
                         </div>
@@ -43,7 +43,7 @@
                     </li>
                   </ul>
                 </li>
-                <li class="nav-item menu-large"><a href="/commons/InternationalVolunteer/search" >國際志工專區<b class="caret"></b></a>     
+                <li class="nav-item menu-large"><a href="/commons/InternationalVolunteer/list" >國際志工專區<b class="caret"></b></a>     
                       
 
                      

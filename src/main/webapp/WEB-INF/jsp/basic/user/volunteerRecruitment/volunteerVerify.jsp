@@ -30,6 +30,8 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<!-- sweetalert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 <meta charset="UTF-8">
@@ -120,47 +122,87 @@
 	  </section>
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	
-<script>
-	
+<script>	
 	var dataTable;
 	
-	
 	function accept(id) {
-		$.ajax({
-			url : '/user/volunteerVerify/accept?id=' + id,
-			type : 'post',
-			dataType : 'JSON',
-			success : function(acceptResult) {
-				if(acceptResult.status == "SUCCESS"){
-					alert("接受編號" + acceptResult.obj.id + " " + acceptResult.status);									
-					
-				}else{
-					alert("接受編號" + acceptResult.obj.id + " " + acceptResult.status);
-					alert("FAIL reason:" + acceptResult.messages);	
-				}
-				dataTable.ajax.reload();
+		swal({
+			  title: "確定招募此人擔任志工?",
+			  text: "招募後此人將成為您的志工",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willaccept) => {
+			  if (willaccept) {
 				
-			},
-		})
+				$.ajax({
+					url : '/user/volunteerVerify/accept?id=' + id,
+					type : 'post',
+					dataType : 'JSON',
+					success : function(acceptResult) {
+						if(acceptResult.status == "SUCCESS"){
+							
+							swal("接受"+acceptResult.obj.volunteer.name+"成功", {
+				 			      icon: "success",
+				 			 });
+							
+						}else{
+							
+							swal("接受"+acceptResult.obj.name+"失敗，因為"+acceptResult.messages+"", {
+				 			      icon: "error",
+				 			});
+							
+						}
+						dataTable.ajax.reload();				
+					},
+				})
+			
+			  } else {
+	 				swal("未接受");
+	 			 }
+	 		}); 	
 	}
 	
 	function reject(id) {
-		$.ajax({
-			url : '/user/volunteerVerify/reject?id=' + id,
-			type : 'post',
-			dataType : 'JSON',
-			success : function(rejectResult) {
-				if(rejectResult.status == "SUCCESS"){
-					alert("拒絕編號" + rejectResult.obj.id + " " + rejectResult.status);									
-					
-				}else{
-					alert("拒絕編號" + rejectResult.obj.id + " " + rejectResult.status);
-					alert("FAIL reason:" + rejectResult.messages);	
-				}
-				dataTable.ajax.reload();
+		
+		swal({
+			  title: "確定拒絕此人擔任您的志工?",
+			  text: "拒絕後此人將無法為您服務",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willreject) => {
+			  if (willreject) {
 				
-			},
-		})
+				$.ajax({
+					url : '/user/volunteerVerify/reject?id=' + id,
+					type : 'post',
+					dataType : 'JSON',
+					success : function(rejectResult) {
+						if(rejectResult.status == "SUCCESS"){
+// 							alert("拒絕編號" + rejectResult.obj.id + " " + rejectResult.status);									
+							swal("拒絕"+rejectResult.obj.volunteer.name+"成功", {
+				 			      icon: "success",
+				 			 });
+							
+						}else{
+// 							alert("拒絕編號" + rejectResult.obj.id + " " + rejectResult.status);
+// 							alert("FAIL reason:" + rejectResult.messages);
+							swal("拒絕"+rejectResult.obj.volunteer.name+"失敗，因為"+rejectResult.messages+"", {
+				 			      icon: "error",
+				 			});
+						}
+						dataTable.ajax.reload();
+						
+					},
+				})
+
+			  } else {
+	 				swal("未接受");
+	 			 }
+	 		}); 	
 	}
 	
 	
@@ -220,14 +262,17 @@
 									
 						{"data": function (data, type, val) {
 							if(data.orderStatus=='VolunteerApply'){
-								 var acceptbutton="<button class='btn btn-outline-secondary' onclick=\"accept("+data.id+")\">接受</button>";     
-								 var rejectbutton="<button class='btn btn-outline-secondary' onclick=\"reject("+data.id+")\">拒絕</button>"; 	
+								 var acceptbutton="<button class='btn btn-outline-primary' onclick=\"accept("+data.id+")\">接受</button>";     
+								 var rejectbutton="<button class='btn btn-outline-danger' onclick=\"reject("+data.id+")\">拒絕</button>"; 	
 								 return acceptbutton + rejectbutton;
 							 }else if(data.orderStatus=='RequesterAcceptService'){
-								 return "已接受";
+								 var vbutton="<span class='badge badge-success'>已接受</span>"
+								 return vbutton;
 								 
 							 }else if(data.orderStatus=='RequesterRefuceServiceMatchFail'){
-								 return "已拒絕";
+								 var vbutton="<span class='badge badge-danger'>已拒絕</span>"
+								 return vbutton;
+								 
 							 }else {
 								 return "不應該出現的狀態";
 							 }

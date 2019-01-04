@@ -25,11 +25,6 @@ public class AdminSecurityUserController {
 	
 	@Autowired
 	private MemberService memberService;
-	
-	@Autowired
-	private RoleService roleService;
-	
-	
 
 	@RequestMapping("/list")
 	public String list() {
@@ -117,7 +112,7 @@ public class AdminSecurityUserController {
 		
 		AjaxResponse<Member> response = new AjaxResponse<Member>();
 		try {
-			roleService.deleteMemberRole(memberId, roleId);
+			memberService.deleteMemberRole(memberId, roleId);
 			System.out.println("刪除成功");
 		} catch (Exception e) {
 			response.addMessage("刪除失敗" + e.getMessage());
