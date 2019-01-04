@@ -30,7 +30,8 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-
+<!-- sweetalert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <title>志工審核</title>
 <style>
@@ -128,7 +129,18 @@
 	
 	
 	
-	function pay(orderId,volunteerId) {
+	function pay(orderId,volunteerId,name) {
+		console.log(name)
+		
+		swal({
+ 			  title: "確定給予志工"+name+"	"+$("#"+volunteerId+" option:selected").val()+"小時與"+$("#score"+volunteerId+" option:selected").val()+"星評分嗎?",
+ 			  text: "確定後將進行付款與志工評點",
+ 			  icon: "warning",
+ 			  buttons: true,
+ 			  dangerMode: true,
+ 			})
+ 			.then((willcancel) => {
+ 			  if (willcancel) {
 		
 		$.ajax({
 			url : '/user/payTime/pay?orderId=' + orderId+'&hours='+$("#"+volunteerId+" option:selected").val()+'&score='+$("#score"+volunteerId+" option:selected").val(),
@@ -136,17 +148,34 @@
 			dataType : 'JSON',
 			success : function(payResult) {
 				if(payResult.status == "SUCCESS"){
-					alert("審核編號" + payResult.obj.id + " " + payResult.status);									
+// 					alert("審核編號" + payResult.obj.id + " " + payResult.status);	
+					 swal("付款與評點"+payResult.obj.volunteer.name+"成功", {
+		 			      icon: "success",
+		 			 });
+					
 					
 				}else{
-					alert("審核編號" + payResult.obj.id + " " + payResult.status);
-					alert("FAIL reason:" + payResult.messages);	
+// 					alert("審核編號" + payResult.obj.id + " " + payResult.status);
+// 					alert("FAIL reason:" + payResult.messages);	
+					
+					swal("付款與評點"+payResult.obj.volunteer.name+"失敗，因為"+payResult.messages+"", {
+		 			      icon: "error",
+		 			});
 				}
 				dataTable.ajax.reload();
 				
 			},
 		})
+		
+		   
+ 			  } else {
+ 			    swal("取消"+name+"的付款與評點");
+ 			  }
+ 			}); 	
 	}
+	
+	
+	
 	
 	function penalty(orderId) {
 		$.ajax({
@@ -284,8 +313,8 @@
 						{"data":function (data, type, val) {
 							if(data.orderStatus=="ServiceFinishNotPay"){
 							
-							
-							var paybutton="<button class='btn btn-outline-secondary' onclick=\"pay("+data.id+","+data.volunteer.id+")\">時數核發與評分</button>";     
+							var name=data.volunteer.name
+							var paybutton="<button class='btn btn-outline-secondary' onclick=\"pay("+data.id+","+data.volunteer.id+",'"+name+"')\">時數核發與評分</button>";     
 							return paybutton ;
 							}else if(data.orderStatus=="ServiceFinishPayMatchSuccess"){
 								 var vbutton="<span class='badge badge-success'>已審核時數與評分</span>"
