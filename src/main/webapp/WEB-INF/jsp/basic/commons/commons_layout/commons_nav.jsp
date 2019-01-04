@@ -43,7 +43,7 @@
                     </li>
                   </ul>
                 </li>
-                <li class="nav-item menu-large"><a href="/commons/InternationalVolunteer/search" >國際志工專區<b class="caret"></b></a>     
+                <li class="nav-item menu-large"><a href="/commons/InternationalVolunteer/list" >國際志工專區<b class="caret"></b></a>     
                       
 
                      

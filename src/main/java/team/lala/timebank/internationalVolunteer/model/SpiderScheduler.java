@@ -1,4 +1,4 @@
-package team.lala.timebank.internationalVolunteer;
+package team.lala.timebank.internationalVolunteer.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
