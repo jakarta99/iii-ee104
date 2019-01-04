@@ -62,10 +62,10 @@
 	<div class="container">
     	<div class="row">
             <article>
-				<div class="container">
-					<h2 class="text-center text-uppercase text-secondary mb-0">我的交易紀錄</h2>
-			        <hr class="star-dark mb-5">
-				</div>
+<!-- 				<div class="container"> -->
+<!-- 					<h2 class="text-center text-uppercase text-secondary mb-0">我的交易紀錄</h2> -->
+<!-- 			        <hr class="star-dark mb-5"> -->
+<!-- 				</div> -->
 				<div id="sideBar">
 					<form>
 						<fieldset style="width:1100px">
