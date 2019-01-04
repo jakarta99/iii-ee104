@@ -31,7 +31,6 @@
 
 
 
-
 <meta charset="UTF-8">
 <title>mission list(login)</title>
 <style>
