@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Personal Information</title>
-<jsp:include page="../../../admin/admin_layout/admin_css_js_links.jsp" />
+<%-- <jsp:include page="../../../admin/admin_layout/admin_css_js_links.jsp" /> --%>
 <!-- css -->
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp" />
 <!-- Javascript files -->
@@ -39,7 +39,7 @@
 		}
  	article { 
  		font-family: 'Righteous', cursive;
- 		margin-top: 30px; 
+/*  		margin-top: 30px;  */
  		margin-bottom: 30px; 
  		padding: 10px; 
  	} */
@@ -184,25 +184,25 @@
 							<input type="text" value="${signUpDate}" id="signUpDate" name="signUpDate" autocomplete="off"><br>
 						</div>
 					</fieldset>
-					<fieldset>
-						<legend>驗證資訊</legend>
-						<div class="block">
-							<label>Email驗證信確認(Y/N):</label>
-							<label>Y</label> 
-							<input type="radio" value="Y" name="emailVerification">
-							<label>N</label> 
-							<input type="radio" value="N" name="emailVerification"><br>
-						</div>
-						<c:if test="${member.memberType eq 'O' }">
-							<div class="block">
-								<label>機構身分驗證 (Y/N):</label>
-									<label>Y</label> 
-									<input type="radio" value="Y" name="orgIdConfirmation">
-									<label>N</label> 
-									<input type="radio" value="N" name="orgIdConfirmation"><br>								
-							</div>
-						</c:if>	
-					</fieldset>
+<!-- 					<fieldset> -->
+<!-- 						<legend>驗證資訊</legend> -->
+<!-- 						<div class="block"> -->
+<!-- 							<label>Email驗證信確認(Y/N):</label> -->
+<!-- 							<label>Y</label>  -->
+<!-- 							<input type="radio" value="Y" name="emailVerification"> -->
+<!-- 							<label>N</label>  -->
+<!-- 							<input type="radio" value="N" name="emailVerification"><br> -->
+<!-- 						</div> -->
+<%-- 						<c:if test="${member.memberType eq 'O' }"> --%>
+<!-- 							<div class="block"> -->
+<!-- 								<label>機構身分驗證 (Y/N):</label> -->
+<!-- 									<label>Y</label>  -->
+<!-- 									<input type="radio" value="Y" name="orgIdConfirmation"> -->
+<!-- 									<label>N</label>  -->
+<!-- 									<input type="radio" value="N" name="orgIdConfirmation"><br>								 -->
+<!-- 							</div> -->
+<%-- 						</c:if>	 --%>
+<!-- 					</fieldset> -->
 					<c:if test="${member.memberType eq 'O' }">
 						<fieldset>	
 							<legend>公司資料</legend>
@@ -271,7 +271,7 @@
 			$("span[role='tw-city-selector']").attr("data-county-value",'${member.county}');
 			$("span[role='tw-city-selector']").attr("data-district-value", '${member.district}');
 					
-			$("input[name='emailVerification'][value="+'${member.emailVerification}' + "]").prop("checked", true);
+// 			$("input[name='emailVerification'][value="+'${member.emailVerification}' + "]").prop("checked", true);
 			if ('${member.memberType }' == 'O') {
 				$("input[name='orgIdConfirmation'][value="+ '${member.orgIdConfirmation}' + "]").prop("checked", true);			
 			}			
