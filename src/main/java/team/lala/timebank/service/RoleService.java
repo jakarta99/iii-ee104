@@ -17,7 +17,7 @@ public class RoleService {
 
 	@Autowired
 	private RoleDao roleDao ;
-
+	
 	public Role insert(Role r) {
 		//FIXME		
 		return r; 
@@ -47,7 +47,6 @@ public class RoleService {
 	public void deleteById(Long id) {
 		roleDao.deleteById(id);
 	}
-	
 	
 	
 }
