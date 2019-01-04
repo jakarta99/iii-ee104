@@ -19,7 +19,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Getter;
 import lombok.Setter;
-
+import lombok.extern.slf4j.Slf4j;
+import team.lala.timebank.dao.RoleDao;
+@Slf4j
 @Getter
 @Setter
 @Entity
@@ -52,8 +54,13 @@ public class Role implements GrantedAuthority{
 	
 
 	 public void addMember(Member member) {
-	       if (!getMembers().contains(member)) {
-	    	   getMembers().add(member);
+	       log.debug("Role.getMembers()={}", getMembers());
+	       log.debug("member.getRoles()={}", member.getRoles());
+//	       member.setRoles();
+		   if (!getMembers().contains(member)) {
+			   getMembers().add(member);
+			   
+	    	   log.debug("8888888888888888888888888888888888888888888888");
 	       }
 	       if (!member.getRoles().contains(this)) {
 	    	   member.getRoles().add(this);
