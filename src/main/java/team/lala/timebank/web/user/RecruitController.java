@@ -95,12 +95,9 @@ public class RecruitController {
 		try {
 
 			response.setObj(missionService.getOne(id));
-			// 更改mission狀態為5
-			missionService.cancel(id);
-			// 拒絕所有apply的order
-			List<Order> orders = orderService.findByMission(missionService.getOne(id));
-			orderService.rejectOrders(orders);
-			systemMessageService.missionCancel(orders);
+			// 取消訂單  更改mission狀態為5
+			missionService.cancelMission(id);
+			
 
 		} catch (Exception e) {
 			response.addMessage("取消失敗，" + e.getMessage());

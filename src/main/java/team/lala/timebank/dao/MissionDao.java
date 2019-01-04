@@ -19,5 +19,6 @@ public interface MissionDao extends JpaRepository<Mission, Long>, JpaSpecificati
 	public Page<Mission> findByMember(Member member, Pageable pageable);
 	
 	public Page<Mission> findByMissionstatus(MissionStatus missionstatus, Pageable pageable);
-			
+	
+	
 }

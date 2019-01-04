@@ -23,7 +23,7 @@ import team.lala.timebank.enums.YesNo;
 
 @Slf4j
 @Service
-public class PayService {
+public class FacadeService {
 	@Autowired
 	private TimeLedgerDao timeLedgerDao;
 

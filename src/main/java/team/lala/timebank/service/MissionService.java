@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
@@ -21,11 +22,12 @@ import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.MissionDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
-import team.lala.timebank.entity.Penalty;
+import team.lala.timebank.entity.Order;
 import team.lala.timebank.enums.MissionStatus;
 import team.lala.timebank.spec.MissionSpecification;
 
 @Slf4j
+@Transactional
 @Service
 public class MissionService {
 
@@ -33,7 +35,12 @@ public class MissionService {
 	private MissionDao missionDao;
 	@Autowired
 	private MemberDao memberDao;
-
+	@Autowired
+	private OrderService orderService;
+	@Autowired
+	private SystemMessageService systemMessageService;
+	@Autowired
+	private MissionService missionService;
 	// list for everyone
 	public Page<Mission> findByStatusAndSpecification(Mission inputMission, PageRequest pageRequest) {
 		inputMission.setMissionStatusTransient("New");
@@ -47,6 +54,9 @@ public class MissionService {
 	public Page<Mission> findBySpecification(Specification<Mission> specification, PageRequest pageRequest) {
 		return missionDao.findAll(specification, pageRequest);
 	}
+	public List<Mission> findBySpecification(Specification<Mission> specification) {
+		return missionDao.findAll(specification);
+	}
 
 	// list for user
 	public Page<Mission> findByMemberAndSpecification(Principal principal, Mission mission, PageRequest pageRequest) {
@@ -57,57 +67,9 @@ public class MissionService {
 	}
 
 	// insert for user
-	public Mission insertMissionAndPicture(MultipartFile missionPicture, Mission mission, HttpServletRequest request) {
-		try {
-			mission = insert(mission);
-			mission.setUpdateDate(new java.util.Date());
-			mission = missionDao.save(mission);
-
-			// 如果有上傳圖片，才存檔案到Server，及存路徑到DB
-			if (missionPicture.getOriginalFilename().length() > 0) {
-				// 取得應用程式根目錄中圖片之路徑
-				String realPath = request.getServletContext().getRealPath("/") + "..\\resources\\static\\img\\";
-				System.out.println(realPath + "***************************");
-				// 確認是否有此資料夾，如無則建資料夾
-				File dir = new File(realPath);
-				if (!dir.exists()) {
-					dir.mkdirs();
-				}
-				// 檔名
-				String location = realPath + "missionPicture_" + mission.getId() + ".jpg";
-
-				// 寫出檔案到Server
-				FileOutputStream fos = new FileOutputStream(location);
-				fos.write(missionPicture.getBytes());
-				fos.close();
-
-				// 將檔名存入DB
-				mission.setMissionPicName("missionPicture_" + mission.getId() + ".jpg");
-				mission = missionDao.save(mission);
-
-			}
-			return mission;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return mission;
-		}
-	}
-
-	// insert for Admin
-	public Mission insert(Mission mission) {
-		mission.setMissionstatus(MissionStatus.A_New);
-		mission.setStartDate(mission.getStartDate());
-		mission.setEndDate(mission.getEndDate());
-		mission.setPublishDate(new Date());
-		mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
-		mission.setApprovedQuantity(0);
-		return missionDao.save(mission);
-	}
-
-	// insert for user
 	public Mission insert(Mission mission, Principal principal) {
 		mission.setMember(memberDao.findByAccount(principal.getName()));
+		mission.setUpdateDate(new java.util.Date());
 		mission.setMissionstatus(MissionStatus.A_New);
 		mission.setStartDate(mission.getStartDate());
 		mission.setEndDate(mission.getEndDate());
@@ -194,13 +156,17 @@ public class MissionService {
 	}
 
 	// cancel for user
-	public Mission cancel(Long id) {
-		Mission mission = missionDao.getOne(id);
+	public Mission cancelMission(Long missionid) {
+		Mission mission = missionDao.getOne(missionid);
 		
 		if (mission.getMissionstatus() == MissionStatus.A_New
 				|| mission.getMissionstatus() == MissionStatus.A_VolunteerApproved) {
 			mission.setMissionstatus(MissionStatus.C_Cancel);
 			mission.setFinishDate(new Date());
+			// 拒絕所有apply的order
+			List<Order> orders = orderService.findByMission(mission);
+			orderService.rejectOrders(orders);
+			systemMessageService.missionCancel(orders);
 			return missionDao.save(mission);
 		}
 		return null;
