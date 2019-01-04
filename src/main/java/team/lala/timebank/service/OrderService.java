@@ -136,8 +136,10 @@ public class OrderService {
 		return orders;
 	}
 
-	public List<Order> findByVolunteer(Member volunteer) {
-		List<Order> orders = orderDao.findByVolunteer(volunteer);
+	public List<Order> findByVolunteer(Principal principal) {
+		String account = principal.getName();
+		Member member = memberDao.findByAccount(account);
+		List<Order> orders = orderDao.findByVolunteer(member);
 		return orders;
 	}
 

@@ -6,18 +6,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>calendar</title>
-<!-- Javascript files-->
+<!-- Java script files-->
 <jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
-<!-- TOAST UI Calendar -->
-<script src="https://uicdn.toast.com/tui.code-snippet/latest/tui-code-snippet.js"></script>
-<script src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js"></script>
-<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.css" />
+<!-- Moment.js v2.20.0 -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.0/moment.min.js"></script>
+<!-- FullCalendar v3.8.1 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.min.css" rel="stylesheet"  />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.print.css" rel="stylesheet" media="print">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.min.js"></script>
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 </head>
 <body>
 <!-- Top bar-->
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp" />
-	<!-- Navbar -->
+	<!-- Nav bar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />
   	<div id="heading-breadcrumbs">
        <div class="container">
@@ -30,7 +32,7 @@
      </div>
     <section class="bar">
 	    <div class="container">
-	    <div id="calendar" style="height: 800px;"></div>
+	    <div id="calendar"></div>
 	    </div>
     </section>
       
@@ -38,18 +40,61 @@
     <!-- FOOTER -->
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
 	<script>
-	var Calendar = tui.Calendar;
-	$('#calendar').tuiCalendar({
-	  defaultView: 'month',
-	  taskView: true,
-	  template: {
-	    monthGridHeader: function(model) {
-	    var date = new Date(model.date);
-	    var template = '<span class="tui-full-calendar-weekday-grid-date">' + date.getDate() + '</span>';
-	    return template;
-	  	}
-	  }
-	});
+	$(document).ready(function(){
+		  var orderEvents = [];
+// 		 $.ajax({
+// 			    url: "/user/getOrder",
+// 			    method: "GET",
+// 			    datatype: "json",
+// 			  }).done(function(response) {
+// 				  $.each(response, function(idx, order) {
+// 					  orderEvents.push({
+// 				        start: order.mission.startDate,
+// 				        end: order.mission.endDate,
+// 				        title: order.mission.title
+// 				      });
+// 				  });
+// 			  });
+// 		JSON.stringify(orderEvents);
+// 		console.log(orderEvents)
+
+	  $('#calendar').fullCalendar({
+		  header: {
+			  left: 'month,agendaWeek,agendaDay',
+			  center: 'title',
+			  right: 'today, prev, next'
+			  },
+		  monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+		  monthNamesShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+		  dayNames: ["週日", "週一", "週二", "週三", "週四", "週五", "週六"],
+		  dayNamesShort: ["週日", "週一", "週二", "週三", "週四", "週五", "週六"],
+		  today: ["今天"],
+		  firstDay: 1,
+		  buttonText: {
+			  prev: '«', next: '»', prevYear: ' << ', nextYear: ' >> ',
+			  today: '今天', month: '月', week: '周', day: '日'
+			  },
+		  events:  [ { title : 'event1', start : '2018-11-01', end : '2018-12-30' }, {} ]
+// 			  function(callback) {
+// 			  orderEvents = [];
+// 			  $.ajax({
+// 				    url: "/user/getOrder",
+// 				    method: "GET",
+// 				    datatype: "json",
+// 				  }).done(function(response) {
+// 					  $.each(response, function(idx, order) {
+// 						  orderEvents.push({
+// 					        title: order.mission.title
+// 					        start: order.mission.startDate,
+// 					        end: order.mission.endDate,
+// 					      });
+// 					  });
+// 					  console.log(orderEvents)
+// 					return orderEvents;
+// 				  });
+// 			  }
+		});
+	})
 	</script>
 </body>
 </html>
