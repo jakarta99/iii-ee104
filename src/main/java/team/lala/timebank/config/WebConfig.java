@@ -15,7 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
 //	String realPath = request.getServletContext().getRealPath("/");
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		this;
+		
 		//Jasmine:設定檢舉佐證資料上傳與存取路徑
 		registry
             .addResourceHandler("/image/**")
