@@ -80,43 +80,43 @@ public class MissionService {
 	}
 
 	// insert for user
-	public Mission insert(Mission mission, Principal principal, MultipartFile missionPicture,
-			HttpServletRequest request) {
-		mission.setMember(memberDao.findByAccount(principal.getName()));
-		mission.setMissionstatus(MissionStatus.A_New);
-		mission.setStartDate(mission.getStartDate());
-		mission.setEndDate(mission.getEndDate());
-		mission.setPublishDate(new Date());
-		mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
-		mission.setApprovedQuantity(0);
-		try {
-			// 如果有上傳圖片，才存檔案到Server，及存路徑到DB
-			if (missionPicture.getOriginalFilename().length() > 0) {
-				// 取得應用程式根目錄中圖片之路徑
-				String realPath = request.getServletContext().getRealPath("/") + "..\\resources\\static\\img\\";
-				// 確認是否有此資料夾，如無則建資料夾
-				File dir = new File(realPath);
-				if (!dir.exists()) {
-					dir.mkdirs();
-				}
-				// 檔名
-				String location = realPath + "missionPicture_" + mission.getId() + ".jpg";
-
-				// 寫出檔案到Server
-				FileOutputStream fos = new FileOutputStream(location);
-				fos.write(missionPicture.getBytes());
-				fos.close();
-
-				// 將檔名存入DB
-				mission.setMissionPicName("missionPicture_" + mission.getId() + ".jpg");
-				mission = missionDao.save(mission);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return mission;
-		}
-		return missionDao.save(mission);
-	}
+//	public Mission insert(Mission mission, Principal principal, MultipartFile missionPicture,
+//			HttpServletRequest request) {
+//		mission.setMember(memberDao.findByAccount(principal.getName()));
+//		mission.setMissionstatus(MissionStatus.A_New);
+//		mission.setStartDate(mission.getStartDate());
+//		mission.setEndDate(mission.getEndDate());
+//		mission.setPublishDate(new Date());
+//		mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
+//		mission.setApprovedQuantity(0);
+//		try {
+//			// 如果有上傳圖片，才存檔案到Server，及存路徑到DB
+//			if (missionPicture.getOriginalFilename().length() > 0) {
+//				// 取得應用程式根目錄中圖片之路徑
+//				String realPath = request.getServletContext().getRealPath("/") + "..\\resources\\static\\img\\";
+//				// 確認是否有此資料夾，如無則建資料夾
+//				File dir = new File(realPath);
+//				if (!dir.exists()) {
+//					dir.mkdirs();
+//				}
+//				// 檔名
+//				String location = realPath + "missionPicture_" + mission.getId() + ".jpg";
+//
+//				// 寫出檔案到Server
+//				FileOutputStream fos = new FileOutputStream(location);
+//				fos.write(missionPicture.getBytes());
+//				fos.close();
+//
+//				// 將檔名存入DB
+//				mission.setMissionPicName("missionPicture_" + mission.getId() + ".jpg");
+//				mission = missionDao.save(mission);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return mission;
+//		}
+//		return missionDao.save(mission);
+//	}
 
 	// update for user & Admin
 	public Mission update(Mission mission) {

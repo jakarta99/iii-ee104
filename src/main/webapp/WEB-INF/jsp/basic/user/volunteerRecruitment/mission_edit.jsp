@@ -141,7 +141,7 @@
     </div>
     
     <div class="form-group">
-     missionPicture:<a id="missionPicName" href="/../img/${mission.missionPicName}" target="_blank">原上傳圖片</a>
+     missionPicture:<a id="missionPicName" href="/image/user/mission/${mission.missionPicName}" target="_blank">原上傳圖片</a>
      <input type="file" id="missionPicture" name="missionPicture" accept="image/*" class="form-control" />
     </div>
       
