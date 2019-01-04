@@ -16,7 +16,7 @@ import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.service.MissionService;
 import team.lala.timebank.service.OrderService;
-import team.lala.timebank.service.PayService;
+import team.lala.timebank.service.FacadeService;
 import team.lala.timebank.service.TimeLedgerService;
 
 @Slf4j

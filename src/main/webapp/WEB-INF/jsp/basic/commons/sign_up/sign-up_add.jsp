@@ -95,14 +95,20 @@
 						<div class="block">
 							<label for="idAccount">帳號:</label>
 							<input type="text" value="${param.account}" id="idAccount" placeholder="請輸入帳號" name="account" autofocus autocompelete="off">
-							<span id="idspAccount" style='color:red'></span>
+							<span id="idspAccount" style='color:red'>${accountDouble}</span><span id="isDoubleAccount"></span>
 							<div class="remark">(1.不可空白，2.至少6個字以上，3.必須全部為英文或數字)</div>
 						</div>
 						<div class="block">
 							<label for="idPassword">密碼:</label>
-							<input type="text" value="${param.password}" id="idPassword" placeholder="請輸入密碼" name="password" autofocus autocompelete="off">
+							<input type="password" value="${param.password}" id="idPassword" placeholder="請輸入密碼" name="password" autofocus autocompelete="off">
 							<span id="idspPassword" style='color:red'></span>
-							<div class="remark">(1.不可空白，2.至少8個字且必須包含字母、數字、特殊符號[~!@#$%^&*])</div>
+							<div class="remark">(1.不可空白，2.至少8個字最多16個字，3.必須包含字母、數字、特殊符號[~!@#$%^&*])</div>
+						</div>
+						<div class="block">
+							<label for="idPasswordCheck">確認密碼:</label>
+							<input type="password" value="${param.passwordCheck}" id="idPasswordCheck" placeholder="請再輸入一次密碼" name="passwordCheck" autofocus autocompelete="off">
+							<span id="idspPasswordCheck" style='color:red'></span>
+							<div class="remark">(1.不可空白，2.須與密碼相同)</div>
 						</div>
           			</fieldset>
           			<fieldset>	
@@ -228,6 +234,11 @@
 	document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("idAccount").addEventListener("keyup", chkAccount);
     });
+	
+	
+	
+	
+	
     function chkAccount() {
         var theAccount = document.getElementById("idAccount").value;
         var theAccountLen = theAccount.length;
@@ -238,21 +249,29 @@
         }
         //如果長度是否大於6，判斷是否全部為英文或數字
         else if (theAccountLen >= 6) {
-            for (var i = 0; i < theAccountLen; i++) {
-            	var AccountChr = theAccount.charAt(i).toUpperCase();//轉換為大寫
-                if (AccountChr >= "A" && AccountChr <= "Z" || AccountChr >= "0" && AccountChr <= "9") {
-                    $.get()
-                	
-//                 	if(){
-                    	
-//                     }
-                	document.getElementById("idspAccount").innerHTML =
-                        "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
-                } else {
-                    document.getElementById("idspAccount").innerHTML =
-                        "<img src='/img/X.jpg'><span style='color:red'>必須全部為英文或數字</span>"
-                }
-            }
+        	$.ajax({
+				method:"post",
+				dataType: "text",        
+				url:"/commons/sign-up/checkAccount",
+				data: {account:$("#idAccount").val()}
+			}).done(function(response){
+				if(response == "帳號可使用"){
+					for (var i = 0; i < theAccountLen; i++) {
+		            	var AccountChr = theAccount.charAt(i).toUpperCase();//轉換為大寫
+		                if (AccountChr >= "A" && AccountChr <= "Z" || AccountChr >= "0" && AccountChr <= "9") {
+		                		document.getElementById("idspAccount").innerHTML =
+		                            "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
+		                } else {
+		                    document.getElementById("idspAccount").innerHTML =
+		                        "<img src='/img/X.jpg'><span style='color:red'>必須全部為英文或數字</span>"
+		                }
+		            }
+				}else{
+					document.getElementById("idspAccount").innerHTML =
+                        "<img src='/img/X.jpg'><span style='color:red'>已有此帳號</span>"
+// 					$("#isDoubleAccount").html(response);
+				}
+			})  
         }
         else{
             document.getElementById("idspAccount").innerHTML =
@@ -298,6 +317,27 @@
             document.getElementById("idspPassword").innerHTML =
                 "<img src='/img/X.jpg'><span style='color:red'>至少8個字，最多16個字</span>"
         }
+    }
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("idPasswordCheck").addEventListener("keyup", chkPasswordCheck);
+    });
+    function chkPasswordCheck(){
+    	var thePassword = document.getElementById("idPassword").value;
+    	var thePasswordCheck = document.getElementById("idPasswordCheck").value;
+        var thePasswordCheckLen = thePasswordCheck.length;
+        var msgChk = document.getElementById("idspPasswordCheck")
+        if (thePasswordCheck == ""){
+        	msgChk.innerHTML =
+                "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
+        }else if(thePassword != idPasswordCheck.value){
+        	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:red'>輸入錯誤</span>";
+//         	idPassword.value = "";
+//         	idPasswordCheck.value = "";
+        }else{
+        	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+        }
+        
     }
     
 	document.addEventListener("DOMContentLoaded", function () {
@@ -643,7 +683,7 @@
 							if (message =="帳號格式錯誤"){
 								$("#idspAccount").html(message);
 							}
-							if (message =="帳號重複"){
+							if (message =="已有此帳號"){
 								$("#idspAccount").html(message);
 							}
 							if (message =="密碼格式錯誤"){

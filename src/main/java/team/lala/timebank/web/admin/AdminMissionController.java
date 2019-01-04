@@ -1,8 +1,7 @@
 package team.lala.timebank.web.admin;
 
-import java.util.HashMap;
+import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,22 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
-import team.lala.timebank.commons.ajax.PageResponse;
-import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
-import team.lala.timebank.entity.Order;
-
 import team.lala.timebank.entity.ServiceType;
 import team.lala.timebank.service.MissionService;
-
 import team.lala.timebank.service.ServiceTypeService;
-import team.lala.timebank.spec.MemberSpecification;
 import team.lala.timebank.spec.MissionSpecification;
-import team.lala.timebank.spec.OrderSpecification;
 
 @Slf4j
 @Controller
@@ -99,11 +90,11 @@ public class AdminMissionController {
 
 	@RequestMapping("/insert")
 	@ResponseBody
-	public AjaxResponse<Mission> insert(Mission mission) {
+	public AjaxResponse<Mission> insert(Mission mission, Principal principal) {
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
 
 		try {
-			missionService.insert(mission);
+			missionService.insert(mission, principal);
 			response.setObj(mission);
 		} catch (Exception e) {
 			response.addMessage("新增失敗，" + e.getMessage());

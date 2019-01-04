@@ -162,9 +162,9 @@ public class MemberService {
 	}
 	
 	
-	public Member findByAccount(String s) {
+	public Member findByAccount(String account) {
 		Member member = null;
-		member = memberDao.findByAccount(s);
+		member = memberDao.findByAccount(account);
 		return member;
 	}
 

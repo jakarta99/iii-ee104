@@ -18,7 +18,7 @@ import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.service.MissionService;
 import team.lala.timebank.service.OrderService;
-import team.lala.timebank.service.PayService;
+import team.lala.timebank.service.FacadeService;
 import team.lala.timebank.service.TimeLedgerService;
 
 @Slf4j
@@ -30,7 +30,7 @@ public class PayTimeController {
 	@Autowired
 	private MissionService missionService;
 	@Autowired
-	private PayService payService;
+	private FacadeService facadeService;
 
 	@RequestMapping("/list")
 	public String listPage(@RequestParam(value = "id") Long id, Model model) {
@@ -67,7 +67,7 @@ public class PayTimeController {
 			Long volunteerId = orderService.getById(orderId).getVolunteer().getId();
 			Long payerId = orderService.getById(orderId).getMission().getMember().getId();
 			Mission mission = orderService.getById(orderId).getMission();
-			payService.transaction(hours, volunteerId, payerId, mission, orderId,score);
+			facadeService.transaction(hours, volunteerId, payerId, mission, orderId,score);
 
 		} catch (Exception e) {
 			response.addMessage("付款失敗，" + e.getMessage());

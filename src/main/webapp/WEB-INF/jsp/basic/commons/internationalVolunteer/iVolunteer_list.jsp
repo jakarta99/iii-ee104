@@ -28,7 +28,7 @@ function doSpider(){
 		<!-- heading-breadcrumbs -->
 		<jsp:include page="../commons_layout/commons_heading_breadcrumbs.jsp" />
 		
-		
+		<a href="/commons/InternationalVolunteer/search" >國際志工專區-搜尋</a> 
 		<div id="content">
 			<div class="container">
 				<section class="bar">
