@@ -108,14 +108,15 @@
             </div>
             <div class="row">
               <div class="col-md-8">
-                <p>1234567897</p>
-                <p><p>
                 <div class="heading">
                   <h3>活動資訊</h3>
                 </div>
                 <ul class="ul-icons list-unstyled">
                   <li>
-                    <div class="icon-filled"></div>服務類型:${mission.serviceType}
+                    <div class="icon-filled"></div>服務種類:${mission.serviceType.serviceType}
+                  </li>
+                  <li>
+                    <div class="icon-filled"></div>服務類型:
                   </li>
                   <li>
                     <div class="icon-filled"></div>起迄時間:${mission.startDate} ~ ${mission.endDate}
@@ -123,9 +124,18 @@
                   <li>
                     <div class="icon-filled"></div>需求人數:${mission.peopleNeeded}
                   </li>
+                  <li>
+                    <div class="icon-filled"></div>活動時數:${mission.timeValue}
+                  </li>
+                  <li>
+                    <div class="icon-filled"></div>聯絡人:${mission.contactPerson}
+                  </li>
+                  <li>
+                    <div class="icon-filled"></div>聯絡電話:${mission.contactPhone}
+                  </li>
                 </ul>
               </div>
-              <div class="col-md-4"><img alt="" src="/img/detailsquare.jpg" class="img-fluid rounded-circle"></div>
+              <div class="col-md-4"><img id="missionImg" alt="" src="../../img/${mission.missionPicName}" class="img-fluid rounded-circle"></div>
             </div>
           </section>
           <section class="bar pt-0">
@@ -212,8 +222,13 @@
 
 
 <jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
-	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-	<script type="text/javascript">
+	<script>
+	$(document).ready(function () {
+		
+		
+		
+		
+	})
 	
 	
 	
