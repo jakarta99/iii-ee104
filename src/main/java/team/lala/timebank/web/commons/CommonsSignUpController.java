@@ -296,6 +296,9 @@ public class CommonsSignUpController {
 			try {
 				member.setPassword(encoder.encode(member.getPassword()));
 				Member newMember = memberService.insert(member);
+				log.debug("newMember.getId()={}", newMember.getId());
+				memberService.addRole(newMember.getId(), 2L);	//新增完會員，取得id，才能新增角色
+				
 //				Set<Role> roles = new TreeSet<Role>();
 //				Role role = new Role();
 //				role.setRoleName("user");

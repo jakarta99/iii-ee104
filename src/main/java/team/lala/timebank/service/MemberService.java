@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import team.lala.timebank.dao.MemberDao;
+import team.lala.timebank.dao.RoleDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Role;
 import team.lala.timebank.enums.MemberType;
@@ -26,14 +27,35 @@ public class MemberService {
 	private MemberDao memberDao;
 	@Autowired
 	protected EntityManager em;
+	@Autowired
+	private RoleDao roleDao;
 	
-	 public Member addMemberRole(int memberId, int rolejId) {
-		 	Member member = em.find(Member.class, memberId);
-		    Role role = em.find(Role.class, rolejId);
-		    role.addMember(member);
-		    return member;
-	} 
 	
+    //anchor 註冊會員 增加角色(roleDao.save進資料庫)
+    public Member addRole(Long memberId, Long roleId) {
+    	Member member = em.find(Member.class, memberId);
+        Role role = em.find(Role.class, roleId);
+        role.getMembers().add(member);
+        roleDao.save(role);
+        return member;
+    } 
+	
+	public Member addMemberRole(Long memberId, Long roleId) {
+		Member member = em.find(Member.class, memberId);
+		Role role = em.find(Role.class, roleId);
+		role.addMember(member);
+		return member;
+	}
+	
+	public void deleteMemberRole(Long memberId, Long roleId) {
+		Role role = roleDao.getOne(roleId);
+		Member member = memberDao.getOne(memberId);
+		role.deleteMember(member);
+		roleDao.save(role);
+		memberDao.save(member);
+		 
+		System.out.println("role:deleteMember");
+	}
 	
 	public Member insert(Member newMember) throws SQLException  {
 		if (newMember.getId() != null) {
