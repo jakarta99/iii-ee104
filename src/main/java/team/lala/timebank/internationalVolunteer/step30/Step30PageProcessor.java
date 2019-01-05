@@ -1,5 +1,7 @@
 package team.lala.timebank.internationalVolunteer.step30;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
+import team.lala.timebank.commons.ContinentDistributor;
 import team.lala.timebank.internationalVolunteer.model.InternationalVolunteer;
 import team.lala.timebank.internationalVolunteer.model.InternationalVolunteerService;
 import us.codecraft.webmagic.Page;
@@ -20,8 +23,9 @@ import us.codecraft.webmagic.selector.Html;
 public class Step30PageProcessor implements PageProcessor {
 
 	@Autowired
-	private InternationalVolunteerService internationalVolunteerService;
-
+	private InternationalVolunteerService internationalVolunteerService;	
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");	
+	
 	// 抓取網站的相關配置，包括編碼、抓取間隔、重試次數等
 	private Site site = Site.me().setRetryTimes(20).setSleepTime(100).setCharset("UTF-8");
 
@@ -53,14 +57,14 @@ public class Step30PageProcessor implements PageProcessor {
 		divHtmlList = new Html(divRowsHtml).xpath("div[@class=\"blog-end-date\"]/html()").all();
 		for (String divDate : divHtmlList) {
 			List<String> spanDates = new Html(divDate).xpath("//span/text()").all();
-			endDateList.add(convertDateFormat(spanDates)); // 將日期格式化後存入startDateList
+			endDateList.add(convertDateFormat(spanDates)); // 將日期格式化後存入endDateList
 		}
 		int index;
 		// 項目標題
 		List<String> titleList = new Html(divRowsHtml).xpath("div[@class=\"blog-title\"]/a/text()").all();
 		for (int i = 0; i < titleList.size(); i ++) {
 			if ((index = titleList.get(i).indexOf("愛"))!= -1) {
-				titleList.set(i, titleList.get(i).substring(0, index+1)+".女孩團");
+				titleList.set(i, titleList.get(i).substring(0, index+1)+"女孩團");
 			}
 		}
 		// 項目敘述
@@ -72,36 +76,39 @@ public class Step30PageProcessor implements PageProcessor {
 			}
 		}
 		// 項目地點
-		List<String> placeList = new ArrayList<>();
+		List<String> countryList = new ArrayList<>();
+		List<String> continentList = new ArrayList<>();
 		for (String title : titleList) {
 			if (title.indexOf("月") != -1) {
-				String place = title.split("月")[1].split("[舊愛宣]{1}")[0];
-				placeList.add(place);
+				String country = title.split("月")[1].split("[舊愛宣]{1}")[0];
+				countryList.add(country);
+				continentList.add(ContinentDistributor.getContinentByCountry(country));			
 			}
 		}
-
 		for (int i = 0; i < imgs.size(); i++) {
 			InternationalVolunteer iVolunteer = new InternationalVolunteer();
 			iVolunteer.setPicture(imgs.get(i));
-			iVolunteer.setPlace(placeList.get(i));
+			iVolunteer.setPlace("");
+			iVolunteer.setCountry(countryList.get(i));
+			iVolunteer.setContinent(continentList.get(i));
 			// iVolunteer.setProjectLength("");
 			iVolunteer.setRequirement("無須經驗，沒有特別要求");
 			iVolunteer.setRoleDiscription(discriptionList.get(i));
-			iVolunteer.setStartDate(startDateList.get(i) + " - " + endDateList.get(i));
+			try {
+				iVolunteer.setStartDate(sdf.parse(startDateList.get(i)));
+				iVolunteer.setEndDate(sdf.parse(endDateList.get(i)));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			iVolunteer.setTitle(titleList.get(i));
 			iVolunteer.setOrganization("Step30  舊鞋。救命");
-			iVolunteer.setOrgLogo(page.getHtml().xpath("/html/body/div[1]/header/nav/div/div[1]/a/img/@src")
-					.replace("images", "https://www.step30.org/images").toString());
 			iVolunteer.setWebsiteUrl(page.getUrl().toString());
-			System.out.println(iVolunteer);
 			internationalVolunteerService.insert(iVolunteer);
 		}
 
-		System.out.println("put field end");
 	}
 
 	private String convertDateFormat(List<String> spanDates) {
-
 		if (spanDates.get(1).equalsIgnoreCase("Jan")) {
 			spanDates.set(1, "01");
 		} else if (spanDates.get(1).equalsIgnoreCase("Feb")) {
@@ -127,8 +134,7 @@ public class Step30PageProcessor implements PageProcessor {
 		} else if (spanDates.get(1).equalsIgnoreCase("Dec")) {
 			spanDates.set(1, "12");
 		}
-		String formattedDate = spanDates.get(2) + "/" + spanDates.get(1) + "/" + spanDates.get(0);
-		return formattedDate;
+		return spanDates.get(2) + "/" + spanDates.get(1) + "/" + spanDates.get(0);
 	}
 
 }

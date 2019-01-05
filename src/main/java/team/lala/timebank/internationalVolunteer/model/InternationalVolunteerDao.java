@@ -1,12 +1,10 @@
 package team.lala.timebank.internationalVolunteer.model;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-/**
- * Created by iceyohoo on 2016/10/20.
- */
 
-public interface InternationalVolunteerDao extends JpaRepository<InternationalVolunteer,Long>{
+public interface InternationalVolunteerDao extends JpaRepository<InternationalVolunteer,Long>, JpaSpecificationExecutor<InternationalVolunteer>{
 
-//    HousesDictionaryPlateRecord findByAreaId(Long areaId);
+
 }

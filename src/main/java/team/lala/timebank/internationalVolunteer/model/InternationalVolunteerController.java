@@ -1,22 +1,22 @@
 package team.lala.timebank.internationalVolunteer.model;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.internationalVolunteer.projectsAbroad.ProjectsAbroadPageProcessor;
 import team.lala.timebank.internationalVolunteer.projectsAbroad.ProjectsAbroadPipeline;
 import team.lala.timebank.internationalVolunteer.step30.Step30PageProcessor;
 import team.lala.timebank.internationalVolunteer.vya.VYAPageProcessor;
-import team.lala.timebank.internationalVolunteer.vya.VYAPipeline;
 import team.lala.timebank.internationalVolunteer.waker.WakerPageProcessor;
 import team.lala.timebank.internationalVolunteer.waker.WakerPipeline;
 import us.codecraft.webmagic.Spider;
-
+@Slf4j
 @Controller
 @RequestMapping("/commons/InternationalVolunteer")
 public class InternationalVolunteerController {
@@ -24,34 +24,21 @@ public class InternationalVolunteerController {
 	@Autowired
 	private InternationalVolunteerService internationalVolunteerService;
 	
-	@RequestMapping("search")
+	@RequestMapping("/search")
 	public String searchPage() {
 		return "/basic/commons/internationalVolunteer/iVolunteer_search";
 	}
 
 	@RequestMapping("/list")
-	public String listPage(Model model) {
-		model.addAttribute("IVolunteers", internationalVolunteerService.findAll());
+	public String listPage(InternationalVolunteer iVolunteer, Model model) {
+		log.debug("iVolunteer={}", iVolunteer);
+		Specification<InternationalVolunteer> spec = new InternationalVolunteerSpecification(iVolunteer);
+		model.addAttribute("IVolunteers", internationalVolunteerService.findBySpecification(spec));
 		return "/basic/commons/internationalVolunteer/iVolunteer_list";
 	}
 
-	@RequestMapping("/query")
-	@ResponseBody
-	public List<InternationalVolunteer> query() {
-		return internationalVolunteerService.findAll();
-	}
-	
-	
-	
-	
-	@RequestMapping("/test")
-	public String test() {
-		return "/basic/commons/internationalVolunteer/test";
-	}
-	
-	
-	//此方法作用spiderScheduler的方法相同，爬蟲功能透過url執行
-	//成功
+
+	//此方法作用spiderScheduler的方法相同，client端發出request才執行爬蟲功能
 	@Autowired
 	private ProjectsAbroadPipeline projectsAbroadPipeline;
 	@Autowired
@@ -65,14 +52,15 @@ public class InternationalVolunteerController {
 	@ResponseBody
 	@RequestMapping("/spidertest")
 	public String iVolunteerSpider(Model model) {
+		internationalVolunteerService.deleteAll();
 		System.out.println("----開始執行國際志工文章爬蟲定時任務");
 		Spider spider = Spider.create(projectsAbroadPageProcessor);
-		spider.addUrl("https://www.projects-abroad.com.tw/volunteer-projects/").addPipeline(projectsAbroadPipeline)
-				.thread(5).setExitWhenComplete(true).start();
-		
+		spider.addUrl("https://www.projects-abroad.com.tw/volunteer-projects/")
+				.addPipeline(projectsAbroadPipeline)
+				.thread(5).setExitWhenComplete(true).start();		
 		spider = Spider.create(step30PageProcessor);
 		spider.addUrl("https://www.step30.org/action_explain.php?select=1")
-			.thread(5).setExitWhenComplete(true).start();
+				.thread(5).setExitWhenComplete(true).start();
 		spider = Spider.create(vyaPageProcessor);
 		spider.addUrl("http://www.volunteermatch.org.tw/IW/3-1-group-pariticipant.htm")
 				.thread(5).setExitWhenComplete(true).start();		
@@ -121,8 +109,7 @@ public class InternationalVolunteerController {
 	}
 	
 	//成功
-		@Autowired
-		private VYAPipeline vyaPipeline;
+
 		
 		@ResponseBody
 		@RequestMapping("/spidertest4")
