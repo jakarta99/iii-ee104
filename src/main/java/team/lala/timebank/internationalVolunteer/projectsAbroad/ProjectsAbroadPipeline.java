@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ContinentDistributor;
-import team.lala.timebank.internationalVolunteer.model.InternationalVolunteer;
-import team.lala.timebank.internationalVolunteer.model.InternationalVolunteerService;
+import team.lala.timebank.entity.InternationalVolunteer;
+import team.lala.timebank.service.InternationalVolunteerService;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.pipeline.Pipeline;
 

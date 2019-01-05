@@ -1,4 +1,4 @@
-package team.lala.timebank.internationalVolunteer.model;
+package team.lala.timebank.entity;
 
 import java.util.Date;
 

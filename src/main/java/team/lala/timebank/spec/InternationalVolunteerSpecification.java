@@ -1,4 +1,4 @@
-package team.lala.timebank.internationalVolunteer.model;
+package team.lala.timebank.spec;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -11,6 +11,8 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
+
+import team.lala.timebank.entity.InternationalVolunteer;
 
 
 @SuppressWarnings("serial")
