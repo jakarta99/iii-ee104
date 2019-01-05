@@ -41,23 +41,6 @@
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
 	<script>
 	$(document).ready(function(){
-		  var orderEvents = [];
-// 		 $.ajax({
-// 			    url: "/user/getOrder",
-// 			    method: "GET",
-// 			    datatype: "json",
-// 			  }).done(function(response) {
-// 				  $.each(response, function(idx, order) {
-// 					  orderEvents.push({
-// 				        start: order.mission.startDate,
-// 				        end: order.mission.endDate,
-// 				        title: order.mission.title
-// 				      });
-// 				  });
-// 			  });
-// 		JSON.stringify(orderEvents);
-// 		console.log(orderEvents)
-
 	  $('#calendar').fullCalendar({
 		  header: {
 			  left: 'month,agendaWeek,agendaDay',
@@ -74,25 +57,29 @@
 			  prev: '«', next: '»', prevYear: ' << ', nextYear: ' >> ',
 			  today: '今天', month: '月', week: '周', day: '日'
 			  },
-		  events:  [ { title : 'event1', start : '2018-11-01', end : '2018-12-30' }, {} ]
-// 			  function(callback) {
-// 			  orderEvents = [];
-// 			  $.ajax({
-// 				    url: "/user/getOrder",
-// 				    method: "GET",
-// 				    datatype: "json",
-// 				  }).done(function(response) {
-// 					  $.each(response, function(idx, order) {
-// 						  orderEvents.push({
-// 					        title: order.mission.title
-// 					        start: order.mission.startDate,
-// 					        end: order.mission.endDate,
-// 					      });
-// 					  });
-// 					  console.log(orderEvents)
-// 					return orderEvents;
-// 				  });
-// 			  }
+		  events: function(start, end, timezone, callback) {
+			  $.ajax({
+				  url: '/user/getOrder',
+				  success: function(data) {
+					  var events = [];
+					  $.each(data, function(idx){
+						  events.push({
+							  title: data[idx].mission.title,
+							  start: data[idx].mission.startDate,
+							  end: data[idx].mission.endDate
+						  });
+					  });
+					  callback(events);
+				  }
+			  })
+		  },
+		  eventClick: function(event, jsEvent, view){
+				alert('Event:' + event.title);
+				console.log(jsEvent);
+				console.log(view);
+			},
+		  eventColor: 'yellow',
+		  eventTextColor: 'black',
 		});
 	})
 	</script>
