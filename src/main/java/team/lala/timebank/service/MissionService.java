@@ -39,8 +39,6 @@ public class MissionService {
 	private OrderService orderService;
 	@Autowired
 	private SystemMessageService systemMessageService;
-	@Autowired
-	private MissionService missionService;
 	// list for everyone
 	public Page<Mission> findByStatusAndSpecification(Mission inputMission, PageRequest pageRequest) {
 		inputMission.setMissionStatusTransient("New");

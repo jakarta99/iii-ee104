@@ -93,7 +93,7 @@ public class Mission {
 	@Column(name = "CONTACT_EMAIL", nullable = false, length = 20)
 	private String contactEmail;
 
-	@Column(name = "DISCRIPTION", nullable = false, length = 300)
+	@Column(name = "DISCRIPTION", nullable = false, length = 1000)
 	private String discription;
 
 	@Column(name = "COUNTY", nullable = false)
