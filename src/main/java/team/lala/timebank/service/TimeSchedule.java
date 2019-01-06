@@ -40,7 +40,7 @@ public class TimeSchedule {
 	private OrderService orderService;
 	
 	//測試　 
-	@Scheduled(cron = "0 0/2 * * * *") //(cron = "0 0 1 * * ?")每天一點執行
+//	@Scheduled(cron = "0 0/2 * * * *") //(cron = "0 0 1 * * ?")每天一點執行
 	public void updateStatus() {
 
 		Mission inputMission = new Mission();
