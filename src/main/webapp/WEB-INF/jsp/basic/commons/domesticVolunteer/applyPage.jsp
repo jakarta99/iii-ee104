@@ -83,13 +83,13 @@
         <div class="container">
           <div class="row d-flex align-items-center flex-wrap">
             <div class="col-md-7">
-              <h1 class="h2">${mission.title}</h1>
+              <h1 class="h2" align="center" style=color:brown>${mission.title}</h1>
             </div>
             <div class="col-md-5">
               <ul class="breadcrumb d-flex justify-content-end">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item"><a href="team.html">Our Team</a></li>
-                <li class="breadcrumb-item active">Team Member</li>
+                <li class="breadcrumb-item"><a href="index.html">首頁</a></li>
+                <li class="breadcrumb-item"><a href="team.html">志工招募</a></li>
+                <li class="breadcrumb-item active">招募申請</li>
               </ul>
             </div>
           </div>
@@ -103,134 +103,69 @@
                 <div class="heading">
                   <h2>活動介紹</h2>
                 </div>
-                <p class="lead">${mission.discription}</p>
-              </div>
+                <p align="center" class="lead">${mission.discription}
+				</div>
             </div>
             <div class="row">
               <div class="col-md-8">
                 <div class="heading">
                   <h3>活動資訊</h3>
                 </div>
-                <ul class="ul-icons list-unstyled">
-                  <li>
-                    <div class="icon-filled"></div>服務種類:${mission.serviceType.serviceType}
-                  </li>
-                  <li>
-                    <div class="icon-filled"></div>服務類型:
-                  </li>
-                  <li>
-                    <div class="icon-filled"></div>起迄時間:${mission.startDate} ~ ${mission.endDate}
-                  </li>
-                  <li>
-                    <div class="icon-filled"></div>需求人數:${mission.peopleNeeded}
-                  </li>
-                  <li>
-                    <div class="icon-filled"></div>活動時數:${mission.timeValue}
-                  </li>
-                  <li>
-                    <div class="icon-filled"></div>聯絡人:${mission.contactPerson}
-                  </li>
-                  <li>
-                    <div class="icon-filled"></div>聯絡電話:${mission.contactPhone}
-                  </li>
-                </ul>
+				<ul class="ul-icons list-unstyled">
+					<li>
+						<div class="icon-filled"></div>活動地點:${mission.county}${mission.district}${mission.address}
+					</li>
+					<li>
+						<div class="icon-filled"></div>服務種類:${mission.serviceType.serviceType}
+					</li>
+					<li>
+						<div class="icon-filled"></div>服務類型:
+							<c:if test="${mission.termType == 'L'}"> 
+								長期
+							</c:if> 
+							<c:if test="${mission.termType == 'S'}"> 
+								短期
+							</c:if>
+					</li>
+					<li>
+						<div class="icon-filled"></div>起迄時間:${mission.startDate} ~ ${mission.endDate}
+					</li>
+					<li>
+						<div class="icon-filled"></div>需求人數:${mission.peopleNeeded}人
+					</li>
+					<li>
+						<div class="icon-filled"></div>活動時數:${mission.timeValue}小時
+					</li>
+					<li>
+						<div class="icon-filled"></div>聯絡人:${mission.contactPerson}
+					</li>
+					<li>
+						<div class="icon-filled"></div>聯絡電話:${mission.contactPhone}
+					</li>
+					<li>
+						<div class="icon-filled"></div>聯絡Email:  ${mission.contactEmail}
+					</li>
+				</ul>
+				<div class="col-md-12 text-center">
+					<button onclick="insetOrder()" class="btn btn-template-outlined"><i class="fa fa-plus"></i>我要參加</button>
+				</div>
               </div>
               <div class="col-md-4"><img id="missionImg" alt="" src="../../img/${mission.missionPicName}" class="img-fluid rounded-circle"></div>
             </div>
           </section>
-          <section class="bar pt-0">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="heading">
-                  <h3>Get in touch with Han</h3>
-                </div>
-                <ul class="social list-inline">
-                  <li class="list-inline-item"><a href="#" class="external facebook"><i class="fa fa-facebook"></i></a></li>
-                  <li class="list-inline-item"><a href="#" class="external gplus"><i class="fa fa-google-plus"></i></a></li>
-                  <li class="list-inline-item"><a href="#" class="external twitter"><i class="fa fa-twitter"></i></a></li>
-                  <li class="list-inline-item"><a href="#" class="email"><i class="fa fa-envelope"></i></a></li>
-                </ul>
-              </div>
-              <div class="col-md-4">
-                <div class="heading">
-                  <h3>Han's presentations</h3>
-                </div>
-                <ul class="ul-icons list-unstyled">
-                  <li>
-                    <div class="icon-filled"><i class="fa fa-check"></i></div><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</a>
-                  </li>
-                  <li>
-                    <div class="icon-filled"><i class="fa fa-check"></i></div><a href="#">Aliquam tincidunt mauris eu risus.</a>
-                  </li>
-                  <li>
-                    <div class="icon-filled"><i class="fa fa-check"></i></div><a href="#">Vestibulum auctor dapibus neque.</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-md-4">
-                <div class="heading">
-                  <h3>Han's articles</h3>
-                </div>
-                <ul class="ul-icons list-unstyled">
-                  <li>
-                    <div class="icon-filled"><i class="fa fa-check"></i></div><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</a>
-                  </li>
-                  <li>
-                    <div class="icon-filled"><i class="fa fa-check"></i></div><a href="#">Aliquam tincidunt mauris eu risus.</a>
-                  </li>
-                  <li>
-                    <div class="icon-filled"><i class="fa fa-check"></i></div><a href="#">Vestibulum auctor dapibus neque.</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </section>
+ 
         </div>
-        <section class="bar bg-gray">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="heading text-center">
-                  <h2>Clients Han is taking care of</h2>
-                </div>
-                <ul class="list-unstyled owl-carousel customers no-mb">
-                  <li class="item"><img src="img/customer-1.png" alt="" class="img-fluid"></li>
-                  <li class="item"><img src="img/customer-2.png" alt="" class="img-fluid"></li>
-                  <li class="item"><img src="img/customer-3.png" alt="" class="img-fluid"></li>
-                  <li class="item"><img src="img/customer-4.png" alt="" class="img-fluid"></li>
-                  <li class="item"><img src="img/customer-5.png" alt="" class="img-fluid"></li>
-                  <li class="item"><img src="img/customer-6.png" alt="" class="img-fluid"></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-      <!-- GET IT-->
-      <div class="get-it">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-8 text-center p-3">
-              <h3>Do you want cool website like this one?</h3>
-            </div>
-            <div class="col-lg-4 text-center p-3">   <a href="#" class="btn btn-template-outlined-white">Buy this template now</a></div>
-          </div>
-        </div>
-      </div>
-
+	 </div>
 
 
 
 <jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script>
-	$(document).ready(function () {
-		
-		
-		
-		
-	})
-	
-	
+	function insetOrder(missionId){
+		$.get(
+				url:"/user/volunteerRecruitment/insert?missionId=" + missionId,
+				)
+	}
 	
 	
 	</script>

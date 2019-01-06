@@ -125,12 +125,12 @@ public class AdminPenaltyController {
 		excelModel.put("sheetname", "PenaltiesSheet");
 		
 		// Headers List
-		List<String> headers = penaltyService.getPenaltyExcelHeaders();
+		List<String> headers = penaltyService.getPenaltyExcelAndPdfHeaders();
 		excelModel.put("headers", headers);
 		
 		// Results Table (List<Object[]>)
 		PenaltySpecification penaltySpec = new PenaltySpecification(inputPenalty);
-		List<List<String>> results= penaltyService.findAllBySpecificationForExcel(penaltySpec);
+		List<List<String>> results= penaltyService.findAllBySpecificationForExcelAndPdf(penaltySpec);
 		excelModel.put("results", results);
 		
 		response.setContentType("application/ms-excel");
@@ -139,26 +139,5 @@ public class AdminPenaltyController {
 		return new ModelAndView(new ExcelView(), excelModel);
 	}
 	
-//	//測PDF
-//	@RequestMapping(value = "/pdfreport", method = RequestMethod.GET,
-//            produces = MediaType.APPLICATION_PDF_VALUE)
-//    public ResponseEntity<InputStreamResource> citiesReport(Penalty inputPenalty) throws IOException {
-//
-////        List<City> cities = (List<City>) cityService.findAll();
-//        PenaltySpecification penaltySpec = new PenaltySpecification(inputPenalty);
-////		List<String> results= penaltyService.findAllBySpecificationForExcel(penaltySpec);
-//		
-//		
-////        ByteArrayInputStream bis = GeneratePdfReport.citiesReport(cities);
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.add("Content-Disposition", "inline; filename=citiesreport.pdf");
-//
-////        return ResponseEntity
-////                .ok()
-////                .headers(headers)
-////                .contentType(MediaType.APPLICATION_PDF)
-////                .body(new InputStreamResource(bis));
-//    }
-//
+
 }

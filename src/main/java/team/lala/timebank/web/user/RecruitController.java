@@ -18,22 +18,22 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
+import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.ServiceType;
-import team.lala.timebank.entity.SystemMessage;
-import team.lala.timebank.enums.SystemMessageType;
+import team.lala.timebank.service.MemberService;
 import team.lala.timebank.service.MissionService;
 import team.lala.timebank.service.OrderService;
 import team.lala.timebank.service.ServiceTypeService;
 import team.lala.timebank.service.SystemMessageService;
-import team.lala.timebank.spec.MissionSpecification;
 
 @Slf4j
 @RequestMapping("/user/volunteerRecruitment")
 @Controller
 public class RecruitController {
-
+	@Autowired
+	private MemberService memberService;
 	@Autowired
 	private ServiceTypeService serviceTypeService;
 	@Autowired
@@ -52,12 +52,11 @@ public class RecruitController {
 	@RequestMapping("/query")
 	@ResponseBody
 	public Page<Mission> getMemberMission(Mission inputMission, Principal principal,
-			@RequestParam(value = "start", required = false) Optional<Integer> start,
+			@RequestParam(value = "page", required = false) Optional<Integer> page,
 			@RequestParam(value = "length", required = false) Optional<Integer> length) {
-		int page = start.orElse(0) / length.orElse(10);
 
 		Page<Mission> missions = missionService.findByMemberAndSpecification(principal, inputMission,
-				PageRequest.of(page, length.orElse(10)));
+				PageRequest.of(page.orElse(0), length.orElse(10)));
 		return missions;
 	}
 
@@ -141,5 +140,16 @@ public class RecruitController {
 
 		return "/basic/user/volunteerRecruitment/mission_list";
 	}
+	@RequestMapping("/insert")
 
+	public String insertOrder (Principal principal, @RequestParam("missionId") Long missionId) {
+		try {
+			Mission mission = missionService.getOne(missionId);
+			Member member = memberService.findByAccount(principal.getName());
+			orderService.insert(mission, member);
+		}catch(Exception e) {
+			return "/basic/commons/login";
+		}
+		return "/user/volunteerApplication/applicationPage";
+	}
 }

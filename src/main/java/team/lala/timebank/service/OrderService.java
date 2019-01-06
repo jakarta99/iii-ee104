@@ -159,6 +159,15 @@ public class OrderService {
 		order.setVolunteerApplyTime(new java.util.Date());
 		return orderDao.save(order);
 	}
+	//Roy 志工申請任務 新增order
+	public Order insert(Mission mission, Member volunteer) {
+		Order order = new Order();
+		order.setVolunteer(volunteer);
+		order.setOrderStatus(OrderStatus.VolunteerApply);
+		order.setMission(mission);
+		order.setVolunteerApplyTime(new java.util.Date());
+		return orderDao.save(order);
+	}
 
 	public Order update(Order order) {
 		Order dbOrder = orderDao.getOne(order.getId());

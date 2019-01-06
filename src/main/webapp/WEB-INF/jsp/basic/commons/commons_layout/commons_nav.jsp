@@ -184,8 +184,12 @@
       </header>
  
  <script>
-	//顯示系統訊息未讀數量
- 	checkMailBox();
+	//登入後，顯示系統訊息未讀數量
+ 	if($("#loginName").html() != undefined){ //$("#loginName")來自commons_t0p-bar
+ 		checkMailBox();
+ 	}
+	
+	
 	function checkMailBox(){
 		$.ajax({
 			type:"get",
