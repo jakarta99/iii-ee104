@@ -56,12 +56,8 @@ public class PdfView extends AbstractITextPdfView {
 	        
 	        
 	        //塞入資料
-	        //如有中文，必須指明中文字體
-//	        BaseFont bf = BaseFont.createFont("/SIMYOU.TTF", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
-//	        BaseFont bfChinese = BaseFont.createFont( "STSongStd-Light" ,"UniGB-UCS2-H",BaseFont.NOT_EMBEDDED);
-//	        BaseFont bfChinese = BaseFont.createFont("STSong-Light", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
-	        
-	        BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H",BaseFont.NOT_EMBEDDED,true);
+	        //如有中文，必須指明中文字體	        
+	        BaseFont bfChinese = BaseFont.createFont("C:\\WINDOWS\\Fonts\\KAIU.TTF", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
 	        
 	        Font chineseFont = new Font(bfChinese, 12, Font.NORMAL ); 
 	        PdfPCell contentCell = new PdfPCell();
