@@ -72,9 +72,9 @@
 	<article>
 		<fieldset style="width:1300px">
 			<div class="btn-group" style="margin-bottom: 20px">
-			  <button type="button" class="btn btn-info" id="notRead">未讀</button>
-			  <button type="button" class="btn btn-outline-info" id="alreadyRead" name="HI">已讀</button>
-			  <button type="button" class="btn btn-outline-info" id="allMessages">全部訊息</button>
+<!-- 			  <button type="button" class="btn btn-info" id="notRead">未讀</button> -->
+<!-- 			  <button type="button" class="btn btn-outline-info" id="alreadyRead" name="HI">已讀</button> -->
+<!-- 			  <button type="button" class="btn btn-outline-info" id="allMessages">全部訊息</button> -->
 			</div>
 	
 			<form action="/system-message/selectMsgsAsRead" method="post" onSubmit="return checkForm();">
@@ -82,11 +82,11 @@
 					<thead>
 						<tr style="background-color: white">
 							<th scope="col"></th>
+<!-- 							<th scope="col" width="50px"> -->
+<!-- 								<input type="checkbox" style="display:inline;" name="CheckAll" value="全選" id="CheckAll" /> -->
+<!-- 							</th> -->
 							<th scope="col" width="50px">
-								<input type="checkbox" style="display:inline;" name="CheckAll" value="全選" id="CheckAll" />
-							</th>
-							<th scope="col" width="50px">
-								<input id="submit" style="display:inline;" type="submit" value="標記已讀" class="btn btn-outline-info btn-sm"/>
+<!-- 								<input id="submit" style="display:inline;" type="submit" value="標記已讀" class="btn btn-outline-info btn-sm"/> -->
 							</th>
 							<th scope="col">訊息時間</th>
 							<th scope="col">訊息類型</th>
@@ -110,7 +110,9 @@
 	<script>
 
 		var dataTable;
-		var readStatus = "N";
+		var readStatus = "";
+		
+		//暫不用此方法。
 		function getMessageId(msgId){
 			$.ajax({
 				url : "/system-message/readMessage",
@@ -183,17 +185,19 @@
 					$('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
 				}, columns: [ 		//DataTable:設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
 		     		{data:null},
-		     		{data:function(data){
-		     			var checkBox = ""
-		     			if(data.readStatus=="N"){
-		     				checkBox = "<input type='checkbox' name='msgChecked[]' value='" + data.id +"'>";
-		     			}
-		     			return checkBox;} 
-		     		},//勾選欄位
+// 		     		{data:function(data){
+// 		     			var checkBox = ""
+// 		     			if(data.readStatus=="N"){
+// 		     				checkBox = "<input type='checkbox' name='msgChecked[]' value='" + data.id +"'>";
+// 		     			}
+// 		     			return checkBox;} 
+// 		     		},//勾選欄位
 		           	{data: function (data) {
 		           		var readButt = "";
-		           		readButt = "<input type='button' class=\"btn btn-info btn-sm\" name='readButt'"+
-		           					"value='閱讀訊息' onclick='getMessageId(" + data.id + ")'/>";
+		           		if(data.messageType=="Penalty"){
+		           			readButt = "<input type='button' class=\"btn btn-info btn-sm\" name='complaintButt'"+
+           						"value='申訴' onclick='#'/>";
+		           		}
 		               	return readButt;	}
 		           	},
 		           	{data:null, render:function(data, type, row){
@@ -212,6 +216,8 @@
 				}], order: [[1, 'asc']]   
 			 });
 			
+			
+			
 			dataTable.on('draw.dt',function() {
 				dataTable.column(0, {
 	                search:'applied',
@@ -224,6 +230,7 @@
 	                var columnIndex = (i+pageno*length);	//DataTable:行号等于 页数*每页数据长度+行号
 	                cell.innerHTML = columnIndex;
 	            });
+				checkMailBox(); //刷新nav上的系統訊息數字
 	        });
 			
 			
@@ -241,7 +248,7 @@
 			$("#dateBefore").datepicker(datePickerSetting);
 			$("#dateAfter").datepicker(datePickerSetting);
 			
-			
+			//暫不用以下方法
 			//按下已讀未讀信件
 			$("#allMessages").click(function(){
 				readStatus="";
@@ -270,7 +277,7 @@
 				$("#notRead").attr('class', 'btn btn-outline-info');
 			})
 			
-			
+			//暫不用以下方法
 			//全選訊息
 			$("#CheckAll").click(function(){
 				   if($("#CheckAll").prop("checked")){//如果全選按鈕有被選擇的話（被選擇是true）
@@ -288,7 +295,7 @@
 
 		})
 						
-		
+		//暫不用以下方法
 		//如果未勾選任何一筆訊息，則按下"標記已讀"不會呼叫controller
 		function checkForm(){
 			var checkItemNum = 0;
