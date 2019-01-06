@@ -162,15 +162,6 @@ public class PenaltyService {
 		return penaltyDao.save(dbPenalty);
 	}
 
-//	public SXSSFWorkbook getPenaltyListExcel(Specification<Penalty> specification) throws JSONException {
-//		// 字段名Key
-//		List<String> fieldNames = new ArrayList<>();
-//		fieldNames.add("ID");
-//		fieldNames.add("欄位測試一");
-//		List<Penalty> penaltyList = findAllBySpecification(specification);
-//		SXSSFWorkbook workbook = POIUtil.export("測試測試", penaltyList, fieldNames);
-//		return workbook;
-//	}
 
 	public Penalty save(Penalty penalty) {
 		penalty.setUpdateDate(new java.util.Date());
@@ -199,8 +190,8 @@ public class PenaltyService {
 		return penalty;
 	}
 
-	//Excel報表用 (待問，無法直接用List<Penalty>寫出Excel，用了jackson也無助於寫出Excel的無窮迴圈問題)
-	public List<List<String>> findAllBySpecificationForExcel(Specification<Penalty> specification) {
+	//Excel、PDF報表用
+	public List<List<String>> findAllBySpecificationForExcelAndPdf(Specification<Penalty> specification) {
 		List<Penalty> penalties = penaltyDao.findAll(specification);
 		
 		List<List<String>> results = new ArrayList<List<String>>();
@@ -211,8 +202,8 @@ public class PenaltyService {
 		return results;
 	}
 	
-	//Excel報表用(產表頭)
-	public List<String> getPenaltyExcelHeaders(){
+	//Excel、PDF報表用(產表頭)
+	public List<String> getPenaltyExcelAndPdfHeaders(){
 		List<String> headers = new ArrayList<String>();
 		headers.add("PENALTY_ID");
 		headers.add("MISSION_START_DATE");

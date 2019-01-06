@@ -112,6 +112,10 @@
 			  	<a class="btn btn-secondary" href="#" 
 						id="excelButt" >產製報表(EXCEL)</a>
 			  </div>
+			  <div>
+			  	<a class="btn btn-secondary" href="#" 
+						id="pdfButt" >產製報表(PDF)</a>
+			  </div>
 			  
 			</div>
 			
@@ -303,7 +307,12 @@
 				$(this).attr("href", "/penalty/penaltyExcel?" + $('form').serialize())
 			})
 			
-
+			//產製PDF報表功能之按鈕
+			$("#pdfButt").click(function(){
+				$(this).attr("href", "/penalty/penaltyPDF?" + $('form').serialize())
+			})
+			
+			
 		})
 						
 
