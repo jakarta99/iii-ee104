@@ -199,10 +199,16 @@
 								<div class="remark">(1.不可空白，2.至少2個字以上，3.必須全部為中文)</div>
 							</div>
 							<div class="block">
-								<label for="idOrgContactPersonPhone">聯絡人電話:</label> 
-								<input type="text" value="${param.orgContactPersonPhone}" id="idOrgContactPersonPhone" name="orgContactPersonPhone" autofocus autocompelete="off">
-								<span id="idspOrgContactPersonPhone" style='color:red'></span>
-								<div class="remark">(格式需為09XX-XXX-XXX或為0X-XXXXXXXX)</div>
+								<label for="idOrgContactPersonTel">聯絡人電話:</label> 
+								<input type="text" value="${param.orgContactPersonTel}" id="idOrgContactPersonTel" name="orgContactPersonTel" autofocus autocompelete="off">
+								<span id="idspOrgContactPersonTel" style='color:red'></span>
+								<div class="remark">(格式需為0X-XXXXXXXX)</div>
+							</div>
+							<div class="block">
+								<label for="idOrgContactPersonMobile">聯絡人手機:</label> 
+								<input type="text" value="${param.orgContactPersonMobile}" id="idOrgContactPersonMobile" name="orgContactPersonMobile" autofocus autocompelete="off">
+								<span id="idspOrgContactPersonMobile" style='color:red'></span>
+								<div class="remark">(格式需為09XX-XXX-XXX)</div>
 							</div>
 							<div class="block">
 								<label for="idOrgWebsiteLink">網址:</label>
@@ -237,11 +243,6 @@
 	document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("idAccount").addEventListener("keyup", chkAccount);
     });
-	
-	
-	
-	
-	
     function chkAccount() {
         var theAccount = document.getElementById("idAccount").value;
         var theAccountLen = theAccount.length;
@@ -616,14 +617,27 @@
 	    }
 	    
 	    document.addEventListener("DOMContentLoaded", function () {
-	        document.getElementById("idOrgContactPersonPhone").addEventListener("keyup", chkPhone);
+	        document.getElementById("idOrgContactPersonTel").addEventListener("keyup", chkOrgContactPersonTel);
 	    });
-	    function chkPhone(){
-	    	var strPhone = document.getElementById("idOrgContactPersonPhone").value;
-	        var msgChk = document.getElementById("idspOrgContactPersonPhone");
-	        var mobileReg = /^09[0-9]{2}-[0-9]{3}-[0-9]{3}$/;
+	    function chkOrgContactPersonTel(){
+	    	var strPhone = document.getElementById("idOrgContactPersonTel").value;
+	        var msgChk = document.getElementById("idspOrgContactPersonTel");
 	    	var telephoneReg = /^[0-9]{2}-[0-9]{6,8}$/;
-	    	if(!mobileReg.test(strPhone) && !telephoneReg.test(strPhone)){
+	    	if(!telephoneReg.test(strPhone)){
+	    		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>電話號碼不正確，請重新輸入</span>";
+	    	}else{
+	    		msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+	    	}
+	    }
+	    
+	    document.addEventListener("DOMContentLoaded", function () {
+	        document.getElementById("idOrgContactPersonMobile").addEventListener("keyup", chkOrgContactPersonMobile);
+	    });
+	    function chkOrgContactPersonMobile(){
+	    	var strPhone = document.getElementById("idOrgContactPersonMobile").value;
+	        var msgChk = document.getElementById("idspOrgContactPersonMobile");
+	        var mobileReg = /^09[0-9]{2}-[0-9]{3}-[0-9]{3}$/;
+	    	if(!mobileReg.test(strPhone)){
 	    		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>電話號碼不正確，請重新輸入</span>";
 	    	}else{
 	    		msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
@@ -737,6 +751,24 @@
 							}
 							if (message =="手機格式錯誤"){
 								$("#idspMobile").html(message);
+							}
+							if (message =="創辦人格式錯誤"){
+								$("#idspOrgFounder").html(message);
+							}
+							if (message =="執行長格式錯誤"){
+								$("#idspOrgCeo").html(message);
+							}
+							if (message =="聯絡人格式錯誤"){
+								$("#idspOrgContactPerson").html(message);
+							}
+							if (message =="聯絡人電話格式錯誤"){
+								$("#idspOrgContactPersonTel").html(message);
+							}
+							if (message =="聯絡人手機格式錯誤"){
+								$("#idspOrgContactPersonMobile").html(message);
+							}
+							if (message =="網址格式錯誤"){
+								$("#idspOrgWebsiteLink").html(message);
 							}
 							
 							if (message == "資料有誤"){

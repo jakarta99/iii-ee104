@@ -78,6 +78,12 @@ public class CommonsSignUpController {
 		boolean fEmail = false;
 		boolean fTelephone = false;
 		boolean fMobile = false;
+		boolean fOrgFounder = false;
+		boolean fOrgCeo = false;
+		boolean fOrgContactPerson = false;
+		boolean fOrgContactPersonTel = false;
+		boolean fOrgContactPersonMobile = false;
+		boolean fOrgWebsiteLink = false;
 
 		log.debug("member={}", member);
 //		AjaxResponse<Member> response = new AjaxResponse<Member>();
@@ -285,30 +291,142 @@ public class CommonsSignUpController {
 		}else {
 			fMobile = true;
 		}
+		
+		//檢查 公司資料
+		if(member.getMemberType() == MemberType.O) {
+			//創辦人
+			if (member.getOrgFounder() != null && member.getOrgFounder().trim().length() >= 2) {
+				// 檢查必須全部為中文
+				for (int i = 0; i < member.getOrgFounder().length(); i++) {
+					String test = member.getOrgFounder().substring(i, i + 1);
+					if (test.matches("[\\u4E00-\\u9FA5]")) {
+						fOrgFounder = true;
+					}
+				}
+			}else {
+				log.debug("創辦人XXX");
+				response.addMessage("創辦人格式錯誤");
+			}
+			//執行長
+			if (member.getOrgCeo() != null && member.getOrgCeo().trim().length() >= 2) {
+				// 檢查必須全部為中文
+				for (int i = 0; i < member.getOrgCeo().length(); i++) {
+					String test = member.getOrgCeo().substring(i, i + 1);
+					if (test.matches("[\\u4E00-\\u9FA5]")) {
+						fOrgCeo = true;
+					}
+				}
+			}else {
+				log.debug("執行長XXX");
+				response.addMessage("執行長格式錯誤");
+			}
+			//聯絡人
+			if (member.getOrgContactPerson() != null && member.getOrgContactPerson().trim().length() >= 2) {
+				// 檢查必須全部為中文
+				for (int i = 0; i < member.getOrgContactPerson().length(); i++) {
+					String test = member.getOrgContactPerson().substring(i, i + 1);
+					if (test.matches("[\\u4E00-\\u9FA5]")) {
+						fOrgContactPerson = true;
+					}
+				}
+			}else {
+				log.debug("聯絡人XXX");
+				response.addMessage("聯絡人格式錯誤");
+			}
+			//聯絡人電話
+			if(member.getOrgContactPersonTel() != null && member.getOrgContactPersonTel().trim().length() != 0) {
+				String regex = "^[0-9]{2}-[0-9]{6,8}$";
+				Pattern p = Pattern.compile(regex);
+				if (p.matcher(member.getOrgContactPersonTel()).find()) {
+					fOrgContactPersonTel = true;
+				}else {
+					log.debug("聯絡人電話XXX");
+					response.addMessage("聯絡人電話格式錯誤");
+				}
+			}else {
+				fOrgContactPersonTel = true;
+			}
+			//聯絡人手機
+			if(member.getOrgContactPersonMobile() != null && member.getOrgContactPersonMobile().trim().length() != 0) {
+				String regex = "^09[0-9]{2}-[0-9]{3}-[0-9]{3}$";
+				Pattern p = Pattern.compile(regex);
+				if (p.matcher(member.getOrgContactPersonMobile()).find()) {
+					fOrgContactPersonMobile = true;
+				}else {
+					log.debug("聯絡人手機XXX");
+					response.addMessage("聯絡人手機格式錯誤");
+				}
+			}else {
+				fOrgContactPersonMobile = true;
+			}
+			//網址
+			if(member.getOrgWebsiteLink() != null && member.getOrgWebsiteLink().trim().length() != 0) {
+				String regex = "^((https|http|ftp|rtsp|mms)?://)"
+			    	   	+ "?(([0-9a-zA-Z_!~*'().&=+$%-]+: )?[0-9a-zA-Z_!~*'().&=+$%-]+@)?" //ftp的user@
+			    	   	+ "(([0-9]{1,3}.){3}[0-9]{1,3}" // IP URL- 123.123.123.123
+			    	   	+ "|" // allow IP和DOMAIN
+				    	+ "([0-9a-zA-Z_!~*'()-]+.)*" // DOMAIN- www.
+				    	+ "([0-9a-zA-Z][0-9a-zA-Z-]{0,61})?[0-9a-zA-Z]." // second DOMAIN
+				    	+ "[a-z]{2,6})" // first level domain- .com or .museum
+				    	+ "(:[0-9]{1,4})?" // port- :80
+				    	+ "((/?)|" // a slash isn't required if there is no file name
+				    	+ "(/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+/?)$";
+				Pattern p = Pattern.compile(regex);
+				if (p.matcher(member.getOrgWebsiteLink()).find()) {
+					fOrgWebsiteLink = true;
+				}else {
+					log.debug("網址XXX");
+					response.addMessage("網址格式錯誤");
+				}
+			}else {
+				fOrgWebsiteLink = true;
+			}
+		}
 
 		
 		//要放在驗證資料之後
 		if( fAccount && fAccountD && fPassword && fName && fIdNumber 
 				/*&& fDate*/ && fEmail && fTelephone && fMobile) {
-			try {
-				member.setPassword(encoder.encode(member.getPassword()));
-				Member newMember = memberService.insert(member);
-				log.debug("newMember.getId()={}", newMember.getId());
-				memberService.addRole(newMember.getId(), 2L);	//新增完會員，取得id，才能新增角色
-				
-//				Set<Role> roles = new TreeSet<Role>();
-//				Role role = new Role();
-//				role.setRoleName("user");
-//				roles.add(role);
-//				member.setRoles(roles);
-				
-//				result.put("member", newMember);
-//				response.setObj(result);
-				response.setObj(newMember);
-				log.debug("新增成功");
-			} catch (Exception e) {
-				response.addMessage("新增失敗" + e.getMessage());
-				e.printStackTrace();
+			if(member.getMemberType() == MemberType.O) {
+				if( fOrgFounder && fOrgCeo && fOrgContactPerson 
+						&& fOrgContactPersonTel && fOrgContactPersonMobile && fOrgWebsiteLink) {
+					try {
+						member.setPassword(encoder.encode(member.getPassword()));
+						Member newMember = memberService.insert(member);
+						log.debug("newMember.getId()={}", newMember.getId());
+						memberService.addRole(newMember.getId(), 2L);	//新增完會員，取得id，才能新增角色
+						response.setObj(newMember);
+						log.debug("新增成功");
+					} catch (Exception e) {
+						response.addMessage("新增失敗" + e.getMessage());
+						e.printStackTrace();
+					}
+				}else {
+					response.addMessage("資料有誤");
+				}
+			}else if(member.getMemberType() == MemberType.P){
+				try {
+					member.setPassword(encoder.encode(member.getPassword()));
+					Member newMember = memberService.insert(member);
+					log.debug("newMember.getId()={}", newMember.getId());
+					memberService.addRole(newMember.getId(), 2L);	//新增完會員，取得id，才能新增角色
+					
+//					Set<Role> roles = new TreeSet<Role>();
+//					Role role = new Role();
+//					role.setRoleName("user");
+//					roles.add(role);
+//					member.setRoles(roles);
+					
+//					result.put("member", newMember);
+//					response.setObj(result);
+					response.setObj(newMember);
+					log.debug("新增成功");
+				} catch (Exception e) {
+					response.addMessage("新增失敗" + e.getMessage());
+					e.printStackTrace();
+				}
+			}else {
+				response.addMessage("資料有誤");
 			}
 		}else {
 			response.addMessage("資料有誤");
