@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,13 +51,13 @@ function doSpider(){
 								<div class="product">
 									<div class="image">
 										<a href="${volunteer.websiteUrl}" class="btn btn-template-outlined-white">			
-											<img src="${volunteer.picture}" alt="..." class="image1" width="300px"  height="230px" >
+											<img src="${volunteer.picture}"  class="image1" width="300px"  height="230px" >
 										</a>
 										
 									</div>
 									</div>
 									<div class="text">
-										<h4>
+										<h4 style="width:270px; margin:auto; margin-bottom:10px" >
 											<a href="${volunteer.websiteUrl}">${volunteer.title} </a>
 										</h4>
 										<p class="author-category" >
@@ -64,8 +65,20 @@ function doSpider(){
 										</p>
 										<p>
 											<table style="margin:auto;">
-												<tr><td width="70px">服務地區: </td><td width="200px"> ${volunteer.place}</td></tr>
-												<tr><td width="70px">服務時間: </td><td width="200px"> ${volunteer.startDate}</td></tr>
+												<tr><td width="70px">服務地區: </td><td width="200px"> 
+													<c:if test="${not empty volunteer.country}">${volunteer.country}
+														<c:if test="${not empty volunteer.place}">${volunteer.place}</c:if>
+													</c:if>
+												</td></tr>
+												<tr><td width="70px">服務時間: </td><td width="200px">
+													<c:choose>
+	  													<c:when test="${empty volunteer.startDate}">自由選擇，沒有限定</c:when>
+	 													<c:otherwise>
+	 														<fmt:formatDate value="${volunteer.startDate}" pattern="yyyy/MM/dd"/> - 
+	 														<fmt:formatDate value="${volunteer.endDate}" pattern="yyyy/MM/dd"/>
+	 													</c:otherwise>
+													</c:choose>
+												</td></tr>
 											</table>
 										</p>
 										<a href="${volunteer.websiteUrl}" class="btn btn-template-outlined">更多資訊</a>

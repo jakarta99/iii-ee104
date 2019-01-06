@@ -55,6 +55,7 @@ public class SystemMessageService {
 	};
 
 	// Jasmine
+	//查詢全部系統訊息
 	public Page<SystemMessage> findAllByPageAndMember(Principal principal, Pageable Pageable) {
 		Member member = memberDao.findByAccount(principal.getName());
 		Page<SystemMessage> systemMessages = systemMessageDao.findByMember(member, Pageable);
@@ -62,7 +63,20 @@ public class SystemMessageService {
 	};
 
 	// Jasmine
-	// 讀系統訊息後，變更狀態為已讀
+	// 將所有訊息狀態變更為已讀
+	public List<SystemMessage> readAllMessage(Principal principal) {
+		Member member = memberDao.findByAccount(principal.getName());
+		List<SystemMessage> systemMessages = systemMessageDao.findByMember(member);
+		for(SystemMessage s : systemMessages) {
+			s.setReadStatus(YesNo.Y);
+			systemMessageDao.save(s);
+		}
+		
+		return systemMessages;
+	}
+	
+	// Jasmine
+	// 讀單筆系統訊息後，變更狀態為已讀
 	public SystemMessage changeReadStatusAndGetSystemMessage(Long id) {
 		SystemMessage systemMessage = systemMessageDao.getOne(id);
 		systemMessage.setReadStatus(YesNo.Y);
@@ -133,4 +147,6 @@ public class SystemMessageService {
 
 		}
 	}
+
+
 }

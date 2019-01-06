@@ -1,11 +1,13 @@
 package team.lala.timebank.web.user;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +37,7 @@ public class SystemMessageController {
 	}
 	
 	//Jasmine
-	//ajax回傳每頁資料
+	//ajax回傳每頁資料，並將所有系統訊息標為已讀
 	@RequestMapping("/getSystemMessages")
 	@ResponseBody
 	public Page<SystemMessage> getSystemMessages(@RequestParam("readStatus") YesNo readStatus, Principal principal,
@@ -47,6 +49,7 @@ public class SystemMessageController {
 		Sort sort = new Sort(Sort.Direction.DESC, "releaseTime"); //傳入PageRequest.of()當第三個參數，從最近的訊息開始列
 		if(readStatus == null) {
 			systemMessages = systemMessageService.findAllByPageAndMember(principal, PageRequest.of(page, length.orElse(10), sort));
+			systemMessageService.readAllMessage(principal);//1/6進入系統信箱直接預設讀取所有系統訊息
 		} else {
 			systemMessages = systemMessageService.findByReadStatusAndMember(
 					readStatus, principal, PageRequest.of(page, length.orElse(10), sort));
@@ -55,8 +58,9 @@ public class SystemMessageController {
 	}
 	
 	
+	
 	//Jasmine
-	//讀取訊息，並將系統訊息狀態改為已讀
+	//讀取單筆訊息，並將系統訊息狀態改為已讀
 	@RequestMapping("/readMessage")
 	@ResponseBody
 	public SystemMessage readMessage( @RequestParam("id") Long id) {
@@ -66,7 +70,7 @@ public class SystemMessageController {
 	}
 	
 	//Jasmine
-	//查詢未讀訊息筆數 //效能不好，之後再調
+	//查詢未讀訊息筆數
 	@RequestMapping("/countNotReadMessage")
 	@ResponseBody
 	public Integer countNotReadMessage(Model model, Principal principal) {
