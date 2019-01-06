@@ -113,7 +113,7 @@
                 </div>
               </section>
              
-             <div>
+             <div >
                	<nav aria-label="Page navigation example">
                     <ul id ="pagebox" class="pagination pagination-lg">
 <!--                     換頁控制開始 -->

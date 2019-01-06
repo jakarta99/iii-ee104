@@ -448,13 +448,14 @@ ul.social a {
   width: 28px;
   height: 28px;
   line-height: 28px;
-  background: #555;
+  background: #ffc107;
   color: #fff;
   text-align: center;
   border-radius: 50%;
   margin: 0 2px;
   font-size: 0.8rem;
 }
+
 
 ul.social a:hover {
   -webkit-transform: scale(1.1);
@@ -1691,6 +1692,13 @@ header.nav-holder.sticky {
 
 .team-member p.role {
   font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 0;
+}
+
+.team-member p.role_1 {
+  font-size: 16px;
   text-transform: uppercase;
   color: #999;
   margin-bottom: 0;

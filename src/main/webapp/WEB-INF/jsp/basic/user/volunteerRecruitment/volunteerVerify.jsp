@@ -48,7 +48,11 @@
             margin: auto
         }
         .s2{
-            text-align: center
+            text-align: center;
+        }
+        .s3{
+            margin: 5px;
+            text-align: left;
         }
         .margintop{
 			 margin-top:70px;
@@ -84,6 +88,94 @@
           </div>
         </div>
       </div>
+      
+       <div id="content">
+        <div class="container">
+          <section class="bar mb-0">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="heading">
+                  <h2>志工審核</h2>
+                </div>
+                <p class="lead">以下是對您的招募有興趣的志工，您可以接受或拒絕</p>
+                <div id="boxbox" class="row text-center">
+<!--                 志工名單開始 -->
+                
+                  <div class="col-md-3">
+                    <div data-animate="fadeInUp" class="team-member">
+                      <div class="image"><a href="team-member.html"><img src="../../img/person-1.jpg" alt="" class="img-fluid rounded-circle"></a></div>
+                      <h3><a href="team-member.html">志工名稱</a></h3>
+                      <p class="role_1">申請時間</p>
+                      <ul class="social list-inline">
+                       	<li class="s3"><a href="#" class="star"><i class="fa fa-star"></i></a>平均XXX分</li>
+<!--                         <li class="s3"><a href="#" class="external facebook"><i class="fa fa-facebook"></i></a>7878787878787878787</li> -->
+<!--                         <li class="s3"><a href="#" class="external gplus"><i class="fa fa-google-plus"></i></a>787878787878787878</li> -->
+                        <li class="s3"><a href="#" class="external twitter"><i class="fa fa-phone"></i></a>87878787878</li>
+                        <li class="s3"><a href="#" class="email"><i class="fa fa-envelope"></i></a>8787878787878</li>
+                      </ul>
+                      
+                    </div>
+                  </div>
+                  <!-- /.team-member-->
+                  <div data-animate="fadeInUp" class="col-md-3">
+                    <div class="team-member">
+                      <div class="image"><a href="team-member.html"><img src="../../img/person-2.jpg" alt="" class="img-fluid rounded-circle"></a></div>
+                      <h3><a href="team-member.html">Luke Skywalker</a></h3>
+                      <p class="role">CTO</p>
+                      <ul class="social list-inline">
+                        <li class="list-inline-item"><a href="#" class="external facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="external gplus"><i class="fa fa-google-plus"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="external twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="email"><i class="fa fa-envelope"></i></a></li>
+                      </ul>
+                      <div class="text">
+                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.team-member-->
+                  <div data-animate="fadeInUp" class="col-md-3">
+                    <div class="team-member">
+                      <div class="image"><a href="team-member.html"><img src="../../img/person-3.png" alt="" class="img-fluid rounded-circle"></a></div>
+                      <h3><a href="team-member.html">Princess Leia</a></h3>
+                      <p class="role">Team Leader</p>
+                      <ul class="social list-inline">
+                        <li class="list-inline-item"><a href="#" class="external facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="external gplus"><i class="fa fa-google-plus"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="external twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="email"><i class="fa fa-envelope"></i></a></li>
+                      </ul>
+                      <div class="text">
+                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.team-member-->
+                  <div data-animate="fadeInUp" class="col-md-3">
+                    <div class="team-member">
+                      <div class="image"><a href="team-member.html"><img src="../../img/person-4.jpg" alt="" class="img-fluid rounded-circle"></a></div>
+                      <h3><a href="team-member.html">Jabba Hut</a></h3>
+                      <p class="role">Lead Developer</p>
+                      <ul class="social list-inline">
+                        <li class="list-inline-item"><a href="#" class="external facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="external gplus"><i class="fa fa-google-plus"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="external twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="email"><i class="fa fa-envelope"></i></a></li>
+                      </ul>
+                      <div class="text">
+                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                    </div>
+            </div>
+          </section>
+        </div>
+        </div>
+      
+      
+      
 	
 	 <section class="bar">
         <div class="container">
