@@ -49,6 +49,7 @@
         .s2{
             text-align: center
         }
+       
         .margintop{
 			 margin-top:70px;
 		}
@@ -75,154 +76,75 @@
 	  <!-- Navbar -->
       <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
       
+      <div id="heading-breadcrumbs" class="border-top-0 border-bottom-0">
+        <div class="container">
+          <div class="row d-flex align-items-center flex-wrap">
+            <div class="col-md-7">
+              <h1 id="webtitle" class="h2"></h1>
+            </div>
+<!--             <div class="col-md-5"> -->
+<!--               <ul class="breadcrumb d-flex justify-content-end"> -->
+<!--                 <li class="breadcrumb-item"><a href="index.html">Home</a></li> -->
+<!--                 <li class="breadcrumb-item active">Blog Listing: Small</li> -->
+<!--               </ul> -->
+<!--             </div> -->
+          </div>
+        </div>
+      </div>
+      
       
         <div id="content">
         <div class="container">
+        <section class="bar_1">
+        	<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
+		       <li class="nav-item"><a id="status12Butt" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active">未開始</a></li>
+		       <li class="nav-item"><a id="status3Butt" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">時數未核發</a></li>
+		       <li class="nav-item"><a id="status4Butt" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" class="nav-link">歷史紀錄</a></li>
+   			 </ul>
+       	  </section>
           <div class="row bar">
+          
             <div id="blog-listing-medium" class="col-md-9">
           
           
-              <section class="post">
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="video">
-                      <div class="embed-responsive embed-responsive-4by3">
-                        <img src="../../img/detailsquare.jpg" class="embed-responsive-item"></img>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <h2 class="h3 mt-0"><a href="post.htmls">活動名稱</a></h2>
-                    <div class="d-flex flex-wrap justify-content-between text-xs">
-                      <p class="author-category_1">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a></p>
-                      <p class="date-comments_1"><a href="blog-post.html"><i class="fa fa-edit"></i> 編輯</a><a href="blog-post.html"><i class="fa fa-trash"></i> 取消</a></p>
-                    </div>
-                   
-                    <p class="intro">活動地點:1111111111111</p>
-                    <p class="intro">開始時間:1111111111111</p>
-                    <p class="intro">需求人數:1111111111111</p>
-                    <p class="read-more text-right"><a href="blog-post.html" class="btn btn-template-outlined">志工審核</a></p>
-                  </div>
+              <section class="post_1">
+                <div class="row" id="boxbox">
+<!--                 mission內容開始 -->                
                 </div>
               </section>
              
-             
-             
-              <ul class="pager d-flex align-items-center justify-content-between list-unstyled">
-                <li class="previous"><a href="#" class="btn btn-template-outlined">← Older</a></li>
-                <li class="next disabled"><a href="#" class="btn btn-template-outlined">Newer →</a></li>
-              </ul>
+             <div>
+               	<nav aria-label="Page navigation example">
+                    <ul id ="pagebox" class="pagination pagination-lg">
+<!--                     換頁控制開始 -->
+              		</ul>
+                  </nav>
+              </div>    
             </div>
             <div class="col-md-3">
+              
               <div class="panel panel-default sidebar-menu">
                 <div class="panel-heading">
-                  <h3 class="h4 panel-title">Text widget</h3>
+                  <h3 class="h4 panel-title">條件查詢</h3>
                 </div>
-                <div class="panel-body text-widget">
-                  <p>Improved own provided blessing may peculiar domestic. Sight house has never. No visited raising gravity outward subject my cottage mr be. Hold do at tore in park feet near my case.</p>
-                </div>
-              </div>
-              <div class="panel panel-default sidebar-menu">
-                <div class="panel-heading">
-                  <h3 class="h4 panel-title">Search</h3>
-                </div>
+                
+                
                 <div class="panel-body">
-                  <form role="search">
-                    <div class="input-group">
-                      <input type="text" placeholder="Search" class="form-control"><span class="input-group-btn">
-                        <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button></span>
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <div class="panel panel-default sidebar-menu">
-                <div class="panel-heading">
-                  <h3 class="h4 panel-title">Categories</h3>
-                </div>
-                <div class="panel-body">
-                  <ul class="nav nav-pills flex-column text-sm">
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Webdesign</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link active">Tutorials</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Print</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Our tips</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="panel sidebar-menu">
-                <div class="panel-heading">
-                  <h3 class="h4 panel-title">Tags</h3>
-                </div>
-                <div class="panel-body">
-                  <ul class="tag-cloud list-inline">
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-tags"></i> html5</a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-tags"></i> css3</a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-tags"></i> jquery</a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-tags"></i> ajax</a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-tags"></i> php</a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-tags"></i> responsive</a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-tags"></i> visio</a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-tags"></i> bootstrap</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- GET IT-->
-      <div class="get-it">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-8 text-center p-3">
-              <h3>Do you want cool website like this one?</h3>
-            </div>
-            <div class="col-lg-4 text-center p-3">   <a href="#" class="btn btn-template-outlined-white">Buy this template now</a></div>
-          </div>
-        </div>
-      </div>
-      
-      
-      
-      
-      
-      
-	<div id="heading-breadcrumbs">
-       <div class="container">
-          <div class="row d-flex align-items-center flex-wrap">
-            <div class="col-md-7">
-              <h1 class="h2">招募清單</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-	
-	 <section class="bar">
-        <div class="container">
-          <div class="row">
-            
-    <div>
-	
-	<form>
-	<fieldset>
-		<legend>基本查詢</legend>
-			<div class="form-group mx-sm-3 mb-3">
-			<label>活動名稱 :</label> 
-			<input type="text" value="" placeholder="" id="title" name="title"/>
-			
-			<input type="button" value="搜尋" id="searchButt" />
-			<div>
-			
-			<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
-			進階查詢:
-  			</a>
-  			</div> 
-			<div class="collapse" id="collapse">
-			<div class="form-group mx-sm-3 mb-3">
+                	<form>
+                <div class="form-group mx-sm-3 mb-3">
 					<label>縣市:</label> 	
 					<div role="tw-city-selector"></div>
 				</div>
+			
+				
+			<div class="form-group mx-sm-3 mb-3">			
+			<label>活動名稱 :</label> 
+			<input type="text" value="" placeholder="" id="title" name="title" class="form-control"/>
+			<div>
+			
+			
 			<label>會員類型 :</label> 
-				<select  id="serviceTypeDetail" name="serviceTypeDetail">
+				<select  id="serviceTypeDetail" name="serviceTypeDetail" class="form-control">
 					<option value="">選擇服務類型</option>
 					<option value="婦幼關懷">婦幼關懷</option>
 			        <option value="身心障礙">身心障礙</option>
@@ -236,93 +158,86 @@
 			        <option value="宗教信仰">宗教信仰</option>
 				</select>
 				
+				
 			<label>長短期 :</label> 
-				<select  id="termType" name="termType">
+				<select  id="termType" name="termType" class="form-control">
 					<option value="">選擇長短期</option>
 					<option value="L">長期</option>
 			        <option value="S">短期</option>
-				</select>
+				</select>	
+				
 			<label>時數 :</label> 
-			<input type="text" value="" placeholder="timeValue" id="timeValue" name="timeValue"/>
+			<input type="text" value="" placeholder="" id="timeValue" name="timeValue" class="form-control"/>
 			<div>	
 				<label>開始日期:</label>
-				<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
+				<input type="text"  id="startDate" name="startDate" autocomplete="off" class="form-control"/>
 				<label>結束日期:</label>
-				<input type="text"  id="endDate" name="endDate" autocomplete="off"/>
+				<input type="text"  id="endDate" name="endDate" autocomplete="off" class="form-control"/>
 			</div>
-			
-			
-			
+				
 			<input type="hidden" value="" placeholder="missionstatus" id="missionstatus" name="missionstatus"/>
+			<input  type="button" value="搜尋" id="searchButt" class="btn btn-primary btn" >
 			
 			
 			</div>
 			</div>
-			</fieldset>
 		</form>
-	
-	
-	<fieldset >
-	<ul  id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
-       <li class="nav-item"><a id="status12Butt" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active">未開始</a></li>
-       <li class="nav-item"><a id="status3Butt" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">時數未核發</a></li>
-       <li class="nav-item"><a id="status4Butt" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" class="nav-link">歷史紀錄</a></li>
-    </ul>
-	
-	<table id="table" class="table table-hover">
-	<thead class="thead-dark">
-	<tr>
-		<th>選項</th>
-		<th scope="col">活動名稱</th>
-		<th scope="col">需求人數</th>
-		<th scope="col">地點</th>
-		<th id="time" scope="col">開始時間</th>
-		<th id="statusField" scope="col">志工審核</th>
-		<th scope="col">狀態</th>
-	</tr>
-	 </thead>	
-	 <tbody id="tbody">	
-	 </tbody>
-	</table>
-		
-	<button class="btn btn-outline-secondary" onclick="javascript:document.location.href='/'">回列表頁</button>
-	
-	</fieldset>
-	</div>
-	</div>
-	</div>
-	  </section>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 	
 	<script>
 	
-	var dataTable;
+	var length=3;
+	var page=0;
+	var first;
+	var last;
+	
  	$("#searchButt").click(function(){
- 		dataTable.ajax.reload();
+ 		list();
 	})
 	
 	$("#status12Butt").click(function(){
+		$("#webtitle").empty().append("招募紀錄-未開始");
 		$("#time").empty().append("開始時間");
 		$("#statusField").empty().append("志工審核");
 		$("#missionstatus").val("A_VolunteerApproved");
-		dataTable.ajax.reload();		
+		page=0;
+		list();
 	})
 	
 	$("#status3Butt").click(function(){
+		$("#webtitle").empty().append("招募紀錄-時數未核發");
 		$("#time").empty().append("結束時間");
 		$("#statusField").empty().append("時數核發");
 		$("#missionstatus").val('B_AccountsPayable');
-		dataTable.ajax.reload();		
+		page=0;
+		list();
 	})
 	
 	$("#status4Butt").click(function(){
+		$("#webtitle").empty().append("招募紀錄-歷史紀錄");
 		$("#time").empty().append("結案時間");
 		$("#statusField").empty().append("結案紀錄");
 		$("#missionstatus").val('C_Finish');
-		dataTable.ajax.reload();		
+		page=0;
+		list();		
 	})
-		
+	
+	function mouseover(id){
+		$('#cancel'+id).css('text-decoration','underline')
+	}
+ 	function mouseout(id){
+ 		$("#cancel"+id).css('text-decoration','none')
+ 	}	
+
+
 	function cancelMission(id,title) { 		
  		swal({
  			  title: "確定取消"+title+"的招募刊登?",
@@ -361,7 +276,110 @@
  			  }
  			}); 	
 	}
-			
+ 	
+ 	
+ 	function list(){
+		$.ajax({
+			url:"/user/volunteerRecruitment/query?"+$('form').serialize()+"&page="+page+"&length="+length,
+			type: "get",
+		    dataType : "json",
+		    
+	        }).done(function(missions){
+	        	$("#boxbox").text("");
+	        	$("#pagebox").text("");
+	        	console.log(missions);
+	        	
+	        	var totalElements=missions.totalElements;
+	        	console.log(totalElements);
+	        	
+	        	var totalPages=missions.totalPages;
+	        	console.log(totalPages);
+	        	
+	        	first=missions.first;
+	        	console.log(first);
+	        	
+	        	last=missions.last;
+	        	console.log(last);
+	        	
+	        	page=missions.number;
+	        	
+	        	
+	        	$.each(missions.content,function(index, mission){
+	        		console.log(mission)
+	        		var box="<div class='col-md-4'>"
+	        		   box+="<div class='video'>"
+	        		   box+="<div class='embed-responsive embed-responsive-4by3'>"	        	
+	        		   box+=" <a href='#'><img src=../../img/"+mission.missionPicName+" class='embed-responsive-item'></img></a>"     
+	        		   box+="</div></div></div>"
+	                   box+="<div class='col-md-8'>"
+	                   box+="<h1 class='h1 mt-0'><a href='post.htmls'>"+ mission.title + "</a></h1>"
+	                   box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
+	                   box+="<p class='author-category_1'><a href='#'>"+ mission.member.name + "</a></p>"
+					 if(mission.missionstatus=="A_New"||mission.missionstatus=="A_VolunteerApproved"){
+	                   box+="<p class='date-comments_1'><a href='/user/volunteerRecruitment/edit?id="+mission.id+"'><i class='fa fa-edit'></i>編輯</a><a id='cancel"+mission.id+"' onmouseover='mouseover("+mission.id+")' onmouseout='mouseout("+mission.id+")' onclick=\"cancelMission("+mission.id+",'"+mission.title+"')\" ><i class='fa fa-trash'></i>取消</a></p></div>"
+					 }
+					 else if(mission.missionstatus == "B_AccountsPayable"){
+					   box+="</div>"
+					 }else if(mission.missionstatus == "C_Finish" || mission.missionstatus == "C_Cancel"){
+					   box+="</div>"
+					 }
+	                		   
+	                   box+="<p class='intro_1'>活動地點:"+mission.county+mission.district+"</p>"
+	                   
+	                   
+	                   if(mission.missionstatus == "A_New" || mission.missionstatus == "A_VolunteerApproved"){
+	                   box+="<p class='intro_1'>開始時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>"   
+		            	}else if(mission.missionstatus == "B_AccountsPayable"){
+		            		box+="<p class='intro_1'>截止時間:"+new Date(mission.endDate).toLocaleDateString()+"</p>"
+		            	}else if(mission.missionstatus == "C_Finish" || data.missionstatus == "C_Cancel"){
+		            		box+="<p class='intro_1'>結束時間:"+new Date(mission.finishDate).toLocaleDateString()+"</p>"
+		            	}else{
+		            		box+="<p class='intro_1'>開始時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>"
+		                
+		               }  
+	                   
+	                   
+	                   
+	                   
+	                   box+="<p class='intro_1'>需求人數:"+mission.peopleNeeded+"</p>"	          
+	                 if(mission.missionstatus=="A_New"){
+	                   box+="<p class='read-more text-right'><a href='/user/volunteerVerify/list?id="+mission.id+"' class='btn btn-template-outlined'>志工審核</a></p> </div>"
+	                 
+	     							
+	 				 }else if(mission.missionstatus=="B_AccountsPayable"){
+	 					box+="<p class='read-more text-right'><a href='/user/payTime/list?id="+mission.id+"' class='btn btn-template-outlined'>核發時數</a></p> </div>"
+
+	 					}else if(mission.missionstatus=="C_Cancel"){
+	 						box+="<p class='read-more text-right'><a href='/user/closed/list?id="+mission.id+"' class='btn btn-template-outlined'>取消紀錄</a></p> </div>"
+								
+	 					}else if(mission.missionstatus=="C_Finish"){
+	 						box+="<p class='read-more text-right'><a href='/user/closed/list?id="+mission.id+"' class='btn btn-template-outlined'>結案紀錄</a></p> </div>"
+								
+	 					}else{
+	 						box+="<p class='read-more text-right'><span class='badge badge-success'>已審核</span></p><div>"
+	 					}
+	                   
+	                var boxbox=$("#boxbox").append(box)
+	        	
+	        	})
+	        	
+	        		$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
+	        	for (var index = 1; index <= totalPages ; index++) {
+	        		$("#nextli").before("<li class='page-item'><a name='count' id="+index+" class='page-link'>"+index+"</a></li>")
+				}
+	    
+	    
+	        })
+	        
+			}
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 
 	$(document).ready( function () {
 
 		new TwCitySelector();
@@ -381,132 +399,36 @@
 		})
 		
 		$("#missionstatus").val("A_VolunteerApproved");
+		$("#webtitle").append("招募紀錄-未開始");
 		
-		dataTable=$('#table').DataTable({
-				pageResize: true,
-				fixedHeader: true,
-				pagingType: 'full_numbers',
-	 			searching:false,
-	 			processing:false,
-	 			serverSide:true,
-	 			"stateSave": true,
-				"infoCallback": function( settings, start, end, max, total, pre ) {
-		 			    var api = this.api();
-		 			    var pageInfo = api.page.info();
-		 			   	console.log(pageInfo);
-		 			   api.rows( {page:'current'} ).data()
-		 			    return '顯示第 '+(pageInfo.start+1)+' 筆到第  '+(pageInfo.end)+' 筆 共 '+ pageInfo.recordsTotal+' 筆資料 ';
-		 			 },	
-				"lengthMenu": [  6, 9, 12, ],
-				ajax:{
-					url:"/user/volunteerRecruitment/query",
-					type: "get",
-				    dataType : "json",
-				    data: function(d){
-		            	console.log(d);
-		            	var start = d.start;
-						var length = d.length;
-						var request = $("form").serialize()+"&start="+start+"&length="+length;
-		            	return request;
-		            },
-
-				    dataSrc:"content",
-				    dataFilter: function(resp){
-		                var json = jQuery.parseJSON( resp );
-		                json.recordsTotal = json.totalElements;
-		                json.recordsFiltered = json.totalElements;	     			
-		                return JSON.stringify( json ); 
-		            	},
-					},
-					columns:[						
-						{"data": function (data, type, val) {
-							if(data.missionstatus=="A_New"||data.missionstatus=="A_VolunteerApproved"){
-							 var editbutton="<button class='btn btn-outline-primary' onclick=\"javascript:document.location.href='/user/volunteerRecruitment/edit?id="+data.id+"'\">編輯</button>";     
-							 var cancelbutton="<button class='btn btn-outline-danger' onclick=\"cancelMission("+data.id+",'"+data.title+"')\">取消</button>"; 	
-							 return editbutton + cancelbutton;
-							 }else if(data.missionstatus == "B_AccountsPayable"){
-								 return "待核發" ;
-							 }else if(data.missionstatus == "C_Finish" || data.missionstatus == "C_Cancel"){
-								 return "結案活動" ;
-							 }
-						}
-						},					 
-						{"data":"title"},
-						{"data":"peopleNeeded"},						
-						{"data": null, render: function ( data, type, row ) {
-			                return data.county + data.district+ data.address;
-			            }},						
-						
-			            {"data":null, render: function ( data, type, row ) {
-			            	if(data.missionstatus == "A_New" || data.missionstatus == "A_VolunteerApproved"){
-			            		return new Date(data.startDate).toLocaleDateString();
-			            	}else if(data.missionstatus == "B_AccountsPayable"){
-			            		return new Date(data.endDate).toLocaleDateString();
-			            	}else if(data.missionstatus == "C_Finish" || data.missionstatus == "C_Cancel"){
-			            		return new Date(data.finishDate).toLocaleDateString();
-			            	}
-			            	return new Date(data.startDate).toLocaleDateString();
-			                
-			            }},	
-					
-						{"data":function (data, type, val) {
-							if(data.missionstatus=="A_New"){
-							var vbutton="<button class='btn btn-outline btn-primary' onclick=\"javascript:document.location.href='/user/volunteerVerify/list?id="+data.id+"'\">志工審核</button>";   
-								return vbutton;
-								
-							}else if(data.missionstatus=="B_AccountsPayable"){
-								var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/payTime/list?id="+data.id+"'\">核發時數</button>";   
-								return vbutton;
-
-							}else if(data.missionstatus=="C_Cancel"){
-								var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/closed/list?id="+data.id+"'\">取消紀錄</button>";   
-								return vbutton;	
-							
-							}else if(data.missionstatus=="C_Finish"){
-								var vbutton="<button class='btn btn-outline-secondary' onclick=\"javascript:document.location.href='/user/closed/list?id="+data.id+"'\">結案紀錄</button>";   
-								return vbutton;	
-							
-							}else{
-								var vbutton="<span class='badge badge-success'>已審核</span>"
-								return vbutton;
-							}
-							
-							}							 
-						},
-			            
-						{"data":function (data, type, val) {
-							if(data.missionstatus=="A_New"){
-								return "未開始";
-								
-							}else if(data.missionstatus=="B_AccountsPayable"){
-								return "進行中";
-
-							}else if(data.missionstatus=="C_Cancel"){
-								return "已取消";	
-							
-							}else if(data.missionstatus=="C_Finish"){
-								return "已結案";	
-							
-							}else{
-								return "未開始已審核";
-							}
-							
-							}							 
-						},
-									
-					],
-					 columnDefs: [{
-			                "searchable": false,
-			                "orderable": false,
-			                "targets": [0],
-			            }],
-			            order: [[1, 'asc']]
-					
-					
-					
-				});		
+		list()
 		
 		
+		$("#pagebox").on("click","li>a[name='backa']", function(){
+			if(first == false){
+				page = page - 1;
+				list();
+			}
+			 $('body,html').animate({
+                 scrollTop: 0 }, 1);
+		}) 
+		
+		$("#pagebox").on("click","li>a[name='nexta']", function(){
+				if(last == false){
+					page = page + 1;
+					list();
+				}
+				 $('body,html').animate({
+	                 scrollTop: 0 }, 1);
+		 })
+
+    	$("#pagebox").on("click","li>a[name='count']", function(){			
+    		page=$(this).text()-1;
+    		list();
+    		 $('body,html').animate({
+                 scrollTop: 0 }, 1);
+    	})
+// 		
 	});
 	</script>
 </body>

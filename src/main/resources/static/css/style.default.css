@@ -95,6 +95,10 @@ p.lead {
   letter-spacing: 0 !important;
 }
 
+.bar_1 {
+  padding-top: 30px;
+}
+
 .bar {
   padding: 60px 0;
 }
@@ -1152,6 +1156,10 @@ header.nav-holder.sticky {
   margin-bottom: 60px;
 }
 
+#blog-listing-big .post, #blog-listing-medium .post_1 {
+  
+}
+
 #blog-listing-big .image, #blog-listing-medium .image {
   margin-bottom: 15px;
 }
@@ -1203,6 +1211,19 @@ header.nav-holder.sticky {
 #blog-listing-big p.intro, #blog-listing-medium p.intro {
   margin-top: 10px;
   color: #777;
+}
+
+#blog-listing-big p.intro, #blog-listing-medium p.intro_1 {
+  margin-top: 10px;
+  color: #777;
+  font-size: 15px;
+}
+
+#blog-listing-big p.intro, #blog-listing-medium p.intro_2 {
+  margin-top: 10px;
+  color: #777;
+  font-size: 15px;
+  float: left;
 }
 
 .pager {
