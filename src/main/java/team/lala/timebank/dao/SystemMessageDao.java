@@ -17,5 +17,6 @@ public interface SystemMessageDao extends JpaRepository<SystemMessage, Long>, Jp
 	public List<SystemMessage> findByReadStatusAndMember(YesNo readStatus, Member member);
 	
 	public Page<SystemMessage> findByMember(Member member, Pageable Pageable);
-
+	
+	public List<SystemMessage> findByMember(Member member);
 }
