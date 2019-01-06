@@ -95,6 +95,10 @@ p.lead {
   letter-spacing: 0 !important;
 }
 
+.bar_1 {
+  padding-top: 30px;
+}
+
 .bar {
   padding: 60px 0;
 }
@@ -444,13 +448,14 @@ ul.social a {
   width: 28px;
   height: 28px;
   line-height: 28px;
-  background: #555;
+  background: #ffc107;
   color: #fff;
   text-align: center;
   border-radius: 50%;
   margin: 0 2px;
   font-size: 0.8rem;
 }
+
 
 ul.social a:hover {
   -webkit-transform: scale(1.1);
@@ -1152,6 +1157,10 @@ header.nav-holder.sticky {
   margin-bottom: 60px;
 }
 
+#blog-listing-big .post, #blog-listing-medium .post_1 {
+  
+}
+
 #blog-listing-big .image, #blog-listing-medium .image {
   margin-bottom: 15px;
 }
@@ -1203,6 +1212,19 @@ header.nav-holder.sticky {
 #blog-listing-big p.intro, #blog-listing-medium p.intro {
   margin-top: 10px;
   color: #777;
+}
+
+#blog-listing-big p.intro, #blog-listing-medium p.intro_1 {
+  margin-top: 10px;
+  color: #777;
+  font-size: 15px;
+}
+
+#blog-listing-big p.intro, #blog-listing-medium p.intro_2 {
+  margin-top: 10px;
+  color: #777;
+  font-size: 15px;
+  float: left;
 }
 
 .pager {
@@ -1670,6 +1692,13 @@ header.nav-holder.sticky {
 
 .team-member p.role {
   font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 0;
+}
+
+.team-member p.role_1 {
+  font-size: 16px;
   text-transform: uppercase;
   color: #999;
   margin-bottom: 0;

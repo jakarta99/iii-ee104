@@ -52,12 +52,11 @@ public class RecruitController {
 	@RequestMapping("/query")
 	@ResponseBody
 	public Page<Mission> getMemberMission(Mission inputMission, Principal principal,
-			@RequestParam(value = "start", required = false) Optional<Integer> start,
+			@RequestParam(value = "page", required = false) Optional<Integer> page,
 			@RequestParam(value = "length", required = false) Optional<Integer> length) {
-		int page = start.orElse(0) / length.orElse(10);
 
 		Page<Mission> missions = missionService.findByMemberAndSpecification(principal, inputMission,
-				PageRequest.of(page, length.orElse(10)));
+				PageRequest.of(page.orElse(0), length.orElse(10)));
 		return missions;
 	}
 
