@@ -109,7 +109,7 @@ public class CommonsSignUpController {
 		}
 		// 檢查帳號是否重複，如果沒重複則insert資料庫
 		// findByLoginAccount回傳如果是null，代表資料庫沒相同的帳號，可以註冊
-		if (memberService.findByAccount(member) == null) {
+		if (memberService.findByAccount(member.getAccount()) == null) {
 			fAccountD = true;
 		}else {
 //			errors.put("account", "帳號重複(測)");
@@ -475,7 +475,7 @@ public class CommonsSignUpController {
 
 	@RequestMapping("/edit")
 	public String editPage(Member m, Model model) {
-		Member member = memberService.findByAccount(m);
+		Member member = memberService.findByAccount(m.getAccount());
 		model.addAttribute("member", member);
 		return "/basic/commons/sign_up/sign-up_edit";
 	}

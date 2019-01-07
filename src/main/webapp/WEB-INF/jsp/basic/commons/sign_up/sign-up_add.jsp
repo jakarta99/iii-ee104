@@ -739,7 +739,7 @@
 							}
 							if (message =="密碼不一致"){
 								document.getElementById("idspPasswordCheck").innerHTML =
-					                "<img src='/img/X.jpg'><span style='color:red'>密碼格式錯誤</span>"
+					                "<img src='/img/X.jpg'><span style='color:red'>密碼不一致</span>"
 // 								$("#idspPasswordCheck").html(message);
 							}
 							if (message =="姓名格式錯誤"){
