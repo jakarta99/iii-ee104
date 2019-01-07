@@ -1,4 +1,4 @@
-package team.lala.timebank.web.penalty;
+package team.lala.timebank.web.admin;
 
 import java.security.Principal;
 import java.sql.SQLException;
@@ -39,9 +39,9 @@ import team.lala.timebank.spec.PenaltySpecification;
 
 @Slf4j
 @Controller
-@RequestMapping("/penalty")
+@RequestMapping("/admin/penaltyVertify")
 @SessionAttributes(names = { "reportOnePenalty" })
-public class PenaltyController {
+public class PenaltyVertifyController {
 
 	@Autowired
 	private PenaltyService penaltyService;

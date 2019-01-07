@@ -44,13 +44,6 @@ public class CommonsSignUpController {
 		return "/basic/commons/sign_up/sign-up_add";
 	}
 	
-	@RequestMapping("/edit")
-	public String editPage(Member m, Model model) {
-		Member member = memberService.findByAccount(m);
-		model.addAttribute("member", member);
-		return "/basic/commons/sign_up/sign-up_edit";
-	}
-	
 //	@InitBinder
 //	public void registerCustomPropertyEditor(WebDataBinder webDataBinder) {
 //		webDataBinder.registerCustomEditor(java.util.Date.class, 
@@ -154,6 +147,11 @@ public class CommonsSignUpController {
 				String test = member.getName().substring(i, i + 1);
 				if (test.matches("[\\u4E00-\\u9FA5]")) {
 					fName = true;
+				}else {
+					fName = false;
+					log.debug("姓名XXX");
+					response.addMessage("姓名格式錯誤");
+					break;
 				}
 			}
 		}else {
@@ -301,6 +299,11 @@ public class CommonsSignUpController {
 					String test = member.getOrgFounder().substring(i, i + 1);
 					if (test.matches("[\\u4E00-\\u9FA5]")) {
 						fOrgFounder = true;
+					}else {
+						fOrgFounder = false;
+						log.debug("創辦人XXX");
+						response.addMessage("創辦人格式錯誤");
+						break;
 					}
 				}
 			}else {
@@ -314,6 +317,11 @@ public class CommonsSignUpController {
 					String test = member.getOrgCeo().substring(i, i + 1);
 					if (test.matches("[\\u4E00-\\u9FA5]")) {
 						fOrgCeo = true;
+					}else {
+						fOrgCeo = false;
+						log.debug("執行長XXX");
+						response.addMessage("執行長格式錯誤");
+						break;
 					}
 				}
 			}else {
@@ -327,6 +335,11 @@ public class CommonsSignUpController {
 					String test = member.getOrgContactPerson().substring(i, i + 1);
 					if (test.matches("[\\u4E00-\\u9FA5]")) {
 						fOrgContactPerson = true;
+					}else {
+						fOrgContactPerson = false;
+						log.debug("聯絡人XXX");
+						response.addMessage("聯絡人格式錯誤");
+						break;
 					}
 				}
 			}else {
@@ -458,6 +471,13 @@ public class CommonsSignUpController {
 			result = "正確";
 		}
 		return result;
+	}
+
+	@RequestMapping("/edit")
+	public String editPage(Member m, Model model) {
+		Member member = memberService.findByAccount(m);
+		model.addAttribute("member", member);
+		return "/basic/commons/sign_up/sign-up_edit";
 	}
 	
 	@RequestMapping("/update")

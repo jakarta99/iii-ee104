@@ -147,13 +147,10 @@ public class RecruitController {
 	@RequestMapping("/insert")
 
 	public String insertOrder (Principal principal, @RequestParam("missionId") Long missionId) {
-		try {
-			Mission mission = missionService.getOne(missionId);
-			Member member = memberService.findByAccount(principal.getName());
-			orderService.insert(mission, member);
-		}catch(Exception e) {
-			return "/basic/commons/login";
-		}
+		
+		Mission mission = missionService.getOne(missionId);
+		Member member = memberService.findByAccount(principal.getName());
+		orderService.insert(mission, member);
 		return "/user/volunteerApplication/applicationPage";
 	}
 }
