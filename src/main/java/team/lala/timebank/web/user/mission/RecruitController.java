@@ -1,4 +1,4 @@
-package team.lala.timebank.web.user;
+package team.lala.timebank.web.user.mission;
 
 import java.security.Principal;
 import java.util.List;
@@ -27,6 +27,7 @@ import team.lala.timebank.service.MissionService;
 import team.lala.timebank.service.OrderService;
 import team.lala.timebank.service.ServiceTypeService;
 import team.lala.timebank.service.SystemMessageService;
+import team.lala.timebank.spec.MissionSpecification;
 
 @Slf4j
 @RequestMapping("/user/volunteerRecruitment")
@@ -54,8 +55,11 @@ public class RecruitController {
 	public Page<Mission> getMemberMission(Mission inputMission, Principal principal,
 			@RequestParam(value = "page", required = false) Optional<Integer> page,
 			@RequestParam(value = "length", required = false) Optional<Integer> length) {
-
-		Page<Mission> missions = missionService.findByMemberAndSpecification(principal, inputMission,
+		
+		inputMission.setMemberAccount(principal.getName());
+		MissionSpecification missionSpec = new MissionSpecification(inputMission);
+		
+		Page<Mission> missions = missionService.findBySpecification(missionSpec,
 				PageRequest.of(page.orElse(0), length.orElse(10)));
 		return missions;
 	}

@@ -1,4 +1,4 @@
-package team.lala.timebank.web.user;
+package team.lala.timebank.web.user.mission;
 
 import java.io.File;
 import java.io.FileOutputStream;

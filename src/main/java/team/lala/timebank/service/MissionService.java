@@ -56,13 +56,7 @@ public class MissionService {
 		return missionDao.findAll(specification);
 	}
 
-	// list for user
-	public Page<Mission> findByMemberAndSpecification(Principal principal, Mission mission, PageRequest pageRequest) {
-		mission.setMember(memberDao.findByAccount(principal.getName()));
-		MissionSpecification missionSpec = new MissionSpecification(mission);
-		Page<Mission> missions = this.findBySpecification(missionSpec, pageRequest);
-		return missions;
-	}
+//	
 
 	// insert for user
 	public Mission insert(Mission mission, Principal principal) {

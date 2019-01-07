@@ -1,4 +1,4 @@
-package team.lala.timebank.web.domesticVolunteer;
+package team.lala.timebank.web.commons.domesticVolunteer;
 
 import java.util.Optional;
 
