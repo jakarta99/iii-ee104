@@ -233,7 +233,7 @@
 						var missionId = ${missionId}
 		            	var start = d.start;
 						var length = d.length;
-						var request = "start=" + start + "&length=" + length + "&missionId=" + missionId;
+						var request = "page=" + start + "&length=" + length + "&missionId=" + missionId;
 		            	return request;
 		            },
 
