@@ -1,10 +1,12 @@
 package team.lala.timebank.service;
 
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
 import team.lala.timebank.dao.DonationDao;
 import team.lala.timebank.entity.Donation;
 import team.lala.timebank.entity.Member;
+import team.lala.timebank.entity.TimeLedger;
+import team.lala.timebank.spec.DonationSpecification;
 
 @Service
 public class DonationService {
@@ -53,6 +57,14 @@ public class DonationService {
 		return donationDao.findAll(specification, page);
 	}
 	
+	//list for user
+	public Page<Donation> findByDonatorIdAndSpecification(Principal principal, Donation donation,
+			PageRequest pageRequest){
+		donation.setDonatorAccount(principal.getName());
+		DonationSpecification donationSpec = new DonationSpecification(donation);
+		Page<Donation> donations = this.findBySpecification(donationSpec, pageRequest);
+		return donations;
+	}
 	
 	public void deleteById(Long id) {
 		donationDao.deleteById(id);

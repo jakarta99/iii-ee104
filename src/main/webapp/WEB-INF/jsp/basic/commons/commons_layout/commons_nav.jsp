@@ -37,7 +37,7 @@
                         <div class="col-md-6 col-lg-3">
                          <h5><a href="/user/transaction-record/list" >我的交易紀錄</a></h5>
                          <h5><a href="#" >我的最愛</a></h5>
-                          <h5><a href="/basic/user/my-donation/list" >我的捐款</a></h5>     
+                          <h5><a href="/user/donation-record/list" >我的捐款</a></h5>     
                         </div>
                       </div>
                     </li>
