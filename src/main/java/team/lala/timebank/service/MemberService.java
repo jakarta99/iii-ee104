@@ -144,6 +144,10 @@ public class MemberService {
 		member = memberDao.findByAccount(account);
 		return member;
 	}
+	
+	public Page<Member> findByMemberType(MemberType memberType,Pageable pageable) {
+		return memberDao.findByMemberType(memberType, pageable);
+	}
 
 
 }

@@ -8,7 +8,7 @@
             <button type="button" data-toggle="collapse" data-target="#navigation" class="navbar-toggler btn-template-outlined"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
             <div id="navigation" class="navbar-collapse collapse">
               <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item"><a href="javascript: void(0)">公益團體 <b class="caret"></b></a>
+                <li class="nav-item"><a href="/commons/organization/list">公益團體 <b class="caret"></b></a>
                 </li>
                 <li class="nav-item menu-large"><a href="/commons/domesticVolunteer/list" >志工招募<b class="caret"></b></a>
                 </li>

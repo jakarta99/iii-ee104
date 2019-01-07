@@ -182,6 +182,9 @@ public class Member implements UserDetails {
 	@Column(name = "AVERAGE_SCORE")
 	private Double averageScore;
 	
+	@Column(name = "PICTURE")
+	private String picture;
+	
 //	 public void addRole(Role role) {
 //	       if (!getRoles().contains(role)) {
 //	           getRoles().add(role);
