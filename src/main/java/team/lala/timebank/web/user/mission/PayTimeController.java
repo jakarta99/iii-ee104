@@ -44,10 +44,9 @@ public class PayTimeController {
 	@RequestMapping("/query")
 	@ResponseBody
 	public Page<Order> getOrderByMissionAndStatus(
-			@RequestParam(value = "start", required = false) Optional<Integer> start,
+			@RequestParam(value = "start", required = false) int page,
 			@RequestParam(value = "length", required = false) Optional<Integer> length,
 			@RequestParam(value = "missionId") Long id) {
-		int page = start.orElse(0) / length.orElse(10);
 		Mission mission = missionService.getOne(id);
 		// Page<Mission> missions = missionService.findByAccount(principal,
 		// inputMission, PageRequest.of(page, length.orElse(10)));

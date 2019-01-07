@@ -147,6 +147,41 @@ public class SystemMessageService {
 
 		}
 	}
+	
+	//產生付款後收到的訊息
+	public void pay(Member payer,Member volunteer,Integer hours,String missionTitle) {
+		SystemMessage pay = new SystemMessage();
+		pay.setSender(payer);
+		pay.setReleaseTime(new Date());
+		pay.setReadStatus(YesNo.N);
+		pay.setMember(payer);
+		pay.setMessage("您因為志工活動:[" + missionTitle + "]付款給:["
+				+ volunteer.getName() + "]共" + hours + "小時已成功");
+		pay.setMessageType(SystemMessageType.PayTimeValue);
+		systemMessageDao.save(pay);
+	}
+	//產生入賬後收到的訊息
+	public void earn(Member payer,Member volunteer,Integer hours,String missionTitle) {
+		SystemMessage earn = new SystemMessage();
+		earn.setSender(payer);
+		earn.setReleaseTime(new Date());
+		earn.setReadStatus(YesNo.N);
+		earn.setMember(volunteer);
+		earn.setMessage("您參加志工活動:[" + missionTitle + "]獲得" + hours + "小時已入帳");
+		earn.setMessageType(SystemMessageType.PayTimeValue);
+		systemMessageDao.save(earn);
+	}
+	
+	public void finishMission(Member payer,String missionTitle) {
+		SystemMessage finishMessage = new SystemMessage();
+		finishMessage.setReleaseTime(new Date());
+		finishMessage.setReadStatus(YesNo.N);
+		finishMessage.setMember(payer);
+		finishMessage.setMessage("您刊登的志工活動:[" + missionTitle + "]已結案");
+		finishMessage.setMessageType(SystemMessageType.MissionFinish);
+		systemMessageDao.save(finishMessage);
+	}
+	
 
 
 }
