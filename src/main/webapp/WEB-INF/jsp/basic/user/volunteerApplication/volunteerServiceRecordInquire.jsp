@@ -258,10 +258,10 @@
 		                return data.mission.county + data.mission.district+ data.mission.address;
 		            } },
 		            { data: null, render: function ( data, type, row ) {
-		            	return new Date(data.mission.startDate).Format('yyyy-MM-dd hh-mm');
+		            	return new Date(data.mission.startDate).Format('yyyy-MM-dd hh:mm');
 		            } },
 		            { data: null, render: function ( data, type, row ) {
-		            	return new Date(data.mission.endDate).Format('yyyy-MM-dd hh-mm');
+		            	return new Date(data.mission.endDate).Format('yyyy-MM-dd hh:mm');
 		            } },
 					{data:"mission.timeValue"},
 					{data:"orderStatus"},

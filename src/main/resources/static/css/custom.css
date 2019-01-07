@@ -22,8 +22,9 @@
 	margin-top: 10px;
 }
 
-.111 {
-	color: #999;
-	margin-left: 25px;
-	font-size: 20px;
+
+.modal .modal-header h4 {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #4fbfa8;
 }

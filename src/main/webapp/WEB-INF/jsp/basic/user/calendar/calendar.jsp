@@ -15,6 +15,26 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.print.css" rel="stylesheet" media="print">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.min.js"></script>
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
+<style type="text/css">
+.fc td, .fc th {
+  padding: 1px;
+  vertical-align: top; 
+   border-color: #0e0d0d;
+  }
+.fc-title{	
+	letter-spacing:3px;
+}
+.fc-event{
+	padding:3px;
+	margin:3px;
+}
+.fc-button{
+	  background: #4fbfa8;
+	  border: 1px solid #4fbfa8 !important;
+	  color: #fff !important;
+	  border-radius: 0 !important;
+}
+</style>
 </head>
 <body>
 <!-- Top bar-->
@@ -34,6 +54,27 @@
 	    <div class="container">
 	    <div id="calendar"></div>
 	    </div>
+	<div id="fullCalModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="modalTitle" class="modal-title"></h4>
+	            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          		<span aria-hidden="true">&times;</span>
+	        	</button>
+            </div>
+            <div id="modalBody" class="modal-body">
+	            <h5>活動開始時間</h5>
+	            <p id="eventBegin"></p>
+	            <h5>活動結束時間</h5>
+	            <p id="eventEnd"></p>
+            </div>
+            <div class="modal-footer">
+            	<a id="eventUrl" href="#" role="button" class="btn btn-primary" title="Popover title">查看活動頁面</a> 
+            </div>
+        </div>
+    </div>
+	</div>
     </section>
       
       
@@ -66,22 +107,52 @@
 						  events.push({
 							  title: data[idx].mission.title,
 							  start: data[idx].mission.startDate,
-							  end: data[idx].mission.endDate
+							  end: data[idx].mission.endDate,
+							  id: data[idx].mission.id,
+							  status: data[idx].orderStatus,
 						  });
 					  });
 					  callback(events);
 				  }
 			  })
 		  },
-		  eventClick: function(event, jsEvent, view){
-				alert('Event:' + event.title);
-				console.log(jsEvent);
-				console.log(view);
+		  eventClick: function(event, jsEvent, view){	  
+			  	$('#modalTitle').html(event.title);
+	            $('#eventBegin').text(new Date(event.start).Format('yyyy-MM-dd hh:mm'));
+	            $('#eventEnd').text(new Date(event.end).Format('yyyy-MM-dd hh:mm'));
+	            $('#eventUrl').attr('href','/commons/domesticVolunteer/apply?missionId=' + event.id);
+	            $('#fullCalModal').modal();
 			},
-		  eventColor: 'yellow',
-		  eventTextColor: 'black',
+			eventAfterRender: function (event, element, view) {
+				element.css('font-weight', '700')
+				element.css('border', 'white');
+				element.css('color', 'black');
+		        if (event.status == 'VolunteerApply' || event.status == 'RequesterAcceptService' || event.status == 'ServiceFinishNotPay') {		        	
+		            element.css('background-color', '#d2e9ff');	
+		        } else {
+		            element.css('background-color', '#ceffce');		            
+		        }
+		    },
+		  eventTextColor: '	#000000',
 		});
 	})
+	
+	//自訂日期格式
+	Date.prototype.Format = function (fmt) {
+	    var o = {
+	        "M+": this.getMonth() + 1, //月份
+	        "d+": this.getDate(), //日
+	        "h+": this.getHours(), //小时
+	        "m+": this.getMinutes(), //分
+	        "s+": this.getSeconds(), //秒
+	        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+	        "S": this.getMilliseconds() //毫秒
+	    };
+	    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+	    for (var k in o)
+	        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+	    return fmt;
+	}
 	</script>
 </body>
 </html>
