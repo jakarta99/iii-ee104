@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.enums.MemberType;
@@ -23,10 +24,9 @@ public class OrganizationController {
 		return "/basic/commons/organization_list";
 	}
 	
-	
+	@ResponseBody
 	@RequestMapping("/query")
 	public Page<Member> query(@RequestParam int page, @RequestParam int length){
-		System.out.println("QEYR");
 		return memberService.findByMemberType(MemberType.O, PageRequest.of(page, length));
 	}
 
