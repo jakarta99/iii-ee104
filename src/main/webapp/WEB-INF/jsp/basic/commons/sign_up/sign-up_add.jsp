@@ -8,10 +8,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Sign Up Add</title>
 
-<jsp:include page="../../../admin/admin_layout/admin_css_js_links.jsp" />
+<%-- <jsp:include page="../../../admin/admin_layout/admin_css_js_links.jsp" /> --%>
 <!-- css -->
 <jsp:include page="../commons_layout/commons_css_links.jsp" />
-
+<!-- Javascript files -->
+<jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
+<script defer
+	src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
 <!-- date picker -->
@@ -19,6 +23,7 @@
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
+
 <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 
 <!-- sweetAlert -->
@@ -238,7 +243,7 @@
     </section>
 	<!-- FOOTER -->
 	<jsp:include page="../commons_layout/commons_footer.jsp"/>
-	
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 	<script>
 	document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("idAccount").addEventListener("keyup", chkAccount);
@@ -370,7 +375,8 @@
                         "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
                 } else {
                     document.getElementById("idspName").innerHTML =
-                        "<img src='/img/X.jpg'><span style='color:red'>必須全部為中文字</span>"
+                        "<img src='/img/X.jpg'><span style='color:red'>必須全部為中文字</span>";
+                    break;
                 }
             }
         }
@@ -421,23 +427,23 @@
         		var invalidList = "00000000,11111111";
         	    if (/^\d{8}$/.test(theCertificateIdNumber) == false || invalidList.indexOf(theCertificateIdNumber) != -1) {
         	    	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>請輸入正確統一編號格式</span>";
-        	    }
-
-        	    var validateOperator = [1, 2, 1, 2, 1, 2, 4, 1],
+        	    }else{
+        	    	var validateOperator = [1, 2, 1, 2, 1, 2, 4, 1],
         	        sum = 0,
         	        calculate = function (product) { // 個位數 + 十位數
         	            var ones = product % 10,
         	                tens = (product - ones) / 10;
         	            return ones + tens;
         	        };
-        	    for (var i = 0; i < validateOperator.length; i++) {
-        	        sum += calculate(theCertificateIdNumber[i] * validateOperator[i]);
-        	    }
+        	    	for (var i = 0; i < validateOperator.length; i++) {
+        	        	sum += calculate(theCertificateIdNumber[i] * validateOperator[i]);
+        	    	}
 
-        	    if (sum % 10 == 0 || (theCertificateIdNumber[6] == "7" && (sum + 1) % 10 == 0)) {
-        	    	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
-        	    } else {
-        	    	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>驗證失敗，請輸入正確統一編號格式</span>";
+        	    	if (sum % 10 == 0 || (theCertificateIdNumber[6] == "7" && (sum + 1) % 10 == 0)) {
+        	    		msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+        	    	} else {
+        	    		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>驗證失敗，請輸入正確統一編號格式</span>";
+        	    	}
         	    }
         	}
         }else{
@@ -554,6 +560,7 @@
 	                	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
 	                } else {
 	                	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>必須全部為中文字</span>"
+	                	break;
 	                }
 	            }
 	        }
@@ -581,6 +588,7 @@
 	                	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
 	                } else {
 	                	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>必須全部為中文字</span>"
+	                	break;
 	                }
 	            }
 	        }
@@ -608,6 +616,7 @@
 	                	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
 	                } else {
 	                	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>必須全部為中文字</span>"
+	                	break;
 	                }
 	            }
 	        }
@@ -771,7 +780,7 @@
 							if (message =="電話格式錯誤"){
 								document.getElementById("idspTelephone").innerHTML =
 					                "<img src='/img/X.jpg'><span style='color:red'>電話格式錯誤</span>"
-								$("#idspTelephone").html(message);
+// 								$("#idspTelephone").html(message);
 							}
 							if (message =="手機格式錯誤"){
 								document.getElementById("idspMobile").innerHTML =

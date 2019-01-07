@@ -57,33 +57,32 @@
 		<h2 class="text-center text-uppercase text-secondary mb-0">securityUser List</h2>
 <!--         <hr class="star-dark mb-5"> -->
 	</div>
-	<fieldset style="width:700px">
-		<input type="button" class="btn btn-warning btn-sm" id="editButt3" onclick="editRow()" value="更新-2"/>
-		
+	<fieldset style="width:700px">	
 		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-warning btn-sm" id="editButt" onclick="editRow()" data-toggle="modal" data-target="#exampleModal" > 更新</button>
+		<button type="button" class="btn btn-warning btn-sm" id="editButt" data-toggle="modal" data-target="#exampleModal" > 新增</button>
 		
  		<!-- Modal --> 
 		<div class="modal fade" id=exampleModal tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+		        <h5 class="modal-title" id="exampleModalLabel">ADD</h5>
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		        </button>
 		      </div>
 		      <div class="modal-body">
+		      	請輸入授權者的編號及增加的角色編號:
 		      <form>
-		      	<label>會員編號 :</label> 
-		      	<input type="text" name="memberId" value="">
+		      	<input type="text" id="memberId" name="memberId" value="" placeholder="會員編號">
+		      	<input type="text" id="roleId" name="roleId" value="" placeholder="角色">
 		      
 		      </form>
-		        Are you sure you want to delete this Member?
+		      
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary" onclick='deleteRow()' >OK</button>
+		        <button type="button" class="btn btn-primary" onclick='addUser()' >OK</button>
 		      </div>
 		    </div>
 		  </div>
@@ -119,39 +118,43 @@
 		var dataTable;
 		var selectedRowId = 0;
 
-// 		function deleteRow(memberId, roleId){
-// // 			alert(memberId+","+ roleId)
-// 			$.ajax({
-// 				type: "get",
-// 				dataType: "json",         
-// 				url: "/admin/securityUser/delete",
-// 				data: {"memberId":memberId,
-// 						"roleId" : roleId}					
-// 			})
-// 			.done(function(response){
-// 				if (response.status =="SUCCESS"){
-// 					alert("刪除成功");
-// 				} else {
-// 					$.each(response.messages, function(idx, message) {
-// 						alert("the "+idx+"th ERROR, because "+message);
-// 					});
-// 				}			
-// 				dataTable.ajax.reload(); //會回到第一頁
-// 			})	
+		function deleteRow(memberId, roleId){
+			$.ajax({
+				type: "get",
+				dataType: "json",         
+				url: "/admin/securityUser/delete",
+				data: {"memberId":memberId,
+						"roleId" : roleId}					
+			})
+			.done(function(response){
+				if (response.status =="SUCCESS"){
+					alert("刪除成功");
+				} else {
+					$.each(response.messages, function(idx, message) {
+						alert("the "+idx+"th ERROR, because "+message);
+					});
+				}			
+				dataTable.ajax.reload(); //會回到第一頁
+			})	
 			
-// 		}
+		}
 		
-		function editRow(){
-			var array = selectedRowId.split(",",2);
-			if (array!= null ){
-				$.post("/admin/securityUser/add", 
-						{memberId:array[0],rowId: array[1]}, 
-						function(data){
-							console.log(data);
-						}) 
-// 				javascript:document.location.href='/admin/securityUser/securityUser_add?memberId='+array[0]+'&rowId=' +array[1];
-// 				window.location.replace("/admin/member/list");
-			}
+		function addUser(){
+			var memberId = $("#memberId").val();
+			var roleId = $("#roleId").val();
+			$.get("/admin/securityUser/add",
+					{"memberId":memberId, "roleId":roleId}, function(response){
+						if (response.status =="SUCCESS"){
+							alert("新增成功");
+						} else {
+							$.each(response.messages, function(idx, message) {
+								alert("the "+idx+"th ERROR, because "+message);
+							});
+						}		
+					})
+			
+				window.location.replace("/admin/securityUser/list");
+
 		}
 
 	
@@ -201,21 +204,21 @@
 			 } );
 			
 			
-			 $('#table tbody').on( 'click', 'tr', function () {
-			        if ( $(this).hasClass('selected')) {
-			            $(this).removeClass('selected');
-			            selectedRowId = 0;
-			            $('#deleteButt').prop("disabled", true);
-			            $('#editButt').prop("disabled", true);
-			        }
-			        else {
-			        	$('tr.selected').removeClass('selected');
-			        	selectedRowId = this.id;
-						$(this).addClass('selected');
-			            $('#deleteButt').prop("disabled", false);
-			            $('#editButt').prop("disabled", false);
-			        }
-			    } );
+// 			 $('#table tbody').on( 'click', 'tr', function () {
+// 			        if ( $(this).hasClass('selected')) {
+// 			            $(this).removeClass('selected');
+// 			            selectedRowId = 0;
+// 			            $('#deleteButt').prop("disabled", true);
+// 			            $('#editButt').prop("disabled", true);
+// 			        }
+// 			        else {
+// 			        	$('tr.selected').removeClass('selected');
+// 			        	selectedRowId = this.id;
+// 						$(this).addClass('selected');
+// 			            $('#deleteButt').prop("disabled", false);
+// 			            $('#editButt').prop("disabled", false);
+// 			        }
+// 			    } );
 			
 			
 		})	

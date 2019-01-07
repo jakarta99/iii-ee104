@@ -173,7 +173,7 @@
 				serverSide: true,  //DataTable:分頁、排序都交由伺服器處理
 				lengthMenu: [ 3, 6, 9, 12, ],
 				ajax:{
-					url:"/penalty/getVertifyList",
+					url:"/admin/penaltyVertify/getVertifyList",
 					type:"get",
 					dataType:"json",
 					data:function(d){ 				//DataTable:傳送給伺服器的資料(datatable預設會傳送d的資料)
@@ -202,10 +202,10 @@
 		           		var vertifyButt = "";
 		           		//已完成審核之案件，不顯示審核按鈕
 		           		if(data.status != 1){
-		           			vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-info btn-sm\"  onclick=\"javascript:document.location.href='/penalty/vertify?id="
+		           			vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-info btn-sm\"  onclick=\"javascript:document.location.href='/admin/penaltyVertify/vertify?id="
 								+ data.id + "'\" value='檢視紀錄'  /></div>";
 						}else{
-							vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-info btn-sm\"  onclick=\"javascript:document.location.href='/penalty/vertify?id="
+							vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-info btn-sm\"  onclick=\"javascript:document.location.href='/admin/penaltyVertify/vertify?id="
 								+ data.id + "'\" value='審核'  /></div>";
 						}
 		               	return vertifyButt;	}
@@ -304,12 +304,12 @@
 			
 			//產製EXCEL報表功能之按鈕
 			$("#excelButt").click(function(){
-				$(this).attr("href", "/penalty/penaltyExcel?" + $('form').serialize())
+				$(this).attr("href", "/admin/penaltyVertify/penaltyExcel?" + $('form').serialize())
 			})
 			
 			//產製PDF報表功能之按鈕
 			$("#pdfButt").click(function(){
-				$(this).attr("href", "/penalty/penaltyPDF?" + $('form').serialize())
+				$(this).attr("href", "/admin/penaltyVertify/penaltyPDF?" + $('form').serialize())
 			})
 			
 			
