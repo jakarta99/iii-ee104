@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,7 @@ import team.lala.timebank.enums.YesNo;
 
 @Slf4j
 @Service
+@Transactional
 public class PenaltyService {
 
 	@Autowired
