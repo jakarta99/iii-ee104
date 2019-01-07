@@ -1,5 +1,7 @@
 package team.lala.timebank.web.user.mission;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
@@ -66,7 +68,7 @@ public class RecruitController {
 
 	// 編輯mission並發送系統訊息
 	@RequestMapping("/edit")
-	public String editRecruit(@RequestParam("id") Long id, Model model) {
+	public String editRecruit(@RequestParam("id") Long id, Model model, HttpServletRequest request) {
 		Mission mission = missionService.getOne(id);
 		List<ServiceType> serviceType = serviceTypeService.findAll();
 		model.addAttribute("mission", mission);
@@ -126,17 +128,35 @@ public class RecruitController {
 	@RequestMapping("/update")
 
 	public String update(Mission mission, @RequestParam("missionPicture") MultipartFile missionPicture,
-			HttpServletRequest request, Model model) {
+			HttpServletRequest request, Principal principal, Model model) {
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
-
-		log.debug("mission.getMember()={}", mission.getMember());
 
 		try {
 			missionService.update(mission, missionPicture, request);
 			List<Order> orders = orderService.findByMission(mission);
 			systemMessageService.missionEdit(orders);
+			if (missionPicture.getOriginalFilename().length() > 0) {
+				// 取得應用程式根目錄中圖片之路徑
+				String realPath = request.getServletContext().getRealPath("/") + "WEB-INF\\image\\user\\mission\\";
+				System.out.println(realPath + "***************************");
+				// 確認是否有此資料夾，如無則建資料夾
+				File dir = new File(realPath);
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+				// 檔名
+				String location = realPath + "missionPicture_" + mission.getId() + ".jpg";
+
+				// 寫出檔案到Server
+				FileOutputStream fos = new FileOutputStream(location);
+				fos.write(missionPicture.getBytes());
+				fos.close();
+
+				// 將檔名存入DB
+				mission.setMissionPicName("missionPicture_" + mission.getId() + ".jpg");
+				missionService.insert(mission, principal);
+			}
 			response.addMessage("修改成功");
-			
 		} catch (Exception e) {
 			response.addMessage("修改失敗，" + e.getMessage());
 			e.printStackTrace();
@@ -144,13 +164,25 @@ public class RecruitController {
 
 		return "/basic/user/volunteerRecruitment/mission_list";
 	}
+	
 	@RequestMapping("/insert")
-
-	public String insertOrder (Principal principal, @RequestParam("missionId") Long missionId) {
-		
-		Mission mission = missionService.getOne(missionId);
-		Member member = memberService.findByAccount(principal.getName());
-		orderService.insert(mission, member);
-		return "/user/volunteerApplication/applicationPage";
+	@ResponseBody
+	public AjaxResponse<Mission> insertOrder (Principal principal, @RequestParam("missionId") Long missionId) {
+		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
+		try {
+			Mission mission = missionService.getOne(missionId);
+			//刊登者與申請者相同時 申請失敗
+			
+			if(!principal.getName().equals(mission.getMember().getAccount())) {
+				Member member = memberService.findByAccount(principal.getName());
+				orderService.insert(mission, member);
+				response.addMessage("申請成功");
+			}else {
+				response.addMessage("申請者不得與刊登者為相同帳戶");
+			}
+		}catch(Exception e) {
+			response.addMessage("申請失敗");
+		}
+		return response;
 	}
 }

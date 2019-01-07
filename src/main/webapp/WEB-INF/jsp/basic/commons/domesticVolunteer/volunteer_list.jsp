@@ -209,16 +209,14 @@ $("#searchButt").click(function(){
 	        	
 	        	
 	        	$.each(missions.content,function(index, mission){
-	        		var box1="<div class='col-lg-4 col-md-6'>";
-	        		var box2="<div class='home-blog-post'>";
-	        		var box3="<div class='image'><img src=../../img/"+mission.missionPicName+" alt='...' class='img-fluid'  height='300'>";
-	        		var box4="<div class='overlay d-flex align-items-center justify-content-center'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"' class='btn btn-template-outlined-white'><i class='fa fa-chain'> </i> Read More</a></div>";
-	        		var box5="</div><div class='text'><h4><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'>"+ mission.title + "</a></h4>";
-	        		var box6="<p class='author-category'>活動時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>";
-	        		var box7="<p class='author-category'>活動地點:"+mission.county+mission.district+"</p>";
-	        		var box8="<p class='intro'>"+mission.discription+"</p><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"' class='btn btn-template-outlined'>Continue Reading</a>";        	
-	        		var box9="</div></div></div>";   
-	        		var boxbox=$("#boxbox").append([box1+box2+box3+box4+box5+box6+box7+box8+box9]); 
+	        		var box="<div class='col-lg-4 col-md-6'>";
+	        		 box+="<div class='home-blog-post'>";
+	        		 box+="<div class='image' style='text-align:center'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'><img width='300px' height='230px' src=/image/user/mission/"+mission.missionPicName+" alt='...'></a>";
+	        		 box+="</div><div class='text'><h4><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'>"+ mission.title + "</a></h4>";
+	        		 box+="<p class='author-category'>活動時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>";
+	        		 box+="<p class='author-category'>活動地點:"+mission.county+mission.district+"</p>";       	
+	        		 box+="</div></div></div>";   
+	        		var boxbox=$("#boxbox").append(box); 
 	        		//https://css-tricks.com/html-templates-via-javascript-template-literals/
 	        		
 	        		

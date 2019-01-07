@@ -2,6 +2,8 @@ package team.lala.timebank.web.commons;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -56,7 +58,7 @@ public class DomesticVolunteerController {
 	}
 	
 	@RequestMapping("/apply")
-	public String missionDetail (@RequestParam Long missionId, Model model) {
+	public String missionDetail (@RequestParam Long missionId, Model model, HttpServletRequest request) {
 
 		log.debug("inputMission={}", missionId);
 		Mission mission = missionService.getOne(missionId);

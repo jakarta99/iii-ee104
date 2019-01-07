@@ -32,7 +32,7 @@
 
 
 			
-<title>mission edit</title>
+<title>活動編輯</title>
  <style>
         fieldset {
             width: 800px;
@@ -67,102 +67,153 @@
 <fmt:formatDate value="${mission.publishDate }" pattern="yyyy/MM/dd" var="publishDate" />
 <fmt:formatDate value="${mission.startDate }" pattern="yyyy/MM/dd HH:mm" var="startDate" />
 <fmt:formatDate value="${mission.endDate }" pattern="yyyy/MM/dd HH:mm" var="endDate" />
-<div id="navBar" class="margintop"></div>
-	
-	<h1 class="s2">mission edit(after login)</h1>
-	
-	<form enctype="multipart/form-data" action="/user/volunteerRecruitment/update" method="post">
-	<fieldset>
-	
-	<input type="hidden" value="${mission.id}" id="id" name="id"/>
-   	<input type="hidden" value="${mission.member.id}" id="member" name="member"/><p>
-	<input type="hidden" value="${publishDate}"  id="publishDate" name="publishDate"/>
-	<input type="hidden" value="${mission.approvedQuantity}"  id="approvedQuantity" name="approvedQuantity"/>
-	<input type="hidden" value="${mission.missionstatus}"  id="missionstatus" name="missionstatus"/>
-	
-	
-	<div>			
-		<label>活動縣市:</label> <br>
-		<div role="tw-city-selector" ></div>
-		<div>
-			活動地址:<input type='text'  value='${mission.address}'id='address' name='address' class="form-control"/>
-		</div>
-	</div>
+	<!-- Top bar-->
+	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
+ 	
+	<!-- Navbar -->
+    <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
     
-    <div class="form-group">
-    title:<input type="text" value="${mission.title}" id="title" name="title" class="form-control"/>
-    </div>
-   
-   
-   
-   	<div class="form-group">
-    serviceType:<select id="serviceType" name="serviceType" class="form-control"  >
-        <c:forEach var="serviceType" items="${serviceType}"> 
-			<option value="${serviceType.id}">${serviceType.serviceType}</option> 
-		</c:forEach> 			
-    </select><p>
-    </div>
+    <div id="heading-breadcrumbs">
+        <div class="container">
+          <div class="row d-flex align-items-center flex-wrap">
+            <div class="col-md-7">
+              <h1 class="h2">編輯活動</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+		<section class="bar">
+        	<div class="container">
+          	<div class="row">
+          	<div class="bo3">
+                <div class="heading">
+                  <h3 class="text-uppercase">活動詳細</h3>
+                </div>
+                <form id="missionForm" action="/user/volunteerRecruitment/update" method="post" enctype="multipart/form-data">
+					<input type="hidden" value="${mission.id}" id="id" name="id"/>
+				   	<input type="hidden" value="${mission.member.id}" id="member" name="member"/><p>
+					<input type="hidden" value="${publishDate}"  id="publishDate" name="publishDate"/>
+					<input type="hidden" value="${mission.approvedQuantity}"  id="approvedQuantity" name="approvedQuantity"/>
+					<input type="hidden" value="${mission.missionstatus}"  id="missionstatus" name="missionstatus"/>
+                  
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="title">活動標題</label>
+                        <input type="text" value="${mission.title}" id="title" name="title" class="form-control"/>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="serviceType">活動類型</label>
+                        <select id="serviceType" name="serviceType" class="form-control">
+					        <c:forEach var="serviceType" items="${serviceType}"> 
+								<option value="${serviceType.id}">${serviceType.serviceType}</option> 
+							</c:forEach> 
+						</select>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                     <div class="form-group">
+                     	<label>活動地點</label>
+                     	<div role="tw-city-selector" ></div>
+                     </div>
+                    </div>
+                     <div class="col-md-3">
+                     	<div class="form-group">
+                      	<label for="address">地址</label>
+                     	<input type='text'  value='${mission.address}'id='address' name='address' class="form-control"/>
+                     </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="startDate">開始日期</label>
+                        <input value="${startDate}" id="startDate" name="startDate" class="form-control">
+                      </div>
+                    </div>     
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="endDate">結束日期</label>
+                        <input value="${endDate}" id="endDate" name="endDate" class="form-control">
+                      </div>
+                    </div>
+                    
+                    
+                    
     
-    <div class="form-group">
-    termType:<select id="termType" name="termType" class="form-control" >
-        <option value="L">長期</option>
-        <option value="S">短期</option>
-    </select>
-    </div>
-    
-    <div>
-		<label>startDate:</label> 
-		<input  value="${startDate}" id="startDate" name="startDate" class="form-control" autocomplete="off"><br>
-	</div>
-						
-	<div>
-		<label>endDate:</label> 
-		<input  value="${endDate}"  id="endDate" name="endDate" class="form-control" autocomplete="off"><br>
-	</div>
-    
-    <div class="form-group">
-    timeValue:<input type="text" value="${mission.timeValue}" id="timeValue" name="timeValue" class="form-control"/><p>
-	</div>
-	
-	<div class="form-group">
-    peopleNeeded:<input type="text" value="${mission.peopleNeeded}" id="peopleNeeded" name="peopleNeeded" class="form-control"/>
-    </div>
-    
-    <div class="form-group">
-    contactPerson:<input type="text" value="${mission.contactPerson}" id="contactPerson" name="contactPerson" class="form-control"/>
-    </div>
-    
-    <div class="form-group">
-    contactPhone:<input type="text" value="${mission.contactPhone}" id="contactPhone" name="contactPhone" class="form-control"/>
-    </div>
-    
-    <div class="form-group">
-    contactEmail:<input type="email" value="${mission.contactEmail}" id="contactEmail" name="contactEmail" class="form-control"/>
-    </div>
-    
-    <div class="form-group">
-     missionPicture:<a id="missionPicName" href="/image/user/mission/${mission.missionPicName}" target="_blank">原上傳圖片</a>
-     <input type="file" id="missionPicture" name="missionPicture" accept="image/*" class="form-control" />
-    </div>
-      
-    
-    <div class="form-group">
-     description:<input type="text" value="${mission.discription}" id="discription" name="discription" class="form-control"/>
-    </div>
-	
-	
-	
-	<div>
-	<button id="add" class="btn btn-outline-secondary" >更新</button>
-	<input type="reset" class="btn btn-outline-secondary" />
-	</div>
-	<div>
-	<input type="button" class="btn btn-outline-secondary" onclick="javascript:document.location.href='/user/volunteerRecruitment/list'" value="回列表頁"/>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="termType">長短期</label>
+                        <select id="termType" name="termType" class="form-control">
+					        <option value="L">長期</option>
+					        <option value="S">短期</option>
+    					</select>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="peopleNeeded">需求人數</label>
+                        <input type="text" value="${mission.peopleNeeded}" id="peopleNeeded" name="peopleNeeded" class="form-control"/>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="timeValue">支付時數</label>
+                        <input type="text" value="${mission.timeValue}" id="timeValue" name="timeValue" class="form-control"/>
+                      </div>
+                    </div>   
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 col-lg-3">
+                      <div class="form-group">
+                        <label for="contactPerson">聯絡人</label>
+                        <input type="text" value="${mission.contactPerson}" id="contactPerson" name="contactPerson" class="form-control"/>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                      <div class="form-group">
+                        <label for="contactPhone">聯絡電話</label>
+                        <input id="contactPhone" value="${mission.contactPhone}" name="contactPhone" type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                      <div class="form-group">
+                        <label for="email">聯絡Email</label>
+                        <input type="email" value="${mission.contactEmail}" id="contactEmail" name="contactEmail" class="form-control"/>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                      <div class="form-group">
+                        <label for="missionPicture">活動宣傳圖</label>
+                        <a id="missionPicName" href="/image/user/mission/${mission.missionPicName}" target="_blank">原上傳圖片</a>
+                        <input type="file"  id="missionPicture" name="missionPicture" accept="image/*" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group"> 
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="discription">活動詳細文字敘述</label>
+                        <textarea class="form-control"  id="discription" name="discription" rows="3">${mission.discription}</textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-12 text-center">
+                      <button type="submit" class="btn btn-template-outlined"><i class="fa fa-save"></i>更新活動</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+          </div>
+        </div>
+	 </section>
+	  
+	  
+	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 
-	</div>
-					
-	</fieldset>
-	</form>
 	
 	<script>
 		var missionPicName = '${mission.missionPicName}';
