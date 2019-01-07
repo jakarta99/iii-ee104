@@ -40,7 +40,8 @@ public class UserPersonalInfoController {
 	
 	@RequestMapping("/update")
 	@ResponseBody
-	public AjaxResponse<Member> updateMember(Member member, @RequestParam("passwordNew") String passwordNew/*, BindingResult bindingResults*/) {		
+	public AjaxResponse<Member> updateMember(Member member, @RequestParam("passwordCheck") String passwordCheck, 
+			@RequestParam("passwordNew") String passwordNew/*, BindingResult bindingResults*/) {		
 		
 //		if(bindingResults != null && bindingResults.hasFieldErrors()) {
 //			if(bindingResults.hasFieldErrors("birthDate")) {
@@ -56,6 +57,7 @@ public class UserPersonalInfoController {
 		boolean fPassword4 = false;
 		boolean fPassword5 = false;
 		boolean fPassword6 = false;
+		boolean fPasswordCheck = false;		
 		boolean fName = false;
 		boolean fIdNumber = false;
 		boolean fDate = false;
@@ -74,8 +76,22 @@ public class UserPersonalInfoController {
 		
 		//驗證資料
 		
-//		// 檢查舊密碼  
-//		if(member.get)
+		// 檢查舊密碼 是否與資料庫相符
+		if(member.getPassword() != null) {
+			Member userDetails = (Member) SecurityContextHolder.getContext()  
+					.getAuthentication()  
+					.getPrincipal();
+			String encodeDB = (memberService.getOne(userDetails.getId())).getPassword();
+			log.debug("insertPassword={}",member.getPassword());
+
+			//確認輸入的密碼 與 轉碼後的隱碼 是否相符
+			if(encoder.matches(member.getPassword(), encodeDB)) {
+				fPasswordOld = true;
+			}else {
+				log.debug("舊密碼XXX");
+				response.addMessage("密碼輸入錯誤");
+			}
+		}
 		// 不可空白，長度必須大於等於8小於等於16
 //		if (member.getPassword() != null && member.getPassword().trim().length() >= 8 && member.getPassword().trim().length() <= 16) {
 //			// 判斷是否包含字母、數字、特殊符號
@@ -92,24 +108,6 @@ public class UserPersonalInfoController {
 //				}
 //			}
 //			if (fPassword1 && fPassword2 && fPassword3) {
-				Member userDetails = (Member) SecurityContextHolder.getContext()  
-						.getAuthentication()  
-						.getPrincipal();
-				String encodeDB = (memberService.getOne(userDetails.getId())).getPassword();
-				//檢查舊密碼是否正確，與資料庫相符
-				String result = "密碼輸入錯誤";
-				log.debug("insertPassword={}",member.getPassword());
-
-//		String encodeOld = encoder.encode(password);
-//		log.debug("encodeOld={}",encodeOld);
-//		String encodeTest = encoder.encode(password);
-//		log.debug("encodeTest={}",encodeTest);
-
-				//確認輸入的密碼 與 轉碼後的隱碼 是否相符
-				if(encoder.matches(member.getPassword(), encodeDB)) {
-						result = "正確";
-				}
-//				return result;
 //				fPasswordOld = true;
 //			}
 //		}else {
@@ -138,6 +136,14 @@ public class UserPersonalInfoController {
 		}else {
 			log.debug("新密碼XXX");
 			response.addMessage("新密碼格式錯誤");
+		}
+		
+		//檢查確認密碼，與新密碼相同
+		if(passwordCheck.equals(passwordNew)) {
+			fPasswordCheck = true;
+		}else {
+			log.debug("確認密碼XXX");
+			response.addMessage("密碼不一致");
 		}
 		
 		//檢查Name 不可空白，至少2個字以上
@@ -395,16 +401,18 @@ public class UserPersonalInfoController {
 				fOrgWebsiteLink = true;
 			}
 		}
-
 		
 		//要放在驗證資料之後
-		if( /*fPasswordOld &&*/ fPasswordNew && fName && fIdNumber /*&& fDate*/ 
+		if( fPasswordOld && fPasswordNew && fPasswordCheck && fName && fIdNumber /*&& fDate*/ 
 				&& fEmail && fTelephone && fMobile) {
 			if(member.getMemberType() == MemberType.O) {
 				if( fOrgFounder && fOrgCeo && fOrgContactPerson 
 						&& fOrgContactPersonTel && fOrgContactPersonMobile && fOrgWebsiteLink) {
 					try {
-						member.setPassword(encoder.encode(passwordNew));
+						String encode = encoder.encode(passwordNew);
+						log.debug("encode={}",encode);
+						member.setPassword(encode);
+						
 						Member updatedMember = memberService.update(member);
 						log.debug("updatedMember.getId()={}", updatedMember.getId());
 						response.setObj(updatedMember);
@@ -418,7 +426,10 @@ public class UserPersonalInfoController {
 				}
 			}else if(member.getMemberType() == MemberType.P){
 				try {
-					member.setPassword(encoder.encode(passwordNew));
+					String encode = encoder.encode(passwordNew);
+					log.debug("encode={}",encode);
+					member.setPassword(encode);
+					
 					Member updatedMember = memberService.update(member);
 					log.debug("updatedMember.getId()={}", updatedMember.getId());
 					response.setObj(updatedMember);

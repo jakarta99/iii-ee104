@@ -768,9 +768,17 @@
 					} else{
 						$.each(response.messages, function(idx, message) {
 // 							alert("the "+idx+"th ERROR, because "+message);
+							if (message =="密碼輸入錯誤"){
+								document.getElementById("idspPasswordOld").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>密碼輸入錯誤</span>"
+							}
 							if (message =="新密碼格式錯誤"){
 								document.getElementById("idspPasswordNew").innerHTML =
 					                "<img src='/img/X.jpg'><span style='color:red'>新密碼格式錯誤</span>"
+							}
+							if (message =="密碼不一致"){
+								document.getElementById("idspPasswordCheck").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>密碼不一致</span>"
 							}
 							if (message =="姓名格式錯誤"){
 								document.getElementById("idspName").innerHTML =
