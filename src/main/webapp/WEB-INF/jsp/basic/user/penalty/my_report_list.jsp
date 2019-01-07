@@ -54,7 +54,7 @@
 		</table>
 		<hr>
 		<h2>是否上傳舉證資料?</h2>
-		<form action="/penalty/storeProofPic" method="Post" enctype="multipart/form-data" onSubmit="return CheckForm();">
+		<form action="/admin/penaltyVertify/storeProofPic" method="Post" enctype="multipart/form-data" onSubmit="return CheckForm();">
 			<input type="hidden" id="penaltyId" name="penaltyId" value="${reportOnePenalty.id}">
 			<input type="file" id="proofPic" name="proofPic"  accept="image/*"><p>
 			請選擇圖檔，如無佐證資料，則直接送出審核<p>

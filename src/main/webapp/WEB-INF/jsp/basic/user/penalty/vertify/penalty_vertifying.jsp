@@ -106,7 +106,7 @@
 					<div class="custom-control custom-radio">
 						<input type="radio" id="proofRadio1" name="proofRadio" class="custom-control-input" readonly>
 						<label class="custom-control-label" for="customRadio1">是</label>
-						<a id="proofPic" href="../img/${penalty.proofPicName}" target="_blank">佐證資料檢視</a>
+						<a id="proofPic" href="../../img/${penalty.proofPicName}" target="_blank">佐證資料檢視</a>
 					</div>
 					<div class="custom-control custom-radio">
 						<input type="radio" id="proofRadio2" name="proofRadio" class="custom-control-input" readonly>
@@ -195,7 +195,7 @@
 					//alert("處罰時數需大於0");
 				}else{
 					$.ajax({
-						url : "/penalty/doneVertify",
+						url : "/admin/penaltyVertify/doneVertify",
 						method : "put",
 						dataType : "json",
 						data : {"penaltyId":$('#penaltyId').val(),"status":$('#status').val(),
@@ -212,7 +212,7 @@
 							    	icon: "success",
 							    }).then((result) => {
 									if (result) {
-										document.location.href="/penalty/showVertifyList";
+										document.location.href="/admin/penaltyVertify/showVertifyList";
 									}
 								});;
 								//alert(result.statusDescription);
@@ -243,9 +243,7 @@
 					.then((result) => {
 					  if (result) {
 						  saveVertify("完成審核", "審核結果儲存失敗");
-					  } else {
-					    swal("Your imaginary file is safe!");
-					  }
+					  } 
 					});
 				
 				

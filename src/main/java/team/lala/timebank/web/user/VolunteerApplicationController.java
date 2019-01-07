@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.service.OrderService;
+import team.lala.timebank.spec.OrderSpecification;
 
 @Slf4j
 @Controller
@@ -43,8 +44,10 @@ public class VolunteerApplicationController {
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
 		Order order = new Order();
 		order.setOrderStatusDetail(orderStatusDetail);
+		order.setVolunteerAccount(principal.getName());
+		OrderSpecification orderSpecification = new OrderSpecification(order);
 		int page = start.orElse(0)/length.orElse(10);
-		return orderService.findByVolunteerAndOrderStatus(principal, order, PageRequest.of(page, length.orElse(10)));
+		return orderService.findBySpecification(orderSpecification, PageRequest.of(page, length.orElse(10)));
 	}
 	
 	@ResponseBody
@@ -53,8 +56,10 @@ public class VolunteerApplicationController {
 			@RequestParam(value="orderStatusDetail") String orderStatusDetail,
 			@RequestParam(value="start",required=false) Optional<Integer> start, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
+		order.setVolunteerAccount(principal.getName());
+		OrderSpecification orderSpecification = new OrderSpecification(order);
 		int page = start.orElse(0)/length.orElse(10);
-		return orderService.findByVolunteerAndOrderStatus(principal, order, PageRequest.of(page, length.orElse(10)));
+		return orderService.findBySpecification(orderSpecification, PageRequest.of(page, length.orElse(10)));
 	}
 	
 	@ResponseBody
