@@ -27,7 +27,6 @@ import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.enums.OrderStatus;
-import team.lala.timebank.spec.OrderSpecification;
 
 @Slf4j
 @Service
@@ -41,14 +40,11 @@ public class OrderService {
 	@Autowired
 	private PenaltyDao penaltyDao;
 
-	public List<Order> findBySpecification(Specification<Order> specification) {
-		return orderDao.findAll(specification);
-	}
-
+	// 根據會員查詢order
 	public Page<Order> findBySpecification(Specification<Order> specification, PageRequest pageRequest) {
 		return orderDao.findAll(specification, pageRequest);
-	}
-
+	}	
+	
 	public Page<Order> findByMission(Mission inputMission, int page, Optional<Integer> length) {
 		Page<Order> orders = orderDao.findByMission(inputMission, PageRequest.of(page, length.orElse(10)));
 		// mission.setMember(memberDao.findByAccount(principal.getName()));
@@ -59,13 +55,6 @@ public class OrderService {
 		return orders;
 	}
 
-	// 根據會員查詢order
-	public Page<Order> findByVolunteerAndOrderStatus(Principal principal, Order order, PageRequest pageRequest) {
-		order.setVolunteer(memberDao.findByAccount(principal.getName()));
-		OrderSpecification orderSpecification = new OrderSpecification(order);
-		return orderDao.findAll(orderSpecification, pageRequest);
-	}
-	
 	//志工幫雇主評分
 	public void score(Long orderId, Integer score) {
 		Order order = orderDao.getOne(orderId);
@@ -131,11 +120,6 @@ public class OrderService {
 		}
 	}
 
-	public List<Order> findAll() {
-		List<Order> orders = orderDao.findAll();
-		return orders;
-	}
-
 	public List<Order> findByVolunteer(Principal principal) {
 		String account = principal.getName();
 		Member member = memberDao.findByAccount(account);
@@ -146,12 +130,6 @@ public class OrderService {
 	public Order getById(Long id) {
 		// getOne查無資料不會回傳null，而是噴錯(確認是在Service處理Exception，還是在Controller)
 		Order order = orderDao.getOne(id);
-		return order;
-	}
-
-	// 測試用，待確認Optional物件用法，用不到記得刪
-	public Optional<Order> findById(Long id) {
-		Optional<Order> order = orderDao.findById(id);
 		return order;
 	}
 
