@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.microsoft.sqlserver.jdbc.StringUtils;
+
+import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Role;
 import team.lala.timebank.service.MemberService;
-import team.lala.timebank.service.RoleService;
-
+@Slf4j
 @Controller
 @RequestMapping("/admin/securityUser")
 public class AdminSecurityUserController {
@@ -33,19 +35,18 @@ public class AdminSecurityUserController {
 	
 	@ResponseBody
 	@RequestMapping("/add")
-	public Map<String, Object> add(@RequestParam("memberId") Long memberId , @RequestParam("roleId") Long roleId, Model model) {
-		System.out.println("memberId" +memberId+", roleId"+roleId);
-		Member member = memberService.getOne(memberId);
-		Map<String, Object> map = new HashMap<>();
-		Set<Role> roles = member.getRoles();
-		for (Role r : roles) {
-			map.put("id", member.getId());
-			map.put("account", member.getUsername());
-			map.put("role", r);
-			
-		}	
-//		model.addAttribute(map);
-		return map;
+	public AjaxResponse<Member> add(@RequestParam("memberId") Long memberId,
+			@RequestParam("roleId") Long roleId, Model model) {
+		log.debug("memberId={}, roleId={} ",memberId, roleId);
+		AjaxResponse<Member> resp = new AjaxResponse<Member>();
+		Member member = null;
+		if (memberId != 0 && roleId != 0) {
+			member = memberService.addRole(memberId, roleId);
+		}
+		member = memberService.update(member);
+		resp.setObj(member);
+		
+		return resp;
 	}
 	
 	
@@ -68,42 +69,6 @@ public class AdminSecurityUserController {
 	}
 	
 	
-	
-//	@ResponseBody
-//	@RequestMapping("/update")
-//	public AjaxResponse<Member> update(Member member) {
-//		System.out.println("inputMember="+member);			
-//		AjaxResponse<Member> response = new AjaxResponse<Member>();
-//		try {
-//			Member updatedMember = memberService.update(member);
-//			response.setObj(updatedMember);
-//			System.out.println("updatedMember="+updatedMember);		
-//			System.out.println("資料更新成功");
-//		} catch (Exception e) {
-//			response.addMessage("資料更新失敗" + e.getMessage());
-//			System.out.println("資料更新失敗");
-//		}
-//		return 	response;
-//	}
-
-
-//	@RequestMapping("/insert")
-//	@ResponseBody
-//	public AjaxResponse<Member> insert(@RequestParam("memberId") Long memberId, @RequestParam("roleId") Long roleId) {		
-//		System.out.println("member = " + member);
-//		AjaxResponse<Member> response = new AjaxResponse<Member>();
-//		
-//		try {
-//			Member newMember = memberService.insert(member);
-//			response.setObj(newMember);
-//			System.out.println("新增成功");
-//		} catch (Exception e) {
-//			response.addMessage("新增失敗" + e.getMessage());
-//			e.printStackTrace();
-//		}
-//		return response;
-//	}
-
 	@RequestMapping("/delete")
 	@ResponseBody
 	public AjaxResponse<Member> deleteMember(@RequestParam("memberId") Long memberId, @RequestParam("roleId") Long roleId) {
