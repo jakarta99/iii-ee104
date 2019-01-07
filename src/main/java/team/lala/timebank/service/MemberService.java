@@ -123,11 +123,6 @@ public class MemberService {
 		return member;
 	}
 	
-	public Member findById(Long id){
-		Optional<Member> m = memberDao.findById(id);
-		Member member = m.orElse(null);
-		return member;
-	}
 
 	public List<Member> findAll() {
 		List<Member> members = memberDao.findAll();
@@ -142,24 +137,6 @@ public class MemberService {
 		return memberDao.findAll(specification, page);
 	}
 	
-
-	public Member login(String account, String password) {
-		Member member = memberDao.findByAccount(account);
-		if (member != null) {
-			if (member.getPassword().equals(password)) {
-				return member;
-			}
-		}
-		return null;
-	}
-
-	// louis
-	public Member findByAccount(Member m) {
-		// 根據帳號在資料庫中尋找
-		Member member = null;
-		member = memberDao.findByAccount(m.getAccount());
-		return member;
-	}
 	
 	
 	public Member findByAccount(String account) {

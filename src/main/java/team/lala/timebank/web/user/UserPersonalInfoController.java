@@ -40,19 +40,22 @@ public class UserPersonalInfoController {
 	
 	@RequestMapping("/update")
 	@ResponseBody
-	public AjaxResponse<Member> updateMember(Member member/*, BindingResult bindingResults*/) {		
+	public AjaxResponse<Member> updateMember(Member member, @RequestParam("passwordNew") String passwordNew/*, BindingResult bindingResults*/) {		
 		
 //		if(bindingResults != null && bindingResults.hasFieldErrors()) {
 //			if(bindingResults.hasFieldErrors("birthDate")) {
 //				errors.put("birthDate", "birthDate must be a date of YYYY-MM-DD");
 //			}
 //		}
-		boolean fAccount = false;
-		boolean fAccountD = false;
-		boolean fPassword = false;
+		
+		boolean fPasswordOld = false;
 		boolean fPassword1 = false;
 		boolean fPassword2 = false;
 		boolean fPassword3 = false;
+		boolean fPasswordNew = false;
+		boolean fPassword4 = false;
+		boolean fPassword5 = false;
+		boolean fPassword6 = false;
 		boolean fName = false;
 		boolean fIdNumber = false;
 		boolean fDate = false;
@@ -71,7 +74,9 @@ public class UserPersonalInfoController {
 		
 		//驗證資料
 		
-//		// 檢查密碼  不可空白，長度必須大於等於8小於等於16
+//		// 檢查舊密碼  
+//		if(member.get)
+		// 不可空白，長度必須大於等於8小於等於16
 //		if (member.getPassword() != null && member.getPassword().trim().length() >= 8 && member.getPassword().trim().length() <= 16) {
 //			// 判斷是否包含字母、數字、特殊符號
 //			for (int i = 0; i < member.getPassword().length(); i++) {
@@ -83,16 +88,57 @@ public class UserPersonalInfoController {
 //				}else if(test.matches("[~!@#$%^&*]")){
 //					fPassword3 = true;
 //				}else {
-//					response.addMessage("密碼格式錯誤");
+//					response.addMessage("舊密碼格式錯誤");
 //				}
 //			}
 //			if (fPassword1 && fPassword2 && fPassword3) {
-//				fPassword = true;
+				Member userDetails = (Member) SecurityContextHolder.getContext()  
+						.getAuthentication()  
+						.getPrincipal();
+				String encodeDB = (memberService.getOne(userDetails.getId())).getPassword();
+				//檢查舊密碼是否正確，與資料庫相符
+				String result = "密碼輸入錯誤";
+				log.debug("insertPassword={}",member.getPassword());
+
+//		String encodeOld = encoder.encode(password);
+//		log.debug("encodeOld={}",encodeOld);
+//		String encodeTest = encoder.encode(password);
+//		log.debug("encodeTest={}",encodeTest);
+
+				//確認輸入的密碼 與 轉碼後的隱碼 是否相符
+				if(encoder.matches(member.getPassword(), encodeDB)) {
+						result = "正確";
+				}
+//				return result;
+//				fPasswordOld = true;
 //			}
 //		}else {
-//			log.debug("密碼XXX");
-//			response.addMessage("密碼格式錯誤");
+//			log.debug("舊密碼XXX");
+//			response.addMessage("舊密碼格式錯誤");
 //		}
+				
+		// 檢查新密碼  不可空白，長度必須大於等於8小於等於16
+		if (passwordNew != null && passwordNew.trim().length() >= 8 && passwordNew.trim().length() <= 16) {
+			// 判斷是否包含字母、數字、特殊符號
+			for (int i = 0; i < passwordNew.length(); i++) {
+				String test = passwordNew.substring(i, i + 1);
+				if (test.matches("[a-zA-Z]")) {
+					fPassword4 = true;
+				}else if(test.matches("[0-9]")){
+					fPassword5 = true;
+				}else if(test.matches("[~!@#$%^&*]")){
+					fPassword6 = true;
+				}else {
+					response.addMessage("新密碼格式錯誤");
+				}
+			}
+			if (fPassword4 && fPassword5 && fPassword6) {
+				fPasswordNew = true;
+			}
+		}else {
+			log.debug("新密碼XXX");
+			response.addMessage("新密碼格式錯誤");
+		}
 		
 		//檢查Name 不可空白，至少2個字以上
 		if (member.getName() != null && member.getName().trim().length() >= 2) {
@@ -352,16 +398,15 @@ public class UserPersonalInfoController {
 
 		
 		//要放在驗證資料之後
-		if( /*fPassword &&*/ fName && fIdNumber /*&& fDate*/ 
+		if( /*fPasswordOld &&*/ fPasswordNew && fName && fIdNumber /*&& fDate*/ 
 				&& fEmail && fTelephone && fMobile) {
 			if(member.getMemberType() == MemberType.O) {
 				if( fOrgFounder && fOrgCeo && fOrgContactPerson 
 						&& fOrgContactPersonTel && fOrgContactPersonMobile && fOrgWebsiteLink) {
 					try {
-//						member.setPassword(encoder.encode(member.getPassword()));
+						member.setPassword(encoder.encode(passwordNew));
 						Member updatedMember = memberService.update(member);
 						log.debug("updatedMember.getId()={}", updatedMember.getId());
-//						memberService.addRole(updatedMember.getId(), 2L);	//新增完會員，取得id，才能新增角色
 						response.setObj(updatedMember);
 						log.debug("資料更新成功");
 					} catch (Exception e) {
@@ -373,10 +418,9 @@ public class UserPersonalInfoController {
 				}
 			}else if(member.getMemberType() == MemberType.P){
 				try {
-//					member.setPassword(encoder.encode(member.getPassword()));
+					member.setPassword(encoder.encode(passwordNew));
 					Member updatedMember = memberService.update(member);
 					log.debug("updatedMember.getId()={}", updatedMember.getId());
-//					memberService.addRole(updatedMember.getId(), 2L);	//新增完會員，取得id，才能新增角色
 					response.setObj(updatedMember);
 					log.debug("資料更新成功");
 				} catch (Exception e) {
@@ -392,13 +436,36 @@ public class UserPersonalInfoController {
 		return response;
 	}
 	
+	@RequestMapping("/changePassword")
+	@ResponseBody
+	public String passwordChange(@RequestParam("password") String password){
+		Member userDetails = (Member) SecurityContextHolder.getContext()  
+							.getAuthentication()  
+							.getPrincipal();
+		String encodeDB = (memberService.getOne(userDetails.getId())).getPassword();
+		//檢查舊密碼是否正確，與資料庫相符
+		String result = "密碼輸入錯誤";
+		log.debug("insertPassword={}",password);
+		
+//		String encodeOld = encoder.encode(password);
+//		log.debug("encodeOld={}",encodeOld);
+//		String encodeTest = encoder.encode(password);
+//		log.debug("encodeTest={}",encodeTest);
+		
+		//確認輸入的密碼 與 轉碼後的隱碼 是否相符
+		if(encoder.matches(password, encodeDB)) {
+			result = "正確";
+		}
+		return result;
+	}
+	
 	@RequestMapping("/checkPassword")
 	@ResponseBody
 	public String passwordCheck(@RequestParam("passwordCheck") String passwordCheck,
-			@RequestParam("password") String password){
-		//檢查確認密碼，與密碼相同
+			@RequestParam("passwordNew") String passwordNew){
+		//檢查確認密碼，與新密碼相同
 		String result = "密碼不一致";
-		if(passwordCheck.equals(password)) {
+		if(passwordCheck.equals(passwordNew)) {
 			result = "正確";
 		}
 		return result;

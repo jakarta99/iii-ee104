@@ -127,9 +127,30 @@
 				<div class=center>您在 TimeBank中使用的基本資訊</div>
 				<form action="/user/personalInfo/edit" method="post">
 					<fieldset>
+          				<legend>帳戶資料</legend>
+          				<input type="hidden" value="${member.id}" id="id" name="id"> 
+						<input type="hidden" value="${member.memberType}" id="memberType" name="memberType">
+						<div class="block">
+							<label for="idPasswordOld">舊密碼:</label>
+							<input type="password" value="" id="idPasswordOld" placeholder="請輸入舊密碼" name="password" autofocus autocompelete="off">
+							<span id="idspPasswordOld" style='color:red'></span>
+<!-- 							<div class="remark">(1.不可空白，2.至少8個字最多16個字，3.必須包含字母、數字、特殊符號[~!@#$%^&*])</div> -->
+						</div>
+						<div class="block">
+							<label for="idPasswordNew">新密碼:</label>
+							<input type="password" value="" id="idPasswordNew" placeholder="請輸入新密碼" name="passwordNew" autofocus autocompelete="off">
+							<span id="idspPasswordNew" style='color:red'></span>
+							<div class="remark">(1.不可空白，2.至少8個字最多16個字，3.必須包含字母、數字、特殊符號[~!@#$%^&*])</div>
+						</div>
+						<div class="block">
+							<label for="idPasswordCheck">確認新密碼:</label>
+							<input type="password" value="" id="idPasswordCheck" placeholder="請再輸入一次新密碼" name="passwordCheck" autofocus autocompelete="off">
+							<span id="idspPasswordCheck" style='color:red'></span>
+							<div class="remark">(1.不可空白，2.須與密碼相同)</div>
+						</div>
+          			</fieldset>
+					<fieldset>
 						<legend>個人資料</legend>
-						<input type="hidden" value="${member.id}" id="id" name="id" /> 
-						<input type="hidden" value="${member.memberType}" id="memberType" name="memberType" />
 						<div class="block">
 							<label for="idName">姓名:</label>
 							<input type="text" value="${member.name}" id="idName" name="name" autofocus autocompelete="off">
@@ -259,19 +280,19 @@
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
  	<script>
-// 	    document.addEventListener("DOMContentLoaded", function () {
-// 	        document.getElementById("idPassword").addEventListener("keyup", chkPassword);
-// 	    });
-// 	    function chkPassword() {
-// 	        var thePassword = document.getElementById("idPassword").value;
+	    document.addEventListener("DOMContentLoaded", function () {
+	        document.getElementById("idPasswordOld").addEventListener("keyup", chkPasswordOld);
+	    });
+	    function chkPasswordOld() {
+	        var thePassword = document.getElementById("idPasswordOld").value;
+	        var msgChk = document.getElementById("idspPasswordOld");
 // 	        var thePasswordLen = thePassword.length;
 // 	        var flag1 = false, flag2 = false, flag3 = false;
-// 	        //判斷元素值是否為空白，長度是否大於8
+	        //判斷元素值是否為空白，長度是否大於8
 // 	        if (thePassword == ""){
-// 	            document.getElementById("idspPassword").innerHTML =
-// 	                "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
+// 	        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
 // 	        }
-// 	        //如果長度是否大於8，判斷是否包含字母、數字、特殊符號
+	        //如果長度是否大於8，判斷是否包含字母、數字、特殊符號
 // 	        else if (thePasswordLen >= 8 && thePasswordLen <= 16) {
 // 	            for (var i = 0; i < thePasswordLen; i++) {
 // 	                var PasswordChr = thePassword.charAt(i).toUpperCase();//轉換為大寫
@@ -287,44 +308,92 @@
 // 	                }
 // 	            }
 // 	            if (flag1 && flag2 && flag3){
-// 	                document.getElementById("idspPassword").innerHTML =
-// 	                    "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
+	            	$.ajax({
+						method:"post",
+						dataType: "text",        
+						url:"/user/personal-info/changePassword",
+						data: {password:$("#idPasswordOld").val()}
+					}).done(function(response){
+						if(response == "正確"){
+							msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+						}else{
+							msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>密碼輸入錯誤</span>";
+						}
+					})
 // 	            }else{
-// 	                document.getElementById("idspPassword").innerHTML =
-// 	                    "<img src='/img/X.jpg'><span style='color:red'>必須包含字母、數字、特殊符號[~!@#$%^&*]</span>"
+// 	            	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>必須包含字母、數字、特殊符號[~!@#$%^&*]</span>"
 // 	            }
 // 	        }else{
-// 	            document.getElementById("idspPassword").innerHTML =
-// 	                "<img src='/img/X.jpg'><span style='color:red'>至少8個字，最多16個字</span>"
+// 	        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>至少8個字，最多16個字</span>"
 // 	        }
-// 	    }
+	    }
 	    
-// 	    document.addEventListener("DOMContentLoaded", function () {
-// 	        document.getElementById("idPasswordCheck").addEventListener("keyup", chkPasswordCheck);
-// 	    });
-// 	    function chkPasswordCheck(){
-// 	    	var thePassword = document.getElementById("idPassword").value;
-// 	    	var thePasswordCheck = document.getElementById("idPasswordCheck").value;
-// 	        var msgChk = document.getElementById("idspPasswordCheck")
-// 	        if (thePasswordCheck == ""){
-// 	        	msgChk.innerHTML =
-// 	                "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
-// 	        }
-// 	        else {
-// 	        	$.ajax({
-// 					method:"post",
-// 					dataType: "text",        
-// 					url:"/commons/sign-up/checkPassword",
-// 					data: {passwordCheck:$("#idPasswordCheck").val(),password:$("#idPassword").val()}
-// 				}).done(function(response){
-// 					if(response == "正確"){
-// 						msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
-// 					}else{
-// 						msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>密碼不一致</span>";
-// 					}
-// 				})
-// 	        }      
-// 	    }
+	    document.addEventListener("DOMContentLoaded", function () {
+	        document.getElementById("idPasswordNew").addEventListener("keyup", chkPasswordNew);
+	    });
+	    function chkPasswordNew() {
+	        var thePassword = document.getElementById("idPasswordNew").value;
+	        var thePasswordLen = thePassword.length;
+	        var flag1 = false, flag2 = false, flag3 = false;
+	        //判斷元素值是否為空白，長度是否大於8
+	        if (thePassword == ""){
+	            document.getElementById("idspPasswordNew").innerHTML =
+	                "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
+	        }
+	        //如果長度是否大於8，判斷是否包含字母、數字、特殊符號
+	        else if (thePasswordLen >= 8 && thePasswordLen <= 16) {
+	            for (var i = 0; i < thePasswordLen; i++) {
+	                var PasswordChr = thePassword.charAt(i).toUpperCase();//轉換為大寫
+	                if (PasswordChr >= "A" && PasswordChr <= "Z") {
+	                    flag1 = true;
+	                } else if (PasswordChr >= "0" && PasswordChr <= "9") {
+	                    flag2 = true;
+	                } else if (PasswordChr == "~" || "!" || "@" || "#" || "$" || "%" || "^" || "&" || "*") {
+	                    flag3 = true;
+	                }
+	                if (flag1 && flag2 && flag3) {
+	                    break;
+	                }
+	            }
+	            if (flag1 && flag2 && flag3){
+	                document.getElementById("idspPasswordNew").innerHTML =
+	                    "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
+	            }else{
+	                document.getElementById("idspPasswordNew").innerHTML =
+	                    "<img src='/img/X.jpg'><span style='color:red'>必須包含字母、數字、特殊符號[~!@#$%^&*]</span>"
+	            }
+	        }else{
+	            document.getElementById("idspPasswordNew").innerHTML =
+	                "<img src='/img/X.jpg'><span style='color:red'>至少8個字，最多16個字</span>"
+	        }
+	    }
+	    
+	    document.addEventListener("DOMContentLoaded", function () {
+	        document.getElementById("idPasswordCheck").addEventListener("keyup", chkPasswordCheck);
+	    });
+	    function chkPasswordCheck(){
+	    	var thePassword = document.getElementById("idPasswordNew").value;
+	    	var thePasswordCheck = document.getElementById("idPasswordCheck").value;
+	        var msgChk = document.getElementById("idspPasswordCheck")
+	        if (thePasswordCheck == ""){
+	        	msgChk.innerHTML =
+	                "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
+	        }
+	        else {
+	        	$.ajax({
+					method:"post",
+					dataType: "text",        
+					url:"/user/personal-info/checkPassword",
+					data: {passwordCheck:$("#idPasswordCheck").val(),passwordNew:$("#idPasswordNew").val()}
+				}).done(function(response){
+					if(response == "正確"){
+						msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+					}else{
+						msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>密碼不一致</span>";
+					}
+				})
+	        }      
+	    }
 	    
 		document.addEventListener("DOMContentLoaded", function () {
 	        document.getElementById("idName").addEventListener("keyup", chkName);
@@ -398,24 +467,24 @@
 	        		var invalidList = "00000000,11111111";
 	        	    if (/^\d{8}$/.test(theCertificateIdNumber) == false || invalidList.indexOf(theCertificateIdNumber) != -1) {
 	        	    	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>請輸入正確統一編號格式</span>";
-	        	    }
-	
-	        	    var validateOperator = [1, 2, 1, 2, 1, 2, 4, 1],
+	        	    }else{
+	        	    	var validateOperator = [1, 2, 1, 2, 1, 2, 4, 1],
 	        	        sum = 0,
 	        	        calculate = function (product) { // 個位數 + 十位數
 	        	            var ones = product % 10,
 	        	                tens = (product - ones) / 10;
 	        	            return ones + tens;
 	        	        };
-	        	    for (var i = 0; i < validateOperator.length; i++) {
-	        	        sum += calculate(theCertificateIdNumber[i] * validateOperator[i]);
-	        	    }
+	        	    	for (var i = 0; i < validateOperator.length; i++) {
+	        	        	sum += calculate(theCertificateIdNumber[i] * validateOperator[i]);
+	        	    	}
 	
-	        	    if (sum % 10 == 0 || (theCertificateIdNumber[6] == "7" && (sum + 1) % 10 == 0)) {
-	        	    	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
-	        	    } else {
-	        	    	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>驗證失敗，請輸入正確統一編號格式</span>";
-	        	    }
+	        	    	if (sum % 10 == 0 || (theCertificateIdNumber[6] == "7" && (sum + 1) % 10 == 0)) {
+	        	    		msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+	        	    	} else {
+	        	    		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>驗證失敗，請輸入正確統一編號格式</span>";
+	        	    	}
+	        	    }  
 	        	}
 	        }else{
 	        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
@@ -699,14 +768,10 @@
 					} else{
 						$.each(response.messages, function(idx, message) {
 // 							alert("the "+idx+"th ERROR, because "+message);
-// 							if (message =="密碼格式錯誤"){
-// 								document.getElementById("idspPassword").innerHTML =
-// 					                "<img src='/img/X.jpg'><span style='color:red'>密碼格式錯誤</span>"
-// 							}
-// 							if (message =="密碼不一致"){
-// 								document.getElementById("idspPasswordCheck").innerHTML =
-// 					                "<img src='/img/X.jpg'><span style='color:red'>密碼格式錯誤</span>"
-// 							}
+							if (message =="新密碼格式錯誤"){
+								document.getElementById("idspPasswordNew").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>新密碼格式錯誤</span>"
+							}
 							if (message =="姓名格式錯誤"){
 								document.getElementById("idspName").innerHTML =
 					                "<img src='/img/X.jpg'><span style='color:red'>姓名格式錯誤</span>"
