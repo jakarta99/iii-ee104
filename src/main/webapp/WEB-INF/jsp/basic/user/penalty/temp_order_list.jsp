@@ -112,7 +112,7 @@
 			 	processing: true,
 				serverSide: true,  //分頁、排序都交由伺服器處理
 				ajax:{
-					url:"/penalty/tempOrders",
+					url:"/admin/penaltyVertify/tempOrders",
 					type:"get",
 					dataType:"json",
 					data:function(d){ 				//傳送給伺服器的資料(datatable預設會傳送d的資料)
@@ -136,7 +136,7 @@
 				}, columns: [ 		//設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
 		     		{data:null},
 		           	{data: function (data, type, row ) {
-						var reportButt = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/penalty/report?orderId="
+						var reportButt = "<input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/penaltyVertify/report?orderId="
 											+ data.id + "'\" value='檢舉'  />";
 		               	return reportButt;	}
 		           	},

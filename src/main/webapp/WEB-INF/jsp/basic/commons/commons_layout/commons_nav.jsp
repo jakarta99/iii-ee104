@@ -163,8 +163,8 @@
                     <li class="dropdown-item"><a href="/admin/mission/list" class="nav-link" id="backStage-penalty">mission</a></li>
                     <li class="dropdown-item"><a href="/admin/role/list" class="nav-link" id="backStage-role">role</a></li>
                     <li class="dropdown-item"><a href="/admin/serviceType/list" class="nav-link" id="backStage-role">serviceType</a></li>
-                    <li class="dropdown-item"><a href="/penalty/tempPenaltyEntrance" class="nav-link" id="backStage-personalinfo">【使用者】模擬提出檢舉(暫放)</a></li>
-                    <li class="dropdown-item"><a href="/penalty/showVertifyList" class="nav-link" id="backStage-personalinfo">【管理者】檢舉案件審核</a></li>
+                    <li class="dropdown-item"><a href="/admin/penaltyVertify/tempPenaltyEntrance" class="nav-link" id="backStage-personalinfo">【使用者】模擬提出檢舉(暫放)</a></li>
+                    <li class="dropdown-item"><a href="/admin/penaltyVertify/showVertifyList" class="nav-link" id="backStage-personalinfo">【管理者】檢舉案件審核</a></li>
                   </ul>
                 </li>
                 </sec:authorize>

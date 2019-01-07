@@ -27,7 +27,7 @@
 	<h1 style="padding-top: 2cm">填寫檢舉資料</h1>
 	<h4>#開頭為debug用，正式上線時拿掉</h4>
 	<hr>
-	<form enctype="multipart/form-data" onSubmit="return CheckForm();" action="/penalty/doReport" method="post">
+	<form enctype="multipart/form-data" onSubmit="return CheckForm();" action="/admin/penaltyVertify/doReport" method="post">
 <!-- 	<form enctype="multipart/form-data" onSubmit="return CheckForm();"> -->
 <!-- 	input設disabled，則不會被序列化 -->
 		#媒合案件編號(Order.id):
@@ -84,7 +84,7 @@
 // 		$.ajax({
 // 			method: "post",
 // 			dataType: "json",
-// 			url: "/penalty/doReport",
+// 			url: "/admin/penaltyVertify/doReport",
 // 			data: formData, //$("form").serialize(),
 // 			enctype : "multipart/form-data",
 // 		    cache: false,
@@ -99,7 +99,7 @@
 // 						alert("檢舉失敗，" + message);
 // 					});
 // 				}
-// 				window.location.replace("/penalty/tempPenaltyEntrance");
+// 				window.location.replace("/admin/penaltyVertify/tempPenaltyEntrance");
 // 			}
 // 		})
 // 	})
