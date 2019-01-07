@@ -714,65 +714,105 @@
 						$.each(response.messages, function(idx, message){
 // 							alert("the "+idx+"th ERROR, because "+message);
 							if (message =="帳號格式錯誤"){
-								$("#idspAccount").html(message);
+								document.getElementById("idspAccount").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>帳號格式錯誤</span>"
+// 								$("#idspAccount").html(message);
 							}
 							if (message =="已有此帳號"){
-								$("#idspAccount").html(message);
+								document.getElementById("idspAccount").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>已有此帳號</span>"
+// 								$("#idspAccount").html(message);
 							}
 							if (message =="密碼格式錯誤"){
-								$("#idspPassword").html(message);
+								document.getElementById("idspPassword").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>密碼格式錯誤</span>"
+// 								$("#idspPassword").html(message);
 							}
 							if (message =="密碼不一致"){
-								$("#idspPasswordCheck").html(message);
+								document.getElementById("idspPasswordCheck").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>密碼格式錯誤</span>"
+// 								$("#idspPasswordCheck").html(message);
 							}
 							if (message =="姓名格式錯誤"){
-								$("#idspName").html(message);
+								document.getElementById("idspName").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>姓名格式錯誤</span>"
+// 								$("#idspName").html(message);
 							}
 							if (message =="身分證字號格式錯誤"){
-								$("#idspCertificateIdNumber").html(message);
+								document.getElementById("idspCertificateIdNumber").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>身分證字號格式錯誤</span>"
+// 								$("#idspCertificateIdNumber").html(message);
 							}
 							if (message =="統一編號格式錯誤"){
-								$("#idspCertificateIdNumber").html(message);
+								document.getElementById("idspCertificateIdNumber").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>統一編號格式錯誤</span>"
+// 								$("#idspCertificateIdNumber").html(message);
 							}
 							if (message =="IdNumber格式錯誤"){
-								$("#idspCertificateIdNumber").html(message);
+								document.getElementById("idspCertificateIdNumber").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>IdNumber格式錯誤</span>"
+// 								$("#idspCertificateIdNumber").html(message);
 							}
 							if (message =="出生日期格式錯誤"){
-								$("#idspDate").html(message);
+								document.getElementById("idspDate").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>出生日期格式錯誤</span>"
+// 								$("#idspDate").html(message);
 							}
 							if (message =="創立日期格式錯誤"){
-								$("#idspDate").html(message);
+								document.getElementById("idspDate").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>創立日期格式錯誤</span>"
+// 								$("#idspDate").html(message);
 							}
 							if (message =="email格式錯誤"){
-								$("#idspEmail").html(message);
+								document.getElementById("idspEmail").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>email格式錯誤</span>"
+// 								$("#idspEmail").html(message);
 							}
 							if (message =="電話格式錯誤"){
+								document.getElementById("idspTelephone").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>電話格式錯誤</span>"
 								$("#idspTelephone").html(message);
 							}
 							if (message =="手機格式錯誤"){
-								$("#idspMobile").html(message);
+								document.getElementById("idspMobile").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>手機格式錯誤</span>"
+// 								$("#idspMobile").html(message);
 							}
 							if (message =="創辦人格式錯誤"){
-								$("#idspOrgFounder").html(message);
+								document.getElementById("idspOrgFounder").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>創辦人格式錯誤</span>"
+// 								$("#idspOrgFounder").html(message);
 							}
 							if (message =="執行長格式錯誤"){
-								$("#idspOrgCeo").html(message);
+								document.getElementById("idspOrgCeo").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>執行長格式錯誤</span>"
+// 								$("#idspOrgCeo").html(message);
 							}
 							if (message =="聯絡人格式錯誤"){
-								$("#idspOrgContactPerson").html(message);
+								document.getElementById("idspOrgContactPerson").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>聯絡人格式錯誤</span>"
+// 								$("#idspOrgContactPerson").html(message);
 							}
 							if (message =="聯絡人電話格式錯誤"){
-								$("#idspOrgContactPersonTel").html(message);
+								document.getElementById("idspOrgContactPersonTel").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>聯絡人電話格式錯誤</span>"
+// 								$("#idspOrgContactPersonTel").html(message);
 							}
 							if (message =="聯絡人手機格式錯誤"){
-								$("#idspOrgContactPersonMobile").html(message);
+								document.getElementById("idspOrgContactPersonMobile").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>聯絡人手機格式錯誤</span>"
+// 								$("#idspOrgContactPersonMobile").html(message);
 							}
 							if (message =="網址格式錯誤"){
-								$("#idspOrgWebsiteLink").html(message);
+								document.getElementById("idspOrgWebsiteLink").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>網址格式錯誤</span>"
+// 								$("#idspOrgWebsiteLink").html(message);
 							}
 							
 							if (message == "資料有誤"){
-								$("#error").html(message);
+								document.getElementById("error").innerHTML =
+					                "<img src='/img/X.jpg'><span style='color:red'>資料填寫有誤</span>"
+// 								$("#error").html(message);
 								swal({
 									  title: "ERROR",
 									  text: "註冊失敗，資料有誤",
