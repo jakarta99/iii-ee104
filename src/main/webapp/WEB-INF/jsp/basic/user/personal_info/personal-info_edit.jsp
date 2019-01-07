@@ -398,24 +398,24 @@
 	        		var invalidList = "00000000,11111111";
 	        	    if (/^\d{8}$/.test(theCertificateIdNumber) == false || invalidList.indexOf(theCertificateIdNumber) != -1) {
 	        	    	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>請輸入正確統一編號格式</span>";
-	        	    }
-	
-	        	    var validateOperator = [1, 2, 1, 2, 1, 2, 4, 1],
+	        	    }else{
+	        	    	var validateOperator = [1, 2, 1, 2, 1, 2, 4, 1],
 	        	        sum = 0,
 	        	        calculate = function (product) { // 個位數 + 十位數
 	        	            var ones = product % 10,
 	        	                tens = (product - ones) / 10;
 	        	            return ones + tens;
 	        	        };
-	        	    for (var i = 0; i < validateOperator.length; i++) {
-	        	        sum += calculate(theCertificateIdNumber[i] * validateOperator[i]);
-	        	    }
+	        	    	for (var i = 0; i < validateOperator.length; i++) {
+	        	        	sum += calculate(theCertificateIdNumber[i] * validateOperator[i]);
+	        	    	}
 	
-	        	    if (sum % 10 == 0 || (theCertificateIdNumber[6] == "7" && (sum + 1) % 10 == 0)) {
-	        	    	msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
-	        	    } else {
-	        	    	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>驗證失敗，請輸入正確統一編號格式</span>";
-	        	    }
+	        	    	if (sum % 10 == 0 || (theCertificateIdNumber[6] == "7" && (sum + 1) % 10 == 0)) {
+	        	    		msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
+	        	    	} else {
+	        	    		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>驗證失敗，請輸入正確統一編號格式</span>";
+	        	    	}
+	        	    }  
 	        	}
 	        }else{
 	        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
