@@ -43,6 +43,10 @@ public class UserPersonalInfoController {
 	public AjaxResponse<Member> updateMember(Member member, @RequestParam("passwordCheck") String passwordCheck, 
 			@RequestParam("passwordNew") String passwordNew/*, BindingResult bindingResults*/) {		
 		
+		Member userDetails = (Member) SecurityContextHolder.getContext()  
+						.getAuthentication()  
+						.getPrincipal();
+		Member memberDB = memberService.getOne(userDetails.getId());
 //		if(bindingResults != null && bindingResults.hasFieldErrors()) {
 //			if(bindingResults.hasFieldErrors("birthDate")) {
 //				errors.put("birthDate", "birthDate must be a date of YYYY-MM-DD");
@@ -78,9 +82,6 @@ public class UserPersonalInfoController {
 		
 		// 檢查舊密碼 是否與資料庫相符
 		if(member.getPassword() != null) {
-			Member userDetails = (Member) SecurityContextHolder.getContext()  
-					.getAuthentication()  
-					.getPrincipal();
 			String encodeDB = (memberService.getOne(userDetails.getId())).getPassword();
 			log.debug("insertPassword={}",member.getPassword());
 
@@ -411,9 +412,22 @@ public class UserPersonalInfoController {
 					try {
 						String encode = encoder.encode(passwordNew);
 						log.debug("encode={}",encode);
-						member.setPassword(encode);
-						
-						Member updatedMember = memberService.update(member);
+						memberDB.setPassword(encode);
+						memberDB.setName(member.getName());
+						memberDB.setCertificateIdNumber(member.getCertificateIdNumber());
+						memberDB.setBirthDate(member.getBirthDate());
+						memberDB.setEmail(member.getEmail());
+						memberDB.setTelephone(member.getTelephone());
+						memberDB.setMobile(member.getMobile());
+						memberDB.setAddress(member.getAddress());
+						memberDB.setOrgFounder(member.getOrgFounder());
+						memberDB.setOrgCeo(member.getOrgCeo());
+						memberDB.setOrgContactPerson(member.getOrgContactPerson());
+						memberDB.setOrgContactPersonTel(member.getOrgContactPersonTel());
+						memberDB.setOrgContactPersonMobile(member.getOrgContactPersonMobile());
+						memberDB.setOrgWebsiteLink(member.getOrgWebsiteLink());
+						memberDB.setOrgFoundPurpose(member.getOrgFoundPurpose());
+						Member updatedMember = memberService.update(memberDB);
 						log.debug("updatedMember.getId()={}", updatedMember.getId());
 						response.setObj(updatedMember);
 						log.debug("資料更新成功");
@@ -428,9 +442,16 @@ public class UserPersonalInfoController {
 				try {
 					String encode = encoder.encode(passwordNew);
 					log.debug("encode={}",encode);
-					member.setPassword(encode);
-					
-					Member updatedMember = memberService.update(member);
+					memberDB.setPassword(encode);
+					memberDB.setPassword(encode);
+					memberDB.setName(member.getName());
+					memberDB.setCertificateIdNumber(member.getCertificateIdNumber());
+					memberDB.setBirthDate(member.getBirthDate());
+					memberDB.setEmail(member.getEmail());
+					memberDB.setTelephone(member.getTelephone());
+					memberDB.setMobile(member.getMobile());
+					memberDB.setAddress(member.getAddress());
+					Member updatedMember = memberService.update(memberDB);
 					log.debug("updatedMember.getId()={}", updatedMember.getId());
 					response.setObj(updatedMember);
 					log.debug("資料更新成功");
