@@ -88,9 +88,9 @@
             </div>
             <div class="col-md-5">
               <ul class="breadcrumb d-flex justify-content-end">
-                <li class="breadcrumb-item"><a href="index.html">首頁</a></li>
-                <li class="breadcrumb-item"><a href="team.html">志工招募</a></li>
-                <li class="breadcrumb-item active">招募申請</li>
+                <li class="breadcrumb-item"><a href="/">首頁</a></li>
+                <li class="breadcrumb-item"><a href="/user/volunteerRecruitment/list">招募紀錄</a></li>
+                <li class="breadcrumb-item active">招募詳細</li>
               </ul>
             </div>
           </div>
@@ -108,15 +108,39 @@
 				</div>
             </div>
             <div class="row">
-              <div class="col-md-8">
-                <div class="heading">
+            <div class="col-md-8">
+            <div class="heading">
                   <h3>活動資訊</h3>
                 </div>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                
 				<ul class="ul-icons list-unstyled">
 					<li>
 						<div class="icon-filled"></div>活動地點:${mission.county}${mission.district}${mission.address}
 					</li>
+					
+					
 					<li>
+						<div class="icon-filled"></div>起迄時間:<fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.startDate}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.endDate}"/>
+					</li>			
+					<li>
+						<div class="icon-filled"></div>聯絡人:${mission.contactPerson}<br>
+					</li>
+					<li>
+						<div class="icon-filled"></div>聯絡電話:${mission.contactPhone}
+					</li>
+					<li>
+						<div class="icon-filled"></div>聯絡Email:  ${mission.contactEmail}
+					</li>
+				</ul>
+
+              </div>
+              <div class="col-md-4">
+              	<ul class="ul-icons list-unstyled">
+              		<li>
 						<div class="icon-filled"></div>服務種類:${mission.serviceType.serviceType}
 					</li>
 					<li>
@@ -129,27 +153,15 @@
 							</c:if>
 					</li>
 					<li>
-						<div class="icon-filled"></div>起迄時間:<fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.startDate}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.endDate}"/>
-					</li>
-					<li>
 						<div class="icon-filled"></div>需求人數:${mission.peopleNeeded}人
 					</li>
 					<li>
 						<div class="icon-filled"></div>活動時數:${mission.timeValue}小時
 					</li>
-					<li>
-						<div class="icon-filled"></div>聯絡人:${mission.contactPerson}
-					</li>
-					<li>
-						<div class="icon-filled"></div>聯絡電話:${mission.contactPhone}
-					</li>
-					<li>
-						<div class="icon-filled"></div>聯絡Email:  ${mission.contactEmail}
-					</li>
-				</ul>
-
+              	</ul>
+              
               </div>
-              <div class="col-md-4"><img id="missionImg" alt="" src="/image/user/mission/${mission.missionPicName}" class="img-fluid rounded-circle"></div>
+              <div class="col-md-4"><img style="width:300px;height:270px" id="missionImg" alt="" src="/image/user/mission/${mission.missionPicName}" class="img-fluid rounded-circle"></div>
             </div>
           </section>
  

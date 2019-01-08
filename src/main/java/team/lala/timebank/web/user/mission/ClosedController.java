@@ -32,6 +32,7 @@ public class ClosedController {
 	public String listPage(@RequestParam(value = "id") Long id, Model model) {
 		
 		model.addAttribute("mission", missionService.getOne(id));
+		model.addAttribute("orders", missionService.getOne(id).getOrders());
 		return "/basic/user/volunteerRecruitment/endRecord";
 	}
 

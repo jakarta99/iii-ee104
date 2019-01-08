@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
+import team.lala.timebank.enums.OrderStatus;
 
 public interface OrderDao extends JpaRepository<Order,Long>, JpaSpecificationExecutor<Order>{
 
@@ -18,4 +19,6 @@ public interface OrderDao extends JpaRepository<Order,Long>, JpaSpecificationExe
 	public Page<Order> findByMission(Mission mission, Pageable Pageable);
 	
 	public List<Order> findByMission(Mission mission);
+	
+	public List<Order> findByMissionAndOrderStatus(Mission mission, OrderStatus orderStatus);
 }

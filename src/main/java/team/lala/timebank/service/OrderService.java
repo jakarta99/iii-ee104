@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
+import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.OrderDao;
 import team.lala.timebank.dao.PenaltyDao;
@@ -26,13 +27,16 @@ import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
+import team.lala.timebank.enums.MissionStatus;
 import team.lala.timebank.enums.OrderStatus;
 
 @Slf4j
 @Service
 @Transactional
 public class OrderService {
-
+	
+	@Autowired
+	private MissionService missionService;
 	@Autowired
 	private OrderDao orderDao;
 	@Autowired
@@ -165,12 +169,16 @@ public class OrderService {
 	}
 
 	// accept 志工 改狀態為2接受
-	public Order accept(Long id) {
-		Order order = orderDao.getOne(id);
-		if (order.getOrderStatus() == OrderStatus.VolunteerApply) {
-			order.setOrderStatus(OrderStatus.RequesterAcceptService);
-			return orderDao.save(order);
-		}
+	public Order accept(Long orderId) {
+		
+		Order order = orderDao.getOne(orderId);
+		Mission mission = order.getMission();
+		if(mission.getMissionstatus() == MissionStatus.A_New) {
+			if (order.getOrderStatus() == OrderStatus.VolunteerApply) {
+				order.setOrderStatus(OrderStatus.RequesterAcceptService);
+				return orderDao.save(order);
+			}
+		}	
 		return null;
 	}
 

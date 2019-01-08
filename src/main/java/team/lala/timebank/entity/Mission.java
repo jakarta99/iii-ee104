@@ -1,7 +1,7 @@
 package team.lala.timebank.entity;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,7 +20,6 @@ import javax.persistence.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -63,7 +62,7 @@ public class Mission {
 
 	@JsonBackReference
 	@OneToMany(mappedBy = "mission", cascade = { CascadeType.REMOVE })
-	private Set<Order> orders;
+	private List<Order> orders;
 
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@Column(name = "PUBLISH_DATE", nullable = false)
@@ -108,9 +107,10 @@ public class Mission {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "MISSION_STATUS", nullable = false)
 	private MissionStatus missionstatus;
-
+	
+	
 	@Column(name = "APPROVED_QUANTITY", nullable = false)
-	private Integer approvedQuantity;
+	private Integer approvedQuantity; //被核准的志工數量
 	
 	@Column(name = "UPDATE_DATE")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
