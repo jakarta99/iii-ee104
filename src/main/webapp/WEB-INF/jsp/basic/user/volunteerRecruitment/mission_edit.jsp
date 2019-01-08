@@ -187,7 +187,8 @@
                     <div class="col-md-6 col-lg-3">
                       <div class="form-group">
                         <label for="missionPicture">活動宣傳圖</label>
-                        <a id="missionPicName" href="/image/user/mission/${mission.missionPicName}" target="_blank">原上傳圖片</a>
+                        <a  href="/image/user/mission/${mission.missionPicName}" target="_blank">原上傳圖片</a>
+                        <input type="text"  id="missionPicName" name="missionPicName" hidden=true class="form-control" />
                         <input type="file"  id="missionPicture" name="missionPicture" accept="image/*" class="form-control" />
                       </div>
                     </div>
@@ -202,7 +203,7 @@
                       </div>
                     </div>
                     <div class="col-md-12 text-center">
-                      <button type="submit" class="btn btn-template-outlined"><i class="fa fa-save"></i>更新活動</button>
+                      <button type="submit" id="updateButton" class="btn btn-template-outlined"><i class="fa fa-save"></i>更新活動</button>
                     </div>
                   </div>
                 </form>
@@ -216,7 +217,15 @@
 
 	
 	<script>
+	
+	
 		var missionPicName = '${mission.missionPicName}';
+	
+		if($("#missionPicture").val() == ''){
+			$("#missionPicName").val(missionPicName);
+		}
+		
+		
 		if(missionPicName.length == 0){
 			$("#missionPicName").html("");
 			$("#missionPicName").prop("hidden", true);

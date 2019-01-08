@@ -51,6 +51,15 @@ public class RecruitController {
 
 		return "/basic/user/volunteerRecruitment/mission_list";
 	}
+	
+	@RequestMapping("/detail")
+	public String missionDetail(@RequestParam("id") Long missionId, Model model) {
+		Mission mission = missionService.getOne(missionId);
+		Member member = memberService.findByAccount(mission.getMember().getAccount());
+		model.addAttribute("mission", mission);
+		model.addAttribute("member", member);
+		return "/basic/user/volunteerRecruitment/mission_detail";
+	}
 
 	@RequestMapping("/query")
 	@ResponseBody
