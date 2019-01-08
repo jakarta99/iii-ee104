@@ -1,14 +1,8 @@
 package team.lala.timebank.service;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,13 +10,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
-import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.OrderDao;
-import team.lala.timebank.dao.PenaltyDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
