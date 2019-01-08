@@ -316,10 +316,12 @@
 	        	})
         	}
         	if(orders.content.length != 0){
-	        	$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
+        		$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
 	        	for (var index = 1; index <= totalPages ; index++) {
-	        		$("#nextli").before("<li class='page-item' data-toggle='pill' href='javascript: void(0)' role='tab' aria-controls='pills-home' aria-selected='true'><a name='count' id="+index+" class='page-link'>"+index+"</a></li>")
-				}	        		
+	        		$("#nextli").before("<li id='page"+index+"' class='page-item'><a name='count' id="+index+" class='page-link'>"+index+"</a></li>")
+				}
+	        	var pageNo = "#page" + (page+1);
+	        	$(pageNo).addClass('page-item active');
         	}
 	 	})
  	}

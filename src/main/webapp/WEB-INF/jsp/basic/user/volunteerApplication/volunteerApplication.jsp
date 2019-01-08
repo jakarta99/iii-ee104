@@ -62,6 +62,7 @@
 	<!-- FOOTER -->
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
 		<script>
+		var orderStatusDetail = "VolunteerApply";
 		var length=3;
 		var page=0;
 		var first;
@@ -137,10 +138,12 @@
 		        	})
 	        	}
 	        	if(orders.content.length != 0){
-		        	$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
+	        		$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
 		        	for (var index = 1; index <= totalPages ; index++) {
-		        		$("#nextli").before("<li class='page-item'><a name='count' id="+index+" class='page-link'>"+index+"</a></li>")
-					}	        		
+		        		$("#nextli").before("<li id='page"+index+"' class='page-item'><a name='count' id="+index+" class='page-link'>"+index+"</a></li>")
+					}
+		        	var pageNo = "#page" + (page+1);
+		        	$(pageNo).addClass('page-item active');
 	        	}
 		 	})
 	 	}
@@ -190,7 +193,7 @@
 		    return fmt;
 		};
 		$(document).ready(function() {
-			var orderStatusDetail = "VolunteerApply";
+			
 			$("#webtitle").empty().append("申請中的任務");
 			list();
 			$("#pagebox").on("click","li>a[name='backa']", function(){

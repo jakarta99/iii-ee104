@@ -1,5 +1,7 @@
 package team.lala.timebank.web.user.mission;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,11 @@ import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
+import team.lala.timebank.entity.Penalty;
+import team.lala.timebank.service.FacadeService;
 import team.lala.timebank.service.MissionService;
 import team.lala.timebank.service.OrderService;
-import team.lala.timebank.service.FacadeService;
-import team.lala.timebank.service.TimeLedgerService;
+import team.lala.timebank.service.PenaltyService;
 
 @Slf4j
 @Controller
@@ -31,6 +34,8 @@ public class PayTimeController {
 	private MissionService missionService;
 	@Autowired
 	private FacadeService facadeService;
+	@Autowired
+	private PenaltyService penaltyService;
 
 	@RequestMapping("/list")
 	public String listPage(@RequestParam(value = "id") Long id, Model model) {
@@ -79,7 +84,31 @@ public class PayTimeController {
 			@RequestParam("proofPic") MultipartFile proofPic
 			, MultipartHttpServletRequest request){
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
-		orderService.report(orderId, description, proofPic, request);
+		Penalty penalty =  orderService.report(orderId, description);
+		try {
+			if (proofPic.getOriginalFilename().length() > 0) {
+				// 取得應用程式根目錄中圖片之路徑
+				String realPath = request.getServletContext().getRealPath("/") + "WEB-INF\\image\\user\\mission\\";
+				// 確認是否有此資料夾，如無則建資料夾
+				File dir = new File(realPath);
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+				// 檔名
+				String location = realPath + "missionPicture_" + penalty.getId() + ".jpg";
+				// 寫出檔案到Server
+				FileOutputStream fos = new FileOutputStream(location);
+				fos.write(proofPic.getBytes());
+				fos.close();
+				// 將檔名存入DB
+				penalty.setProofPicName("penaltyPicture_" + penalty.getId() + ".jpg");
+				penaltyService.save(penalty);
+			}
+			response.addMessage("修改成功");
+		} catch (Exception e) {
+			response.addMessage("修改失敗，" + e.getMessage());
+			e.printStackTrace();
+		}
 		return response;
 	}
 }

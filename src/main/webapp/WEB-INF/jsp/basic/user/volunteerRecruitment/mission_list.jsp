@@ -318,8 +318,7 @@
 	                var boxbox=$("#boxbox").append(box)
 	        	})
 	        		$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
-	        		$("#nextli").before("<li id='page1' class='page-item '><a name='count' id='1' class='page-link'>1</a></li>")
-	        	for (var index = 2; index <= totalPages ; index++) {
+	        	for (var index = 1; index <= totalPages ; index++) {
 	        		$("#nextli").before("<li id='page"+index+"' class='page-item'><a name='count' id="+index+" class='page-link'>"+index+"</a></li>")
 				}
 	        		var pageNo = "#page" + (page+1);
