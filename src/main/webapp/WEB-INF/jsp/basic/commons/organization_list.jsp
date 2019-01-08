@@ -113,28 +113,30 @@
 		        		var box="<div class='col-lg-4'>";
 		        		 box+="<div class='home-blog-post'><div class=\"product\">";
 		        		 box+="<div class='image'><a href='"+org.orgWebsiteLink +"' class=\"btn btn-template-outlined-white\">";
-		        		 box+= "<img width='300px' height='230px' src='/image/user/member/"+org.picture+"' class=\"image1\"></a></div></div>";
+		        		 box+= "<img width='250px' height='200px' src='/image/user/member/"+org.picture+"' class=\"image1\"></a></div></div>";
 		        		 box+= "<div class=\"text\">";
 		        		 box+= "<h4 style=\"width:270px; margin:auto; margin-bottom:10px\" >";
 		        		 box+= "<a href='"+ org.orgWebsiteLink +"'>"+org.name+ "</a></h4>";
 		        		 
-		        		 box+="<p class='author-category'>地址:"+org.county+org.district+"</p>"; 
+		        		 box+="<p><table style=\"margin:auto; \">";
+		        		 box+= "<tr><td width=\"70px\">地區:</td><td width=\"100px\"> "+org.county + org.district +"</td></tr>";
+		        		 box+= "<tr><td width=\"70px\">電話:</td><td width=\"100px\"> "+org.telephone +"</td></tr>";
+
 		        		 
-		        		 box+= ""
+		        		 box+= "</table></p>"
 		        		 box+="</div></div></div>";   
 		        		var boxbox=$("#boxbox").append(box); 
 		        		
 	
 			
-						
-// 								<p class="author-category" >
-// 									<span  style="color:#999">${org.account}</span>
-// 								</p>
-// 								<a href="${org.orgWebsiteLink}" class="btn btn-template-outlined">更多資訊</a>
-// 							</div>							
-// 						</div>
-// 					</div>
-		        		
+// 		        		<p>
+// 						<table style="margin:auto;">
+// 							<tr><td width="70px">服務地區: </td><td width="200px"> 
+// 								${volunteer.country}${volunteer.place}
+// 							</td></tr>
+							
+// 						</table>
+// 					</p>
 		        		
 		        		
 		        		
