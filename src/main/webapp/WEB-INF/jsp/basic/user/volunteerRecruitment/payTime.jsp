@@ -150,22 +150,23 @@
  			}); 	
 	}
 	
-	function penalty(orderId) {
-		$.ajax({
-			url : '/penalty/report?orderId=' + orderId,
-			type : 'post',
-			dataType : 'JSON',
-			success : function(penaltyResult) {
-				if(penaltyResult.status == "SUCCESS"){
-					alert("檢舉編號" + penaltyResult.obj.id + " " + penaltyResult.status);									
-				}else{
-					alert("檢舉編號" + penaltyResult.obj.id + " " + penaltyResult.status);
-					alert("FAIL reason:" + penaltyResult.messages);	
-				}
-				dataTable.ajax.reload();
-				
-			},
-		})
+	
+	function penalty(orderId,volunteerId,name) {
+// 		swal.withForm({
+// 		    title: 'Cool Swal-Forms example',
+// 		    text: 'Any text that you consider useful for the form',
+// 		    showCancelButton: true,
+// 		    confirmButtonColor: '#DD6B55',
+// 		    confirmButtonText: 'Get form data!',
+// 		    closeOnConfirm: true,
+// 		    formFields: [
+// 		        { id: 'name', placeholder:'Name Field', required: true },
+// 		        { id: 'nickname', placeholder:'Add a cool nickname' }
+// 		    ]
+// 		}, function(isConfirm) {
+// 		    // do whatever you want with the form data
+// 		    console.log(this.swalForm) // { name: 'user name', nickname: 'what the user sends' }
+// 		})
 	}
 	
 	function list(){
@@ -207,7 +208,7 @@
 	        			box +='</select></div></div>'	
 						var value=$("#"+order	.volunteer.id+" option:selected").val()
 	        			box+="<button class='btn btn-primary' onclick=\"pay("+order.id+","+order.volunteer.id+",'"+order.volunteer.name+"')\">時數核發與評分</button>"
-	        			box+="<button class='btn btn-danger' onclick=\"reject("+order.id+",'"+order.volunteer.name+"')\" >  檢舉    </button></div>"
+	        			box+="<button class='btn btn-danger' onclick=\"penalty("+order.id+","+order.volunteer.id+",'"+order.volunteer.name+"')\" >  檢舉    </button></div>"
 	        			}else if(order.orderStatus=='ServiceFinishPayMatchSuccess'){
 	        			box+="<span class='badge badge-success'>已付款與評分</span>"
 	        			}else if(order.orderStatus=='ServiceFinishNotPay'){
