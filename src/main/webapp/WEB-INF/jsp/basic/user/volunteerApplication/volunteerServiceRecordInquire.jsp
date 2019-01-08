@@ -1,18 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <!-- Javascript files-->
 <jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
-
-<!-- data table -->
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/js/dataTable_full_numbers_no_ellipses.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
-<script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
-<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+<!-- sweetalert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
 <!-- date picker -->
@@ -22,34 +17,27 @@
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 	
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
-
-<title>mission list(login)</title>
+<meta charset="UTF-8">
+<title>媒合紀錄查詢</title>
 <style> 	
-        fieldset {
-            width: 100%;
-            border-radius: 20px;
-            padding: 20px;
-            margin: 20px;
-            border: 3px solid rgba(0,0,0,0);
-            margin: auto
-        }
-        .s2{
-            text-align: center
-        }
-        .margintop{
-			 margin-top:70px;
-		}
-		.county,.district {
-	  padding: 0.375rem 0.75rem;
-	  font-size: 1rem;
-	  line-height: 1.5;
-	  color: #495057;
-	  background-color: #fff;
-	  background-image: none;
-	  background-clip: padding-box;
-	  border: 1px solid #ced4da;
-	  border-radius: 0.25rem;
-	  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+
+	.s2{
+		text-align: center
+	}
+    .margintop{
+		 margin-top:70px;
+	}
+	.county,.district {
+		padding: 0.375rem 0.75rem;
+		font-size: 1rem;
+		line-height: 1.5;
+		color: #495057;
+		background-color: #fff;
+		background-image: none;
+		background-clip: padding-box;
+		border: 1px solid #ced4da;
+		border-radius: 0.25rem;
+		transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	}
 	.smart-green {
 	margin-left:auto;
@@ -135,340 +123,324 @@
 	background-color:#80A24A;
 	}
     </style>
-    <meta charset="UTF-8">
+    
 </head>
 <body>
 	<!-- Top bar-->
-	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp" />
+	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
-	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />
-	 <div id="heading-breadcrumbs">
-        <div class="container">
-          <div class="row d-flex align-items-center flex-wrap">
-            <div class="col-md-7">
-              <h1 class="h2">媒合紀錄查詢</h1>
+	<jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
+	<div id="heading-breadcrumbs" class="border-top-0 border-bottom-0">
+		<div class="container">
+			<div class="row d-flex align-items-center flex-wrap">
+			<div class="col-md-7">
+			<h1 class="h2">媒合紀錄查詢</h1>
+			</div>
+			</div>
+		</div>
+	</div>
+	<div id="content">
+    <div class="container">
+		<section class="bar_1">
+			<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
+				<li class="nav-item"><a id="orderStatus7" data-toggle="pill" href="javascript: void(0)" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active">媒合成功紀錄</a></li>
+				<li class="nav-item"><a id="orderStatus3" data-toggle="pill" href="javascript: void(0)" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">媒合失敗紀錄</a></li>
+			</ul>
+		</section>
+	<div class="row bar">
+	<div id="blog-listing-medium" class="col-md-9">
+		<section class="post_1">
+			<div class="row" id="boxbox">
+			<!--mission內容開始 -->                
+			</div>
+		</section>
+		<div>
+			<nav aria-label="Page navigation example">
+				<ul id ="pagebox" class="pagination pagination-lg">
+				<!--換頁控制開始 -->
+				</ul>
+			</nav>
+		</div>    
+	</div>
+	<div class="col-md-3">
+	<div class="panel panel-default sidebar-menu">
+		<div class="panel-heading">
+			<h3 class="h4 panel-title">條件查詢</h3>
+		</div>
+        <div class="panel-body">
+        <form>
+	        <div class="form-group mx-sm-3 mb-3">
+				<label>縣市:</label> 	
+				<div role="tw-city-selector"></div>
+			</div>
+			<div class="form-group mx-sm-3 mb-3">
+				<label>活動名稱 :</label>
+				<input type="text" value="" placeholder="" id="title" name="title" class="form-control"/>
+			<div>
+			<label>時數 :</label>
+				<input type="text" value="" placeholder="" id="timeValue" name="timeValue" class="form-control"/>
+			<div>
+				<label>開始日期:</label>
+				<input type="text"  id="startDate" name="startDate" autocomplete="off" class="form-control"/>
+				<label>結束日期:</label>
+				<input type="text"  id="endDate" name="endDate" autocomplete="off" class="form-control"/>
+			</div>
+			<input type="hidden" value="" placeholder="missionstatus" id="missionstatus" name="missionstatus"/>
+			<input  type="button" value="搜尋" id="searchButt" class="btn btn-primary btn" >
+			</div>
+			</div>
+		</form>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+<!--評分視窗 -->
+    <div class="modal fade" id="scoreModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">評分系統</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-          </div>
+            <div class="modal-body">
+                <label>
+                    <span>分數</span>
+                    <select id='score' name='score'>
+                        <option value=''>請評分</option>
+                        <option value='1'>1</option>
+                        <option value='2'>2</option>
+                        <option value='3'>3</option>
+                        <option value='4'>4</option>
+                        <option value='5'>5</option>
+                    </select>
+                </label>
+            </div>
+            <div class="modal-footer">
+                <input type='button' class='btn btn-primary btn-sm' onclick='' value='評分' />
+            </div>
         </div>
-      </div>
-	<section class="bar">
-        <div class="container">
-        	<div class="row">
-<%-- 			<jsp:include page="../user_layout/user_sidebar.jsp" /> --%>
-        			<!-- 條件搜尋表單 -->
-        		<div>
-				<fieldset>
-				<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
-	                <li class="nav-item"><a id="orderStatus7" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active">媒合成功紀錄</a></li>
-	                <li class="nav-item"><a id="orderStatus3" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">媒合失敗紀錄</a></li>
-              	</ul>
-					<form id="form">
-						<label><span>活動地址:</span><div role="tw-city-selector" ></div></label>						
-						<label>開始日期:</label>
-						<input type="text"  id="startDate" name="startDate" autocomplete="off"/>
-						<label>結束日期:</label>
-						<input type="text"  id="endDate" name="endDate" autocomplete="off"/>
-						<input type="button" value="搜尋"  class="btn btn-outline-secondary" id="searchButt" />
-						<input type="reset"  value="清除重填" class="btn btn-outline-secondary" />
-						<div>	
-						<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
-						進階查詢:
-			  			</a>
-			  			</div> 
-						<div class="collapse" id="collapse">		
-							<label>獲得時間 :</label> 
-							<input type="text" value="" id="memberScore" name="memberScore"/>
-							<label>狀態 :</label> 
-							<select  id="orderStatus" name="orderStatus">
-								<option value="">選擇狀態</option>
-								<option value='ServiceFinishPayMatchSuccess'>已完成</option>
-								<option value='RequesterCancleActivityNoPunishMatchSuccess'>Requester 臨時取消活動(不懲罰)</option>
-								<option value='RequesterCancleActivityPunishMatchSuccess'>Requester 臨時取消活動(要懲罰)</option>
-								<option value='VolunteerCancleActivityNoPunishMatchSuccess'>志工 臨時請假(不懲罰)</option>
-								<option value=''>志工 臨時不去(要懲罰)</option>
-							</select>
-						</div>
-					</form>
-				</fieldset>
-				<fieldset>
-					<table id="table" class="table table-striped table-bordered">
-						<thead>
-							<tr>
-								<th scope="col"></th>
-								<th scope="col">活動名稱</th>
-								<th scope="col">地點</th>
-								<th scope="col">活動開始時間</th>
-								<th scope="col">活動結束時間</th>
-								<th scope="col">時數</th>
-								<th scope="col">狀態</th>
-								<th scope="col">實際時數</th>
-								<th scope="col">備註</th>
-							</tr>
-						</thead>
-						<tbody id="tableBody">
-							<!-- 會員資料 -->
-						</tbody>
-					</table>
-				</fieldset>
-				</div>
-	 		</div>
-	 	</div>
-	</section>
-	<!-- FOOTER -->
-	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
+    </div>
+</div>
+<!-- 檢舉視窗 -->
+<div class="modal fade" id="reportModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">檢舉系統</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form id="reportForm" enctype="multipart/form-data">
+        	<input type='hidden' id='orderId' name='orderId' value='' />
+            <h5>檢舉人名</h5>
+            <p id="memberAccount"></p>
+            <h5>檢舉原因</h5>
+            <textarea cols='40' rows='5' id='description' name='description'></textarea>
+            <input type="file" id="proofPic" name="proofPic" accept="image/*">
+            <p>請選擇圖檔，如無佐證資料，則直接送出審核</p>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <input type='button' class='btn btn-primary btn-sm' onclick='report()' value='檢舉' />
+    </div>
+</div>
+</div>
+</div>
+	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script>
-		var dataTable;
-		var orderStatusDetail = "MatchSuccess";
-		$(document).ready(function() {
-			
-		dataTable = $('#table').DataTable({
-				pageResize: true, 
-				fixedHeader: true,
-				pagingType: 'full_numbers',
-				searching: false,				
-			 	processing: true,
-				serverSide: true,  //分頁、排序都交由伺服器處理
-				ajax:{
-					url:"/user/volunteerRecord/queryRecord",
-					type:"get",
-					dataType:"json",
-					data:function(d){ 				//傳送給伺服器的資料(datatable預設會傳送d的資料)
-						var start = d.start;
-						var length = d.length;
-						var request =  $("#form").serialize() + "&orderStatusDetail=" + orderStatusDetail +
-											"&start=" + start + "&length="+ length;
-						return request;
-					},
-					dataSrc:"content",
-					dataFilter:function(resp){		//對伺服器送來的資料進行修改
-						 var json = jQuery.parseJSON( resp );
-			             json.recordsTotal = json.totalElements;
-			             json.recordsFiltered = json.totalElements;	     			
-			             return JSON.stringify( json ); 
-					},
-				}, drawCallback:function(d){
-						var api = this.api();
-						var pageNum = parseInt(d.json.pageable.pageNumber) ;
-						var totalPages = d.json.totalPages;
-						$('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
-				}, columns: [ 		//設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
-		     		{data:null},
-		           	{data:"mission.title" },
-		           	{ data: null, render: function ( data, type, row ) {
-		                return data.mission.county + data.mission.district+ data.mission.address;
-		            } },
-		            { data: null, render: function ( data, type, row ) {
-		            	return new Date(data.mission.startDate).Format('yyyy-MM-dd hh:mm');
-		            } },
-		            { data: null, render: function ( data, type, row ) {
-		            	return new Date(data.mission.endDate).Format('yyyy-MM-dd hh:mm');
-		            } },
-					{data:"mission.timeValue"},
-					{data:"orderStatus"},
-					{ data: null, render: function ( data, type, row ) {
-						if(data.memberScore == null){
-							return 0;
-						} else {
-		            		return data.memberScore;							
-						}
-		            } },
-		            { data: null, render: function(data, type, row ) {
-		            	if(data.orderStatus == "RequesterCancleActivityNoPunishMatchSuccess") {
-		            		var report = "<input type='button' class=\"btn btn-primary btn-sm\" onclick=report(" + data.id + ") value='檢舉'  />";
-		            		var text = "<textarea cols='40' rows='5' id='description' name='description'></textarea>"
-							var reportModal = '<div class="modal fade" id="reportModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">'+
-											  '<div class="modal-dialog modal-dialog-centered" role="document">'+
-									    '<div class="modal-content">'+
-									     '<div class="modal-header">'+
-									       '<h5 class="modal-title" id="exampleModalCenterTitle">檢舉系統</h5>'+
-									        '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
-									          '<span aria-hidden="true">&times;</span>'+
-									        '</button></div>'+
-									      '<div class="modal-body">'+ 
-									      '<form id="reportForm" enctype="multipart/form-data">' +
-									      '<input type="hidden" id="orderId" name="orderId" value="' + data.id + '" /><p>' +
-									      '<h5>檢舉人名<h5><p>' + data.mission.member.account + '</p>' +
- 									      '<h5>檢舉原因</h5><p>' + text +'</p>' +
- 									     '<input type="file" id="proofPic" name="proofPic"  accept="image/*"><p>請選擇圖檔，如無佐證資料，則直接送出審核<p>' + 
-									      '</form></div><div class="modal-footer">'+ report + 
-									      '</div></div></div></div>';
-									      
-		            		var reportButt = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reportModalCenter">檢舉</button>'
-		            		return reportButt + reportModal;
-		            	} else if (data.orderStatus == "ServiceFinishPayMatchSuccess") {
-							var score = "<input type='button' class='btn btn-primary btn-sm'  onclick=sendScore(" + data.id +") value='評分'  />"
-		            		var select = "<select id='score' name='score'><option value=''>請評分</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option></select>"
-							var scoreModal = '<div class="modal fade" id="scoreModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">'+
-											  '<div class="modal-dialog modal-dialog-centered" role="document">'+
-									    '<div class="modal-content">'+
-									     '<div class="modal-header">'+
-									       '<h5 class="modal-title" id="exampleModalCenterTitle">評分系統</h5>'+
-									        '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
-									          '<span aria-hidden="true">&times;</span>'+
-									        '</button></div>'+
-									      '<div class="modal-body">'+ 
-								   			'<label><span>分數</span>' + select + '</label>' +
-									      '</div><div class="modal-footer">'+
-									       score + '</div></div></div></div>';
-							var scoreButt = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#scoreModalCenter">評分</button>'
-		            		return scoreButt + scoreModal;		            		
-		            	} else if (data.orderStatus == "ServiceFinishPayAndScoreMatchSuccess"){
-		            		return '<button type="button" class="btn btn-primary btn-sm">已評分</button>'
-		            	} else if (data.orderStatus == "VolunteerReportRequestMatchSuccess" || data.orderStatus == "RequesterCancleActivityPunishMatchSuccess"){
-		            		return '<button type="button" class="btn btn-primary btn-sm">已檢舉</button>'
-		            	} else {
-		            		return null;
-		            	}
-		            } },
-				], columnDefs:[{		//禁用第0123列的搜索和排序
-					"searchable": false,
-	                "orderable": false,
-	                "targets": [0, 1, 2],
-				}], order: [[1, 'asc']]   
-			 });
-			
-			dataTable.on('draw.dt',function() {
-				dataTable.column(0, {
-	                search:'applied',
-	                order:'applied'
-	            }).nodes().each(function(cell, i) {
-					 i = i+1;								//i從0開始，所以先加1
-	                var pageinfo = dataTable.page.info();	//服務氣模式下，使用DT提供的API直接獲取分頁資訊
-	                var pageno = pageinfo.page;				//当前第几页，从0开始
-	                var length = pageinfo.length;			//每页数据
-	                var columnIndex = (i+pageno*length);	//行号等于 页数*每页数据长度+行号
-	                cell.innerHTML = columnIndex;
-	            });
-	        });
-					
-			new TwCitySelector();
-			
-			//日期選擇器
-			var datePickerSetting = {
-				format : "yyyy/mm/dd",
-				autoclose : true,
-				todayHighlight : true,
-				language : 'zh-TW',
-				clearBtn : true,
-				startView : "2",
-				endDate : "0d",
-			};
-			$("#startDate").datepicker(datePickerSetting);
-			$("#endDate").datepicker(datePickerSetting);
-			
-// 			$('#startDate').datetimepicker({
-// 				dateFormat: "yy/mm/dd",
-// 			    todayHighlight: true,
-// 			    language: 'zh-TW',
-// 			    startView:"years",
-// 			})
-			
-// 			$('#endDate').datetimepicker({
-// 				dateFormat: "yy/mm/dd",
-// 			    todayHighlight: true,
-// 			    language: 'zh-TW',
-// 			    startView:"years",
-// 			})
-		//搜尋事件
-		$("#searchButt").click(	function(){
-			dataTable.ajax.reload();
-			})
-		})
+	var length=3;
+	var page=0;
+	var first;
+	var last;
+	//切換服務狀態
+	$('#orderStatus7').click(function(){
+		orderStatusDetail = "MatchSuccess";
+		page=0;
+		list();
+	})
+	$('#orderStatus3').click(function(){
+		orderStatusDetail = "MatchFail";
+		page=0;
+		list();
+	})
+	//抓出會員資料
+ 	function list(){
+ 		$.ajax({
+ 			url:"/user/volunteerRecord/queryRecord?"+$('form').serialize()+"&orderStatusDetail="+orderStatusDetail+"&page="+page+"&length="+length,
+			type:"get",
+			dataType:"json",
+ 		}).done(function(orders){
+ 			$("#boxbox").text("");
+        	$("#pagebox").text("");
+        	var totalElements=orders.totalElements;
+        	var totalPages=orders.totalPages;
+        	first=orders.first;
+        	last=orders.last;
+        	page=orders.number;
+        	if(orders.content.length == 0){
+        		var box="<h2>目前沒有活動，快去申請吧</h2>"
+        		$("#boxbox").append(box);
+        	} else {
+	        	$.each(orders.content, function(index, order){
+	        	   var box="<div class='col-md-4'>"
+        		   box+="<div class='video'>"
+        		   box+="<div class='embed-responsive embed-responsive-4by3'>"	        	
+        		   box+=" <a href='#'><img src=../../img/"+order.mission.missionPicName+" class='embed-responsive-item'></img></a>"     
+        		   box+="</div></div></div>"
+                   box+="<div class='col-md-8'>"
+                   box+="<h1 class='h1 mt-0'><a href='post.htmls'>"+ order.mission.title + "</a></h1>"
+                   box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
+                   box+="<p class='author-category_1'><a href='#'>"+ order.mission.member.name + "</a></p>"
+                   if(order.orderStatus == "ServiceFinishPayMatchSuccess"){
+                   	   box+="<p class='date-comments_1'><a href='javascript: void(0)' data-toggle='modal' data-target='#scoreModalCenter' id='" + order.id + "'><i class='fa fa-edit'></i>評分</a></p></div>"
+                   } else if(order.orderStatus == "RequesterCancleActivityNoPunishMatchSuccess") {
+                	   box+="<p class='date-comments_1'><a href='javascript: void(0)' data-toggle='modal' data-target='#reportModalCenter' id='" + order.id + "' name='" + order.mission.member.account + "'><i class='fa fa-trash'></i>檢舉</a></p></div>"	                	   
+                   } else if(order.orderStatus == "ServiceFinishPayAndScoreMatchSuccess"){
+                	   box+="<p class='date-comments_1'><i class='fa fa-edit'></i>已評分</a></p></div>"
+	               } else if(order.orderStatus == "VolunteerReportRequestMatchSuccess" || order.orderStatus == "RequesterCancleActivityPunishMatchSuccess"){
+	            	   box+="<p class='date-comments_1'><i class='fa fa-trash'></i>已檢舉</a></p></div>"
+	               } else {
+                	   box+="</div>"
+                   }
+		           box+="<p class='intro_1'>結束時間:"+new Date(order.mission.endDate).Format('yyyy-MM-dd hh:mm')+"</p>"
+                   box+="<p class='intro_1'>活動地點:"+order.mission.county + order.mission.district+"</p>"
+//                    if(order.orderStatus ==)
+                   box+="<p class='intro_1'>獲得實數:"+order.memberScore+"</p>"
+			       $("#boxbox").append(box);
+	        	})
+        	}
+        	if(orders.content.length != 0){
+        		$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
+	        	for (var index = 1; index <= totalPages ; index++) {
+	        		$("#nextli").before("<li id='page"+index+"' class='page-item'><a name='count' id="+index+" class='page-link'>"+index+"</a></li>")
+				}
+	        	var pageNo = "#page" + (page+1);
+	        	$(pageNo).addClass('page-item active');
+        	}
+	 	})
+ 	}
+	new TwCitySelector();
 		
-		//評分
-		function sendScore(orderId) {
-			if ($('#score').val() == null || $('#score').val().length == 0){
-				alert("請評分")
-			} else {			
-				$.ajax({
-					url : '/user/volunteerRecord/score?orderId=' + orderId +'&score=' + $('#score').val(),
-					type : 'get',
-					dataType : 'JSON'
-				}).done(function(response){
-					if (response.status =="SUCCESS"){
-						alert("評分成功");
-					} else {
-						alert("評分失敗");
-					}
-					$('#scoreModalCenter').modal('hide')
-					dataTable.ajax.reload();
-				})	
-			}
+	//日期選擇器
+	var datePickerSetting = {
+		format : "yyyy/mm/dd",
+		autoclose : true,
+		todayHighlight : true,
+		language : 'zh-TW',
+		clearBtn : true,
+		startView : "2",
+		endDate : "0d",
+	};
+	$("#startDate").datepicker(datePickerSetting);
+	$("#endDate").datepicker(datePickerSetting);
+	//搜尋事件
+ 	$("#searchButt").click(function(){
+ 		list();
+	})
+	//呼叫評分視窗
+
+	//評分
+	function score(orderId) {
+		if ($('#score').val() == null || $('#score').val().length == 0){
+			alert("請評分")
+		} else {			
+			$.ajax({
+				url : '/user/volunteerRecord/score?orderId=' + orderId +'&score=' + $('#score').val(),
+				type : 'get',
+				dataType : 'JSON'
+			}).done(function(response){
+				if (response.status =="SUCCESS"){
+					alert("評分成功");
+				} else {
+					alert("評分失敗");
+				}
+				$('#scoreModalCenter').modal('hide')
+				list();
+			})	
 		}
-		
-		//檢舉
-		function report(orderId) {
-			if(confirm("確認要送出檢舉嗎？")==true) {
-				var data = new FormData($('#reportForm')[0]);
-				$.ajax({
-					url : '/user/volunteerRecord/report' ,
-					type : 'post',
-					cache: false,
-					data : data,
-					processData: false,
-					contentType: false
-				}).done(function(response){
-					console.log(response)
-					if (response.status =="SUCCESS"){
-						alert("檢舉成功");
-					} else {
-						alert("檢舉失敗");
-					}
-					$('#reportModalCenter').modal('hide')
-					dataTable.ajax.reload();
-				})	
-			} else {
-				return false;
-			}
+	}		
+	//檢舉
+	function report() {
+		if(confirm("確認要送出檢舉嗎？")==true) {
+			var data = new FormData($('#reportForm')[0]);
+			$.ajax({
+				url : '/user/volunteerRecord/report',
+				type : 'post',
+				cache: false,
+				data : data,
+				processData: false,
+				contentType: false
+			}).done(function(response){
+				console.log(response)
+				if (response.status =="SUCCESS"){
+					alert("檢舉成功");
+				} else {
+					alert("檢舉失敗");
+				}
+				$('#reportModalCenter').modal('hide')
+				list();
+			})	
+		} else {
+			return false;
 		}
-		
-		function CheckForm(){
-			if(confirm("確認要送出檢舉嗎？")==true) {
-				return true;
-			} else {
-				return false;
+	}
+	//自訂日期格式
+	Date.prototype.Format = function (fmt) {
+	    var o = {
+	        "M+": this.getMonth() + 1, //月份
+	        "d+": this.getDate(), //日
+	        "h+": this.getHours(), //小时
+	        "m+": this.getMinutes(), //分
+	        "s+": this.getSeconds(), //秒
+	        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+	        "S": this.getMilliseconds() //毫秒
+	    };
+	    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+	    for (var k in o)
+	        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+	    return fmt;
+	}
+	$(document).ready(function() {
+		orderStatusDetail = "MatchSuccess";
+		list();
+		$("#pagebox").on("click","li>a[name='backa']", function(){
+			if(first == false){
+				page = page - 1;
+				list();
 			}
-		} 
+			$('body,html').animate({scrollTop: 0 }, 1);
+		}) 
 		
-		//切換服務狀態
-		var Status7 = 
-			"<option value=''>選擇狀態</option>"+
-			"<option value='ServiceFinishPayMatchSuccess'>已完成</option>"+
-			"<option value='RequesterCancleActivityNoPunishMatchSuccess'>Requester 臨時取消活動(不懲罰)</option>"+
-			"<option value='RequesterCancleActivityPunishMatchSuccess'>Requester 臨時取消活動(要懲罰)</option>"+
-			"<option value='VolunteerCancleActivityNoPunishMatchSuccess'>志工 臨時請假(不懲罰)</option>"+
-			"<option value='VolunteerCancleActivityPunishMatchSuccess'>志工 臨時不去(要懲罰)</option>";
-		var Status3 = 
-			"<option value=''>選擇狀態</option>"+
-			"<option value='RequesterRefuceServiceMatchFail'>requester 拒絕服務</option>"+
-			"<option value='RequesterCancleTransactionMatchFail'>Requester 取消交易</option>"+
-			"<option value='VolunteerCancleTransactionMatchFail'>志工 取消交易</option>";    
-		$('#orderStatus7').click(function(){
-			orderStatusDetail = "MatchSuccess";
-			$('#orderStatus').html(Status7);
-			dataTable.ajax.reload();
+		$("#pagebox").on("click","li>a[name='nexta']", function(){
+			if(last == false){
+				page = page + 1;
+				list();
+			}
+			$('body,html').animate({scrollTop: 0 }, 1);
+		 })
+
+    	$("#pagebox").on("click","li>a[name='count']", function(){
+    		page=$(this).text()-1;
+    		list();
+    		$(this).
+    		$('body,html').animate({scrollTop: 0 }, 1);
+    	})
+    	//彈出評分視窗時，修改裡面的值
+	    $("#boxbox").on('click', "[data-target='#scoreModalCenter']", function (event) {
+			$("[value='評分']").attr("onclick", "score("+ event.target.id +")")
 		})
-		$('#orderStatus3').click(function(){
-			orderStatusDetail = "MatchFail";
-			$('#orderStatus').html(Status3);
-			dataTable.ajax.reload();
+		//彈出檢舉視窗時，修改裡面的值
+		$("#boxbox").on('click', "[data-target='#reportModalCenter']", function (event) {
+			$("#orderId").attr("value", event.target.id)
+			$("#memberAccount").html(event.target.name)
 		})
-		//自訂日期格式
-		Date.prototype.Format = function (fmt) {
-		    var o = {
-		        "M+": this.getMonth() + 1, //月份
-		        "d+": this.getDate(), //日
-		        "h+": this.getHours(), //小时
-		        "m+": this.getMinutes(), //分
-		        "s+": this.getSeconds(), //秒
-		        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-		        "S": this.getMilliseconds() //毫秒
-		    };
-		    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-		    for (var k in o)
-		        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-		    return fmt;
-		}
+	});
 	</script>
 </body>
 </html>

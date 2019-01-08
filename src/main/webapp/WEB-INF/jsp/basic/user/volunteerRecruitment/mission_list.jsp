@@ -114,7 +114,7 @@
               </section>
              
              <div >
-               	<nav aria-label="Page navigation example">
+               	<nav aria-label="Page navigation example" class="d-flex justify-content-center">
                     <ul id ="pagebox" class="pagination pagination-lg">
 <!--                     換頁控制開始 -->
               		</ul>
@@ -205,8 +205,6 @@
 	
 	$("#status12Butt").click(function(){
 		$("#webtitle").empty().append("招募紀錄-未開始");
-		$("#time").empty().append("開始時間");
-		$("#statusField").empty().append("志工審核");
 		$("#missionstatus").val("A_VolunteerApproved");
 		page=0;
 		list();
@@ -214,8 +212,6 @@
 	
 	$("#status3Butt").click(function(){
 		$("#webtitle").empty().append("招募紀錄-時數未核發");
-		$("#time").empty().append("結束時間");
-		$("#statusField").empty().append("時數核發");
 		$("#missionstatus").val('B_AccountsPayable');
 		page=0;
 		list();
@@ -223,21 +219,11 @@
 	
 	$("#status4Butt").click(function(){
 		$("#webtitle").empty().append("招募紀錄-歷史紀錄");
-		$("#time").empty().append("結案時間");
-		$("#statusField").empty().append("結案紀錄");
 		$("#missionstatus").val('C_Finish');
 		page=0;
 		list();		
 	})
-	
-	function mouseover(id){
-		$('#cancel'+id).css('text-decoration','underline')
-	}
- 	function mouseout(id){
- 		$("#cancel"+id).css('text-decoration','none')
- 	}	
-
-
+		
 	function cancelMission(id,title) { 		
  		swal({
  			  title: "確定取消"+title+"的招募刊登?",
@@ -247,65 +233,49 @@
  			  dangerMode: true,
  			})
  			.then((willcancel) => {
- 			  if (willcancel) {
- 				   				  
+ 			  if (willcancel) { 				   				  
  				 $.ajax({
  					url : '/user/volunteerRecruitment/cancel?id=' + id,
  					type : 'post',
  					dataType : 'JSON',
  					success : function(cancelResult) {
- 						if(cancelResult.status == "SUCCESS"){
- 							
+ 						if(cancelResult.status == "SUCCESS"){ 							
  							 swal("取消"+cancelResult.obj.title+"的招募計畫成功", {
  				 			      icon: "success",
- 				 			 });
- 							
- 						}else{
- 							
+ 				 			 }); 							
+ 						}else{ 							
  							swal("取消"+cancelResult.obj.title+"的招募計畫失敗，因為"+cancelResult.messages+"", {
 				 			      icon: "error",
-				 			});
- 							
+				 			}); 							
  						} 						
- 						dataTable.ajax.reload();						
+ 						list();								
  					},
- 				})
- 				   			   
+ 				}) 				   			   
  			  } else {
  			    swal(""+title+"的招募計畫仍繼續進行");
  			  }
  			}); 	
 	}
  	
+ 	function cancelEndMission(time,title){
+ 		swal(title, "您於"+time+"取消本次申請");
+ 	}
  	
+ 	 	
  	function list(){
 		$.ajax({
 			url:"/user/volunteerRecruitment/query?"+$('form').serialize()+"&page="+page+"&length="+length,
 			type: "get",
-		    dataType : "json",
-		    
+		    dataType : "json",		    
 	        }).done(function(missions){
 	        	$("#boxbox").text("");
 	        	$("#pagebox").text("");
-	        	console.log(missions);
-	        	
-	        	var totalElements=missions.totalElements;
-	        	console.log(totalElements);
-	        	
-	        	var totalPages=missions.totalPages;
-	        	console.log(totalPages);
-	        	
-	        	first=missions.first;
-	        	console.log(first);
-	        	
-	        	last=missions.last;
-	        	console.log(last);
-	        	
-	        	page=missions.number;
-	        	
-	        	
+	        	var totalElements=missions.totalElements;	        	
+	        	var totalPages=missions.totalPages;	        	
+	        	first=missions.first;	        	
+	        	last=missions.last;	        	
+	        	page=missions.number;	        		        	
 	        	$.each(missions.content,function(index, mission){
-	        		console.log(mission)
 	        		var box="<div class='col-md-4'>"
 	        		   box+="<div class='video'>"
 	        		   box+="<div class='embed-responsive embed-responsive-4by3'>"	        	
@@ -316,69 +286,45 @@
 	                   box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
 	                   box+="<p class='author-category_1'><a href='#'>"+ mission.member.name + "</a></p>"
 					 if(mission.missionstatus=="A_New"||mission.missionstatus=="A_VolunteerApproved"){
-	                   box+="<p class='date-comments_1'><a href='/user/volunteerRecruitment/edit?id="+mission.id+"'><i class='fa fa-edit'></i>編輯</a><a id='cancel"+mission.id+"' onmouseover='mouseover("+mission.id+")' onmouseout='mouseout("+mission.id+")' onclick=\"cancelMission("+mission.id+",'"+mission.title+"')\" ><i class='fa fa-trash'></i>取消</a></p></div>"
+	                   box+="<p class='date-comments_1'><a href='/user/volunteerRecruitment/edit?id="+mission.id+"'><i class='fa fa-edit'></i>編輯</a><a href='javascript:void(0)' onclick=\"cancelMission("+mission.id+",'"+mission.title+"')\" ><i class='fa fa-trash'></i>取消</a></p></div>"
 					 }
 					 else if(mission.missionstatus == "B_AccountsPayable"){
 					   box+="</div>"
 					 }else if(mission.missionstatus == "C_Finish" || mission.missionstatus == "C_Cancel"){
 					   box+="</div>"
-					 }
-	                		   
-	                   box+="<p class='intro_1'>活動地點:"+mission.county+mission.district+"</p>"
-	                   
-	                   
+					 }    		   
+	                   box+="<p class='intro_1'>活動地點:"+mission.county+mission.district+"</p>"	                  
 	                   if(mission.missionstatus == "A_New" || mission.missionstatus == "A_VolunteerApproved"){
 	                   box+="<p class='intro_1'>開始時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>"   
 		            	}else if(mission.missionstatus == "B_AccountsPayable"){
 		            		box+="<p class='intro_1'>截止時間:"+new Date(mission.endDate).toLocaleDateString()+"</p>"
-		            	}else if(mission.missionstatus == "C_Finish" || data.missionstatus == "C_Cancel"){
+		            	}else if(mission.missionstatus == "C_Finish" || mission.missionstatus == "C_Cancel"){
 		            		box+="<p class='intro_1'>結束時間:"+new Date(mission.finishDate).toLocaleDateString()+"</p>"
 		            	}else{
-		            		box+="<p class='intro_1'>開始時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>"
-		                
-		               }  
-	                   
-	                   
-	                   
-	                   
+		            		box+="<p class='intro_1'>開始時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>"		                
+		               }  	        
 	                   box+="<p class='intro_1'>需求人數:"+mission.peopleNeeded+"</p>"	          
-	                 if(mission.missionstatus=="A_New"){
-	                   box+="<p class='read-more text-right'><a href='/user/volunteerVerify/list?id="+mission.id+"' class='btn btn-template-outlined'>志工審核</a></p> </div>"
-	                 
-	     							
-	 				 }else if(mission.missionstatus=="B_AccountsPayable"){
-	 					box+="<p class='read-more text-right'><a href='/user/payTime/list?id="+mission.id+"' class='btn btn-template-outlined'>核發時數</a></p> </div>"
-
-	 					}else if(mission.missionstatus=="C_Cancel"){
-	 						box+="<p class='read-more text-right'><a href='/user/closed/list?id="+mission.id+"' class='btn btn-template-outlined'>取消紀錄</a></p> </div>"
-								
-	 					}else if(mission.missionstatus=="C_Finish"){
-	 						box+="<p class='read-more text-right'><a href='/user/closed/list?id="+mission.id+"' class='btn btn-template-outlined'>結案紀錄</a></p> </div>"
-								
-	 					}else{
-	 						box+="<p class='read-more text-right'><span class='badge badge-success'>已審核</span></p><div>"
-	 					}
-	                   
+	                if(mission.missionstatus=="A_New"){
+	                   box+="<p class='read-more text-right'><a href='/user/volunteerVerify/list?id="+mission.id+"' class='btn btn-template-outlined'>志工審核</a></p></div>"	      				
+	 				}else if(mission.missionstatus=="B_AccountsPayable"){
+	 					box+="<p class='read-more text-right'><a href='/user/payTime/list?id="+mission.id+"' class='btn btn-template-outlined'>核發時數</a></p></div>"
+	 				}else if(mission.missionstatus=="C_Cancel"){
+	 					box+="<p class='read-more text-right'><a href='javascript:void(0)' onclick=\"cancelEndMission('"+new Date(mission.finishDate).toLocaleDateString()+"','"+mission.title+"')\" class='btn btn-template-outlined'>取消紀錄</a></p></div>"								
+	 				}else if(mission.missionstatus=="C_Finish"){
+	 					box+="<p class='read-more text-right'><a href='/user/closed/list?id="+mission.id+"' class='btn btn-template-outlined'>結案紀錄</a></p></div>"								
+	 				}else if(mission.missionstatus=="A_VolunteerApproved"){
+	 					box+="<p class='read-more text-right'><span class='badge badge-success'>已審核</span></p><div>"
+	 				}                 
 	                var boxbox=$("#boxbox").append(box)
-	        	
 	        	})
-	        	
 	        		$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
 	        	for (var index = 1; index <= totalPages ; index++) {
-	        		$("#nextli").before("<li class='page-item'><a name='count' id="+index+" class='page-link'>"+index+"</a></li>")
+	        		$("#nextli").before("<li id='page"+index+"' class='page-item'><a name='count' id="+index+" class='page-link'>"+index+"</a></li>")
 				}
-	    
-	    
+	        		var pageNo = "#page" + (page+1);
+	        		$(pageNo).addClass('page-item active');
 	        })
-	        
-			}
- 	
- 	
- 	
- 	
- 	
- 	
- 	
+			} 	
  
 	$(document).ready( function () {
 
@@ -428,7 +374,6 @@
     		 $('body,html').animate({
                  scrollTop: 0 }, 1);
     	})
-// 		
 	});
 	</script>
 </body>

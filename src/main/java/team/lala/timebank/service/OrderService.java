@@ -42,7 +42,9 @@ public class OrderService {
 	@Autowired
 	private MemberDao memberDao;
 	@Autowired
-	private PenaltyDao penaltyDao;
+	private PenaltyService penaltyService;
+	@Autowired
+	private SystemMessageService systemMessageService;
 
 	// 根據會員查詢order
 	public Page<Order> findBySpecification(Specification<Order> specification, PageRequest pageRequest) {
@@ -77,51 +79,18 @@ public class OrderService {
 		memberDao.save(member);
 		order.setOrderStatus(OrderStatus.ServiceFinishPayAndScoreMatchSuccess);		//修改order狀態
 		orderDao.save(order);
+		systemMessageService.scoreMessage(order, score);
+		
 	}
 	
 	//志工檢舉雇主
-	public void report(Long orderId, String description, MultipartFile proofPic, HttpServletRequest request) {
-		Order order = orderDao.getOne(orderId);
-		Penalty penalty = new Penalty();
-		penalty.setOrder(order);
-		penalty.setAccuser(order.getVolunteer());
-		penalty.setDefendant(order.getMission().getMember());
-		penalty.setUpdateDate(new java.util.Date());
-		penalty.setDescription(description);
-		penalty.setStatus(new Integer(1));
-		penaltyDao.save(penalty);
+	public Penalty report(Long orderId, String description) {
+		Order order = orderDao.getOne(orderId);		
+		Penalty penalty = penaltyService.report(order, description);
 		order.setOrderStatus(OrderStatus.VolunteerReportRequestMatchSuccess);
 		orderDao.save(order);
-		// 如果有上傳圖片，才存檔案到Server，及存路徑到DB
-		if (proofPic.getOriginalFilename().length() > 0) {
-			// 取得應用程式根目錄中圖片之路徑
-			String realPath = request.getServletContext().getRealPath("/") + "..\\resources\\static\\img\\";
-			System.out.println(realPath + "***************************");
-			// 確認是否有此資料夾，如無則建資料夾
-			File dir = new File(realPath);
-			if (!dir.exists()) {
-				dir.mkdirs();
-			}
-
-			// 檔名
-			String location = realPath + "penaltyProof_" + penalty.getId() + ".jpg";
-
-			// 寫出檔案到Server
-			try {
-				FileOutputStream fos = new FileOutputStream(location);
-				fos.write(proofPic.getBytes());
-				fos.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			// 將檔名存入DB
-			penalty.setProofPicName("penaltyProof_" + penalty.getId() + ".jpg");
-			penalty = penaltyDao.save(penalty);
-
-		}
+		systemMessageService.reportMessage(order);
+		return penalty;
 	}
 
 	public List<Order> findByVolunteer(Principal principal) {

@@ -175,8 +175,10 @@
           </section>
  
         </div>
+				<button  class="btn btn-template-outlined">聊天</button>
 	 </div>
 
+	
 
 
 <jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
