@@ -90,12 +90,7 @@
       <div id="content">
         <div class="container">
           <div class="row bar">
-          
-          
-          
-          
-          
-          
+       
 		<!--查詢 -->
           <div class="panel panel-default sidebar-menu">
           	<div class="panel-heading">
@@ -103,10 +98,8 @@
             </div>
             <div class="panel-body">
             	<form role="search">
-                	<div class="input-group">
-                                        
-                    	<div  role="tw-city-selector"></div>                    
-                    
+                	<div class="input-group">                                        
+                    	<div  role="tw-city-selector"></div>                                       
 	                    <div class="form-group">
 		                    <select  id="serviceTypeDetail" name="serviceTypeDetail" class="form-control">
 								<option value="">服務類型</option>
@@ -138,76 +131,50 @@
 	                    <span class="input-group-btn">
 	                    
 	                    	<input  type="button" value="搜尋" id="searchButt" class="btn btn-outline-primary" >               
-<!-- 	                    	<button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button> -->
 	                    </span>
                     </div>
                   </form>
                 </div>
               </div>
-          
 			<!--志工招募清單 -->
             <div>
               <div id="boxbox" class="row">
-
                </div>
-               
                
                	 <nav aria-label="Page navigation example">
                     <ul id ="pagebox" class="pagination pagination-lg">
               		</ul>
                   </nav>
+                  
             </div>
           </div>
         </div>
       </div>
-     
-
-
-
 <jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
-	
-	
-	
-	
 	<script>
 	var length=9;
 	var page=0;
 	var first;
 	var last;
 	
-$("#searchButt").click(function(){
-	list();
- 		
-	})
+	$("#searchButt").click(function(){
+		list();
+	 		
+		})
 
-	
-	
 	function list(){
 		$.ajax({
 			url:"/commons/domesticVolunteer/query?"+$('form').serialize()+"&page="+page+"&length="+length,
 			type: "get",
 		    dataType : "json",
-		    
 	        }).done(function(missions){
 	        	$("#boxbox").text("");
 	        	$("#pagebox").text("");
-	        	console.log(missions);
-	        	
 	        	var totalElements=missions.totalElements;
-	        	console.log(totalElements);
-	        	
 	        	var totalPages=missions.totalPages;
-	        	console.log(totalPages);
-	        	
 	        	first=missions.first;
-	        	console.log(first);
-	        	
 	        	last=missions.last;
-	        	console.log(last);
-	        	
 	        	page=missions.number;
-	        	
-	        	
 	        	$.each(missions.content,function(index, mission){
 	        		var box="<div class='col-lg-4 col-md-6'>";
 	        		 box+="<div class='home-blog-post'>";
@@ -217,27 +184,17 @@ $("#searchButt").click(function(){
 	        		 box+="<p class='author-category'>活動地點:"+mission.county+mission.district+"</p>";       	
 	        		 box+="</div></div></div>";   
 	        		var boxbox=$("#boxbox").append(box); 
-	        		//https://css-tricks.com/html-templates-via-javascript-template-literals/
-	        		
-	        		
-	        		
 	        	})
-	        	
 	        		$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
 	        	for (var index = 1; index <= totalPages ; index++) {
 	        		$("#nextli").before("<li class='page-item'><a name='count' id="+index+" class='page-link'>"+index+"</a></li>")
 				}
-	    
-	    
 	        })
-	        
 			}
-	
 
 	$(document).ready( function () {		
 		new TwCitySelector();	
 		list();
-		
 		$("#pagebox").on("click","li>a[name='backa']", function(){
 			if(first == false){
 				page = page - 1;
@@ -262,15 +219,8 @@ $("#searchButt").click(function(){
     		 $('body,html').animate({
                  scrollTop: 0 }, 1);
     	})
-    	
-    	
-    	
 	
 	})
 	</script>
-
-
-
-
 </body>
 </html>
