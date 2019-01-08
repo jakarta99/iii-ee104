@@ -100,14 +100,12 @@
                 <p class="lead">以下是對您的招募有興趣的志工，您可以接受或拒絕</p>
                 <div id="boxbox" class="row text-center">
 <!--                 志工名單開始 -->
-                
-                 
                 </div>
               </div>
             </div>
             
             <div>
-              <nav aria-label="Page navigation example">
+              <nav aria-label="Page navigation example" class="d-flex justify-content-center">
                 <ul id ="pagebox" class="pagination pagination-lg">
 <!--                     換頁控制開始 -->
               	</ul>
@@ -117,11 +115,6 @@
           </section>
         </div>
         </div>
-      
-      
-      
-	
-	
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	
 <script>	
@@ -147,22 +140,17 @@
 					dataType : 'JSON',
 					success : function(acceptResult) {
 						if(acceptResult.status == "SUCCESS"){
-							
 							swal("接受"+acceptResult.obj.volunteer.name+"的志工申請成功", {
 				 			      icon: "success",
 				 			 });
-							
 						}else{
-							
 							swal("接受"+acceptResult.obj.name+"失敗，因為"+acceptResult.messages+"", {
 				 			      icon: "error",
 				 			});
-							
 						}
 						list()		
 					},
 				})
-			
 			  } else {
 	 				swal("未接受"+name+"成為您的志工");
 	 			 }
@@ -187,20 +175,15 @@
 					dataType : 'JSON',
 					success : function(rejectResult) {
 						if(rejectResult.status == "SUCCESS"){
-// 							alert("拒絕編號" + rejectResult.obj.id + " " + rejectResult.status);									
 							swal("拒絕"+rejectResult.obj.volunteer.name+"的志工申請成功", {
 				 			      icon: "success",
 				 			 });
-							
 						}else{
-// 							alert("拒絕編號" + rejectResult.obj.id + " " + rejectResult.status);
-// 							alert("FAIL reason:" + rejectResult.messages);
 							swal("拒絕"+rejectResult.obj.volunteer.name+"失敗，因為"+rejectResult.messages+"", {
 				 			      icon: "error",
 				 			});
 						}
 						list()
-						
 					},
 				})
 
@@ -209,7 +192,6 @@
 	 			 }
 	 		}); 	
 	}
-	
 	
 	function list(){
 		$.ajax({
@@ -220,25 +202,12 @@
 	        }).done(function(orders){
 	        	$("#boxbox").text("");
 	        	$("#pagebox").text("");
-// 	        	console.log(members);
-	        	
 	        	var totalElements=orders.totalElements;
-	        	console.log(totalElements);
-	        	
 	        	var totalPages=orders.totalPages;
-	        	console.log(totalPages);
-	        	
 	        	first=orders.first;
-	        	console.log(first);
-	        	
 	        	last=orders.last;
-	        	console.log(last);
-	        	
 	        	page=orders.number;
-	        	
-	        	
 	        	$.each(orders.content,function(index, order){
-	        		console.log(order)
 	        		var box="<div class='col-md-3'>"
 	        			box+="<div data-animate='fadeInUp' class='team-member'>"
 	        			box+="<div class='image'><a href='team-member.html'><img src='/image/user/member/"+order.volunteer.picture+"' class='img-fluid rounded-circle'></a></div>"
@@ -260,111 +229,15 @@
 	        			box+="<li class='s3'><a href='#' class='email'><i class='fa fa-envelope'></i></a>Email:"+order.volunteer.telephone+"</li>"
 	        			box+="</ul></div></div>"
 	        		var boxbox=$("#boxbox").append(box)
-	        		
- 	        	
-	        		
-	        		
-	        	
 	        	})
-	        	
 	        		$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
-	        	
 	        	for (var index = 1; index <= totalPages ; index++) {
 	        		$("#nextli").before("<li class='page-item'><a name='count' id="+index+" class='page-link'>"+index+"</a></li>")
 				}
-	    
-	    
 	        })
-	        
 			}
-	
-	
-	
-	
-	
-	
 	$(document).ready( function () {
 		list()
-// 		dataTable=$('#table').DataTable({
-// 				pageResize: true,
-// 				fixedHeader: true,
-// 				pagingType: 'full_numbers',
-// 	 			searching:false,
-// 	 			processing:false,
-// 	 			serverSide:true,
-// 	 			"stateSave": true,
-// 				"infoCallback": function( settings, start, end, max, total, pre ) {
-// 		 			    var api = this.api();
-// 		 			    var pageInfo = api.page.info();
-// 		 			   api.rows( {page:'current'} ).data()
-// 		 			    return '顯示第 '+(pageInfo.start+1)+' 筆到第  '+(pageInfo.end)+' 筆 共 '+ pageInfo.recordsTotal+' 筆資料 ';
-// 		 			 },	
-// 				"lengthMenu": [  6, 9, 12, ],
-// 				ajax:{
-// 					url:"/user/volunteerVerify/query",
-// 					type: "get",
-// 				    dataType : "json",
-// 				    data: function(d){
-// 						var missionId = ${missionId}
-// 		            	var start = d.start;
-// 						var length = d.length;
-// 						var request = "start=" + start + "&length=" + length + "&missionId=" + missionId;
-// 		            	return request;
-// 		            },
-
-// 				    dataSrc:"content",
-// 				    dataFilter: function(resp){
-// 		                var json = jQuery.parseJSON( resp );
-// 		                json.recordsTotal = json.totalElements;
-// 		                json.recordsFiltered = json.totalElements;	     			
-// 		                return JSON.stringify( json ); 
-// 		            	},
-// 					},
-// 					columns:[						
-// 						{"data":"mission.title"},	
-// 						{"data":"volunteer.account"},
-// 						{"data":"volunteer.name"},
-// 						{"data":"volunteer.telephone"},
-// 						{"data":"volunteer.averageScore"},
-// 			            {"data":null, render: function (data, type, row ) {
-// 			                return new Date(data.volunteerApplyTime).toLocaleDateString();
-// 			            } },	
-						
-									
-// 						{"data": function (data, type, val) {
-// 							if(data.orderStatus=='VolunteerApply'){
-// 								 var acceptbutton="<button class='btn btn-outline-primary' onclick=\"accept("+data.id+",'"+data.volunteer.name+"')\">接受</button>";     
-// 								 var rejectbutton="<button class='btn btn-outline-danger' onclick=\"reject("+data.id+",'"+data.volunteer.name+"')\">拒絕</button>"; 	
-// 								 return acceptbutton + rejectbutton;
-// 							 }else if(data.orderStatus=='RequesterAcceptService'){
-// 								 var vbutton="<span class='badge badge-success'>已接受</span>"
-// 								 return vbutton;
-								 
-// 							 }else if(data.orderStatus=='RequesterRefuceServiceMatchFail'){
-// 								 var vbutton="<span class='badge badge-danger'>已拒絕</span>"
-// 								 return vbutton;
-								 
-// 							 }else {
-// 								 return "不應該出現的狀態";
-// 							 }
-// 						}
-// 						},					 
-					
-// 			            {"data":"mission.missionstatus"},
-									
-// 					],
-// 					 columnDefs: [{
-// 			                "searchable": false,
-// 			                "orderable": false,
-// 			                "targets": [0],
-// 			            }],
-// 			            order: [[1, 'asc']]
-					
-					
-					
-// 				});	
-		
-		
 		$("#pagebox").on("click","li>a[name='backa']", function(){
 			if(first == false){
 				page = page - 1;
@@ -382,15 +255,12 @@
 				 $('body,html').animate({
 	                 scrollTop: 0 }, 1);
 		 })
-
     	$("#pagebox").on("click","li>a[name='count']", function(){			
     		page=$(this).text()-1;
     		list();
     		 $('body,html').animate({
                  scrollTop: 0 }, 1);
     	})
-		
-		
 	});
 </script>
 </body>
