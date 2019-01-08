@@ -114,7 +114,7 @@
               </section>
              
              <div >
-               	<nav aria-label="Page navigation example">
+               	<nav aria-label="Page navigation example" class="d-flex justify-content-center">
                     <ul id ="pagebox" class="pagination pagination-lg">
 <!--                     換頁控制開始 -->
               		</ul>

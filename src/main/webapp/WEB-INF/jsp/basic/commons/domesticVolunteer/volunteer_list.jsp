@@ -141,7 +141,7 @@
               <div id="boxbox" class="row">
                </div>
                
-               	 <nav aria-label="Page navigation example">
+               	 <nav aria-label="Page navigation example" class="d-flex justify-content-center">
                     <ul id ="pagebox" class="pagination pagination-lg">
               		</ul>
                   </nav>
