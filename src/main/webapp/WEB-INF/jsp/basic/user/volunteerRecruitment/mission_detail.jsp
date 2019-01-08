@@ -147,30 +147,9 @@
 						<div class="icon-filled"></div>聯絡Email:  ${mission.contactEmail}
 					</li>
 				</ul>
-				<div class="col-md-12 text-center">
-					<button onclick="insertOrder(${mission.id})" class="btn btn-template-outlined"><i class="fa fa-plus"></i>我要參加</button>
-				</div>
+
               </div>
               <div class="col-md-4"><img id="missionImg" alt="" src="/image/user/mission/${mission.missionPicName}" class="img-fluid rounded-circle"></div>
-            	
-            	
-            	
-            	
-            	
-            	<table>
-            		<tr>
-            			<td>會員名稱:${member.name}</td>
-            		</tr>
-            		<tr>
-            			<td>會員名稱:</td>
-            		</tr>
-            		<tr>
-            			<td>會員名稱:${member.name}</td>
-            		</tr>
-            		<tr>
-            			<td>會員名稱:${member.name}</td>
-            		</tr>         	
-            	</table>
             </div>
           </section>
  
@@ -181,68 +160,8 @@
 
 <jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script>
-	function insertOrder(missionId){
-		swal({
-			  title: "申請確認",
-			  text: "確定申請?",
-			  icon: "warning",
-			  buttons: true,
-			  dangerMode: true,
-			}).then((willreject) => {
-				if(willreject){
-					$.get("/user/volunteerRecruitment/insert",{"missionId":missionId},
-						function(data){
-							if(data.messages == '申請成功'){
-								swal({
-								  title: "申請結果",
-								  text: "申請成功",
-								  icon: "success",
-								  buttons: false,
-								  dangerMode: false,
-								})
-							}else{
-								swal({
-									  title: "申請失敗",
-									  text: " " + data.messages,
-									  icon: "error",
-									  buttons: false,
-									  dangerMode: false,
-									})
-							}
-					})
-				}else{
-					
-				}
-				
-			})
-// 				if(wullreject){
-// 					$.get(
-// 						"/user/volunteerRecruitment/insert",
-// 						{"missionId":missionId},
-// 						function(data){
-// 							if(data.messages == '申請成功'){
-// 								swal({
-// 									  title: "申請結果",
-// 									  text: "申請成功",
-// 									  icon: "sucess",
-// 									  buttons: false,
-// 									  dangerMode: false,
-// 									})
-// 							}else{
-// 								swal({
-// 									  title: "申請結果",
-// 									  text: "申請失敗",
-// 									  icon: "error",
-// 									  buttons: false,
-// 									  dangerMode: false,
-// 									})
-// 							}
-							
-// 						}
-// 					)
-// 				}
-// 			}	
-	}
+	
+	
 	
 	
 	</script>

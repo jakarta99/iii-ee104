@@ -1777,6 +1777,7 @@ header.nav-holder.sticky {
 .product .image {
   overflow: hidden;
   max-height: 190px;
+  height:190px;
 }
 
 .product .image a {
