@@ -256,6 +256,11 @@
  			  }
  			}); 	
 	}
+ 	
+ 	function cancelEndMission(time,title){
+ 		swal(title, "您於"+time+"取消本次申請");
+ 	}
+ 	
  	 	
  	function list(){
 		$.ajax({
@@ -293,23 +298,23 @@
 	                   box+="<p class='intro_1'>開始時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>"   
 		            	}else if(mission.missionstatus == "B_AccountsPayable"){
 		            		box+="<p class='intro_1'>截止時間:"+new Date(mission.endDate).toLocaleDateString()+"</p>"
-		            	}else if(mission.missionstatus == "C_Finish" || data.missionstatus == "C_Cancel"){
+		            	}else if(mission.missionstatus == "C_Finish" || mission.missionstatus == "C_Cancel"){
 		            		box+="<p class='intro_1'>結束時間:"+new Date(mission.finishDate).toLocaleDateString()+"</p>"
 		            	}else{
 		            		box+="<p class='intro_1'>開始時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>"		                
 		               }  	        
 	                   box+="<p class='intro_1'>需求人數:"+mission.peopleNeeded+"</p>"	          
-	                 if(mission.missionstatus=="A_New"){
-	                   box+="<p class='read-more text-right'><a href='/user/volunteerVerify/list?id="+mission.id+"' class='btn btn-template-outlined'>志工審核</a></p> </div>"	      				
-	 				 }else if(mission.missionstatus=="B_AccountsPayable"){
-	 					box+="<p class='read-more text-right'><a href='/user/payTime/list?id="+mission.id+"' class='btn btn-template-outlined'>核發時數</a></p> </div>"
-	 					}else if(mission.missionstatus=="C_Cancel"){
-	 						box+="<p class='read-more text-right'><a href='/user/closed/list?id="+mission.id+"' class='btn btn-template-outlined'>取消紀錄</a></p> </div>"								
-	 					}else if(mission.missionstatus=="C_Finish"){
-	 						box+="<p class='read-more text-right'><a href='/user/closed/list?id="+mission.id+"' class='btn btn-template-outlined'>結案紀錄</a></p> </div>"								
-	 					}else{
-	 						box+="<p class='read-more text-right'><span class='badge badge-success'>已審核</span></p><div>"
-	 					}                 
+	                if(mission.missionstatus=="A_New"){
+	                   box+="<p class='read-more text-right'><a href='/user/volunteerVerify/list?id="+mission.id+"' class='btn btn-template-outlined'>志工審核</a></p></div>"	      				
+	 				}else if(mission.missionstatus=="B_AccountsPayable"){
+	 					box+="<p class='read-more text-right'><a href='/user/payTime/list?id="+mission.id+"' class='btn btn-template-outlined'>核發時數</a></p></div>"
+	 				}else if(mission.missionstatus=="C_Cancel"){
+	 					box+="<p class='read-more text-right'><a href='javascript:void(0)' onclick=\"cancelEndMission('"+new Date(mission.finishDate).toLocaleDateString()+"','"+mission.title+"')\" class='btn btn-template-outlined'>取消紀錄</a></p></div>"								
+	 				}else if(mission.missionstatus=="C_Finish"){
+	 					box+="<p class='read-more text-right'><a href='/user/closed/list?id="+mission.id+"' class='btn btn-template-outlined'>結案紀錄</a></p></div>"								
+	 				}else if(mission.missionstatus=="A_VolunteerApproved"){
+	 					box+="<p class='read-more text-right'><span class='badge badge-success'>已審核</span></p><div>"
+	 				}                 
 	                var boxbox=$("#boxbox").append(box)
 	        	})
 	        		$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
