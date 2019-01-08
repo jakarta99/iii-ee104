@@ -241,7 +241,7 @@
 	        		console.log(order)
 	        		var box="<div class='col-md-3'>"
 	        			box+="<div data-animate='fadeInUp' class='team-member'>"
-	        			box+="<div class='image'><a href='team-member.html'><img src='../../img/person-1.jpg' class='img-fluid rounded-circle'></a></div>"
+	        			box+="<div class='image'><a href='team-member.html'><img src='/image/user/member/"+order.volunteer.picture+"' class='img-fluid rounded-circle'></a></div>"
 	        			box+="<h3><a href='team-member.html'>"+order.volunteer.name+"</a></h3><div>"
 	        			if(order.orderStatus=='VolunteerApply'){
 	        			box+="<button class='btn btn-outline-primary' onclick=\"accept("+order.id+",'"+order.volunteer.name+"')\" >接受</button>"
