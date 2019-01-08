@@ -181,6 +181,10 @@
 							<span role="tw-city-selector"></span>
 							<input type="text" value="${param.address}" id="address" name="address">
 						</div>
+<!-- 						<div class="block">			 -->
+<!-- 							<label>圖片:</label> -->
+<!-- 							<input type="file" id="idPicture" name="picture" accept="image/*" class="form-control" > -->
+<!-- 						</div> -->
 					</fieldset>
 					<c:if test="${memberType eq 'O' }">
 						<fieldset>
@@ -700,7 +704,9 @@
 					method:"post",
 					dataType: "json",        
 					url:"/commons/sign-up/insert",
-					data: $("form").serialize()
+					data: $("form").serialize(),
+// 					processData: false,	// jQuery預設會把data轉為query String, 所以要停用
+// 					contentType: false	// jQuery預設contentType為'application/x-www-form-urlencoded; charset=UTF-8', 且不用自己設定為'multipart/form-data'
 				}).done(function(response){
 // 					alert(response.obj);
 // 					console.log("status="+response.status);
@@ -714,7 +720,7 @@
 							  button: "確定",
 						}).then((result) => {
 							if (result) {
-								window.location.replace("/login");	//讀完導至LOGIN(之後至驗證信!)
+								window.location.replace("/commons/sign-up/pic");	//讀完導至上傳圖檔(再至LOGIN(之後至驗證信!))
 							}
 						});
 // 						alert("會員新增成功");

@@ -2,6 +2,8 @@ package team.lala.timebank.web.commons;
 
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
@@ -19,6 +24,7 @@ import team.lala.timebank.service.MemberService;
 @Slf4j
 @Controller
 @RequestMapping("/commons/sign-up")
+//@SessionAttributes(names = {"memberId"})
 public class CommonsSignUpController {
 	
 	@Autowired
@@ -52,7 +58,8 @@ public class CommonsSignUpController {
 	
 	@RequestMapping("/insert")
 	@ResponseBody
-	public AjaxResponse<Member> insertMember(Member member/*, BindingResult bindingResults*/) {		
+	public AjaxResponse<Member> insertMember(Member member, HttpSession session/*, BindingResult bindingResults, 
+			@RequestParam("picture") MultipartFile picture, HttpServletRequest request*/) {		
 		
 //		if(bindingResults != null && bindingResults.hasFieldErrors()) {
 //			if(bindingResults.hasFieldErrors("birthDate")) {
@@ -79,7 +86,6 @@ public class CommonsSignUpController {
 		boolean fOrgWebsiteLink = false;
 
 		log.debug("member={}", member);
-//		AjaxResponse<Member> response = new AjaxResponse<Member>();
 		AjaxResponse<Member> response = new AjaxResponse<Member>();//回傳前端
 //		Map<String, Object> result = new HashMap<>(); //ajaxResponse.obj
 //		Map<String, String> errors = new HashMap<>();
@@ -407,8 +413,9 @@ public class CommonsSignUpController {
 						member.setPassword(encoder.encode(member.getPassword()));
 						Member newMember = memberService.insert(member);
 						log.debug("newMember.getId()={}", newMember.getId());
-						memberService.addRole(newMember.getId(), 2L);	//新增完會員，取得id，才能新增角色
+						memberService.addRole(newMember.getId(), 3L);	//新增完會員，取得id，才能新增角色(org_user)
 						response.setObj(newMember);
+						session.setAttribute("memberId", newMember);
 						log.debug("新增成功");
 					} catch (Exception e) {
 						response.addMessage("新增失敗" + e.getMessage());
@@ -422,7 +429,7 @@ public class CommonsSignUpController {
 					member.setPassword(encoder.encode(member.getPassword()));
 					Member newMember = memberService.insert(member);
 					log.debug("newMember.getId()={}", newMember.getId());
-					memberService.addRole(newMember.getId(), 2L);	//新增完會員，取得id，才能新增角色
+					memberService.addRole(newMember.getId(), 2L);	//新增完會員，取得id，才能新增角色(user)
 					
 //					Set<Role> roles = new TreeSet<Role>();
 //					Role role = new Role();
@@ -433,6 +440,7 @@ public class CommonsSignUpController {
 //					result.put("member", newMember);
 //					response.setObj(result);
 					response.setObj(newMember);
+					session.setAttribute("memberId", newMember);
 					log.debug("新增成功");
 				} catch (Exception e) {
 					response.addMessage("新增失敗" + e.getMessage());
@@ -471,6 +479,29 @@ public class CommonsSignUpController {
 			result = "正確";
 		}
 		return result;
+	}
+	
+	@RequestMapping("/pic")
+	public String picPage(HttpSession session) {
+		log.debug("memberId={}", session.getAttribute("memberId"));
+		return "/basic/commons/sign_up/sign-up_pic";
+	}
+	
+	@RequestMapping("/storeMemberPic")
+	public String storeMemberPic(@RequestParam("picture") MultipartFile picture,
+			MultipartHttpServletRequest request, HttpSession session) {
+		Member member = (Member)session.getAttribute("memberId");
+		AjaxResponse<Member> ajaxResponse = new AjaxResponse<Member>();
+		try {
+			Member memberResult = memberService.storeMemberPic(picture, member, request);
+			ajaxResponse.setObj(memberResult);
+//			session.invalidate();	//清掉session
+		} catch (Exception e) {
+			e.printStackTrace();
+			ajaxResponse.addMessage(e.getMessage());
+			return "/basic/commons/login";
+		}
+		return "/basic/commons//login";
 	}
 
 	@RequestMapping("/edit")
