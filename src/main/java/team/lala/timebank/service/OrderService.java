@@ -38,7 +38,9 @@ public class OrderService {
 	@Autowired
 	private MemberDao memberDao;
 	@Autowired
-	private PenaltyDao penaltyDao;
+	private PenaltyService penaltyService;
+	@Autowired
+	private SystemMessageService systemMessageService;
 
 	// 根據會員查詢order
 	public Page<Order> findBySpecification(Specification<Order> specification, PageRequest pageRequest) {
@@ -73,21 +75,17 @@ public class OrderService {
 		memberDao.save(member);
 		order.setOrderStatus(OrderStatus.ServiceFinishPayAndScoreMatchSuccess);		//修改order狀態
 		orderDao.save(order);
+		systemMessageService.scoreMessage(order, score);
+		
 	}
 	
 	//志工檢舉雇主
 	public Penalty report(Long orderId, String description) {
-		Order order = orderDao.getOne(orderId);
-		Penalty penalty = new Penalty();
-		penalty.setOrder(order);
-		penalty.setAccuser(order.getVolunteer());
-		penalty.setDefendant(order.getMission().getMember());
-		penalty.setUpdateDate(new java.util.Date());
-		penalty.setDescription(description);
-		penalty.setStatus(new Integer(1));
-		penalty = penaltyDao.save(penalty);
+		Order order = orderDao.getOne(orderId);		
+		Penalty penalty = penaltyService.report(order, description);
 		order.setOrderStatus(OrderStatus.VolunteerReportRequestMatchSuccess);
 		orderDao.save(order);
+		systemMessageService.reportMessage(order);
 		return penalty;
 	}
 

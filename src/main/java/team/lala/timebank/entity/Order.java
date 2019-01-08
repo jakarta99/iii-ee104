@@ -62,10 +62,10 @@ public class Order{
 	private Mission mission;
 	
 	@Column(name="MEMBER_SCORE")
-	private Long memberScore;	//志工獲得時間
+	private Long memberScore;	//機構對志工評分
 	
 	@Column(name="FEEDBACK_SCORE")
-	private Long feedBackScore;
+	private Long feedBackScore; //志工對機構評分
 	
 	@Transient
 	private String county;

@@ -163,6 +163,18 @@ public class PenaltyService {
 		dbPenalty.setVertifyReason(vertifyReason);
 		return penaltyDao.save(dbPenalty);
 	}
+	
+	//志工檢舉雇主
+	public Penalty report(Order order, String description) {
+		Penalty penalty = new Penalty();
+		penalty.setOrder(order);
+		penalty.setAccuser(order.getVolunteer());
+		penalty.setDefendant(order.getMission().getMember());
+		penalty.setUpdateDate(new java.util.Date());
+		penalty.setDescription(description);
+		penalty.setStatus(new Integer(1));
+		return penaltyDao.save(penalty);
+	}
 
 
 	public Penalty save(Penalty penalty) {

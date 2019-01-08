@@ -115,6 +115,31 @@ public class SystemMessageService {
 		}
 
 	}
+	
+	//志工檢舉雇主，發送訊息告知
+	public void reportMessage(Order order) {
+		SystemMessage systemMessage = new SystemMessage();
+		systemMessage.setMember(order.getVolunteer());
+		systemMessage.setSender(order.getMission().getMember());
+		systemMessage.setReleaseTime(new java.util.Date());
+		systemMessage.setMessageType(SystemMessageType.Penalty);
+		systemMessage.setMessage("你被檢舉了");
+		systemMessage.setReadStatus(YesNo.N);
+		systemMessageDao.save(systemMessage);
+		
+	}
+	
+	//志工對雇主評分後，發送系統訊息
+	public void scoreMessage(Order order, Integer score) {
+		SystemMessage systemMessage = new SystemMessage();
+		systemMessage.setMember(order.getVolunteer());
+		systemMessage.setSender(order.getMission().getMember());
+		systemMessage.setReleaseTime(new java.util.Date());
+		systemMessage.setMessageType(SystemMessageType.Score);
+		systemMessage.setMessage("你在" + order.getMission().getTitle() + "活動中獲得" + score + "分");
+		systemMessage.setReadStatus(YesNo.N);
+		systemMessageDao.save(systemMessage);
+	}
 
 	// 通知志工mission已被編輯
 	public void missionEdit(List<Order> orders) {

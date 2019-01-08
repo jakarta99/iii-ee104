@@ -57,10 +57,11 @@ public class VolunteerApplicationController {
 	
 	@ResponseBody
 	@RequestMapping("/volunteerRecord/queryRecord")		//查詢媒合紀錄資料
-	public Page<Order> queryRecord(Principal principal, Order order, 
+	public Page<Order> queryRecord(Principal principal, Order order,
 			@RequestParam(value="orderStatusDetail") String orderStatusDetail,
 			@RequestParam(value="page",required=false) Integer page,
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
+		log.debug("order={}", order);
 		order.setVolunteerAccount(principal.getName());
 		OrderSpecification orderSpecification = new OrderSpecification(order);
 		return orderService.findBySpecification(orderSpecification, PageRequest.of(page, length.orElse(10)));
