@@ -23,8 +23,6 @@
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 
-<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
-
 <!-- sweetAlert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -43,7 +41,6 @@
 			 margin-top:70px;
 		}
  	article { 
- 		font-family: 'Righteous', cursive;
 /*  		margin-top: 30px;  */
  		margin-bottom: 30px; 
  		padding: 10px; 
@@ -125,7 +122,7 @@
             <article>
 				<h2 class=center>個人資訊</h2>
 				<div class=center>您在 TimeBank中使用的基本資訊</div>
-				<form action="/user/personalInfo/edit" method="post">
+				<form action="/user/personalInfo/edit" method="post" enctype="multipart/form-data">
 					<fieldset>
           				<legend>帳戶資料</legend>
           				<input type="hidden" value="${member.id}" id="id" name="id"> 
@@ -212,6 +209,11 @@
 <%-- 							<span>${member.county}</span> --%>
 							<input type="text" value="${member.address}" id="address" name="address">
 						</div>
+						<div class="block">
+	                        <label>圖片:</label>
+	                        <a href="/image/user/member/${member.picture}" target="_blank">原上傳圖片</a>
+	                        <input type="button" class="btn btn-primary btn-sm" id="changePicture" value="更改照片" />
+                        </div>
 						<div class="block">
 							<fmt:formatDate value="${member.signUpDate}" pattern="yyyy/MM/dd" var="signUpDate" />
 							<label>註冊日期:</label> 
@@ -743,7 +745,12 @@
 // 			if ('${member.memberType }' == 'O') {
 // 				$("input[name='orgIdConfirmation'][value="+ '${member.orgIdConfirmation}' + "]").prop("checked", true);			
 // 			}			
-					
+			
+			//change picture event
+			$("#changePicture").click(function() {
+				window.location.replace("/user/personal-info/pic");
+			});
+
 			//update member info. event
 			$("#updateButt").click(function() {
 				$.ajax({

@@ -24,14 +24,11 @@
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 
-<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
-
 <!-- sweetAlert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <style>
 	article {
-		font-family: 'Righteous', cursive;
 		margin-top: 30px;
 		margin-bottom: 30px;
 		padding: 10px;
