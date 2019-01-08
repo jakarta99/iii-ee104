@@ -159,7 +159,7 @@
 				 			});
 							
 						}
-						dataTable.ajax.reload();				
+						list()		
 					},
 				})
 			
@@ -199,7 +199,7 @@
 				 			      icon: "error",
 				 			});
 						}
-						dataTable.ajax.reload();
+						list()
 						
 					},
 				})
@@ -241,7 +241,7 @@
 	        		console.log(order)
 	        		var box="<div class='col-md-3'>"
 	        			box+="<div data-animate='fadeInUp' class='team-member'>"
-	        			box+="<div class='image'><a href='team-member.html'><img src='../../img/person-1.jpg' class='img-fluid rounded-circle'></a></div>"
+	        			box+="<div class='image'><a href='team-member.html'><img src='/image/user/member/"+order.volunteer.picture+"' class='img-fluid rounded-circle'></a></div>"
 	        			box+="<h3><a href='team-member.html'>"+order.volunteer.name+"</a></h3><div>"
 	        			if(order.orderStatus=='VolunteerApply'){
 	        			box+="<button class='btn btn-outline-primary' onclick=\"accept("+order.id+",'"+order.volunteer.name+"')\" >接受</button>"
@@ -261,22 +261,7 @@
 	        			box+="</ul></div></div>"
 	        		var boxbox=$("#boxbox").append(box)
 	        		
-// 	        		if(data.orderStatus=='VolunteerApply'){
-// 								 var acceptbutton="<button class='btn btn-outline-primary' onclick=\"accept("+data.id+",'"+data.volunteer.name+"')\">接受</button>";     
-// 								 var rejectbutton="<button class='btn btn-outline-danger' onclick=\"reject("+data.id+",'"+data.volunteer.name+"')\">拒絕</button>"; 	
-// 								 return acceptbutton + rejectbutton;
-// 							 }else if(data.orderStatus=='RequesterAcceptService'){
-// 								 var vbutton="<span class='badge badge-success'>已接受</span>"
-// 								 return vbutton;
-								 
-// 							 }else if(data.orderStatus=='RequesterRefuceServiceMatchFail'){
-// 								 var vbutton="<span class='badge badge-danger'>已拒絕</span>"
-// 								 return vbutton;
-								 
-// 							 }else {
-// 								 return "不應該出現的狀態";
-// 							 }
-// 						}
+ 	        	
 	        		
 	        		
 	        	

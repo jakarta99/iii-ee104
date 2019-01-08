@@ -113,7 +113,7 @@
 		        		var box="<div class='col-lg-4'>";
 		        		 box+="<div class='home-blog-post'><div class=\"product\">";
 		        		 box+="<div class='image'><a href='"+org.orgWebsiteLink +"' class=\"btn btn-template-outlined-white\">";
-		        		 box+= "<img width='300px' height='230px' src='"+org.picture+"' class=\"image1\"></a></div></div>";
+		        		 box+= "<img width='300px' height='230px' src='/image/user/member/"+org.picture+"' class=\"image1\"></a></div></div>";
 		        		 box+= "<div class=\"text\">";
 		        		 box+= "<h4 style=\"width:270px; margin:auto; margin-bottom:10px\" >";
 		        		 box+= "<a href='"+ org.orgWebsiteLink +"'>"+org.name+ "</a></h4>";
