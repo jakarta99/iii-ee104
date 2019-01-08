@@ -159,7 +159,7 @@
 				 			});
 							
 						}
-						dataTable.ajax.reload();				
+						list()		
 					},
 				})
 			
@@ -199,7 +199,7 @@
 				 			      icon: "error",
 				 			});
 						}
-						dataTable.ajax.reload();
+						list()
 						
 					},
 				})
@@ -261,22 +261,7 @@
 	        			box+="</ul></div></div>"
 	        		var boxbox=$("#boxbox").append(box)
 	        		
-// 	        		if(data.orderStatus=='VolunteerApply'){
-// 								 var acceptbutton="<button class='btn btn-outline-primary' onclick=\"accept("+data.id+",'"+data.volunteer.name+"')\">接受</button>";     
-// 								 var rejectbutton="<button class='btn btn-outline-danger' onclick=\"reject("+data.id+",'"+data.volunteer.name+"')\">拒絕</button>"; 	
-// 								 return acceptbutton + rejectbutton;
-// 							 }else if(data.orderStatus=='RequesterAcceptService'){
-// 								 var vbutton="<span class='badge badge-success'>已接受</span>"
-// 								 return vbutton;
-								 
-// 							 }else if(data.orderStatus=='RequesterRefuceServiceMatchFail'){
-// 								 var vbutton="<span class='badge badge-danger'>已拒絕</span>"
-// 								 return vbutton;
-								 
-// 							 }else {
-// 								 return "不應該出現的狀態";
-// 							 }
-// 						}
+ 	        	
 	        		
 	        		
 	        	
