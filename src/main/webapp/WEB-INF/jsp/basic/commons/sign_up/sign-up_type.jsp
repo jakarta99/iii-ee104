@@ -6,7 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Sign Up Type</title>
-<%-- <jsp:include page="../../../admin/admin_layout/admin_css_js_links.jsp" /> --%>
 <!-- css -->
 <jsp:include page="../commons_layout/commons_css_links.jsp" />
 <!-- Javascript files-->

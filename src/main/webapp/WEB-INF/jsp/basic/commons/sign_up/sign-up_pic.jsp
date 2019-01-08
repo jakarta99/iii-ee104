@@ -6,12 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Sign Up Pic</title>
-<%-- <jsp:include page="../../../admin/admin_layout/admin_css_js_links.jsp" /> --%>
 <!-- css -->
 <jsp:include page="../commons_layout/commons_css_links.jsp" />
 <!-- Javascript files-->
 <jsp:include page="../commons_layout/commons_js_links.jsp" />
 <style>
+	body{
+		font-family: "微軟正黑體"
+	}
 </style>
 
 </head>
@@ -21,8 +23,7 @@
 	<!-- Navbar -->
 	<jsp:include page="../commons_layout/commons_nav.jsp"/>
 	<section class="bar">
-		<div id="all">  
-
+		<div id="all">
 <!--       <div id="heading-breadcrumbs"> -->
 <!--         <div class="container"> -->
 <!--           <div class="row d-flex align-items-center flex-wrap"> -->
@@ -43,15 +44,16 @@
           <div class="row">           
             <div class="col-lg-6" style="margin:auto">
               <div class="box">
+              	<div class="heading">
                 <h2 class="text-uppercase">NEW PIC</h2>
-                <p class="lead">上傳一張您的照片</p>
+                </div>
+                <h5>上傳一張您的照片</h5>
                 <hr>
                 <form id="pictureForm" action="/commons/sign-up/storeMemberPic" method="post" enctype="multipart/form-data">
-                  <div class="text-center">
-					<input type="hidden" id="id" name="id" value=""/>
+                  <div>
 					<label for="picture">圖片 :</label>
- 					<input type="file" id="idPicture" name="picture" accept="image/*">
- 					<p class="text-muted">請選擇圖檔，無圖檔亦可直接送出<p>
+ 					<input type="file" id="idPicture" name="picture" accept="image/*" class="form-control">
+ 					<label class="text-muted">請選擇圖檔，無圖檔亦可直接送出</label>
 	                <div class="col-md-12 text-center">
                     	<button type="submit" class="btn btn-template-outlined"><i class="fa fa-plus"></i>上傳</button>
                     </div>

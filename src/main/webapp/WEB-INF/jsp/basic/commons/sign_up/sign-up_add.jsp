@@ -25,12 +25,6 @@
 	body{
 		font-family: "微軟正黑體"
 	}
-    .s2{
-        text-align: center
-    }
-    .margintop{
-		margin-top:70px;
-	}
 	.county,.district {
 	  	padding: 0.375rem 0.75rem;
 	  	font-size: 1rem;
