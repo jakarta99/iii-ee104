@@ -106,7 +106,7 @@
 					<div class="custom-control custom-radio">
 						<input type="radio" id="proofRadio1" name="proofRadio" class="custom-control-input" readonly>
 						<label class="custom-control-label" for="customRadio1">是</label>
-						<a id="proofPic" href="../../img/${penalty.proofPicName}" target="_blank">佐證資料檢視</a>
+						<a id="proofPic" href="/image/admin/penalty/${penalty.proofPicName}" target="_blank">佐證資料檢視</a>
 					</div>
 					<div class="custom-control custom-radio">
 						<input type="radio" id="proofRadio2" name="proofRadio" class="custom-control-input" readonly>

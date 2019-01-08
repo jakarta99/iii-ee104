@@ -2,6 +2,8 @@ package team.lala.timebank.web.user;
 
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
@@ -41,7 +45,8 @@ public class UserPersonalInfoController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public AjaxResponse<Member> updateMember(Member member, @RequestParam("passwordCheck") String passwordCheck, 
-			@RequestParam("passwordNew") String passwordNew/*, BindingResult bindingResults*/) {		
+			@RequestParam("passwordNew") String passwordNew, @RequestParam("picture") MultipartFile picture, 
+			MultipartHttpServletRequest request/*, BindingResult bindingResults*/) {		
 		
 		Member userDetails = (Member) SecurityContextHolder.getContext()  
 						.getAuthentication()  
@@ -427,6 +432,7 @@ public class UserPersonalInfoController {
 						memberDB.setOrgContactPersonMobile(member.getOrgContactPersonMobile());
 						memberDB.setOrgWebsiteLink(member.getOrgWebsiteLink());
 						memberDB.setOrgFoundPurpose(member.getOrgFoundPurpose());
+						memberDB.setPicture(memberService.storeMemberPic(picture, member, request).getPicture());
 						Member updatedMember = memberService.update(memberDB);
 						log.debug("updatedMember.getId()={}", updatedMember.getId());
 						response.setObj(updatedMember);
@@ -443,7 +449,6 @@ public class UserPersonalInfoController {
 					String encode = encoder.encode(passwordNew);
 					log.debug("encode={}",encode);
 					memberDB.setPassword(encode);
-					memberDB.setPassword(encode);
 					memberDB.setName(member.getName());
 					memberDB.setCertificateIdNumber(member.getCertificateIdNumber());
 					memberDB.setBirthDate(member.getBirthDate());
@@ -451,6 +456,7 @@ public class UserPersonalInfoController {
 					memberDB.setTelephone(member.getTelephone());
 					memberDB.setMobile(member.getMobile());
 					memberDB.setAddress(member.getAddress());
+					memberDB.setPicture(memberService.storeMemberPic(picture, member, request).getPicture());
 					Member updatedMember = memberService.update(memberDB);
 					log.debug("updatedMember.getId()={}", updatedMember.getId());
 					response.setObj(updatedMember);
@@ -501,6 +507,33 @@ public class UserPersonalInfoController {
 			result = "正確";
 		}
 		return result;
+	}
+	
+	@RequestMapping("/pic")
+	public String picPage() {
+		return "/basic/user/personal_info/personal-info_pic";
+	}
+	
+	@RequestMapping("/changeMemberPic")
+	public String changeMemberPic(@RequestParam("picture") MultipartFile picture,
+			MultipartHttpServletRequest request, Model model) {
+		log.debug("................................");
+		Member userDetails = (Member) SecurityContextHolder.getContext()  
+							.getAuthentication()  
+							.getPrincipal();
+		Member member = memberService.getOne(userDetails.getId());
+		model.addAttribute("member",member);
+		AjaxResponse<Member> ajaxResponse = new AjaxResponse<Member>();
+		try {
+			Member memberResult = memberService.storeMemberPic(picture, member, request);
+			ajaxResponse.setObj(memberResult);
+//			session.invalidate();	//清掉session
+		} catch (Exception e) {
+			e.printStackTrace();
+			ajaxResponse.addMessage(e.getMessage());
+//			return "/basic/user/personal_info/personal-info_edit";
+		}
+		return "/basic/user/personal_info/personal-info_edit";
 	}
 	
 //	@ResponseBody

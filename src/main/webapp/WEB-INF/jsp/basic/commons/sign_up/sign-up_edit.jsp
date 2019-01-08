@@ -19,11 +19,9 @@
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
-<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 
 <style>
 	article {
-		font-family: 'Righteous', cursive;
 		margin-top: 30px;
 		margin-bottom: 30px;
 		padding: 10px;

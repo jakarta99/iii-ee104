@@ -76,7 +76,7 @@ public class OrderService {
 	}
 	
 	//志工檢舉雇主
-	public void report(Long orderId, String description, MultipartFile proofPic, HttpServletRequest request) {
+	public Penalty report(Long orderId, String description) {
 		Order order = orderDao.getOne(orderId);
 		Penalty penalty = new Penalty();
 		penalty.setOrder(order);
@@ -85,39 +85,10 @@ public class OrderService {
 		penalty.setUpdateDate(new java.util.Date());
 		penalty.setDescription(description);
 		penalty.setStatus(new Integer(1));
-		penaltyDao.save(penalty);
+		penalty = penaltyDao.save(penalty);
 		order.setOrderStatus(OrderStatus.VolunteerReportRequestMatchSuccess);
 		orderDao.save(order);
-		// 如果有上傳圖片，才存檔案到Server，及存路徑到DB
-		if (proofPic.getOriginalFilename().length() > 0) {
-			// 取得應用程式根目錄中圖片之路徑
-			String realPath = request.getServletContext().getRealPath("/") + "..\\resources\\static\\img\\";
-			System.out.println(realPath + "***************************");
-			// 確認是否有此資料夾，如無則建資料夾
-			File dir = new File(realPath);
-			if (!dir.exists()) {
-				dir.mkdirs();
-			}
-
-			// 檔名
-			String location = realPath + "penaltyProof_" + penalty.getId() + ".jpg";
-
-			// 寫出檔案到Server
-			try {
-				FileOutputStream fos = new FileOutputStream(location);
-				fos.write(proofPic.getBytes());
-				fos.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			// 將檔名存入DB
-			penalty.setProofPicName("penaltyProof_" + penalty.getId() + ".jpg");
-			penalty = penaltyDao.save(penalty);
-
-		}
+		return penalty;
 	}
 
 	public List<Order> findByVolunteer(Principal principal) {
