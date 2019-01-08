@@ -40,13 +40,12 @@ public class VolunteerApplicationController {
 	@ResponseBody
 	@RequestMapping("/volunteerApplication/queryApplication")	//查詢申請中網頁的資料
 	public Page<Order> queryApplication(Principal principal, @RequestParam(value="orderStatusDetail") String orderStatusDetail,
-			@RequestParam(value="start",required=false) Optional<Integer> start, 
+			@RequestParam(value="page",required=false) Integer page, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
 		Order order = new Order();
 		order.setOrderStatusDetail(orderStatusDetail);
 		order.setVolunteerAccount(principal.getName());
 		OrderSpecification orderSpecification = new OrderSpecification(order);
-		int page = start.orElse(0)/length.orElse(10);
 		return orderService.findBySpecification(orderSpecification, PageRequest.of(page, length.orElse(10)));
 	}
 	
@@ -54,11 +53,10 @@ public class VolunteerApplicationController {
 	@RequestMapping("/volunteerRecord/queryRecord")		//查詢媒合紀錄資料
 	public Page<Order> queryRecord(Principal principal, Order order, 
 			@RequestParam(value="orderStatusDetail") String orderStatusDetail,
-			@RequestParam(value="start",required=false) Optional<Integer> start, 
+			@RequestParam(value="page",required=false) Integer page,
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
 		order.setVolunteerAccount(principal.getName());
 		OrderSpecification orderSpecification = new OrderSpecification(order);
-		int page = start.orElse(0)/length.orElse(10);
 		return orderService.findBySpecification(orderSpecification, PageRequest.of(page, length.orElse(10)));
 	}
 	

@@ -6,27 +6,15 @@
 <head>
 <!-- Javascript files-->
 <jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
-
 <!-- sweetalert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-		
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 <meta charset="UTF-8">
 <title>mission list(login)</title>
 <style>
-	fieldset {
-		width: 100%;
-		margin: 20px;
-		border: 3px solid rgba(0,0,0,0);
-		margin: auto
-	}
-	table {
-		padding: 20px;
-	}
 	.nav-link{
 		font-weight: bold;
-	}
-	
+	}	
     </style>
 </head>
 <body>
@@ -69,21 +57,15 @@
             </div>
             </div>
             </div>
-<!--             <div class="col-md-3"> -->
-<!--             <div class="panel panel-default sidebar-menu"> -->
-<!--             </div> -->
-<!--             </div> -->
 		</div>
 		</div>
-
 	<!-- FOOTER -->
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
 		<script>
 		var length=3;
-		var start=0;
+		var page=0;
 		var first;
 		var last;
-		var orderStatusDetail = "VolunteerApply";
 		//切換服務狀態
 		$('#orderStatus1').click(function(){
 			orderStatusDetail = "VolunteerApply";
@@ -103,18 +85,10 @@
 			page=0;
 			list();
 		})
-		
-		function mouseover(id){
-			$('#cancel'+id).css('text-decoration','underline')
-		}
-	 	function mouseout(id){
-	 		$("#cancel"+id).css('text-decoration','none')
-	 	}
-	 	
 	 	//抓出會員資料
 	 	function list(){
 	 		$.ajax({
-	 			url:"/user/volunteerApplication/queryApplication?"+"orderStatusDetail="+orderStatusDetail+"&start="+start+"&length="+length,
+	 			url:"/user/volunteerApplication/queryApplication?orderStatusDetail="+orderStatusDetail+"&page="+page+"&length="+length,
 				type:"get",
 				dataType:"json",
 	 		}).done(function(orders){
@@ -140,10 +114,10 @@
 	                   box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
 	                   box+="<p class='author-category_1'><a href='#'>"+ order.mission.member.name + "</a></p>"
 	                   if(order.orderStatus == "VolunteerApply"){
-	                   		box+="<p class='date-comments_1'><a id='cancel"+ order.id +"' onmouseover='mouseover("+order.id+")' onmouseout='mouseout("+order.id+")' onclick='deleteRow("+order.id+")' ><i class='fa fa-trash'></i>取消</a></p></div>"
+	                   		box+="<p class='date-comments_1'><a href='javascript: void(0)' onclick='deleteRow("+order.id+")' ><i class='fa fa-trash'></i>取消</a></p></div>"
 					   } else if (order.orderStatus == "RequesterAcceptService"){
 						   if(Date.parse(new Date()).valueOf() > Date.parse(order.mission.deadline).valueOf()){
-							   box+="<p class='date-comments_1'><a id='cancel"+ order.id +"' onmouseover='mouseover("+order.id+")' onmouseout='mouseout("+order.id+")' onclick='deleteRow("+order.id+")' ><i class='fa fa-trash'></i>取消</a></p></div>"
+							   box+="<p class='date-comments_1'><a id='cancel"+ order.id +"' href='javascript: void(0)' onclick='deleteRow("+order.id+")' ><i class='fa fa-trash'></i>取消</a></p></div>"
 		           			} else {
 		           				box+="</div>"
 		           			}
@@ -216,7 +190,7 @@
 		    return fmt;
 		};
 		$(document).ready(function() {
-			orderStatusDetail = "VolunteerApply";
+			var orderStatusDetail = "VolunteerApply";
 			$("#webtitle").empty().append("申請中的任務");
 			list();
 			$("#pagebox").on("click","li>a[name='backa']", function(){
