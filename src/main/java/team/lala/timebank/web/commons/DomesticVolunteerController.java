@@ -60,7 +60,6 @@ public class DomesticVolunteerController {
 	@RequestMapping("/apply")
 	public String missionDetail (@RequestParam Long missionId, Model model, HttpServletRequest request) {
 
-		log.debug("inputMission={}", missionId);
 		Mission mission = missionService.getOne(missionId);
 		Member member = memberService.findByAccount(mission.getMember().getAccount());
 		model.addAttribute("mission", mission);
