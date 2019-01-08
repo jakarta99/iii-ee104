@@ -415,7 +415,7 @@ public class CommonsSignUpController {
 						log.debug("newMember.getId()={}", newMember.getId());
 						memberService.addRole(newMember.getId(), 3L);	//新增完會員，取得id，才能新增角色(org_user)
 						response.setObj(newMember);
-						session.setAttribute("memberId", newMember);
+						session.setAttribute("memberId", newMember.getId());
 						log.debug("新增成功");
 					} catch (Exception e) {
 						response.addMessage("新增失敗" + e.getMessage());
@@ -440,7 +440,7 @@ public class CommonsSignUpController {
 //					result.put("member", newMember);
 //					response.setObj(result);
 					response.setObj(newMember);
-					session.setAttribute("memberId", newMember);
+					session.setAttribute("memberId", newMember.getId());
 					log.debug("新增成功");
 				} catch (Exception e) {
 					response.addMessage("新增失敗" + e.getMessage());
@@ -490,7 +490,8 @@ public class CommonsSignUpController {
 	@RequestMapping("/storeMemberPic")
 	public String storeMemberPic(@RequestParam("picture") MultipartFile picture,
 			MultipartHttpServletRequest request, HttpSession session) {
-		Member member = (Member)session.getAttribute("memberId");
+		Long memberId = (Long)session.getAttribute("memberId");
+		Member member = memberService.getOne(memberId);	//因session會將member蓋掉，所以以memberId取
 		AjaxResponse<Member> ajaxResponse = new AjaxResponse<Member>();
 		try {
 			Member memberResult = memberService.storeMemberPic(picture, member, request);

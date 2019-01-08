@@ -28,26 +28,26 @@
 <!-- 				<div class="dark-mask"></div> -->
 				<div class="homepage owl-carousel" style="padding-top: 0;">
 					<div class="item">
-						<div class="row">
+						<div class="row" style="margin-left: 0;margin-right: 0;">
 							<img
 								src="../image/indexPicture/indexPic1.jpg"
-								alt="">
+								alt="" style="max-width: 100%;">
 
 						</div>
 					</div>
 					<div class="item">
-						<div class="row">
+						<div class="row" style="margin-left: 0;margin-right: 0;">
 							<img
 								src="../image/indexPicture/indexPic2.jpg"
-								alt="" class="ml-auto">
+								alt="" class="ml-auto" style="max-width: 100%;">
 
 						</div>
 					</div>
 					<div class="item">
-						<div class="row">
+						<div class="row" style="margin-left: 0;margin-right: 0;">
 							<img
 								src="../image/indexPicture/indexPic3.jpg"
-								alt="" class="ml-auto">
+								alt="" class="ml-auto" style="max-width: 100%;">
 
 						</div>
 					</div>

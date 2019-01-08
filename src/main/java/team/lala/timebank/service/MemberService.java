@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.annotation.Syntax;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 
@@ -170,20 +171,21 @@ public class MemberService {
 			// 如果有上傳圖片，才存檔案到Server，及存路徑到DB
 			if (picture.getOriginalFilename().length() > 0) {
 				// 取得應用程式根目錄中圖片之路徑
-				String realPath = request.getServletContext().getRealPath("/") + "..\\WEB-INF\\image\\user\\member\\";
+				System.out.println(request.getServletContext().getRealPath("/"));
+				String realPath = request.getServletContext().getRealPath("/") + "WEB-INF\\image\\user\\member\\";
 				// 確認是否有此資料夾，如無則建資料夾
 				File dir = new File(realPath);
 				if (!dir.exists()) {
 					dir.mkdirs();
 				}
 				// 檔名
-				String location = realPath + "memberpic_" + member.getId() + ".jpg";
+				String location = realPath + "memberpic" + member.getId() + ".jpg";
 				// 寫出檔案到Server
 				FileOutputStream fos = new FileOutputStream(location);
 				fos.write(picture.getBytes());
 				fos.close();
 				// 將檔名存入DB
-				member.setPicture("memberpic_" + member.getId() + ".jpg");
+				member.setPicture("memberpic" + member.getId() + ".jpg");
 				member = memberDao.save(member);
 			}
 			return member;
