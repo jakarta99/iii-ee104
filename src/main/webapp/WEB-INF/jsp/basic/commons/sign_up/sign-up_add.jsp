@@ -10,7 +10,7 @@
 <!-- css -->
 <jsp:include page="../commons_layout/commons_css_links.jsp" />
 <!-- Javascript files -->
-<jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
+<jsp:include page="../commons_layout/commons_js_links.jsp" />
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
 <!-- date picker -->
@@ -25,14 +25,6 @@
 	body{
 		font-family: "微軟正黑體"
 	}
-/* 	fieldset { */
-/*         width: 600px; */
-/*         border-radius: 20px; */
-/*         padding: 20px; */
-/*         margin: 20px; */
-/*         border: 3px double #bebebe; */
-/*         margin: auto */
-/*     } */
     .s2{
         text-align: center
     }
@@ -51,56 +43,6 @@
 		border-radius: 0.25rem;
 		transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	}
-/* 	article { */
-/* 		margin-top: 30px; */
-/* 		margin-bottom: 30px; */
-/* 		padding: 10px; */
-/* 	} */
-/* 	article fieldset { */
-/* 		width: 800px; */
-/* 		border-radius: 15px; */
-/* 		padding: 20px;  */
-/* 		border: 3px solid rgb(146, 168, 209); */
-/* 		margin: auto; */
-/* 	} */
-/* 	article input, select, label { */
-/*   		padding-left: 10px;  		    */
-/*   		line-height:center;  */
-/* 	} */
-/* /* 	設定縣市地區選擇器的css樣式 */ */
-/* 	.county,.district { */
-/* 	  padding: 0.375rem 0.75rem; */
-/* 	  font-size: 1rem; */
-/* 	  line-height: 1.5; */
-/* 	  color: #495057; */
-/* 	  background-color: #fff; */
-/* 	  background-image: none; */
-/* 	  background-clip: padding-box; */
-/* 	  border: 1px solid #ced4da; */
-/* 	  border-radius: 0.25rem; */
-/* 	  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; */
-/* 	} */
-/* 	.center{ */
-/* 		text-align: center; */
-/* 	} */
-/* 	.myform { */
-/*         margin: 8% 11%; */
-/*         border-collapse: collapse; */
-/*         font-size: 100%; */
-/*         line-height: 200%; */
-/*     } */
-/*     legend{ */
-/*         font-size:150%; */
-/*         color:rgb(193, 186, 177); */
-/*     } */
-/*     .block { */
-/*         width: 650px; */
-/*         border-bottom: 2px solid rgb(247, 202, 201); */
-/*         margin: 20px; */
-/*     } */
-/*     .remark { */
-/*         color: rgb(193, 186, 177); */
-/*     } */
 </style>
 
 </head>
@@ -133,6 +75,8 @@
 									<span id="idspAccount" style='color:red'>${accountDouble}</span><span id="isDoubleAccount"></span>
 								</div>
 							</div>
+						</div>
+						<div class="row">
                     		<div class="col-md-6">
                       			<div class="form-group">
 									<label for="idPassword">密碼:</label>
@@ -141,8 +85,6 @@
 									<span id="idspPassword" style='color:red'></span>
 								</div>
 							</div>
-						</div>
-						<div class="row">
 							<div class="col-md-6">
                       			<div class="form-group">
 									<label for="idPasswordCheck">確認密碼:</label>
@@ -241,7 +183,7 @@
 							</div>
 							<div class="col-md-4">
                       			<div class="form-group">
-                      				<div><label>住址:</label></div>
+                      				<label>住址:</label>
 									<input type="text" value="${param.address}" id="address" name="address" class="form-control">
 								</div>
 							</div>
@@ -253,53 +195,79 @@
 					</fieldset>
 					<c:if test="${memberType eq 'O' }">
 						<fieldset>
-							<legend>公司資料</legend>
-							<div class="block">
-								<label for="idOrgFounder">創辦人:</label> 
-								<input type="text" value="${param.orgFounder}" id="idOrgFounder" name="orgFounder" autofocus autocompelete="off">
-								<span id="idspOrgFounder" style='color:red'></span>
-								<div class="remark">(1.不可空白，2.至少2個字以上，3.必須全部為中文)</div>
+							<div class="heading">
+								<h3>公司資料</h3>
 							</div>
-							<div class="block">
-								<label for="idOrgCeo">執行長:</label>
-								<input type="text" value="${param.orgCeo}" id="idOrgCeo" name="orgCeo" autofocus autocompelete="off">
-								<span id="idspOrgCeo" style='color:red'></span>
-								<div class="remark">(1.不可空白，2.至少2個字以上，3.必須全部為中文)</div>
+							<div class="row">
+								<div class="col-md-4">
+                      				<div class="form-group">
+										<label for="idOrgFounder">創辦人:</label> 
+										<input type="text" value="${param.orgFounder}" id="idOrgFounder" name="orgFounder" autofocus autocompelete="off" class="form-control">
+										<div><label>(1.不可空白，2.至少2個字以上，3.必須全部為中文)</label></div>
+										<span id="idspOrgFounder" style='color:red'></span>
+									</div>
+								</div>
+								<div class="col-md-4">
+                      				<div class="form-group">
+										<label for="idOrgCeo">執行長:</label>
+										<input type="text" value="${param.orgCeo}" id="idOrgCeo" name="orgCeo" autofocus autocompelete="off" class="form-control">
+										<div><label>(1.不可空白，2.至少2個字以上，3.必須全部為中文)</label></div>
+										<span id="idspOrgCeo" style='color:red'></span>
+									</div>
+								</div>
+								<div class="col-md-4">
+                      				<div class="form-group">
+										<label for="idOrgContactPerson">聯絡人:</label>
+										<input type="text" value="${param.orgContactPerson}" id="idOrgContactPerson" name="orgContactPerson" autofocus autocompelete="off" class="form-control">
+										<div><label>(1.不可空白，2.至少2個字以上，3.必須全部為中文)</label></div>
+										<span id="idspOrgContactPerson" style='color:red'></span>
+									</div>
+								</div>
 							</div>
-							<div class="block">
-								<label for="idOrgContactPerson">聯絡人:</label>
-								<input type="text" value="${param.orgContactPerson}" id="idOrgContactPerson" name="orgContactPerson" autofocus autocompelete="off">
-								<span id="idspOrgContactPerson" style='color:red'></span>
-								<div class="remark">(1.不可空白，2.至少2個字以上，3.必須全部為中文)</div>
+							<div class="row">
+								<div class="col-md-4">
+                      				<div class="form-group">
+										<label for="idOrgContactPersonTel">聯絡人電話:</label> 
+										<input type="text" value="${param.orgContactPersonTel}" id="idOrgContactPersonTel" name="orgContactPersonTel" autofocus autocompelete="off" class="form-control">
+										<div><label>(格式需為0X-XXXXXXXX)</label></div>
+										<span id="idspOrgContactPersonTel" style='color:red'></span>
+									</div>
+								</div>
+								<div class="col-md-4">
+                      				<div class="form-group">
+										<label for="idOrgContactPersonMobile">聯絡人手機:</label> 
+										<input type="text" value="${param.orgContactPersonMobile}" id="idOrgContactPersonMobile" name="orgContactPersonMobile" autofocus autocompelete="off" class="form-control">
+										<div><label>(格式需為09XX-XXX-XXX)</label></div>
+										<span id="idspOrgContactPersonMobile" style='color:red'></span>
+									</div>
+								</div>
+								<div class="col-md-4">
+                      				<div class="form-group">
+										<label for="idOrgWebsiteLink">網址:</label>
+										<input type="url" size="50px" value="${param.orgWebsiteLink}" id="idOrgWebsiteLink" name="orgWebsiteLink" autofocus autocompelete="off" class="form-control">
+										<div><label>(必須符合規則)</label></div>
+										<span id="idspOrgWebsiteLink" style='color:red'></span>
+									</div>
+								</div>
 							</div>
-							<div class="block">
-								<label for="idOrgContactPersonTel">聯絡人電話:</label> 
-								<input type="text" value="${param.orgContactPersonTel}" id="idOrgContactPersonTel" name="orgContactPersonTel" autofocus autocompelete="off">
-								<span id="idspOrgContactPersonTel" style='color:red'></span>
-								<div class="remark">(格式需為0X-XXXXXXXX)</div>
-							</div>
-							<div class="block">
-								<label for="idOrgContactPersonMobile">聯絡人手機:</label> 
-								<input type="text" value="${param.orgContactPersonMobile}" id="idOrgContactPersonMobile" name="orgContactPersonMobile" autofocus autocompelete="off">
-								<span id="idspOrgContactPersonMobile" style='color:red'></span>
-								<div class="remark">(格式需為09XX-XXX-XXX)</div>
-							</div>
-							<div class="block">
-								<label for="idOrgWebsiteLink">網址:</label>
-								<input type="url" size="50px" value="${param.orgWebsiteLink}" id="idOrgWebsiteLink" name="orgWebsiteLink" autofocus autocompelete="off">
-								<span id="idspOrgWebsiteLink" style='color:red'></span>
-								<div class="remark">(必須符合規則)</div>
-							</div>
-							<div class="block">
-								<label>創立宗旨:</label>
-								<textarea rows="5" cols="50" id="orgFoundPurpose" name="orgFoundPurpose">
-									${member.orgFoundPurpose}
-								</textarea>
+							<div class="row">
+<!-- 								<div class="col-md-3"> -->
+<!-- 	                      			<div class="form-group"> -->
+<!-- 	                      			</div> -->
+<!-- 	                      		</div> -->
+								<div class="col-md-6">
+	                      			<div class="form-group">
+										<label>創立宗旨:</label>
+										<textarea rows="5" id="orgFoundPurpose" name="orgFoundPurpose" class="form-control">
+											${member.orgFoundPurpose}
+										</textarea>
+									</div>
+								</div>
 							</div>
 						</fieldset>
 					</c:if>
 					<fieldset style="border:none">
-						<div>
+						<div class="col-md-12 text-center">
 							<input type="button" class="btn btn-template-outlined" id="submit" value="確定送出" />
 					        <input type="reset" class="btn btn-template-outlined" value="清除重填" />
 					        <span id="error" style='color:red'></span>
