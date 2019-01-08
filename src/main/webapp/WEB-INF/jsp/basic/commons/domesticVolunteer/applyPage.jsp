@@ -152,12 +152,17 @@
 				</div>
               </div>
               <div class="col-md-4"><img id="missionImg" alt="" src="/image/user/mission/${mission.missionPicName}" class="img-fluid rounded-circle"></div>
+            	
+            	
+            	
+            	
+            	
             	<table>
             		<tr>
             			<td>會員名稱:${member.name}</td>
             		</tr>
             		<tr>
-            			<td>會員名稱:${member.}</td>
+            			<td>會員名稱:</td>
             		</tr>
             		<tr>
             			<td>會員名稱:${member.name}</td>
