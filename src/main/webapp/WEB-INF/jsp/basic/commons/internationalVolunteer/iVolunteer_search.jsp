@@ -37,8 +37,6 @@
 		<jsp:include page="../commons_layout/commons_nav.jsp" />
 
 		<section>
-			<!-- 			style="background: url('https://media.goeco.org/_media/media/422/11924_1903_546.jpg') center center repeat; background-size: cover;" -->
-			<!-- 			class="bar background-white relative-positioned"> -->
 			<!-- Carousel Start-->
 			<div class="home-carousel">
 <!-- 				<div class="dark-mask"></div> -->
@@ -47,21 +45,7 @@
 						<div class="row">
 							<img
 								src="https://media.goeco.org/_media/media/422/11924_1903_546.jpg"
-								alt="">
-								
-<!-- 							<div class="carousel-caption d-none d-md-block"> -->
-
-<!-- 								<div class="col-md-8 "> -->
-<!-- 								</div> -->
-<!-- 								<div class="col-md-4" style="float:right"> -->
-<!-- 									<h1>Easy to customize</h1> -->
-<!-- 									<ul class="list-unstyled"> -->
-<!-- 										<li>7 preprepared colour variations.</li> -->
-<!-- 										<li>Easily to change fonts</li> -->
-<!-- 									</ul> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-							
+								alt="">					
 						</div>
 					</div>
 					<div class="item">
@@ -80,27 +64,18 @@
 
 						</div>
 					</div>
-<!-- 					<div class="item"> -->
-<!-- 						<div class="row"> -->
-<!-- 							<div class="col-md-7"> -->
-<!-- 								<img src="img/template-easy-code.png" alt="" class="img-fluid"> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-md-5"> -->
-<!-- 								<h1>Easy to customize</h1> -->
-<!-- 								<ul class="list-unstyled"> -->
-<!-- 									<li>7 preprepared colour variations.</li> -->
-<!-- 									<li>Easily to change fonts</li> -->
-<!-- 								</ul> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
 				</div>
 			</div>
 			<!-- Carousel End-->
 		</section>
 		<section class="bar background-pentagon no-mb">
 			<div class="container">
-				<div class="row">
+				<div class="row">		
+					<div class="col-md-12">
+						<p class="lead">TimeBank時間銀行整理了多家機構招募國際志工的資訊，
+							您可以在這裡選擇自己有興趣的範疇及時間，再到機構的官網報名參加和獲得更詳細的資訊。</p>
+					</div>
+			
 					<div class="col-md-6">
 						<h1>Selection</h1>
 						<form action="/commons/InternationalVolunteer/list" method="get" >
@@ -136,14 +111,15 @@
 					</div>
 				</div>
 			</div>
+			
+			
 		</section>
-
+	
 
 	</div>
 
 	<!-- FOOTER -->
 	<%-- 		<jsp:include page="../commons_layout/commons_footer.jsp" /> --%>
-	<jsp:include page="../commons_layout/back-to-top_button.jsp" />
 	
 	
 	<script>

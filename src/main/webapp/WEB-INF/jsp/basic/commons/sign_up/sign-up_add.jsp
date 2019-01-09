@@ -25,6 +25,9 @@
 	body{
 		font-family: "微軟正黑體"
 	}
+	article{
+		width:100%;
+	}
 	.county,.district {
 	  	padding: 0.375rem 0.75rem;
 	  	font-size: 1rem;
@@ -115,7 +118,7 @@
 									<div class="col-md-4">
                       					<div class="form-group">
 											<label for="idDate">出生日期:</label>
-											<input type="text" value="${param.date}" id="idDate" name="birthDate" autofocus autocomplete="off" class="form-control">
+											<input type="text" value="${param.birthDate}" id="idDate" name="birthDate" placeholder="請輸入日期" autofocus autocomplete="off" class="form-control">
 											<div><label>(1.不可空白，2.格式為yyyy/MM/dd)</label></div>
 											<span id="idspDate" style='color:red'></span>
 										</div>

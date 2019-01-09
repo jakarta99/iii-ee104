@@ -1,5 +1,6 @@
 package team.lala.timebank.web.user;
 
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -16,14 +17,14 @@ public class ChatMessageHandlerController {
 
 	@MessageMapping("/chat")
 	@SendTo("/topic/messages")
-	public ChatOutputMessage send(ChatClient message) throws Exception {
+	public ChatOutputMessage send(ChatClient message, Principal principal) throws Exception {
 	    String time = new SimpleDateFormat("HH:mm").format(new Date());
-	    return new ChatOutputMessage(message.getFrom(), message.getText(), time);
+	    return new ChatOutputMessage(principal.getName(),message.getTo(), message.getText(), time);
 	}
 	
 	@RequestMapping("/chatpage")
 	public String chatPage() {
-		return "/basic/user/chatRoom/chatting";
+		return "/basic/user/chatRoom/chattingExample";
 	}
 	
 }

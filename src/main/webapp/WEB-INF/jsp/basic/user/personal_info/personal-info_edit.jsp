@@ -25,6 +25,9 @@
 	body{
 		font-family: "微軟正黑體"
 	}
+	article{
+		width:100%;
+	}
 	.county,.district {
 	  	padding: 0.375rem 0.75rem;
 	  	font-size: 1rem;
@@ -758,7 +761,7 @@
 				endDate:"0d",
 			};
 			$('#idDate').datepicker(datePickerSetting);
-			$('#signUpDate').datepicker(datePickerSetting);
+// 			$('#signUpDate').datepicker(datePickerSetting);
 
 			$("span[role='tw-city-selector']").attr("data-county-value",'${member.county}');
 			$("span[role='tw-city-selector']").attr("data-district-value", '${member.district}');
