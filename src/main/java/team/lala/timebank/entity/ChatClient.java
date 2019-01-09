@@ -26,6 +26,9 @@ public class ChatClient {
 	@Column(name="FROM")
 	private String from;
 	
+	@Column(name="TO")
+	private String to;
+	
 	@Column(name="TEXT")
     private String text;
 

@@ -39,6 +39,16 @@ public class TimeSchedule {
 	@Autowired
 	private OrderService orderService;
 	
+	public void autoPay() {
+		
+		
+		
+		
+	}
+	
+	
+	
+	
 	//測試　 
 //	@Scheduled(cron = "0 0/2 * * * *") //(cron = "0 0 1 * * ?")每天一點執行
 	public void updateStatus() {

@@ -15,8 +15,11 @@ public class ChatOutputMessage {
 	
 	private String time;
 	
-	public ChatOutputMessage(String from, String text, String time) {
+	private String to;
+	
+	public ChatOutputMessage(String from,String to, String text, String time ) {
 		this.from = from;
+		this.to = to;
 		this.text = text;
 		this.time = time;
 	}

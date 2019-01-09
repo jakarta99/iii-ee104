@@ -11,7 +11,18 @@
 <jsp:include page="../commons_layout/commons_css_links.jsp" />
 <!-- Javascript files-->
 <jsp:include page="../commons_layout/commons_js_links.jsp" />
+<style>
+.container{
+	max-width: 1500px;
+	border-top-left-radius:3px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+	
+}
 
+
+</style>
 <script>
 function doSpider(){
 	$.get("/commons/InternationalVolunteer/spidertest", function(msg){
@@ -28,43 +39,29 @@ function doSpider(){
 		<jsp:include page="../commons_layout/commons_nav.jsp" />
 		<!-- heading-breadcrumbs -->
 		<jsp:include page="../commons_layout/commons_heading_breadcrumbs.jsp" />
-		
-		<a href="/commons/InternationalVolunteer/search" >國際志工專區-搜尋</a> 
+<!-- 		<h4 class="h4"><a href="#" onclick="doSpider()">若無資料，請按此進行爬蟲功能	</a></h4> -->
+<!-- 		<a href="/commons/InternationalVolunteer/search" >國際志工專區-搜尋</a>  -->
 		<div id="content">
-			<div class="container">
-				<section class="bar">
-					<div class="row">
-						<div class="col-md-12">
-<!-- 							<div class="heading"> -->
-<!-- 								<h2>國際志工專區</h2> -->
-<!-- 							</div> -->
-							 <h4 class="h4"><a href="#" onclick="doSpider()">若無資料，請按此進行爬蟲功能	</a>
-							 	<span id="msg"></span></h4>
-							<p class="lead">TimeBank時間銀行整理了多家機構招募國際志工的資訊，
-								您可以在這裡選擇自己有興趣的範疇及時間，再到機構的官網報名參加和獲得更詳細的資訊。</p>
-						</div>
-					</div>
+			<div class="container" style="background-color: rgba(234, 234, 234);margin-top:30px">
+				<section class="bar" style="padding: 30px 0;">
 					<div class="row portfolio text-center" >
 						<c:forEach items="${IVolunteers}" var="volunteer">
 							<div class="col-lg-4">
 								<div class="home-blog-post">
 								<div class="product">
-									<div class="image">
-										<a href="${volunteer.websiteUrl}" class="btn btn-template-outlined-white">			
-											<img src="${volunteer.picture}"  class="image1" width="300px"  height="230px" >
+										<a href="${volunteer.websiteUrl}">			
+											<img src="${volunteer.picture}"  class="image1" width="400px"  height="300px" >
 										</a>
-										
-									</div>
 									</div>
 									<div class="text">
-										<h4 style="width:270px; margin:auto; margin-bottom:10px" >
-											<a href="${volunteer.websiteUrl}">${volunteer.title} </a>
-										</h4>
+										<h3 style="width:370px; margin:auto; margin-bottom:10px; "  >
+											<a href="${volunteer.websiteUrl}" style="color: #13b5b1">${volunteer.title} </a>
+										</h3>
 										<p class="author-category" >
-											<span  style="color:#999">${volunteer.organization}</span>
+											<span  >${volunteer.organization}</span>
 										</p>
 										<p>
-											<table style="margin:auto;">
+											<table style="margin:auto;color:rgba(125, 125, 125)">
 												<tr><td width="70px">服務地區: </td><td width="200px"> 
 													<c:if test="${not empty volunteer.country}">${volunteer.country}
 														<c:if test="${not empty volunteer.place}">${volunteer.place}</c:if>

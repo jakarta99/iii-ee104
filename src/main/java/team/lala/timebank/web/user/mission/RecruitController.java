@@ -154,7 +154,6 @@ public class RecruitController {
 				mission.setMissionPicName("missionPicture_" + mission.getId() + ".jpg");
 				missionService.insert(mission, principal);
 			}
-			response.addMessage("修改成功");
 		} catch (Exception e) {
 			response.addMessage("修改失敗，" + e.getMessage());
 			e.printStackTrace();
@@ -170,11 +169,9 @@ public class RecruitController {
 		try {
 			Mission mission = missionService.getOne(missionId);
 			//刊登者與申請者相同時 申請失敗
-			
 			if(!principal.getName().equals(mission.getMember().getAccount())) {
 				Member member = memberService.findByAccount(principal.getName());
 				orderService.insert(mission, member);
-				response.addMessage("申請成功");
 			}else {
 				response.addMessage("申請者不得與刊登者為相同帳戶");
 			}

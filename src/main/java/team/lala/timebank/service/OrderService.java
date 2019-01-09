@@ -68,7 +68,7 @@ public class OrderService {
 		}
 		member.setAverageScore(new Double(member.getSumScore() / member.getScoredTimes()));	
 		memberDao.save(member);
-		order.setOrderStatus(OrderStatus.ServiceFinishPayAndScoreMatchSuccess);		//修改order狀態
+		order.setOrderStatus(OrderStatus.ServiceFinishPayMatchSuccess);		//修改order狀態
 		orderDao.save(order);
 		systemMessageService.scoreMessage(order, score);
 		
@@ -78,7 +78,7 @@ public class OrderService {
 	public Penalty report(Long orderId, String description) {
 		Order order = orderDao.getOne(orderId);		
 		Penalty penalty = penaltyService.report(order, description);
-		order.setOrderStatus(OrderStatus.VolunteerReportRequestMatchSuccess);
+		order.setOrderStatus(OrderStatus.ServiceFinishPayMatchSuccess);
 		orderDao.save(order);
 		systemMessageService.reportMessage(order);
 		return penalty;
@@ -129,8 +129,7 @@ public class OrderService {
 	}
 
 	// accept 志工 改狀態為2接受
-	public Order accept(Long orderId) {
-		
+	public Order acceptVolunteer(Long orderId) {
 		Order order = orderDao.getOne(orderId);
 		Mission mission = order.getMission();
 		if(mission.getMissionstatus() == MissionStatus.A_New) {

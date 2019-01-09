@@ -108,6 +108,33 @@
           </section>
         </div>
         </div>
+        
+<div class="modal fade" id="reportModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">檢舉系統</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form id="reportForm" enctype="multipart/form-data">
+        	<input type='hidden' id='orderId' name='orderId' value='' />
+            <h5>檢舉人名</h5>
+            <p id="memberAccount"></p>
+            <h5>檢舉原因</h5>
+            <textarea cols='40' rows='5' id='description' name='description'></textarea>
+            <input type="file" id="proofPic" name="proofPic" accept="image/*">
+            <p>請選擇圖檔，如無佐證資料，則直接送出審核</p>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <input type='button' class='btn btn-primary btn-sm' onclick='report()' value='檢舉' />
+    </div>
+</div>
+</div>
+</div>
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	
 <script>
@@ -151,23 +178,47 @@
 	}
 	
 	
-	function penalty(orderId,volunteerId,name) {
-// 		swal.withForm({
-// 		    title: 'Cool Swal-Forms example',
-// 		    text: 'Any text that you consider useful for the form',
-// 		    showCancelButton: true,
-// 		    confirmButtonColor: '#DD6B55',
-// 		    confirmButtonText: 'Get form data!',
-// 		    closeOnConfirm: true,
-// 		    formFields: [
-// 		        { id: 'name', placeholder:'Name Field', required: true },
-// 		        { id: 'nickname', placeholder:'Add a cool nickname' }
-// 		    ]
-// 		}, function(isConfirm) {
-// 		    // do whatever you want with the form data
-// 		    console.log(this.swalForm) // { name: 'user name', nickname: 'what the user sends' }
-// 		})
+	
+	function report() {
+		swal({
+			  title: "確定送出檢舉嗎?",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willreport) => {
+			  if (willreport) {
+				  var data = new FormData($('#reportForm')[0]);
+					$.ajax({
+						url : '/user/volunteerRecord/report',
+						type : 'post',
+						cache: false,
+						data : data,
+						processData: false,
+						contentType: false
+					}).done(function(response){
+						console.log(response)
+						if (response.status =="SUCCESS"){
+							 swal("檢舉成功", {icon: "success",});
+						} else {
+							swal("檢舉失敗", {icon: "error",});
+						}
+						$('#reportModalCenter').modal('hide')
+						list();
+					})	
+	
+			  } else {
+			    swal("取消檢舉");
+			  }
+			}); 	
 	}
+		
+		
+		
+		
+		
+		
+		
 	
 	function list(){
 		$.ajax({
@@ -208,7 +259,7 @@
 	        			box +='</select></div></div>'	
 						var value=$("#"+order	.volunteer.id+" option:selected").val()
 	        			box+="<button class='btn btn-primary' onclick=\"pay("+order.id+","+order.volunteer.id+",'"+order.volunteer.name+"')\">時數核發與評分</button>"
-	        			box+="<button class='btn btn-danger' onclick=\"penalty("+order.id+","+order.volunteer.id+",'"+order.volunteer.name+"')\" >  檢舉    </button></div>"
+	        			box+="<button class='btn btn-danger' data-toggle='modal' data-target='#reportModalCenter' id='" + order.id + "' name='" + order.volunteer.name+ "'>  檢舉    </button></div>"
 	        			}else if(order.orderStatus=='ServiceFinishPayMatchSuccess'){
 	        			box+="<span class='badge badge-success'>已付款與評分</span>"
 	        			}else if(order.orderStatus=='ServiceFinishNotPay'){
@@ -257,6 +308,11 @@
     		 $('body,html').animate({
                  scrollTop: 0 }, 1);
     	})
+    	//彈出檢舉視窗時，修改裡面的值
+		$("#boxbox").on('click', "[data-target='#reportModalCenter']", function (event) {
+			$("#orderId").attr("value",event.target.id)
+			$("#memberAccount").html(event.target.name)
+		})
 	});
 </script>
 </body>
