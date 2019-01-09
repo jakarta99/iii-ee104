@@ -121,7 +121,7 @@ INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publ
 VALUES (13,'[機構13]伊甸基金會-偏鄉暑期陪讀志工 ',8,'S',1,'2019/7/7','2019/8/24 09:00','2019/7/31 17:00',6,'廖先生','03-28828899','eedian@gmail.com','在偏鄉社區中，許多孩子有著不同的天賦，如音樂、舞蹈等，卻因為城鄉差距、貧富落差的關係，失去了發展的機會；或是沒有經費可以栽培孩子、或是地處偏僻比較缺乏老師願意來教，對許多偏鄉弱勢的孩子來說，才藝學習是遥不可及的夢想，冀望能夠透過音樂教學相關才藝課程，給予多元刺激適性發展，偏鄉孩子一樣能，同時我們深信「教育」是提高人口素質的根本方法：唯有「教育」能幫助人脫離貧困和愚昧。所以我們很願意協助更多的偏鄉兒童、原住民學子，努力求學、奮發向上、發揮偏鄉兒童、原住民的才華，找到每個人的一片天空。<br>希望徵求兩名志工，陪伴孩子、豐富孩子的暑假。','台東縣','東河鄉','泰源村泰源書屋','A_New','2019/6/10',0,'readwithchild.jpg');
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME) 
-VALUES (13,'[機構13]伊甸基金會-為家漆上愛志工 ',8,'S',4,'2019/1/15','2019/3/30 09:00','2019/3/30 17:00',15,'曹小姐','03-28828899','eedian@gmail.com','伊甸基金會與特力屋士林店招募羅賴把志工，一起聯手打造友善安居家庭日，訂於108年3月9日(六)至特力屋士林店受訓後，於108年3月30日(六)至弱勢家庭家中刷油漆，一起為家漆上愛。','台北市','文山區','萬和街6號4樓之2','A_New','2019/2/18',0,'paint.jpg');
+VALUES (13,'[機構13]伊甸基金會-為家漆上愛志工 ',8,'S',4,'2019/1/3','2019/1/5 09:00','2019/1/5 17:00',15,'曹小姐','03-28828899','eedian@gmail.com','伊甸基金會與特力屋士林店招募羅賴把志工，一起聯手打造友善安居家庭日，訂於107年12月30日(六)至特力屋士林店受訓後，於108年1月5日(六)至弱勢家庭家中刷油漆，一起為家漆上愛。','台北市','文山區','萬和街6號4樓之2','B_AccountsPayable','2019/1/5',0,'paint.jpg');
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME) 
 VALUES (13,'[機構13]伊甸基金會-視障重建中心導盲志工 ',3,'L',2,'2019/1/8','2019/3/1 09:00','2019/12/31 17:00',5,'董小姐','08-28828899','eedian@gmail.com','你是充滿熱忱、有滿腔愛心的人嗎？是否遇過視障者需要協助時，卻不知該怎麼幫忙呢？竭誠邀請您一同參與導盲志工培訓招募，完成培訓後可排班協助視障者外出購物、休閒活動及陪同參與社區化活動。歡迎您一同加入我們的行列，協助視障者參與社會。','台北市','松山區','光復北路60巷19-6號B1樓','A_New','2019/12/31',0,'blindvol.jpg');
@@ -222,25 +222,25 @@ VALUES (2,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/
 
 --ORDER_LIST
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
-VALUES(6, 1,  'ServiceFinishNotPay', '2018/10/11 17:00');
+VALUES(6, 1,  'VolunteerApply', '2018/10/11 17:00');
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
-VALUES(6, 2,  'ServiceFinishNotPay', '2018/10/11 17:00');
+VALUES(6, 2,  'VolunteerApply', '2018/10/11 17:00');
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
-VALUES(6, 3,  'ServiceFinishNotPay', '2018/10/11 17:00');
+VALUES(6, 3,  'VolunteerApply', '2018/10/11 17:00');
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
-VALUES(6, 4,  'ServiceFinishNotPay', '2018/10/11 17:00');
+VALUES(6, 4,  'VolunteerApply', '2018/10/11 17:00');
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
-VALUES(6, 5,  'ServiceFinishNotPay', '2018/10/11 17:00');
+VALUES(6, 5,  'VolunteerApply', '2018/10/11 17:00');
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME)
-VALUES(9, 2,  'ServiceFinishNotPay', '2018/10/11 17:00');
+VALUES(7, 2,  'ServiceFinishNotPay', '2018/10/11 17:00');
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME)
-VALUES(9, 3,  'ServiceFinishNotPay', '2018/10/11 17:00');
+VALUES(7, 3,  'ServiceFinishNotPay', '2018/10/11 17:00');
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME)
-VALUES(9, 4,  'ServiceFinishNotPay', '2018/10/11 17:00');
+VALUES(7, 4,  'ServiceFinishNotPay', '2018/10/11 17:00');
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME)
-VALUES(9, 5,  'ServiceFinishNotPay', '2018/10/11 17:00');
+VALUES(7, 5,  'ServiceFinishNotPay', '2018/10/11 17:00');
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME)
-VALUES(9, 1,  'ServiceFinishNotPay', '2018/10/11 17:00');
+VALUES(7, 1,  'ServiceFinishNotPay', '2018/10/11 17:00');
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
 VALUES(4, 1,  'VolunteerApply', '2018/10/11 17:00');
 
