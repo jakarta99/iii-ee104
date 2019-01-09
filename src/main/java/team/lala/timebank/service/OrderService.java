@@ -1,14 +1,8 @@
 package team.lala.timebank.service;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,29 +10,32 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.OrderDao;
-import team.lala.timebank.dao.PenaltyDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
+import team.lala.timebank.enums.MissionStatus;
 import team.lala.timebank.enums.OrderStatus;
 
 @Slf4j
 @Service
 @Transactional
 public class OrderService {
-
+	
+	@Autowired
+	private MissionService missionService;
 	@Autowired
 	private OrderDao orderDao;
 	@Autowired
 	private MemberDao memberDao;
 	@Autowired
-	private PenaltyDao penaltyDao;
+	private PenaltyService penaltyService;
+	@Autowired
+	private SystemMessageService systemMessageService;
 
 	// 根據會員查詢order
 	public Page<Order> findBySpecification(Specification<Order> specification, PageRequest pageRequest) {
@@ -73,21 +70,17 @@ public class OrderService {
 		memberDao.save(member);
 		order.setOrderStatus(OrderStatus.ServiceFinishPayAndScoreMatchSuccess);		//修改order狀態
 		orderDao.save(order);
+		systemMessageService.scoreMessage(order, score);
+		
 	}
 	
 	//志工檢舉雇主
 	public Penalty report(Long orderId, String description) {
-		Order order = orderDao.getOne(orderId);
-		Penalty penalty = new Penalty();
-		penalty.setOrder(order);
-		penalty.setAccuser(order.getVolunteer());
-		penalty.setDefendant(order.getMission().getMember());
-		penalty.setUpdateDate(new java.util.Date());
-		penalty.setDescription(description);
-		penalty.setStatus(new Integer(1));
-		penalty = penaltyDao.save(penalty);
+		Order order = orderDao.getOne(orderId);		
+		Penalty penalty = penaltyService.report(order, description);
 		order.setOrderStatus(OrderStatus.VolunteerReportRequestMatchSuccess);
 		orderDao.save(order);
+		systemMessageService.reportMessage(order);
 		return penalty;
 	}
 
@@ -136,12 +129,16 @@ public class OrderService {
 	}
 
 	// accept 志工 改狀態為2接受
-	public Order accept(Long id) {
-		Order order = orderDao.getOne(id);
-		if (order.getOrderStatus() == OrderStatus.VolunteerApply) {
-			order.setOrderStatus(OrderStatus.RequesterAcceptService);
-			return orderDao.save(order);
-		}
+	public Order accept(Long orderId) {
+		
+		Order order = orderDao.getOne(orderId);
+		Mission mission = order.getMission();
+		if(mission.getMissionstatus() == MissionStatus.A_New) {
+			if (order.getOrderStatus() == OrderStatus.VolunteerApply) {
+				order.setOrderStatus(OrderStatus.RequesterAcceptService);
+				return orderDao.save(order);
+			}
+		}	
 		return null;
 	}
 

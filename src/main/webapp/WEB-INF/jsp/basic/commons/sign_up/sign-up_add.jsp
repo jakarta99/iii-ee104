@@ -7,15 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Sign Up Add</title>
-
-<%-- <jsp:include page="../../../admin/admin_layout/admin_css_js_links.jsp" /> --%>
 <!-- css -->
 <jsp:include page="../commons_layout/commons_css_links.jsp" />
 <!-- Javascript files -->
-<jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
-<script defer
-	src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<jsp:include page="../commons_layout/commons_js_links.jsp" />
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
 <!-- date picker -->
@@ -23,64 +18,28 @@
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
-
-<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
-
 <!-- sweetAlert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <style>
-	article {
-		font-family: 'Righteous', cursive;
-		margin-top: 30px;
-		margin-bottom: 30px;
-		padding: 10px;
+	body{
+		font-family: "微軟正黑體"
 	}
-	article fieldset {
-		width: 800px;
-		border-radius: 15px;
-		padding: 20px; 
-		border: 3px solid rgb(146, 168, 209);
-		margin: auto;
+	article{
+		width:100%;
 	}
-	article input, select, label {
-  		padding-left: 10px;  		   
-  		line-height:center; 
-	}
-/* 	設定縣市地區選擇器的css樣式 */
 	.county,.district {
-	  padding: 0.375rem 0.75rem;
-	  font-size: 1rem;
-	  line-height: 1.5;
-	  color: #495057;
-	  background-color: #fff;
-	  background-image: none;
-	  background-clip: padding-box;
-	  border: 1px solid #ced4da;
-	  border-radius: 0.25rem;
-	  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	  	padding: 0.375rem 0.75rem;
+	  	font-size: 1rem;
+		line-height: 1.5;
+		color: #495057;
+		background-color: #fff;
+		background-image: none;
+		background-clip: padding-box;
+		border: 1px solid #ced4da;
+		border-radius: 0.25rem;
+		transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	}
-	.center{
-		text-align: center;
-	}
-	.myform {
-        margin: 8% 11%;
-        border-collapse: collapse;
-        font-size: 100%;
-        line-height: 200%;
-    }
-    legend{
-        font-size:150%;
-        color:rgb(193, 186, 177);
-    }
-    .block {
-        width: 650px;
-        border-bottom: 2px solid rgb(247, 202, 201);
-        margin: 20px;
-    }
-    .remark {
-        color: rgb(193, 186, 177);
-    }
 </style>
 
 </head>
@@ -93,93 +52,138 @@
 	<div class="container">
     	<div class="row">
           	<article>
-          		<h2 class=center>建立您的TimeBank帳戶</h2>
-          		<input type="button" class="btn btn-primary btn-sm" onclick="javascript:document.location.href='/commons/sign-up/type'" value="回前頁">  
+          			<h3>建立您的TimeBank帳戶</h3>
+          			<hr>
+          		<input type="button" class="btn btn-template-outlined" onclick="javascript:document.location.href='/commons/sign-up/type'" value="回前頁">  
+          		<hr>
           		<form class="myform" action="#" method="post" enctype="multipart/form-data">
           			<fieldset>
-          				<legend>帳戶資料</legend>
+          				<div class="heading">
+          					<h3>帳戶資料</h3>
+          				</div>
           				<input type="hidden" value="" id="id" name="id"> 
 						<input type="hidden" value="${memberType}" id="memberType" name="memberType">
-						<div class="block">
-							<label for="idAccount">帳號:</label>
-							<input type="text" value="${param.account}" id="idAccount" placeholder="請輸入帳號" name="account" autofocus autocompelete="off">
-							<span id="idspAccount" style='color:red'>${accountDouble}</span><span id="isDoubleAccount"></span>
-							<div class="remark">(1.不可空白，2.至少6個字以上，3.必須全部為英文或數字)</div>
+						<div class="row">
+                    		<div class="col-md-6">
+                      			<div class="form-group">
+									<label for="idAccount">帳號:</label>
+									<input type="text" value="${param.account}" id="idAccount" placeholder="請輸入帳號" name="account" autofocus autocompelete="off" class="form-control">
+									<div><label>(1.不可空白，2.至少6個字以上，3.必須全部為英文或數字)</label></div>
+									<span id="idspAccount" style='color:red'>${accountDouble}</span><span id="isDoubleAccount"></span>
+								</div>
+							</div>
 						</div>
-						<div class="block">
-							<label for="idPassword">密碼:</label>
-							<input type="password" value="${param.password}" id="idPassword" placeholder="請輸入密碼" name="password" autofocus autocompelete="off">
-							<span id="idspPassword" style='color:red'></span>
-							<div class="remark">(1.不可空白，2.至少8個字最多16個字，3.必須包含字母、數字、特殊符號[~!@#$%^&*])</div>
-						</div>
-						<div class="block">
-							<label for="idPasswordCheck">確認密碼:</label>
-							<input type="password" value="${param.passwordCheck}" id="idPasswordCheck" placeholder="請再輸入一次密碼" name="passwordCheck" autofocus autocompelete="off">
-							<span id="idspPasswordCheck" style='color:red'></span>
-							<div class="remark">(1.不可空白，2.須與密碼相同)</div>
+						<div class="row">
+                    		<div class="col-md-6">
+                      			<div class="form-group">
+									<label for="idPassword">密碼:</label>
+									<input type="password" value="${param.password}" id="idPassword" placeholder="請輸入密碼" name="password" autofocus autocompelete="off" class="form-control">
+									<div><label>(1.不可空白，2.至少8個字最多16個字，3.必須包含字母、數字、特殊符號[~!@#$%^&*])</label></div>
+									<span id="idspPassword" style='color:red'></span>
+								</div>
+							</div>
+							<div class="col-md-6">
+                      			<div class="form-group">
+									<label for="idPasswordCheck">確認密碼:</label>
+									<input type="password" value="${param.passwordCheck}" id="idPasswordCheck" placeholder="請再輸入一次密碼" name="passwordCheck" autofocus autocompelete="off" class="form-control">
+									<div><label>(1.不可空白，2.須與密碼相同)</label></div>
+									<span id="idspPasswordCheck" style='color:red'></span>
+								</div>
+							</div>	
 						</div>
           			</fieldset>
-          			<fieldset>	
-						<legend>個人資料</legend>
-						<div class="block">
-							<label for="idName">姓名:</label>
-							<input type="text" value="${param.name}" id="idName" name="name" autofocus autocompelete="off">
-							<span id="idspName" style='color:red'></span>
-							<div class="remark">(1.不可空白，2.至少2個字以上，3.必須全部為中文)</div>
+          			<fieldset>
+          				<div class="heading">
+							<h3>個人資料</h3>
 						</div>
-						<c:choose>
-							<c:when test="${memberType eq 'P'}">
-								<div class="block">
-									<label for="idCertificateIdNumber">身分證字號:</label>
-									<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" name="certificateIdNumber" autofocus autocompelete="off">
-									<span id="idspCertificateIdNumber" style='color:red'></span>
-									<div class="remark">(1.不可空白，2.必須符合規則)</div>
+						<div class="row">
+							<div class="col-md-4">
+                      			<div class="form-group">
+									<label for="idName">姓名:</label>
+									<input type="text" value="${param.name}" id="idName" name="name" autofocus autocompelete="off" class="form-control">
+									<div><label>(1.不可空白，2.至少2個字以上，3.必須全部為中文)</label></div>
+									<span id="idspName" style='color:red'></span>
 								</div>
-								<div class="block">
-									<label for="idDate">出生日期:</label>
-									<input type="text" value="${param.date}" id="idDate" name="birthDate" autofocus autocomplete="off">
-									<span id="idspDate" style='color:red'></span>
-									<div class="remark">(1.不可空白，2.格式為yyyy/MM/dd)</div>
-								</div>
-							</c:when>
-							<c:when test="${memberType eq 'O'}">
-								<div class="block">
-									<label for="idCertificateIdNumber">統一編號:</label> 
-									<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" name="certificateIdNumber" autofocus autocompelete="off">
-									<span id="idspCertificateIdNumber" style='color:red'></span>
-									<div class="remark">(1.不可空白，2.必須符合規則)</div>
-								</div>
-								<div class="block">
-									<label for="idDate">創立日期:</label> 
-									<input type="text" value="${param.date}" id="idDate" name="birthDate" autofocus autocomplete="off">
-<!-- 									name需與entity相同 -->
-									<span id="idspDate" style='color:red'></span>
-									<div class="remark">(1.不可空白，2.格式為yyyy/MM/dd)</div>
-								</div>
-							</c:when>
-						</c:choose>
-						<div class="block">
-							<label for="idEmail">email:</label> 
-							<input type="text" value="${param.email}" id="idEmail" name="email" autofocus autocompelete="off">
-							<span id="idspEmail" style='color:red'></span>
-							<div class="remark">(1.不可空白，2.必須填入確切用戶信箱，以供驗證)</div>
+							</div>
+							<c:choose>
+								<c:when test="${memberType eq 'P'}">
+									<div class="col-md-4">
+                      					<div class="form-group">
+											<label for="idCertificateIdNumber">身分證字號:</label>
+											<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" name="certificateIdNumber" autofocus autocompelete="off" class="form-control">
+											<div><label>(1.不可空白，2.必須符合規則)</label></div>
+											<span id="idspCertificateIdNumber" style='color:red'></span>
+										</div>
+									</div>
+									<div class="col-md-4">
+                      					<div class="form-group">
+											<label for="idDate">出生日期:</label>
+											<input type="text" value="${param.birthDate}" id="idDate" name="birthDate" placeholder="請輸入日期" autofocus autocomplete="off" class="form-control">
+											<div><label>(1.不可空白，2.格式為yyyy/MM/dd)</label></div>
+											<span id="idspDate" style='color:red'></span>
+										</div>
+									</div>
+								</c:when>
+								<c:when test="${memberType eq 'O'}">
+									<div class="col-md-4">
+                      					<div class="form-group">
+											<label for="idCertificateIdNumber">統一編號:</label> 
+											<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" name="certificateIdNumber" autofocus autocompelete="off" class="form-control">
+											<div><label>(1.不可空白，2.必須符合規則)</label></div>
+											<span id="idspCertificateIdNumber" style='color:red'></span>
+										</div>
+									</div>
+									<div class="col-md-4">
+                      					<div class="form-group">
+											<label for="idDate">創立日期:</label> 
+											<input type="text" value="${param.date}" id="idDate" name="birthDate" autofocus autocomplete="off" class="form-control">
+		<!-- 									name需與entity相同 -->
+											<div><label>(1.不可空白，2.格式為yyyy/MM/dd)</label></div>
+											<span id="idspDate" style='color:red'></span>
+										</div>
+									</div>
+								</c:when>
+							</c:choose>
 						</div>
-						<div class="block">
-							<label for="idTelephone">電話:</label> 
-							<input type="text" value="${param.telephone}" id="idTelephone" name="telephone" autofocus autocompelete="off">
-							<span id="idspTelephone" style='color:red'></span>
-							<div class="remark">(格式需為0X-XXXXXXXX)</div>
+						<div class="row">
+							<div class="col-md-4">
+                      			<div class="form-group">
+									<label for="idEmail">email:</label> 
+									<input type="text" value="${param.email}" id="idEmail" name="email" autofocus autocompelete="off" class="form-control">
+									<div><label>(1.不可空白，2.必須填入確切用戶信箱，以供驗證)</label></div>
+									<span id="idspEmail" style='color:red'></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+                      			<div class="form-group">
+									<label for="idTelephone">電話:</label> 
+									<input type="text" value="${param.telephone}" id="idTelephone" name="telephone" autofocus autocompelete="off" class="form-control">
+									<div><label>(格式需為0X-XXXXXXXX)</label></div>
+									<span id="idspTelephone" style='color:red'></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+                      			<div class="form-group">
+									<label for="idMobile">手機:</label> 
+									<input type="text" value="${param.mobile}" id="idMobile" name="mobile" autofocus autocompelete="off" class="form-control">
+									<div><label>(格式需為09XX-XXX-XXX)</label></div>
+									<span id="idspMobile" style='color:red'></span>
+								</div>
+							</div>
 						</div>
-						<div class="block">
-							<label for="idMobile">手機:</label> 
-							<input type="text" value="${param.mobile}" id="idMobile" name="mobile" autofocus autocompelete="off">
-							<span id="idspMobile" style='color:red'></span>
-							<div class="remark">(格式需為09XX-XXX-XXX)</div>
-						</div>
-						<div class="block">			
-							<label>住址:</label>
-							<span role="tw-city-selector"></span>
-							<input type="text" value="${param.address}" id="address" name="address">
+						<div class="row">
+							<div class="col-md-4">
+                      			<div class="form-group">		
+									<div><label>縣市區域:</label></div>
+										<span role="tw-city-selector"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+                      			<div class="form-group">
+                      				<label>住址:</label>
+									<input type="text" value="${param.address}" id="address" name="address" class="form-control">
+								</div>
+							</div>
 						</div>
 <!-- 						<div class="block">			 -->
 <!-- 							<label>圖片:</label> -->
@@ -188,55 +192,81 @@
 					</fieldset>
 					<c:if test="${memberType eq 'O' }">
 						<fieldset>
-							<legend>公司資料</legend>
-							<div class="block">
-								<label for="idOrgFounder">創辦人:</label> 
-								<input type="text" value="${param.orgFounder}" id="idOrgFounder" name="orgFounder" autofocus autocompelete="off">
-								<span id="idspOrgFounder" style='color:red'></span>
-								<div class="remark">(1.不可空白，2.至少2個字以上，3.必須全部為中文)</div>
+							<div class="heading">
+								<h3>公司資料</h3>
 							</div>
-							<div class="block">
-								<label for="idOrgCeo">執行長:</label>
-								<input type="text" value="${param.orgCeo}" id="idOrgCeo" name="orgCeo" autofocus autocompelete="off">
-								<span id="idspOrgCeo" style='color:red'></span>
-								<div class="remark">(1.不可空白，2.至少2個字以上，3.必須全部為中文)</div>
+							<div class="row">
+								<div class="col-md-4">
+                      				<div class="form-group">
+										<label for="idOrgFounder">創辦人:</label> 
+										<input type="text" value="${param.orgFounder}" id="idOrgFounder" name="orgFounder" autofocus autocompelete="off" class="form-control">
+										<div><label>(1.不可空白，2.至少2個字以上，3.必須全部為中文)</label></div>
+										<span id="idspOrgFounder" style='color:red'></span>
+									</div>
+								</div>
+								<div class="col-md-4">
+                      				<div class="form-group">
+										<label for="idOrgCeo">執行長:</label>
+										<input type="text" value="${param.orgCeo}" id="idOrgCeo" name="orgCeo" autofocus autocompelete="off" class="form-control">
+										<div><label>(1.不可空白，2.至少2個字以上，3.必須全部為中文)</label></div>
+										<span id="idspOrgCeo" style='color:red'></span>
+									</div>
+								</div>
+								<div class="col-md-4">
+                      				<div class="form-group">
+										<label for="idOrgContactPerson">聯絡人:</label>
+										<input type="text" value="${param.orgContactPerson}" id="idOrgContactPerson" name="orgContactPerson" autofocus autocompelete="off" class="form-control">
+										<div><label>(1.不可空白，2.至少2個字以上，3.必須全部為中文)</label></div>
+										<span id="idspOrgContactPerson" style='color:red'></span>
+									</div>
+								</div>
 							</div>
-							<div class="block">
-								<label for="idOrgContactPerson">聯絡人:</label>
-								<input type="text" value="${param.orgContactPerson}" id="idOrgContactPerson" name="orgContactPerson" autofocus autocompelete="off">
-								<span id="idspOrgContactPerson" style='color:red'></span>
-								<div class="remark">(1.不可空白，2.至少2個字以上，3.必須全部為中文)</div>
+							<div class="row">
+								<div class="col-md-4">
+                      				<div class="form-group">
+										<label for="idOrgContactPersonTel">聯絡人電話:</label> 
+										<input type="text" value="${param.orgContactPersonTel}" id="idOrgContactPersonTel" name="orgContactPersonTel" autofocus autocompelete="off" class="form-control">
+										<div><label>(格式需為0X-XXXXXXXX)</label></div>
+										<span id="idspOrgContactPersonTel" style='color:red'></span>
+									</div>
+								</div>
+								<div class="col-md-4">
+                      				<div class="form-group">
+										<label for="idOrgContactPersonMobile">聯絡人手機:</label> 
+										<input type="text" value="${param.orgContactPersonMobile}" id="idOrgContactPersonMobile" name="orgContactPersonMobile" autofocus autocompelete="off" class="form-control">
+										<div><label>(格式需為09XX-XXX-XXX)</label></div>
+										<span id="idspOrgContactPersonMobile" style='color:red'></span>
+									</div>
+								</div>
+								<div class="col-md-4">
+                      				<div class="form-group">
+										<label for="idOrgWebsiteLink">網址:</label>
+										<input type="url" size="50px" value="${param.orgWebsiteLink}" id="idOrgWebsiteLink" name="orgWebsiteLink" autofocus autocompelete="off" class="form-control">
+										<div><label>(必須符合規則)</label></div>
+										<span id="idspOrgWebsiteLink" style='color:red'></span>
+									</div>
+								</div>
 							</div>
-							<div class="block">
-								<label for="idOrgContactPersonTel">聯絡人電話:</label> 
-								<input type="text" value="${param.orgContactPersonTel}" id="idOrgContactPersonTel" name="orgContactPersonTel" autofocus autocompelete="off">
-								<span id="idspOrgContactPersonTel" style='color:red'></span>
-								<div class="remark">(格式需為0X-XXXXXXXX)</div>
-							</div>
-							<div class="block">
-								<label for="idOrgContactPersonMobile">聯絡人手機:</label> 
-								<input type="text" value="${param.orgContactPersonMobile}" id="idOrgContactPersonMobile" name="orgContactPersonMobile" autofocus autocompelete="off">
-								<span id="idspOrgContactPersonMobile" style='color:red'></span>
-								<div class="remark">(格式需為09XX-XXX-XXX)</div>
-							</div>
-							<div class="block">
-								<label for="idOrgWebsiteLink">網址:</label>
-								<input type="url" size="50px" value="${param.orgWebsiteLink}" id="idOrgWebsiteLink" name="orgWebsiteLink" autofocus autocompelete="off">
-								<span id="idspOrgWebsiteLink" style='color:red'></span>
-								<div class="remark">(必須符合規則)</div>
-							</div>
-							<div class="block">
-								<label>創立宗旨:</label>
-								<textarea rows="5" cols="50" id="orgFoundPurpose" name="orgFoundPurpose">
-									${member.orgFoundPurpose}
-								</textarea>
+							<div class="row">
+<!-- 								<div class="col-md-3"> -->
+<!-- 	                      			<div class="form-group"> -->
+<!-- 	                      			</div> -->
+<!-- 	                      		</div> -->
+								<div class="col-md-6">
+	                      			<div class="form-group">
+										<label>創立宗旨:</label>
+										<textarea rows="5" id="orgFoundPurpose" name="orgFoundPurpose" class="form-control">
+											${member.orgFoundPurpose}
+										</textarea>
+									</div>
+								</div>
 							</div>
 						</fieldset>
 					</c:if>
 					<fieldset style="border:none">
-						<div>
-							<input type="button" class="btn btn-primary btn-sm" id="submit" value="確定送出" />
-					        <input type="reset" class="btn btn-primary btn-sm" value="清除重填" />
+						<div class="col-md-12 text-center">
+							<input type="button" class="btn btn-template-outlined" id="submit" value="確定送出" />
+					        <input type="reset" class="btn btn-template-outlined" value="清除重填" />
 					        <span id="error" style='color:red'></span>
 						</div>
 					</fieldset>

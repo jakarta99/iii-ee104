@@ -64,11 +64,14 @@ public class VolunteerVerifyController {
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		try {
 			response.setObj(orderService.getById(orderId));
-			orderService.accept(orderId);
+			Order order = orderService.accept(orderId);
+			if(order == null) {
+				response.addMessage("需求人數已滿");
+			}
 			SystemMessage systemMessage = new SystemMessage();
 			systemMessage.setMessageType(SystemMessageType.MissionAccecpt);
 			systemMessageService.volunteerVerify(systemMessage, orderService.getById(orderId));
-
+			missionService.checkMissionStatus(orderId);
 		} catch (Exception e) {
 			response.addMessage("接受失敗，" + e.getMessage());
 

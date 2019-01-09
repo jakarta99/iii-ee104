@@ -89,7 +89,6 @@
       </div>
       <div id="content">
         <div class="container">
-          <div class="row bar">
        
 		<!--查詢 -->
           <div class="panel panel-default sidebar-menu">
@@ -197,6 +196,7 @@
 	$(document).ready( function () {		
 		new TwCitySelector();	
 		list();
+		
 		$("#pagebox").on("click","li>a[name='backa']", function(){
 			if(first == false){
 				page = page - 1;

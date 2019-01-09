@@ -121,17 +121,6 @@ public class RecruitController {
 		return response;
 	}
 
-	@RequestMapping("/recruiting")
-	@ResponseBody
-	public Page<Mission> recruiting(Mission inputMission, Principal principal,
-			@RequestParam(value = "start", required = false) Optional<Integer> start,
-			@RequestParam(value = "length", required = false) Optional<Integer> length) {
-		int page = start.orElse(0) / length.orElse(10);
-
-		Page<Mission> missions = missionService.findByMember(principal, inputMission,
-				PageRequest.of(page, length.orElse(10)));
-		return missions;
-	}
 
 	// 編輯mission並發送系統訊息
 	@RequestMapping("/update")
@@ -141,7 +130,7 @@ public class RecruitController {
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
 
 		try {
-			missionService.update(mission, missionPicture, request);
+			missionService.update(mission);
 			List<Order> orders = orderService.findByMission(mission);
 			systemMessageService.missionEdit(orders);
 			if (missionPicture.getOriginalFilename().length() > 0) {

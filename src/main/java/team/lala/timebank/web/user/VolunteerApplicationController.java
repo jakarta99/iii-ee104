@@ -57,10 +57,11 @@ public class VolunteerApplicationController {
 	
 	@ResponseBody
 	@RequestMapping("/volunteerRecord/queryRecord")		//查詢媒合紀錄資料
-	public Page<Order> queryRecord(Principal principal, Order order, 
+	public Page<Order> queryRecord(Principal principal, Order order,
 			@RequestParam(value="orderStatusDetail") String orderStatusDetail,
 			@RequestParam(value="page",required=false) Integer page,
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
+		log.debug("order={}", order);
 		order.setVolunteerAccount(principal.getName());
 		OrderSpecification orderSpecification = new OrderSpecification(order);
 		return orderService.findBySpecification(orderSpecification, PageRequest.of(page, length.orElse(10)));
@@ -95,9 +96,9 @@ public class VolunteerApplicationController {
 				if (!dir.exists()) {
 					dir.mkdirs();
 				}
-				// 檔名
-				String location = realPath + "missionPicture_" + penalty.getId() + ".jpg";
-				// 寫出檔案到Server
+				//路徑
+				String location = realPath + "penaltyPicture_" + penalty.getId() + ".jpg";
+				//寫出檔案到Server
 				FileOutputStream fos = new FileOutputStream(location);
 				fos.write(proofPic.getBytes());
 				fos.close();

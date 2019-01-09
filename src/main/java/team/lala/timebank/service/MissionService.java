@@ -1,12 +1,8 @@
 package team.lala.timebank.service;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,15 +11,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.MissionDao;
+import team.lala.timebank.dao.OrderDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.enums.MissionStatus;
+import team.lala.timebank.enums.OrderStatus;
 import team.lala.timebank.spec.MissionSpecification;
 
 @Slf4j
@@ -32,6 +29,8 @@ import team.lala.timebank.spec.MissionSpecification;
 public class MissionService {
 
 	@Autowired
+	private OrderDao orderDao;
+	@Autowired
 	private MissionDao missionDao;
 	@Autowired
 	private MemberDao memberDao;
@@ -39,6 +38,7 @@ public class MissionService {
 	private OrderService orderService;
 	@Autowired
 	private SystemMessageService systemMessageService;
+
 	// list for everyone
 	public Page<Mission> findByStatusAndSpecification(Mission inputMission, PageRequest pageRequest) {
 		inputMission.setMissionStatusTransient("New");
@@ -52,16 +52,16 @@ public class MissionService {
 	public Page<Mission> findBySpecification(Specification<Mission> specification, PageRequest pageRequest) {
 		return missionDao.findAll(specification, pageRequest);
 	}
+
 	public List<Mission> findBySpecification(Specification<Mission> specification) {
 		return missionDao.findAll(specification);
 	}
 
-//	
+	//
 
 	// insert for user
 	public Mission insert(Mission mission, Principal principal) {
 		mission.setMember(memberDao.findByAccount(principal.getName()));
-		mission.setUpdateDate(new java.util.Date());
 		mission.setMissionstatus(MissionStatus.A_New);
 		mission.setStartDate(mission.getStartDate());
 		mission.setEndDate(mission.getEndDate());
@@ -71,86 +71,28 @@ public class MissionService {
 		return missionDao.save(mission);
 	}
 
-	// insert for user
-//	public Mission insert(Mission mission, Principal principal, MultipartFile missionPicture,
-//			HttpServletRequest request) {
-//		mission.setMember(memberDao.findByAccount(principal.getName()));
-//		mission.setMissionstatus(MissionStatus.A_New);
-//		mission.setStartDate(mission.getStartDate());
-//		mission.setEndDate(mission.getEndDate());
-//		mission.setPublishDate(new Date());
-//		mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
-//		mission.setApprovedQuantity(0);
-//		try {
-//			// 如果有上傳圖片，才存檔案到Server，及存路徑到DB
-//			if (missionPicture.getOriginalFilename().length() > 0) {
-//				// 取得應用程式根目錄中圖片之路徑
-//				String realPath = request.getServletContext().getRealPath("/") + "..\\resources\\static\\img\\";
-//				// 確認是否有此資料夾，如無則建資料夾
-//				File dir = new File(realPath);
-//				if (!dir.exists()) {
-//					dir.mkdirs();
-//				}
-//				// 檔名
-//				String location = realPath + "missionPicture_" + mission.getId() + ".jpg";
-//
-//				// 寫出檔案到Server
-//				FileOutputStream fos = new FileOutputStream(location);
-//				fos.write(missionPicture.getBytes());
-//				fos.close();
-//
-//				// 將檔名存入DB
-//				mission.setMissionPicName("missionPicture_" + mission.getId() + ".jpg");
-//				mission = missionDao.save(mission);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return mission;
-//		}
-//		return missionDao.save(mission);
-//	}
-
 	// update for user & Admin
 	public Mission update(Mission mission) {
+		mission.setUpdateDate(new java.util.Date());
 		mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
 		return missionDao.save(mission);
 	}
 
-	public Mission update(Mission mission, MultipartFile missionPicture, HttpServletRequest request) {
-		mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
-		try {
-			// 如果有上傳圖片，才存檔案到Server，及存路徑到DB
-			if (missionPicture.getOriginalFilename().length() > 0) {
-				// 取得應用程式根目錄中圖片之路徑
-				String realPath = request.getServletContext().getRealPath("/") + "..\\resources\\static\\img\\";
-				// 確認是否有此資料夾，如無則建資料夾
-				File dir = new File(realPath);
-				if (!dir.exists()) {
-					dir.mkdirs();
-				}
-				// 檔名
-				String location = realPath + "missionPicture_" + mission.getId() + ".jpg";
-
-				// 寫出檔案到Server
-				FileOutputStream fos = new FileOutputStream(location);
-				fos.write(missionPicture.getBytes());
-				fos.close();
-
-				// 將檔名存入DB
-				mission.setMissionPicName("missionPicture_" + mission.getId() + ".jpg");
-				mission = missionDao.save(mission);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return mission;
+	// 檢查mission的orders 全數審核完改變其狀態
+	public void checkMissionStatus(Long orderId) {
+		Mission mission = orderDao.getOne(orderId).getMission();
+		List<Order> orders = orderDao.findByMissionAndOrderStatus(mission, OrderStatus.RequesterAcceptService);
+		mission.setApprovedQuantity(orders.size() + 1);
+		if (mission.getApprovedQuantity() == mission.getPeopleNeeded()) {
+			mission.setMissionstatus(MissionStatus.A_VolunteerApproved);
 		}
-		return missionDao.save(mission);
+		missionDao.save(mission);
 	}
 
 	// cancel for user
 	public Mission cancelMission(Long missionid) {
 		Mission mission = missionDao.getOne(missionid);
-		
+
 		if (mission.getMissionstatus() == MissionStatus.A_New
 				|| mission.getMissionstatus() == MissionStatus.A_VolunteerApproved) {
 			mission.setMissionstatus(MissionStatus.C_Cancel);
