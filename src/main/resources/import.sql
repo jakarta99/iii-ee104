@@ -115,6 +115,24 @@ INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publ
 VALUES (7,'[機構7]臺灣國際淨灘行動',3,'S',7,'2019/1/2','2019/4/27 14:00','2019/4/27 17:00',10,'劉先生','0912456789','brian@gmail.com','全球海灘上塑膠垃圾的密度是海底的29倍，更是大海表面的兩千倍。海岸線像一台不用插電的吸塵器，透過潮汐與波浪的日夜推移，讓漂浮的垃圾不斷堆積在沙灘上。<br>原來我們不一定要辛苦航行到太平洋中心打撈稀薄的塑膠碎片，與海底與海面相比，海岸是人類最容易到達的海洋環境，讓「淨灘」成為每個地球人守護海洋最直接的行動。<br>誠摯地邀請您與我們及全世界愛海的朋友一齊來加入淨灘的行列。','新北市','八里區','挖仔尾海灘','A_New','2019/4/10',0,'beach.jpg');
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME) 
+VALUES (12,'[機構12]愛愛院-社區照顧關懷據點志工 ',3,'L',3,'2019/1/2','2019/3/1 14:00','2019/7/31 17:00',8,'陳小姐','02-28828899','aiaiai@gmail.com','如果您想要豐富退休的生活，如果您想要好好充實自己的生活；<br>如果您對於老人服務充滿熱忱，如果您想要投入公益服務；<br>那麼愛愛院期待您的加入。<br>愛愛院急徵有志一同的志工夥伴們一起加入『愛』的行列。<br>愛愛院的志工項目：<br>☆ 關懷陪談<br>☆ 電話問安<br>☆ 活動支援<br>☆ 庶務機動<br>☆ 居家訪視<br>','台北市','萬華區','大理街175巷27號','A_New','2019/6/30',0,'aiai.jpg');
+
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME) 
+VALUES (13,'[機構13]伊甸基金會-偏鄉暑期陪讀志工 ',8,'S',1,'2019/7/7','2019/8/24 09:00','2019/7/31 17:00',3,'廖先生','03-28828899','eedian@gmail.com','在偏鄉社區中，許多孩子有著不同的天賦，如音樂、舞蹈等，卻因為城鄉差距、貧富落差的關係，失去了發展的機會；或是沒有經費可以栽培孩子、或是地處偏僻比較缺乏老師願意來教，對許多偏鄉弱勢的孩子來說，才藝學習是遥不可及的夢想，冀望能夠透過音樂教學相關才藝課程，給予多元刺激適性發展，偏鄉孩子一樣能，同時我們深信「教育」是提高人口素質的根本方法：唯有「教育」能幫助人脫離貧困和愚昧。所以我們很願意協助更多的偏鄉兒童、原住民學子，努力求學、奮發向上、發揮偏鄉兒童、原住民的才華，找到每個人的一片天空。<br>希望徵求兩名志工，陪伴孩子、豐富孩子的暑假。','台東縣','東河鄉','泰源村泰源書屋','A_New','2019/6/10',0,'readwithchild.jpg');
+
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME) 
+VALUES (13,'[機構13]伊甸基金會-為家漆上愛志工 ',8,'S',4,'2019/1/15','2019/3/30 09:00','2019/3/30 17:00',15,'曹小姐','03-28828899','eedian@gmail.com','伊甸基金會與特力屋士林店招募羅賴把志工，一起聯手打造友善安居家庭日，訂於108年3月9日(六)至特力屋士林店受訓後，於108年3月30日(六)至弱勢家庭家中刷油漆，一起為家漆上愛。','台北市','文山區','萬和街6號4樓之2','A_New','2019/2/18',0,'paint.jpg');
+
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME) 
+VALUES (13,'[機構13]伊甸基金會-視障重建中心導盲志工 ',3,'L',2,'2019/1/8','2019/3/1 09:00','2019/12/31 17:00',5,'董小姐','08-28828899','eedian@gmail.com','你是充滿熱忱、有滿腔愛心的人嗎？是否遇過視障者需要協助時，卻不知該怎麼幫忙呢？竭誠邀請您一同參與導盲志工培訓招募，完成培訓後可排班協助視障者外出購物、休閒活動及陪同參與社區化活動。歡迎您一同加入我們的行列，協助視障者參與社會。','台北市','松山區','光復北路60巷19-6號B1樓','A_New','2019/12/31',0,'blindvol.jpg');
+
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME) 
+VALUES (11,'[機構11]失智者照顧協會-失智關懷志工 ',4,'L',2,'2019/1/8','2019/3/1 09:00','2019/12/31 17:00',20,'魏先生','08-28828899','shichih@gmail.com','有鑑於失智症罹患率逐年增加，及其為家庭、社會帶來的衝擊與壓力，本會與臺北市立聯合醫院團隊一直致力於失智整合照護服務的建構與發展，成立失智症醫療照護聯盟，凝聚社區力量、提升社區對失智者的認同與支持，達到失智友善社區的願景。<br>而這願景的實現需要團隊的共識，更需志工的投入和參與。 因此我們預計在108年度辦理失智關懷志工招募，並予以一連串的專業訓練培養所需識能，協助臺北市立聯合醫院各院區日照、據點、篩檢、記憶門診…等，予以失智症患者與家屬更專業用心的陪伴，共同走過漫長醫療與照護的無助歷程。竭誠邀請您一同加入!','台北市','松山區','光復北路60巷19-6號B1樓','A_New','2019/12/31',0,'dementia.jpg');
+
+
+
+
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME) 
 VALUES (2,'一起照顧老人',2,'L',3,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','大安區','復興南路一段390號15樓','A_New','2018/12/31',0,'detailsquare.jpg');
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME) 
