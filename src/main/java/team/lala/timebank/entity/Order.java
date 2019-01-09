@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import team.lala.timebank.enums.OrderStatus;
+import team.lala.timebank.enums.ReportStatus;
 
 @Getter
 @Setter
@@ -37,11 +38,18 @@ public class Order{
 	private Member volunteer;
 	
 	@Transient
-	private String volunteerAccount; 
+	private String volunteerAccount;
+	
+	@Transient
+	private String missionTitle;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "ORDER_STATUS")
 	private OrderStatus orderStatus;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "REPORT_STATUS")
+	private ReportStatus reportStatus;
 	
 	@Transient
 	private String orderStatusDetail;

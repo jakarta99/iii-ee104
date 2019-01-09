@@ -49,7 +49,7 @@
 			</div>
             </section>
            	<div>
-            <nav aria-label="Page navigation example">
+            <nav aria-label="Page navigation example" class="d-flex justify-content-center">
 	            <ul id ="pagebox" class="pagination pagination-lg">
 					<!--換頁控制開始 -->
 	            </ul>
@@ -108,10 +108,10 @@
 		        	   var box="<div class='col-md-4'>"
 	        		   box+="<div class='video'>"
 	        		   box+="<div class='embed-responsive embed-responsive-4by3'>"	        	
-	        		   box+=" <a href='#'><img src=../../img/"+order.mission.missionPicName+" class='embed-responsive-item'></img></a>"     
+	        		   box+=" <a href='/commons/domesticVolunteer/apply?missionId="+ order.mission.id +"'><img src=/image/user/mission/"+order.mission.missionPicName+" class='embed-responsive-item'></img></a>"     
 	        		   box+="</div></div></div>"
 	                   box+="<div class='col-md-8'>"
-	                   box+="<h1 class='h1 mt-0'><a href='post.htmls'>"+ order.mission.title + "</a></h1>"
+	                   box+="<h1 class='h1 mt-0'><a href='/commons/domesticVolunteer/apply?missionId="+ order.mission.id +"'>"+ order.mission.title + "</a></h1>"
 	                   box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
 	                   box+="<p class='author-category_1'><a href='#'>"+ order.mission.member.name + "</a></p>"
 	                   if(order.orderStatus == "VolunteerApply"){
