@@ -47,7 +47,6 @@ public class MissionPublishController {
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
 		try {
 			missionService.insert(mission, principal);
-			response.addMessage("新增成功");
 			model.addAttribute(response);
 			if (missionPicture.getOriginalFilename().length() > 0) {
 				// 取得應用程式根目錄中圖片之路徑

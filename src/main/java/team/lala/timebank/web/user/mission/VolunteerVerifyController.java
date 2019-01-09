@@ -64,7 +64,7 @@ public class VolunteerVerifyController {
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		try {
 			response.setObj(orderService.getById(orderId));
-			Order order = orderService.accept(orderId);
+			Order order = orderService.acceptVolunteer(orderId);
 			if(order == null) {
 				response.addMessage("需求人數已滿");
 			}

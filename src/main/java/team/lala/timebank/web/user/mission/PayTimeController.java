@@ -38,11 +38,11 @@ public class PayTimeController {
 	private PenaltyService penaltyService;
 
 	@RequestMapping("/list")
-	public String listPage(@RequestParam(value = "id") Long id, Model model) {
+	public String listPage(@RequestParam(value = "id") Long missionId, Model model) {
 
 		// Mission mission = missionService.getOne(id);
 		// model.addAttribute("mission", mission);
-		model.addAttribute("missionId", id);
+		model.addAttribute("missionId", missionId);
 		return "/basic/user/volunteerRecruitment/payTime";
 	}
 
@@ -104,7 +104,6 @@ public class PayTimeController {
 				penalty.setProofPicName("penaltyPicture_" + penalty.getId() + ".jpg");
 				penaltyService.save(penalty);
 			}
-			response.addMessage("修改成功");
 		} catch (Exception e) {
 			response.addMessage("修改失敗，" + e.getMessage());
 			e.printStackTrace();

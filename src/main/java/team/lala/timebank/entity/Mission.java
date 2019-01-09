@@ -123,6 +123,9 @@ public class Mission {
 	@Column(name = "MISSION_PIC_NAME")
 	private String missionPicName;// 工作宣傳圖片名字
 	
+	@Column(name = "PAY_DATE")
+	private Date payDate;// 活動完結後 自動付錢評分的時間
+	
 	@Transient
 	private String missionStatusTransient;
 	

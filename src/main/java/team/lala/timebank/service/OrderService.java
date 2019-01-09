@@ -129,8 +129,7 @@ public class OrderService {
 	}
 
 	// accept 志工 改狀態為2接受
-	public Order accept(Long orderId) {
-		
+	public Order acceptVolunteer(Long orderId) {
 		Order order = orderDao.getOne(orderId);
 		Mission mission = order.getMission();
 		if(mission.getMissionstatus() == MissionStatus.A_New) {

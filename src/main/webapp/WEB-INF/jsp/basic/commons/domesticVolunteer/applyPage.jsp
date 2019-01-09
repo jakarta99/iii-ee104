@@ -194,7 +194,8 @@
 				if(willreject){
 					$.get("/user/volunteerRecruitment/insert",{"missionId":missionId},
 						function(data){
-							if(data.messages == '申請成功'){
+						
+							if(data.status == 'SUCCESS'){
 								swal({
 								  title: "申請結果",
 								  text: "申請成功",
@@ -205,7 +206,7 @@
 							}else{
 								swal({
 									  title: "申請失敗",
-									  text: " " + data.messages,
+									  text: " " + data.status,
 									  icon: "error",
 									  buttons: false,
 									  dangerMode: false,

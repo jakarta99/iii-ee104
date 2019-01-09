@@ -171,12 +171,13 @@
             <div class="row">
               <div class="col-md-6">
               	<ul class="ul-icons list-unstyled">
+              	
               	<c:forEach var="order" items="${orders}">
               		<li>
-              			<div class="icon-filled"></div>${order.volunteer.name}
-              			<div class="icon-filled"></div>${order.volunteer.email}
-              			<div class="icon-filled"></div>${order.volunteer.email}
-              		
+              			<img style="width:60px;height:54px" class="img-fluid rounded-circle" src='/image/user/member/${order.volunteer.picture}'>
+              			名字:${order.volunteer.name}
+              			Email:${order.volunteer.email}
+              			
               		</li>
               	</c:forEach>
               	</ul>
@@ -199,7 +200,7 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		
-	
+	 
 	})
 	
 	

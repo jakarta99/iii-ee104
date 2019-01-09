@@ -61,10 +61,10 @@ public class MissionService {
 
 	// insert for user
 	public Mission insert(Mission mission, Principal principal) {
+		
 		mission.setMember(memberDao.findByAccount(principal.getName()));
 		mission.setMissionstatus(MissionStatus.A_New);
-		mission.setStartDate(mission.getStartDate());
-		mission.setEndDate(mission.getEndDate());
+		mission.setPayDate(new Date(mission.getEndDate().getTime() + 3 * 24 * 60 * 60 * 1000));
 		mission.setPublishDate(new Date());
 		mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
 		mission.setApprovedQuantity(0);
@@ -75,6 +75,7 @@ public class MissionService {
 	public Mission update(Mission mission) {
 		mission.setUpdateDate(new java.util.Date());
 		mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
+		mission.setPayDate(new Date(mission.getEndDate().getTime() + 3 * 24 * 60 * 60 * 1000));
 		return missionDao.save(mission);
 	}
 
@@ -132,7 +133,7 @@ public class MissionService {
 		Mission mission = missionDao.getOne(id);
 
 		if (mission == null) {
-			System.out.println("id" + id + " does not exist");
+			return null;
 		}
 		return mission;
 	}
