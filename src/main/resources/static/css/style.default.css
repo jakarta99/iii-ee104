@@ -570,7 +570,8 @@ table input[type="number"] {
 }
 
 .top-bar {
-  background: #555;
+/*   background: #555; */
+  background:rgba(0, 0, 0, 0.6);
   color: #fff;
   font-size: 0.9rem;
   padding: 10px 0;
@@ -772,7 +773,7 @@ color: rgba(140, 140, 140);
 }
 
 #navbar .navbar-nav > li > a:hover {
-  	background:  rgba(19, 181, 177, 0.9) ;
+  	background:  rgba(19, 181, 177, 0.8) ;
   	border-color: rgba(19, 181, 177, 0.9);
 /*   	border-top-left-radius:2px; */
 /* 	border-top-right-radius:2px; */

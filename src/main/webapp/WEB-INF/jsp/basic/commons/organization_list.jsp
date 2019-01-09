@@ -11,6 +11,24 @@
 <jsp:include page="commons_layout/commons_css_links.jsp" />
 <!-- Javascript files-->
 <jsp:include page="commons_layout/commons_js_links.jsp" />
+<style>
+	.container-1{
+		background-color: rgba(234, 234, 234);
+		margin-top:30px;max-width: 1500px;
+		border-top-left-radius:3px;
+		border-top-right-radius:3px;
+		border-bottom-left-radius:3px;
+		border-bottom-right-radius:3px;
+		
+	}
+
+.form-group{
+	padding-left:20px;
+}
+.form-control{
+border-radius: 3px;
+}
+</style>
 
 </head>
 <body>
@@ -23,36 +41,50 @@
 		<jsp:include page="commons_layout/commons_heading_breadcrumbs.jsp" />
 		
 
-		<div id="content">
-			<div class="container">
+		<div id="content" style='margin-top:50px'>
+			<div class="container" id='searchbox'>
+				<!--查詢 -->
+	          <div class="panel panel-default sidebar-menu">
+	            <div class="panel-body">
+	            	<form role="search">
+	                	<div class="input-group">                                        
+	                    	<div  role="tw-city-selector"></div>                                       
+		                    <div class="form-group">
+			                    <select  id="serviceTypeDetail" name="serviceTypeDetail" class="form-control">
+									<option value="">服務類型</option>
+									<option value="婦幼關懷">婦幼關懷</option>
+							        <option value="身心障礙">身心障礙</option>
+							        <option value="老人服務">老人服務</option>
+							        <option value="社會服務">社會服務</option>
+							        <option value="動物保護">動物保護</option>
+							        <option value="國際救援">國際救援</option>
+							        <option value="環境保護">環境保護</option>
+							        <option value="文教藝術">文教藝術</option>
+							        <option value="醫療服務">醫療服務</option>
+							        <option value="宗教信仰">宗教信仰</option>
+								</select>
+							</div>					
+		                    <div class="form-group">
+		                    	<input type="text" value="" placeholder="請輸入關鍵字" id="title" name="title" class="form-control">
+		                    </div>
+	                    
+		                    <span class="input-group-btn form-group">
+		                    
+		                    	<input  type="button" value="搜尋" id="searchButt" class="btn btn-outline-primary" >               
+		                    </span>
+	                    </div>
+	                  </form>
+	                </div>
+	              </div>
+				
+			</div>
+			<div class="container container-1">
 				<section class="bar">
 					
 					<div  id="boxbox" class="row portfolio text-center" >
-<%-- 						<c:forEach items="${orgMembers}" var="org"> --%>
-<!-- 							<div class="col-lg-4"> -->
-<!-- 								<div class="home-blog-post"> -->
-<!-- 								<div class="product"> -->
-<!-- 									<div class="image"> -->
-<%-- 										<a href="${org.orgWebsiteLink}" class="btn btn-template-outlined-white">			 --%>
-<%-- 											<img src="${org.picture}"  class="image1" width="300px"  height="230px" > --%>
-<!-- 										</a> -->
-										
-<!-- 									</div> -->
-<!-- 									</div> -->
-<!-- 									<div class="text"> -->
-<!-- 										<h4 style="width:270px; margin:auto; margin-bottom:10px" > -->
-<%-- 											<a href="${org.orgWebsiteLink}">${org.account} </a> --%>
-<!-- 										</h4> -->
-<!-- 										<p class="author-category" > -->
-<%-- 											<span  style="color:#999">${org.account}</span> --%>
-<!-- 										</p> -->
-<%-- 										<a href="${org.orgWebsiteLink}" class="btn btn-template-outlined">更多資訊</a> --%>
-<!-- 									</div>							 -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<%-- 						</c:forEach>						 --%>
+
 					</div>
-					<nav aria-label="Page navigation example">
+					<nav aria-label="Page navigation example" class="d-flex justify-content-center">
 	                    <ul id ="pagebox" class="pagination pagination-lg">
 	              		</ul>
                   </nav>
@@ -110,50 +142,37 @@
 		        	
 		        	
 		        	$.each(data.content,function(index, org){
-		        		var box="<div class='col-lg-4'>";
+	        			var box="<div class='col-lg-4'>";
 		        		 box+="<div class='home-blog-post'><div class=\"product\">";
-		        		 box+="<div class='image'><a href='"+org.orgWebsiteLink +"' class=\"btn btn-template-outlined-white\">";
-		        		 box+= "<img width='250px' height='200px' src='/image/user/member/"+org.picture+"' class=\"image1\"></a></div></div>";
+		        		 box+="<a href='"+org.orgWebsiteLink +"' class=\"btn \" >";
+		        		 box+= "<img width='300px'  height='200px' src='/image/user/member/"+org.picture+"' style='border:2px solid rgb(19, 181, 177, 0.5)' class=\"image1\"></a></div>";
 		        		 box+= "<div class=\"text\">";
 		        		 box+= "<h4 style=\"width:270px; margin:auto; margin-bottom:10px\" >";
-		        		 box+= "<a href='"+ org.orgWebsiteLink +"'>"+org.name+ "</a></h4>";
-		        		 
+		        		 box+= "<a href='"+ org.orgWebsiteLink +"'>"+org.name+ "</a></h4>";	        		 
 		        		 box+="<p><table style=\"margin:auto; \">";
 		        		 box+= "<tr><td width=\"70px\">地區:</td><td width=\"100px\"> "+org.county + org.district +"</td></tr>";
 		        		 box+= "<tr><td width=\"70px\">電話:</td><td width=\"100px\"> "+org.telephone +"</td></tr>";
-
-		        		 
 		        		 box+= "</table></p>"
 		        		 box+="</div></div></div>";   
 		        		var boxbox=$("#boxbox").append(box); 
 		        		
-	
-			
-// 		        		<p>
-// 						<table style="margin:auto;">
-// 							<tr><td width="70px">服務地區: </td><td width="200px"> 
-// 								${volunteer.country}${volunteer.place}
-// 							</td></tr>
-							
-// 						</table>
-// 					</p>
-		        		
-		        		
-		        		
-		        		
-
-		        		
-		        		
 		        		
 		        	})
 		        	
-		        		$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
+		        	$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
 		        	for (var index = 1; index <= totalPages ; index++) {
 		        		$("#nextli").before("<li id='page"+index+"' class='page-item'><a name='count' id="+index+" class='page-link'>"+index+"</a></li>")
 					}
 		        	var pageNo = "#page" + (page+1);
-		        	console.log(pageNo)
 		        	$(pageNo).addClass("page-item active")
+		        	
+		    
+		        	 
+	                   
+							
+						
+		        	
+		        	
 		    
 		    
 		        })
