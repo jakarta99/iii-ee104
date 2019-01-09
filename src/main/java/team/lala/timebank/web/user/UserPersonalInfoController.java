@@ -42,31 +42,22 @@ public class UserPersonalInfoController {
 		return "/basic/user/personal_info/personal-info_edit";
 	}
 	
+	//個人資料(不含密碼、照片)
 	@RequestMapping("/update")
 	@ResponseBody
-	public AjaxResponse<Member> updateMember(Member member, @RequestParam("passwordCheck") String passwordCheck, 
-			@RequestParam("passwordNew") String passwordNew, @RequestParam("picture") MultipartFile picture, 
-			MultipartHttpServletRequest request/*, BindingResult bindingResults*/) {		
+	public AjaxResponse<Member> updateMember(Member member/*, BindingResult bindingResults*/) {		
 		
 		Member userDetails = (Member) SecurityContextHolder.getContext()  
 						.getAuthentication()  
 						.getPrincipal();
 		Member memberDB = memberService.getOne(userDetails.getId());
+		member.setMemberType(memberDB.getMemberType());
 //		if(bindingResults != null && bindingResults.hasFieldErrors()) {
 //			if(bindingResults.hasFieldErrors("birthDate")) {
 //				errors.put("birthDate", "birthDate must be a date of YYYY-MM-DD");
 //			}
 //		}
 		
-		boolean fPasswordOld = false;
-		boolean fPassword1 = false;
-		boolean fPassword2 = false;
-		boolean fPassword3 = false;
-		boolean fPasswordNew = false;
-		boolean fPassword4 = false;
-		boolean fPassword5 = false;
-		boolean fPassword6 = false;
-		boolean fPasswordCheck = false;		
 		boolean fName = false;
 		boolean fIdNumber = false;
 		boolean fDate = false;
@@ -84,73 +75,6 @@ public class UserPersonalInfoController {
 		AjaxResponse<Member> response = new AjaxResponse<Member>();//回傳前端
 		
 		//驗證資料
-		
-		// 檢查舊密碼 是否與資料庫相符
-		if(member.getPassword() != null) {
-			String encodeDB = (memberService.getOne(userDetails.getId())).getPassword();
-			log.debug("insertPassword={}",member.getPassword());
-
-			//確認輸入的密碼 與 轉碼後的隱碼 是否相符
-			if(encoder.matches(member.getPassword(), encodeDB)) {
-				fPasswordOld = true;
-			}else {
-				log.debug("舊密碼XXX");
-				response.addMessage("密碼輸入錯誤");
-			}
-		}
-		// 不可空白，長度必須大於等於8小於等於16
-//		if (member.getPassword() != null && member.getPassword().trim().length() >= 8 && member.getPassword().trim().length() <= 16) {
-//			// 判斷是否包含字母、數字、特殊符號
-//			for (int i = 0; i < member.getPassword().length(); i++) {
-//				String test = member.getPassword().substring(i, i + 1);
-//				if (test.matches("[a-zA-Z]")) {
-//					fPassword1 = true;
-//				}else if(test.matches("[0-9]")){
-//					fPassword2 = true;
-//				}else if(test.matches("[~!@#$%^&*]")){
-//					fPassword3 = true;
-//				}else {
-//					response.addMessage("舊密碼格式錯誤");
-//				}
-//			}
-//			if (fPassword1 && fPassword2 && fPassword3) {
-//				fPasswordOld = true;
-//			}
-//		}else {
-//			log.debug("舊密碼XXX");
-//			response.addMessage("舊密碼格式錯誤");
-//		}
-				
-		// 檢查新密碼  不可空白，長度必須大於等於8小於等於16
-		if (passwordNew != null && passwordNew.trim().length() >= 8 && passwordNew.trim().length() <= 16) {
-			// 判斷是否包含字母、數字、特殊符號
-			for (int i = 0; i < passwordNew.length(); i++) {
-				String test = passwordNew.substring(i, i + 1);
-				if (test.matches("[a-zA-Z]")) {
-					fPassword4 = true;
-				}else if(test.matches("[0-9]")){
-					fPassword5 = true;
-				}else if(test.matches("[~!@#$%^&*]")){
-					fPassword6 = true;
-				}else {
-					response.addMessage("新密碼格式錯誤");
-				}
-			}
-			if (fPassword4 && fPassword5 && fPassword6) {
-				fPasswordNew = true;
-			}
-		}else {
-			log.debug("新密碼XXX");
-			response.addMessage("新密碼格式錯誤");
-		}
-		
-		//檢查確認密碼，與新密碼相同
-		if(passwordCheck.equals(passwordNew)) {
-			fPasswordCheck = true;
-		}else {
-			log.debug("確認密碼XXX");
-			response.addMessage("密碼不一致");
-		}
 		
 		//檢查Name 不可空白，至少2個字以上
 		if (member.getName() != null && member.getName().trim().length() >= 2) {
@@ -409,15 +333,11 @@ public class UserPersonalInfoController {
 		}
 		
 		//要放在驗證資料之後
-		if( fPasswordOld && fPasswordNew && fPasswordCheck && fName && fIdNumber /*&& fDate*/ 
-				&& fEmail && fTelephone && fMobile) {
+		if(fName && fIdNumber && fEmail && fTelephone && fMobile) {
 			if(member.getMemberType() == MemberType.O) {
 				if( fOrgFounder && fOrgCeo && fOrgContactPerson 
 						&& fOrgContactPersonTel && fOrgContactPersonMobile && fOrgWebsiteLink) {
 					try {
-						String encode = encoder.encode(passwordNew);
-						log.debug("encode={}",encode);
-						memberDB.setPassword(encode);
 						memberDB.setName(member.getName());
 						memberDB.setCertificateIdNumber(member.getCertificateIdNumber());
 						memberDB.setBirthDate(member.getBirthDate());
@@ -432,7 +352,6 @@ public class UserPersonalInfoController {
 						memberDB.setOrgContactPersonMobile(member.getOrgContactPersonMobile());
 						memberDB.setOrgWebsiteLink(member.getOrgWebsiteLink());
 						memberDB.setOrgFoundPurpose(member.getOrgFoundPurpose());
-						memberDB.setPicture(memberService.storeMemberPic(picture, member, request).getPicture());
 						Member updatedMember = memberService.update(memberDB);
 						log.debug("updatedMember.getId()={}", updatedMember.getId());
 						response.setObj(updatedMember);
@@ -446,9 +365,6 @@ public class UserPersonalInfoController {
 				}
 			}else if(member.getMemberType() == MemberType.P){
 				try {
-					String encode = encoder.encode(passwordNew);
-					log.debug("encode={}",encode);
-					memberDB.setPassword(encode);
 					memberDB.setName(member.getName());
 					memberDB.setCertificateIdNumber(member.getCertificateIdNumber());
 					memberDB.setBirthDate(member.getBirthDate());
@@ -456,7 +372,6 @@ public class UserPersonalInfoController {
 					memberDB.setTelephone(member.getTelephone());
 					memberDB.setMobile(member.getMobile());
 					memberDB.setAddress(member.getAddress());
-					memberDB.setPicture(memberService.storeMemberPic(picture, member, request).getPicture());
 					Member updatedMember = memberService.update(memberDB);
 					log.debug("updatedMember.getId()={}", updatedMember.getId());
 					response.setObj(updatedMember);
@@ -467,6 +382,123 @@ public class UserPersonalInfoController {
 				}
 			}else {
 				response.addMessage("資料有誤");
+			}
+		}else {
+			response.addMessage("資料有誤");
+		}
+		return response;
+	}
+	
+	@RequestMapping("/password")
+	public String passwordPage() {
+		return "/basic/user/personal_info/personal-info_password";
+	}
+	
+	@RequestMapping("/updatePassword")
+	@ResponseBody
+	public AjaxResponse<Member> updatePassword(Member member, @RequestParam("passwordCheck") String passwordCheck, 
+			@RequestParam("passwordNew") String passwordNew) {		
+		
+		Member userDetails = (Member) SecurityContextHolder.getContext()  
+						.getAuthentication()  
+						.getPrincipal();
+		Member memberDB = memberService.getOne(userDetails.getId());
+		
+		boolean fPasswordOld = false;
+		boolean fPassword1 = false;
+		boolean fPassword2 = false;
+		boolean fPassword3 = false;
+		boolean fPasswordNew = false;
+		boolean fPassword4 = false;
+		boolean fPassword5 = false;
+		boolean fPassword6 = false;
+		boolean fPasswordCheck = false;		
+
+		log.debug("member={}", member);
+		AjaxResponse<Member> response = new AjaxResponse<Member>();//回傳前端
+		
+		//驗證資料
+		
+		// 檢查舊密碼 是否與資料庫相符
+		if(member.getPassword() != null) {
+			String encodeDB = (memberService.getOne(userDetails.getId())).getPassword();
+			log.debug("insertPassword={}",member.getPassword());
+
+			//確認輸入的密碼 與 轉碼後的隱碼 是否相符
+			if(encoder.matches(member.getPassword(), encodeDB)) {
+				fPasswordOld = true;
+			}else {
+				log.debug("舊密碼XXX");
+				response.addMessage("密碼輸入錯誤");
+			}
+		}
+		// 不可空白，長度必須大於等於8小於等於16
+//		if (member.getPassword() != null && member.getPassword().trim().length() >= 8 && member.getPassword().trim().length() <= 16) {
+//			// 判斷是否包含字母、數字、特殊符號
+//			for (int i = 0; i < member.getPassword().length(); i++) {
+//				String test = member.getPassword().substring(i, i + 1);
+//				if (test.matches("[a-zA-Z]")) {
+//					fPassword1 = true;
+//				}else if(test.matches("[0-9]")){
+//					fPassword2 = true;
+//				}else if(test.matches("[~!@#$%^&*]")){
+//					fPassword3 = true;
+//				}else {
+//					response.addMessage("舊密碼格式錯誤");
+//				}
+//			}
+//			if (fPassword1 && fPassword2 && fPassword3) {
+//				fPasswordOld = true;
+//			}
+//		}else {
+//			log.debug("舊密碼XXX");
+//			response.addMessage("舊密碼格式錯誤");
+//		}
+				
+		// 檢查新密碼  不可空白，長度必須大於等於8小於等於16
+		if (passwordNew != null && passwordNew.trim().length() >= 8 && passwordNew.trim().length() <= 16) {
+			// 判斷是否包含字母、數字、特殊符號
+			for (int i = 0; i < passwordNew.length(); i++) {
+				String test = passwordNew.substring(i, i + 1);
+				if (test.matches("[a-zA-Z]")) {
+					fPassword4 = true;
+				}else if(test.matches("[0-9]")){
+					fPassword5 = true;
+				}else if(test.matches("[~!@#$%^&*]")){
+					fPassword6 = true;
+				}else {
+					response.addMessage("新密碼格式錯誤");
+				}
+			}
+			if (fPassword4 && fPassword5 && fPassword6) {
+				fPasswordNew = true;
+			}
+		}else {
+			log.debug("新密碼XXX");
+			response.addMessage("新密碼格式錯誤");
+		}
+		
+		//檢查確認密碼，與新密碼相同
+		if(passwordCheck.equals(passwordNew)) {
+			fPasswordCheck = true;
+		}else {
+			log.debug("確認密碼XXX");
+			response.addMessage("密碼不一致");
+		}
+		
+		//要放在驗證資料之後
+		if( fPasswordOld && fPasswordNew && fPasswordCheck) {
+			try {
+				String encode = encoder.encode(passwordNew);
+				log.debug("encode={}",encode);
+				memberDB.setPassword(encode);
+				Member updatedMember = memberService.update(memberDB);
+				log.debug("updatedMember.getId()={}", updatedMember.getId());
+				response.setObj(updatedMember);
+				log.debug("資料更新成功");
+			} catch (Exception e) {
+				response.addMessage("資料更新失敗" + e.getMessage());
+				e.printStackTrace();
 			}
 		}else {
 			response.addMessage("資料有誤");
@@ -531,7 +563,7 @@ public class UserPersonalInfoController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			ajaxResponse.addMessage(e.getMessage());
-//			return "/basic/user/personal_info/personal-info_edit";
+			return "/basic/user/personal_info/personal-info_edit";
 		}
 		return "/basic/user/personal_info/personal-info_edit";
 	}
