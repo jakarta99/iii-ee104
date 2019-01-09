@@ -20,10 +20,6 @@
 <meta charset="UTF-8">
 <title>媒合紀錄查詢</title>
 <style> 	
-
-	.s2{
-		text-align: center
-	}
     .margintop{
 		 margin-top:70px;
 	}
@@ -39,7 +35,7 @@
 		border-radius: 0.25rem;
 		transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	}
-	.smart-green {
+	.green {
 	margin-left:auto;
 	margin-right:auto;
 	max-width: 500px;
@@ -155,7 +151,7 @@
 			</div>
 		</section>
 		<div>
-			<nav aria-label="Page navigation example">
+			<nav aria-label="Page navigation example" class="d-flex justify-content-center">
 				<ul id ="pagebox" class="pagination pagination-lg">
 				<!--換頁控制開始 -->
 				</ul>
@@ -196,35 +192,35 @@
     </div>
     </div>
     </div>
-<!--評分視窗 -->
-    <div class="modal fade" id="scoreModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">評分系統</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <label>
-                    <span>分數</span>
-                    <select id='score' name='score'>
-                        <option value=''>請評分</option>
-                        <option value='1'>1</option>
-                        <option value='2'>2</option>
-                        <option value='3'>3</option>
-                        <option value='4'>4</option>
-                        <option value='5'>5</option>
-                    </select>
-                </label>
-            </div>
-            <div class="modal-footer">
-                <input type='button' class='btn btn-primary btn-sm' onclick='' value='評分' />
-            </div>
-        </div>
-    </div>
-</div>
+<!--評分視窗 -->  
+<!-- <div class="modal fade" id="scoreModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"> -->
+<!--     <div class="modal-dialog modal-dialog-centered" role="document"> -->
+<!--         <div class="modal-content"> -->
+<!--             <div class="modal-header"> -->
+<!--                 <h5 class="modal-title" id="exampleModalCenterTitle">評分系統</h5> -->
+<!--                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+<!--                     <span aria-hidden="true">&times;</span> -->
+<!--                 </button> -->
+<!--             </div> -->
+<!--             <div class="modal-body"> -->
+<!--                 <label> -->
+<!--                     <span>分數</span> -->
+<!--                     <select id='score' name='score'> -->
+<!--                         <option value=''>請評分</option> -->
+<!--                         <option value='1'>1</option> -->
+<!--                         <option value='2'>2</option> -->
+<!--                         <option value='3'>3</option> -->
+<!--                         <option value='4'>4</option> -->
+<!--                         <option value='5'>5</option> -->
+<!--                     </select> -->
+<!--                 </label> -->
+<!--             </div> -->
+<!--             <div class="modal-footer"> -->
+<!--                 <input type='button' class='btn btn-primary btn-sm' onclick='' value='評分' /> -->
+<!--             </div> -->
+<!--         </div> -->
+<!--     </div> -->
+<!-- </div> -->
 <!-- 檢舉視窗 -->
 <div class="modal fade" id="reportModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -291,27 +287,35 @@
 	        	   var box="<div class='col-md-4'>"
         		   box+="<div class='video'>"
         		   box+="<div class='embed-responsive embed-responsive-4by3'>"	        	
-        		   box+=" <a href='#'><img src=../../img/"+order.mission.missionPicName+" class='embed-responsive-item'></img></a>"     
+        		   box+=" <a href='/commons/domesticVolunteer/apply?missionId="+ order.mission.id +"'><img src=../../img/"+order.mission.missionPicName+" class='embed-responsive-item'></img></a>"     
         		   box+="</div></div></div>"
                    box+="<div class='col-md-8'>"
-                   box+="<h1 class='h1 mt-0'><a href='post.htmls'>"+ order.mission.title + "</a></h1>"
+                   box+="<h1 class='h1 mt-0'><a href='/commons/domesticVolunteer/apply?missionId="+ order.mission.id +"'>"+ order.mission.title + "</a></h1>"
                    box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
                    box+="<p class='author-category_1'><a href='#'>"+ order.mission.member.name + "</a></p>"
-                   if(order.orderStatus == "ServiceFinishPayMatchSuccess"){
-                   	   box+="<p class='date-comments_1'><a href='javascript: void(0)' data-toggle='modal' data-target='#scoreModalCenter' id='" + order.id + "'><i class='fa fa-edit'></i>評分</a></p></div>"
-                   } else if(order.orderStatus == "RequesterCancleActivityNoPunishMatchSuccess") {
-                	   box+="<p class='date-comments_1'><a href='javascript: void(0)' data-toggle='modal' data-target='#reportModalCenter' id='" + order.id + "' name='" + order.mission.member.account + "'><i class='fa fa-trash'></i>檢舉</a></p></div>"	                	   
-                   } else if(order.orderStatus == "ServiceFinishPayAndScoreMatchSuccess"){
-                	   box+="<p class='date-comments_1'><i class='fa fa-edit'></i>已評分</a></p></div>"
-	               } else if(order.orderStatus == "VolunteerReportRequestMatchSuccess" || order.orderStatus == "RequesterCancleActivityPunishMatchSuccess"){
+                   if(order.orderStatus == "ServiceFinishPayMatchSuccess" && order.ReportStatus == 'Null' || order.orderStatus == "ServiceFinishPayMatchSuccess" && order.ReportStatus == 'RequesterReportVolunteer'){
+                   	   box+="<p class='date-comments_1'><a href='javascript: void(0)' data-toggle='modal' data-target='#reportModalCenter' id='" + order.id + "' name='" + order.mission.member.account + "'><i class='fa fa-trash'></i>檢舉</a></p></div>"
+                   } else if(order.ReportStatus == 'VolunteerReportRequester' || order.ReportStatus == 'BothReport'){
 	            	   box+="<p class='date-comments_1'><i class='fa fa-trash'></i>已檢舉</a></p></div>"
 	               } else {
                 	   box+="</div>"
                    }
-		           box+="<p class='intro_1'>結束時間:"+new Date(order.mission.endDate).Format('yyyy-MM-dd hh:mm')+"</p>"
-                   box+="<p class='intro_1'>活動地點:"+order.mission.county + order.mission.district+"</p>"
-//                    if(order.orderStatus ==)
-                   box+="<p class='intro_1'>獲得實數:"+order.memberScore+"</p>"
+                   if(order.orderStatus == 'RequesterRefuceServiceMatchFail'){
+                	   box+="<p class='intro_1'>失敗原因:申請被拒絕</p>"
+                   }
+                   if(order.orderStatus == 'RequesterCancleTransactionMatchFail'){
+                	   box+="<p class='intro_1'>失敗原因:申請被拒絕</p>"
+                   }
+				   if(order.orderStatus == 'VolunteerCancleTransactionMatchFail'){
+					   box+="<p class='intro_1'>失敗原因:申請被拒絕</p>"
+                   }
+				   if(order.orderStatus == 'ServiceFinishPayMatchSuccess'){
+		           	   box+="<p class='intro_1'>結束時間:"+new Date(order.mission.endDate).Format('yyyy-MM-dd hh:mm')+"</p>"
+                   	   box+="<p class='intro_1'>活動地點:"+order.mission.county + order.mission.district+"</p>"					   
+				   }
+                   if(order.orderStatus == 'ServiceFinishPayMatchSuccess'){
+	                   box+="<p class='intro_1'>獲得時數:"+order.memberScore+"</p>"
+                   }
 			       $("#boxbox").append(box);
 	        	})
         	}
@@ -346,49 +350,55 @@
 	//呼叫評分視窗
 
 	//評分
-	function score(orderId) {
-		if ($('#score').val() == null || $('#score').val().length == 0){
-			alert("請評分")
-		} else {			
-			$.ajax({
-				url : '/user/volunteerRecord/score?orderId=' + orderId +'&score=' + $('#score').val(),
-				type : 'get',
-				dataType : 'JSON'
-			}).done(function(response){
-				if (response.status =="SUCCESS"){
-					alert("評分成功");
-				} else {
-					alert("評分失敗");
-				}
-				$('#scoreModalCenter').modal('hide')
-				list();
-			})	
-		}
-	}		
+// 	function score(orderId) {
+// 		if ($('#score').val() == null || $('#score').val().length == 0){
+// 			swal({title: "請評分"})
+// 		} else {			
+// 			$.ajax({
+// 				url : '/user/volunteerRecord/score?orderId=' + orderId +'&score=' + $('#score').val(),
+// 				type : 'get',
+// 				dataType : 'JSON'
+// 			}).done(function(response){
+// 				if (response.status =="SUCCESS"){
+// 					swal({title: "評分成功"})
+// 				} else {
+// 					swal({title: "評分失敗"})
+// 				}
+// 				$('#scoreModalCenter').modal('hide')
+// 				list();
+// 			})	
+// 		}
+// 	}		
 	//檢舉
 	function report() {
-		if(confirm("確認要送出檢舉嗎？")==true) {
-			var data = new FormData($('#reportForm')[0]);
-			$.ajax({
-				url : '/user/volunteerRecord/report',
-				type : 'post',
-				cache: false,
-				data : data,
-				processData: false,
-				contentType: false
-			}).done(function(response){
-				console.log(response)
-				if (response.status =="SUCCESS"){
-					alert("檢舉成功");
+		swal({
+			  title: "確認要送出檢舉嗎？",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			}).then((willcancel) => {
+				if (willcancel) {
+					var data = new FormData($('#reportForm')[0]);
+					$.ajax({
+						url : '/user/volunteerRecord/report',
+		 				type : 'post',
+		 				cache: false,
+		 				data : data,
+		 				processData: false,
+		 				contentType: false
+					})
+					.done(function(response){
+						if (response.status =="SUCCESS"){
+							swal("檢舉成功", {icon: "success",});
+						} else {
+							swal("檢舉失敗，因為"+response.messages+"", {icon: "error",});
+						}
+						list();
+					})
 				} else {
-					alert("檢舉失敗");
+					swal("任務仍繼續進行");
 				}
-				$('#reportModalCenter').modal('hide')
-				list();
-			})	
-		} else {
-			return false;
-		}
+			});
 	}
 	//自訂日期格式
 	Date.prototype.Format = function (fmt) {
@@ -428,7 +438,6 @@
     	$("#pagebox").on("click","li>a[name='count']", function(){
     		page=$(this).text()-1;
     		list();
-    		$(this).
     		$('body,html').animate({scrollTop: 0 }, 1);
     	})
     	//彈出評分視窗時，修改裡面的值
