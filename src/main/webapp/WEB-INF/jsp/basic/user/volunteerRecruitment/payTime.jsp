@@ -79,6 +79,13 @@
             <div class="col-md-7">
               <h1 class="h2">時數核發</h1>
             </div>
+            <div class="col-md-5">
+              <ul class="breadcrumb d-flex justify-content-end">
+                <li class="breadcrumb-item"><a href="/">首頁</a></li>
+                <li class="breadcrumb-item"><a href="/user/volunteerRecruitment/list?box=2">招募紀錄</a></li>
+                <li class="breadcrumb-item active">時數審核</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -190,7 +197,7 @@
 			  if (willreport) {
 				  var data = new FormData($('#reportForm')[0]);
 					$.ajax({
-						url : '/user/volunteerRecord/report',
+						url : '/user/payTime/report',
 						type : 'post',
 						cache: false,
 						data : data,

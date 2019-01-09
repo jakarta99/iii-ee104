@@ -20,6 +20,7 @@ import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.enums.MissionStatus;
 import team.lala.timebank.enums.OrderStatus;
+import team.lala.timebank.enums.ReportStatus;
 
 @Slf4j
 @Service
@@ -83,6 +84,24 @@ public class OrderService {
 		systemMessageService.reportMessage(order);
 		return penalty;
 	}
+	
+	//顧主檢舉志工
+		public Penalty requesterReportVolunteer(Long orderId, String description) {
+			Order order = orderDao.getOne(orderId);	
+			
+			Penalty penalty = penaltyService.requesterReportVolunteer(order, description);
+			if(order.getReportStatus()==ReportStatus.Null) {
+				order.setReportStatus(ReportStatus.RequesterReportVolunteer);
+			}else if(order.getReportStatus()==ReportStatus.VolunteerReportRequester) {
+				order.setReportStatus(ReportStatus.BothReport);
+			}
+			order.setOrderStatus(OrderStatus.ServiceFinishPayMatchSuccess);
+			orderDao.save(order);
+			return penalty;
+		}
+		
+		
+	
 
 	public List<Order> findByVolunteer(Principal principal) {
 		String account = principal.getName();

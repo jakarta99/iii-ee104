@@ -47,11 +47,21 @@ public class RecruitController {
 	private SystemMessageService systemMessageService;
 
 	@RequestMapping("/list")
-	public String listPage() {
-
+	public String listPage(Model model, @RequestParam(value = "box", required = false) Integer box) {
+		if (box != null) {
+			if (box == 1) {
+				model.addAttribute("box", "1");
+			} else if (box == 2) {
+				model.addAttribute("box", "2");
+			} else if (box == 3) {
+				model.addAttribute("box", "3");
+			}
+		}else {
+			model.addAttribute("box", "4");
+		}
 		return "/basic/user/volunteerRecruitment/mission_list";
 	}
-	
+
 	@RequestMapping("/detail")
 	public String missionDetail(@RequestParam("id") Long missionId, Model model) {
 		Mission mission = missionService.getOne(missionId);
@@ -66,10 +76,10 @@ public class RecruitController {
 	public Page<Mission> getMemberMission(Mission inputMission, Principal principal,
 			@RequestParam(value = "page", required = false) Optional<Integer> page,
 			@RequestParam(value = "length", required = false) Optional<Integer> length) {
-		
+
 		inputMission.setMemberAccount(principal.getName());
 		MissionSpecification missionSpec = new MissionSpecification(inputMission);
-		
+
 		Page<Mission> missions = missionService.findBySpecification(missionSpec,
 				PageRequest.of(page.orElse(0), length.orElse(10)));
 		return missions;
@@ -109,9 +119,8 @@ public class RecruitController {
 		try {
 
 			response.setObj(missionService.getOne(id));
-			// 取消訂單  更改mission狀態為5
+			// 取消訂單 更改mission狀態為5
 			missionService.cancelMission(id);
-			
 
 		} catch (Exception e) {
 			response.addMessage("取消失敗，" + e.getMessage());
@@ -120,7 +129,6 @@ public class RecruitController {
 		}
 		return response;
 	}
-
 
 	// 編輯mission並發送系統訊息
 	@RequestMapping("/update")
@@ -161,21 +169,21 @@ public class RecruitController {
 
 		return "/basic/user/volunteerRecruitment/mission_list";
 	}
-	
+
 	@RequestMapping("/insert")
 	@ResponseBody
-	public AjaxResponse<Mission> insertOrder (Principal principal, @RequestParam("missionId") Long missionId) {
+	public AjaxResponse<Mission> insertOrder(Principal principal, @RequestParam("missionId") Long missionId) {
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
 		try {
 			Mission mission = missionService.getOne(missionId);
-			//刊登者與申請者相同時 申請失敗
-			if(!principal.getName().equals(mission.getMember().getAccount())) {
+			// 刊登者與申請者相同時 申請失敗
+			if (!principal.getName().equals(mission.getMember().getAccount())) {
 				Member member = memberService.findByAccount(principal.getName());
 				orderService.insert(mission, member);
-			}else {
+			} else {
 				response.addMessage("申請者不得與刊登者為相同帳戶");
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			response.addMessage("申請失敗");
 		}
 		return response;
