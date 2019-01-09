@@ -1,6 +1,7 @@
 package team.lala.timebank.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +15,8 @@ import team.lala.timebank.dao.TimeLedgerDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
-import team.lala.timebank.entity.SystemMessage;
-import team.lala.timebank.entity.TimeLedger;
 import team.lala.timebank.enums.MissionStatus;
 import team.lala.timebank.enums.OrderStatus;
-import team.lala.timebank.enums.SystemMessageType;
-import team.lala.timebank.enums.YesNo;
 
 @Slf4j
 @Service
@@ -90,22 +87,15 @@ public class FacadeService {
 			systemMessageService.earn(payer, volunteer, hours, missionTitle);
 			// 5.2 產生入賬後收到的訊息完成
 
-			// 使用for-each取值 檢查mission中的所有order 若全付款則將 mission 狀態改變
-			int payOrderCounter = 0;
-			for (Order checkOrder : mission.getOrders()) {
-				if (checkOrder.getOrderStatus() == OrderStatus.ServiceFinishPayMatchSuccess) {
-					payOrderCounter++;
-					if (payOrderCounter == mission.getOrders().size()) {
-						mission.setMissionstatus(MissionStatus.C_Finish);
-						mission.setFinishDate(new Date());
-						missionDao.save(mission);
-						systemMessageService.finishMission(payer, missionTitle);
-					}
+			// 搜尋mission中的所有order 若全付款則將 mission 狀態改變
+			List<Order> orders = orderDao.findByMissionAndOrderStatus(mission, OrderStatus.ServiceFinishPayMatchSuccess);
+				if (orders.size() == mission.getOrders().size()) {
+					mission.setMissionstatus(MissionStatus.C_Finish);
+					mission.setFinishDate(new Date());
+					missionDao.save(mission);
+					systemMessageService.finishMission(payer, missionTitle);
 				}
-			}
-
 			orderDao.save(order);
-
 		}
 
 	}

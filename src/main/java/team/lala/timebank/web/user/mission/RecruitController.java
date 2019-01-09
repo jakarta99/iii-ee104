@@ -20,10 +20,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
+import team.lala.timebank.dao.OrderDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.ServiceType;
+import team.lala.timebank.enums.OrderStatus;
 import team.lala.timebank.service.MemberService;
 import team.lala.timebank.service.MissionService;
 import team.lala.timebank.service.OrderService;
@@ -168,14 +170,30 @@ public class RecruitController {
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
 		try {
 			Mission mission = missionService.getOne(missionId);
-			//刊登者與申請者相同時 申請失敗
-			if(!principal.getName().equals(mission.getMember().getAccount())) {
+			//刊登者與申請者相同 申請失敗
+			if(!mission.getMember().getAccount().equals(principal.getName())) {
+				//已存在相同申請者 申請失敗
+				for(Order order : mission.getOrders()) {
+					if(order.getVolunteer().getAccount().equals(principal.getName())) {
+						response.addMessage("不得重複申請");
+						return response;
+					}
+				}
+				//已接受的申請數量等於需求數量
+				List<Order> acceptOrders = orderService.findByMissionAndOrderStatus(mission, OrderStatus.RequesterAcceptService);
+				if(mission.getPeopleNeeded().equals(acceptOrders.size())) {
+					response.addMessage("需求人數已滿");
+					return response;
+				}else {
 				Member member = memberService.findByAccount(principal.getName());
 				orderService.insert(mission, member);
+				}
 			}else {
-				response.addMessage("申請者不得與刊登者為相同帳戶");
+				response.addMessage("不得申請自己的活動");
+				return response;
 			}
 		}catch(Exception e) {
+			e.printStackTrace();
 			response.addMessage("申請失敗");
 		}
 		return response;

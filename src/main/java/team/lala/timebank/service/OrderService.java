@@ -51,7 +51,9 @@ public class OrderService {
 		log.debug("Orders={}", orders);
 		return orders;
 	}
-
+	public List<Order> findByMissionAndOrderStatus(Mission mission, OrderStatus orderStatus){
+		return orderDao.findByMissionAndOrderStatus(mission, orderStatus);
+	}
 	//志工幫雇主評分
 	public void score(Long orderId, Integer score) {
 		Order order = orderDao.getOne(orderId);
