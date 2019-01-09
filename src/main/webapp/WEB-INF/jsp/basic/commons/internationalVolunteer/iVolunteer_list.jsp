@@ -19,22 +19,50 @@
 <style>
 
 .container-1{
-	background-color: rgba(234, 234, 234);
-	margin-top:30px;max-width: 1500px;
-	border-top-left-radius:3px;
-	border-top-right-radius:3px;
-	border-bottom-left-radius:3px;
-	border-bottom-right-radius:3px;
+ 	background-color: rgba(234, 234, 234); 
+	max-width: 1500px;
+	border-radius: 3px;
 	
 }
+.row{
+	margin:auto;
+}
+.owl-dots {
+    display: none;
+}
+.panel-body{
+	background-color: rgba(200, 200, 200); 
+	border-radius: 5px;
+	margin-bottom:20px;
 
+}
+.input-group{
+	width: 930px;
+    margin: auto;
+}
 .form-group{
+	padding:30px 0px;
 	padding-left:20px;
+	margin:auto;
 }
-.form-control{
-border-radius: 3px;
+.input-group .btn, .form-control{	
+	border-radius: 3px;
+	font-size: 16px;
+    height: 52px !important;
 }
 
+.btn-outline-primary {
+    color: #fff;
+    background-color: #13B5AD;
+    border-color: #13B5AD;  
+}
+.btn-outline-primary:hover {
+/* 	color: #13b5b1; */
+    background-color: transparent;
+    background-image: none;
+    border-color:rgb(19, 181, 177, 0.8);
+    background-color: rgb(19, 181, 177, 0.8);
+}
 </style>
 <script>
 function doSpider(){
@@ -64,10 +92,9 @@ function query(){
 <%-- 		<jsp:include page="../commons_layout/commons_heading_breadcrumbs.jsp" /> --%>
 		
 		
-				<section>
+		<section>
 			<!-- Carousel Start-->
 			<div class="home-carousel">
-<!-- 				<div class="dark-mask"></div> -->
 				<div class="homepage owl-carousel" style="padding-top: 0;">
 					<div class="item">
 						<div class="row">
@@ -76,14 +103,14 @@ function query(){
 								alt="">					
 						</div>
 					</div>
-					<div class="item">
-						<div class="row">
-							<img
-								src="https://media.goeco.org/_media/media/422/11945_1903_546.jpg"
-								alt="" class="ml-auto">
+<!-- 					<div class="item"> -->
+<!-- 						<div class="row"> -->
+<!-- 							<img -->
+<!-- 								src="https://media.goeco.org/_media/media/422/11945_1903_546.jpg" -->
+<!-- 								alt="" class="ml-auto"> -->
 
-						</div>
-					</div>
+<!-- 						</div> -->
+<!-- 					</div> -->
 					<div class="item">
 						<div class="row">
 							<img
@@ -96,15 +123,15 @@ function query(){
 			</div>
 			<!-- Carousel End-->
 		</section>
-<!-- 		<h4 class="h4"><a href="#" onclick="doSpider()">若無資料，請按此進行爬蟲功能	</a></h4> -->
+
 		
-		<div id="content" style='margin-top:50px'>
+		<div id="content" >
 			<div class="container" >
-				<div class="panel-body">
-            	<form role="search">
-                	<div class="input-group">                                                                               
-	                    <div class="form-group" >
-							<select id="continent" 
+				<div class="panel-body" >
+	            	<form role="search">
+	                	<div class="input-group" >                                                                               
+		                    <div class="form-group" >
+								<select id="continent" 
 									name="continent" class="form-control">
 									<option>東非</option>
 									<option>西非</option>
@@ -122,10 +149,10 @@ function query(){
 						</div>
 					
 						<div class="form-group">
-								<input type="text" placeholder='出發時間' class="form-control" value="${param.dateChosenStart }"  id="dateChosenStart" name="dateChosenStart" autocomplete="off" style="width:200px;display:inline" />
+								<input type="text" placeholder='出發日期' class="form-control" value="${param.dateChosenStart }"  id="dateChosenStart" name="dateChosenStart" autocomplete="off" style="width:200px;display:inline" />
 						</div>
 						<div class="form-group">	
-								<input type="text" placeholder='回來時間'  class="form-control" value="${param.dateChosenEnd }" id="dateChosenEnd" name="dateChosenEnd" autocomplete="off" style="width:200px;display:inline"/>	
+								<input type="text" placeholder='返回日期'  class="form-control" value="${param.dateChosenEnd }" id="dateChosenEnd" name="dateChosenEnd" autocomplete="off" style="width:200px;display:inline"/>	
 						</div>
 					
 	                    <div class="form-group">
@@ -186,7 +213,7 @@ function query(){
 				</section>
 			</div>
 		</div>
-		
+				<h4 class="h4"><a href="#" onclick="doSpider()">若無資料，請按此進行爬蟲功能	</a></h4>
 	
 
 		
@@ -199,7 +226,6 @@ function query(){
 
 	<script>
 		$(document).ready(function(){
-			$("#heading-breadcrumbs>div>div>div.col-md-7>h1").text("國際志工專區");	
 			
 			var datePickerSetting = {
 					format : "yyyy/mm/dd",

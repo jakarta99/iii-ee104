@@ -7,12 +7,7 @@
 <title>Insert title here</title>
 <!-- css -->
 <jsp:include page="../commons_layout/commons_css_links.jsp" />
-<!-- Javascript files-->
-<jsp:include page="../commons_layout/commons_js_links.jsp" />
-<!-- date picker -->
-<script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
-<script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
-<script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
+<script src="/vendor/jquery/jquery.min.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 <style>
 .home-carousel .owl-carousel {
@@ -24,14 +19,26 @@
 	margin-left: 0;
 	margin-right: 0;
 }
+.owl-carousel.home-slider .slider-item {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: calc(100vh - 117px);
+    min-height: 700px;
+    position: relative;
+}
+.owl-carousel.home-slider .slider-item .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    background: #000;
+    opacity: .2;
+}
 </style>
-<script>
-	function doSpider(){
-		$.get("/commons/InternationalVolunteer/spidertest", function(msg){
-			alert(msg);
-		})
-	}
-</script>
+
 </head>
 <body>
 
@@ -41,29 +48,28 @@
 		<jsp:include page="../commons_layout/commons_top-bar.jsp" />
 		<!-- Navbar -->
 		<jsp:include page="../commons_layout/commons_nav.jsp" />
-
+	    
 		<section>
-			<!-- Carousel Start-->
+<!--  			Carousel Start  -->
 			<div class="home-carousel">
-<!-- 				<div class="dark-mask"></div> -->
 				<div class="homepage owl-carousel" style="padding-top: 0;">
-					<div class="item">
-						<div class="row">
+					<div class="item" style="background-image: url('https://media.goeco.org/_media/media/422/11924_1903_546.jpg');">
+						<div class="row" >
 							<img
 								src="https://media.goeco.org/_media/media/422/11924_1903_546.jpg"
 								alt="">					
 						</div>
 					</div>
-					<div class="item">
-						<div class="row">
+					<div class="item" style="background-image: url('https://media.goeco.org/_media/media/422/11945_1903_546.jpg');">
+						<div class="row" >
 							<img
 								src="https://media.goeco.org/_media/media/422/11945_1903_546.jpg"
 								alt="" class="ml-auto">
 
 						</div>
 					</div>
-					<div class="item">
-						<div class="row">
+					<div class="item" style="background-image: url('https://media.goeco.org/_media/media/422/11950_1903_546.jpg');">
+						<div class="row" >
 							<img
 								src="https://media.goeco.org/_media/media/422/11950_1903_546.jpg"
 								alt="" class="ml-auto">
@@ -72,7 +78,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- Carousel End-->
+<!-- 			Carousel End  -->
 		</section>
 		<section class="bar background-pentagon no-mb">
 			<div class="container">
@@ -129,6 +135,17 @@
 	<%-- 		<jsp:include page="../commons_layout/commons_footer.jsp" /> --%>
 	
 	
+	
+	<!-- Javascript files-->
+	<jsp:include page="../commons_layout/commons_js_links.jsp" />
+	
+	<script>
+		function doSpider(){
+			$.get("/commons/InternationalVolunteer/spidertest", function(msg){
+				alert(msg);
+			})
+		}
+	</script>
 	<script>
 		$(document).ready(function(){
 			var datePickerSetting = {
