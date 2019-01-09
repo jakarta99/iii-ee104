@@ -16,6 +16,7 @@
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
+
 <style>
 
 .container-1{
@@ -88,62 +89,49 @@ function query(){
 		<jsp:include page="../commons_layout/commons_top-bar.jsp" />
 		<!-- Navbar -->
 		<jsp:include page="../commons_layout/commons_nav.jsp" />
-		<!-- heading-breadcrumbs -->
-<%-- 		<jsp:include page="../commons_layout/commons_heading_breadcrumbs.jsp" /> --%>
 		
-		
+<!-- 			Carousel Start -->
 		<section>
-			<!-- Carousel Start-->
 			<div class="home-carousel">
 				<div class="homepage owl-carousel" style="padding-top: 0;">
 					<div class="item">
 						<div class="row">
-							<img
-								src="https://media.goeco.org/_media/media/422/11924_1903_546.jpg"
-								alt="">					
+							<img class="ml-auto"
+								src="https://media.goeco.org/_media/media/422/11924_1903_546.jpg" >					
 						</div>
 					</div>
-<!-- 					<div class="item"> -->
-<!-- 						<div class="row"> -->
-<!-- 							<img -->
-<!-- 								src="https://media.goeco.org/_media/media/422/11945_1903_546.jpg" -->
-<!-- 								alt="" class="ml-auto"> -->
-
-<!-- 						</div> -->
-<!-- 					</div> -->
 					<div class="item">
 						<div class="row">
-							<img
-								src="https://media.goeco.org/_media/media/422/11950_1903_546.jpg"
-								alt="" class="ml-auto">
+							<img class="ml-auto" 
+								src="https://media.goeco.org/_media/media/422/11950_1903_546.jpg" >
 
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- Carousel End-->
 		</section>
+<!-- 			Carousel End -->
 
 		
 		<div id="content" >
 			<div class="container" >
 				<div class="panel-body" >
-	            	<form role="search">
+	            	<form action="/commons/InternationalVolunteer/list" method="get" role="search">
 	                	<div class="input-group" >                                                                               
 		                    <div class="form-group" >
 								<select id="continent" 
 									name="continent" class="form-control">
-									<option>東非</option>
-									<option>西非</option>
-									<option>南非</option>
-									<option>東亞</option>
-									<option>東南亞</option>
-									<option>中南亞</option>
-									<option>北美洲</option>
-									<option>中美洲</option>
-									<option>南美洲</option>
-									<option>歐洲</option>
-									<option>大洋洲</option>
+									<option value="東南亞">東南亞</option>
+									<option value="中南亞">中南亞</option>
+									<option value="東亞">東亞</option>
+									<option value="東非">東非</option>
+									<option value="西非">西非</option>
+									<option value="南非">南非</option>
+									<option value="北美洲">北美洲</option>
+									<option value="中美洲">中美洲</option>
+									<option value="南美洲">南美洲</option>
+									<option value="歐洲">歐洲</option>
+									<option value="大洋洲">大洋洲</option>
 									
 								</select>	
 						</div>
@@ -161,7 +149,7 @@ function query(){
                     
 	                    <span class="input-group-btn form-group">
 	                    
-	                    	<input type="button" value="搜尋" id="searchButt" class="btn btn-outline-primary" onclick="query()">               
+	                    	<input type="submit" value="搜尋" id="searchButt" class="btn btn-outline-primary" onclick="query()">               
 	                    </span>
                     </div>
                   </form>
@@ -224,6 +212,17 @@ function query(){
  		<jsp:include page="../commons_layout/back-to-top_button.jsp"/>
 	</div>
 
+  <script src="/js/voyage/jquery-migrate-3.0.1.min.js"></script>
+  <script src="/js/voyage/jquery.easing.1.3.js"></script>
+  <script src="/js/voyage/jquery.waypoints.min.js"></script>
+  <script src="/js/voyage/jquery.stellar.min.js"></script>
+  <script src="/js/voyage/owl.carousel.min.js"></script>
+  <script src="/js/voyage/jquery.magnific-popup.min.js"></script>
+  <script src="/js/voyage/aos.js"></script>
+<!--   <script src="js/jquery.animateNumber.min.js"></script> -->
+<!--   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
+<!--   <script src="js/google-map.js"></script> -->
+  <script src="/js/voyage/main.js"></script>
 	<script>
 		$(document).ready(function(){
 			
@@ -235,8 +234,13 @@ function query(){
 					clearBtn:true,
 					startView:"2",
 				};			
-				$('#dateChosenStart').datepicker(datePickerSetting);
-				$('#dateChosenEnd').datepicker(datePickerSetting);
+			$('#dateChosenStart').datepicker(datePickerSetting);
+			$('#dateChosenEnd').datepicker(datePickerSetting);
+			$("#continent").val('${IVolunteers[0].continent}');
+
+			
+			
+			
 		})
 	
 

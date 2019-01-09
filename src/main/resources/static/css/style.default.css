@@ -775,11 +775,8 @@ color: rgba(100, 100, 100);
 #navbar .navbar-nav > li > a:hover {
   	background:  rgba(19, 181, 177, 0.8) ;
   	border-color: rgba(19, 181, 177, 0.9);
-/*   	border-top-left-radius:2px; */
-/* 	border-top-right-radius:2px; */
-/* 	border-bottom-left-radius:2px; */
-/* 	border-bottom-right-radius:2px; */
-	color:rgba(244, 244, 244);
+/* border-radius:2px; */
+	color:rgba(240, 240, 240);
 }
 
 #navbar .navbar-nav > li > a:focus {
