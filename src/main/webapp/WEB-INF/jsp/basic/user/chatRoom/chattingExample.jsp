@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Chat WebSocket</title>
 <script src="/js/webjar/sockjs.min.js"></script>
 <script src="/js/webjar/stomp.min.js"></script>
 
@@ -10,7 +14,8 @@
 	function setConnected(connected) {
 		document.getElementById('connect').disabled = connected;
 		document.getElementById('disconnect').disabled = !connected;
-		document.getElementById('conversationDiv').style.visibility = connected ? 'visible': 'hidden';
+		document.getElementById('conversationDiv').style.visibility = connected ? 'visible'
+				: 'hidden';
 		document.getElementById('response').innerHTML = '';
 	}
 
@@ -35,26 +40,29 @@
 	}
 
 	function sendMessage() {
-		var to = $("to").value;
-		var text = $('text').value;
+		var from = document.getElementById('from').value;
+		var text = document.getElementById('text').value;
 		stompClient.send("/app/chat", {}, JSON.stringify({
-			'to' : to,
+			'from' : from,
 			'text' : text
 		}));
 	}
 
 	function showMessageOutput(messageOutput) {
-		var response = $('response');
+		var response = document.getElementById('response');
 		var p = document.createElement('p');
 		p.style.wordWrap = 'break-word';
-		p.appendChild(document.createTextNode(messageOutput.to + ": "
+		p.appendChild(document.createTextNode(messageOutput.from + ": "
 				+ messageOutput.text + " (" + messageOutput.time + ")"));
 		response.appendChild(p);
 	}
 </script>
+</head>
+<body onload="disconnect()">
 
+	<div>
 		<div>
-			<input type="text" id="to" placeholder="Choose a nickname" />
+			<input type="text" id="from" placeholder="Choose a nickname" />
 		</div>
 		<br />
 		<div>
@@ -63,17 +71,28 @@
 				Disconnect</button>
 		</div>
 		<br />
-
+		<div id="conversationDiv">
+			<input type="text" id="text" placeholder="Write a message..." />
+			<button id="sendMessage" onclick="sendMessage();">Send</button>
+			<p id="response"></p>
+		</div>
 		
-		<div id="container" onload="disconnect()">
-	        <div id="content" > </div>
-	        <div id="send-box">   
-	        	<div id="conversationDiv" style="width:260px; height:300px;border:1px solid black; text-align:center; padding:20px">
-					<p id="response" style="height:240px;border:1px solid blue;"></p>
-					<input type="text" id="text" placeholder="Write a message..." />
-					<button id="sendMessage" onclick="sendMessage();">Send</button>
-				</div>
+		
+		<div id="container">
+<!-- 	        <div id="status-box">Server: <span id="status">Connected.</span> / <span id="online">2</span> online.</div> -->
+	        <div id="content"> </div>
+	        <div id="send-box">
+	            <form id="send-form">
+<!-- 	                <input type="text" name="name" id="name" placeholder="暱稱"> -->
+	                <input type="text" name="msg" id="msg" placeholder="說點什麼？">
+	                <button id="sendMessage" onclick="sendMessage();">送出</button>
+	            </form>
 	        </div>
 	    </div>
+		
+		
+		
+	</div>
 
-
+</body>
+</html>
