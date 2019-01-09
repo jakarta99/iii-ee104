@@ -52,34 +52,39 @@ public class OrderService {
 		log.debug("Orders={}", orders);
 		return orders;
 	}
-
-	//志工幫雇主評分
-	public void score(Long orderId, Integer score) {
-		Order order = orderDao.getOne(orderId);
-		Member member = order.getMission().getMember();
-		if(member.getScoredTimes() == null || member.getScoredTimes() == 0) {
-			member.setScoredTimes(1);
-		} else {
-			member.setScoredTimes(member.getScoredTimes() + 1);
-		}
-		if(member.getSumScore() == null || member.getSumScore() == 0) {
-			member.setSumScore(score);
-		} else {
-			member.setSumScore(member.getSumScore() + score);			
-		}
-		member.setAverageScore(new Double(member.getSumScore() / member.getScoredTimes()));	
-		memberDao.save(member);
-		order.setOrderStatus(OrderStatus.ServiceFinishPayMatchSuccess);		//修改order狀態
-		orderDao.save(order);
-		systemMessageService.scoreMessage(order, score);
-		
+	public List<Order> findByMissionAndOrderStatus(Mission mission, OrderStatus orderStatus){
+		return orderDao.findByMissionAndOrderStatus(mission, orderStatus);
 	}
+	//志工幫雇主評分
+//	public void score(Long orderId, Integer score) {
+//		Order order = orderDao.getOne(orderId);
+//		Member member = order.getMission().getMember();
+//		if(member.getScoredTimes() == null || member.getScoredTimes() == 0) {
+//			member.setScoredTimes(1);
+//		} else {
+//			member.setScoredTimes(member.getScoredTimes() + 1);
+//		}
+//		if(member.getSumScore() == null || member.getSumScore() == 0) {
+//			member.setSumScore(score);
+//		} else {
+//			member.setSumScore(member.getSumScore() + score);			
+//		}
+//		member.setAverageScore(new Double(member.getSumScore() / member.getScoredTimes()));	
+//		memberDao.save(member);
+//		order.setOrderStatus(OrderStatus.ServiceFinishPayMatchSuccess);		//修改order狀態
+//		orderDao.save(order);
+//		systemMessageService.scoreMessage(order, score);		
+//	}
 	
 	//志工檢舉雇主
 	public Penalty report(Long orderId, String description) {
 		Order order = orderDao.getOne(orderId);		
 		Penalty penalty = penaltyService.report(order, description);
-		order.setOrderStatus(OrderStatus.ServiceFinishPayMatchSuccess);
+		if(order.getReportStatus() == ReportStatus.Null) {
+			order.setReportStatus(ReportStatus.VolunteerReportRequester);			
+		} else {
+			order.setReportStatus(ReportStatus.BothReport);
+		}
 		orderDao.save(order);
 		systemMessageService.reportMessage(order);
 		return penalty;
@@ -125,6 +130,7 @@ public class OrderService {
 		Order order = new Order();
 		order.setVolunteer(volunteer);
 		order.setOrderStatus(OrderStatus.VolunteerApply);
+		order.setReportStatus(ReportStatus.Null);
 		order.setMission(mission);
 		order.setVolunteerApplyTime(new java.util.Date());
 		return orderDao.save(order);

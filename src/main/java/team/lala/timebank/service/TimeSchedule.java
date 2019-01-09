@@ -7,12 +7,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MissionDao;
+import team.lala.timebank.dao.OrderDao;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.enums.MissionStatus;
@@ -28,8 +28,9 @@ import us.codecraft.webmagic.Spider;
 @Transactional
 @Component
 public class TimeSchedule {
-
 	
+	@Autowired
+	private OrderDao orderDao;
 	@Autowired
 	private MissionDao missionDao;
 	@Autowired
@@ -70,17 +71,18 @@ public class TimeSchedule {
 				if(mission.getOrders().size() == 0) {
 					mission.setMissionstatus(MissionStatus.C_Cancel);
 				}else {
-					List<Order> cancelOrders = new ArrayList<Order>();
-					List<Order> orders = orderService.findByMission(mission);
+					List<Order> cancelOrders = orderDao.findByMissionAndOrderStatus(mission, OrderStatus.VolunteerApply);
+					if(cancelOrders.size() != 0) {
+						systemMessageService.missionCancel(cancelOrders);
+						orderService.rejectOrders(cancelOrders);
+					}
+					
+					
 					mission.setMissionstatus(MissionStatus.B_AccountsPayable);
 					missionDao.save(mission);
-					for(Order order : orders) {
-						if(order.getOrderStatus() == OrderStatus.VolunteerApply) {
-							cancelOrders.add(order);		
-						}
-					}
-					systemMessageService.missionCancel(cancelOrders);
-					orderService.rejectOrders(cancelOrders);
+					
+					
+					
 				}
 			}
 		}

@@ -73,42 +73,7 @@
 				<h3>個人資訊</h3>
 				<h5>您在 TimeBank中使用的基本資訊</h5>
 				<hr>
-				<form action="/user/personalInfo/edit" method="post" enctype="multipart/form-data">
-					<fieldset>
-						<div class="heading">
-          					<h3>帳戶資料</h3>
-          				</div>
-          				<input type="hidden" value="${member.id}" id="id" name="id"> 
-						<input type="hidden" value="${member.memberType}" id="memberType" name="memberType">
-						<div class="row">
-                    		<div class="col-md-6">
-                      			<div class="form-group">
-									<label for="idPasswordOld">舊密碼:</label>
-									<input type="password" value="" id="idPasswordOld" placeholder="請輸入舊密碼" name="password" autofocus autocompelete="off" class="form-control">
-		<!-- 							<div><label>(1.不可空白，2.至少8個字最多16個字，3.必須包含字母、數字、特殊符號[~!@#$%^&*])</label></div> -->
-									<span id="idspPasswordOld" style='color:red'></span>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-                    		<div class="col-md-6">
-                      			<div class="form-group">
-									<label for="idPasswordNew">新密碼:</label>
-									<input type="password" value="" id="idPasswordNew" placeholder="請輸入新密碼" name="passwordNew" autofocus autocompelete="off" class="form-control">
-									<div><label>(1.不可空白，2.至少8個字最多16個字，3.必須包含字母、數字、特殊符號[~!@#$%^&*])</label></div>
-									<span id="idspPasswordNew" style='color:red'></span>
-								</div>
-							</div>
-							<div class="col-md-6">
-                      			<div class="form-group">
-									<label for="idPasswordCheck">確認新密碼:</label>
-									<input type="password" value="" id="idPasswordCheck" placeholder="請再輸入一次新密碼" name="passwordCheck" autofocus autocompelete="off" class="form-control">
-									<div><label>(1.不可空白，2.須與密碼相同)</label></div>
-									<span id="idspPasswordCheck" style='color:red'></span>
-								</div>
-							</div>
-						</div>
-          			</fieldset>
+				<form>					
 					<fieldset>
 						<div class="heading">
 							<h3>個人資料</h3>
@@ -201,23 +166,29 @@
 									<input type="text" value="${member.address}" id="address" name="address" class="form-control">
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-2">
 	                      		<div class="form-group">
 			                        <div><label>圖片:</label></div>
-			                        <a href="/image/user/member/${member.picture}" target="_blank">原上傳圖片</a>
-			                        <input type="button" class="btn btn-template-outlined" id="changePicture" value="更改照片" class="form-control"/>
+			                        <input type="button" class="btn btn-template-outlined" id="originPicture" value="原圖片" class="form-control"/>
+			                        <input type="button" class="btn btn-template-outlined" id="changePicture" value="更改圖片" class="form-control"/>
+                        		</div>
+                        	</div>
+                        	<div class="col-md-2">
+	                      		<div class="form-group">
+			                        <div><label>密碼:</label></div>
+			                        <input type="button" class="btn btn-template-outlined" id="changePassword" value="修改密碼" class="form-control"/>
                         		</div>
                         	</div>
                         </div>
-						<div class="row">
-							<div class="col-md-4">
-	                      		<div class="form-group">
-									<fmt:formatDate value="${member.signUpDate}" pattern="yyyy/MM/dd" var="signUpDate" />
-									<label>註冊日期:</label> 
-									<input type="text" value="${signUpDate}" id="signUpDate" name="signUpDate" autocomplete="off" readonly class="form-control">
-								</div>
-							</div>
-						</div>
+<!-- 						<div class="row"> -->
+<!-- 							<div class="col-md-4"> -->
+<!-- 	                      		<div class="form-group"> -->
+<%-- 									<fmt:formatDate value="${member.signUpDate}" pattern="yyyy/MM/dd" var="signUpDate" /> --%>
+<!-- 									<label>註冊日期:</label>  -->
+<%-- 									<input type="text" value="${signUpDate}" id="signUpDate" name="signUpDate" autocomplete="off" readonly class="form-control"> --%>
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 					</fieldset>
 					<c:if test="${member.memberType eq 'O' }">
 						<fieldset>
@@ -277,10 +248,6 @@
 								</div>
 							</div>
 							<div class="row">
-<!-- 								<div class="col-md-3"> -->
-<!-- 	                      			<div class="form-group"> -->
-<!-- 	                      			</div> -->
-<!-- 	                      		</div> -->
 								<div class="col-md-6">
 	                      			<div class="form-group">
 										<label>創立宗旨:</label>
@@ -293,8 +260,8 @@
 						</fieldset>
 					</c:if>
 						<fieldset style="border:none">
-							<div>
-								<input type="button" class="btn btn-template-outlined" id="updateButt" value="儲存"> 
+							<div class="col-md-12 text-center">
+								<button type="button" class="btn btn-template-outlined" id="updateButt"><i class="fa fa-save"></i>儲存</button>
 								<span id="error" style='color:red'></span>
 							</div>
 						</fieldset>
@@ -306,122 +273,7 @@
 	<!-- FOOTER -->
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
- 	<script>
-	    document.addEventListener("DOMContentLoaded", function () {
-	        document.getElementById("idPasswordOld").addEventListener("keyup", chkPasswordOld);
-	    });
-	    function chkPasswordOld() {
-	        var thePassword = document.getElementById("idPasswordOld").value;
-	        var msgChk = document.getElementById("idspPasswordOld");
-// 	        var thePasswordLen = thePassword.length;
-// 	        var flag1 = false, flag2 = false, flag3 = false;
-	        //判斷元素值是否為空白，長度是否大於8
-// 	        if (thePassword == ""){
-// 	        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
-// 	        }
-	        //如果長度是否大於8，判斷是否包含字母、數字、特殊符號
-// 	        else if (thePasswordLen >= 8 && thePasswordLen <= 16) {
-// 	            for (var i = 0; i < thePasswordLen; i++) {
-// 	                var PasswordChr = thePassword.charAt(i).toUpperCase();//轉換為大寫
-// 	                if (PasswordChr >= "A" && PasswordChr <= "Z") {
-// 	                    flag1 = true;
-// 	                } else if (PasswordChr >= "0" && PasswordChr <= "9") {
-// 	                    flag2 = true;
-// 	                } else if (PasswordChr == "~" || "!" || "@" || "#" || "$" || "%" || "^" || "&" || "*") {
-// 	                    flag3 = true;
-// 	                }
-// 	                if (flag1 && flag2 && flag3) {
-// 	                    break;
-// 	                }
-// 	            }
-// 	            if (flag1 && flag2 && flag3){
-	            	$.ajax({
-						method:"post",
-						dataType: "text",        
-						url:"/user/personal-info/changePassword",
-						data: {password:$("#idPasswordOld").val()}
-					}).done(function(response){
-						if(response == "正確"){
-							msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
-						}else{
-							msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>密碼輸入錯誤</span>";
-						}
-					})
-// 	            }else{
-// 	            	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>必須包含字母、數字、特殊符號[~!@#$%^&*]</span>"
-// 	            }
-// 	        }else{
-// 	        	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>至少8個字，最多16個字</span>"
-// 	        }
-	    }
-	    
-	    document.addEventListener("DOMContentLoaded", function () {
-	        document.getElementById("idPasswordNew").addEventListener("keyup", chkPasswordNew);
-	    });
-	    function chkPasswordNew() {
-	        var thePassword = document.getElementById("idPasswordNew").value;
-	        var thePasswordLen = thePassword.length;
-	        var flag1 = false, flag2 = false, flag3 = false;
-	        //判斷元素值是否為空白，長度是否大於8
-	        if (thePassword == ""){
-	            document.getElementById("idspPasswordNew").innerHTML =
-	                "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
-	        }
-	        //如果長度是否大於8，判斷是否包含字母、數字、特殊符號
-	        else if (thePasswordLen >= 8 && thePasswordLen <= 16) {
-	            for (var i = 0; i < thePasswordLen; i++) {
-	                var PasswordChr = thePassword.charAt(i).toUpperCase();//轉換為大寫
-	                if (PasswordChr >= "A" && PasswordChr <= "Z") {
-	                    flag1 = true;
-	                } else if (PasswordChr >= "0" && PasswordChr <= "9") {
-	                    flag2 = true;
-	                } else if (PasswordChr == "~" || "!" || "@" || "#" || "$" || "%" || "^" || "&" || "*") {
-	                    flag3 = true;
-	                }
-	                if (flag1 && flag2 && flag3) {
-	                    break;
-	                }
-	            }
-	            if (flag1 && flag2 && flag3){
-	                document.getElementById("idspPasswordNew").innerHTML =
-	                    "<img src='/img/O.jpg'><span style='color:green'>正確</span>"
-	            }else{
-	                document.getElementById("idspPasswordNew").innerHTML =
-	                    "<img src='/img/X.jpg'><span style='color:red'>必須包含字母、數字、特殊符號[~!@#$%^&*]</span>"
-	            }
-	        }else{
-	            document.getElementById("idspPasswordNew").innerHTML =
-	                "<img src='/img/X.jpg'><span style='color:red'>至少8個字，最多16個字</span>"
-	        }
-	    }
-	    
-	    document.addEventListener("DOMContentLoaded", function () {
-	        document.getElementById("idPasswordCheck").addEventListener("keyup", chkPasswordCheck);
-	    });
-	    function chkPasswordCheck(){
-	    	var thePassword = document.getElementById("idPasswordNew").value;
-	    	var thePasswordCheck = document.getElementById("idPasswordCheck").value;
-	        var msgChk = document.getElementById("idspPasswordCheck")
-	        if (thePasswordCheck == ""){
-	        	msgChk.innerHTML =
-	                "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
-	        }
-	        else {
-	        	$.ajax({
-					method:"post",
-					dataType: "text",        
-					url:"/user/personal-info/checkPassword",
-					data: {passwordCheck:$("#idPasswordCheck").val(),passwordNew:$("#idPasswordNew").val()}
-				}).done(function(response){
-					if(response == "正確"){
-						msgChk.innerHTML = "<img src='/img/O.jpg'><span style='color:green'>正確</span>";
-					}else{
-						msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>密碼不一致</span>";
-					}
-				})
-	        }      
-	    }
-	    
+ 	<script>    
 		document.addEventListener("DOMContentLoaded", function () {
 	        document.getElementById("idName").addEventListener("keyup", chkName);
 	    });
@@ -771,9 +623,22 @@
 // 				$("input[name='orgIdConfirmation'][value="+ '${member.orgIdConfirmation}' + "]").prop("checked", true);			
 // 			}			
 			
+			//origin picture event
+			$("#originPicture").click(function() {
+				swal({
+					title: '圖片', 
+					icon: '/image/user/member/${member.picture}',
+				})
+			});
+			
 			//change picture event
 			$("#changePicture").click(function() {
 				window.location.replace("/user/personal-info/pic");
+			});
+			
+			//change password event
+			$("#changePassword").click(function() {
+				window.location.replace("/user/personal-info/password");
 			});
 
 			//update member info. event
@@ -800,18 +665,6 @@
 					} else{
 						$.each(response.messages, function(idx, message) {
 // 							alert("the "+idx+"th ERROR, because "+message);
-							if (message =="密碼輸入錯誤"){
-								document.getElementById("idspPasswordOld").innerHTML =
-					                "<img src='/img/X.jpg'><span style='color:red'>密碼輸入錯誤</span>"
-							}
-							if (message =="新密碼格式錯誤"){
-								document.getElementById("idspPasswordNew").innerHTML =
-					                "<img src='/img/X.jpg'><span style='color:red'>新密碼格式錯誤</span>"
-							}
-							if (message =="密碼不一致"){
-								document.getElementById("idspPasswordCheck").innerHTML =
-					                "<img src='/img/X.jpg'><span style='color:red'>密碼不一致</span>"
-							}
 							if (message =="姓名格式錯誤"){
 								document.getElementById("idspName").innerHTML =
 					                "<img src='/img/X.jpg'><span style='color:red'>姓名格式錯誤</span>"

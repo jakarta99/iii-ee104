@@ -209,7 +209,7 @@
 							}else{
 								swal({
 									  title: "申請失敗",
-									  text: " " + data.status,
+									  text: " "+data.messages,
 									  icon: "error",
 									  buttons: false,
 									  dangerMode: false,
