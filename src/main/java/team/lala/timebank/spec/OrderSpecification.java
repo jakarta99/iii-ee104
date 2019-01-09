@@ -40,6 +40,11 @@ public class OrderSpecification implements Specification<Order>  {
 			list.add(criteriaBuilder.equal(join.get("account"), inputOrder.getVolunteerAccount()));
 		}
 		
+		if(!StringUtils.isEmpty(inputOrder.getMissionTitle())) {
+			Join<Mission, Order> join = root.join("mission", JoinType.LEFT);
+			list.add(criteriaBuilder.like(join.get("title").as(String.class), "%" + inputOrder.getMissionTitle() + "%"));
+		}
+		
 		if(StringUtils.isEmpty(inputOrder.getOrderStatus())) {
 			if (!StringUtils.isEmpty(inputOrder.getOrderStatusDetail())) {
 				list.add(criteriaBuilder.like(root.get("orderStatus").as(String.class), "%" + inputOrder.getOrderStatusDetail() + "%"));
