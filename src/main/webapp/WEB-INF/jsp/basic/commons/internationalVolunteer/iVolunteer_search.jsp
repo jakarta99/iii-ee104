@@ -25,7 +25,13 @@
 	margin-right: 0;
 }
 </style>
-
+<script>
+	function doSpider(){
+		$.get("/commons/InternationalVolunteer/spidertest", function(msg){
+			alert(msg);
+		})
+	}
+</script>
 </head>
 <body>
 

@@ -42,6 +42,16 @@ function doSpider(){
 		alert(msg);
 	})
 }
+
+function query(){
+	$.ajax({
+		url:"/commons/organization/query?page="+page+"&length="+length,
+		type: "get",
+	    dataType : "json",
+	 }).done(function(data){
+		 
+	 })
+}
 </script>
 </head>
 <body>
@@ -51,9 +61,43 @@ function doSpider(){
 		<!-- Navbar -->
 		<jsp:include page="../commons_layout/commons_nav.jsp" />
 		<!-- heading-breadcrumbs -->
-		<jsp:include page="../commons_layout/commons_heading_breadcrumbs.jsp" />
+<%-- 		<jsp:include page="../commons_layout/commons_heading_breadcrumbs.jsp" /> --%>
+		
+		
+				<section>
+			<!-- Carousel Start-->
+			<div class="home-carousel">
+<!-- 				<div class="dark-mask"></div> -->
+				<div class="homepage owl-carousel" style="padding-top: 0;">
+					<div class="item">
+						<div class="row">
+							<img
+								src="https://media.goeco.org/_media/media/422/11924_1903_546.jpg"
+								alt="">					
+						</div>
+					</div>
+					<div class="item">
+						<div class="row">
+							<img
+								src="https://media.goeco.org/_media/media/422/11945_1903_546.jpg"
+								alt="" class="ml-auto">
+
+						</div>
+					</div>
+					<div class="item">
+						<div class="row">
+							<img
+								src="https://media.goeco.org/_media/media/422/11950_1903_546.jpg"
+								alt="" class="ml-auto">
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Carousel End-->
+		</section>
 <!-- 		<h4 class="h4"><a href="#" onclick="doSpider()">若無資料，請按此進行爬蟲功能	</a></h4> -->
-<!-- 		<a href="/commons/InternationalVolunteer/search" >國際志工專區-搜尋</a>  -->
+		
 		<div id="content" style='margin-top:50px'>
 			<div class="container" >
 				<div class="panel-body">
@@ -90,7 +134,7 @@ function doSpider(){
                     
 	                    <span class="input-group-btn form-group">
 	                    
-	                    	<input type="button" value="搜尋" id="searchButt" class="btn btn-outline-primary">               
+	                    	<input type="button" value="搜尋" id="searchButt" class="btn btn-outline-primary" onclick="query()">               
 	                    </span>
                     </div>
                   </form>
