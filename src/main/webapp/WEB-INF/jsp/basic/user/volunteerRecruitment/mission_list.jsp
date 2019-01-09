@@ -82,12 +82,12 @@
             <div class="col-md-7">
               <h1 id="webtitle" class="h2"></h1>
             </div>
-<!--             <div class="col-md-5"> -->
-<!--               <ul class="breadcrumb d-flex justify-content-end"> -->
-<!--                 <li class="breadcrumb-item"><a href="index.html">Home</a></li> -->
-<!--                 <li class="breadcrumb-item active">Blog Listing: Small</li> -->
-<!--               </ul> -->
-<!--             </div> -->
+            <div class="col-md-5">
+              <ul class="breadcrumb d-flex justify-content-end">
+                <li class="breadcrumb-item"><a href="/">首頁</a></li>
+                <li class="breadcrumb-item active">招募紀錄</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -97,7 +97,7 @@
         <div class="container">
         <section class="bar_1">
         	<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
-		       <li class="nav-item"><a id="status12Butt" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active">未開始</a></li>
+		       <li class="nav-item"><a id="status12Butt" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="false" class="nav-link">未開始</a></li>
 		       <li class="nav-item"><a id="status3Butt" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">時數未核發</a></li>
 		       <li class="nav-item"><a id="status4Butt" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" class="nav-link">歷史紀錄</a></li>
    			 </ul>
@@ -208,6 +208,7 @@
 		$("#missionstatus").val("A_VolunteerApproved");
 		page=0;
 		list();
+
 	})
 	
 	$("#status3Butt").click(function(){
@@ -327,7 +328,7 @@
 			} 	
  
 	$(document).ready( function () {
-
+// 		alert('${test}')
 		new TwCitySelector();
 		
 		$('#startDate').datetimepicker({
@@ -344,10 +345,47 @@
 		    startView:"years",
 		})
 		
-		$("#missionstatus").val("A_VolunteerApproved");
-		$("#webtitle").append("招募紀錄-未開始");
+		if(${box}=="3"){
+			$("#webtitle").empty().append("招募紀錄-歷史紀錄");
+			$("#missionstatus").val('C_Finish');
+			
+		}else if (${box}=="2"){
+			$("#webtitle").empty().append("招募紀錄-時數未核發");
+			$("#missionstatus").val('B_AccountsPayable');
+		}else{
+			$("#webtitle").empty().append("招募紀錄-未開始");
+			$("#missionstatus").val("A_VolunteerApproved");
+		}
+		
 		
 		list()
+		
+		if($("#missionstatus").val()=='C_Finish'){
+			$("#status3Butt").attr("aria-selected",false)
+			$("#status3Butt").attr("class",'nav-link page-item')
+			$("#status12Butt").attr("aria-selected",false)
+			$("#status12Butt").attr("class",'nav-link page-item')
+			$("#status4Butt").attr("aria-selected",true)
+			$("#status4Butt").attr("class",'nav-link page-item active show')
+			
+		}else if ($("#missionstatus").val()=='B_AccountsPayable'){
+			$("#status4Butt").attr("aria-selected",false)
+			$("#status4Butt").attr("class",'nav-link page-item')
+			$("#status12Butt").attr("aria-selected",false)
+			$("#status12Butt").attr("class",'nav-link page-item')
+			$("#status3Butt").attr("aria-selected",true)
+			$("#status3Butt").attr("class",'nav-link page-item active show')
+			
+		}else{
+			$("#status3Butt").attr("aria-selected",false)
+			$("#status3Butt").attr("class",'nav-link page-item')
+			$("#status4Butt").attr("aria-selected",false)
+			$("#status4Butt").attr("class",'nav-link page-item')
+			$("#status12Butt").attr("aria-selected",true)
+			$("#status12Butt").attr("class",'nav-link page-item active show')
+		}
+		
+		
 		
 		
 		$("#pagebox").on("click","li>a[name='backa']", function(){

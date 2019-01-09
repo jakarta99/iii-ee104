@@ -28,8 +28,8 @@
 	                </sec:authorize>	                
 					<sec:authorize  access="isAuthenticated()">
 
-						<span class="d-none d-md-inline-block" id="loginName"> 
-							Welcome Back, <sec:authentication property="name"/>&nbsp&nbsp&nbsp
+						<span class="d-none d-md-inline-block" id="loginName" style="width:150px"> 
+							歡迎回來, <sec:authentication property="name"/>&nbsp&nbsp&nbsp
 						</span>					
 						<!-- logout method:get -->
 						<a href="/logout" class="logout-btn">

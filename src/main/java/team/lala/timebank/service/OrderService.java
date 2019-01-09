@@ -52,7 +52,9 @@ public class OrderService {
 		log.debug("Orders={}", orders);
 		return orders;
 	}
-
+	public List<Order> findByMissionAndOrderStatus(Mission mission, OrderStatus orderStatus){
+		return orderDao.findByMissionAndOrderStatus(mission, orderStatus);
+	}
 	//志工幫雇主評分
 //	public void score(Long orderId, Integer score) {
 //		Order order = orderDao.getOne(orderId);
@@ -87,6 +89,24 @@ public class OrderService {
 		systemMessageService.reportMessage(order);
 		return penalty;
 	}
+	
+	//顧主檢舉志工
+		public Penalty requesterReportVolunteer(Long orderId, String description) {
+			Order order = orderDao.getOne(orderId);	
+			
+			Penalty penalty = penaltyService.requesterReportVolunteer(order, description);
+			if(order.getReportStatus()==ReportStatus.Null) {
+				order.setReportStatus(ReportStatus.RequesterReportVolunteer);
+			}else if(order.getReportStatus()==ReportStatus.VolunteerReportRequester) {
+				order.setReportStatus(ReportStatus.BothReport);
+			}
+			order.setOrderStatus(OrderStatus.ServiceFinishPayMatchSuccess);
+			orderDao.save(order);
+			return penalty;
+		}
+		
+		
+	
 
 	public List<Order> findByVolunteer(Principal principal) {
 		String account = principal.getName();

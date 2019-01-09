@@ -163,8 +163,8 @@ public class PenaltyService {
 		dbPenalty.setVertifyReason(vertifyReason);
 		return penaltyDao.save(dbPenalty);
 	}
-	
-	//志工檢舉雇主
+
+	// 志工檢舉雇主
 	public Penalty report(Order order, String description) {
 		Penalty penalty = new Penalty();
 		penalty.setOrder(order);
@@ -176,6 +176,17 @@ public class PenaltyService {
 		return penaltyDao.save(penalty);
 	}
 
+	// 雇主檢舉志工
+	public Penalty requesterReportVolunteer(Order order, String description) {
+		Penalty penalty = new Penalty();
+		penalty.setOrder(order);
+		penalty.setAccuser(order.getMission().getMember());//原告
+		penalty.setDefendant(order.getVolunteer());//被告
+		penalty.setUpdateDate(new java.util.Date());
+		penalty.setDescription(description);
+		penalty.setStatus(new Integer(1));
+		return penaltyDao.save(penalty);
+	}
 
 	public Penalty save(Penalty penalty) {
 		penalty.setUpdateDate(new java.util.Date());
@@ -204,20 +215,20 @@ public class PenaltyService {
 		return penalty;
 	}
 
-	//Excel、PDF報表用
+	// Excel、PDF報表用
 	public List<List<String>> findAllBySpecificationForExcelAndPdf(Specification<Penalty> specification) {
 		List<Penalty> penalties = penaltyDao.findAll(specification);
-		
+
 		List<List<String>> results = new ArrayList<List<String>>();
-		for(Penalty p : penalties) {
+		for (Penalty p : penalties) {
 			List<String> pen = turnPenaltyIntoStringList(p);
 			results.add(pen);
 		}
 		return results;
 	}
-	
-	//Excel、PDF報表用(產表頭)
-	public List<String> getPenaltyExcelAndPdfHeaders(){
+
+	// Excel、PDF報表用(產表頭)
+	public List<String> getPenaltyExcelAndPdfHeaders() {
 		List<String> headers = new ArrayList<String>();
 		headers.add("PENALTY_ID");
 		headers.add("MISSION_START_DATE");
@@ -226,31 +237,27 @@ public class PenaltyService {
 		headers.add("DEFENDANT_ACCOUNT");
 		headers.add("UPDATEDATE");
 		headers.add("DESCRIPTION");
-		
+
 		headers.add("STATUS");
 		headers.add("PENALTY_TIMEVALUE");
 		headers.add("PROOF_PICNAME");
-		
+
 		headers.add("VERTIFY_REASON");
 		return headers;
 	}
-	
-	//給EXCEL用
+
+	// 給EXCEL用
 	public List<String> turnPenaltyIntoStringList(Penalty penalty) {
-		String temp = penalty.getId() + "," 
-				+ penalty.getOrder().getMission().getStartDate() + "," + penalty.getOrder().getMission().getTitle() + ","
-				+ penalty.getAccuser().getAccount() + ","
-				+ penalty.getDefendant().getAccount() + ","
-				+ penalty.getUpdateDate() + "," + penalty.getDescription() + "," + penalty.getStatus() + ","
-				+ penalty.getPenaltyTimeValue() + "," + penalty.getProofPicName() + ","
-				+ penalty.getVertifyReason();
+		String temp = penalty.getId() + "," + penalty.getOrder().getMission().getStartDate() + ","
+				+ penalty.getOrder().getMission().getTitle() + "," + penalty.getAccuser().getAccount() + ","
+				+ penalty.getDefendant().getAccount() + "," + penalty.getUpdateDate() + "," + penalty.getDescription()
+				+ "," + penalty.getStatus() + "," + penalty.getPenaltyTimeValue() + "," + penalty.getProofPicName()
+				+ "," + penalty.getVertifyReason();
 		String[] array = temp.split(",");
-		List<String> result= Arrays.asList(array);
+		List<String> result = Arrays.asList(array);
 		return result;
 	}
-	
-	
-	
+
 	public List<Penalty> findAllBySpecification(Specification<Penalty> specification) {
 		List<Penalty> penalties = penaltyDao.findAll(specification);
 		return penalties;

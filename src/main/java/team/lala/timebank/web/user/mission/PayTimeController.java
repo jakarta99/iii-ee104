@@ -78,13 +78,15 @@ public class PayTimeController {
 		return response;
 	}
 	@ResponseBody
-	@RequestMapping("/report")		//雇主檢舉志工
+	@RequestMapping("/report")	//雇主檢舉志工
 	public AjaxResponse<Order> Report(@RequestParam(value="orderId") Long orderId,
 			@RequestParam(value="description") String description,
 			@RequestParam("proofPic") MultipartFile proofPic
 			, MultipartHttpServletRequest request){
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
-		Penalty penalty =  orderService.report(orderId, description);
+		
+		Penalty penalty =  orderService.requesterReportVolunteer(orderId, description);
+		
 		try {
 			if (proofPic.getOriginalFilename().length() > 0) {
 				// 取得應用程式根目錄中圖片之路徑

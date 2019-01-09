@@ -287,7 +287,7 @@
 	        	   var box="<div class='col-md-4'>"
         		   box+="<div class='video'>"
         		   box+="<div class='embed-responsive embed-responsive-4by3'>"	        	
-        		   box+=" <a href='/commons/domesticVolunteer/apply?missionId="+ order.mission.id +"'><img src=../../img/"+order.mission.missionPicName+" class='embed-responsive-item'></img></a>"     
+        		   box+=" <a href='/commons/domesticVolunteer/apply?missionId="+ order.mission.id +"'><img src=/image/user/mission/"+order.mission.missionPicName+" class='embed-responsive-item'></img></a>"     
         		   box+="</div></div></div>"
                    box+="<div class='col-md-8'>"
                    box+="<h1 class='h1 mt-0'><a href='/commons/domesticVolunteer/apply?missionId="+ order.mission.id +"'>"+ order.mission.title + "</a></h1>"

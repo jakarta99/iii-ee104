@@ -129,6 +129,7 @@ public class SystemMessageService {
 		
 	}
 	
+	
 	//志工對雇主評分後，發送系統訊息
 	public void scoreMessage(Order order, Integer score) {
 		SystemMessage systemMessage = new SystemMessage();
