@@ -243,10 +243,11 @@
 	        	$.each(orders.content,function(index, order){
 	        		var box="<div class='col-md-4'>"
 	        			box+="<div data-animate='fadeInUp' class='team-member'>"
-	        			box+="<div class='image'><a href='team-member.html'><img src='/image/user/member/"+order.volunteer.picture+"' class='img-fluid rounded-circle'></a></div>"
-	        			box+="<h3><a href='team-member.html'>"+order.volunteer.name+"</a></h3><div>"
+	        			box+="<div class='image_1'><a href='team-member.html'><img src='/image/user/member/"+order.volunteer.picture+"' class='img-fluid rounded-circle'></a></div>"
+	        			box+="<h1 style='font-family:Microsoft JhengHei'><a href='team-member.html'>"+order.volunteer.name+"</a></h1><div>"
+	        			
 	        			if(order.orderStatus=='ServiceFinishNotPay'){
-	        			box+= "<div ><div class='input-group mb-3' ><div class='input-group-prepend'><label class='input-group-text'>分數:</label></div><select class='custom-select' id='score"+order.volunteer.id+"' name='timeValue' >"
+	        			box+= "<div class='row' ><div class='col-md-6 center-block'><div class='input-group mb-3' ><div class='input-group-prepend'><label class='input-group-text'>分數:</label></div><select class='custom-select' id='score"+order.volunteer.id+"' name='timeValue' >"
 	        			for(var x = 1 ; x <=5 ; x++){
 							if(x==5){
 								box += "<option selected='true' value='" + x + "'>"+ x + "</option>"	
@@ -254,8 +255,9 @@
 								box += "<option value='" + x + "'>"+ x + "</option>"
 							}
 						}	
-	        			box +='</select></div>'
-	        			box +="<div class='input-group mb-3' ><div class='input-group-prepend'><label class='input-group-text'>時數:</label></div><select class='custom-select'  id='"+order.volunteer.id+"' name='timeValue'>"
+	        			box +='</select></div></div>'
+	        			
+	        			box +="<div class='col-md-6 center-block'><div class='input-group mb-3' ><div class='input-group-prepend'><label class='input-group-text'>時數:</label></div><select class='custom-select'  id='"+order.volunteer.id+"' name='timeValue'>"
 	        			for(var i = 0 ; i <= order.mission.timeValue ; i++){
 								if(i==order.mission.timeValue){
 									box += "<option selected='true' value='" + i + "'>"+ i + "</option>"	
@@ -263,12 +265,13 @@
 									box += "<option value='" + i + "'>"+ i + "</option>"
 								}
 							}
-	        			box +='</select></div></div>'	
-						var value=$("#"+order	.volunteer.id+" option:selected").val()
-	        			box+="<button class='btn btn-primary' onclick=\"pay("+order.id+","+order.volunteer.id+",'"+order.volunteer.name+"')\">時數核發與評分</button>"
-	        			box+="<button class='btn btn-danger' data-toggle='modal' data-target='#reportModalCenter' id='" + order.id + "' name='" + order.volunteer.name+ "'>  檢舉    </button></div>"
+	        			box +='</select></div></div></div>'	
+						
+	        			var value=$("#"+order	.volunteer.id+" option:selected").val()
+	        			box+="<button class='btn btn-primary btn-lg_1' onclick=\"pay("+order.id+","+order.volunteer.id+",'"+order.volunteer.name+"')\">時數核發與評分</button>"
+	        			box+="<button class='btn btn-danger btn-lg_1' data-toggle='modal' data-target='#reportModalCenter' id='" + order.id + "' name='" + order.volunteer.name+ "'>檢舉 </button></div>"
 	        			}else if(order.orderStatus=='ServiceFinishPayMatchSuccess'){
-	        			box+="<span class='badge badge-success'>已付款與評分</span>"
+	        			box+="<span class='badge badge-success_1'>已付款與評分</span>"
 	        			}else if(order.orderStatus=='ServiceFinishNotPay'){
 	        			box+="<span class='badge badge-danger'>已檢舉</span>"	
 	        			}else {
