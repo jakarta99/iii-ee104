@@ -195,10 +195,11 @@ public class RecruitController {
 	@RequestMapping("/insert")
 	@ResponseBody
 	public AjaxResponse<Mission> insertOrder(Principal principal, @RequestParam("missionId") Long missionId) {
+		log.debug("**********","***********");
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
 		try {
 			Mission mission = missionService.getOne(missionId);
-
+			
 			//刊登者與申請者相同 申請失敗
 			if(!mission.getMember().getAccount().equals(principal.getName())) {
 				//已存在相同申請者 申請失敗

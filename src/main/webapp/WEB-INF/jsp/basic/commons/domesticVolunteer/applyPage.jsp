@@ -208,27 +208,41 @@
 			  dangerMode: true,
 			}).then((willreject) => {
 				if(willreject){
-					$.get("/user/volunteerRecruitment/insert",{"missionId":missionId},
-						function(data){
-						
-							if(data.status == 'SUCCESS'){
-								swal({
-								  title: "申請結果",
-								  text: "申請成功",
-								  icon: "success",
-								  buttons: false,
-								  dangerMode: false,
-								})
-							}else{
-								swal({
-									  title: "申請失敗",
-									  text: " "+data.messages,
-									  icon: "error",
-									  buttons: false,
-									  dangerMode: false,
-									})
-							}
+					$.ajax({
+						url:"/user/volunteerRecruitment/insert?missionId="+missionId,
+						type:'get',
+						dataType:'json'
+					}).fail(function( jqXHR, textStatus){
+						if(jqXHR.status == 200){
+							window.location.replace("/login");
+						}
 					})
+// 							function( data, textStatus, jqXHR ){
+// 							console.log(jqXHR);
+// 							console.log(data);
+// 							if(data.status == 'SUCCESS'){
+// 								swal({
+// 								  title: "申請結果",
+// 								  text: "申請成功",
+// 								  icon: "success",
+// 								  buttons: false,
+// 								  dangerMode: false,
+// 								})
+// 							}
+// // 							else if(data.status == undefined){
+// // 								 window.location.replace("/login")
+// // 							} 
+// 							else{
+								
+// 								swal({
+// 									  title: "申請失敗",
+// 									  text: " "+data.messages,
+// 									  icon: "error",
+// 									  buttons: false,
+// 									  dangerMode: false,
+// 									})
+// 							}
+// 					})
 				}else{
 					
 				}
