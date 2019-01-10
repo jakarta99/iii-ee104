@@ -32,7 +32,8 @@
     display: none;
 }
 .panel-body{
-	background-color: rgba(200, 200, 200); 
+/* 	background-color: rgba(200, 200, 200);  */
+	background-color:rgba(19, 85, 180, 0.16);
 	border-radius: 5px;
 	margin-bottom:20px;
 
@@ -49,20 +50,20 @@
 .input-group .btn, .form-control{	
 	border-radius: 3px;
 	font-size: 16px;
-    height: 52px !important;
+    height: 52px ;
 }
 
 .btn-outline-primary {
     color: #fff;
-    background-color: #13B5AD;
-    border-color: #13B5AD;  
+    border-color:#13b5b1a8;
+    background-color: #13b5b1a8; 
     transition:all 0.5s;
+
 }
 .btn-outline-primary:hover {
 	color: #fff; 
-    background-image: none;
-    border-color:#4f9d9d;
-    background-color: #4f9d9d; 
+    background-color: #13b5b1ed;
+    border-color: #13b5b1ed;  
     transition:all 0.5s;
 }
 </style>
@@ -120,7 +121,7 @@ function query(){
 	            	<form action="/commons/InternationalVolunteer/list" method="get" role="search">
 	                	<div class="input-group" >                                                                               
 		                    <div class="form-group" >
-								<select id="continent" 
+								<select id="continent" style="height:52px"
 									name="continent" class="form-control">
 									<option value="東南亞">東南亞</option>
 									<option value="中南亞">中南亞</option>
@@ -150,7 +151,7 @@ function query(){
                     
 	                    <span class="input-group-btn form-group">
 	                    
-	                    	<input type="submit" value="搜尋" id="searchButt" class="btn btn-outline-primary" onclick="query()">               
+	                    	<input style="height:48px" type="submit" value="搜尋" id="searchButt" class="btn btn-outline-primary" onclick="query()">               
 	                    </span>
                     </div>
                   </form>

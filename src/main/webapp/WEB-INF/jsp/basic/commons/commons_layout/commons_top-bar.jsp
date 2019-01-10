@@ -28,7 +28,7 @@
 	                </sec:authorize>	                
 					<sec:authorize  access="isAuthenticated()">
 
-						<span class="d-none d-md-inline-block" id="loginName" style="width:150px"> 
+						<span class="d-none d-md-inline-block" id="loginName" style="width:200px; text-align:right"> 
 							歡迎回來, <sec:authentication property="name"/>&nbsp&nbsp&nbsp
 						</span>					
 						<!-- logout method:get -->

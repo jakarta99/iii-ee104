@@ -4,6 +4,7 @@
 <script src="/js/webjar/sockjs.min.js"></script>
 <script src="/js/webjar/stomp.min.js"></script>
 
+<link rel="stylesheet" href="/css/chatt.css" />
 <script type="text/javascript">
 
 	var stompClient = null;
@@ -83,20 +84,14 @@
 		<div>
 			<input type="text" disabled="disabled" id="to" value="${mission.member.account}"  />
 		</div>
-<!-- 		<br /> -->
-<!-- 		<div> -->
-<!-- 			<button id="connect" onclick="connect();">Connect</button> -->
-<!-- 			<button id="disconnect" disabled="disabled" onclick="disconnect();"> -->
-<!-- 				Disconnect</button> -->
-<!-- 		</div> -->
-<!-- 		<br /> -->
+
 
 		
 		<div id="container" onload="disconnect()">
 	        <div id="content" > </div>
-	        <div id="send-box">   
-	        	<div id="conversationDiv" style="width:260px; height:300px;border:1px solid black; text-align:center; padding:20px">
-					<p id="response" style="height:240px;border:1px solid blue;"></p>
+	        <div class="chattbox" id="send-box">   
+	        	<div id="conversationDiv">
+					<p id="response"></p>
 					<input type="text" id="text" placeholder="Write a message..." />
 					<button id="sendMessage" onclick="sendMessage();">Send</button>
 				</div>
