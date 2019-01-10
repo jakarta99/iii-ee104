@@ -23,9 +23,9 @@ import lombok.extern.slf4j.Slf4j;
 public class MySimpleUrlAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
 	private RequestCache requestCache = new HttpSessionRequestCache();
-	private String defaultTargetUrl = "/";
+//	private String defaultTargetUrl = "/";
 	private String targetUrlParameter ="sourceUrl";
-	private boolean useReferer = false;
+//	private boolean useReferer = false;
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws ServletException, IOException {
@@ -57,45 +57,24 @@ public class MySimpleUrlAuthenticationSuccessHandler extends SimpleUrlAuthentica
 
 	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
-		String targetUrl = determineTargetUrl(request, response);
-
+		String targetUrl = null;
+		log.debug("sourceUrl={}",request.getParameter(targetUrlParameter));
+		
+		if (!StringUtils.isEmpty(request.getParameter(targetUrlParameter))) {
+			targetUrl = request.getParameter(targetUrlParameter);
+		} else {
+			targetUrl = determineTargetUrl(request, response);			
+		}
+		log.debug("targetUrl={}",targetUrl);
 		if (response.isCommitted()) {
-			logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
+			log.debug("Response has already been committed. Unable to redirect to " + targetUrl);
 			return;
 		}
 
 		getRedirectStrategy().sendRedirect(request, response, targetUrl);
 	}
 
-	protected String determineTargetUrl(HttpServletRequest request,
-			HttpServletResponse response) {
-		if (isAlwaysUseDefaultTargetUrl()) {
-			return defaultTargetUrl;
-		}
-
-		// Check for the parameter and use that if available
-		String targetUrl = null;
-
-		if (targetUrlParameter != null) {
-			targetUrl = request.getParameter(targetUrlParameter);
-			if (StringUtils.hasText(targetUrl)) {
-				logger.debug("Found targetUrlParameter in request: " + targetUrl);
-				return targetUrl;
-			}
-		}
-
-		if (useReferer && !StringUtils.hasLength(targetUrl)) {
-			targetUrl = request.getHeader("Referer");
-			logger.debug("Using Referer header: " + targetUrl);
-		}
-
-		if (!StringUtils.hasText(targetUrl)) {
-			targetUrl = defaultTargetUrl;
-			logger.debug("Using default Url: " + targetUrl);
-		}
-
-		return targetUrl;
-	}
+	
 
 
 	public void setRequestCache(RequestCache requestCache) {
