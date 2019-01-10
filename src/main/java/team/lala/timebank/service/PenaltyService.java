@@ -91,7 +91,14 @@ public class PenaltyService {
 
 		if (penalty != null) {
 			//修改Order中ReportStatus的狀態
-			penalty.getOrder().setReportStatus(ReportStatus.TemporarilyEnd);
+			if(penalty.getStatus().equals(2)) { //如果審核結果須懲罰
+				penalty.getOrder().setReportStatus(ReportStatus.TemporarilyEnd);
+			}
+			
+			if(penalty.getStatus().equals(3)) { //如果審核結果不須懲罰
+				penalty.getOrder().setReportStatus(ReportStatus.Finish);
+			}
+			
 			
 			//寄信給檢舉人
 			SystemMessage systemMessage = new SystemMessage();

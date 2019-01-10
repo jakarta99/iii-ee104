@@ -29,7 +29,7 @@ public class ApplyPenaltyReVertifyController {
 	
 	//Jasmine 提出申訴
 		//如果penalty.getOrder().getReportStatus == ReportStatus.TemporarilyEnd
-		//則更改Penalty狀態為4 申訴中
+		//則更改Penalty狀態為申訴中
 	@ResponseBody
 	@RequestMapping(value = "/applyReVertify", method = RequestMethod.POST)
 	public AjaxResponse<Penalty> applyReVertify(@RequestParam("penaltyId") Long penaltyId, 

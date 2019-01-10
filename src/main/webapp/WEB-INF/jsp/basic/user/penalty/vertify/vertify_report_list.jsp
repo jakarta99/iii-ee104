@@ -139,7 +139,7 @@
 						<th scope="col">檢舉事由</th>
 						<th scope="col">懲罰額度(小時)</th>
 						<th scope="col">處理進度</th>
-						
+						<th scope="col">是否申訴</th>
 						
 					</tr>
 				</thead>
@@ -223,8 +223,28 @@
 					{data:"defendant.account"},
 					{data:"description"},
 					{data:"penaltyTimeValue"},
-					{data:"status"},
+					{data:function (data){
+						var status = data.status;
+						if(status == 1){
+							return "審核中";
+						}else if(status == 2){
+							return "已懲罰";
+						}else if(status == 3){
+							return "不懲罰";
+						}else if(status == 4){
+							return "申訴審核中";
+						}
+					}
 					
+					},
+					{data:function (data){
+						var applyReVertify = data.applyReVertify;
+						if(applyReVertify == null){
+							return "N";
+						}else{
+							return data.applyReVertify;
+						}
+					}},
 					
 				], columnDefs:[{		//DataTable:禁用第0123列的搜索和排序
 					"searchable": false,
