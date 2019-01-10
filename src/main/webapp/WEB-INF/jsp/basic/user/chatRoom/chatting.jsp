@@ -18,6 +18,43 @@
 	}
 
 	function connect() {
+		$.ajax({
+			url:"/user/chatMessage/list?to=" + to,
+			type: "post",
+		    dataType : "json",	 
+// 		    statusCode: {
+// 	    	    302: function() {
+// 	    	        alert( "page not found" );
+// 	    	      }
+// 	    	    }
+		    
+        }).done(function(data, textStatus, jqXHR ){
+        	console.log("data"+data)
+        	console.log("jqXHR="+jqXHR)
+        	var response = document.getElementById('response');
+    		$.each(data, function(idx, obj){
+    			console.log("text="+obj.text)
+    			var m = new Date(obj.time);
+    			var dateTime = m.getUTCHours() + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds();
+    	 		var p = document.createElement('p');
+    	 		p.style.wordWrap = 'break-word';
+    	 		p.appendChild(document.createTextNode(obj.fromAccount + ": "
+    	 				+ obj.text + " (" + dateTime + ")" ) );
+    	 		response.appendChild(p);
+    	 		if (obj.fromAccount == to){
+    		 		p.classList.add("p1-to");
+    		 		
+    		 	} else {
+    		 		p.classList.add("p1-from");
+    		 	}
+    		})
+       }).fail(function (jqXHR, textStatus) {
+			if (textStatus == "parsererror"){
+				window.location.replace("/login");
+			}
+	    
+	    });
+		
 		var socket = new SockJS('/chat');
 		stompClient = Stomp.over(socket);
 		stompClient.connect({}, function(frame) {
@@ -28,31 +65,7 @@
 			});
 		
 			var to = $("#to").val();
-			$.ajax({
-					url:"/user/chatMessage/list?to=" + to,
-					type: "post",
-				    dataType : "json",	    
-		        }).done(function(data){
-		        	console.log("data=");
-		        	console.log(data)
-		        	var response = document.getElementById('response');
-		    		$.each(data, function(idx, obj){
-		    			console.log("text="+obj.text)
-		    			var m = new Date(obj.time);
-		    			var dateTime = m.getUTCHours() + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds();
-		    	 		var p = document.createElement('p');
-		    	 		p.style.wordWrap = 'break-word';
-		    	 		p.appendChild(document.createTextNode(obj.fromAccount + ": "
-		    	 				+ obj.text + " (" + dateTime + ")" ) );
-		    	 		response.appendChild(p);
-		    	 		if (obj.fromAccount == to){
-		    		 		p.classList.add("p1-to");
-		    		 		
-		    		 	} else {
-		    		 		p.classList.add("p1-from");
-		    		 	}
-		    		})
-		       })
+			
 		
 		});
 		

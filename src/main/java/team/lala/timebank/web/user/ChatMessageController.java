@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.extern.slf4j.Slf4j;
+import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.ChatClient;
 import team.lala.timebank.entity.ChatMessage;
 import team.lala.timebank.service.ChatMessageService;
@@ -41,6 +42,7 @@ public class ChatMessageController {
 	@RequestMapping("/user/chatMessage/list")
 	public List<ChatMessage> listMessages(@RequestParam String to, Principal principal){
 		log.debug("to={}",to);
+//		AjaxResponse<List<ChatMessage>> resp = new AjaxResponse<List<ChatMessage>>();
 		ChatMessage chatMessage = new ChatMessage();
 		chatMessage.setToAccount(to);
 		chatMessage.setFromAccount(principal.getName());
