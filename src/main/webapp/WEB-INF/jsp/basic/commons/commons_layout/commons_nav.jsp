@@ -12,7 +12,7 @@
                 </li>
                 <li class="nav-item menu-large"><a href="/commons/domesticVolunteer/list" >志工招募<b class="caret"></b></a>
                 </li>
-                <sec:authorize access="hasAnyRole('USER','ORG_USER')">
+<%--                 <sec:authorize access="hasAnyRole('USER','ORG_USER')"> --%>
               	<li class="nav-item dropdown menu-large" ><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">會員專區 <b class="caret"></b></a>
                   <ul class="dropdown-menu megamenu" style="width:450px;">
                     <li>
@@ -43,7 +43,7 @@
                     </li>
                   </ul>
                 </li>
-                </sec:authorize>
+<%--                 </sec:authorize> --%>
                 <li class="nav-item menu-large"><a href="/commons/InternationalVolunteer/list" >國際志工專區<b class="caret"></b></a>                        
                 <!-- ========== FULL WIDTH MEGAMENU ==================-->
                 <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">關於我們 <b class="caret"></b></a>

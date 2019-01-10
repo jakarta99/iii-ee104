@@ -21,13 +21,7 @@
 		$.ajax({
 			url:"/user/chatMessage/list?to=" + to,
 			type: "post",
-		    dataType : "json",	 
-// 		    statusCode: {
-// 	    	    302: function() {
-// 	    	        alert( "page not found" );
-// 	    	      }
-// 	    	    }
-		    
+		    dataType : "json",	 	    
         }).done(function(data, textStatus, jqXHR ){
         	console.log("data"+data)
         	console.log("jqXHR="+jqXHR)
@@ -49,9 +43,11 @@
     		 	}
     		})
        }).fail(function (jqXHR, textStatus) {
-			if (textStatus == "parsererror"){
-				window.location.replace("/login");
-			}
+    	   console.log(jqXHR)
+// 			if (textStatus == "parsererror"){
+// 				window.location.href = '/login';
+// 			}
+    	   document.write(jqXHR.responseText)
 	    
 	    });
 		
