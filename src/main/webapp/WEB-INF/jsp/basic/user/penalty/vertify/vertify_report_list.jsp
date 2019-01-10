@@ -65,6 +65,7 @@
 						<option value=1>審核中</option>
 						<option value=2>審核完成，有懲罰</option>
 						<option value=3>審核完成，未懲罰</option>
+						<option value=4>申訴審核中</option>
 					</select>
 					<div>
 						<label>檢舉事由</label>
@@ -99,7 +100,8 @@
 		
 		<fieldset style="width:1300px">
 			<div class="btn-group" style="margin-bottom: 20px">
-			  <button type="button" class="btn btn-info" id="vertifyingCase">審核中</button>
+			  <button type="button" class="btn btn-info" id="vertifyingCase">【檢舉】審核中</button>
+			  <button type="button" class="btn btn-outline-info" id="reVertifyingCase">【申訴】審核中</button>
 			  <button type="button" class="btn btn-outline-info" id="allCases">所有案件</button>
 			  <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="history">
 			    	審核歷史紀錄
@@ -201,13 +203,27 @@
 		           	{data: function (data) {
 		           		var vertifyButt = "";
 		           		//已完成審核之案件，不顯示審核按鈕
-		           		if(data.status != 1){
-		           			vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-info btn-sm\"  onclick=\"javascript:document.location.href='/admin/penaltyVertify/vertify?id="
-								+ data.id + "'\" value='檢視紀錄'  /></div>";
+// 		           		if(data.status != 1){
+// 		           			vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-info btn-sm\"  onclick=\"javascript:document.location.href='/admin/penaltyVertify/vertify?id="
+// 								+ data.id + "'\" value='檢視紀錄'  /></div>";
+// 						}else{
+// 							vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-info btn-sm\"  onclick=\"javascript:document.location.href='/admin/penaltyVertify/vertify?id="
+// 								+ data.id + "'\" value='審核'  /></div>";
+// 						}
+		           		if(data.status == 1){
+		           			vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/penaltyVertify/vertify?id="
+								+ data.id + "'\" value='[檢舉]審核'  /></div>";
+						}else if(data.status == 4){
+							vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/penaltyVertify/vertify?id="
+								+ data.id + "'\" value='[申訴]審核'  /></div>";
 						}else{
 							vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-info btn-sm\"  onclick=\"javascript:document.location.href='/admin/penaltyVertify/vertify?id="
-								+ data.id + "'\" value='審核'  /></div>";
+								+ data.id + "'\" value='檢視紀錄'  /></div>";
 						}
+		           		
+		           		
+		           		
+		           		
 		               	return vertifyButt;	}
 		           	},
 		           	{data:"id" },
@@ -287,12 +303,22 @@
 				dataTable.ajax.reload();
 			})
 			
-			//按下審核中的按鍵
+			//按下檢舉審核中的按鍵
 			$("#vertifyingCase").click(	function(){
 				$('#status').val("1");
 				dataTable.ajax.reload();
 				$("#history").attr('class', 'btn btn-outline-info dropdown-toggle');
 				$("#allCases").attr('class', 'btn btn-outline-info');
+				$("#reVertifyingCase").attr('class', 'btn btn-outline-info');
+				$(this).attr('class', 'btn btn-info');
+			})
+			//按下申訴審核中按鍵
+			$("#reVertifyingCase").click(function(){
+				$('#status').val("4");
+				dataTable.ajax.reload();
+				$("#history").attr('class', 'btn btn-outline-info dropdown-toggle');
+				$("#allCases").attr('class', 'btn btn-outline-info');
+				$("#vertifyingCase").attr('class', 'btn btn-outline-info');
 				$(this).attr('class', 'btn btn-info');
 			})
 			
@@ -301,6 +327,7 @@
 				$('#status').val("");
 				dataTable.ajax.reload();
 				$("#vertifyingCase").attr('class', 'btn btn-outline-info');
+				$("#reVertifyingCase").attr('class', 'btn btn-outline-info');
 				$("#history").attr('class', 'btn btn-outline-info dropdown-toggle');
 				$(this).attr('class', 'btn btn-info');
 			})
@@ -309,6 +336,7 @@
 			$("#history").click(function(){
 				$("#vertifyingCase").attr('class', 'btn btn-outline-info');
 				$("#allCases").attr('class', 'btn btn-outline-info');
+				$("#reVertifyingCase").attr('class', 'btn btn-outline-info');
 				$(this).attr('class', 'btn btn-info dropdown-toggle');
 			})
 			

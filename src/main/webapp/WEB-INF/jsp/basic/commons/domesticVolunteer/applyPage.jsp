@@ -107,16 +107,40 @@
                 <p align="center" class="lead">${mission.discription}
 				</div>
             </div>
-            <div class="row">
-              <div class="col-md-8">
-                <div class="heading">
+          <div class="row">
+            <div class="col-md-12">
+            <div class="heading">
                   <h3>活動資訊</h3>
                 </div>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                
 				<ul class="ul-icons list-unstyled">
 					<li>
 						<div class="icon-filled"></div>活動地點:${mission.county}${mission.district}${mission.address}
 					</li>
+					
+					
 					<li>
+						<div class="icon-filled"></div>起迄時間:<fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.startDate}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.endDate}"/>
+					</li>			
+					<li>
+						<div class="icon-filled"></div>聯絡人:${mission.contactPerson}<br>
+					</li>
+					<li>
+						<div class="icon-filled"></div>聯絡電話:${mission.contactPhone}
+					</li>
+					<li>
+						<div class="icon-filled"></div>聯絡Email:  ${mission.contactEmail}
+					</li>
+				</ul>
+
+              </div>
+              <div class="col-md-4">
+              	<ul class="ul-icons list-unstyled">
+              		<li>
 						<div class="icon-filled"></div>服務種類:${mission.serviceType.serviceType}
 					</li>
 					<li>
@@ -129,35 +153,18 @@
 							</c:if>
 					</li>
 					<li>
-						<div class="icon-filled"></div>起迄時間:<fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.startDate}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.endDate}"/>
-					</li>
-					<li>
 						<div class="icon-filled"></div>需求人數:${mission.peopleNeeded}人
 					</li>
 					<li>
 						<div class="icon-filled"></div>活動時數:${mission.timeValue}小時
 					</li>
-					<li>
-						<div class="icon-filled"></div>聯絡人:${mission.contactPerson}
-					</li>
-					<li>
-						<div class="icon-filled"></div>聯絡電話:${mission.contactPhone}
-					</li>
-					<li>
-						<div class="icon-filled"></div>聯絡Email:  ${mission.contactEmail}
-					</li>
-				</ul>
-				<div class="col-md-12 text-center">
-					<button onclick="insertOrder(${mission.id})" class="btn btn-template-outlined"><i class="fa fa-plus"></i>我要參加</button>
-				</div>
+              	</ul>
+              
               </div>
-              <div class="col-md-4"><img id="missionImg" alt="" src="/image/user/mission/${mission.missionPicName}" class="img-fluid rounded-circle"></div>
-            	
-            	
-            	
-            	
-            	
-            	<table>
+              <div class="col-md-4">
+              	<img  style="width:200px;height:180px;border:1px solid black;" id="missionImg" alt="" src="/image/user/mission/${mission.missionPicName}" class="img-fluid rounded-square">
+              	<table>
+              		<c:if test='${member.memberType == P}'>
             		<tr>
             			<td>會員帳號:${member.account}(debug用)</td>
             		</tr>
@@ -169,8 +176,15 @@
             		</tr>
             		<tr>
             			<td>會員名稱:${member.name}</td>
-            		</tr>         	
+            		</tr>
+            		</c:if>         	
             	</table>
+              
+              </div>
+            </div>
+            	<div class="col-md-12 text-center">
+					<button onclick="insertOrder(${mission.id})" class="btn btn-template-outlined"><i class="fa fa-plus"></i>我要參加</button>
+				</div>    	
             </div>
           </section>
  				
@@ -220,33 +234,7 @@
 				}
 				
 			})
-// 				if(wullreject){
-// 					$.get(
-// 						"/user/volunteerRecruitment/insert",
-// 						{"missionId":missionId},
-// 						function(data){
-// 							if(data.messages == '申請成功'){
-// 								swal({
-// 									  title: "申請結果",
-// 									  text: "申請成功",
-// 									  icon: "sucess",
-// 									  buttons: false,
-// 									  dangerMode: false,
-// 									})
-// 							}else{
-// 								swal({
-// 									  title: "申請結果",
-// 									  text: "申請失敗",
-// 									  icon: "error",
-// 									  buttons: false,
-// 									  dangerMode: false,
-// 									})
-// 							}
-							
-// 						}
-// 					)
-// 				}
-// 			}	
+
 	}
 	
 	

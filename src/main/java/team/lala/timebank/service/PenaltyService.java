@@ -175,7 +175,7 @@ public class PenaltyService {
 		}
 	}
 
-	// Jasmine 補註解
+	// Jasmine 檢舉案件審核
 	public Penalty vertifyPenalty(Long penaltyId, Integer status, Integer penaltyTimeValue, String vertifyReason) {
 		Penalty dbPenalty = penaltyDao.getOne(penaltyId);
 		dbPenalty.setPenaltyTimeValue(penaltyTimeValue);
@@ -183,6 +183,18 @@ public class PenaltyService {
 		dbPenalty.setVertifyReason(vertifyReason);
 		return penaltyDao.save(dbPenalty);
 	}
+	
+	// Jasmine 申訴案件審核
+	public Penalty reVertifyPenalty(Long penaltyId, Integer reVertifystatus, Integer reVertifyPenaltyTimeValue, String reVertifyReason) {
+		Penalty dbPenalty = penaltyDao.getOne(penaltyId);
+		dbPenalty.setStatus(reVertifystatus);
+		dbPenalty.setReVertifyPenaltyTimeValue(reVertifyPenaltyTimeValue);
+		dbPenalty.setReVertifyReason(reVertifyReason);
+		return penaltyDao.save(dbPenalty);
+	}
+	
+	//申訴，補時數
+	
 
 	// 志工檢舉雇主
 	public Penalty report(Order order, String description) {

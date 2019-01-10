@@ -89,8 +89,8 @@ public class RecruitController {
 
 	// 編輯mission並發送系統訊息
 	@RequestMapping("/edit")
-	public String editRecruit(@RequestParam("id") Long id, Model model, HttpServletRequest request) {
-		Mission mission = missionService.getOne(id);
+	public String editRecruit(@RequestParam("id") Long missionId, Model model, HttpServletRequest request) {
+		Mission mission = missionService.getOne(missionId);
 		List<ServiceType> serviceType = serviceTypeService.findAll();
 		model.addAttribute("mission", mission);
 		model.addAttribute("serviceType", serviceType);
@@ -135,13 +135,32 @@ public class RecruitController {
 	// 編輯mission並發送系統訊息
 	@RequestMapping("/update")
 
-	public String update(Mission mission, @RequestParam("missionPicture") MultipartFile missionPicture,
+	public String update(Mission inputMission, @RequestParam("missionPicture") MultipartFile missionPicture,
 			HttpServletRequest request, Principal principal, Model model) {
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
-
+		Member member = memberService.findByAccount(principal.getName());
+		if(member.getBalanceValue() == null || inputMission.getTimeValue() == null) {
+			member.setBalanceValue(0);
+			inputMission.setTimeValue(0);
+		}
+		//先加回刊登時扣除的額度
+		member.setBalanceValue(member.getBalanceValue().intValue() + missionService.getOne(inputMission.getId()).getTimeValue().intValue());
+		//使用額度超過member餘額 無法刊登
+		if(member.getBalanceValue().intValue() >= inputMission.getTimeValue().intValue()) {
+			//member可使用額度減少
+			member.setBalanceValue(member.getBalanceValue().intValue() - inputMission.getTimeValue().intValue());
+			missionService.insert(inputMission, principal);
+			model.addAttribute(response);
+		}else {
+			//扣回原本的可使用額度
+			member.setBalanceValue(member.getBalanceValue().intValue() - missionService.getOne(inputMission.getId()).getTimeValue().intValue());
+			response.addMessage("餘額不足 無法刊登");
+			model.addAttribute(response);
+			return "redirect:/user/volunteerRecruitment/edit?id=" + inputMission.getId();
+		}
 		try {
-			missionService.update(mission);
-			List<Order> orders = orderService.findByMission(mission);
+			missionService.update(inputMission);
+			List<Order> orders = orderService.findByMission(inputMission);
 			systemMessageService.missionEdit(orders);
 			if (missionPicture.getOriginalFilename().length() > 0) {
 				// 取得應用程式根目錄中圖片之路徑
@@ -153,7 +172,7 @@ public class RecruitController {
 					dir.mkdirs();
 				}
 				// 檔名
-				String location = realPath + "missionPicture_" + mission.getId() + ".jpg";
+				String location = realPath + "missionPicture_" + inputMission.getId() + ".jpg";
 
 				// 寫出檔案到Server
 				FileOutputStream fos = new FileOutputStream(location);
@@ -161,15 +180,16 @@ public class RecruitController {
 				fos.close();
 
 				// 將檔名存入DB
-				mission.setMissionPicName("missionPicture_" + mission.getId() + ".jpg");
-				missionService.insert(mission, principal);
+				inputMission.setMissionPicName("missionPicture_" + inputMission.getId() + ".jpg");
+				missionService.update(inputMission);
 			}
 		} catch (Exception e) {
 			response.addMessage("修改失敗，" + e.getMessage());
 			e.printStackTrace();
 		}
 
-		return "/basic/user/volunteerRecruitment/mission_list";
+		return "redirect:/user/volunteerRecruitment/edit?id=" + inputMission.getId();
+		
 	}
 
 	@RequestMapping("/insert")

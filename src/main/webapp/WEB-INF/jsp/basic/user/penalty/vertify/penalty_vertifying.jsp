@@ -118,7 +118,7 @@
 		</fieldset>
 		
 		<fieldset style="width:1300px">
-		<legend>審核</legend>
+		<legend>檢舉審核</legend>
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label>審核結果:</label>
@@ -153,17 +153,93 @@
 			<input type="button" class="btn btn-info" id="vertifyTemp" value="暫時儲存"><p>
 		</fieldset>
 	</form>
+	
+	
+	
+	
+	
+	<form id="reVertifyBox">
+		<fieldset style="width:1300px">
+		<legend>申訴內容</legend>
+			<input type="hidden" value="${penalty.id}" id="penaltyId" name="penaltyId" />
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label>申訴內容描述</label>
+					<input type="text" id="applyReVertifyDescription" name="applyReVertifyDescription"
+								class="form-control" value="${penalty.applyReVertifyDescription}" readonly/>
+				</div>
+				<div class="form-group col-md-6">
+					<label>是否檢附佐證資料</label>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="proofRadio3" name="reVertifyProofPicRadio" class="custom-control-input" readonly>
+						<label class="custom-control-label" for="customRadio1">是</label>
+						<a id="reVertifyProofPicName" href="/image/user/reVertify/${penalty.reVertifyProofPicName}" target="_blank">佐證資料檢視</a>
+					</div>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="proofRadio4" name="reVertifyProofPicRadio" class="custom-control-input" readonly>
+						<label class="custom-control-label" for="customRadio2">否</label>
+					</div>
+					
+				</div>
+			</div>
+		</fieldset>
+		
+		
+		<fieldset style="width:1300px">
+		<legend>申訴審核</legend>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label>申訴審核結果:</label>
+					<select id="reVertifystatus" name="reVertifystatus" class="form-control" >
+						<option value=4>申訴審核中</option>
+						<option value=2>需懲罰</option>
+						<option value=3>無需懲罰</option>
+					</select>
+				</div>
+					
+				<div class="form-group col-md-6">
+					<label>調整懲罰時數:</label>
+					<select class="custom-select my-1 mr-sm-2" id="reVertifyPenaltyTimeValue">
+					  <option value="0">0</option>
+					  <option value="1">1</option>
+					  <option value="2">2</option>
+					  <option value="3">3</option>
+					  <option value="4">4</option>
+					  <option value="5">5</option>
+					</select>
+				</div>
+	
+			</div>			
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<label>申訴審核意見、原因</label>
+					<textarea class="form-control"  id="reVertifyReason" name="reVertifyReason" cols="50" rows="5"></textarea>
+				</div>
+			</div>
+			
+			<input type="button" class="btn btn-info" id="reVertifyFinish" value="完成申訴審核" disabled>
+			<input type="button" class="btn btn-info" id="reVertifyTemp" value="暫時儲存"><p>
+		</fieldset>
+	</form>
+	
 
 <!-- 	<a href="/admin/penalty/list">back to penalty_list</a> -->
 
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var penaltyStatus = "${penalty.status}";
-			
+			var applyReVertify = "${penalty.applyReVertify}";
+
 			//設定審核狀態、審核意見及原因
 			$('#status').val(penaltyStatus);
 			$('#vertifyReason').val('${penalty.vertifyReason}');
 			$('#penaltyTimeValue').val('${penalty.penaltyTimeValue}');
+			
+			//設定申訴狀態、審核意見及原因
+			$('#reVertifystatus').val('${penalty.status}');
+			$('#reVertifyPenaltyTimeValue').val('${penalty.reVertifyPenaltyTimeValue}');
+			$('#reVertifyReason').val('${penalty.reVertifyReason}');
+			
 			
 			//如檢視審核歷史紀錄，則刪去審核按鈕，並將所有欄位設為readonly
 			if(penaltyStatus != 1){
@@ -175,6 +251,26 @@
 				$("#vertifyReason").prop("readonly", true);
 				
 				$("#topic").html("檢舉案件歷史資料");
+			}
+			
+			//非曾提過申訴的案件，不顯示申訴區塊
+			if(penaltyStatus != 4  && applyReVertify != "Y"){
+				$("#reVertifyBox").html("");
+			}else{
+				$("#status").val("2");
+				if(penaltyStatus != 1  && penaltyStatus != 4  && applyReVertify == "Y"){
+					$("#reVertifyFinish").remove();
+					$("#reVertifyTemp").remove();
+				}
+			}
+			
+			//提起申訴的案件，顯示申訴佐證資料超連結
+			var reVertifyProofPicName = "${penalty.reVertifyProofPicName}";
+			if(reVertifyProofPicName.length == 0){
+				$("#reVertifyProofPicName").html("");
+				$("#proofRadio4").prop("checked", true);
+			}else{
+				$("#proofRadio3").prop("checked", true);
 			}
 			
 			//無佐證資料時，不顯示佐證資料超連結
@@ -231,6 +327,52 @@
 				}
 			}
 			
+			//暫存或完成申訴審核結果的方法
+			function saveReVertify(successMessage, errorMessage){
+// 				if($('#status').val() == 2 && $('#penaltyTimeValue').val() <= 0){
+// 					swal("處罰時數需大於0", {
+// 					      icon: "warning",
+// 					    });
+// 					//alert("處罰時數需大於0");
+// 				}else{
+					$.ajax({
+						url : "/admin/penaltyVertify/doReVertify",
+						method : "put",
+						dataType : "json",
+						data : {"penaltyId":$('#penaltyId').val(),"reVertifystatus":$('#reVertifystatus').val(),
+							"reVertifyPenaltyTimeValue":$('#reVertifyPenaltyTimeValue').val(),"reVertifyReason":$('#reVertifyReason').val()},
+						success : function(result) {
+							if(result.status == "SUCCESS"){
+								swal(successMessage, {
+								      icon: "success",
+								    });
+								//alert(successMessage);
+							}
+							if(result.statusDescription != null){
+								swal(result.statusDescription, {
+							    	icon: "success",
+							    }).then((result) => {
+									if (result) {
+										document.location.href="/admin/penaltyVertify/showVertifyList";
+									}
+								});;
+								//alert(result.statusDescription);
+							}
+							
+						},
+						error: function (result) {
+							if(result.status == "ERROR"){
+								alert(errorMessage);
+							}
+					        $.each(result.messages, function(idx, message) {
+								alert("the "+idx+"th ERROR, because "+message);
+							});
+					    }
+					})
+// 				}
+			}
+			
+			
 			//完成審核
 			$('#vertifyFinish').click(function() {
 				swal({
@@ -245,18 +387,35 @@
 						  saveVertify("完成審核", "審核結果儲存失敗");
 					  } 
 					});
-				
-				
-// 				var conf = confirm("確定送出審核結果? 送出後將無法更改");
-// 				if(conf == true){
-// 					saveVertify("完成審核", "審核結果儲存失敗");
-// 				}
 			})
 			
 			//暫存審核結果
 			$('#vertifyTemp').click(function() {
 				saveVertify("暫存審核內容成功", "暫存審核內容失敗");
 			})
+			
+			//完成申訴審核
+			$('#reVertifyFinish').click(function() {
+				swal({
+					  title: "確定送出審核結果?",
+					  text: "送出後將無法更改!",
+					  icon: "warning",
+					  buttons: true,
+					  dangerMode: true,
+					})
+					.then((result) => {
+					  if (result) {
+						  saveReVertify("完成申訴審核", "申訴審核結果儲存失敗");
+						  document.location.href="/admin/penaltyVertify/showVertifyList";
+					  } 
+					});
+			})
+			
+			//暫存申訴審核結果
+			$('#reVertifyTemp').click(function() {
+				saveReVertify("暫存申訴審核內容成功", "暫存申訴審核內容失敗");
+			})
+			
 			
 			$('#status').change(function(){
 				//alert($(this).val());
@@ -280,6 +439,32 @@
 					
 					$('#vertifyFinish').prop("disabled", false);
 					$('#vertifyTemp').prop("disabled", true);
+				}
+				
+			})
+			
+			
+			$('#reVertifystatus').change(function(){
+				if($(this).val()==4){ //審核中，扣款時數可編輯
+// 					$('#penaltyTimeValue').removeAttr("disabled");
+					
+					$('#reVertifyFinish').prop("disabled", true);
+					$('#reVertifyTemp').prop("disabled", false);
+				}
+				
+				if($(this).val() == 2){ //須處罰者，扣款時數可編輯
+// 					$('#penaltyTimeValue').removeAttr("disabled");
+				
+					$('#reVertifyFinish').prop("disabled", false);
+					$('#reVertifyTemp').prop("disabled", true);
+				}
+				
+				if($(this).val()==3){ //無須處罰者，扣款時數強制寫為0，且不得更改
+// 					$('#penaltyTimeValue').val("0");
+// 					$('#penaltyTimeValue').prop("disabled", true);
+					
+					$('#reVertifyFinish').prop("disabled", false);
+					$('#reVertifyTemp').prop("disabled", true);
 				}
 				
 			})

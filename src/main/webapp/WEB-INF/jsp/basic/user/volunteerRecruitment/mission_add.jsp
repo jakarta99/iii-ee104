@@ -91,7 +91,7 @@
                     <div class="col-md-3">
                       <div class="form-group">
                         <label for="title">活動標題</label>
-                        <input id="title" name="title" type="text" class="form-control">
+                        <input value='${mission.title}' id="title" name="title" type="text" class="form-control">
                       </div>
                     </div>
                     <div class="col-md-3">
@@ -113,7 +113,7 @@
                      <div class="col-md-3">
                      	<div class="form-group">
                       	<label for="address">地址</label>
-                     	<input type='text' id='address' name='address' class="form-control"/>
+                     	<input value='${mission.address}' type='text' id='address' name='address' class="form-control"/>
                      </div>
                     </div>
                   </div>
@@ -121,13 +121,13 @@
                     <div class="col-md-3">
                       <div class="form-group">
                         <label for="startDate">開始日期</label>
-                        <input id="startDate" name="startDate" class="form-control">
+                        <input value='${mission.startDate}' id="startDate" name="startDate" class="form-control">
                       </div>
                     </div>     
                     <div class="col-md-3">
                       <div class="form-group">
                         <label for="endDate">結束日期</label>
-                        <input id="endDate" name="endDate" class="form-control">
+                        <input value='${mission.endDate}' id="endDate" name="endDate" class="form-control">
                       </div>
                     </div>
                     
@@ -146,13 +146,13 @@
                     <div class="col-md-2">
                       <div class="form-group">
                         <label for="peopleNeeded">需求人數</label>
-                        <input type="text" value="" id="peopleNeeded" name="peopleNeeded" class="form-control"/>
+                        <input value='${mission.peopleNeeded}' type="text" value="" id="peopleNeeded" name="peopleNeeded" class="form-control"/>
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group">
                         <label for="timeValue">支付時數</label>
-                        <input type="text" id="timeValue" name="timeValue" class="form-control"/>
+                        <input value='${mission.timeValue}' type="text" id="timeValue" name="timeValue" class="form-control"/>
                       </div>
                     </div>   
                   </div>
@@ -160,19 +160,19 @@
                     <div class="col-md-6 col-lg-3">
                       <div class="form-group">
                         <label for="contactPerson">聯絡人</label>
-                        <input type="text" id="contactPerson" name="contactPerson" class="form-control"/>
+                        <input value='${mission.contactPerson}' type="text" id="contactPerson" name="contactPerson" class="form-control"/>
                       </div>
                     </div>
                     <div class="col-md-6 col-lg-3">
                       <div class="form-group">
                         <label for="contactPhone">聯絡電話</label>
-                        <input id="contactPhone" name="contactPhone" type="text" class="form-control">
+                        <input value='${mission.contactPhone}' id="contactPhone" name="contactPhone" type="text" class="form-control">
                       </div>
                     </div>
                     <div class="col-md-6 col-lg-3">
                       <div class="form-group">
                         <label for="email">聯絡Email</label>
-                        <input type="email" id="contactEmail" name="contactEmail" class="form-control"/>
+                        <input value='${mission.contactEmail}' type="email" id="contactEmail" name="contactEmail" class="form-control"/>
                       </div>
                     </div>
                     <div class="col-md-6 col-lg-3">
@@ -188,11 +188,11 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="discription">活動詳細文字敘述</label>
-                        <textarea class="form-control"  id="discription" name="discription" rows="3"></textarea>
+                        <textarea class="form-control"  id="discription" name="discription" rows="3">${mission.discription}</textarea>
                       </div>
                     </div>
                     <div class="col-md-12 text-center">
-                      <button type="submit" class="btn btn-template-outlined"><i class="fa fa-plus"></i>刊登活動</button>
+                      <button id="insertMission" type="submit" class="btn btn-template-outlined"><i class="fa fa-plus"></i>刊登活動</button>
                     </div>
                   </div>
                 </form>
@@ -204,53 +204,50 @@
 	  
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script>
-// 	$(function(){
-// 		  $("#missionForm").submit(function(e){
-// 		    e.preventDefault(); // 停止觸發submit
-// 		    console.log("upload");
-// 		    var formData = new FormData($("#myForm")[0]); // 使用FormData包裝form表單來傳輸資料
-// 		    $.ajax({
-// 		      type: "POST",
-// 		      url: "upload",
-// 		      data:formData,
-// 		      cache:false, // 不需要cache
-// 		      processData: false, // jQuery預設會把data轉為query String, 所以要停用
-// 		      contentType: false, // jQuery預設contentType為'application/x-www-form-urlencoded; charset=UTF-8', 且不用自己設定為'multipart/form-data'
-// 		      dataType: 'text',
-// 		      success: function (data){
-// 		        console.log(data);
-// 		      }      
-// 		    });
-// 		  });
-// 		});
 	
-// 		function addMission() {
-// 			var formdata = new FormData($("#missionForm"));  
-// 			$.ajax({
-// 				data : formdata,
-// 				url : "/user/missionPublish/insert",				
-// 				type : 'post',
-// 				cache:false,
-// 				traditional: true,
-// 				contentType: false,
-// 				processData: false,
-// 				success : function(addResult) {
-// 					if(addResult.status == "SUCCESS"){
-// 						alert("新增編號" + addResult.obj.id + " "+ addResult.status);
-// 						document.location.href = "/user/missionPublish/add"
-// 					}else{
-// 						alert("新增編號" + addResult.obj.id + " " + addResult.status);
-// 						alert("FAIL reason:" + addResult.messages);
-// 					}
-// 				},
-// 			})
-// 		}
-		$(document).ready(function() {
-			
-			
-// 			$('#serviceType').append()
-			
+		$('#insertMission').click(function(){
+			swal({
+				  title: "刊登確認",
+				  text: "確定刊登?",
+				  icon: "warning",
+				  buttons: true,
+				  dangerMode: true,
+				}).then((willreject) => {
+					if(willreject){
+						$.post("/user/missionPublish/insert",{"missionId":missionId},
+							function(data){
+								if(data.status == 'SUCCESS'){
+									swal({
+									  title: "申請結果",
+									  text: "申請成功",
+									  icon: "success",
+									  buttons: false,
+									  dangerMode: false,
+									})
+								}else{
+									swal({
+										  title: "申請失敗",
+										  text: " "+data.messages,
+										  icon: "error",
+										  buttons: false,
+										  dangerMode: false,
+										})
+								}
+						})
+					}else{
 						
+					}
+				})
+			
+			
+			
+		})
+		
+	
+	
+	
+		$(document).ready(function() {
+		
 			new TwCitySelector();
 			
 			
@@ -280,11 +277,6 @@
 			
 			$("div[role='tw-city-selector']").attr("data-county-value",'${mission.county}');
 			$("div[role='tw-city-selector']").attr("data-district-value", '${mission.district}');
-			
-
-
-			
-		
 		})
 		
 
