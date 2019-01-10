@@ -105,6 +105,34 @@
 	<!-- FOOTER -->
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
 
+	<div class="modal fade" id="penaltyReVertifyCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+	<div class="modal-content">
+	    <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalCenterTitle">申訴系統</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	        <span aria-hidden="true">&times;</span>
+	        </button>
+	    </div>
+	    <div class="modal-body">
+	        <form id="applyForm" enctype="multipart/form-data">
+	        	<input id='penaltyId' name='penaltyId' value=''/><br>
+<!-- 	        	type='hidden'  -->
+	            <h5>申訴原因</h5>
+	            <textarea cols='40' rows='5' id='applyReVertifyDescription' name='applyReVertifyDescription'></textarea>
+	            <input type="file" id="reVertifyProofPicName" name="reVertifyProofPicName" accept="image/*">
+	            <p>請選擇佐證資料圖檔，如無佐證資料，則直接送出審核</p>
+	        </form>
+	    </div>
+	    <div class="modal-footer">
+	        <input type='button' class='btn btn-primary btn-sm' onclick='applyReVertify()' value='申訴' />
+	    </div>
+	</div>
+	</div>
+	</div>
+
+
+
 	
 	
 	<script>
@@ -194,10 +222,17 @@
 // 		     		},//勾選欄位
 		           	{data: function (data) {
 		           		var readButt = "";
-		           		if(data.messageType=="Penalty"){
-		           			readButt = "<input type='button' class=\"btn btn-info btn-sm\" name='complaintButt'"+
-           						"value='申訴' onclick='#'/>";
+		           		
+		           		//如果是懲罰的message，且未提出申訴
+		           		if(data.messageType=="Penalty" && data.penalty.applyReVertify!="Y"){
+           					readButt = "<button class='btn btn-warning btn-sm' data-toggle='modal' data-target='#penaltyReVertifyCenter' id='" + data.penalty.id + "' onclick='bringPenaltyIdToModal(" + data.penalty.id + ")'>  申訴    </button>"
 		           		}
+		           		
+		           		//如果是懲罰的message，且已提出申訴
+		           		if(data.messageType=="Penalty" && data.penalty.applyReVertify=="Y"){
+           					readButt = "<button class='btn btn-info btn-sm'>  已申訴    </button>"
+		           		}
+		           		
 		               	return readButt;	}
 		           	},
 		           	{data:null, render:function(data, type, row){
@@ -310,6 +345,53 @@
 				return true;
 			}
 		}
+		
+		//按下申訴按鈕
+		function bringPenaltyIdToModal(penaltyId){
+			$("#penaltyId").attr("value",penaltyId);
+		}
+		
+		//提出申訴時呼叫這支
+		function applyReVertify() {
+			swal({
+				  title: "確定送出申訴嗎?",
+				  icon: "warning",
+				  buttons: true,
+				  dangerMode: true,
+				})
+				.then((willApply) => {
+				  if (willApply) {
+					  var data = new FormData($('#applyForm')[0]);
+						$.ajax({
+							url : '/user/applyReVertify',
+							type : 'post',
+							cache: false,
+							data : data,
+							processData: false,
+							contentType: false
+						}).done(function(response){
+							console.log(response)
+							if (response.status =="SUCCESS"){
+								 swal("申訴成功", {icon: "success",})
+								 .then(function(){
+									 //$('#penaltyReVertifyCenter').modal('hide');
+									 window.location.replace("/system-message/list");
+								 });
+								 
+							} else {
+								swal("申訴失敗", {icon: "error",});
+							}
+							
+							
+						})	
+		
+				  } else {
+				    swal("取消申訴");
+				  }
+				}); 	
+		}
+		
+
 	</script>
 
 </body>

@@ -28,6 +28,7 @@ import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.entity.SystemMessage;
+import team.lala.timebank.enums.ReportStatus;
 import team.lala.timebank.enums.SystemMessageType;
 import team.lala.timebank.enums.YesNo;
 
@@ -79,19 +80,27 @@ public class PenaltyService {
 		return penalty;
 
 	}
-
-	// Jasmine 完成審核後寄站內信給檢舉人
+	
+	
+	
+	
+	// Jasmine 完成審核，寄站內信給檢舉人，修改Order中ReportStatus的狀態
 	public void sendSystemMessageToAccuser(Penalty penalty) {
 		Member sender = (Member) SecurityContextHolder.getContext() // 管理員會員(寄件者)
 				.getAuthentication().getPrincipal();
 
 		if (penalty != null) {
+			//修改Order中ReportStatus的狀態
+			penalty.getOrder().setReportStatus(ReportStatus.TemporarilyEnd);
+			
+			//寄信給檢舉人
 			SystemMessage systemMessage = new SystemMessage();
 			systemMessage.setMember(penalty.getAccuser());// 系統訊息給檢舉人
 			systemMessage.setMessageType(SystemMessageType.ReplyPenaltyReport);
 			systemMessage.setReadStatus(YesNo.N);
 			systemMessage.setReleaseTime(new java.util.Date());
 			systemMessage.setSender(sender);
+			systemMessage.setPenalty(penalty);
 			systemMessage.setMessage("謝謝您的檢舉，TimeBank已完成您的檢舉案的審核及處置。");
 			systemMessageDao.save(systemMessage);
 			// 補邏輯:訊息送出後，紀錄在penalty表內(有寄信)，加entity欄位
@@ -102,7 +111,10 @@ public class PenaltyService {
 	public void sendSystemMessageToDefendant(Penalty penalty) {
 		Member sender = (Member) SecurityContextHolder.getContext() // 管理員會員(寄件者)
 				.getAuthentication().getPrincipal();
-
+		//修改Order中ReportStatus的狀態
+		penalty.getOrder().setReportStatus(ReportStatus.TemporarilyEnd);
+		
+		//寄信給被檢舉人
 		if (penalty != null) {
 			SystemMessage systemMessage = new SystemMessage();
 			systemMessage.setMember(penalty.getDefendant());// 系統訊息給檢舉人
@@ -110,7 +122,8 @@ public class PenaltyService {
 			systemMessage.setReadStatus(YesNo.N);
 			systemMessage.setReleaseTime(new java.util.Date());
 			systemMessage.setSender(sender);
-			systemMessage.setMessage("[扣除時數]原因:檢舉, " + penalty.getDescription());
+			systemMessage.setMessage("[扣除時數]原因:檢舉, 檢舉原因:" + penalty.getDescription() + ", 活動名稱:" + penalty.getOrder().getMission().getTitle());
+			systemMessage.setPenalty(penalty);
 			systemMessageDao.save(systemMessage);
 			// 補邏輯:訊息送出後，紀錄在penalty表內(有寄信)，加entity欄位
 		}
