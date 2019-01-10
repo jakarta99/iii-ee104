@@ -241,7 +241,7 @@
 	        	last=orders.last;
 	        	page=orders.number;
 	        	$.each(orders.content,function(index, order){
-	        		var box="<div class='col-md-3'>"
+	        		var box="<div class='col-md-4'>"
 	        			box+="<div data-animate='fadeInUp' class='team-member'>"
 	        			box+="<div class='image'><a href='team-member.html'><img src='/image/user/member/"+order.volunteer.picture+"' class='img-fluid rounded-circle'></a></div>"
 	        			box+="<h3><a href='team-member.html'>"+order.volunteer.name+"</a></h3><div>"
@@ -276,7 +276,7 @@
 						}
 	        			box+="<ul class='social list-inline'>"
 	        			box+="<li class='s3'><a href='#' class='external twitter'><i class='fa fa-phone'></i></a>電話:"+order.volunteer.telephone+"</li>"
-	        			box+="<li class='s3'><a href='#' class='email'><i class='fa fa-envelope'></i></a>Email:"+order.volunteer.telephone+"</li>"
+	        			box+="<li class='s3'><a href='#' class='email'><i class='fa fa-envelope'></i></a>Email:"+order.volunteer.email+"</li>"
 	        			box+="</ul></div></div>"
 	        		var boxbox=$("#boxbox").append(box)
 	        	})
