@@ -214,6 +214,10 @@
 	        	first=orders.first;
 	        	last=orders.last;
 	        	page=orders.number;
+	        	if(orders.content.length == 0){
+	        		var box="<h2>目前尚無志工申請</h2>"
+	        		$("#boxbox").append(box);
+	        	} else {
 	        	$.each(orders.content,function(index, order){
 	        		var box="<div class='col-md-4'>"
 	        			box+="<div data-animate='fadeInUp' class='team-member'>"
@@ -243,6 +247,7 @@
 	        	for (var index = 1; index <= totalPages ; index++) {
 	        		$("#nextli").before("<li id='page"+index+"' class='page-item'><a name='count' id="+index+" class='page-link'>"+index+"</a></li>")
 				}
+	        	}
 	        		var pageNo = "#page" + (page+1);
 	        		$(pageNo).addClass('page-item active');
 	        })
