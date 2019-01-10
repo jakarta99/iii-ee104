@@ -151,7 +151,7 @@
 				 			      icon: "success",
 				 			 });
 						}else{
-							swal("接受"+acceptResult.obj.name+"失敗，因為"+acceptResult.messages+"", {
+							swal("接受"+acceptResult.obj.volunteer.name+"失敗，因為"+acceptResult.messages+"", {
 				 			      icon: "error",
 				 			});
 						}
@@ -225,7 +225,9 @@
 	        			}else if(order.orderStatus=='RequesterAcceptService'){
 	        			box+="<span class='badge badge-success_1'>已接受</span>"
 	        			}else if(order.orderStatus=='RequesterRefuceServiceMatchFail'){
-	        			box+="<span class='badge badge-danger_1'>已拒絕</span>"	
+	        			box+="<span class='badge badge-danger_1'>已拒絕</span>"
+	    	        	}else if(order.orderStatus=='VolunteerCancleTransactionMatchFail'){
+	    	        	box+="<span class='badge badge-danger_1'>志工取消申請</span>"	
 	        			}else {
 	        			box+= "<p>不應該出現的狀態</p>";
 						}
