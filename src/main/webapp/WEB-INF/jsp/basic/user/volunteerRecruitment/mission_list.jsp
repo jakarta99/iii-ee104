@@ -312,7 +312,9 @@
 		               }  
 	                   if(mission.missionstatus == "A_New" || mission.missionstatus == "A_VolunteerApproved"){
 	                   box+="<p class='intro_1'>需求人數:"+mission.peopleNeeded+"/目前人數:"+mission.approvedQuantity+"</p>"	
-	                   }
+	                   }else if(mission.missionstatus=="B_AccountsPayable"||mission.missionstatus=="C_Cancel"||mission.missionstatus=="C_Finish"){
+	                　　　　　　　box+="<p class='intro_1'>參與人數:"+mission.approvedQuantity+"</p>"
+		 				}
 	                if(mission.missionstatus=="A_New"){
 	                   box+="<p class='read-more text-right'><a href='/user/volunteerVerify/list?id="+mission.id+"' class='btn btn-template-outlined'>志工審核</a></p></div>"	      				
 	 				}else if(mission.missionstatus=="B_AccountsPayable"){

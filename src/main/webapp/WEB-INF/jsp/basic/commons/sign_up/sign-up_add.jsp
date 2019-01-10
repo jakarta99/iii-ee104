@@ -20,7 +20,8 @@
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 <!-- sweetAlert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+<!-- icon -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <style>
 	body{
 		font-family: "微軟正黑體"
@@ -266,7 +267,7 @@
 					<fieldset style="border:none">
 						<div class="col-md-12 text-center">
 							<input type="button" class="btn btn-template-outlined" id="submit" value="確定送出" />
-					        <input type="reset" class="btn btn-template-outlined" value="清除重填" />
+					        <input type="reset" class="btn btn-template-outlined" id="reset" value="清除重填" />
 					        <span id="error" style='color:red'></span>
 						</div>
 						
@@ -735,8 +736,7 @@
 				//val抓值text顯現於畫面，bug會無法更新區域
 	    		$("select[name='district']>option").val('三峽區');
 	    		$("select[name='district']>option").text('三峽區');
-	    		
-	    		$('#address').val('復興路147號3樓');	
+	    		$('#address').val('復興路447號3樓');	
     		}
     		if(${memberType eq 'O' }){
     			$('#idAccount').val('hlccaservice');
@@ -779,6 +779,10 @@
 			
 // 			insert new member
 			$("#submit").click(function(){
+ 				swal({
+ 		            icon: "/image/user/member/loading.gif",
+ 					button: false,
+ 				})
 				$.ajax({
 					method:"post",
 					dataType: "json",        
@@ -922,6 +926,30 @@
 // 						});
 					}						
 				})
+			})
+			
+			//reset 清空span
+			$("#reset").click(function(){
+				document.getElementById("idspAccount").innerHTML = "" ;
+				document.getElementById("idspPassword").innerHTML = "" ;
+				document.getElementById("idspPasswordCheck").innerHTML = "" ;
+				document.getElementById("idspName").innerHTML = "" ;
+				document.getElementById("idspCertificateIdNumber").innerHTML = "" ;
+				document.getElementById("idspDate").innerHTML = "" ;
+				document.getElementById("idspEmail").innerHTML = "" ;
+				document.getElementById("idspTelephone").innerHTML = "" ;
+				document.getElementById("idspMobile").innerHTML = "" ;
+				document.getElementById("error").innerHTML = "" ;
+				
+				if(${memberType eq 'O' }){
+					document.getElementById("idspOrgFounder").innerHTML = "" ;
+					document.getElementById("idspOrgCeo").innerHTML = "" ;
+					document.getElementById("idspOrgContactPerson").innerHTML = "" ;
+					document.getElementById("idspOrgContactPersonTel").innerHTML = "" ;
+					document.getElementById("idspOrgContactPersonMobile").innerHTML = "" ;
+					document.getElementById("idspOrgWebsiteLink").innerHTML = "" ;
+				}
+				
 			})
 		})
 	</script>
