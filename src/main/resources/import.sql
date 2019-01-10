@@ -442,7 +442,7 @@ INSERT INTO PENALTY (ORDER_LIST, accuser_id, defendant_id, update_date, descript
 VALUES(2, 2, 3,'2018/11/11', '遲到1小時', 2 , 2);
 
 INSERT INTO PENALTY (ORDER_LIST, accuser_id, defendant_id, update_date, description, status, penalty_time_value)
-VALUES(3, 5, 2, '2018/11/12', '服務態度不佳', 3 ,0);
+VALUES(3, 5, 2, '2018/11/12', '服務態度不佳', 2 ,0);
 
 INSERT INTO PENALTY (ORDER_LIST, accuser_id, defendant_id, update_date, description, status, penalty_time_value)
 VALUES(4, 1, 3, '2018/11/13', '缺席', 1 , 4);
