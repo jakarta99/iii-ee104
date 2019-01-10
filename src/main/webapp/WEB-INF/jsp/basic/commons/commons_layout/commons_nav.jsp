@@ -12,11 +12,11 @@
                 </li>
                 <li class="nav-item menu-large"><a href="/commons/domesticVolunteer/list" >志工招募<b class="caret"></b></a>
                 </li>
+                <sec:authorize access="hasRole('USER')">
               	<li class="nav-item dropdown menu-large" ><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">會員專區 <b class="caret"></b></a>
                   <ul class="dropdown-menu megamenu" style="width:450px;">
                     <li>
                       <div class="row">
-
                         <div class="col-md-6 col-lg-3">
                            <h5><a href="/user/calendar" >行事曆</a></h5>                      
                           <h5><a href="/system-message/list" id="systemMessage">系統訊息</a></h5>
@@ -28,13 +28,11 @@
                             <li class="nav-item"><a href="/user/volunteerRecruitment/list" class="nav-link">招募紀錄</a></li>
                             <li class="nav-item"><a href="/user/missionPublish/add" class="nav-link">刊登任務</a></li>                      
                           </ul>
-                        <sec:authorize access="hasRole('USER')">
 	                         <h5><a href="#">志工申請</a></h5>
 	                          <ul class="list-unstyled mb-3">
 	                            <li class="nav-item"><a href="javascript:document.location.href='/user/volunteerApplication/applicationPage'" class="nav-link">申請中</a></li>
 	                            <li class="nav-item"><a href="javascript:document.location.href='/user/volunteerRecord/RecordPage'" class="nav-link">服務紀錄</a></li>                          
 	                          </ul>
-                         </sec:authorize>
                         </div>
                         <div class="col-md-6 col-lg-3">
                          <h5><a href="/user/transaction-record/list" >我的交易紀錄</a></h5>
@@ -45,10 +43,8 @@
                     </li>
                   </ul>
                 </li>
-                <li class="nav-item menu-large"><a href="/commons/InternationalVolunteer/list" >國際志工專區<b class="caret"></b></a>     
-                      
-
-                     
+                </sec:authorize>
+                <li class="nav-item menu-large"><a href="/commons/InternationalVolunteer/list" >國際志工專區<b class="caret"></b></a>                        
                 <!-- ========== FULL WIDTH MEGAMENU ==================-->
                 <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">關於我們 <b class="caret"></b></a>
                   <ul class="dropdown-menu megamenu">
