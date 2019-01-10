@@ -269,6 +269,12 @@
 					        <input type="reset" class="btn btn-template-outlined" value="清除重填" />
 					        <span id="error" style='color:red'></span>
 						</div>
+						
+						<div class="col-md-12 text-right">
+                      		<div class="form-group">
+								<input type="button" class="btn btn-template-outlined" id="allin" value="一鍵帶入"/>
+							</div>
+						</div>
 					</fieldset>
           		</form>
           	</article>
@@ -713,6 +719,49 @@
 	    }
     
     }
+    
+    	$('#allin').click(function(){
+    		if(${memberType eq 'P' }){
+	    		$('#idAccount').val('anchor0824');
+	    		$('#idPassword').val('asdf123!');
+	    		$('#idPasswordCheck').val('asdf123!');
+	    		$('#idName').val('明家');
+ 		   		$('#idCertificateIdNumber').val('A123456789');
+	    		$('#idDate').val('1991/08/24');
+	    		$('#idEmail').val('xcube.anchor@gmail.com');
+	    		$('#idTelephone').val('02-25159382');
+	    		$('#idMobile').val('0919-307-362');
+	    		$("select[name='county']").val('新北市');
+				//val抓值text顯現於畫面，bug會無法更新區域
+	    		$("select[name='district']>option").val('三峽區');
+	    		$("select[name='district']>option").text('三峽區');
+	    		
+	    		$('#address').val('復興路147號3樓');	
+    		}
+    		if(${memberType eq 'O' }){
+    			$('#idAccount').val('hlccaservice');
+	    		$('#idPassword').val('asdf123!');
+	    		$('#idPasswordCheck').val('asdf123!');
+	    		$('#idName').val('社團法人台灣愛希望兒童關懷發展協會');
+ 		   		$('#idCertificateIdNumber').val('22099131');
+	    		$('#idDate').val('1991/08/24');
+	    		$('#idEmail').val('xcube.anchor@gmail.com');
+	    		$('#idTelephone').val('02-25159382');
+	    		$('#idMobile').val('0919-307-362');
+	    		$("select[name='county']").val('高雄市');
+	    		//val抓值text顯現於畫面，bug會無法更新區域
+	    		$("select[name='district']>option").val('苓雅區');
+	    		$("select[name='district']>option").text('苓雅區');
+	    		$('#address').val('仁德街137號');
+	    		$('#idOrgFounder').val('明家');
+	    		$('#idOrgCeo').val('明家');
+	    		$('#idOrgContactPerson').val('明家');
+	    		$('#idOrgContactPersonTel').val('07-3331118');
+	    		$('#idOrgContactPersonMobile').val('0919-307-362');
+	    		$('#idOrgWebsiteLink').val('http://www.hlcca.org.tw/bin/home.php');
+	    		$('#orgFoundPurpose').val('本會「社團法人台灣愛希望兒童關懷發展協會」為依法設立，非以營利為目的之全國性社會公益團體。以「提供弱勢家庭兒童少年適切服務與扶助，守護兒童少年可以安心上學，快樂上學，讓孩子們可以看見未來」為宗旨。');
+    		}
+    	})	
     
 		$(document).ready(function(){
 // 			$("form div").addClass("form-group");

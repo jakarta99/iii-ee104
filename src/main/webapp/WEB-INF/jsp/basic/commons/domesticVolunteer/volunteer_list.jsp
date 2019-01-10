@@ -80,8 +80,8 @@
             </div>
             <div class="col-md-5">
               <ul class="breadcrumb d-flex justify-content-end">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active">Blog Listing: Small</li>
+                <li class="breadcrumb-item"><a href="/">首頁</a></li>
+                <li class="breadcrumb-item active">志工招募</li>
               </ul>
             </div>
           </div>
@@ -91,11 +91,7 @@
         <div class="container">
        
 		<!--查詢 -->
-          <div class="panel panel-default sidebar-menu">
-          	<div class="panel-heading">
-            	<h2 class="h2 panel-title">志工招募</h2>
-            </div>
-            <div class="panel-body">
+         <section class="bar_1">
             	<form role="search">
                 	<div class="input-group">                                        
                     	<div  role="tw-city-selector"></div>                                       
@@ -133,10 +129,9 @@
 	                    </span>
                     </div>
                   </form>
-                </div>
-              </div>
+          </section>    
 			<!--志工招募清單 -->
-            <div>
+             <section class="post_1">
               <div id="boxbox" class="row">
                </div>
                
@@ -145,10 +140,9 @@
               		</ul>
                   </nav>
                   
-            </div>
+            </section> 
           </div>
         </div>
-      </div>
 <jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script>
 	var length=9;
@@ -179,9 +173,9 @@
 	        		 box+="<div class='home-blog-post'>";
 	        		 box+="<div class='image' style='text-align:center'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'><img width='300px' height='230px' src=/image/user/mission/"+mission.missionPicName+" alt='...'></a>";
 	        		 box+="</div><div class='text'><h4><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'>"+ mission.title + "</a></h4>";
-	        		 box+="<p class='author-category'>活動時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>";
-	        		 box+="<p class='author-category'>活動地點:"+mission.county+mission.district+"</p>";       	
-	        		 box+="<p class='author-category'>發布者:"+mission.member.name+"</p>";       	
+	        		 box+="<p class='author-category_1'>活動時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>";
+	        		 box+="<p class='author-category_1'>活動地點:"+mission.county+mission.district+"</p>";       	
+	        		 box+="<p class='author-category_1'>發布者:"+mission.member.name+"</p>";       	
 	        		 box+="</div></div></div>";   
 	        		var boxbox=$("#boxbox").append(box); 
 	        	})

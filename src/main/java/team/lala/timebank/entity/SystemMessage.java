@@ -41,6 +41,12 @@ public class SystemMessage {
 				insertable=true, updatable=true) 
 	private Member sender;
 	
+	@ManyToOne
+	@JoinColumn(name="PENALTY_ID",
+				referencedColumnName="id",  
+				insertable=true, updatable=true) 
+	private Penalty penalty;
+	
 	
 	@Column(name="RELEASE_TIME")
 	private Date releaseTime;

@@ -275,11 +275,15 @@
 	        	var totalPages=missions.totalPages;	        	
 	        	first=missions.first;	        	
 	        	last=missions.last;	        	
-	        	page=missions.number;	        		        	
+	        	page=missions.number;
+	        	if(missions.content.length == 0){
+	        		var box="<h2>目前沒有申請</h2>"
+	        		$("#boxbox").append(box);
+	        	} else {
 	        	$.each(missions.content,function(index, mission){
 	        		var box="<div class='col-md-4'>"
 	        		   box+="<div class='video'>"
-	        		   box+="<div class='embed-responsive embed-responsive-4by3'>"	        	
+	        		   box+="<div class='embed-responsive embed-responsive-1by1'>"	        	
 	        		   box+=" <a href='#'><img src=/image/user/mission/"+mission.missionPicName+" class='embed-responsive-item'></img></a>"     
 	        		   box+="</div></div></div>"
 	                   box+="<div class='col-md-8'>"
@@ -318,6 +322,7 @@
 	 				}                 
 	                var boxbox=$("#boxbox").append(box)
 	        	})
+	        	}
 	        		$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
 	        	for (var index = 1; index <= totalPages ; index++) {
 	        		$("#nextli").before("<li id='page"+index+"' class='page-item'><a name='count' id="+index+" class='page-link'>"+index+"</a></li>")

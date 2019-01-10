@@ -1143,6 +1143,13 @@ color: rgba(100, 100, 100);
   letter-spacing: 0.1em;
 }
 
+.home-blog-post .author-category_1 {
+  font-size: 1rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
 .home-blog-post .author-category a {
   font-weight: 500;
 }
@@ -1221,7 +1228,7 @@ color: rgba(100, 100, 100);
 #blog-listing-big p.intro, #blog-listing-medium p.intro_1 {
   margin-top: 10px;
   color: #777;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 #blog-listing-big p.intro, #blog-listing-medium p.intro_2 {
@@ -1679,6 +1686,13 @@ color: rgba(100, 100, 100);
   margin-bottom: 1rem;
 }
 
+.team-member .image_1 {
+  margin-bottom: 1rem;
+  width:70%;
+  margin:auto;
+  
+}
+
 .team-member a {
   color: #333;
   margin-bottom: 8px;
@@ -2000,7 +2014,7 @@ table tr td {
 }
 
 .panel-body label {
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 400 !important;
   color: #777;
   opacity: 0.9;
@@ -3062,6 +3076,13 @@ STYLE SWITCHER FOR DEMO
   border-radius: 0;
 }
 
+.btn-lg_1 {
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: 10px;
+}
+
 .btn-sm {
   padding: 0.25rem 0.5rem;
   font-size: 0.7rem;
@@ -3511,6 +3532,18 @@ a.text-dark:focus, a.text-dark:hover {
   background-color: #28a745;
 }
 
+.badge-success_1 {
+  	margin-left: 80px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 30px;
+    font-size: 18px;
+    width: 200px;
+    color: #fff;
+    background-color: #28a745;
+}
+
 .badge-success[href]:focus, .badge-success[href]:hover {
   color: #fff;
   text-decoration: none;
@@ -3541,6 +3574,18 @@ a.text-dark:focus, a.text-dark:hover {
 
 .badge-danger {
   color: #fff;
+  background-color: #dc3545;
+}
+
+.badge-danger_1 {
+   margin-left: 80px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 30px;
+    font-size: 18px;
+    width: 200px;
+    color: #fff;
   background-color: #dc3545;
 }
 

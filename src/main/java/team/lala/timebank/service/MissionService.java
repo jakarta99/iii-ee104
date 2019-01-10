@@ -57,8 +57,6 @@ public class MissionService {
 		return missionDao.findAll(specification);
 	}
 
-	//
-
 	// insert for user
 	public Mission insert(Mission mission, Principal principal) {
 		
@@ -106,19 +104,12 @@ public class MissionService {
 		}
 		return null;
 	}
-
-	public List<Mission> findAll() {
-		List<Mission> missionList = missionDao.findAll();
-		if (missionList == null) {
-			System.out.println("jobList does not exist");
-		}
-		return missionList;
-	}
-
-	public List<Mission> findByMember(Member member) {
-
+	
+	//找出會員全部的mission
+	public List<Mission> findByMember(Principal principal) {
+		String account = principal.getName();
+		Member member = memberDao.findByAccount(account);
 		List<Mission> missionList = missionDao.findByMember(member);
-
 		return missionList;
 
 	}
