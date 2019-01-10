@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
+import team.lala.timebank.dao.MissionDao;
 import team.lala.timebank.dao.OrderDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
@@ -28,7 +29,7 @@ import team.lala.timebank.enums.ReportStatus;
 public class OrderService {
 	
 	@Autowired
-	private MissionService missionService;
+	private MissionDao missionDao;
 	@Autowired
 	private OrderDao orderDao;
 	@Autowired
@@ -105,9 +106,7 @@ public class OrderService {
 			return penalty;
 		}
 		
-		
-	
-
+	//找出會員全部的order
 	public List<Order> findByVolunteer(Principal principal) {
 		String account = principal.getName();
 		Member member = memberDao.findByAccount(account);
@@ -177,13 +176,17 @@ public class OrderService {
 	}
 	
 	//志工取消申請 狀態1 --> 5
-	public Order cancle (Long id) {
+	public void cancle (Long id) {
 		Order order = orderDao.getOne(id);
 		if(order.getOrderStatus() == OrderStatus.VolunteerApply) {
 			order.setOrderStatus(OrderStatus.VolunteerCancleTransactionMatchFail);
-			return orderDao.save(order);
+			orderDao.save(order);
 		}
-		return null;
+		if(order.getMission().getMissionstatus() == MissionStatus.A_VolunteerApproved) {
+			order.getMission().setMissionstatus(MissionStatus.A_New);
+		}
+		order.getMission().setApprovedQuantity(order.getMission().getApprovedQuantity() - 1 );
+		missionDao.save(order.getMission());
 	}
 
 	// 根據mission找出所有的order

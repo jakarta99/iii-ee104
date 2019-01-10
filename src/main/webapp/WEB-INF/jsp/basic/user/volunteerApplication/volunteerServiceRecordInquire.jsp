@@ -304,10 +304,10 @@
                 	   box+="<p class='intro_1'>失敗原因:申請被拒絕</p>"
                    }
                    if(order.orderStatus == 'RequesterCancleTransactionMatchFail'){
-                	   box+="<p class='intro_1'>失敗原因:申請被拒絕</p>"
+                	   box+="<p class='intro_1'>失敗原因:雇主取消活動</p>"
                    }
 				   if(order.orderStatus == 'VolunteerCancleTransactionMatchFail'){
-					   box+="<p class='intro_1'>失敗原因:申請被拒絕</p>"
+					   box+="<p class='intro_1'>失敗原因:志工取消活動</p>"
                    }
 				   if(order.orderStatus == 'ServiceFinishPayMatchSuccess'){
 		           	   box+="<p class='intro_1'>結束時間:"+new Date(order.mission.endDate).Format('yyyy-MM-dd hh:mm')+"</p>"
