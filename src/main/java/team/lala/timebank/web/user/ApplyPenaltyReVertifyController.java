@@ -71,4 +71,7 @@ public class ApplyPenaltyReVertifyController {
 		return ajaxResponse;
 	}
 	
+
+	
+	
 }
