@@ -46,13 +46,6 @@ public class MemberService {
         return member;
     } 
 	
-	public Member addMemberRole(Long memberId, Long roleId) {
-		Member member = em.find(Member.class, memberId);
-		Role role = em.find(Role.class, roleId);
-		role.addMember(member);
-		return member;
-	}
-	
 	public void deleteMemberRole(Long memberId, Long roleId) {
 		Role role = roleDao.getOne(roleId);
 		Member member = memberDao.getOne(memberId);
