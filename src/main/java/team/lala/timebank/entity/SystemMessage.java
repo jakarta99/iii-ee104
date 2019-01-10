@@ -41,6 +41,12 @@ public class SystemMessage {
 				insertable=true, updatable=true) 
 	private Member sender;
 	
+	@ManyToOne
+	@JoinColumn(name="ORDER_ID",
+				referencedColumnName="id",  
+				insertable=true, updatable=true) 
+	private Order order;
+	
 	
 	@Column(name="RELEASE_TIME")
 	private Date releaseTime;
