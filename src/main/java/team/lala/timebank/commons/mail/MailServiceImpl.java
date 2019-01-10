@@ -59,13 +59,13 @@ public class MailServiceImpl implements MailService {
 	        helper.setFrom(from);
 	        helper.setTo(member.getEmail());
 	        helper.setSubject("已註冊TimeBank帳戶");
-	        String content="<html>\n" +
-	                "<body>\n" +
-	                "    <h3>已註冊TimeBank帳戶!</h3>\n" +
+	        String content="<html>" +
+	                "<body>" +
+	                "    <h3>已註冊TimeBank帳戶!</h3>" +
 	                "Dear " + member.getName() +
-    				",\n thank you for signing up. Your account is " + member.getAccount() + ".\n" +
-    				"<a href='localhost:8080'>請按此驗證</a>\n" +
-	                "</body>\n" +
+    				",<br/> thank you for signing up. Your account is " + member.getAccount() + ".<br>" +
+    				"<a href='http://localhost:8080/?emailVerify=Y&account=" + member.getAccount() + "'>請按此驗證</a><br/><br/>" +
+	                "</body>" +
 	                "</html>";
 	        helper.setText(content, true);
 
@@ -91,13 +91,13 @@ public class MailServiceImpl implements MailService {
 	        helper.setSubject("已註冊TimeBank帳戶");
 	        String rscId = member.getAccount();
 //	        String content="<html><body>有圖片的mail：<img src=\'cid:" + rscId + "\' ></body></html>";
-	        String content="<html>\n" +
-			                "<body>\n" +
-			                "    <h3>TimeBank:</h3>\n" +
+	        String content="<html>" +
+			                "<body>" +
+			                "    <h3>TimeBank:</h3>" +
 			                "Dear " + member.getName() +
 		    				", thank you for signing up. Your account is "+ member.getAccount() + "." +
 		    				"<img src=\'cid:" + rscId + "\' >" +
-			                "</body>\n" +
+			                "</body>" +
 			                "</html>";
 	        helper.setText(content, true);
 	        FileSystemResource res = new FileSystemResource(new File(imgPath));
