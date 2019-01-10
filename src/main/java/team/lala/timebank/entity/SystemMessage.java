@@ -42,10 +42,10 @@ public class SystemMessage {
 	private Member sender;
 	
 	@ManyToOne
-	@JoinColumn(name="ORDER_ID",
+	@JoinColumn(name="PENALTY_ID",
 				referencedColumnName="id",  
 				insertable=true, updatable=true) 
-	private Order order;
+	private Penalty penalty;
 	
 	
 	@Column(name="RELEASE_TIME")
