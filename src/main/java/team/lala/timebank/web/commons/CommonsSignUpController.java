@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
-import team.lala.timebank.email.SimpleVerificationEmail;
+import team.lala.timebank.commons.mail.MailServiceImpl;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.enums.MemberType;
 import team.lala.timebank.service.MemberService;
@@ -34,7 +34,7 @@ public class CommonsSignUpController {
 	private PasswordEncoder encoder;
 	
 	@Autowired
-	private SimpleVerificationEmail email;
+	private MailServiceImpl mailService;
 	
 //	@Autowired
 //	private Set<Role> roles;
@@ -414,10 +414,13 @@ public class CommonsSignUpController {
 						&& fOrgContactPersonTel && fOrgContactPersonMobile && fOrgWebsiteLink) {
 					try {
 						member.setPassword(encoder.encode(member.getPassword()));
+						member.setBalanceValue(1000);
 						Member newMember = memberService.insert(member);
-						email.mail(newMember);
+//						mailService.sendSimpleMail(newMember);
+//						mailService.sendHtmlMail(newMember);
+//						mailService.sendInlineResourceMail(newMember);
 						log.debug("newMember.getId()={}", newMember.getId());
-						memberService.addRole(newMember.getId(), 3L);	//新增完會員，取得id，才能新增角色(org_user)
+//						memberService.addRole(newMember.getId(), 3L);	//轉換至驗證信後，才給角色
 						response.setObj(newMember);
 						session.setAttribute("memberId", newMember.getId());
 						log.debug("新增成功");
@@ -431,16 +434,13 @@ public class CommonsSignUpController {
 			}else if(member.getMemberType() == MemberType.P){
 				try {
 					member.setPassword(encoder.encode(member.getPassword()));
+					member.setBalanceValue(0);
 					Member newMember = memberService.insert(member);
-					email.mail(newMember);
+//					mailService.sendSimpleMail(newMember);
+					mailService.sendHtmlMail(newMember);
+//					mailService.sendInlineResourceMail(newMember);
 					log.debug("newMember.getId()={}", newMember.getId());
-					memberService.addRole(newMember.getId(), 2L);	//新增完會員，取得id，才能新增角色(user)
-					
-//					Set<Role> roles = new TreeSet<Role>();
-//					Role role = new Role();
-//					role.setRoleName("user");
-//					roles.add(role);
-//					member.setRoles(roles);
+//					memberService.addRole(newMember.getId(), 2L);	//轉換至驗證信後，才給角色
 					
 //					result.put("member", newMember);
 //					response.setObj(result);
