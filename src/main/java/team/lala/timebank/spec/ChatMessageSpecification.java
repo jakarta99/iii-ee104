@@ -10,7 +10,6 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 import team.lala.timebank.entity.ChatMessage;
-import team.lala.timebank.entity.Member;
 
 
 @SuppressWarnings("serial")
