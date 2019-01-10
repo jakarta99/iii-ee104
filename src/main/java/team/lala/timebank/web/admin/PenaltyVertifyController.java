@@ -241,6 +241,42 @@ public class PenaltyVertifyController {
 
 		return ajaxResponse;
 	}
+	
+	
+	// Jasmine
+	// 申訴審核
+	@RequestMapping("/doReVertify")
+	@ResponseBody
+	public AjaxResponse<Penalty> doReVertify(@RequestParam("penaltyId") Long penaltyId,
+			@RequestParam("reVertifystatus") Integer reVertifystatus, 
+			@RequestParam("reVertifyPenaltyTimeValue") Integer reVertifyPenaltyTimeValue,
+			@RequestParam("reVertifyReason") String reVertifyReason) {
+
+		AjaxResponse<Penalty> ajaxResponse = new AjaxResponse<Penalty>();
+		try {
+//			// 進行申訴案件審核，結果存入DB (可能是暫存申訴審核意見，還沒完成審核)
+			Penalty penalty = penaltyService.reVertifyPenalty(penaltyId, reVertifystatus, reVertifyPenaltyTimeValue, reVertifyReason);
+//
+//			// 完成審核，寄站內信通知原告
+//			if (status == 2 || status == 3) {
+//				penaltyService.sendSystemMessageToAccuser(penalty); // 寄信
+//				ajaxResponse.setStatusDescription("1.已寄站內信給檢舉人。");
+//			}
+//			// 如果審核結果為2(需懲罰)，才進行被檢舉人帳戶扣款，並且寄站內信給被告
+//			if (status == 2) {
+//				timeLedgerService.doPenaltyDebit(penalty); // 扣款
+//				penaltyService.sendSystemMessageToDefendant(penalty); // 寄信
+//				ajaxResponse.setStatusDescription(ajaxResponse.getStatusDescription() + " 2.已寄站內信給被檢舉人。");
+//			}
+//			// ajaxResponse.setObj(penalty);
+		} catch (Exception e) {
+			ajaxResponse.addMessage(e.getMessage());
+			e.printStackTrace();
+		}
+
+		return ajaxResponse;
+	}
+	
 
 	// 將佐證圖片存至Server
 	// @RequestMapping("/storeProofPic")
