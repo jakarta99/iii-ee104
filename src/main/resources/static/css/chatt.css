@@ -19,3 +19,11 @@
 	border: 2px solid #d0d0d0;
 	border-radius: 5px;
 }
+
+.p1-from{
+	text-align:right;
+}
+
+.p1-to{
+	text-align:left;
+}

@@ -38,11 +38,19 @@
 		        	var response = document.getElementById('response');
 		    		$.each(data, function(idx, obj){
 		    			console.log("text="+obj.text)
+		    			var m = new Date(obj.time);
+		    			var dateTime = m.getUTCHours() + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds();
 		    	 		var p = document.createElement('p');
 		    	 		p.style.wordWrap = 'break-word';
 		    	 		p.appendChild(document.createTextNode(obj.fromAccount + ": "
-		    	 				+ obj.text + " (" + obj.time + ")" ) );
+		    	 				+ obj.text + " (" + dateTime + ")" ) );
 		    	 		response.appendChild(p);
+		    	 		if (obj.fromAccount == to){
+		    		 		p.classList.add("p1-to");
+		    		 		
+		    		 	} else {
+		    		 		p.classList.add("p1-from");
+		    		 	}
 		    		})
 		       })
 		
@@ -70,10 +78,18 @@
 	function showMessageOutput(messageOutput) {
 	 	var response = document.getElementById('response');
 	 	var p = document.createElement('p');
+	 	var m = new Date(messageOutput.time);
+		var dateTime = m.getUTCHours() + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds();
 	 	p.style.wordWrap = 'break-word';
 	 	p.appendChild(document.createTextNode(messageOutput.fromAccount + ": "
-	 				+ messageOutput.text + " (" + messageOutput.time + ")" ) );
+	 				+ messageOutput.text + " (" + dateTime + ")" ) );
 	 	response.appendChild(p);
+	 	if (messageOutput.toAccount == to){
+	 		p.classList.add("p1-to");
+	 		
+	 	} else {
+	 		p.classList.add("p1-from");
+	 	}
 	
 	
 
@@ -82,7 +98,7 @@
 		<button type="button" id="connect" class="btn btn-primary btn-sm" onclick="connect();" > 與我聊天</button>
 		<button type="button" id="disconnect" class="btn btn-primary btn-sm" disabled="disabled" onclick="disconnect();"> 關閉聊天室</button>
 		<div>
-			<input type="text" disabled="disabled" id="to" value="${mission.member.account}"  />
+			<input type="hidden" disabled="disabled" id="to" value="${mission.member.account}"  />
 		</div>
 
 
