@@ -11,12 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
+import team.lala.timebank.email.SimpleVerificationEmail;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.enums.MemberType;
 import team.lala.timebank.service.MemberService;
@@ -32,6 +32,9 @@ public class CommonsSignUpController {
 	
 	@Autowired
 	private PasswordEncoder encoder;
+	
+	@Autowired
+	private SimpleVerificationEmail email;
 	
 //	@Autowired
 //	private Set<Role> roles;
@@ -412,6 +415,7 @@ public class CommonsSignUpController {
 					try {
 						member.setPassword(encoder.encode(member.getPassword()));
 						Member newMember = memberService.insert(member);
+						email.mail(newMember);
 						log.debug("newMember.getId()={}", newMember.getId());
 						memberService.addRole(newMember.getId(), 3L);	//新增完會員，取得id，才能新增角色(org_user)
 						response.setObj(newMember);
@@ -428,6 +432,7 @@ public class CommonsSignUpController {
 				try {
 					member.setPassword(encoder.encode(member.getPassword()));
 					Member newMember = memberService.insert(member);
+					email.mail(newMember);
 					log.debug("newMember.getId()={}", newMember.getId());
 					memberService.addRole(newMember.getId(), 2L);	//新增完會員，取得id，才能新增角色(user)
 					
