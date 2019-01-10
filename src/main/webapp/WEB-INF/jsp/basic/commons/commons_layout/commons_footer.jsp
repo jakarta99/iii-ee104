@@ -74,3 +74,4 @@
           </div>
         </div>
      </footer>    
+     <jsp:include page="loginModal.jsp" />

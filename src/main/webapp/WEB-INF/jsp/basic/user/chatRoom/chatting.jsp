@@ -21,7 +21,7 @@
 		$.ajax({
 			url:"/user/chatMessage/list?to=" + to,
 			type: "post",
-		    dataType : "json",	 	    
+		    dataType : "json",	
         }).done(function(data, textStatus, jqXHR ){
         	console.log("data"+data)
         	console.log("jqXHR="+jqXHR)
@@ -44,11 +44,17 @@
     		})
        }).fail(function (jqXHR, textStatus) {
     	   console.log(jqXHR)
-// 			if (textStatus == "parsererror"){
+// 			if (jqXHR.status == 200){
 // 				window.location.href = '/login';
 // 			}
-    	   document.write(jqXHR.responseText)
-	    
+
+	    	$("#login-modal").addClass("modal fade show");
+    	   	$("#login-modal").css("display","block");
+    	   	$("#login-modal").css("padding-right","17px");
+
+	    	
+	    	
+	    	
 	    });
 		
 		var socket = new SockJS('/chat');

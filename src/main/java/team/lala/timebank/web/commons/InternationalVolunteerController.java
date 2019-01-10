@@ -34,6 +34,7 @@ public class InternationalVolunteerController {
 
 	@RequestMapping("/list")
 	public String listPage(InternationalVolunteer iVolunteer, Model model) {
+		log.debug("iVolunteer={}",iVolunteer);
 		Specification<InternationalVolunteer> spec = new InternationalVolunteerSpecification(iVolunteer);
 		model.addAttribute("IVolunteers", internationalVolunteerService.findBySpecification(spec));
 		return "/basic/commons/internationalVolunteer/iVolunteer_list";

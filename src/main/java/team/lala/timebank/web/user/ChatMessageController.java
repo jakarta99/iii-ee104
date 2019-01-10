@@ -42,7 +42,6 @@ public class ChatMessageController {
 	@RequestMapping("/user/chatMessage/list")
 	public List<ChatMessage> listMessages(@RequestParam String to, Principal principal){
 		log.debug("to={}",to);
-//		AjaxResponse<List<ChatMessage>> resp = new AjaxResponse<List<ChatMessage>>();
 		ChatMessage chatMessage = new ChatMessage();
 		chatMessage.setToAccount(to);
 		chatMessage.setFromAccount(principal.getName());

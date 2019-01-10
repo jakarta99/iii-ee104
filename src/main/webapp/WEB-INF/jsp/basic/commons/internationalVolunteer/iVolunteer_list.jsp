@@ -122,7 +122,8 @@ function query(){
 	                	<div class="input-group" >                                                                               
 		                    <div class="form-group" >
 								<select id="continent" style="height:52px"
-									name="continent" class="form-control">
+									name="continent" class="form-control">				
+									<option>請選擇</option>
 									<option value="東南亞">東南亞</option>
 									<option value="中南亞">中南亞</option>
 									<option value="東亞">東亞</option>
@@ -214,17 +215,6 @@ function query(){
  		<jsp:include page="../commons_layout/back-to-top_button.jsp"/>
 	</div>
 
-<!--   <script src="/js/voyage/jquery-migrate-3.0.1.min.js"></script> -->
-<!--   <script src="/js/voyage/jquery.easing.1.3.js"></script> -->
-<!--   <script src="/js/voyage/jquery.waypoints.min.js"></script> -->
-<!--   <script src="/js/voyage/jquery.stellar.min.js"></script> -->
-<!--   <script src="/js/voyage/owl.carousel.min.js"></script> -->
-<!--   <script src="/js/voyage/jquery.magnific-popup.min.js"></script> -->
-<!--   <script src="/js/voyage/aos.js"></script> -->
-<!--   <script src="js/jquery.animateNumber.min.js"></script> -->
-<!--   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
-<!--   <script src="js/google-map.js"></script> -->
-<!--   <script src="/js/voyage/main.js"></script> -->
 	<script>
 		$(document).ready(function(){
 			
