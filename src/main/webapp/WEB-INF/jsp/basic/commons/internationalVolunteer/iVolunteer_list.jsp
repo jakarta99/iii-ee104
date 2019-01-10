@@ -56,13 +56,14 @@
     color: #fff;
     background-color: #13B5AD;
     border-color: #13B5AD;  
+    transition:all 0.5s;
 }
 .btn-outline-primary:hover {
-/* 	color: #13b5b1; */
-    background-color: transparent;
+	color: #fff; 
     background-image: none;
-    border-color:rgb(19, 181, 177, 0.8);
-    background-color: rgb(19, 181, 177, 0.8);
+    border-color:#4f9d9d;
+    background-color: #4f9d9d; 
+    transition:all 0.5s;
 }
 </style>
 <script>
@@ -212,17 +213,17 @@ function query(){
  		<jsp:include page="../commons_layout/back-to-top_button.jsp"/>
 	</div>
 
-  <script src="/js/voyage/jquery-migrate-3.0.1.min.js"></script>
-  <script src="/js/voyage/jquery.easing.1.3.js"></script>
-  <script src="/js/voyage/jquery.waypoints.min.js"></script>
-  <script src="/js/voyage/jquery.stellar.min.js"></script>
-  <script src="/js/voyage/owl.carousel.min.js"></script>
-  <script src="/js/voyage/jquery.magnific-popup.min.js"></script>
-  <script src="/js/voyage/aos.js"></script>
+<!--   <script src="/js/voyage/jquery-migrate-3.0.1.min.js"></script> -->
+<!--   <script src="/js/voyage/jquery.easing.1.3.js"></script> -->
+<!--   <script src="/js/voyage/jquery.waypoints.min.js"></script> -->
+<!--   <script src="/js/voyage/jquery.stellar.min.js"></script> -->
+<!--   <script src="/js/voyage/owl.carousel.min.js"></script> -->
+<!--   <script src="/js/voyage/jquery.magnific-popup.min.js"></script> -->
+<!--   <script src="/js/voyage/aos.js"></script> -->
 <!--   <script src="js/jquery.animateNumber.min.js"></script> -->
 <!--   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
 <!--   <script src="js/google-map.js"></script> -->
-  <script src="/js/voyage/main.js"></script>
+<!--   <script src="/js/voyage/main.js"></script> -->
 	<script>
 		$(document).ready(function(){
 			
