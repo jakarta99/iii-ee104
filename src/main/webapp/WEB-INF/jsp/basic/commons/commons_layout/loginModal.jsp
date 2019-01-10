@@ -9,7 +9,10 @@
               <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body">
-              <form action="#"  method="post" id="login-modal">
+              <form action="/login"  method="post" id="login-modal">
+                <div class="form-group">
+                  <input id="sourceUrl" type="hidden" name="sourceUrl" class="form-control">
+                </div>
                 <div class="form-group">
                   <input id="email_modal" type="text" placeholder="username" name="username" class="form-control">
                 </div>
@@ -32,6 +35,6 @@
       <script>
        	var parentUrl = parent.window.location.href.substring(10);
        	var index = parentUrl.indexOf("/");
-      	$("#login-modal").attr("action","/login?sourceUrl=" +parentUrl.substring(index) );
-      	console.log($("#login-modal").attr("action"))
+      	$("#sourceUrl").val(parentUrl.substring(index));
+      	console.log($("#sourceUrl").val());
       </script>
