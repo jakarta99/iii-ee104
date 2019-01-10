@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Personal Information</title>
+<title>Personal Information Edit</title>
 <!-- css -->
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp" />
 <!-- Javascript files -->

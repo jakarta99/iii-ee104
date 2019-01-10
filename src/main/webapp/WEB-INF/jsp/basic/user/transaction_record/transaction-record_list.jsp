@@ -76,6 +76,8 @@
 								<input type="text" value="${param.depositValue}" id="depositValue" name="depositValue"/>
 								<label>withdrawalValue :</label> 
 								<input type="text" value="${param.withdrawalValue}"  id="withdrawalValue" name="withdrawalValue"/>
+								<label>balanceValue :</label> 
+								<input type="text" value="${param.balanceValue}"  id="balanceValue" name="balanceValue"/>
 							</div>
 							<div>
 							    <label>Start Date :</label>
@@ -99,7 +101,7 @@
 			<!-- 						<th scope="col">description</th> -->
 									<th scope="col">depositValue</th>
 									<th scope="col">withdrawalValue</th>
-			<!-- 						<th scope="col">balanceValue</th> -->
+									<th scope="col">balanceValue</th>
 								</tr>
 							</thead>
 							<tbody id="tableBody">
@@ -168,7 +170,7 @@
 // 				{data:"description"},
 				{data:"depositValue"},
 				{data:"withdrawalValue"},
-// 				{data:"balanceValue"},
+				{data:"balanceValue"},
 			],
 			columnDefs: [{
 	            "searchable": false,
