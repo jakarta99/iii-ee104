@@ -19,6 +19,7 @@ import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.commons.mail.MailServiceImpl;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.enums.MemberType;
+import team.lala.timebank.enums.YesNo;
 import team.lala.timebank.service.MemberService;
 
 @Slf4j
@@ -417,7 +418,7 @@ public class CommonsSignUpController {
 						member.setBalanceValue(1000);
 						Member newMember = memberService.insert(member);
 //						mailService.sendSimpleMail(newMember);
-//						mailService.sendHtmlMail(newMember);
+						mailService.sendHtmlMail(newMember);
 //						mailService.sendInlineResourceMail(newMember);
 						log.debug("newMember.getId()={}", newMember.getId());
 //						memberService.addRole(newMember.getId(), 3L);	//轉換至驗證信後，才給角色

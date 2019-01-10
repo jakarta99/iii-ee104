@@ -83,7 +83,7 @@
        <div class="container">
           <div class="row d-flex align-items-center flex-wrap">
             <div class="col-md-7">
-              <h1 class="h2">志工審核</h1>
+              <h1 class="h2">志工審核-審核您需要的志工</h1>
             </div>
             <div class="col-md-5">
               <ul class="breadcrumb d-flex justify-content-end">
@@ -101,10 +101,10 @@
           <section class="bar mb-0">
             <div class="row">
               <div class="col-md-12">
-                <div class="heading">
-                  <h2>志工審核</h2>
-                </div>
-                <p class="lead">以下是對您的招募有興趣的志工，您可以接受或拒絕</p>
+<!--                 <div class="heading"> -->
+<!--                   <h2>志工審核</h2> -->
+<!--                 </div> -->
+<!--                 <p class="lead">以下是對您的招募有興趣的志工，您可以接受或拒絕</p> -->
                 <div id="boxbox" class="row text-center">
 <!--                 志工名單開始 -->
                 </div>
@@ -215,17 +215,17 @@
 	        	last=orders.last;
 	        	page=orders.number;
 	        	$.each(orders.content,function(index, order){
-	        		var box="<div class='col-md-3'>"
+	        		var box="<div class='col-md-4'>"
 	        			box+="<div data-animate='fadeInUp' class='team-member'>"
-	        			box+="<div class='image'><a href='team-member.html'><img src='/image/user/member/"+order.volunteer.picture+"' class='img-fluid rounded-circle'></a></div>"
-	        			box+="<h3><a href='team-member.html'>"+order.volunteer.name+"</a></h3><div>"
+	        			box+="<div class='image_1'><a href='team-member.html'><img src='/image/user/member/"+order.volunteer.picture+"' class='img-fluid rounded-circle'></a></div>"
+	        			box+="<h1 style='font-family:Microsoft JhengHei'><a href='team-member.html'>"+order.volunteer.name+"</a></h1><div>"
 	        			if(order.orderStatus=='VolunteerApply'){
 	        			box+="<button class='btn btn-outline-primary' onclick=\"accept("+order.id+",'"+order.volunteer.name+"')\" >接受</button>"
 	        			box+="<button class='btn btn-outline-danger' onclick=\"reject("+order.id+",'"+order.volunteer.name+"')\" >拒絕</button></div>"
 	        			}else if(order.orderStatus=='RequesterAcceptService'){
-	        			box+="<span class='badge badge-success'>已接受</span>"
+	        			box+="<span class='badge badge-success_1'>已接受</span>"
 	        			}else if(order.orderStatus=='RequesterRefuceServiceMatchFail'){
-	        			box+="<span class='badge badge-danger'>已拒絕</span>"	
+	        			box+="<span class='badge badge-danger_1'>已拒絕</span>"	
 	        			}else {
 	        			box+= "<p>不應該出現的狀態</p>";
 						}
@@ -233,7 +233,7 @@
 	        			box+="<ul class='social list-inline'>"
 	        			box+="<li class='s3'><a href='#' class='star'><i class='fa fa-star'></i></a>平均分數:"+order.volunteer.averageScore+"</li>"
 	        			box+="<li class='s3'><a href='#' class='external twitter'><i class='fa fa-phone'></i></a>電話:"+order.volunteer.telephone+"</li>"
-	        			box+="<li class='s3'><a href='#' class='email'><i class='fa fa-envelope'></i></a>Email:"+order.volunteer.telephone+"</li>"
+	        			box+="<li class='s3'><a href='#' class='email'><i class='fa fa-envelope'></i></a>Email:"+order.volunteer.email+"</li>"
 	        			box+="</ul></div></div>"
 	        		var boxbox=$("#boxbox").append(box)
 	        	})
