@@ -91,11 +91,7 @@
         <div class="container">
        
 		<!--查詢 -->
-          <div class="panel panel-default sidebar-menu">
-          	<div class="panel-heading">
-            	<h2 class="h2 panel-title">志工招募</h2>
-            </div>
-            <div class="panel-body">
+         <section class="bar_1">
             	<form role="search">
                 	<div class="input-group">                                        
                     	<div  role="tw-city-selector"></div>                                       
@@ -133,10 +129,9 @@
 	                    </span>
                     </div>
                   </form>
-                </div>
-              </div>
+          </section>    
 			<!--志工招募清單 -->
-            <div>
+             <section class="post_1">
               <div id="boxbox" class="row">
                </div>
                
@@ -145,10 +140,9 @@
               		</ul>
                   </nav>
                   
-            </div>
+            </section> 
           </div>
         </div>
-      </div>
 <jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script>
 	var length=9;
