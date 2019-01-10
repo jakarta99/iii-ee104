@@ -12,7 +12,7 @@
                 </li>
                 <li class="nav-item menu-large"><a href="/commons/domesticVolunteer/list" >志工招募<b class="caret"></b></a>
                 </li>
-                <sec:authorize access="hasRole('USER')">
+                <sec:authorize access="hasAnyRole('USER','ORG_USER')">
               	<li class="nav-item dropdown menu-large" ><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">會員專區 <b class="caret"></b></a>
                   <ul class="dropdown-menu megamenu" style="width:450px;">
                     <li>
