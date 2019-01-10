@@ -34,6 +34,31 @@
 	  color: #fff !important;
 	  border-radius: 0 !important;
 }
+li{
+	display:inline;
+	margin-right: 5px;
+	margin-left: 0px;
+}
+.status1{
+	background:#d2e9ff;
+	font-size: 16px;
+	border: 1px solid #5599FF;
+}
+.status2{
+	background:#ceffce;
+	font-size: 16px;
+	border: 1px solid #33FF33;
+}
+.status3{
+	background:#FFFACD;
+	font-size: 16px;
+	border: 1px solid #FFDD55;
+}
+.status4{
+	background:#DDDDDD;
+	font-size: 16px;
+	border: 1px solid #AAAAAA;
+}
 </style>
 </head>
 <body>
@@ -52,6 +77,14 @@
      </div>
     <section class="bar">
 	    <div class="container">
+    	<ul>
+	    	<li><span class='status1'>　</span><span>:進行中的任務(我是志工)</span></li>
+	    	<li><span class='status2'>　</span><span>:已完成的任務(我是志工)</span></li>
+	    </ul>
+	    <ul>	
+	    	<li><span class='status3'>　</span><span>:進行中的任務(我是雇主)</span></li>
+	    	<li><span class='status4'>　</span><span>:已完成的任務(我是雇主)</span></li>
+	    </ul>    
 	    <div id="calendar"></div>
 	    </div>
 	<div id="fullCalModal" class="modal fade">
@@ -98,24 +131,9 @@
 			  prev: '«', next: '»', prevYear: ' << ', nextYear: ' >> ',
 			  today: '今天', month: '月', week: '周', day: '日'
 			  },
-		  events: function(start, end, timezone, callback) {
-			  $.ajax({
-				  url: '/user/getOrder',
-				  success: function(data) {
-					  var events = [];
-					  $.each(data, function(idx){
-						  events.push({
-							  title: data[idx].mission.title,
-							  start: data[idx].mission.startDate,
-							  end: data[idx].mission.endDate,
-							  id: data[idx].mission.id,
-							  status: data[idx].orderStatus,
-						  });
-					  });
-					  callback(events);
-				  }
-			  })
-		  },
+		  eventSources:[
+			  getOrder,getMission
+		  ],
 		  eventClick: function(event, jsEvent, view){	  
 			  	$('#modalTitle').html(event.title);
 	            $('#eventBegin').text(new Date(event.start).Format('yyyy-MM-dd hh:mm'));
@@ -128,9 +146,17 @@
 				element.css('border', 'white');
 				element.css('color', 'black');
 		        if (event.status == 'VolunteerApply' || event.status == 'RequesterAcceptService' || event.status == 'ServiceFinishNotPay') {		        	
-		            element.css('background-color', '#d2e9ff');	
+		            element.css('background-color', '#d2e9ff');
+		            element.css('border', '1px solid #5599FF');
+		        } else if(event.status == 'A_New' || event.status == 'A_VolunteerApproved' || event.status == 'B_AccountsPayable') {
+		        	element.css('background-color', '#FFFACD');
+		        	element.css('border', '1px solid #FFDD55');
+		        } else if(event.status == 'C_Finish' || event.status == 'C_Cancel'){
+		        	element.css('background-color', '#DDDDDD');
+		        	element.css('border', '1px solid #AAAAAA');
 		        } else {
-		            element.css('background-color', '#ceffce');		            
+		            element.css('background-color', '#ceffce');
+		            element.css('border', '1px solid #33FF33');
 		        }
 		    },
 		  eventTextColor: '	#000000',
@@ -153,6 +179,43 @@
 	        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
 	    return fmt;
 	}
+	function getOrder(start, end, timezone, callback) {
+		  $.ajax({
+			  url: '/user/getOrder',
+			  success: function(data) {
+				  var events = [];
+				  $.each(data, function(idx){
+					  events.push({
+						  title: data[idx].mission.title,
+						  start: data[idx].mission.startDate,
+						  end: data[idx].mission.endDate,
+						  id: data[idx].mission.id,
+						  status: data[idx].orderStatus,
+					  });
+				  });
+				  callback(events);
+			  }
+		  })
+	  }
+	function getMission(start, end, timezone, callback) {
+		  $.ajax({
+			  url: '/user/getMission',
+			  success: function(data) {
+				  var events = [];
+				  $.each(data, function(idx){
+					  events.push({
+						  title: data[idx].title,
+						  start: data[idx].startDate,
+						  end: data[idx].endDate,
+						  id: data[idx].id,
+						  status: data[idx].missionstatus,
+					  });
+				  });
+				  console.log(events)
+				  callback(events);
+			  }
+		  })
+	  }
 	</script>
 </body>
 </html>

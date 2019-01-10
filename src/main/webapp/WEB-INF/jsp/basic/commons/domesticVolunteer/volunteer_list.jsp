@@ -80,8 +80,8 @@
             </div>
             <div class="col-md-5">
               <ul class="breadcrumb d-flex justify-content-end">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active">Blog Listing: Small</li>
+                <li class="breadcrumb-item"><a href="/">首頁</a></li>
+                <li class="breadcrumb-item active">志工招募</li>
               </ul>
             </div>
           </div>
@@ -173,9 +173,9 @@
 	        		 box+="<div class='home-blog-post'>";
 	        		 box+="<div class='image' style='text-align:center'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'><img width='300px' height='230px' src=/image/user/mission/"+mission.missionPicName+" alt='...'></a>";
 	        		 box+="</div><div class='text'><h4><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'>"+ mission.title + "</a></h4>";
-	        		 box+="<p class='author-category'>活動時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>";
-	        		 box+="<p class='author-category'>活動地點:"+mission.county+mission.district+"</p>";       	
-	        		 box+="<p class='author-category'>發布者:"+mission.member.name+"</p>";       	
+	        		 box+="<p class='author-category_1'>活動時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>";
+	        		 box+="<p class='author-category_1'>活動地點:"+mission.county+mission.district+"</p>";       	
+	        		 box+="<p class='author-category_1'>發布者:"+mission.member.name+"</p>";       	
 	        		 box+="</div></div></div>";   
 	        		var boxbox=$("#boxbox").append(box); 
 	        	})
