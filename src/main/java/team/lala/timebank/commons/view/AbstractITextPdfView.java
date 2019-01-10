@@ -1,4 +1,4 @@
-package team.lala.timebank.config;
+package team.lala.timebank.commons.view;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;

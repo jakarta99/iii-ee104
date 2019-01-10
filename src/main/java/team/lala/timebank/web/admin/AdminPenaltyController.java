@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import team.lala.timebank.commons.ajax.AjaxResponse;
-import team.lala.timebank.config.ExcelView;
+import team.lala.timebank.commons.view.ExcelView;
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.service.PenaltyService;
 import team.lala.timebank.spec.PenaltySpecification;

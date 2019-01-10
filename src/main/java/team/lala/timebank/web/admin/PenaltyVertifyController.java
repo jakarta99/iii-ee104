@@ -26,8 +26,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
-import team.lala.timebank.config.ExcelView;
-import team.lala.timebank.config.PdfView;
+import team.lala.timebank.commons.view.ExcelView;
+import team.lala.timebank.commons.view.PdfView;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
