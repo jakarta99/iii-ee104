@@ -14,6 +14,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
 <script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
 <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+<!-- sweet alert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
 <!-- date picker -->
@@ -205,53 +207,30 @@
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script>
 	
-		$('#insertMission').click(function(){
-			swal({
-				  title: "刊登確認",
-				  text: "確定刊登?",
-				  icon: "warning",
-				  buttons: true,
-				  dangerMode: true,
-				}).then((willreject) => {
-					if(willreject){
-						$.post("/user/missionPublish/insert",{"missionId":missionId},
-							function(data){
-								if(data.status == 'SUCCESS'){
-									swal({
-									  title: "申請結果",
-									  text: "申請成功",
-									  icon: "success",
-									  buttons: false,
-									  dangerMode: false,
-									})
-								}else{
-									swal({
-										  title: "申請失敗",
-										  text: " "+data.messages,
-										  icon: "error",
-										  buttons: false,
-										  dangerMode: false,
-										})
-								}
-						})
-					}else{
+// 		$('#insertMission').click(function(){
+// 			swal({
+// 				  title: "刊登確認",
+// 				  text: "確定刊登?",
+// 				  icon: "warning",
+// 				  buttons: true,
+// 				  dangerMode: true,
+// 				}).then((willreject) => {
+// 					if(willreject){
+// 						$.post("/user/missionPublish/insert",{"missionId":missionId},
+// 							function(data){
+// 								
+// 						})
+// 					}else{
 						
-					}
-				})
-			
-			
-			
-		})
+// 					}
+// 				})	
+// 		})
 		
 	
 	
 	
 		$(document).ready(function() {
-		
 			new TwCitySelector();
-			
-			
-			
 			$('#startDate').datetimepicker({
 				dateFormat: "yy/mm/dd",
 			    autoclose: true,
@@ -273,10 +252,23 @@
 			    numberOfMonths: 2,
 			    stepMinute: 10,
 			})
-			
-			
+
 			$("div[role='tw-city-selector']").attr("data-county-value",'${mission.county}');
 			$("div[role='tw-city-selector']").attr("data-district-value", '${mission.district}');
+			
+			
+			if('${response.messages}' == ''){
+				}else if('${response.messages}' == 'SUCCESS'){
+					swal({
+						  title: "提示訊息",
+						  text: '${response.messages}',
+						  icon: "error",
+						  buttons: false,
+						  dangerMode: false,
+						})
+				}else
+			
+			
 		})
 		
 

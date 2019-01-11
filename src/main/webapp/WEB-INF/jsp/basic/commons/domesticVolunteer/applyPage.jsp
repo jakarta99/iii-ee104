@@ -163,22 +163,22 @@
               </div>
               <div class="col-md-4">
               	<img  style="width:200px;height:180px;border:1px solid black;" id="missionImg" alt="" src="/image/user/mission/${mission.missionPicName}" class="img-fluid rounded-square">
-              	<table>
-              		<c:if test='${member.memberType == P}'>
-            		<tr>
-            			<td>會員帳號:${member.account}(debug用)</td>
-            		</tr>
-            		<tr>
-            			<td>會員名稱:</td>
-            		</tr>
-            		<tr>
-            			<td>會員名稱:${member.name}</td>
-            		</tr>
-            		<tr>
-            			<td>會員名稱:${member.name}</td>
-            		</tr>
-            		</c:if>         	
-            	</table>
+<!--               	<table> -->
+<%--               		<c:if test='${member.memberType == P}'> --%>
+<!--             		<tr> -->
+<%--             			<td>會員帳號:${member.account}(debug用)</td> --%>
+<!--             		</tr> -->
+<!--             		<tr> -->
+<!--             			<td>會員名稱:</td> -->
+<!--             		</tr> -->
+<!--             		<tr> -->
+<%--             			<td>會員名稱:${member.name}</td> --%>
+<!--             		</tr> -->
+<!--             		<tr> -->
+<%--             			<td>會員名稱:${member.name}</td> --%>
+<!--             		</tr> -->
+<%--             		</c:if>         	 --%>
+<!--             	</table> -->
               
               </div>
             </div>
@@ -199,6 +199,9 @@
 
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script>
+	
+	
+	
 	function insertOrder(missionId){
 		swal({
 			  title: "申請確認",
@@ -214,7 +217,10 @@
 						dataType:'json'
 					}).fail(function( jqXHR, textStatus){
 						if(jqXHR.status == 200){
-							window.location.replace("/login");
+							$("#login-modal").addClass("modal fade show");
+				    	   	$("#login-modal").css("display","block");
+				    	   	$("#login-modal").css("padding-right","17px");
+				    	   	$("#volunteerApply").val("volunteerApply");
 						}
 					})
 // 							function( data, textStatus, jqXHR ){
@@ -246,10 +252,18 @@
 				}else{
 					
 				}
-				
 			})
-
 	}
+		
+	$(document).ready(function() {
+		if ('${applying}' == 'Y'){
+			insertOrder('${mission.id}');
+		}
+	})
+	
+
+	
+
 	
 	
 	</script>
