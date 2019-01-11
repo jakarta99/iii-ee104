@@ -111,7 +111,7 @@
 	        		   box+=" <a href='/commons/domesticVolunteer/apply?missionId="+ order.mission.id +"'><img src=/image/user/mission/"+order.mission.missionPicName+" class='embed-responsive-item'></img></a>"     
 	        		   box+="</div></div></div>"
 	                   box+="<div class='col-md-8'>"
-	                   box+="<h1 class='h1 mt-0'><a href='/commons/domesticVolunteer/apply?missionId="+ order.mission.id +"'>"+ order.mission.title + "</a></h1>"
+	                   box+="<h3 class='h3 mt-0'><a href='/commons/domesticVolunteer/apply?missionId="+ order.mission.id +"'>"+ order.mission.title + "</a></h3>"
 	                   box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
 	                   box+="<p class='author-category_1'><a href='#'>"+ order.mission.member.name + "</a></p>"
 	                   if(order.orderStatus == "VolunteerApply"){
@@ -126,14 +126,14 @@
 						   box+="</div>"
 		           	   }
 		        	   if(order.orderStatus == "VolunteerApply"){
-		               		box+="<p class='intro_1'>申請時間:"+new Date(order.volunteerApplyTime).Format('yyyy-MM-dd hh:mm')+"</p>"
-		               		box+="<p class='intro_1'>開始時間:"+new Date(order.mission.startDate).Format('yyyy-MM-dd hh:mm')+"</p>"
+		               		box+="<p class='intro_3'>申請時間:"+new Date(order.volunteerApplyTime).Format('yyyy-MM-dd hh:mm')+"</p>"
+		               		box+="<p class='intro_3'>開始時間:"+new Date(order.mission.startDate).Format('yyyy-MM-dd hh:mm')+"</p>"
 			           }else if(order.orderStatus == "RequesterAcceptService"){
-			            	box+="<p class='intro_1'>開始時間:"+new Date(order.mission.startDate).Format('yyyy-MM-dd hh:mm')+"</p>"
+			            	box+="<p class='intro_3'>開始時間:"+new Date(order.mission.startDate).Format('yyyy-MM-dd hh:mm')+"</p>"
 			           }else if(order.orderStatus == "ServiceFinishNotPay"){
-			            	box+="<p class='intro_1'>結束時間:"+new Date(order.mission.endDate).Format('yyyy-MM-dd hh:mm')+"</p>"
+			            	box+="<p class='intro_3'>結束時間:"+new Date(order.mission.endDate).Format('yyyy-MM-dd hh:mm')+"</p>"
 			           }
-	                   box+="<p class='intro_1'>活動地點:"+order.mission.county + order.mission.district+"</p>"
+	                   box+="<p class='intro_3'>活動地點:"+order.mission.county + order.mission.district+"</p>"
 				       $("#boxbox").append(box);
 		        	})
 	        	}

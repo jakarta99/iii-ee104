@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,6 +67,9 @@
     </style>
 </head>
 <body>
+<fmt:formatDate value="${mission.publishDate }" pattern="yyyy/MM/dd" var="publishDate" />
+<fmt:formatDate value="${mission.startDate }" pattern="yyyy/MM/dd HH:mm" var="startDate" />
+<fmt:formatDate value="${mission.endDate }" pattern="yyyy/MM/dd HH:mm" var="endDate" />
 	<!-- Top bar-->
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
  	
@@ -123,13 +127,13 @@
                     <div class="col-md-3">
                       <div class="form-group">
                         <label for="startDate">開始日期</label>
-                        <input value='${mission.startDate}' id="startDate" name="startDate" class="form-control">
+                        <input value='${startDate}' id="startDate" name="startDate" class="form-control">
                       </div>
                     </div>     
                     <div class="col-md-3">
                       <div class="form-group">
                         <label for="endDate">結束日期</label>
-                        <input value='${mission.endDate}' id="endDate" name="endDate" class="form-control">
+                        <input value='${endDate}' id="endDate" name="endDate" class="form-control">
                       </div>
                     </div>
                     
@@ -240,7 +244,7 @@
 			    minDate: '0',
 			    numberOfMonths: 2,
 			    stepMinute: 10,
-			})
+			});
 			
 			$('#endDate').datetimepicker({
 				dateFormat: "yy/mm/dd",
@@ -251,27 +255,32 @@
 			    minDate: '0',
 			    numberOfMonths: 2,
 			    stepMinute: 10,
-			})
+			});
 
 			$("div[role='tw-city-selector']").attr("data-county-value",'${mission.county}');
 			$("div[role='tw-city-selector']").attr("data-district-value", '${mission.district}');
 			
+		
 			
-			if('${response.messages}' == ''){
-				}else if('${response.messages}' == 'SUCCESS'){
+			if(${not empty response.messages}){
 					swal({
-						  title: "提示訊息",
-						  text: '${response.messages}',
-						  icon: "error",
-						  buttons: false,
-						  dangerMode: false,
-						})
-				}else
-			
-			
+					  title: "刊登失敗",
+					  text: '${response.messages}',
+					  icon: "error",
+					  buttons: false,
+					  dangerMode: false,
+					})
+				}else if('${res}' == 'SUCCESS'){
+					swal({
+						title: "刊登結果",	
+						text: "刊登成功",
+						icon:"success",
+						buttons: false,
+						dangerMode: false,
+					})
+				}
 		})
 		
-
 
 </script>
 </body>

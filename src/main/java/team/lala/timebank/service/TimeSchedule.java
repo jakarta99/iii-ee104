@@ -28,7 +28,8 @@ import us.codecraft.webmagic.Spider;
 @Transactional
 @Component
 public class TimeSchedule {
-	
+	@Autowired
+	private FacadeService facadeService;
 	@Autowired
 	private OrderDao orderDao;
 	@Autowired
@@ -39,8 +40,25 @@ public class TimeSchedule {
 	private MissionService missionService;
 	@Autowired
 	private OrderService orderService;
-	
+//	@Scheduled(cron = "0 0/2 * * * *") (cron = "0 0 1 * * ?")每天一點執行
 	public void autoPay() {
+		
+		//獲得到期的所有mission
+		Mission inputMission = new Mission();
+		inputMission.setMissionstatus(MissionStatus.A_New);
+		inputMission.setAutoPayDate(new Date(new Date().getTime() + 1 * 24 * 60 * 60 * 1000));
+		MissionSpecification missionSpec = new MissionSpecification(inputMission);
+		List<Mission> missions = missionService.findBySpecification(missionSpec);
+		//設定mission狀態
+		for(Mission mission : missions) {
+			//每個mission的order自動付款評分
+			for(Order order : mission.getOrders()) {
+				//付款評分 自動評5分
+				facadeService.transaction(mission.getTimeValue(), order.getId(), 5);
+			}
+		}
+		
+		
 		
 		
 		
@@ -56,6 +74,7 @@ public class TimeSchedule {
 
 		Mission inputMission = new Mission();
 		inputMission.setMissionstatus(MissionStatus.A_New);
+		
 		//搜尋A狀態的Mission
 		MissionSpecification missionSpec = new MissionSpecification(inputMission);
 		List<Mission> missions = missionService.findBySpecification(missionSpec);
@@ -70,6 +89,7 @@ public class TimeSchedule {
 				
 				if(mission.getOrders().size() == 0) {
 					mission.setMissionstatus(MissionStatus.C_Cancel);
+					
 				}else {
 					List<Order> cancelOrders = orderDao.findByMissionAndOrderStatus(mission, OrderStatus.VolunteerApply);
 					if(cancelOrders.size() != 0) {

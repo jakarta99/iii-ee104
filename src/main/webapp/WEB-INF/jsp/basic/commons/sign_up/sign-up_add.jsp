@@ -20,8 +20,7 @@
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 <!-- sweetAlert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<!-- icon -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
 <style>
 	body{
 		font-family: "微軟正黑體"
@@ -49,15 +48,27 @@
 	<jsp:include page="../commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="../commons_layout/commons_nav.jsp"/>
+	<div id="heading-breadcrumbs">
+    	<div class="container">
+        	<div class="row d-flex align-items-center flex-wrap">
+            	<div class="col-md-7">
+              		<h1 class="h2">建立您的TimeBank帳戶</h1>
+            	</div>
+	            <div class="col-md-5">
+	              	<ul class="breadcrumb d-flex justify-content-end">
+	                	<li class="breadcrumb-item"><a href="/">Home</a></li>
+	                	<li class="breadcrumb-item"><a href="/commons/sign-up/type">Select account type</a></li>
+	                	<li class="breadcrumb-item active">Write information</li>
+	              	</ul>
+	            </div>
+        	</div>
+        </div>
+    </div>
 	<section class="bar">
 	<div class="container">
     	<div class="row">
           	<article>
-          			<h3>建立您的TimeBank帳戶</h3>
-          			<hr>
-          		<input type="button" class="btn btn-template-outlined" onclick="javascript:document.location.href='/commons/sign-up/type'" value="回前頁">  
-          		<hr>
-          		<form class="myform" action="#" method="post" enctype="multipart/form-data">
+          		<form id="memberform" class="myform" action="#" method="post" enctype="multipart/form-data">
           			<fieldset>
           				<div class="heading">
           					<h3>帳戶資料</h3>
@@ -78,7 +89,7 @@
                     		<div class="col-md-6">
                       			<div class="form-group">
 									<label for="idPassword">密碼:</label>
-									<input type="password" value="${param.password}" id="idPassword" placeholder="請輸入密碼" name="password" autofocus autocompelete="off" class="form-control">
+									<input type="password"  id="idPassword" placeholder="請輸入密碼" name="password" autofocus autocompelete="off" class="form-control">
 									<div><label>(1.不可空白，2.至少8個字最多16個字，3.必須包含字母、數字、特殊符號[~!@#$%^&*])</label></div>
 									<span id="idspPassword" style='color:red'></span>
 								</div>
@@ -334,9 +345,10 @@
     });
     function chkPassword() {
         var thePassword = document.getElementById("idPassword").value;
+        console.log(thePassword)
         var thePasswordLen = thePassword.length;
         var flag1 = false, flag2 = false, flag3 = false;
-        //判斷元素值是否為空白，長度是否大於8
+        //判斷元素值是否為空白
         if (thePassword == ""){
             document.getElementById("idspPassword").innerHTML =
                 "<img src='/img/X.jpg'><span style='color:red'>不可空白</span>"
@@ -779,6 +791,8 @@
 			
 // 			insert new member
 			$("#submit").click(function(){
+// 				alert($("#idPassword").val())
+// 				console.log($("#idPassword").val())
  				swal({
  		            icon: "/image/user/member/loading.gif",
  					button: false,
@@ -787,14 +801,14 @@
 					method:"post",
 					dataType: "json",        
 					url:"/commons/sign-up/insert",
-					data: $("form").serialize(),
+					data: $("#memberform").serialize(),
 // 					processData: false,	// jQuery預設會把data轉為query String, 所以要停用
 // 					contentType: false	// jQuery預設contentType為'application/x-www-form-urlencoded; charset=UTF-8', 且不用自己設定為'multipart/form-data'
 				}).done(function(response){
 // 					alert(response.obj);
 // 					console.log("status="+response.status);
-// 					console.log("message="+response.message);
-					
+// 					console.log("messages="+response.messages);
+// 					alert($("#idPassword").val())
 					if(response.status == "SUCCESS") {
 						swal({
 							  title: "SUCCESS",

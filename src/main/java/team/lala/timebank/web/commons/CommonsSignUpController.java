@@ -37,12 +37,6 @@ public class CommonsSignUpController {
 	@Autowired
 	private MailServiceImpl mailService;
 	
-//	@Autowired
-//	private Set<Role> roles;
-//	
-//	@Autowired
-//	private Role role;
-	
 	@RequestMapping("/type")
 	public String typePage(Model model) {
 		return "/basic/commons/sign_up/sign-up_type";
@@ -73,9 +67,8 @@ public class CommonsSignUpController {
 		boolean fAccount = false;
 		boolean fAccountD = false;
 		boolean fPassword = false;
-		boolean fPassword1 = false;
-		boolean fPassword2 = false;
-		boolean fPassword3 = false;
+		boolean fPassword1 = true;
+		
 		boolean fName = false;
 		boolean fIdNumber = false;
 		boolean fDate = false;
@@ -90,6 +83,8 @@ public class CommonsSignUpController {
 		boolean fOrgWebsiteLink = false;
 
 		log.debug("member={}", member);
+		
+		log.debug("member.getPassword()={}",member.getPassword());
 		AjaxResponse<Member> response = new AjaxResponse<Member>();//回傳前端
 //		Map<String, Object> result = new HashMap<>(); //ajaxResponse.obj
 //		Map<String, String> errors = new HashMap<>();
@@ -132,20 +127,26 @@ public class CommonsSignUpController {
 			// 判斷是否包含字母、數字、特殊符號
 			for (int i = 0; i < member.getPassword().length()-1; i++) {
 				String test = member.getPassword().substring(i, i + 1);
-				if (test.matches("[a-zA-Z]")) {
-					fPassword1 = true;
-				}else if(test.matches("[0-9]")){
-					fPassword2 = true;
-				}else if(test.matches("[~!@#$%^&*]")){
-					fPassword3 = true;
-				}else {
-					response.addMessage("密碼格式錯誤");
+				if (!test.matches("[a-zA-Z]")) {
+					if(!test.matches("[0-9]")){
+						if(!test.matches("[~!@#$%^&*]")){
+							fPassword1 = false;
+						}
+					}
 				}
+
+//				else if(test.matches("[0-9]")){
+//					fPassword2 = true;
+//				}else if(test.matches("[~!@#$%^&*]")){
+//					fPassword3 = true;
+//				}
 			}
-			if (fPassword1 && fPassword2 && fPassword3) {
+			if (fPassword1) {
 				fPassword = true;
+			} else {
+				response.addMessage("密碼格式錯誤");
 			}
-		}else {
+		} else {
 			log.debug("密碼XXX");
 			response.addMessage("密碼格式錯誤");
 		}
