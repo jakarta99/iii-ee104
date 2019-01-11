@@ -20,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="CHAT_CLIENT")
+@Table(name="CHAT_MESSAGE")
 public class ChatMessage {
 	
 	@Id
@@ -34,17 +34,20 @@ public class ChatMessage {
 	@Column(name="TIME")
 	private Date time;	
 	
+	@Transient
+	private Member fromMember;
+	
+	@Transient
+	private Member toMember;
+	
+	
 	@Column(name="FROM_ACCOUNT")
 	private String fromAccount;
 	
 	@Column(name="TO_ACCOUNT")
 	private String toAccount;
 
-	@Override
-	public String toString() {
-		return "ChatMessage [id=" + id + ", text=" + text + ", time=" + time + ", fromAccount=" + fromAccount
-				+ ", toAccount=" + toAccount + "]";
-	}
+	
 
 	public ChatMessage(String fromAccount, String toAccount,String text, Date time) {
 		this.text = text;
@@ -55,6 +58,12 @@ public class ChatMessage {
 
 	public ChatMessage() {
 
+	}
+
+	@Override
+	public String toString() {
+		return "ChatMessage [id=" + id + ", text=" + text + ", time=" + time + ", fromMember=" + fromMember
+				+ ", toMember=" + toMember + ", fromAccount=" + fromAccount + ", toAccount=" + toAccount + "]";
 	}
 	
 	

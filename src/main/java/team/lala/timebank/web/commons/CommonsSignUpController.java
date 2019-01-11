@@ -130,7 +130,7 @@ public class CommonsSignUpController {
 		// 檢查密碼  不可空白，長度必須大於等於8小於等於16
 		if (member.getPassword() != null && member.getPassword().trim().length() >= 8 && member.getPassword().trim().length() <= 16) {
 			// 判斷是否包含字母、數字、特殊符號
-			for (int i = 0; i < member.getPassword().length(); i++) {
+			for (int i = 0; i < member.getPassword().length()-1; i++) {
 				String test = member.getPassword().substring(i, i + 1);
 				if (test.matches("[a-zA-Z]")) {
 					fPassword1 = true;

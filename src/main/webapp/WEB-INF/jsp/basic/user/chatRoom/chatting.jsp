@@ -4,11 +4,18 @@
 <script src="/js/webjar/sockjs.min.js"></script>
 <script src="/js/webjar/stomp.min.js"></script>
 
-<link rel="stylesheet" href="/css/chatt.css" />
+<link rel="stylesheet" href="/css/chat.css" />
 <script type="text/javascript">
 
 	var stompClient = null;
-	var to = $("#to").val();
+	var to ;
+	var toUserImg ;
+	var fromUserImg;
+	
+	
+	$(document).ready(function(){
+		 to = $("#to").val();
+	})
 	
 	function setConnected(connected) {
 		document.getElementById('connect').disabled = connected;
@@ -18,58 +25,58 @@
 	}
 
 	function connect() {
+		
 		$.ajax({
 			url:"/user/chatMessage/list?to=" + to,
 			type: "post",
 		    dataType : "json",	
-        }).done(function(data, textStatus, jqXHR ){
-        	console.log("data"+data)
-        	console.log("jqXHR="+jqXHR)
-        	var response = document.getElementById('response');
-    		$.each(data, function(idx, obj){
-    			console.log("text="+obj.text)
-    			var m = new Date(obj.time);
-    			var dateTime = m.getUTCHours() + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds();
-    	 		var p = document.createElement('p');
-    	 		p.style.wordWrap = 'break-word';
-    	 		p.appendChild(document.createTextNode(obj.fromAccount + ": "
-    	 				+ obj.text + " (" + dateTime + ")" ) );
-    	 		response.appendChild(p);
-    	 		if (obj.fromAccount == to){
-    		 		p.classList.add("p1-to");
-    		 		
-    		 	} else {
-    		 		p.classList.add("p1-from");
-    		 	}
-    		})
+        }).done(function(data){		
+        	setConnected(true);
+        	$.each(data.chatList, function(idx, obj){
+        	 	var img;
+        		var m = new Date(obj.time);
+        		var dateTime = m.getHours() + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds() ;		
+        	 	var p = $("<p></p>");
+        	 	$(p).css("wordWrap","break-word");
+        	 	if (obj.toAccount == to){
+        	 		$(p).addClass("p1-to");
+        	 		img = "<img src='/image/user/member/"+data.toMember.picture +"' class='userImg' />";
+//         	 		toUserImg = img;
+        	 	} else {
+        	 		$(p).addClass("p1-from");
+        	 		img = "<img src='/image/user/member/"+data.fromMember.picture +"' class='userImg' />";
+//         	 		fromUserImg = img;
+        	 	}
+        	 	var msgSpan = "<p class='msgSpan'>"+obj.text+"</p>";
+        	 	var dateTimeSpan = "<span class='dateTimeSpan'>"+dateTime+"</span>"; 	
+        		$(p).append(img + msgSpan +"<br>" + dateTimeSpan)
+	    	 	$('#response').append(p);
+        	})
+    	 	
+    	 	$("#text").val("");
+    	 	
+    	
        }).fail(function (jqXHR, textStatus) {
-    	   console.log(jqXHR)
 // 			if (jqXHR.status == 200){
 // 				window.location.href = '/login';
 // 			}
-
 	    	$("#login-modal").addClass("modal fade show");
     	   	$("#login-modal").css("display","block");
-    	   	$("#login-modal").css("padding-right","17px");
-
-	    	
-	    	
-	    	
+    	   	$("#login-modal").css("padding-right","17px");	    	
 	    });
-		
+	
+
 		var socket = new SockJS('/chat');
 		stompClient = Stomp.over(socket);
 		stompClient.connect({}, function(frame) {
-			setConnected(true);
+			
 			console.log('Connected: ' + frame);
 			stompClient.subscribe('/topic/messages', function(messageOutput) {
 				showMessageOutput(JSON.parse(messageOutput.body));
 			});
 		
-			var to = $("#to").val();
-			
-		
 		});
+	
 		
 	}
 
@@ -82,7 +89,6 @@
 	}
 
 	function sendMessage() {
-		var to = $("#to").val();
 		var text = $('#text').val();
 		stompClient.send("/app/chat", {}, JSON.stringify({
 			'to' : to,
@@ -91,29 +97,32 @@
 	}
 
 	function showMessageOutput(messageOutput) {
-	 	var response = document.getElementById('response');
-	 	var p = document.createElement('p');
 	 	var m = new Date(messageOutput.time);
-		var dateTime = m.getUTCHours() + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds();
-	 	p.style.wordWrap = 'break-word';
-	 	p.appendChild(document.createTextNode(messageOutput.fromAccount + ": "
-	 				+ messageOutput.text + " (" + dateTime + ")" ) );
-	 	response.appendChild(p);
+		var dateTime = m.getHours() + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds() 		
+	 	var p = $("<p></p>");
+	 	$(p).css("wordWrap","break-word");
 	 	if (messageOutput.toAccount == to){
-	 		p.classList.add("p1-to");
-	 		
+	 		$(p).addClass("p1-to");
+	 		img = "<img src='/image/user/member/"+messageOutput.toMember.picture +"' class='userImg' />";
 	 	} else {
-	 		p.classList.add("p1-from");
+	 		$(p).addClass("p1-from");
+	 		img = "<img src='/image/user/member/"+messageOutput.toMember.picture +"' class='userImg' />";
 	 	}
-	
-	
+	 	var msgSpan = "<p class='msgSpan'>"+messageOutput.text+"</p>";
+	 	var dateTimeSpan = "<span class='dateTimeSpan'>"+dateTime+"</span>"; 	
+		$(p).append(img + msgSpan +"<br>"+ dateTimeSpan);
 
+	 	$('#response').append(p);
+	 	$("#text").val("");
+	 	var h = $(".p1-to, .p1-from").css("height");
+// 	 	console.log(h)
+	
 	}
 </script>
 		<button type="button" id="connect" class="btn btn-primary btn-sm" onclick="connect();" > 與我聊天</button>
 		<button type="button" id="disconnect" class="btn btn-primary btn-sm" disabled="disabled" onclick="disconnect();"> 關閉聊天室</button>
-		<div>
-			<input type="hidden" disabled="disabled" id="to" value="${mission.member.account}"  />
+		<div>傳送對象:
+			<input type="text" disabled="disabled" id="to" value="${mission.member.account}"  />
 		</div>
 
 
