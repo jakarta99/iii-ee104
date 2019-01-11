@@ -39,15 +39,8 @@ public class UserPersonalInfoController {
 							.getAuthentication()  
 							.getPrincipal();
 		Member member = memberService.getOne(userDetails.getId());
-		model.addAttribute("member", member);
+		model.addAttribute("member", member);	
 		return "/basic/user/personal_info/personal-info_list";
-	}
-
-	@RequestMapping("/query")
-	@ResponseBody
-	public Member getMember(@RequestParam(value = "id") Long memberId) {
-		Member member = memberService.getOne(memberId);
-		return member;
 	}
 	
 	@RequestMapping("/edit")

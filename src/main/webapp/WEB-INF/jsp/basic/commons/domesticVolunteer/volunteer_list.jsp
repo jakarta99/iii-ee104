@@ -175,7 +175,7 @@
 	        		 box+="</div><div class='text'><h4><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'>"+ mission.title + "</a></h4>";
 	        		 box+="<p class='author-category_1'>活動時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>";
 	        		 box+="<p class='author-category_1'>活動地點:"+mission.county+mission.district+"</p>";       	
-	        		 box+="<p class='author-category_1'>發布者:"+mission.member.name+"</p>";       	
+	        		 box+="<p class='author-category_1'>發布者:<a href='/commons/personal-info/list?memberId="+mission.member.id+"'>"+mission.member.name+"</a></p>";       	
 	        		 box+="</div></div></div>";   
 	        		var boxbox=$("#boxbox").append(box); 
 	        	})

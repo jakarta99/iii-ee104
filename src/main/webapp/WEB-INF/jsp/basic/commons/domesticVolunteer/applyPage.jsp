@@ -31,8 +31,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/i18n/jquery-ui-timepicker-zh-TW.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
-
-
+<!-- 轉經緯度 -->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 <meta charset="UTF-8">
 <title>mission Detail</title>
@@ -65,6 +65,10 @@
 	  border-radius: 0.25rem;
 	  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	}
+	 #map {
+        height: 400px;
+        width: 100%;
+       }
  
     </style>
 </head>
@@ -185,14 +189,51 @@
             	<div class="col-md-12 text-center">
 					<button onclick="insertOrder(${mission.id})" class="btn btn-template-outlined"><i class="fa fa-plus"></i>我要參加</button>
 				</div>    	
-            </div>
           </section>
+          
+          
+          
+          <section>
+			    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNASLitmpPiGxtg94A3WqLl8bHHk0lzJM&callback=initMap"></script>
+          	 <h3>我的地圖</h3>
+			    <div id="map"></div>
+			    <script>
+
+			      var map, geocoder, popup;
+			    	
+			      function initMap() {
+			    	geocoder = new google.maps.Geocoder();
+			    	popup = new google.maps.InfoWindow();
+			    	
+			    	
+			    	
+			        var uluru = {lat: 25.0477505, lng: 121.5170599};
+			        map = new google.maps.Map(document.getElementById('map'), {
+			          zoom: 16,
+			          center: uluru
+			        });
+			        var marker = new google.maps.Marker({
+			          position: uluru,
+			          map: map
+			        });
+			      }
+			      
+			    </script>
+          
+          
+          
+          
+          
+          </section>
+          
+          
+          
+            </div>
  				
 		 	<jsp:include page="../../user/chatRoom/chatting.jsp"/>
         </div>
        
 				
-	 </div>
 
 	
 
@@ -279,11 +320,14 @@
 		if ('${applying}' == 'Y'){
 			insertOrder('${mission.id}');
 		}
+		
 	})
 	
 
 	
 
+	
+	
 	
 	
 	</script>
