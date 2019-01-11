@@ -95,10 +95,17 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="heading">
-                  <h2>時數核發</h2>
+                  <h2>已審核人數</h2>
                 </div>
-                <button class='btn btn-primary btn-lg_1' onclick="payAll()">一鍵核發</button>
-                <p class="lead">以下是幫您完成服務的志工，您可以在此審核時數與評分</p>
+                <div class="row">
+               		<div class="col-md-6">
+                	<p class="lead">目前審核人數X人</p>
+                	</div>
+                	<div class="col-md-6" align="right">
+                	<button class='btn btn-primary btn-lg_1' onclick="payAll()">一鍵核發</button>
+                	</div>
+                </div>
+                
                 <div id="boxbox" class="row text-center">
 <!--                 志工名單開始 -->
                 </div>

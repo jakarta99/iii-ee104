@@ -31,8 +31,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/i18n/jquery-ui-timepicker-zh-TW.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
-
-
+<!-- 轉經緯度 -->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 <meta charset="UTF-8">
 <title>mission Detail</title>
@@ -194,17 +194,21 @@
           
           
           <section>
-          	 <h3>My Google Maps Demo</h3>
+			    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNASLitmpPiGxtg94A3WqLl8bHHk0lzJM&callback=initMap"></script>
+          	 <h3>我的地圖</h3>
 			    <div id="map"></div>
 			    <script>
-			    
-			      
-			      
-			      
+
+			      var map, geocoder, popup;
+			    	
 			      function initMap() {
+			    	geocoder = new google.maps.Geocoder();
+			    	popup = new google.maps.InfoWindow();
+			    	
+			    	
 			    	
 			        var uluru = {lat: 25.0477505, lng: 121.5170599};
-			        var map = new google.maps.Map(document.getElementById('map'), {
+			        map = new google.maps.Map(document.getElementById('map'), {
 			          zoom: 16,
 			          center: uluru
 			        });
@@ -213,10 +217,8 @@
 			          map: map
 			        });
 			      }
+			      
 			    </script>
-			    <script async defer
-			    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNASLitmpPiGxtg94A3WqLl8bHHk0lzJM&callback=initMap">
-    </script>
           
           
           
@@ -298,6 +300,7 @@
 		if ('${applying}' == 'Y'){
 			insertOrder('${mission.id}');
 		}
+		
 	})
 	
 
@@ -305,19 +308,6 @@
 
 	
 	
-// 	$(document).ready( function () {
-// 		  function getLatLong()
-// 	      {
-// 	        var apiKey="AIzaSyCNASLitmpPiGxtg94A3WqLl8bHHk0lzJM";
-// 	        var api="https://maps.googleapis.com/maps/api/geocode/json";
-// 	        var location = "台灣";
-// 	        jQuery.get(api,{"key":apiKey,"language":"zh_tw","address":"台北市士林區至善路二段221號"},getResult,"text");
-// 	      }
-// 	      function getResult(data)
-// 	      {
-// 	        alert(data)
-// 	      }
-// 	})
 	
 	
 	</script>
