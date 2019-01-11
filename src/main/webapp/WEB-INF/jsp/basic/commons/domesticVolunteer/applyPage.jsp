@@ -214,7 +214,26 @@
 					$.ajax({
 						url:"/user/volunteerRecruitment/insert?missionId="+missionId,
 						type:'get',
-						dataType:'json'
+						dataType:'json',
+						success:function(data){
+							if(data.status == 'SUCCESS'){
+								swal({
+								  title: "申請結果",
+								  text: "申請成功",
+								  icon: "success",
+								  buttons: false,
+								  dangerMode: false,
+								})
+							}else{
+								swal({
+								  title: "申請失敗",
+								  text: data.messages,
+								  icon: "error",
+								  buttons: false,
+								  dangerMode: false,
+								})
+							}
+						}
 					}).fail(function( jqXHR, textStatus){
 						if(jqXHR.status == 200){
 							$("#login-modal").addClass("modal fade show");
@@ -223,6 +242,7 @@
 				    	   	$("#volunteerApply").val("volunteerApply");
 						}
 					})
+					
 // 							function( data, textStatus, jqXHR ){
 // 							console.log(jqXHR);
 // 							console.log(data);

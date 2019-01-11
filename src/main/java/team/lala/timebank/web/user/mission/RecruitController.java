@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
-import team.lala.timebank.dao.OrderDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
@@ -89,11 +89,18 @@ public class RecruitController {
 
 	// 編輯mission並發送系統訊息
 	@RequestMapping("/edit")
-	public String editRecruit(@RequestParam("id") Long missionId, Model model, HttpServletRequest request) {
+	public String editRecruit(@RequestParam("id") Long missionId, Model model, HttpServletRequest request, @RequestParam(required=false) String res) {
 		Mission mission = missionService.getOne(missionId);
 		List<ServiceType> serviceType = serviceTypeService.findAll();
 		model.addAttribute("mission", mission);
 		model.addAttribute("serviceType", serviceType);
+		if(res != null) {
+			if(res.equals("errorBalance")) {
+				model.addAttribute("response", "額度有誤 更新失敗");
+			}else {
+				model.addAttribute("response", res);
+			}
+		}
 		return "/basic/user/volunteerRecruitment/mission_edit";
 	}
 
@@ -136,27 +143,26 @@ public class RecruitController {
 	@RequestMapping("/update")
 
 	public String update(Mission inputMission, @RequestParam("missionPicture") MultipartFile missionPicture,
-			HttpServletRequest request, Principal principal, Model model) {
-		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
+			HttpServletRequest request, Principal principal, RedirectAttributes attr) {
 		Member member = memberService.findByAccount(principal.getName());
+		attr.addAttribute("id", inputMission.getId());
+		Mission mission = missionService.getOne(inputMission.getId());
 		if(member.getBalanceValue() == null || inputMission.getTimeValue() == null) {
 			member.setBalanceValue(0);
 			inputMission.setTimeValue(0);
 		}
 		//先加回刊登時扣除的額度
-		member.setBalanceValue(member.getBalanceValue().intValue() + missionService.getOne(inputMission.getId()).getTimeValue().intValue());
+		member.setBalanceValue(member.getBalanceValue().intValue() + mission.getTimeValue().intValue() * mission.getPeopleNeeded());
 		//使用額度超過member餘額 無法刊登
-		if(member.getBalanceValue().intValue() >= inputMission.getTimeValue().intValue()) {
+		if(member.getBalanceValue().intValue() >= inputMission.getTimeValue().intValue() * inputMission.getPeopleNeeded()) {
 			//member可使用額度減少
 			member.setBalanceValue(member.getBalanceValue().intValue() - inputMission.getTimeValue().intValue());
 			missionService.insert(inputMission, principal);
-			model.addAttribute(response);
 		}else {
 			//扣回原本的可使用額度
 			member.setBalanceValue(member.getBalanceValue().intValue() - missionService.getOne(inputMission.getId()).getTimeValue().intValue());
-			response.addMessage("餘額不足 無法刊登");
-			model.addAttribute(response);
-			return "redirect:/user/volunteerRecruitment/edit?id=" + inputMission.getId();
+			attr.addAttribute("res", "errorBalance");
+			return "redirect:/user/volunteerRecruitment/edit";
 		}
 		try {
 			missionService.update(inputMission);
@@ -165,7 +171,6 @@ public class RecruitController {
 			if (missionPicture.getOriginalFilename().length() > 0) {
 				// 取得應用程式根目錄中圖片之路徑
 				String realPath = request.getServletContext().getRealPath("/") + "WEB-INF\\image\\user\\mission\\";
-				System.out.println(realPath + "***************************");
 				// 確認是否有此資料夾，如無則建資料夾
 				File dir = new File(realPath);
 				if (!dir.exists()) {
@@ -184,18 +189,18 @@ public class RecruitController {
 				missionService.update(inputMission);
 			}
 		} catch (Exception e) {
-			response.addMessage("修改失敗，" + e.getMessage());
+			attr.addAttribute("res","errorException");
 			e.printStackTrace();
 		}
-
-		return "redirect:/user/volunteerRecruitment/edit?id=" + inputMission.getId();
+		attr.addAttribute("res", "SUCCESS");
+		return "redirect:/user/volunteerRecruitment/edit";
 		
 	}
 
 	@RequestMapping("/insert")
 	@ResponseBody
 	public AjaxResponse<Mission> insertOrder(Principal principal, @RequestParam("missionId") Long missionId) {
-		log.debug("**********","***********");
+
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
 		try {
 			Mission mission = missionService.getOne(missionId);
