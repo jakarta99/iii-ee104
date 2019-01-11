@@ -81,7 +81,7 @@
 						<div class="row">
                     		<div class="col-md-4">
                       			<div class="form-group">
-									<label for="idName">姓名:</label>
+									<label for="idName">名稱:</label>
 									<input type="text" value="${member.name}" id="idName" name="name" autofocus autocompelete="off" class="form-control">
 									<div><label>(1.不可空白，2.至少2個字以上，3.必須全部為中文)</label></div>
 									<span id="idspName" style='color:red'></span>
@@ -138,7 +138,7 @@
 							</div>
 							<div class="col-md-4">
 	                      		<div class="form-group">
-									<label for="idTelephone">電話:</label> 
+									<label for="idTelephone">室內電話:</label> 
 									<input type="text" value="${member.telephone}" id="idTelephone" name="telephone" autofocus autocompelete="off" class="form-control">
 									<div><label>(格式需為0X-XXXXXXXX)</label></div>
 									<span id="idspTelephone" style='color:red'></span>
