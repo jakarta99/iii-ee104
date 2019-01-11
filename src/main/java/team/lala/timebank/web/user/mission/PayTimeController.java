@@ -2,12 +2,14 @@ package team.lala.timebank.web.user.mission;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
+import team.lala.timebank.entity.PayData;
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.service.FacadeService;
 import team.lala.timebank.service.MissionService;
@@ -48,8 +51,7 @@ public class PayTimeController {
 
 	@RequestMapping("/query")
 	@ResponseBody
-	public Page<Order> getOrderByMissionAndStatus(
-			@RequestParam(value = "page", required = false) int page,
+	public Page<Order> getOrderByMissionAndStatus(@RequestParam(value = "page", required = false) int page,
 			@RequestParam(value = "length", required = false) Optional<Integer> length,
 			@RequestParam(value = "missionId") Long id) {
 		Mission mission = missionService.getOne(id);
@@ -62,13 +64,14 @@ public class PayTimeController {
 	// 會員付款
 	@RequestMapping("/pay")
 	@ResponseBody
-	public AjaxResponse<Order> pay(@RequestParam("orderId") Long orderId, @RequestParam("hours") Integer hours,@RequestParam("score") Integer score) {
-		log.debug("orderId={}",orderId);
+	public AjaxResponse<Order> pay(@RequestParam("orderId") Long orderId, @RequestParam("hours") Integer hours,
+			@RequestParam("score") Integer score) {
+		log.debug("orderId={}", orderId);
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
 		try {
 			response.setObj(orderService.getById(orderId));
 
-			facadeService.transaction(hours, orderId,score);
+			facadeService.transaction(hours, orderId, score);
 
 		} catch (Exception e) {
 			response.addMessage("付款失敗，" + e.getMessage());
@@ -77,16 +80,16 @@ public class PayTimeController {
 		}
 		return response;
 	}
+
 	@ResponseBody
-	@RequestMapping("/report")	//雇主檢舉志工
-	public AjaxResponse<Order> Report(@RequestParam(value="orderId") Long orderId,
-			@RequestParam(value="description") String description,
-			@RequestParam("proofPic") MultipartFile proofPic
-			, MultipartHttpServletRequest request){
+	@RequestMapping("/report") // 雇主檢舉志工
+	public AjaxResponse<Order> Report(@RequestParam(value = "orderId") Long orderId,
+			@RequestParam(value = "description") String description, @RequestParam("proofPic") MultipartFile proofPic,
+			MultipartHttpServletRequest request) {
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
-		
-		Penalty penalty =  orderService.requesterReportVolunteer(orderId, description);
-		
+
+		Penalty penalty = orderService.requesterReportVolunteer(orderId, description);
+
 		try {
 			if (proofPic.getOriginalFilename().length() > 0) {
 				// 取得應用程式根目錄中圖片之路徑
@@ -112,4 +115,26 @@ public class PayTimeController {
 		}
 		return response;
 	}
+
+	@ResponseBody
+	@RequestMapping("/payAll")
+	public AjaxResponse<Order> payAll(@RequestBody List<PayData> payDatas) {
+		log.debug("payData={}",payDatas);
+		AjaxResponse<Order> response = new AjaxResponse<Order>();
+		try {	
+			for (PayData payData : payDatas) {
+				if (payData.getHours() != null && payData.getScore() != null) {
+					log.debug("payData={}",payData);
+					response.setObj(orderService.getById(payData.getOrderId()));
+					facadeService.transaction(payData.getHours(), payData.getOrderId(), payData.getScore());					
+				}
+			}
+		} catch (Exception e) {
+			response.addMessage("付款失敗，" + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return response;
+	}
+
 }

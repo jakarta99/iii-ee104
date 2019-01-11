@@ -3,6 +3,9 @@ package team.lala.timebank.web.user.mission;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,19 +17,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
+import team.lala.timebank.dao.MissionDao;
+import team.lala.timebank.dao.OrderDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
+import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.ServiceType;
+import team.lala.timebank.enums.MissionStatus;
+import team.lala.timebank.enums.OrderStatus;
+import team.lala.timebank.service.FacadeService;
 import team.lala.timebank.service.MemberService;
 import team.lala.timebank.service.MissionService;
+import team.lala.timebank.service.OrderService;
 import team.lala.timebank.service.ServiceTypeService;
+import team.lala.timebank.service.SystemMessageService;
+import team.lala.timebank.spec.MissionSpecification;
 @Slf4j
 @Controller
 @RequestMapping("/user/missionPublish")
 public class MissionPublishController {
+	@Autowired
+	private MissionDao missionDao;
+	@Autowired
+	private OrderService orderService;
+	@Autowired
+	private SystemMessageService systemMessageService;
+	@Autowired
+	private OrderDao orderDao;
+	@Autowired
+	private FacadeService facadeService;
 	@Autowired
 	private MissionService missionService;
 	@Autowired
@@ -35,40 +58,44 @@ public class MissionPublishController {
 	private ServiceTypeService serviceTypeService;
 
 	@RequestMapping("/add")
-	public String addPage(Model model, Principal principal) {
+	public String addPage(Model model, Principal principal, @RequestParam(required = false) String response) {
 		
 		List<ServiceType> serviceType = serviceTypeService.findAll();
 		model.addAttribute("serviceType", serviceType);
-
+		if(response != null) {
+			model.addAttribute("res", response);
+		}
 		return "/basic/user/volunteerRecruitment/mission_add";
 	}
 	//刊登mission
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(Mission mission, Principal principal,
-			@RequestParam("missionPicture") MultipartFile missionPicture, HttpServletRequest request, Model model) {
+			@RequestParam("missionPicture") MultipartFile missionPicture, HttpServletRequest request, Model model,
+			RedirectAttributes attr) {
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
 		Member member = memberService.findByAccount(principal.getName());
 		List<ServiceType> serviceType = serviceTypeService.findAll();
 		model.addAttribute("serviceType", serviceType);
 		model.addAttribute("mission", mission);
-		model.addAttribute("response",response);
-		log.debug("member.getBalanceValue()={}",member.getBalanceValue());
+		model.addAttribute("response", response);
+		
 		
 		if(member.getBalanceValue() == null || mission.getTimeValue() == null) {
 			member.setBalanceValue(0);
 			mission.setTimeValue(0);
 		}
-		if(member.getBalanceValue().intValue() == 0 || mission.getTimeValue().intValue() == 0) {
-			response.addMessage("餘額不足 無法刊登");
+		if(member.getBalanceValue().intValue() == 0 || mission.getTimeValue().intValue() == 0 || mission.getPeopleNeeded().intValue() == 0) {
+			response.addMessage("資料有誤 無法刊登");
 			log.debug("response={}", response.getMessages().toString());
 			return "/basic/user/volunteerRecruitment/mission_add";
 		}
 		//使用額度超過member餘額 無法刊登
-		if(member.getBalanceValue().intValue() >= mission.getTimeValue().intValue()) {
+		if(member.getBalanceValue().intValue() >= mission.getTimeValue().intValue() * mission.getPeopleNeeded()) {
 			//member可使用額度減少
-			member.setBalanceValue(member.getBalanceValue().intValue() - mission.getTimeValue().intValue());
+			member.setBalanceValue(member.getBalanceValue().intValue() - mission.getTimeValue().intValue() * mission.getPeopleNeeded());
 			missionService.insert(mission, principal);
 		}else {
+			response.addMessage("餘額不足 無法刊登");
 			return "/basic/user/volunteerRecruitment/mission_add";
 		}
 		try {	
@@ -95,7 +122,65 @@ public class MissionPublishController {
 			response.addMessage("刊登失敗，" + e.getMessage());
 			e.printStackTrace();
 		}
-		return "/basic/user/volunteerRecruitment/mission_add";
+		attr.addAttribute("response", "SUCCESS");
+		return "redirect:/user/missionPublish/add";
 	}
-
+	@RequestMapping("/test")
+	public void test() {
+		//獲得到期的所有mission
+		Mission inputMission = new Mission();
+		inputMission.setMissionstatus(MissionStatus.A_New);
+		inputMission.setAutoPayDate(new Date(new Date().getTime() + 1 * 24 * 60 * 60 * 1000));
+		MissionSpecification missionSpec = new MissionSpecification(inputMission);
+		List<Mission> missions = missionService.findBySpecification(missionSpec);
+		//設定mission狀態
+		for(Mission mission : missions) {
+			//每個mission的order自動付款評分
+			for(Order order : mission.getOrders()) {
+				//付款評分 自動評5分
+				facadeService.transaction(mission.getTimeValue(), order.getId(), 5);
+			}
+		}
+	}
+	@RequestMapping("/test1")
+	public void test1() {
+		Mission inputMission = new Mission();
+		inputMission.setMissionstatus(MissionStatus.A_New);
+		inputMission.setEndDate(new Date());
+		//搜尋A狀態以及活動到期的Mission
+		MissionSpecification missionSpec = new MissionSpecification(inputMission);
+		List<Mission> missions = missionService.findBySpecification(missionSpec);
+		for(Mission mission : missions) {
+			//沒有人申請即取消
+			if(mission.getOrders().size() == 0) {
+				mission.setMissionstatus(MissionStatus.C_Cancel);
+				systemMessageService.missionCancel(mission);
+			}else {
+				//申請狀態為apply 即取消
+				List<Order> cancelOrders = orderDao.findByMissionAndOrderStatus(mission, OrderStatus.VolunteerApply);
+				List<Order> acceptOrders = orderDao.findByMissionAndOrderStatus(mission, OrderStatus.RequesterAcceptService);
+				if(acceptOrders.size() == 0 ){
+					mission.setMissionstatus(MissionStatus.C_Cancel);
+					systemMessageService.missionCancel(acceptOrders);
+					systemMessageService.missionCancel(mission);
+				} else {
+					for(Order order : acceptOrders) {
+						order.setOrderStatus(OrderStatus.ServiceFinishNotPay);
+					}
+					orderDao.saveAll(acceptOrders);
+				}
+				if(cancelOrders.size() != 0) {
+					systemMessageService.missionCancel(cancelOrders);
+					orderService.rejectOrders(cancelOrders);
+					for(Order order : cancelOrders) {
+						order.setOrderStatus(OrderStatus.RequesterCancleTransactionMatchFail);
+					}
+					orderDao.saveAll(acceptOrders);
+				}
+				mission.setMissionstatus(MissionStatus.B_AccountsPayable);
+			}
+		}
+		missionDao.saveAll(missions);
+		
+	}
 }

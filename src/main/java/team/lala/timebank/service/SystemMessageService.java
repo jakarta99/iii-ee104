@@ -13,11 +13,11 @@ import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.SystemMessageDao;
 import team.lala.timebank.entity.Member;
+import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.SystemMessage;
 import team.lala.timebank.enums.SystemMessageType;
 import team.lala.timebank.enums.YesNo;
-import team.lala.timebank.web.user.SystemMessageController;
 
 @Service
 @Slf4j
@@ -157,9 +157,34 @@ public class SystemMessageService {
 
 		}
 	}
-
+	// 通知刊登者mission已到期
+		public void missionFinish(Mission mission) {
+			SystemMessage systemMessage = new SystemMessage();
+			systemMessage.setSender(null);
+			systemMessage.setReleaseTime(new Date());
+			systemMessage.setReadStatus(YesNo.N);
+			systemMessage.setMember(mission.getMember());
+			systemMessage.setMessage("您的志工活動:[" + mission.getTitle() + "]已到期");
+			systemMessage.setMessageType(SystemMessageType.MissionAccecpt);
+			systemMessageDao.save(systemMessage);
+		}
+	// 通知刊登者mission已被取消
+		public void missionCancel(Mission mission) {
+			SystemMessage systemMessage = new SystemMessage();
+			systemMessage.setSender(null);
+			systemMessage.setReleaseTime(new Date());
+			systemMessage.setReadStatus(YesNo.N);
+			systemMessage.setMember(mission.getMember());
+			systemMessage.setMessage("您的志工活動:[" + mission.getTitle() + "]活動資料已被取消");
+			systemMessage.setMessageType(SystemMessageType.MissionCancel);
+			systemMessageDao.save(systemMessage);
+		}
+	
 	// 通知志工mission已被取消
 	public void missionCancel(List<Order> orders) {
+		if(orders == null) {
+
+		}else {
 		for (int i = 0; i < orders.size(); i++) {
 			SystemMessage systemMessage = new SystemMessage();
 			systemMessage.setSender(orders.get(i).getMission().getMember());
@@ -171,7 +196,7 @@ public class SystemMessageService {
 
 			systemMessageDao.save(systemMessage);
 
-		}
+		}}
 	}
 	
 	//產生付款後收到的訊息
