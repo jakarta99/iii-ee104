@@ -71,93 +71,103 @@
     	<div class="row">
             <article>
             	<div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                       	<div class="form-group">
                       		<div class="heading">
 								<h3>基本介紹</h3>
 							</div>
-                      	</div>
+						</div>
+						<div class="row">
+						<div class="col-md-6">
+		                    <div class="form-group">
+		                      	<ul class="ul-icons list-unstyled">
+									<fmt:formatDate value="${member.birthDate}" pattern="yyyy/MM/dd" var="birthDate"/>
+									<li>
+										<c:choose>
+											<c:when test="${member.memberType eq 'P'}">
+												<div class="icon-filled"></div>出生日期  : <span id="date"></span>
+											</c:when>
+											<c:when test="${member.memberType eq 'O'}">
+												<div class="icon-filled"></div>創立日期  : <span id="date"></span>
+											</c:when>
+										</c:choose>
+									</li>			
+									<li>
+										<div class="icon-filled"></div>Email : ${member.email}
+									</li>
+									<li>
+										<div class="icon-filled"></div>地址  : ${member.county}${member.district}${member.address}
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-6">
+			                <div class="form-group">
+			                    <ul class="ul-icons list-unstyled">
+									<li>
+										<div class="icon-filled"></div>手機  : ${member.mobile}
+									</li>
+									<li>
+										<div class="icon-filled"></div>室內電話  : ${member.telephone}
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					</div>
+                    <div class="col-md-4 text-center">
+                    	<div>
+	                		<img style="width:250px;height:225px" id="picture" alt="" src="/image/user/member/${member.picture}" class="img-fluid rounded-circle">
+	                	</div>
+	                	<input type="button" class="btn btn-template-outlined" id="changePicture" value="更改圖片" class="form-control"/>
                     </div>
-                    <div class="col-md-4">
+                </div>
+				<div class="row">
+                    <div class="col-md-8">
                       	<div class="form-group">
                       		<c:if test="${member.memberType eq 'O' }">
 								<div class="heading">
 									<h3>機構介紹</h3>
 								</div>
+				            	<div class="row">
+									<div class="col-md-6">
+						            	<div class="form-group">		
+											<ul class="ul-icons list-unstyled">
+												<li>
+													<div class="icon-filled"></div>創辦人  : ${member.orgFounder}
+												</li>
+												<li>
+													<div class="icon-filled"></div>執行長  : ${member.orgCeo}
+												</li>
+												<li>
+													<div class="icon-filled"></div>網址  : ${member.orgWebsiteLink}
+												</li>
+												<li>
+													<div class="icon-filled"></div>創立宗旨  : ${member.orgFoundPurpose}
+												</li>
+											</ul>
+										</div>
+									</div>	
+									<div class="col-md-6">
+						            	<div class="form-group">		
+											<ul class="ul-icons list-unstyled">
+												<li>
+													<div class="icon-filled"></div>聯絡人  : ${member.orgContactPerson}
+												</li>
+												<li>
+													<div class="icon-filled"></div>聯絡人手機  : ${member.orgContactPersonMobile}
+												</li>
+												<li>
+													<div class="icon-filled"></div>聯絡人電話  : ${member.orgContactPersonTel}
+												</li>
+											</ul>
+										</div>
+					                </div>
+				        		</div>
 							</c:if>
                       	</div>
                     </div>
                 </div>
-				<div class="row">
-                    <div class="col-md-4">
-                      	<div class="form-group">
-                      		<ul class="ul-icons list-unstyled">
-                      			<li>
-									<div class="icon-filled"></div>名稱  : ${member.name}
-								</li>
-								<fmt:formatDate value="${member.birthDate}" pattern="yyyy/MM/dd" var="birthDate"/>
-								<li>
-									<c:choose>
-										<c:when test="${member.memberType eq 'P'}">
-											<div class="icon-filled"></div>出生日期  : ${member.birthDate}
-										</c:when>
-										<c:when test="${member.memberType eq 'O'}">
-											<div class="icon-filled"></div>創立日期  : ${member.birthDate}
-										</c:when>
-									</c:choose>
-								</li>			
-								<li>
-									<div class="icon-filled"></div>Email : ${member.email}
-								</li>
-								<li>
-									<div class="icon-filled"></div>室內電話  : ${member.telephone}
-								</li>
-								<li>
-									<div class="icon-filled"></div>手機  : ${member.mobile}
-								</li>
-								<li>
-									<div class="icon-filled"></div>地址  : ${member.county}${member.district}${member.address}
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-md-4">
-		            	<div class="form-group">		
-							<c:if test="${member.memberType eq 'O' }">
-								<ul class="ul-icons list-unstyled">
-									<li>
-										<div class="icon-filled"></div>創辦人  : ${member.orgFounder}
-									</li>
-									<li>
-										<div class="icon-filled"></div>執行長  : ${member.orgCeo}
-									</li>
-									<li>
-										<div class="icon-filled"></div>聯絡人  : ${member.orgContactPerson}
-									</li>
-									<li>
-										<div class="icon-filled"></div>聯絡人電話  : ${member.orgContactPersonTel}
-									</li>
-									<li>
-										<div class="icon-filled"></div>聯絡人手機  : ${member.orgContactPersonMobile}
-									</li>
-									<li>
-										<div class="icon-filled"></div>網址  : ${member.orgWebsiteLink}
-									</li>
-									<li>
-										<div class="icon-filled"></div>創立宗旨  : 
-										<div>${member.orgFoundPurpose}</div>
-									</li>
-								</ul>
-							</c:if>
-						</div>
-	                </div>
-	                <div class="col-md-4  text-center">
-	                	<div class="form-group">
-	                		<img style="width:300px;height:270px" id="picture" alt="" src="/image/user/member/${member.picture}" class="img-fluid rounded-circle">
-	                	</div>
-	                	<input type="button" class="btn btn-template-outlined" id="changePicture" value="更改圖片" class="form-control"/>
-	                </div>
-	        	</div>
 	        	<div class="col-md-12 text-center">
 					<button type="button" class="btn btn-template-outlined" id="edit"><i class="fas fa-edit"></i>編輯</button>
 				</div>
@@ -180,8 +190,25 @@
 		});
 
 		$(document).ready(function(){
- 
+			var date = '${member.birthDate}'
+			var d = new Date(date).Format('yyyy-MM-dd')
+			$("#date").html(d)
 		})
+		Date.prototype.Format = function (fmt) {
+			var o = {
+			      "M+": this.getMonth() + 1, //月份
+			      "d+": this.getDate(), //日
+			      "h+": this.getHours(), //小时
+			      "m+": this.getMinutes(), //分
+			      "s+": this.getSeconds(), //秒
+			      "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+			      "S": this.getMilliseconds() //毫秒
+			};
+			if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+				for (var k in o)
+			        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+			    return fmt;
+		};
 	</script>
 </body>
 </html>
