@@ -97,6 +97,7 @@
                 <div class="heading">
                   <h2>時數核發</h2>
                 </div>
+                <button class='btn btn-primary btn-lg_1' onclick="payAll()">一鍵核發</button>
                 <p class="lead">以下是幫您完成服務的志工，您可以在此審核時數與評分</p>
                 <div id="boxbox" class="row text-center">
 <!--                 志工名單開始 -->
@@ -149,6 +150,52 @@
 	var page=0;
 	var first;
 	var last;
+	var totalElements;
+	var orderids=[];
+	var vIds=[];
+	
+	function payAll(){
+		var payDatas=[];
+		var hour		
+		for(var x = 0 ; x <totalElements ; x++){
+			payDatas.push({"orderId":orderids[x],"hours":$("#"+vIds[x]+" option:selected").val(),"score":$("#score"+vIds[x]+" option:selected").val()})
+		}
+		swal({
+			  title: "確定評點與審核本頁所有志工嗎?",
+			  text: "確定後將進行付款與志工評點",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willpay) => {
+			  if (willpay) {
+		$.ajax({ 
+            type:"POST", 
+            url:"/user/payTime/payAll", 
+            dataType:"json",      
+            contentType:"application/json",               
+            data:JSON.stringify(payDatas), 
+            success:function(data){ 
+            	if(data.status == "SUCCESS"){
+					 swal("付款與評點成功", {
+		 			      icon: "success",
+		 			 });
+					
+				}else{
+					swal("付款與評點失敗，因為"+data.messages+"", {
+		 			      icon: "error",
+		 			});
+				}
+				list()
+				
+			},
+		})
+			  } else {
+			    swal("取消付款與評點");
+			  }
+			}); 	
+	}
+	
 	function pay(orderId,volunteerId,name) {
 		swal({
  			  title: "確定給予志工"+name+"	"+$("#"+volunteerId+" option:selected").val()+"小時與"+$("#score"+volunteerId+" option:selected").val()+"星評分嗎?",
@@ -233,14 +280,18 @@
 			type: "get",
 		    dataType : "json",
 	        }).done(function(orders){
+	        	console.log(orders)
 	        	$("#boxbox").text("");
 	        	$("#pagebox").text("");
-	        	var totalElements=orders.totalElements;
+	        	totalElements=orders.totalElements;
 	        	var totalPages=orders.totalPages;
 	        	first=orders.first;
 	        	last=orders.last;
 	        	page=orders.number;
 	        	$.each(orders.content,function(index, order){
+	        		orderids.push(order.id)
+	        		vIds.push(order.volunteer.id)
+	        		console.log(orderids)
 	        		var box="<div class='col-md-4'>"
 	        			box+="<div data-animate='fadeInUp' class='team-member'>"
 	        			box+="<div class='image_1'><a href='team-member.html'><img src='/image/user/member/"+order.volunteer.picture+"' class='img-fluid rounded-circle'></a></div>"
@@ -267,7 +318,7 @@
 							}
 	        			box +='</select></div></div></div>'	
 						
-	        			var value=$("#"+order	.volunteer.id+" option:selected").val()
+	        			var value=$("#"+order.volunteer.id+" option:selected").val()
 	        			box+="<button class='btn btn-primary btn-lg_1' onclick=\"pay("+order.id+","+order.volunteer.id+",'"+order.volunteer.name+"')\">時數核發與評分</button>"
 	        			box+="<button class='btn btn-danger btn-lg_1' data-toggle='modal' data-target='#reportModalCenter' id='" + order.id + "' name='" + order.volunteer.name+ "'>檢舉 </button></div>"
 	        			}else if(order.orderStatus=='ServiceFinishPayMatchSuccess'){

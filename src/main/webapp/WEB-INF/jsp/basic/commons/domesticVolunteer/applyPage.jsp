@@ -65,6 +65,10 @@
 	  border-radius: 0.25rem;
 	  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	}
+	 #map {
+        height: 400px;
+        width: 100%;
+       }
  
     </style>
 </head>
@@ -185,14 +189,49 @@
             	<div class="col-md-12 text-center">
 					<button onclick="insertOrder(${mission.id})" class="btn btn-template-outlined"><i class="fa fa-plus"></i>我要參加</button>
 				</div>    	
-            </div>
           </section>
+          
+          
+          
+          <section>
+          	 <h3>My Google Maps Demo</h3>
+			    <div id="map"></div>
+			    <script>
+			    
+			      
+			      
+			      
+			      function initMap() {
+			    	
+			        var uluru = {lat: 25.0477505, lng: 121.5170599};
+			        var map = new google.maps.Map(document.getElementById('map'), {
+			          zoom: 16,
+			          center: uluru
+			        });
+			        var marker = new google.maps.Marker({
+			          position: uluru,
+			          map: map
+			        });
+			      }
+			    </script>
+			    <script async defer
+			    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNASLitmpPiGxtg94A3WqLl8bHHk0lzJM&callback=initMap">
+    </script>
+          
+          
+          
+          
+          
+          </section>
+          
+          
+          
+            </div>
  				
 		 	<jsp:include page="../../user/chatRoom/chatting.jsp"/>
         </div>
        
 				
-	 </div>
 
 	
 
@@ -250,6 +289,21 @@
 			})
 
 	}
+	
+	
+// 	$(document).ready( function () {
+// 		  function getLatLong()
+// 	      {
+// 	        var apiKey="AIzaSyCNASLitmpPiGxtg94A3WqLl8bHHk0lzJM";
+// 	        var api="https://maps.googleapis.com/maps/api/geocode/json";
+// 	        var location = "台灣";
+// 	        jQuery.get(api,{"key":apiKey,"language":"zh_tw","address":"台北市士林區至善路二段221號"},getResult,"text");
+// 	      }
+// 	      function getResult(data)
+// 	      {
+// 	        alert(data)
+// 	      }
+// 	})
 	
 	
 	</script>
