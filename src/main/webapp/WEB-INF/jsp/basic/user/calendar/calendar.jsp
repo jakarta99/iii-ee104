@@ -16,11 +16,32 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.min.js"></script>
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 <style type="text/css">
+
+.fc table{
+	border-collapse: collapse;
+}
 .fc td, .fc th {
-  padding: 1px;
-  vertical-align: top; 
-   border-color: #0e0d0d;
+	vertical-align: top;
+	border: 5px solid #13b5b196;
+	border-collapse: collapse;
+
   }
+ .fc th{
+	background-color: #13b5b196;
+	border: none;
+ }
+ 
+.fc-unthemed td.fc-today {
+	border: 5px solid  #13b5b196;
+    background: #fcf8e3;
+    color: #DDAA00;
+}
+
+.fc-unthemed td.fc-sun{
+    /*background: #DEB887;*/
+    color:#FF0000 ;
+}
+
 .fc-title{	
 	letter-spacing:3px;
 }
@@ -29,10 +50,11 @@
 	margin:3px;
 }
 .fc-button{
-	  background: #4fbfa8;
-	  border: 1px solid #4fbfa8 !important;
-	  color: #fff !important;
-	  border-radius: 0 !important;
+	  background: #CCFF99;
+	  border: 1px solid #CCFF99 !important;
+	  color: black !important;
+	  font-weight: bold;
+	  border-radius: 0.1 !important;
 }
 li{
 	display:inline;
