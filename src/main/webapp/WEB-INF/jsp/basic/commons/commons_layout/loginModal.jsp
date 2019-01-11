@@ -12,6 +12,9 @@
               <form action="/login"  method="post" id="login-modal">
                 <div class="form-group">
                   <input id="sourceUrl" type="hidden" name="sourceUrl" class="form-control">
+                </div>  
+                <div class="form-group">
+                  <input id="volunteerApply" type="hidden" name="volunteerApply" class="form-control">
                 </div>
                 <div class="form-group">
                   <input id="email_modal" type="text" placeholder="username" name="username" class="form-control">

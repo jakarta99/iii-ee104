@@ -51,16 +51,16 @@ public class MissionPublishController {
 		List<ServiceType> serviceType = serviceTypeService.findAll();
 		model.addAttribute("serviceType", serviceType);
 		model.addAttribute("mission", mission);
-		model.addAttribute(response);
+		model.addAttribute("response",response);
 		log.debug("member.getBalanceValue()={}",member.getBalanceValue());
 		
 		if(member.getBalanceValue() == null || mission.getTimeValue() == null) {
 			member.setBalanceValue(0);
 			mission.setTimeValue(0);
-			log.debug("member.getBalanceValue()={}",member.getBalanceValue());
-			return "/basic/user/volunteerRecruitment/mission_add";
-		}else if(member.getBalanceValue().intValue() == 0 || mission.getTimeValue().intValue() == 0) {
+		}
+		if(member.getBalanceValue().intValue() == 0 || mission.getTimeValue().intValue() == 0) {
 			response.addMessage("餘額不足 無法刊登");
+			log.debug("response={}", response.getMessages().toString());
 			return "/basic/user/volunteerRecruitment/mission_add";
 		}
 		//使用額度超過member餘額 無法刊登

@@ -59,9 +59,13 @@ public class MySimpleUrlAuthenticationSuccessHandler extends SimpleUrlAuthentica
 			throws IOException, ServletException {
 		String targetUrl = null;
 		log.debug("sourceUrl={}",request.getParameter(targetUrlParameter));
-		
+		log.debug("volunteerApply={}",request.getParameter("volunteerApply"));
+
 		if (!StringUtils.isEmpty(request.getParameter(targetUrlParameter))) {
 			targetUrl = request.getParameter(targetUrlParameter);
+			if (!StringUtils.isEmpty(request.getParameter("volunteerApply"))) {
+				targetUrl += "&apply=Y";
+			}
 		} else {
 			targetUrl = determineTargetUrl(request, response);			
 		}

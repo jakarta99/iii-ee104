@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.microsoft.sqlserver.jdbc.StringUtils;
+
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
@@ -58,12 +60,15 @@ public class DomesticVolunteerController {
 	}
 	
 	@RequestMapping("/apply")
-	public String missionDetail (@RequestParam Long missionId, Model model, HttpServletRequest request) {
+	public String missionDetail (@RequestParam(required=false) String apply,@RequestParam Long missionId, Model model, HttpServletRequest request) {
 
 		Mission mission = missionService.getOne(missionId);
 		Member member = memberService.findByAccount(mission.getMember().getAccount());
 		model.addAttribute("mission", mission);
 		model.addAttribute("member", member);
+		if (!StringUtils.isEmpty(apply)) {
+			model.addAttribute("applying",apply);
+		}
 		
 		return "/basic/commons/domesticVolunteer/applyPage";
 	}

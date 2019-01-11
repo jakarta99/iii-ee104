@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.entity.Member;
+import team.lala.timebank.entity.Mission;
 import team.lala.timebank.enums.MemberType;
 import team.lala.timebank.service.MemberService;
 
@@ -31,6 +32,16 @@ public class UserPersonalInfoController {
 	
 	@Autowired
 	private PasswordEncoder encoder;
+	
+	@RequestMapping("/list")
+	public String listPage(Model model) {
+		Member userDetails = (Member) SecurityContextHolder.getContext()  
+							.getAuthentication()  
+							.getPrincipal();
+		Member member = memberService.getOne(userDetails.getId());
+		model.addAttribute("member", member);	
+		return "/basic/user/personal_info/personal-info_list";
+	}
 	
 	@RequestMapping("/edit")
 	public String editPage(Model model) {
