@@ -8,9 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Personal Information</title>
 <!-- css -->
-<jsp:include page="../../commons/commons_layout/commons_css_links.jsp" />
+<jsp:include page="commons_layout/commons_css_links.jsp" />
 <!-- Javascript files -->
-<jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
+<jsp:include page="commons_layout/commons_js_links.jsp" />
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
 <!-- date picker -->
@@ -18,8 +18,6 @@
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
-<!-- icon -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 <style>
 	body{
@@ -45,9 +43,9 @@
 </head>
 <body>
 	<!-- Top bar-->
-	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
+	<jsp:include page="commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
-	<jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
+	<jsp:include page="commons_layout/commons_nav.jsp"/>
 	<div id="heading-breadcrumbs">
     	<div class="container">
         	<div class="row d-flex align-items-center flex-wrap">
@@ -64,8 +62,6 @@
         	</div>
         </div>
     </div>
-	<!-- Sidebar -->
-	<jsp:include page="../user_layout/user_sidebar.jsp"/>
 	<section class="bar">
 	<div class="container">
     	<div class="row">
@@ -92,9 +88,6 @@
                     <div class="col-md-4">
                       	<div class="form-group">
                       		<ul class="ul-icons list-unstyled">
-                      			<li>
-									<div class="icon-filled"></div>名稱  : ${member.name}
-								</li>
 								<fmt:formatDate value="${member.birthDate}" pattern="yyyy/MM/dd" var="birthDate"/>
 								<li>
 									<c:choose>
@@ -155,30 +148,16 @@
 	                	<div class="form-group">
 	                		<img style="width:300px;height:270px" id="picture" alt="" src="/image/user/member/${member.picture}" class="img-fluid rounded-circle">
 	                	</div>
-	                	<input type="button" class="btn btn-template-outlined" id="changePicture" value="更改圖片" class="form-control"/>
 	                </div>
 	        	</div>
-	        	<div class="col-md-12 text-center">
-					<button type="button" class="btn btn-template-outlined" id="edit"><i class="fas fa-edit"></i>編輯</button>
-				</div>
 			</article>
 		</div>
 	</div>
 	</section>
 	<!-- FOOTER -->
-	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
+	<jsp:include page="commons_layout/commons_footer.jsp"/>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
  	<script>    
-	 	//change picture event
-		$("#changePicture").click(function() {
-			window.location.replace("/user/personal-info/pic");
-		});		
- 	
- 		//edit pesonal-info event
-		$("#edit").click(function() {
-			window.location.replace("/user/personal-info/edit");
-		});
-
 		$(document).ready(function(){
  
 		})
