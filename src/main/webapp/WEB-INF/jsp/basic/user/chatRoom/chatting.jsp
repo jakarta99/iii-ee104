@@ -8,58 +8,75 @@
 <script type="text/javascript">
 
 	var stompClient = null;
-	var to ;
-	var toUserImg ;
-	var fromUserImg;
-	
+	var to;
+	var connected = false; 
+	var visible = false;
 	
 	$(document).ready(function(){
-		 to = $("#to").val();
+		if (!connected){
+			$("#connect").css("opacity", ".65");
+			$("#sendMessage").prop("disabled",true);
+			$("#text").prop("disabled",true);
+		} 
+		 to = $("#toAccount").text();
 	})
 	
-	function setConnected(connected) {
-		document.getElementById('connect').disabled = connected;
-		document.getElementById('disconnect').disabled = !connected;
-		document.getElementById('conversationDiv').style.visibility = connected ? 'visible': 'hidden';
-		document.getElementById('response').innerHTML = '';
+	function setVisible(visible) {
+		document.getElementById('conversationDiv').style.visibility = visible ? 'visible': 'hidden';
+	} 
+	
+	function chat(){
+		if (!visible || !connected){
+			visible = true;
+			$("#chatbox").css("bottom","2px");
+		} else {
+			visible = false;
+			$("#chatbox").css("bottom","-324px");
+		}
+		if (!connected){
+			connect();
+			$("#connect").css("opacity", "1");
+			
+		} 
+		setVisible(visible);
 	}
 
 	function connect() {
-		
+		console.log("to="+to)
 		$.ajax({
 			url:"/user/chatMessage/list?to=" + to,
 			type: "post",
 		    dataType : "json",	
-        }).done(function(data){		
-        	setConnected(true);
-        	$.each(data.chatList, function(idx, obj){
+        }).done(function(mapObj){	
+        	connected = true;
+        	$("#sendMessage").prop("disabled",false);
+        	$("#text").prop("disabled",false);
+        	$.each(mapObj.chatList, function(idx, chatMessage){
         	 	var img;
-        		var m = new Date(obj.time);
-        		var dateTime = m.getHours() + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds() ;		
+        		var m = new Date(chatMessage.time);
+        		var dateTime = m.getHours() + ":" + m.getUTCMinutes() ;		
         	 	var p = $("<p></p>");
         	 	$(p).css("wordWrap","break-word");
-        	 	if (obj.toAccount == to){
+        	 	var msgSpan = "<p class='msgSpan'>"+ chatMessage.text +"</p>";
+        	 	var dateTimeSpan = "<p class='dateTimeSpan'>"+ dateTime + "</p>"; 	
+        	 	if (chatMessage.toAccount == to){
         	 		$(p).addClass("p1-to");
-        	 		img = "<img src='/image/user/member/"+data.toMember.picture +"' class='userImg' />";
-//         	 		toUserImg = img;
+        		$(p).append( msgSpan +"<br>" + dateTimeSpan)
         	 	} else {
         	 		$(p).addClass("p1-from");
-        	 		img = "<img src='/image/user/member/"+data.fromMember.picture +"' class='userImg' />";
-//         	 		fromUserImg = img;
+        	 		img = "<img src='/image/user/member/"+mapObj.toMemberPic +"' class='userImg' />";
+            		$(p).append(img + msgSpan +"<br>" + dateTimeSpan)
         	 	}
-        	 	var msgSpan = "<p class='msgSpan'>"+obj.text+"</p>";
-        	 	var dateTimeSpan = "<span class='dateTimeSpan'>"+dateTime+"</span>"; 	
-        		$(p).append(img + msgSpan +"<br>" + dateTimeSpan)
 	    	 	$('#response').append(p);
+	    	 	$('#box').animate({ scrollTop: $("#response").height() }, 1);
+	    	 
         	})
     	 	
     	 	$("#text").val("");
     	 	
     	
        }).fail(function (jqXHR, textStatus) {
-// 			if (jqXHR.status == 200){
-// 				window.location.href = '/login';
-// 			}
+    	   	connected = false;
 	    	$("#login-modal").addClass("modal fade show");
     	   	$("#login-modal").css("display","block");
     	   	$("#login-modal").css("padding-right","17px");	    	
@@ -68,8 +85,7 @@
 
 		var socket = new SockJS('/chat');
 		stompClient = Stomp.over(socket);
-		stompClient.connect({}, function(frame) {
-			
+		stompClient.connect({}, function(frame) {		
 			console.log('Connected: ' + frame);
 			stompClient.subscribe('/topic/messages', function(messageOutput) {
 				showMessageOutput(JSON.parse(messageOutput.body));
@@ -90,52 +106,56 @@
 
 	function sendMessage() {
 		var text = $('#text').val();
-		stompClient.send("/app/chat", {}, JSON.stringify({
-			'to' : to,
-			'text' : text
-		}));
+		if (text.length >0){
+			stompClient.send("/app/chat", {}, JSON.stringify({
+				'to' : to,
+				'text' : text
+			}));			
+		}
 	}
 
-	function showMessageOutput(messageOutput) {
-	 	var m = new Date(messageOutput.time);
-		var dateTime = m.getHours() + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds() 		
+	function showMessageOutput(chatMessage) {
+	 	var m = new Date(chatMessage.time);
+		var dateTime = m.getHours() + ":" + m.getUTCMinutes();		
 	 	var p = $("<p></p>");
 	 	$(p).css("wordWrap","break-word");
-	 	if (messageOutput.toAccount == to){
+	 	var msgSpan = "<p class='msgSpan'>"+chatMessage.text+"</p>";
+	 	var dateTimeSpan = "<p class='dateTimeSpan'>"+dateTime+"</p>"; 	
+	 	if (chatMessage.toAccount == to){
 	 		$(p).addClass("p1-to");
-	 		img = "<img src='/image/user/member/"+messageOutput.toMember.picture +"' class='userImg' />";
+			$(p).append(msgSpan +"<br>"+ dateTimeSpan);
 	 	} else {
 	 		$(p).addClass("p1-from");
-	 		img = "<img src='/image/user/member/"+messageOutput.toMember.picture +"' class='userImg' />";
+	 		img = "<img src='/image/user/member/"+chatMessage.toMemberPic +"' class='userImg' />";
+			$(p).append(img + msgSpan +"<br>"+ dateTimeSpan);
 	 	}
-	 	var msgSpan = "<p class='msgSpan'>"+messageOutput.text+"</p>";
-	 	var dateTimeSpan = "<span class='dateTimeSpan'>"+dateTime+"</span>"; 	
-		$(p).append(img + msgSpan +"<br>"+ dateTimeSpan);
-
 	 	$('#response').append(p);
+	 	$('#box').animate({ scrollTop: $("#response").height() }, 1);
 	 	$("#text").val("");
-	 	var h = $(".p1-to, .p1-from").css("height");
-// 	 	console.log(h)
+	}
 	
+	
+	function closeChatBox(){
+		$("#chatbox").hide();
+		if (connected){
+			disconnect();			
+		}
 	}
 </script>
-		<button type="button" id="connect" class="btn btn-primary btn-sm" onclick="connect();" > 與我聊天</button>
-		<button type="button" id="disconnect" class="btn btn-primary btn-sm" disabled="disabled" onclick="disconnect();"> 關閉聊天室</button>
-		<div>傳送對象:
-			<input type="text" disabled="disabled" id="to" value="${mission.member.account}"  />
-		</div>
-
-
 		
-		<div id="container" onload="disconnect()">
-	        <div id="content" > </div>
-	        <div class="chattbox" id="send-box">   
-	        	<div id="conversationDiv">
+		<div id="chatbox"  onload="disconnect()" >
+			<span id="toAccount"  style="display:none">${mission.member.account}</span>
+			<div id="connect"  class="btn btn-primary btn-sm"  >
+				<div onclick="chat();" style="display:inline-block;width:80%"><span id="toName">${mission.member.name}</span></div>
+				<button type="button" data-dismiss="modal" aria-label="Close" class="close" onclick="closeChatBox()"><span aria-hidden="true" >×</span></button>
+			</div>
+        	<div id="conversationDiv">
+        		<div id="box">
 					<p id="response"></p>
-					<input type="text" id="text" placeholder="Write a message..." />
-					<button id="sendMessage" onclick="sendMessage();">Send</button>
 				</div>
-	        </div>
+				<input type="text" id="text" placeholder="Write a message..." />
+				<button id="sendMessage" class="btn btn-primary btn-sm" onclick="sendMessage();">Send</button>
+			</div>
 	    </div>
 
 

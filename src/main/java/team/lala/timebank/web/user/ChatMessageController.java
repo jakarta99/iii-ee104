@@ -56,8 +56,8 @@ public class ChatMessageController {
 		Member toMember = memberService.findByAccount(to);
 		Member fromMember =  memberService.findByAccount(principal.getName());
 		respData.put("chatList", chatList);
-		respData.put("toMember", toMember);
-		respData.put("fromMember", fromMember);
+		respData.put("toMemberPic", toMember.getPicture());
+		respData.put("fromMemberPic", fromMember.getPicture());
 		return respData;
 	}
 	

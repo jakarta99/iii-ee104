@@ -34,11 +34,12 @@ public class ChatMessage {
 	@Column(name="TIME")
 	private Date time;	
 	
-	@Transient
-	private Member fromMember;
 	
 	@Transient
-	private Member toMember;
+	private String fromMemberPic;
+	
+	@Transient
+	private String toMemberPic;
 	
 	
 	@Column(name="FROM_ACCOUNT")
@@ -62,12 +63,11 @@ public class ChatMessage {
 
 	@Override
 	public String toString() {
-		return "ChatMessage [id=" + id + ", text=" + text + ", time=" + time + ", fromMember=" + fromMember
-				+ ", toMember=" + toMember + ", fromAccount=" + fromAccount + ", toAccount=" + toAccount + "]";
+		return "ChatMessage [id=" + id + ", text=" + text + ", time=" + time + ", fromMemberPic=" + fromMemberPic
+				+ ", toMemberPic=" + toMemberPic + ", fromAccount=" + fromAccount + ", toAccount=" + toAccount + "]";
 	}
-	
-	
 
+	
 	
 
 
