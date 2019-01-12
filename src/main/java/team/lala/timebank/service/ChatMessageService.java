@@ -33,12 +33,16 @@ public class ChatMessageService {
 	public ChatMessage insert(ChatMessage chatMessage) {
 		Member toMember = memberDao.findByAccount(chatMessage.getToAccount());
 		Member fromMember =  memberDao.findByAccount(chatMessage.getFromAccount());
-		//為了解決hibernate懶加載問題，此System.out不可刪除
-//		System.out.println(toMember);
-//		System.out.println(fromMember);
 		chatMessage.setToMemberPic(toMember.getPicture());
 		chatMessage.setFromMemberPic(fromMember.getPicture());
 		return chatMessageDao.save(chatMessage);
+	}
+	
+	public List<ChatMessage> findChatMessageByAccount(String userAccount){
+		ChatMessage chatMessage = new ChatMessage();
+		chatMessage.setFromAccount(userAccount);
+		ChatMessageSpecification spec = new ChatMessageSpecification(chatMessage);
+		return chatMessageDao.findAll(spec);
 	}
 	
 }

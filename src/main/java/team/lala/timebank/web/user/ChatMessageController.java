@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +24,7 @@ import team.lala.timebank.service.ChatMessageService;
 import team.lala.timebank.service.MemberService;
 @Slf4j
 @Controller
+@RequestMapping("/user/chatMessage")
 public class ChatMessageController {
 
 	@Autowired
@@ -44,8 +46,17 @@ public class ChatMessageController {
 		return chatMessage;
 	}
 	
+	@RequestMapping("/listPage")
+	public String chatPage(Principal principal, Model model) {
+		List<ChatMessage> chatMessages = chatMessageService.findChatMessageByAccount(principal.getName());
+		model.addAttribute("userChatMessages", chatMessages);
+		log.debug("chatMessages={}",chatMessages);
+		
+		return "/basic/user/chatRoom/chatMessagesPage";
+	}
+	
 	@ResponseBody
-	@RequestMapping("/user/chatMessage/list")
+	@RequestMapping("/listMessage")
 	public Map<String, Object> listMessages(@RequestParam String to, Principal principal){
 		Map<String, Object> respData = new HashMap<String, Object>();
 		ChatMessage chatMessage = new ChatMessage();
@@ -62,10 +73,6 @@ public class ChatMessageController {
 	}
 	
 
-	
-	@RequestMapping("/chatpage")
-	public String chatPage() {
-		return "/basic/user/chatRoom/chattingExample";
-	}
+
 	
 }
