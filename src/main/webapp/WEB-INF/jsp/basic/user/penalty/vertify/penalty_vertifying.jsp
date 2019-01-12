@@ -27,15 +27,17 @@
  		margin-bottom: 20px;  
 	}
 	
-/* 	fieldset { */
-/*  		border-radius: 20px;  */
-/*  		padding: 20px 20px 0px 20px;   */
-/* 		background-color:#d1e9e9; */
-/* 		margin: auto;  */
-/*  		margin-top: 10px;   */
-/*  		margin-bottom: 20px;   */
- 		
-/* 	} */
+/* 	固定上一頁按鈕位置 */
+	#lastPage {
+	    display: none;
+	    position: fixed;
+	    left: 20px;
+ 	    top:120px; 
+	    padding: 10px 15px;    
+	    color: white;
+	    cursor: pointer;
+ 	    z-index:9999; /*讓按鈕浮在最上層 */
+	}
 	
 	body{
 		font-family: "微軟正黑體"
@@ -46,7 +48,7 @@
 
 	<!-- 加入nav.html(放在static/html) -->
 	<jsp:include page="../../../../admin/admin_layout/nav.jsp" />
-	
+	<input type="button" id="lastPage" class="btn btn-info" onclick="history.back()" value="上一頁" >
 	<div class="container" style="margin-top: 140px">
 		<h2 class="text-center text-uppercase text-secondary mb-0" style="font-family: '微軟正黑體'" id="topic">檢舉案件審核</h2>
 <!-- 	    <hr class="star-dark mb-5"> -->
@@ -169,6 +171,7 @@
 			
 			<input type="button" class="btn btn-info" id="vertifyFinish" value="完成審核" disabled>
 			<input type="button" class="btn btn-info" id="vertifyTemp" value="暫時儲存"><p>
+			
 		</fieldset>
 	</form>
 	
@@ -521,6 +524,17 @@
 			
 
 		})
+		
+		
+		$(function() {
+		  $(window).scroll(function() {
+		    if ($(this).scrollTop() > 10)  {          /* 要滑動卷軸的距離 */
+		       $('#lastPage').fadeIn("fast");   /* 幫選單加上固定效果 */
+		    } else {
+		      $('#lastPage').stop().fadeOut("fast"); /* 移除選單固定效果 */
+		    }
+		  });
+		});
 	</script>
 </body>
 </html>

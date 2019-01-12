@@ -41,11 +41,14 @@
  		margin-top: 10px;  
  		margin-bottom: 20px;  
 	}
+  
+	.modal-header {
+		text-align:center;
+	    background-color: #13b5b1;
+	    color:white;
 
-	 table tr td, button{
-	 	text-align:center;
-	 	line-height:center; 
 	 }
+	 
 	 article .btn{
 	 	margin-left:3px;
 	 	margin-right:3px
@@ -80,7 +83,7 @@
 			<form action="/system-message/selectMsgsAsRead" method="post" onSubmit="return checkForm();">
 				<table id="table" class="table table-hover">
 					<thead>
-						<tr style="background-color: white">
+						<tr class="table-info">
 							<th scope="col"></th>
 <!-- 							<th scope="col" width="50px"> -->
 <!-- 								<input type="checkbox" style="display:inline;" name="CheckAll" value="全選" id="CheckAll" /> -->
@@ -91,8 +94,8 @@
 							<th scope="col">時間</th>
 							<th scope="col">類型</th>
 							<th scope="col">內容</th>
-							<th scope="col">是否已讀</th>
-							<th scope="col">會員帳號(debug用)</th>
+<!-- 							<th scope="col">是否已讀</th> -->
+<!-- 							<th scope="col">會員帳號(debug用)</th> -->
 						</tr>
 					</thead>
 					<tbody id="tableBody">
@@ -115,26 +118,28 @@
 	        </button>
 	    </div>
 	    <div class="modal-body">
+	        <h5><img width="20" src="https://image.flaticon.com/icons/svg/134/134974.svg" class="rounded mr-2">申訴內容</h5>
 	        <form id="applyForm" enctype="multipart/form-data">
-
-	        	<input type='hidden' id='penaltyId' name='penaltyId' />
-<!-- 	        	type='hidden' -->
-	            <h5>申訴原因</h5>
-	            <textarea cols='40' rows='5' id='applyReVertifyDescription' name='applyReVertifyDescription'> </textarea>
-	            
-	            <input type="file" id="reVertifyProofPicName" name="reVertifyProofPicName" accept="image/*">
-		        <p id="ProofDescription">     請上傳佐證資料圖檔(如無佐證資料，則直接送出審核)</p>
+				<input type='hidden' id='penaltyId' name='penaltyId' />
+		        <div class="form-group">
+		            <label for="message-text" class="col-form-label">申訴原因</label>
+		            <textarea cols='40' rows='5' class="form-control" id='applyReVertifyDescription' name='applyReVertifyDescription'> </textarea>
+		        </div>
+				<div class="form-group">
+		            <label for="recipient-name" class="col-form-label" id="ProofDescription">上傳佐證圖檔</label>
+		            <input type="file" class="form-control" id="reVertifyProofPicName" name="reVertifyProofPicName" accept="image/*">
+		        </div>
 	        </form>
-	        
-	        <div id="reVertifyImgDes">
-	        	<hr>
-	        	<h5>佐證圖片</h5><img alt="" src="" id="reVertifyImg" width="200">
-	        </div>
-	        
-	        <div id="reVertifyResult">
-	        	<hr>
-	        	<h5></h5>
-	        </div>
+	        <form>
+		        <div id="reVertifyImgDes" class="form-group">
+		        	<hr>
+		        	<label for="message-text" class="col-form-label">佐證圖片</label>
+		        	<img alt="" src="" id="reVertifyImg" width="200">
+		        </div>
+	        </form>
+        <div id="reVertifyResult">
+
+        </div>
 	    </div>
 	    <div class="modal-footer">
 	        <input type='hidden' id="reVertifyBtn" class='btn btn-primary btn-sm' onclick='applyReVertify()' value='申訴' />
@@ -239,14 +244,15 @@
 		           		
 		           		//如果是懲罰的message，且未提出申訴
 		           		if(data.messageType=="Penalty" && data.penalty.applyReVertify!="Y"){
-           					readButt = "<button class='btn btn-warning btn-sm' data-toggle='modal' data-target='#penaltyReVertifyCenter' onclick='bringPenaltyIdToModal(" + data.penalty.id + ")'>  申訴    </button>"
+		           			readButt = "<button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#penaltyReVertifyCenter' onclick='bringPenaltyIdToModal(" + data.penalty.id + ")'>  申訴    </button>"
+		           			
 		           		}
 		           		
 		           		//如果是懲罰的message，且已提出申訴
 		           		if(data.messageType=="Penalty" && data.penalty.applyReVertify=="Y"){
 		           			applyReVertifyDescription = data.penalty.applyReVertifyDescription;
 		           			reVertifyProofPicName = data.penalty.reVertifyProofPicName;
-		           			readButt = "<button class='btn btn-warning btn-sm' data-toggle='modal' data-target='#penaltyReVertifyCenter' onclick='bringApplyReVertifyDescriptionToModal(" + data.penalty.id +")'>  檢視申訴紀錄    </button>"
+		           			readButt = "<button class='btn btn-info btn-sm' data-toggle='modal' data-target='#penaltyReVertifyCenter' onclick='bringApplyReVertifyDescriptionToModal(" + data.penalty.id +")'>  檢視申訴紀錄    </button>"
 		           		}
 		           		
 		               	return readButt;	}
@@ -294,8 +300,8 @@
 		           	}
 		           	},
 					{data:"message"},
-					{data:"readStatus"},
-					{data:"member.account"},
+// 					{data:"readStatus"},
+// 					{data:"member.account"},
 					
 				], columnDefs:[{		//DataTable:禁用第0123列的搜索和排序
 					"searchable": false,
@@ -427,10 +433,10 @@
 					$("#reVertifyImg").attr("src", "/image/user/reVertify/" + result.reVertifyProofPicName);
 					if(result.reVertifyPenaltyTimeValue == null){
 						//申訴案尚在審核中
-						$("#reVertifyResult").html("<hr><h5>申訴案尚在審核中</h5>")
+						$("#reVertifyResult").html("<hr><h5><img width='20' src='https://image.flaticon.com/icons/svg/1336/1336714.svg' class='rounded mr-2'>申訴案尚在審核中</h5>")
 					}else{
 						//申訴案已完成審核
-						var theStr = "<hr><h5>申訴審核結果</h5>" 
+						var theStr = "<hr><h5><img width='20' src='https://image.flaticon.com/icons/svg/1336/1336714.svg' class='rounded mr-2'>申訴審核結果</h5>" 
 									+ "<li>原懲罰時數:" + result.penaltyTimeValue + "</li>"
 									+ "<li>目前懲罰時數:" + result.reVertifyPenaltyTimeValue + "</li>"
 									+ "<li>審核原因:" + result.reVertifyReason + "</li>";
@@ -494,7 +500,12 @@
 				    swal("取消申訴");
 				  }
 				}); 	
+		
+		
 		}
+		
+		
+		
 		
 
 	</script>
