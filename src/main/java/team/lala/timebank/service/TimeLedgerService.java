@@ -78,7 +78,7 @@ public class TimeLedgerService {
 	}
 
 	// Jasmine
-	// 審核檢舉案完畢後，進行扣款(未完成)
+	// 審核檢舉案完畢後，進行扣款
 	// transaction_type還沒加入entity中，待改完要再加
 	public TimeLedger doPenaltyDebit(Penalty penalty) {
 
@@ -108,6 +108,40 @@ public class TimeLedgerService {
 		return timeLedgerDao.save(timeLedger);
 
 	}
+	
+	// Jasmine
+	// 審核申訴案完畢後，進行補時數
+	// transaction_type還沒加入entity中，待改完要再加
+	public TimeLedger sendTimeValueAfterReVertify(Penalty penalty) {
+
+		// 1. findTimeLedgerByMemberId
+		//log.debug("檢舉者ID={}", penalty.getDefendant().getId());
+		TimeLedger lastTimeLedger = timeLedgerDao
+				.findTop1ByMemberIdOrderByTransactionTimeDesc(memberDao.getOne(penalty.getDefendant().getId()));
+		//log.debug("最後一筆交易紀錄={}", lastTimeLedger);
+		// 如果尚無交易紀錄，則先將餘額設為0元
+		if (lastTimeLedger == null || lastTimeLedger.getBalanceValue() == null) {
+			lastTimeLedger.setBalanceValue(0);
+		}
+
+		// 2. PenaltyTimeledger 資料處理
+		TimeLedger timeLedger = new TimeLedger();
+		timeLedger.setMemberId(penalty.getDefendant());
+		Integer thisTimeValue = penalty.getPenaltyTimeValue()-penalty.getReVertifyPenaltyTimeValue();//補入時數計算
+		timeLedger.setWithdrawalValue(0);
+		timeLedger.setDepositValue(thisTimeValue);
+		timeLedger.setTransactionTime(new Date());
+		timeLedger.setBalanceValue(lastTimeLedger.getBalanceValue() + thisTimeValue);
+		String reason = "[申訴補時] 原懲罰時數:" + penalty.getPenaltyTimeValue() 
+				+ "／申訴後懲罰時數:" + penalty.getReVertifyPenaltyTimeValue() 
+				+ "／活動名稱:" + penalty.getOrder().getMission().getTitle(); // 原懲罰時數+申訴後懲罰時數+申訴活動名稱
+		timeLedger.setDescription(reason);
+		//log.debug("扣款紀錄={}", timeLedger);
+		// 3. insert
+		return timeLedgerDao.save(timeLedger);
+
+	}
+	
 
 	// 查詢特定會員某段時間的交易紀錄
 	public List<TimeLedger> findByMemberIdAndTransactionTimeBetween(Long memberId, LocalDateTime transactionTimeBegin,
