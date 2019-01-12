@@ -26,7 +26,7 @@
 
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 <style>
-	 article{
+	 body{
 	 	
 	 	font-family: 微軟正黑體;
 	 }
@@ -53,7 +53,7 @@
 
 </style>
 <meta charset="UTF-8">
-<title>站內信清單</title>
+<title>系統訊息</title>
 </head>
 <body>
 	<!-- Top bar-->
@@ -88,9 +88,9 @@
 							<th scope="col" width="50px">
 <!-- 								<input id="submit" style="display:inline;" type="submit" value="標記已讀" class="btn btn-outline-info btn-sm"/> -->
 							</th>
-							<th scope="col">訊息時間</th>
-							<th scope="col">訊息類型</th>
-							<th scope="col">訊息內容</th>
+							<th scope="col">時間</th>
+							<th scope="col">類型</th>
+							<th scope="col">內容</th>
 							<th scope="col">是否已讀</th>
 							<th scope="col">會員帳號(debug用)</th>
 						</tr>
@@ -103,7 +103,7 @@
 		</fieldset>
 	</article>
 	<!-- FOOTER -->
-	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
+<%-- 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" /> --%>
 
 	<div class="modal fade" id="penaltyReVertifyCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
@@ -116,16 +116,28 @@
 	    </div>
 	    <div class="modal-body">
 	        <form id="applyForm" enctype="multipart/form-data">
-	        	<input id='penaltyId' name='penaltyId' value=''/><br>
-<!-- 	        	type='hidden'  -->
+
+	        	<input type='hidden' id='penaltyId' name='penaltyId' />
+<!-- 	        	type='hidden' -->
 	            <h5>申訴原因</h5>
-	            <textarea cols='40' rows='5' id='applyReVertifyDescription' name='applyReVertifyDescription'></textarea>
+	            <textarea cols='40' rows='5' id='applyReVertifyDescription' name='applyReVertifyDescription'> </textarea>
+	            
 	            <input type="file" id="reVertifyProofPicName" name="reVertifyProofPicName" accept="image/*">
-	            <p>請選擇佐證資料圖檔，如無佐證資料，則直接送出審核</p>
+		        <p id="ProofDescription">     請上傳佐證資料圖檔(如無佐證資料，則直接送出審核)</p>
 	        </form>
+	        
+	        <div id="reVertifyImgDes">
+	        	<hr>
+	        	<h5>佐證圖片</h5><img alt="" src="" id="reVertifyImg" width="200">
+	        </div>
+	        
+	        <div id="reVertifyResult">
+	        	<hr>
+	        	<h5></h5>
+	        </div>
 	    </div>
 	    <div class="modal-footer">
-	        <input type='button' class='btn btn-primary btn-sm' onclick='applyReVertify()' value='申訴' />
+	        <input type='hidden' id="reVertifyBtn" class='btn btn-primary btn-sm' onclick='applyReVertify()' value='申訴' />
 	    </div>
 	</div>
 	</div>
@@ -139,6 +151,8 @@
 
 		var dataTable;
 		var readStatus = "";
+		var applyReVertifyDescription;
+		var reVertifyProofPicName;
 		
 		//暫不用此方法。
 		function getMessageId(msgId){
@@ -173,7 +187,7 @@
 		
 		
 		$(document).ready(function() {
-
+			
 			$("form").addClass("form-inline");
 			$("form div[id!='collapse']").addClass("form-group mx-sm-3 mb-3");
 			$("form input, select").addClass("form-control mx-3");
@@ -225,12 +239,14 @@
 		           		
 		           		//如果是懲罰的message，且未提出申訴
 		           		if(data.messageType=="Penalty" && data.penalty.applyReVertify!="Y"){
-           					readButt = "<button class='btn btn-warning btn-sm' data-toggle='modal' data-target='#penaltyReVertifyCenter' id='" + data.penalty.id + "' onclick='bringPenaltyIdToModal(" + data.penalty.id + ")'>  申訴    </button>"
+           					readButt = "<button class='btn btn-warning btn-sm' data-toggle='modal' data-target='#penaltyReVertifyCenter' onclick='bringPenaltyIdToModal(" + data.penalty.id + ")'>  申訴    </button>"
 		           		}
 		           		
 		           		//如果是懲罰的message，且已提出申訴
 		           		if(data.messageType=="Penalty" && data.penalty.applyReVertify=="Y"){
-           					readButt = "<button class='btn btn-info btn-sm'>  已申訴    </button>"
+		           			applyReVertifyDescription = data.penalty.applyReVertifyDescription;
+		           			reVertifyProofPicName = data.penalty.reVertifyProofPicName;
+		           			readButt = "<button class='btn btn-warning btn-sm' data-toggle='modal' data-target='#penaltyReVertifyCenter' onclick='bringApplyReVertifyDescriptionToModal(" + data.penalty.id +")'>  檢視申訴紀錄    </button>"
 		           		}
 		           		
 		               	return readButt;	}
@@ -239,7 +255,44 @@
 						return new Date(data.releaseTime).toLocaleDateString();
 						}
 					},
-		           	{data:"messageType" },
+		           	{data:function(data){
+		           		var messageType = data.messageType;
+		           		if(messageType == "Penalty"){
+		           			return "懲罰";
+		           		}
+		           		if(messageType == "Score"){
+		           			return "評分";
+		           		}
+		           		if(messageType == "ReplyPenaltyReport"){
+		           			return "檢舉結果";
+		           		}
+		           		if(messageType == "ReplyTheRevertifyApply"){
+		           			return "申訴結果";
+		           		}
+		           		if(messageType == "GetTimeValue"){
+		           			return "獲得時數";
+		           		}
+		           		if(messageType == "PayTimeValue"){
+		           			return "撥付時數";
+		           		}
+		           		if(messageType == "MissionAccecpt"){
+		           			return "活動申請成功";
+		           		}
+		           		if(messageType == "MissionReject"){
+		           			return "活動申請失敗";
+		           		}
+		           		if(messageType == "MissionEdit"){
+		           			return "編輯活動";
+		           		}
+		           		if(messageType == "MissionCancel"){
+		           			return "取消活動";
+		           		}
+		           		if(messageType == "MissionFinish"){
+		           			return "活動完成";
+		           		}
+	
+		           	}
+		           	},
 					{data:"message"},
 					{data:"readStatus"},
 					{data:"member.account"},
@@ -349,6 +402,58 @@
 		//按下申訴按鈕
 		function bringPenaltyIdToModal(penaltyId){
 			$("#penaltyId").attr("value",penaltyId);
+			$("#applyReVertifyDescription").html("");
+			
+			$("#reVertifyImg").attr("src", "");
+			$("#reVertifyProofPicName").attr("type","file");
+			$("#ProofDescription").removeAttr("hidden");
+			$("#reVertifyBtn").attr("type", "button");
+			$("#applyReVertifyDescription").removeAttr("disabled");
+			
+			$("#reVertifyImgDes").attr("hidden", "");
+			$("#reVertifyResult").attr("hidden", "");
+		}
+		
+		//檢視申訴紀錄
+		function bringApplyReVertifyDescriptionToModal(penaltyId){
+			$("#penaltyId").attr("value",penaltyId);
+			$.ajax({
+				url : "/user/checkReVertifyContent",
+				method : "post",
+				dataType : "json",
+				data : {"penaltyId":penaltyId},
+				success : function(result) {
+					$("#applyReVertifyDescription").html(result.applyReVertifyDescription);
+					$("#reVertifyImg").attr("src", "/image/user/reVertify/" + result.reVertifyProofPicName);
+					if(result.reVertifyPenaltyTimeValue == null){
+						//申訴案尚在審核中
+						$("#reVertifyResult").html("<hr><h5>申訴案尚在審核中</h5>")
+					}else{
+						//申訴案已完成審核
+						var theStr = "<hr><h5>申訴審核結果</h5>" 
+									+ "<li>原懲罰時數:" + result.penaltyTimeValue + "</li>"
+									+ "<li>目前懲罰時數:" + result.reVertifyPenaltyTimeValue + "</li>"
+									+ "<li>審核原因:" + result.reVertifyReason + "</li>";
+						$("#reVertifyResult").html(theStr)
+					}
+				},
+				error: function (result) {
+					swal({
+						  title: "ERROR",
+						  text: "查詢失敗",
+						  button: "確定",
+						});
+			    }
+			})
+			
+			
+			$("#applyReVertifyDescription").attr("disabled","");
+			$("#reVertifyProofPicName").attr("type","hidden");
+			$("#ProofDescription").attr("hidden", "");
+			$("#reVertifyBtn").attr("type", "hidden");
+			
+			$("#reVertifyImgDes").removeAttr("hidden");
+			$("#reVertifyResult").removeAttr("hidden");
 		}
 		
 		//提出申訴時呼叫這支

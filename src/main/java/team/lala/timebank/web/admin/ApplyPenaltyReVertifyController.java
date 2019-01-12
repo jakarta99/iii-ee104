@@ -72,6 +72,15 @@ public class ApplyPenaltyReVertifyController {
 		return ajaxResponse;
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value = "/checkReVertifyContent", method = RequestMethod.POST)
+	public Penalty checkReVertifyContent(@RequestParam("penaltyId") Long penaltyId) {
+		
+		Penalty penalty = penaltyService.getOne(penaltyId);
+		return penalty;
+	}
+	
 
 	
 	
