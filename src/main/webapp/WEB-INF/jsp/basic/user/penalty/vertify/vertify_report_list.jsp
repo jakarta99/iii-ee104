@@ -216,25 +216,33 @@
 					{data:"accuser.account"},
 					{data:"defendant.account"},
 					{data:"description"},
-					{data:"penaltyTimeValue"},
-					{data:function (data){
-						var status = data.status;
-						var applyReVertify = data.applyReVertify;
-						if(status == 1){
-							return "檢舉審核中";
-						}else if(status == 2 && applyReVertify!="Y"){
-							return "檢舉審核結果：懲罰";
-						}else if(status == 3){
-							return "檢舉審核結果：不懲罰";
-						}else if(status == 4){
-							return "申訴審核中";
-						}else if(status == 2 && applyReVertify=="Y"){
-							return "申訴審核結果：懲罰";
-						}else if(status == 3 && applyReVertify=="Y"){
-							return "申訴審核結果：不懲罰";
+					{data:function(data){
+							//申訴審核完畢案件，懲罰時數寫申訴審核結果	
+							if(data.reVertifyPenaltyTimeValue != null && data.status != "4"){ 
+								return data.reVertifyPenaltyTimeValue;
+							}else{
+								return data.penaltyTimeValue;
+							}
+						
 						}
-					}
-					
+					},
+					{data:function (data){
+							var status = data.status;
+							var applyReVertify = data.applyReVertify;
+							if(status == 1){
+								return "檢舉審核中";
+							}else if(status == 2 && applyReVertify!="Y"){
+								return "檢舉審核結果：懲罰";
+							}else if(status == 3){
+								return "檢舉審核結果：不懲罰";
+							}else if(status == 4){
+								return "申訴審核中";
+							}else if(status == 2 && applyReVertify=="Y"){
+								return "申訴審核結果：懲罰";
+							}else if(status == 3 && applyReVertify=="Y"){
+								return "申訴審核結果：不懲罰";
+							}
+						}
 					},
 					{data:function (data){
 						var applyReVertify = data.applyReVertify;
