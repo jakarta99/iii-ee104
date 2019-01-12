@@ -9,15 +9,33 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <title>檢舉案件審核</title>
 <style>
-	fieldset {
- 		border-radius: 20px; 
+	.firstVertify{
+		border-radius: 20px; 
  		padding: 20px 20px 0px 20px;  
 		background-color:#d1e9e9;
 		margin: auto; 
  		margin-top: 10px;  
  		margin-bottom: 20px;  
- 		
 	}
+	
+	.secondVertify{
+		border-radius: 20px; 
+ 		padding: 20px 20px 0px 20px;  
+		background-color:#d0d1e2;
+		margin: auto; 
+ 		margin-top: 10px;  
+ 		margin-bottom: 20px;  
+	}
+	
+/* 	fieldset { */
+/*  		border-radius: 20px;  */
+/*  		padding: 20px 20px 0px 20px;   */
+/* 		background-color:#d1e9e9; */
+/* 		margin: auto;  */
+/*  		margin-top: 10px;   */
+/*  		margin-bottom: 20px;   */
+ 		
+/* 	} */
 	
 	body{
 		font-family: "微軟正黑體"
@@ -35,7 +53,7 @@
 	</div>
 
 	<form>
-		<fieldset style="width:1300px">
+		<fieldset style="width:1300px" class="firstVertify">
 		<legend>第${penalty.id}號檢舉案件基本資料</legend>
 			<input type="hidden" value="${penalty.id}" id="penaltyId" name="penaltyId" />
 			<div class="form-row">
@@ -117,7 +135,7 @@
 			</div>
 		</fieldset>
 		
-		<fieldset style="width:1300px">
+		<fieldset style="width:1300px"class="firstVertify">
 		<legend>檢舉審核</legend>
 			<div class="form-row">
 				<div class="form-group col-md-6">
@@ -159,7 +177,7 @@
 	
 	
 	<form id="reVertifyBox">
-		<fieldset style="width:1300px">
+		<fieldset style="width:1300px" class="secondVertify">
 		<legend>申訴內容</legend>
 			<input type="hidden" value="${penalty.id}" id="penaltyId" name="penaltyId" />
 			<div class="form-row">
@@ -185,7 +203,7 @@
 		</fieldset>
 		
 		
-		<fieldset style="width:1300px">
+		<fieldset style="width:1300px" class="secondVertify">
 		<legend>申訴審核</legend>
 			<div class="form-row">
 				<div class="form-group col-md-6">
