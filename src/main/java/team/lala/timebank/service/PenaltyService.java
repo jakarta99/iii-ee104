@@ -323,13 +323,24 @@ public class PenaltyService {
 		return headers;
 	}
 
-	// 給EXCEL用
+	// 給EXCEL、PDF用
 	public List<String> turnPenaltyIntoStringList(Penalty penalty) {
+		String proofPicName = penalty.getProofPicName();
+		String vertifyReason = penalty.getVertifyReason();
+		if(proofPicName == null || proofPicName.equals("")) {
+			proofPicName = "無";
+		}
+		
+		if(vertifyReason == null || vertifyReason.equals("")) {
+			vertifyReason = "無";
+		}
+		
 		String temp = penalty.getId() + "," + penalty.getOrder().getMission().getStartDate() + ","
 				+ penalty.getOrder().getMission().getTitle() + "," + penalty.getAccuser().getAccount() + ","
 				+ penalty.getDefendant().getAccount() + "," + penalty.getUpdateDate() + "," + penalty.getDescription()
-				+ "," + penalty.getStatus() + "," + penalty.getPenaltyTimeValue() + "," + penalty.getProofPicName()
-				+ "," + penalty.getVertifyReason();
+				+ "," + penalty.getStatus() + "," + penalty.getPenaltyTimeValue() 
+				+ "," + proofPicName
+				+ "," + vertifyReason;
 		String[] array = temp.split(",");
 		List<String> result = Arrays.asList(array);
 		return result;
