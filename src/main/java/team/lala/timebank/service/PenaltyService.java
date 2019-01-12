@@ -135,6 +135,43 @@ public class PenaltyService {
 			// 補邏輯:訊息送出後，紀錄在penalty表內(有寄信)，加entity欄位
 		}
 	}
+	
+	// Jasmine 完成申訴審核後，寄站內信給被申訴人(被告)
+	public void sendSystemMessageToDefendantAfterReVertify(Penalty penalty) {
+		Member sender = (Member) SecurityContextHolder.getContext() // 管理員會員(寄件者)
+				.getAuthentication().getPrincipal();
+		//修改Order中ReportStatus的狀態
+		penalty.getOrder().setReportStatus(ReportStatus.Finish);
+		
+		//寄信給被檢舉人
+		if (penalty != null) {
+			SystemMessage systemMessage = new SystemMessage();
+			systemMessage.setMember(penalty.getDefendant());
+			systemMessage.setMessageType(SystemMessageType.ReplyTheRevertifyApply);
+			systemMessage.setReadStatus(YesNo.N);
+			systemMessage.setReleaseTime(new java.util.Date());
+			systemMessage.setSender(sender);
+			
+			//根據不同申訴結果，設定不同的訊息內容
+			String message = "[申訴結果]";
+			if(penalty.getPenaltyTimeValue().equals(penalty.getReVertifyPenaltyTimeValue())) {
+				message += "駁回申訴，原因:" + penalty.getReVertifyReason()
+							+ "(活動名稱:" + penalty.getOrder().getMission().getTitle() + ")";
+			}
+			
+			if(penalty.getPenaltyTimeValue() > penalty.getReVertifyPenaltyTimeValue()) {
+				message += "調整懲罰時數－－原懲罰時數:" + penalty.getPenaltyTimeValue() 
+							+ "，調整懲罰時數:" + penalty.getReVertifyPenaltyTimeValue()
+							+ "。原因:" + penalty.getReVertifyReason()
+							+ "(活動名稱:" + penalty.getOrder().getMission().getTitle() + ")";
+			}
+			
+			systemMessage.setMessage(message);
+			systemMessage.setPenalty(penalty);
+			systemMessageDao.save(systemMessage);
+			
+		}
+	}
 
 	// Jasmine 補註解
 	public Penalty savePenaltyAndStoreProofPic(MultipartFile proofPic, Penalty penalty, HttpServletRequest request) {
@@ -154,7 +191,7 @@ public class PenaltyService {
 					dir.mkdirs();
 				}
 
-				// 檔名
+				// 位置
 				String location = realPath + "penaltyProof_" + penalty.getId() + ".jpg";
 
 				// 寫出檔案到Server
@@ -193,7 +230,15 @@ public class PenaltyService {
 		return penaltyDao.save(dbPenalty);
 	}
 	
-	//申訴，補時數
+	// Jasmine
+	//申訴結果儲存後，補時數進入存摺
+	public void reVertifyAndSaveTime(Penalty penalty) {
+//		Penalty dbPenalty = penaltyDao.getOne(penaltyId);
+//		dbPenalty.setStatus(reVertifystatus);
+//		dbPenalty.setReVertifyPenaltyTimeValue(reVertifyPenaltyTimeValue);
+//		dbPenalty.setReVertifyReason(reVertifyReason);
+//		return penaltyDao.save(dbPenalty);
+	}
 	
 
 	// 志工檢舉雇主

@@ -231,7 +231,7 @@
 			var applyReVertify = "${penalty.applyReVertify}";
 
 			//設定審核狀態、審核意見及原因
-			$('#status').val(penaltyStatus);
+			$('#status').val("${penalty.status}");
 			$('#vertifyReason').val('${penalty.vertifyReason}');
 			$('#penaltyTimeValue').val('${penalty.penaltyTimeValue}');
 			
@@ -242,7 +242,7 @@
 			
 			
 			//如檢視審核歷史紀錄，則刪去審核按鈕，並將所有欄位設為readonly
-			if(penaltyStatus != 1){
+			if(penaltyStatus != "1"){
 				$("#vertifyFinish").remove();
 				$("#vertifyTemp").remove();
 				
@@ -254,15 +254,35 @@
 			}
 			
 			//非曾提過申訴的案件，不顯示申訴區塊
-			if(penaltyStatus != 4  && applyReVertify != "Y"){
+			if(penaltyStatus != "4"  && applyReVertify != "Y"){ //還在檢舉流程或僅有檢舉歷史紀錄
 				$("#reVertifyBox").html("");
-			}else{
-				$("#status").val("2");
-				if(penaltyStatus != 1  && penaltyStatus != 4  && applyReVertify == "Y"){
-					$("#reVertifyFinish").remove();
-					$("#reVertifyTemp").remove();
-				}
 			}
+			
+			//只要提起申訴或曾提起申訴的案件，檢舉審核狀態一定是需懲罰
+			if(applyReVertify == "Y"){ 
+				$("#status").val("2");
+				//申訴懲罰時數設定不得大於原懲罰時數
+				var options = $("#reVertifyPenaltyTimeValue>option");
+				$.each(options, function(index, optionEle){
+					
+					if($(optionEle).val() > $("#penaltyTimeValue").val()){
+						//alert($(optionEle).val());
+						$(optionEle).remove(); //大於原懲罰時數則刪去該選項
+					}
+
+				})
+			}
+			
+			//完成申訴審核的案件，則刪去審核按鈕，並將所有欄位設為readonly
+			if(penaltyStatus != 4  && applyReVertify == "Y"){
+				$("#reVertifyFinish").remove();
+				$("#reVertifyTemp").remove();
+				
+				$("#reVertifystatus").prop("disabled", true);
+				$("#reVertifyPenaltyTimeValue").prop("disabled", true);
+				$("#reVertifyReason").prop("readonly", true);
+			}
+			
 			
 			//提起申訴的案件，顯示申訴佐證資料超連結
 			var reVertifyProofPicName = "${penalty.reVertifyProofPicName}";
@@ -288,6 +308,7 @@
 					swal("處罰時數需大於0", {
 					      icon: "warning",
 					    });
+					return false;
 					//alert("處罰時數需大於0");
 				}else{
 					$.ajax({
@@ -329,12 +350,17 @@
 			
 			//暫存或完成申訴審核結果的方法
 			function saveReVertify(successMessage, errorMessage){
-// 				if($('#status').val() == 2 && $('#penaltyTimeValue').val() <= 0){
-// 					swal("處罰時數需大於0", {
-// 					      icon: "warning",
-// 					    });
-// 					//alert("處罰時數需大於0");
-// 				}else{
+				if($('#reVertifystatus').val() == 2 && $('#reVertifyPenaltyTimeValue').val() <= 0){
+					swal("處罰時數需大於0", {
+					      icon: "warning",
+					 });
+					return false;
+				}else if($('#reVertifystatus').val() == 2 && $('#reVertifyPenaltyTimeValue').val() > $('#penaltyTimeValue').val()){
+					swal("申訴案件懲罰時數不得大於審核懲罰時數", {
+					      icon: "warning",
+					 });
+					return false;
+				}else{
 					$.ajax({
 						url : "/admin/penaltyVertify/doReVertify",
 						method : "put",
@@ -369,7 +395,7 @@
 							});
 					    }
 					})
-// 				}
+				}
 			}
 			
 			
@@ -384,7 +410,10 @@
 					})
 					.then((result) => {
 					  if (result) {
-						  saveVertify("完成審核", "審核結果儲存失敗");
+						  var temp = saveVertify("完成審核", "審核結果儲存失敗");
+						  if(temp != false){
+							  document.location.href="/admin/penaltyVertify/showVertifyList";
+						  }
 					  } 
 					});
 			})
@@ -405,8 +434,10 @@
 					})
 					.then((result) => {
 					  if (result) {
-						  saveReVertify("完成申訴審核", "申訴審核結果儲存失敗");
-						  document.location.href="/admin/penaltyVertify/showVertifyList";
+						  var temp = saveReVertify("完成申訴審核", "申訴審核結果儲存失敗");
+						  if(temp != false){
+							  document.location.href="/admin/penaltyVertify/showVertifyList";
+						  }
 					  } 
 					});
 			})
@@ -416,24 +447,24 @@
 				saveReVertify("暫存申訴審核內容成功", "暫存申訴審核內容失敗");
 			})
 			
-			
+			//檢舉審核結果>>時數是否可編輯、審核或暫存按鈕變化
 			$('#status').change(function(){
 				//alert($(this).val());
-				if($(this).val()==1){ //審核中，扣款時數可編輯
+				if($(this).val()==1){ //審核中，扣款時數可編輯，按鈕為暫存
 					$('#penaltyTimeValue').removeAttr("disabled");
 					
 					$('#vertifyFinish').prop("disabled", true);
 					$('#vertifyTemp').prop("disabled", false);
 				}
 				
-				if($(this).val() == 2){ //須處罰者，扣款時數可編輯
+				if($(this).val() == 2){ //須處罰者，扣款時數可編輯，按鈕為完成審核
 					$('#penaltyTimeValue').removeAttr("disabled");
-				
+					
 					$('#vertifyFinish').prop("disabled", false);
 					$('#vertifyTemp').prop("disabled", true);
 				}
 				
-				if($(this).val()==3){ //無須處罰者，扣款時數強制寫為0，且不得更改
+				if($(this).val()==3){ //無須處罰者，扣款時數強制寫為0，且不得更改，按鈕為完成審核
 					$('#penaltyTimeValue').val("0");
 					$('#penaltyTimeValue').prop("disabled", true);
 					
@@ -443,25 +474,26 @@
 				
 			})
 			
-			
+			//申訴審核結果>>時數是否可編輯、審核或暫存按鈕變化
 			$('#reVertifystatus').change(function(){
-				if($(this).val()==4){ //審核中，扣款時數可編輯
-// 					$('#penaltyTimeValue').removeAttr("disabled");
+				if($(this).val()==4){ //審核中，扣款時數可編輯，按鈕為暫存
+					$('#reVertifyPenaltyTimeValue').removeAttr("disabled");
 					
 					$('#reVertifyFinish').prop("disabled", true);
 					$('#reVertifyTemp').prop("disabled", false);
 				}
 				
-				if($(this).val() == 2){ //須處罰者，扣款時數可編輯
-// 					$('#penaltyTimeValue').removeAttr("disabled");
-				
+				if($(this).val() == 2){ //須處罰者，扣款時數可編輯，按鈕為完成審核
+					$('#reVertifyPenaltyTimeValue').removeAttr("disabled");
+					
 					$('#reVertifyFinish').prop("disabled", false);
 					$('#reVertifyTemp').prop("disabled", true);
 				}
 				
-				if($(this).val()==3){ //無須處罰者，扣款時數強制寫為0，且不得更改
-// 					$('#penaltyTimeValue').val("0");
-// 					$('#penaltyTimeValue').prop("disabled", true);
+				
+				if($(this).val()==3){ //無須處罰者，扣款時數強制寫為0，且不得更改，按鈕為完成審核
+					$('#reVertifyPenaltyTimeValue').val("0");
+					$('#reVertifyPenaltyTimeValue').prop("disabled", true);
 					
 					$('#reVertifyFinish').prop("disabled", false);
 					$('#reVertifyTemp').prop("disabled", true);
