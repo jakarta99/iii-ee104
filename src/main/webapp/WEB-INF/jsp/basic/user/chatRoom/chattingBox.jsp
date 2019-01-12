@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="/vendor/jquery/jquery.min.js"></script>
 <script src="/js/webjar/sockjs.min.js"></script>
 <script src="/js/webjar/stomp.min.js"></script>
-
+<!-- chattingBox.jsp is included in footer -->
 <script type="text/javascript">
 
 	var stompClient = null;
@@ -12,13 +13,13 @@
 	var visible = false;
 	
 	$(document).ready(function(){
-			$("#connect").css("opacity", ".65");		
+// 		if ('${chatting}' == 'Y'){
+// 			chat();	
+// 		}
+		console.log('${sessionScope.chatting}');
 	})
 	
-	function setVisible(visible) {
-		document.getElementById('conversationDiv').style.visibility = visible ? 'visible': 'hidden';
-	} 
-	
+
 	function conversationDivDisplay(){
 		if (!visible){
 			visible = true;
@@ -27,21 +28,20 @@
 			visible = false;
 			$("#chatbox").css("bottom","-324px");
 		}
-		setVisible(visible);
 	}
 	
 	function chat(){
 		if (!connected){
 			connect();
-			console.log(connected);
-			console.log(visible);
+			console.log("connected:"+connected);
+			console.log("visible:"+visible);
 		} 
 	}
 
 	function connect() {
 		console.log("to="+to)
 		$.ajax({
-			url:"/user/chatMessage/list?to=" + to,
+			url:"/user/chatMessage/listMessage?to=" + to,
 			type: "post",
 		    dataType : "json",	
         }).done(function(mapObj){	
@@ -81,7 +81,8 @@
     	   	connected = false;
 	    	$("#login-modal").addClass("modal fade show");
     	   	$("#login-modal").css("display","block");
-    	   	$("#login-modal").css("padding-right","17px");	    	
+    	   	$("#login-modal").css("padding-right","17px");
+    		$("#action").val("chatting");
 	    });
 	
 
@@ -147,6 +148,8 @@
 		console.log(connected)
 	}
 </script>
+
+		
 		
 		<div id="chatbox" style="display:none" onload="disconnect()" >
 			<span id="toAccount" style="display:none"></span>
@@ -162,5 +165,14 @@
 				<button id="sendMessage" class="btn btn-primary btn-sm" disabled onclick="sendMessage();">Send</button>
 			</div>
 	    </div>
+	    
+
+	    <c:if test="${chatting eq 'Y'}">
+			<script>
+				$("#chatbox").css("display", "block");
+				startToChat();
+			</script>
+			 <% request.getSession().removeAttribute("chatting");%>
+		</c:if>
 
 

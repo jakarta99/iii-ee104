@@ -14,7 +14,7 @@
                   <input id="sourceUrl" type="hidden" name="sourceUrl" class="form-control">
                 </div>  
                 <div class="form-group">
-                  <input id="volunteerApply" type="hidden" name="volunteerApply" class="form-control">
+                  <input id="action" type="hidden" name="action" class="form-control">
                 </div>
                 <div class="form-group">
                   <input id="email_modal" type="text" placeholder="username" name="username" class="form-control">

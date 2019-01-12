@@ -163,7 +163,7 @@
 						<div class="icon-filled"></div>需求人數:${mission.peopleNeeded}人
 					</li>
 					<li>
-						<button onclick="startToChat('${mission.member.account}', '${mission.member.name}')" class="btn btn-template-outlined">與我們聯絡</button>
+						<button onclick="startToChat()" class="btn btn-template-outlined">與我們聯絡</button>
 					</li>
               	</ul>
               
@@ -241,7 +241,7 @@
 	
 
 
-	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
+	
 	<script>
 	
 	
@@ -283,7 +283,7 @@
 							$("#login-modal").addClass("modal fade show");
 				    	   	$("#login-modal").css("display","block");
 				    	   	$("#login-modal").css("padding-right","17px");
-				    	   	$("#volunteerApply").val("volunteerApply");
+				    	   	$("#action").val("volunteerApply");
 						}
 					})
 					
@@ -319,9 +319,9 @@
 			})
 		}
 	
-	function startToChat(publisherAccount, publisherName){
-		$("#toAccount").text(publisherAccount);
-		$("#toName").text(publisherName);
+	function startToChat(){
+		$("#toAccount").text('${mission.member.account}');
+		$("#toName").text('${mission.member.name}');
 		to = $("#toAccount").text();
 		chat();		
 	}
@@ -344,6 +344,6 @@
 
 
 
-
+	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 </body>
 </html>
