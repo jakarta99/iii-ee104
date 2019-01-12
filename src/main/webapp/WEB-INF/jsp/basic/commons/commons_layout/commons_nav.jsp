@@ -18,8 +18,8 @@
                     <li>
                       <div class="row">
                         <div class="col-md-6 col-lg-3">
-                           <h5><a href="/user/calendar" >行事曆</a></h5>                      
-                          <h5><a href="/system-message/list" id="systemMessage">通知123</a></h5>
+                          <h5><a href="/user/calendar" >行事曆</a></h5>                      
+                          <h5><a href="/system-message/list" id="systemMessage">通知</a></h5>
                           <h5><a href="/user/chatMessage/listPage" id="chatMessage">我的訊息</a></h5>
                           <h5><a href="/user/personal-info/list" >我的個人資訊</a></h5>                          
                         </div>
@@ -46,7 +46,7 @@
                 </li>
 <%--                 </sec:authorize> --%>
                 <li class="nav-item menu-large"><a href="/commons/InternationalVolunteer/list" >國際志工專區<b class="caret"></b></a>                        
-                 <li class="nav-item dropdown active"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle">關於我們<b class="caret"></b></a>
+                 <li class="nav-item dropdown"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle">關於我們<b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li class="dropdown-item"><a href="/commons/aboutUs/aboutTimeBank" class="nav-link">關於TimeBank</a></li>
                     <li class="dropdown-item"><a href="/commons/aboutUs/contactUs" class="nav-link">聯絡我們</a></li>
@@ -101,9 +101,9 @@
 			url:"/system-message/countNotReadMessage",
 		}).done(function(notReadMsgNum){
 			if(notReadMsgNum > 0){
-				$("#systemMessage").html("系統訊息<font size='2' color='red'>("+ notReadMsgNum +")</font>")
+				$("#systemMessage").html("通知<font size='2' color='red'>("+ notReadMsgNum +")</font>")
 			}else{
-				$("#systemMessage").html("系統訊息")
+				$("#systemMessage").html("通知")
 			}
 			
 		})

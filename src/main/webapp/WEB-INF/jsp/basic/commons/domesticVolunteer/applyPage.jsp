@@ -11,8 +11,6 @@
 <!-- Javascript files-->
 <jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
 
-<script defer
-	src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <!-- sweet alert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
@@ -163,7 +161,7 @@
 						<div class="icon-filled"></div>需求人數:${mission.peopleNeeded}人
 					</li>
 					<li>
-						<button onclick="startToChat()" class="btn btn-template-outlined">與我們聯絡</button>
+						<button id="chatButton" class="btn btn-template-outlined">與我們聯絡</button>
 					</li>
               	</ul>
               
@@ -330,7 +328,7 @@
 		if ('${applying}' == 'Y'){
 			insertOrder('${mission.id}');
 		}
-		
+
 	})
 	
 

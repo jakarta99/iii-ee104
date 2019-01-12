@@ -1,7 +1,5 @@
 package team.lala.timebank.entity;
 
-
-
 import lombok.Getter;
 import lombok.Setter;
 

@@ -8,11 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -30,25 +28,20 @@ public class ChatMessage {
 	@Column(name="TEXT")
 	private String text;
 	
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@Column(name="TIME")
-	private Date time;	
-	
-	
-	@Transient
-	private String fromMemberPic;
-	
-	@Transient
-	private String toMemberPic;
-	
+	private Date time;		
 	
 	@Column(name="FROM_ACCOUNT")
 	private String fromAccount;
 	
 	@Column(name="TO_ACCOUNT")
 	private String toAccount;
-
 	
+	@Transient
+	private String fromMemberPic;
+	
+	@Transient
+	private String toMemberPic;
 
 	public ChatMessage(String fromAccount, String toAccount,String text, Date time) {
 		this.text = text;

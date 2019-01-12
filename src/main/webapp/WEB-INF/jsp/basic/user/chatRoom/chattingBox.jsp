@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<script src="/vendor/jquery/jquery.min.js"></script>
 <script src="/js/webjar/sockjs.min.js"></script>
 <script src="/js/webjar/stomp.min.js"></script>
 <!-- chattingBox.jsp is included in footer -->
@@ -13,10 +12,11 @@
 	var visible = false;
 	
 	$(document).ready(function(){
-// 		if ('${chatting}' == 'Y'){
-// 			chat();	
-// 		}
-		console.log('${sessionScope.chatting}');
+		//將指定的按鈕綁上click事件(頁面中的'與我聯絡'按鈕的id都是chatButton)
+		$("#chatButton").on("click",function(){
+			startToChat();
+		})
+		
 	})
 	
 
@@ -40,6 +40,7 @@
 
 	function connect() {
 		console.log("to="+to)
+		//從資料庫中取出聊天室過往的訊息紀錄
 		$.ajax({
 			url:"/user/chatMessage/listMessage?to=" + to,
 			type: "post",
@@ -73,10 +74,7 @@
 	    	 
         	})
     	 	
-    	 	$("#text").val("");
-        	
-    	 	
-    	
+    	 	$("#text").val("");  	
        }).fail(function (jqXHR, textStatus) {
     	   	connected = false;
 	    	$("#login-modal").addClass("modal fade show");
@@ -85,12 +83,16 @@
     		$("#action").val("chatting");
 	    });
 	
-
-		var socket = new SockJS('/chat');
-		stompClient = Stomp.over(socket);
-		stompClient.connect({}, function(frame) {		
+		//使用SockJS和stomp.js來打開"/gs-guide-websocket"地址的連接，這也是我們使用Spring構建的SockJS服務
+		var socket = new SockJS('/gs-guide-websocket'); // 創建連接對象（還未發起連接）
+		stompClient = Stomp.over(socket); // 獲取 STOMP 子協議的客户端對象
+		// 向服務器發起websocket連接併發送CONNECT
+		stompClient.connect({}, function(frame) { //連接成功時（服務器響應 CONNECTED）的回調方法
 			console.log('Connected: ' + frame);
-			stompClient.subscribe('/topic/messages', function(messageOutput) {
+			//STOMP客户端必須先訂閲相應的URL("/topic/messages")，才能不斷接收來自服務器的推送消息
+			//訂閱後，只要服務端向此地址發送消息，客戶端即可收到此消息
+			stompClient.subscribe('/topic/messages', function(messageOutput) {	
+				//收到消息時的回調方法
 				showMessageOutput(JSON.parse(messageOutput.body));
 			});
 		
@@ -101,7 +103,7 @@
 
 	function disconnect() {
 		if (stompClient != null) {
-			stompClient.disconnect();
+			stompClient.disconnect(); //斷開連接
 		}
 		connected = false; 
 		visible = false;
@@ -111,7 +113,8 @@
 	function sendMessage() {
 		var text = $('#text').val();
 		if (text.length >0){
-			stompClient.send("/app/chat", {}, JSON.stringify({
+			//連接成功後，客户端可使用 send()方法向服務器發送信息
+			stompClient.send("/app/chat", {}, JSON.stringify({	
 				'to' : to,
 				'text' : text
 			}));			

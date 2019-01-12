@@ -41,6 +41,7 @@ public class ChatMessageService {
 	public List<ChatMessage> findChatMessageByAccount(String userAccount){
 		ChatMessage chatMessage = new ChatMessage();
 		chatMessage.setFromAccount(userAccount);
+		log.debug("service:chatMessage={}",chatMessage);
 		ChatMessageSpecification spec = new ChatMessageSpecification(chatMessage);
 		return chatMessageDao.findAll(spec);
 	}

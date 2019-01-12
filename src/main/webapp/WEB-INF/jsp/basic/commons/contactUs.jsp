@@ -51,7 +51,7 @@ function startToChat(){
 					<div class="col-lg-8">
 						<section class="bar">
 							<div class="heading">
-								<h2>We are here to help you <button class="btn btn-primary " id="chatAdmin" onclick="startToChat()">線上即時客服</button></h2>	
+								<h2>We are here to help you <button class="btn btn-primary " id="chatButton" >線上即時客服</button></h2>	
 							</div>
 							<p class="text-sm">Please feel free to contact us, our
 								customer service center is working for you 24/7.</p>
