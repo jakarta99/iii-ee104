@@ -21,6 +21,7 @@
 }
 .close{
 	line-height: 0.6;
+	color:#313030 !important;
 }
 #connect:hover{
 	background-color:#13b5b1;

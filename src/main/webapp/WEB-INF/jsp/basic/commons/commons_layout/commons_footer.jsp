@@ -75,4 +75,4 @@
         </div>
      </footer>    
      <jsp:include page="loginModal.jsp" />
-     <jsp:include page="../../user/chatRoom/chatting.jsp"/>
+     <jsp:include page="../../user/chatRoom/chattingBox.jsp"/>
