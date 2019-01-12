@@ -29,10 +29,10 @@
  		margin-bottom: 20px;  
 	}
 
-	 table tr td, button{
-	 	text-align:center;
-	 	line-height:center; 
-	 }
+ 	 table tr td, button{ */
+/*  	 	text-align:center; */ */
+ 	 	line-height:center;  */
+ 	 } */
 	 article .btn{
 	 	margin-left:3px;
 	 	margin-right:3px
@@ -119,15 +119,15 @@
 					<tr style="background-color: white">
 						<th scope="col"></th>
 						<th scope="col" width="50px"></th>
-						<th scope="col">檢舉案件編號</th>
+						<th scope="col">檢舉<br>編號</th>
 <!-- 						<th scope="col">媒合案件編號</th> -->
-						<th scope="col">檢舉案件活動名稱</th>
+						<th scope="col">活動名稱</th>
 						
-						<th scope="col">提出檢舉時間</th>
+						<th scope="col">檢舉時間</th>
 <!-- 						<th scope="col">檢舉人ID</th> -->
-						<th scope="col">檢舉人帳號</th>
+						<th scope="col">檢舉人<br>帳號</th>
 <!-- 						<th scope="col">被檢舉者ID</th> -->
-						<th scope="col">被檢舉者帳號</th>
+						<th scope="col">被檢舉人<br>帳號</th>
 						
 						<th scope="col">檢舉事由</th>
 						<th scope="col">懲罰額度</th>
