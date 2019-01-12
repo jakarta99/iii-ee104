@@ -139,6 +139,9 @@
 					<li>
 						<div class="icon-filled"></div>聯絡Email:  ${mission.contactEmail}
 					</li>
+					<li>
+						<div class="icon-filled"></div>聯絡Email:  ${mission.contactEmail}
+					</li>
 				</ul>
 
               </div>
@@ -160,7 +163,7 @@
 						<div class="icon-filled"></div>需求人數:${mission.peopleNeeded}人
 					</li>
 					<li>
-						<div class="icon-filled"></div>活動時數:${mission.timeValue}小時
+						<button onclick="startToChat('${mission.member.account}', '${mission.member.name}')" class="btn btn-template-outlined">與我們聯絡</button>
 					</li>
               	</ul>
               
@@ -230,7 +233,7 @@
           
             </div>
  				
-		 	<jsp:include page="../../user/chatRoom/chatting.jsp"/>
+		 	
         </div>
        
 				
@@ -314,6 +317,13 @@
 					
 				}
 			})
+		}
+	
+	function startToChat(publisherAccount, publisherName){
+		$("#toAccount").text(publisherAccount);
+		$("#toName").text(publisherName);
+		to = $("#toAccount").text();
+		chat();		
 	}
 		
 	$(document).ready(function() {

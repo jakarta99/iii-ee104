@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="/vendor/owl.carousel/assets/owl.theme.default.css">
     <!-- theme stylesheet-->
     <link rel="stylesheet" href="/css/style.default.css" id="theme-stylesheet">
+	<!--     聊天室 -->
+    <link rel="stylesheet" href="/css/chat.css" />
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="/css/custom.css">
     <!-- Favicon and apple touch icons-->

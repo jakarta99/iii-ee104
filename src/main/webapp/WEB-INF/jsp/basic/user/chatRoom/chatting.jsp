@@ -4,7 +4,6 @@
 <script src="/js/webjar/sockjs.min.js"></script>
 <script src="/js/webjar/stomp.min.js"></script>
 
-<link rel="stylesheet" href="/css/chat.css" />
 <script type="text/javascript">
 
 	var stompClient = null;
@@ -13,32 +12,30 @@
 	var visible = false;
 	
 	$(document).ready(function(){
-		if (!connected){
-			$("#connect").css("opacity", ".65");
-			$("#sendMessage").prop("disabled",true);
-			$("#text").prop("disabled",true);
-		} 
-		 to = $("#toAccount").text();
+			$("#connect").css("opacity", ".65");		
 	})
 	
 	function setVisible(visible) {
 		document.getElementById('conversationDiv').style.visibility = visible ? 'visible': 'hidden';
 	} 
 	
-	function chat(){
-		if (!visible || !connected){
+	function conversationDivDisplay(){
+		if (!visible){
 			visible = true;
 			$("#chatbox").css("bottom","2px");
 		} else {
 			visible = false;
 			$("#chatbox").css("bottom","-324px");
 		}
+		setVisible(visible);
+	}
+	
+	function chat(){
 		if (!connected){
 			connect();
-			$("#connect").css("opacity", "1");
-			
+			console.log(connected);
+			console.log(visible);
 		} 
-		setVisible(visible);
 	}
 
 	function connect() {
@@ -49,8 +46,11 @@
 		    dataType : "json",	
         }).done(function(mapObj){	
         	connected = true;
+        	visible = true;
         	$("#sendMessage").prop("disabled",false);
         	$("#text").prop("disabled",false);
+        	$("#chatbox").css("display","block");
+        	$("#connect").css("opacity", "1");	
         	$.each(mapObj.chatList, function(idx, chatMessage){
         	 	var img;
         		var m = new Date(chatMessage.time);
@@ -68,11 +68,13 @@
             		$(p).append(img + msgSpan +"<br>" + dateTimeSpan)
         	 	}
 	    	 	$('#response').append(p);
+	    	 	
 	    	 	$('#box').animate({ scrollTop: $("#response").height() }, 1);
 	    	 
         	})
     	 	
     	 	$("#text").val("");
+        	
     	 	
     	
        }).fail(function (jqXHR, textStatus) {
@@ -100,7 +102,8 @@
 		if (stompClient != null) {
 			stompClient.disconnect();
 		}
-		setConnected(false);
+		connected = false; 
+		visible = false;
 		console.log("Disconnected");
 	}
 
@@ -140,13 +143,15 @@
 		if (connected){
 			disconnect();			
 		}
+		console.log("close");
+		console.log(connected)
 	}
 </script>
 		
-		<div id="chatbox"  onload="disconnect()" >
-			<span id="toAccount"  style="display:none">${mission.member.account}</span>
-			<div id="connect"  class="btn btn-primary btn-sm"  >
-				<div onclick="chat();" style="display:inline-block;width:80%"><span id="toName">${mission.member.name}</span></div>
+		<div id="chatbox" style="display:none" onload="disconnect()" >
+			<span id="toAccount" style="display:none"></span>
+			<div  id="connect"  class="btn btn-primary btn-sm"  >
+				<div onclick="conversationDivDisplay();" style="display:inline-block;width:80%"><span id="toName"></span></div>
 				<button type="button" data-dismiss="modal" aria-label="Close" class="close" onclick="closeChatBox()"><span aria-hidden="true" >×</span></button>
 			</div>
         	<div id="conversationDiv">
@@ -154,7 +159,7 @@
 					<p id="response"></p>
 				</div>
 				<input type="text" id="text" placeholder="Write a message..." />
-				<button id="sendMessage" class="btn btn-primary btn-sm" onclick="sendMessage();">Send</button>
+				<button id="sendMessage" class="btn btn-primary btn-sm" disabled onclick="sendMessage();">Send</button>
 			</div>
 	    </div>
 
