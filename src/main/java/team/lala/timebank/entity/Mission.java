@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.BatchSize;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -36,7 +38,7 @@ public class Mission {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "MEMBER_ID", referencedColumnName = "id")
 	private Member member; // 刊登者
 
@@ -52,8 +54,8 @@ public class Mission {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "TERM_TYPE", nullable = false)
 	private TermType termType;// 長短期
-
-	@ManyToOne
+	
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "SERVICE_TYPE", referencedColumnName = "id")
 	private ServiceType serviceType;
 
@@ -62,6 +64,7 @@ public class Mission {
 
 	@JsonBackReference
 	@OneToMany(mappedBy = "mission", cascade = { CascadeType.REMOVE })
+	@BatchSize(size = 20)
 	private List<Order> orders;
 
 	@DateTimeFormat(pattern = "yyyy/MM/dd")

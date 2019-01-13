@@ -26,8 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/", "/home").permitAll()
-			.antMatchers("/admin/**","/user/**").access("hasRole('ADMIN')")
+			.antMatchers("/", "/home","/commons").permitAll()
+			.antMatchers("/admin/**","/image/admin/**").access("hasRole('ADMIN')")
 			.antMatchers("/user/**").hasAnyRole("USER, ORG_USER")
 			.and().formLogin().loginPage("/login")
 			.successHandler(authenticationSuccessHandler)
@@ -44,15 +44,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.deleteCookies("JSESSIONID")
 //				.and().oauth2Login().loginPage("/oauth_login")
 			.and().csrf().disable();
-
+		 http.sessionManagement().maximumSessions(20);
 	}
 
-	// 設定不需檢查的static檔案路徑，
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/js/**", "/css/**", "/img/**", "/vendor/**");
-	}
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(timeBankUserDetailsService).passwordEncoder(passwordEncoder());
@@ -64,6 +59,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return encoder;
 	}
 
+	// 設定不需檢查的static檔案路徑，
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/js/**", "/css/**","/css2/**", "/img/**", "/vendor/**","/vendor2/**","/indexPicture/**");
+	}
 	
 	
 

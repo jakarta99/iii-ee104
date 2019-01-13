@@ -40,23 +40,37 @@ public class ChatMessage {
 	@Column(name="READ_ALREADY")
 	private YesNo readAlready;
 	
-	@Column(name="FROM_MEMBER_PIC")
-	private String fromMemberPic; 
+//	@Column(name="FROM_MEMBER_PIC")
+//	private String fromMemberPic; 
+//	
+//	@Column(name="TO_MEMBER_PIC")
+//	private String toMemberPic;
 	
-	@Column(name="TO_MEMBER_PIC")
-	private String toMemberPic;
-	
-	@Column(name="FROM_NAME")
+//	@Column(name="FROM_NAME")
+	@Transient 
 	private String fromName; 
 	
-	@Column(name="TO_NAME")
+//	@Column(name="TO_NAME")
+	@Transient 
 	private String toName;
+	
+
 
 	@Override
 	public String toString() {
 		return "ChatMessage [id=" + id + ", text=" + text + ", time=" + time + ", fromAccount=" + fromAccount
-				+ ", toAccount=" + toAccount + ", readAlready=" + readAlready + ", fromMemberPic=" + fromMemberPic
-				+ ", toMemberPic=" + toMemberPic + ", fromName=" + fromName + ", toName=" + toName + "]";
+				+ ", toAccount=" + toAccount + ", readAlready=" + readAlready +
+				 ", fromName=" + fromName + ", toName=" + toName + 
+				 "]";
+	}
+
+	public ChatMessage() {
+	}
+
+	public ChatMessage(String fromAccount, String toAccount) {
+		super();
+		this.fromAccount = fromAccount;
+		this.toAccount = toAccount;
 	}
 
 

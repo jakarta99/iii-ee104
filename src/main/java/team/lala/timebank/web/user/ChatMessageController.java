@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.entity.ChatClient;
@@ -25,6 +27,7 @@ import team.lala.timebank.service.MemberService;
 @Slf4j
 @Controller
 @RequestMapping("/user/chatMessage")
+@SessionAttributes(value={"stompClientConnection","toMember","fromMember"})
 public class ChatMessageController {
 
 	@Autowired
@@ -54,8 +57,8 @@ public class ChatMessageController {
 	
 	//搜尋與他人之前的對話
 	@ResponseBody
-	@RequestMapping("/oldMessages/onePerson")
-	public Map<String, Object> findOldMessageWithAnotherMember(@RequestParam String to, @RequestParam String from){
+	@RequestMapping("/oldMessages/onePerson/query")
+	public Map<String, Object> findChatMessagesWithAnotherMember(@RequestParam String to, @RequestParam String from,Model model){
 		Map<String, Object> respData = new HashMap<String, Object>();
 		ChatMessage chatMessage = new ChatMessage();
 		chatMessage.setToAccount(to);
@@ -64,19 +67,26 @@ public class ChatMessageController {
 		log.debug("chatList={}",chatList);
 		Member toMember = memberService.findByAccount(to);
 		Member fromMember =  memberService.findByAccount(from);
+		//將所有需要的資訊放進Map中回傳給Browser
 		respData.put("chatList", chatList);
 		respData.put("toMemberPic", toMember.getPicture());
 		respData.put("fromMemberPic", fromMember.getPicture());
+		//將聊天對象資料存放在session scope內，一旦連線完成，整個網站都能進行對話
+//		model.addAttribute("stompClientConnection", "Y");
+//		model.addAttribute("toMember", toMember);
+//		model.addAttribute("fromMember", fromMember);
 		return respData;
 	}
 	
 	//查看所有訊息的頁面
-	@RequestMapping("/allMessages/list")
-	public String chatPage(Principal principal, Model model) {
+	@RequestMapping("/oldMessages/all/list")
+	public String listAllChatHistoryPage(Principal principal, Model model) {
 		List<ChatMessage> chatMessages = chatMessageService.findAllChatMessageByAccount(principal.getName());
+		List<Member> chatMemberList = chatMessageService.findChatObjectsByAccount(principal.getName());		
 		model.addAttribute("chatMessagesHistory", chatMessages);
+		model.addAttribute("chatMemberList",chatMemberList);
 		log.debug("chatMessages={}",chatMessages);
-		
+		log.debug("chatMemberList={}",chatMemberList);
 		return "/basic/user/chatRoom/chatMessagesPage";
 	}
 	

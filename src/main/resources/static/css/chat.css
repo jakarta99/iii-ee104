@@ -73,12 +73,12 @@
     width: min-content;
 	max-width: 80%;    
 }
-.p1-from > .msgSpan {	
+.p1-to > .msgSpan {	
 	background-color:#afafaf;
 	float:left;	
 	color:#313131;
 }
-.p1-to > .msgSpan {
+.p1-from > .msgSpan {
 	background-color:#1db9b5c2;
 	float:right;
 	color:#6d6b6b;	

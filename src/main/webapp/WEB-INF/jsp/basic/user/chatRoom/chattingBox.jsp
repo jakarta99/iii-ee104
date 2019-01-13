@@ -19,12 +19,15 @@
 
 	
 	$(document).ready(function(){
+// 		console.log('stompConnect=${stompClientConnection}');
+// 		if ('${stompClientConnection}' == 'Y'){
+// 			$("#chatbox").css("display","block");
+// 			connect() 
+// 		}else{
+// 			disconnect();
+// 			$("#chatbox").css("display","none");
+// 		}
 		//將指定的按鈕綁上click事件(頁面中的'與我聯絡'按鈕的id都是chatButton)
-		if (connected){
-			$("#chatbox").css("display","block");
-		}else{
-			$("#chatbox").css("display","none");
-		}
 		$("#chatButton").on("click",function(){
 			startToChat();
 		})
@@ -52,9 +55,10 @@
 	}
 
 	function connect() {
+		console.log("to="+to)
 		//從資料庫中取出聊天室過往的訊息紀錄
 		$.ajax({
-			url:"/user/chatMessage/oldMessages/onePerson",
+			url:"/user/chatMessage/oldMessages/onePerson/query",
 			type: "post",
 			data: {"to":to, "from":from},
 		    dataType : "json",	
@@ -65,8 +69,13 @@
         	$("#text").prop("disabled",false);
         	$("#chatbox").css("display","block");
         	$("#connect").css("opacity", "1");	
+        	//從回傳的物件中取得聊天室雙方資訊
         	toPic=mapObj.toMemberPic;
         	fromPic=mapObj.fromMemberPic;
+			//從session scope取得聊天室雙方資訊
+// 			to='${toMember.account}';
+//         	toPic='${toMember.picture}';
+//         	fromPic='${fromMember.picture}';
         	console.log("toPic="+toPic);
         	console.log("fromPic="+fromPic);
         	$.each(mapObj.chatList, function(idx, chatMessage){
@@ -78,10 +87,10 @@
         	 	var msgSpan = "<p class='msgSpan'>"+ chatMessage.text +"</p>";
         	 	var dateTimeSpan = "<p class='dateTimeSpan'>"+ dateTime + "</p>"; 	
         	 	if (chatMessage.toAccount == to || chatMessage.fromAccount == "${userAccount}"){
-        	 		$(p).addClass("p1-to");
+        	 		$(p).addClass("p1-from");
         			$(p).append( msgSpan +"<br>" + dateTimeSpan)
         	 	} else {
-        	 		$(p).addClass("p1-from");
+        	 		$(p).addClass("p1-to");
         	 		img = "<img src='/image/user/member/"+ toPic +"' class='userImg' />";
             		$(p).append(img + msgSpan +"<br>" + dateTimeSpan)
         	 	}
@@ -119,7 +128,10 @@
 		if (stompClient != null) {
 			stompClient.disconnect(); //斷開連接
 		}
+		connected = false; 
+		visible = false;
 		console.log("Disconnected");
+<%-- 		<% request.getSession().removeAttribute("stompClientConnection");%> --%>
 	}
 
 	function sendMessage() {
@@ -144,10 +156,10 @@
 	 	var msgSpan = "<p class='msgSpan'>"+chatMessage.text+"</p>";
 	 	var dateTimeSpan = "<p class='dateTimeSpan'>"+dateTime+"</p>"; 	
 	 	if (chatMessage.toAccount == to && chatMessage.fromAccount == '${userAccount}'){
-	 		$(p).addClass("p1-to");
+	 		$(p).addClass("p1-from");
 			$(p).append(msgSpan +"<br>"+ dateTimeSpan);
 	 	} else if (chatMessage.fromAccount == to && chatMessage.toAccount == '${userAccount}'){
-	 		$(p).addClass("p1-from");
+	 		$(p).addClass("p1-to");
 	 		img = "<img src='/image/user/member/"+ toPic +"' class='userImg' />";
 			$(p).append(img + msgSpan +"<br>"+ dateTimeSpan);
 	 	}
@@ -160,12 +172,11 @@
 	function closeChatBox(){
 		$("#chatbox").hide();
 		if (connected){
-			disconnect();			
-			connected = false; 
-			visible = false;
+			disconnect();
+			$('#response').html("");    	
 		}
 		console.log("close");
-		console.log(connected)
+		console.log("connected="+connected)
 	}
 </script>
 
