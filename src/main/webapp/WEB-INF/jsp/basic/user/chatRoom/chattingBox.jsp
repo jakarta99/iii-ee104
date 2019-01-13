@@ -1,21 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>   
 <script src="/js/webjar/sockjs.min.js"></script>
 <script src="/js/webjar/stomp.min.js"></script>
 <!-- chattingBox.jsp is included in footer -->
+
+<sec:authentication property="name" var="userAccount"/>
 <script type="text/javascript">
 
 	var stompClient = null;
 	var to;
+	var toPic;
+	var from = "${userAccount}";
+	var fromPic;
 	var connected = false; 
 	var visible = false;
+
 	
 	$(document).ready(function(){
 		//將指定的按鈕綁上click事件(頁面中的'與我聯絡'按鈕的id都是chatButton)
+		if (connected){
+			$("#chatbox").css("display","block");
+		}else{
+			$("#chatbox").css("display","none");
+		}
 		$("#chatButton").on("click",function(){
 			startToChat();
 		})
+		
 		
 	})
 	
@@ -39,11 +52,11 @@
 	}
 
 	function connect() {
-		console.log("to="+to)
 		//從資料庫中取出聊天室過往的訊息紀錄
 		$.ajax({
-			url:"/user/chatMessage/listMessage?to=" + to,
+			url:"/user/chatMessage/oldMessages/onePerson",
 			type: "post",
+			data: {"to":to, "from":from},
 		    dataType : "json",	
         }).done(function(mapObj){	
         	connected = true;
@@ -52,6 +65,10 @@
         	$("#text").prop("disabled",false);
         	$("#chatbox").css("display","block");
         	$("#connect").css("opacity", "1");	
+        	toPic=mapObj.toMemberPic;
+        	fromPic=mapObj.fromMemberPic;
+        	console.log("toPic="+toPic);
+        	console.log("fromPic="+fromPic);
         	$.each(mapObj.chatList, function(idx, chatMessage){
         	 	var img;
         		var m = new Date(chatMessage.time);
@@ -60,20 +77,17 @@
         	 	$(p).css("wordWrap","break-word");
         	 	var msgSpan = "<p class='msgSpan'>"+ chatMessage.text +"</p>";
         	 	var dateTimeSpan = "<p class='dateTimeSpan'>"+ dateTime + "</p>"; 	
-        	 	if (chatMessage.toAccount == to){
+        	 	if (chatMessage.toAccount == to || chatMessage.fromAccount == "${userAccount}"){
         	 		$(p).addClass("p1-to");
-        		$(p).append( msgSpan +"<br>" + dateTimeSpan)
+        			$(p).append( msgSpan +"<br>" + dateTimeSpan)
         	 	} else {
         	 		$(p).addClass("p1-from");
-        	 		img = "<img src='/image/user/member/"+mapObj.toMemberPic +"' class='userImg' />";
+        	 		img = "<img src='/image/user/member/"+ toPic +"' class='userImg' />";
             		$(p).append(img + msgSpan +"<br>" + dateTimeSpan)
         	 	}
-	    	 	$('#response').append(p);
-	    	 	
-	    	 	$('#box').animate({ scrollTop: $("#response").height() }, 1);
-	    	 
+	    	 	$('#response').append(p);    	 	
         	})
-    	 	
+	    	$('#box').animate({ scrollTop: $("#response").height() }, 1);    	    	 	
     	 	$("#text").val("");  	
        }).fail(function (jqXHR, textStatus) {
     	   	connected = false;
@@ -105,8 +119,6 @@
 		if (stompClient != null) {
 			stompClient.disconnect(); //斷開連接
 		}
-		connected = false; 
-		visible = false;
 		console.log("Disconnected");
 	}
 
@@ -115,6 +127,7 @@
 		if (text.length >0){
 			//連接成功後，客户端可使用 send()方法向服務器發送信息
 			stompClient.send("/app/chat", {}, JSON.stringify({	
+				'from':from,
 				'to' : to,
 				'text' : text
 			}));			
@@ -122,18 +135,20 @@
 	}
 
 	function showMessageOutput(chatMessage) {
+		console.log("fromAccount="+chatMessage.fromAccount);
+		console.log("toAccount="+chatMessage.toAccount);
 	 	var m = new Date(chatMessage.time);
 		var dateTime = m.getHours() + ":" + m.getUTCMinutes();		
 	 	var p = $("<p></p>");
 	 	$(p).css("wordWrap","break-word");
 	 	var msgSpan = "<p class='msgSpan'>"+chatMessage.text+"</p>";
 	 	var dateTimeSpan = "<p class='dateTimeSpan'>"+dateTime+"</p>"; 	
-	 	if (chatMessage.toAccount == to){
+	 	if (chatMessage.toAccount == to && chatMessage.fromAccount == '${userAccount}'){
 	 		$(p).addClass("p1-to");
 			$(p).append(msgSpan +"<br>"+ dateTimeSpan);
-	 	} else {
+	 	} else if (chatMessage.fromAccount == to && chatMessage.toAccount == '${userAccount}'){
 	 		$(p).addClass("p1-from");
-	 		img = "<img src='/image/user/member/"+chatMessage.toMemberPic +"' class='userImg' />";
+	 		img = "<img src='/image/user/member/"+ toPic +"' class='userImg' />";
 			$(p).append(img + msgSpan +"<br>"+ dateTimeSpan);
 	 	}
 	 	$('#response').append(p);
@@ -146,6 +161,8 @@
 		$("#chatbox").hide();
 		if (connected){
 			disconnect();			
+			connected = false; 
+			visible = false;
 		}
 		console.log("close");
 		console.log(connected)

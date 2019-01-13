@@ -11,9 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-
 import lombok.Getter;
 import lombok.Setter;
+import team.lala.timebank.enums.YesNo;
 
 @Getter
 @Setter
@@ -37,28 +37,31 @@ public class ChatMessage {
 	@Column(name="TO_ACCOUNT")
 	private String toAccount;
 	
-	@Transient
-	private String fromMemberPic;
+	@Column(name="READ_ALREADY")
+	private YesNo readAlready;
 	
-	@Transient
+	@Column(name="FROM_MEMBER_PIC")
+	private String fromMemberPic; 
+	
+	@Column(name="TO_MEMBER_PIC")
 	private String toMemberPic;
-
-	public ChatMessage(String fromAccount, String toAccount,String text, Date time) {
-		this.text = text;
-		this.time = time;
-		this.fromAccount = fromAccount;
-		this.toAccount = toAccount;
-	}
-
-	public ChatMessage() {
-
-	}
+	
+	@Column(name="FROM_NAME")
+	private String fromName; 
+	
+	@Column(name="TO_NAME")
+	private String toName;
 
 	@Override
 	public String toString() {
-		return "ChatMessage [id=" + id + ", text=" + text + ", time=" + time + ", fromMemberPic=" + fromMemberPic
-				+ ", toMemberPic=" + toMemberPic + ", fromAccount=" + fromAccount + ", toAccount=" + toAccount + "]";
+		return "ChatMessage [id=" + id + ", text=" + text + ", time=" + time + ", fromAccount=" + fromAccount
+				+ ", toAccount=" + toAccount + ", readAlready=" + readAlready + ", fromMemberPic=" + fromMemberPic
+				+ ", toMemberPic=" + toMemberPic + ", fromName=" + fromName + ", toName=" + toName + "]";
 	}
+
+
+
+	
 
 	
 	

@@ -37,42 +37,47 @@ public class ChatMessageController {
 	@MessageMapping("/chat")
 	@SendTo("/topic/messages")
 	public ChatMessage send(ChatClient message, Principal principal) throws Exception {
-		ChatMessage chatMessage = new ChatMessage(principal.getName(),message.getTo(),
-				message.getText(), new Date());	   
-		if (!StringUtils.isEmpty(message.getText())) {
+		log.debug("message={}",message);
+		ChatMessage chatMessage = null;  
+		if (!StringUtils.isEmpty(message.getText()) && !StringUtils.isEmpty(message.getTo()) 
+				&& !StringUtils.isEmpty(message.getFrom())) {
+			chatMessage = new ChatMessage();  
+			chatMessage.setFromAccount(message.getFrom());
+			chatMessage.setToAccount(message.getTo());
+			chatMessage.setText(message.getText());
+			chatMessage.setTime(new Date());
 			chatMessage = chatMessageService.insert(chatMessage);			
 		}
 		
 		return chatMessage;
 	}
 	
-	@RequestMapping("/listPage")
-	public String chatPage(Principal principal, Model model) {
-		List<ChatMessage> chatMessages = chatMessageService.findChatMessageByAccount(principal.getName());
-		model.addAttribute("userChatMessages", chatMessages);
-		log.debug("chatMessages={}",chatMessages);
-		
-		return "/basic/user/chatRoom/chatMessagesPage";
-	}
-	
+	//搜尋與他人之前的對話
 	@ResponseBody
-	@RequestMapping("/listMessage")
-	public Map<String, Object> listMessages(@RequestParam String to, Principal principal){
+	@RequestMapping("/oldMessages/onePerson")
+	public Map<String, Object> findOldMessageWithAnotherMember(@RequestParam String to, @RequestParam String from){
 		Map<String, Object> respData = new HashMap<String, Object>();
 		ChatMessage chatMessage = new ChatMessage();
 		chatMessage.setToAccount(to);
-		chatMessage.setFromAccount(principal.getName());
+		chatMessage.setFromAccount(from);
 		List<ChatMessage> chatList = chatMessageService.findChatMessagesBetweenFromAndTo(chatMessage);
 		log.debug("chatList={}",chatList);
 		Member toMember = memberService.findByAccount(to);
-		Member fromMember =  memberService.findByAccount(principal.getName());
+		Member fromMember =  memberService.findByAccount(from);
 		respData.put("chatList", chatList);
 		respData.put("toMemberPic", toMember.getPicture());
 		respData.put("fromMemberPic", fromMember.getPicture());
 		return respData;
 	}
 	
-
-
+	//查看所有訊息的頁面
+	@RequestMapping("/allMessages/list")
+	public String chatPage(Principal principal, Model model) {
+		List<ChatMessage> chatMessages = chatMessageService.findAllChatMessageByAccount(principal.getName());
+		model.addAttribute("chatMessagesHistory", chatMessages);
+		log.debug("chatMessages={}",chatMessages);
+		
+		return "/basic/user/chatRoom/chatMessagesPage";
+	}
 	
 }

@@ -20,7 +20,7 @@
                         <div class="col-md-6 col-lg-3">
                           <h5><a href="/user/calendar" >行事曆</a></h5>                      
                           <h5><a href="/system-message/list" id="systemMessage">通知</a></h5>
-                          <h5><a href="/user/chatMessage/listPage" id="chatMessage">我的訊息</a></h5>
+                          <h5><a href="/user/chatMessage/allMessages/list" id="chatMessage">我的訊息</a></h5>
                           <h5><a href="/user/personal-info/list" >我的個人資訊</a></h5>                          
                         </div>
                         <div class="col-md-6 col-lg-3">
