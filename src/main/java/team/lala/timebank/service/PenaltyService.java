@@ -102,11 +102,11 @@ public class PenaltyService {
 			
 			//寄信給檢舉人
 			SystemMessage systemMessage = new SystemMessage();
-			systemMessage.setMember(penalty.getAccuser());// 系統訊息給檢舉人
+			systemMessage.setMemberAccount(penalty.getAccuser().getAccount());// 系統訊息給檢舉人
 			systemMessage.setMessageType(SystemMessageType.ReplyPenaltyReport);
 			systemMessage.setReadStatus(YesNo.N);
 			systemMessage.setReleaseTime(new java.util.Date());
-			systemMessage.setSender(sender);
+			systemMessage.setSenderAccount(sender.getAccount());
 			systemMessage.setPenalty(penalty);
 			systemMessage.setMessage("謝謝您的檢舉，TimeBank已完成您的檢舉案的審核及處置。");
 			systemMessageDao.save(systemMessage);
@@ -124,11 +124,11 @@ public class PenaltyService {
 		//寄信給被檢舉人
 		if (penalty != null) {
 			SystemMessage systemMessage = new SystemMessage();
-			systemMessage.setMember(penalty.getDefendant());// 系統訊息給檢舉人
+			systemMessage.setMemberAccount(penalty.getDefendant().getAccount());// 系統訊息給檢舉人
 			systemMessage.setMessageType(SystemMessageType.Penalty);
 			systemMessage.setReadStatus(YesNo.N);
 			systemMessage.setReleaseTime(new java.util.Date());
-			systemMessage.setSender(sender);
+			systemMessage.setSenderAccount(sender.getAccount());
 			systemMessage.setMessage("[扣除時數]原因:檢舉, 檢舉原因:" + penalty.getDescription() + ", 活動名稱:" + penalty.getOrder().getMission().getTitle());
 			systemMessage.setPenalty(penalty);
 			systemMessageDao.save(systemMessage);
@@ -146,11 +146,11 @@ public class PenaltyService {
 		//寄信給被檢舉人
 		if (penalty != null) {
 			SystemMessage systemMessage = new SystemMessage();
-			systemMessage.setMember(penalty.getDefendant());
+			systemMessage.setMemberAccount(penalty.getDefendant().getAccount());
 			systemMessage.setMessageType(SystemMessageType.ReplyTheRevertifyApply);
 			systemMessage.setReadStatus(YesNo.N);
 			systemMessage.setReleaseTime(new java.util.Date());
-			systemMessage.setSender(sender);
+			systemMessage.setSenderAccount(sender.getAccount());
 			
 			//根據不同申訴結果，設定不同的訊息內容
 			String message = "[申訴結果]";

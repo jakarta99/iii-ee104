@@ -48,25 +48,25 @@ public class SystemMessageService {
 	}
 
 	// Jasmine
-	public Page<SystemMessage> findByReadStatusAndMember(YesNo readStatus, Principal principal, Pageable Pageable) {
-		Member member = memberDao.findByAccount(principal.getName());
-		Page<SystemMessage> systemMessages = systemMessageDao.findByReadStatusAndMember(readStatus, member, Pageable);
+	public Page<SystemMessage> findByReadStatusAndMemberAccount(YesNo readStatus, Principal principal, Pageable Pageable) {
+//		Member member = memberDao.findByAccount(principal.getName());
+		Page<SystemMessage> systemMessages = systemMessageDao.findByReadStatusAndMemberAccount(readStatus, principal.getName(), Pageable);
 		return systemMessages;
 	};
 
 	// Jasmine
 	//查詢全部系統訊息
-	public Page<SystemMessage> findAllByPageAndMember(Principal principal, Pageable Pageable) {
-		Member member = memberDao.findByAccount(principal.getName());
-		Page<SystemMessage> systemMessages = systemMessageDao.findByMember(member, Pageable);
+	public Page<SystemMessage> findAllByPageAndMemberAccount(Principal principal, Pageable Pageable) {
+//		Member member = memberDao.findByAccount(principal.getName());
+		Page<SystemMessage> systemMessages = systemMessageDao.findByMemberAccount(principal.getName(), Pageable);
 		return systemMessages;
 	};
 
 	// Jasmine
 	// 將所有訊息狀態變更為已讀
 	public List<SystemMessage> readAllMessage(Principal principal) {
-		Member member = memberDao.findByAccount(principal.getName());
-		List<SystemMessage> systemMessages = systemMessageDao.findByMember(member);
+//		Member member = memberDao.findByAccount(principal.getName());
+		List<SystemMessage> systemMessages = systemMessageDao.findByMemberAccount(principal.getName());
 		for(SystemMessage s : systemMessages) {
 			s.setReadStatus(YesNo.Y);
 			systemMessageDao.save(s);
@@ -86,8 +86,8 @@ public class SystemMessageService {
 	// Jasmine
 	//計算未讀之訊息數量
 	public int countNotReadMessages(Principal principal) {
-		Member member = memberDao.findByAccount(principal.getName());
-		List<SystemMessage> systemMessages = systemMessageDao.findByReadStatusAndMember(YesNo.N, member);
+//		Member member = memberDao.findByAccount(principal.getName());
+		List<SystemMessage> systemMessages = systemMessageDao.findByReadStatusAndMemberAccount(YesNo.N, principal.getName());
 		int count = systemMessages.size();
 		return count;
 	};
@@ -95,19 +95,19 @@ public class SystemMessageService {
 	// 通知志工申請已被接受
 	public SystemMessage volunteerVerify(SystemMessage systemMessage, Order order) {
 		if (systemMessage.getMessageType() == SystemMessageType.MissionAccecpt) {
-			systemMessage.setSender(order.getMission().getMember());
+			systemMessage.setSenderAccount(order.getMission().getMember().getAccount());
 			systemMessage.setReleaseTime(new Date());
 			systemMessage.setReadStatus(YesNo.N);
-			systemMessage.setMember(order.getVolunteer());
+			systemMessage.setMemberAccount(order.getVolunteer().getAccount());
 			systemMessage.setMessage("您申請的志工活動:[" + order.getMission().getTitle() + "]已被接受");
 			systemMessage.setMessageType(systemMessage.getMessageType());
 
 			return systemMessageDao.save(systemMessage);
 		} else {
-			systemMessage.setSender(order.getMission().getMember());
+			systemMessage.setSenderAccount(order.getMission().getMember().getAccount());
 			systemMessage.setReleaseTime(new Date());
 			systemMessage.setReadStatus(YesNo.N);
-			systemMessage.setMember(order.getVolunteer());
+			systemMessage.setMemberAccount(order.getVolunteer().getAccount());
 			systemMessage.setMessage("您申請的志工活動:[" + order.getMission().getTitle() + "]已被拒絕");
 			systemMessage.setMessageType(systemMessage.getMessageType());
 
@@ -119,8 +119,8 @@ public class SystemMessageService {
 	//志工檢舉雇主，發送訊息告知
 	public void reportMessage(Order order) {
 		SystemMessage systemMessage = new SystemMessage();
-		systemMessage.setMember(order.getVolunteer());
-		systemMessage.setSender(order.getMission().getMember());
+		systemMessage.setMemberAccount(order.getVolunteer().getAccount());
+		systemMessage.setSenderAccount(order.getMission().getMember().getAccount());
 		systemMessage.setReleaseTime(new java.util.Date());
 		systemMessage.setMessageType(SystemMessageType.Penalty);
 		systemMessage.setMessage("你被檢舉了");
@@ -133,8 +133,8 @@ public class SystemMessageService {
 	//志工對雇主評分後，發送系統訊息
 	public void scoreMessage(Order order, Integer score) {
 		SystemMessage systemMessage = new SystemMessage();
-		systemMessage.setMember(order.getVolunteer());
-		systemMessage.setSender(order.getMission().getMember());
+		systemMessage.setMemberAccount(order.getVolunteer().getAccount());
+		systemMessage.setSenderAccount(order.getMission().getMember().getAccount());
 		systemMessage.setReleaseTime(new java.util.Date());
 		systemMessage.setMessageType(SystemMessageType.Score);
 		systemMessage.setMessage("你在" + order.getMission().getTitle() + "活動中獲得" + score + "分");
@@ -146,10 +146,10 @@ public class SystemMessageService {
 	public void missionEdit(List<Order> orders) {
 		for (int i = 0; i < orders.size(); i++) {
 			SystemMessage systemMessage = new SystemMessage();
-			systemMessage.setSender(orders.get(i).getMission().getMember());
+			systemMessage.setSenderAccount(orders.get(i).getMission().getMember().getAccount());
 			systemMessage.setReleaseTime(new Date());
 			systemMessage.setReadStatus(YesNo.N);
-			systemMessage.setMember(orders.get(i).getVolunteer());
+			systemMessage.setMemberAccount(orders.get(i).getVolunteer().getAccount());
 			systemMessage.setMessage("您申請的志工活動:[" + orders.get(i).getMission().getTitle() + "]活動資料已被變更，請再次確認內容並決定是否參加");
 			systemMessage.setMessageType(SystemMessageType.MissionEdit);
 
@@ -160,10 +160,10 @@ public class SystemMessageService {
 	// 通知刊登者mission已到期
 		public void missionFinish(Mission mission) {
 			SystemMessage systemMessage = new SystemMessage();
-			systemMessage.setSender(null);
+			systemMessage.setSenderAccount(null);
 			systemMessage.setReleaseTime(new Date());
 			systemMessage.setReadStatus(YesNo.N);
-			systemMessage.setMember(mission.getMember());
+			systemMessage.setMemberAccount(mission.getMember().getAccount());
 			systemMessage.setMessage("您的志工活動:[" + mission.getTitle() + "]已到期");
 			systemMessage.setMessageType(SystemMessageType.MissionAccecpt);
 			systemMessageDao.save(systemMessage);
@@ -171,10 +171,10 @@ public class SystemMessageService {
 	// 通知刊登者mission已被取消
 		public void missionCancel(Mission mission) {
 			SystemMessage systemMessage = new SystemMessage();
-			systemMessage.setSender(null);
+			systemMessage.setSenderAccount(null);
 			systemMessage.setReleaseTime(new Date());
 			systemMessage.setReadStatus(YesNo.N);
-			systemMessage.setMember(mission.getMember());
+			systemMessage.setMemberAccount(mission.getMember().getAccount());
 			systemMessage.setMessage("您的志工活動:[" + mission.getTitle() + "]活動資料已被取消");
 			systemMessage.setMessageType(SystemMessageType.MissionCancel);
 			systemMessageDao.save(systemMessage);
@@ -187,10 +187,10 @@ public class SystemMessageService {
 		}else {
 		for (int i = 0; i < orders.size(); i++) {
 			SystemMessage systemMessage = new SystemMessage();
-			systemMessage.setSender(orders.get(i).getMission().getMember());
+			systemMessage.setSenderAccount(orders.get(i).getMission().getMember().getAccount());
 			systemMessage.setReleaseTime(new Date());
 			systemMessage.setReadStatus(YesNo.N);
-			systemMessage.setMember(orders.get(i).getVolunteer());
+			systemMessage.setMemberAccount(orders.get(i).getVolunteer().getAccount());
 			systemMessage.setMessage("您申請的志工活動:[" + orders.get(i).getMission().getTitle() + "]活動資料已被取消");
 			systemMessage.setMessageType(SystemMessageType.MissionEdit);
 
@@ -202,10 +202,10 @@ public class SystemMessageService {
 	//產生付款後收到的訊息
 	public void pay(Member payer,Member volunteer,Integer hours,String missionTitle) {
 		SystemMessage pay = new SystemMessage();
-		pay.setSender(payer);
+		pay.setSenderAccount(payer.getAccount());
 		pay.setReleaseTime(new Date());
 		pay.setReadStatus(YesNo.N);
-		pay.setMember(payer);
+		pay.setMemberAccount(payer.getAccount());
 		pay.setMessage("您因為志工活動:[" + missionTitle + "]付款給:["
 				+ volunteer.getName() + "]共" + hours + "小時已成功");
 		pay.setMessageType(SystemMessageType.PayTimeValue);
@@ -214,10 +214,10 @@ public class SystemMessageService {
 	//產生入賬後收到的訊息
 	public void earn(Member payer,Member volunteer,Integer hours,String missionTitle) {
 		SystemMessage earn = new SystemMessage();
-		earn.setSender(payer);
+		earn.setSenderAccount(payer.getAccount());
 		earn.setReleaseTime(new Date());
 		earn.setReadStatus(YesNo.N);
-		earn.setMember(volunteer);
+		earn.setMemberAccount(volunteer.getAccount());
 		earn.setMessage("您參加志工活動:[" + missionTitle + "]獲得" + hours + "小時已入帳");
 		earn.setMessageType(SystemMessageType.PayTimeValue);
 		systemMessageDao.save(earn);
@@ -227,7 +227,7 @@ public class SystemMessageService {
 		SystemMessage finishMessage = new SystemMessage();
 		finishMessage.setReleaseTime(new Date());
 		finishMessage.setReadStatus(YesNo.N);
-		finishMessage.setMember(payer);
+		finishMessage.setMemberAccount(payer.getAccount());
 		finishMessage.setMessage("您刊登的志工活動:[" + missionTitle + "]已結案");
 		finishMessage.setMessageType(SystemMessageType.MissionFinish);
 		systemMessageDao.save(finishMessage);
