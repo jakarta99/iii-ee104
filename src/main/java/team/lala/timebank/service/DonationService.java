@@ -80,10 +80,19 @@ public class DonationService {
 	}
 	
 	//Jasmine
-	//統計圖表用
+		//統計圖表用
+		//統計2018年每月TimeBank total捐款時數
 	public List<Object[]> countDonateTimeByYearAndMonth(){
 		List<Object[]> result = donationDao.countDonateTimeByYearAndMonth();
 		return result;
-	};
+	}
+	
+	//Jasmine 
+		//統計圖表用
+		//2018年前三名獲捐機構每月份捐款統計
+	public List<Object[]> countTop3OrgDonateTimeByYearAndMonth(){
+		List<Object[]> result = donationDao.countTop3OrgDonateTimeByYearAndMonth();
+		return result;
+	}
 
 }

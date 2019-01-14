@@ -23,8 +23,23 @@
 					  <c:when test="${status.index=='1'}">
 					    <div name="count" style="display: none">${thing}</div>
 					  </c:when>
+					  
+				</c:choose>
+			</c:forEach>
+		</c:forEach>
+		
+<!-- 		Top3OrgDonateTimeByYearAndMonth -->
+		<c:forEach var="perData" items="${Top3OrgDonateTimeByYearAndMonth}">
+			<c:forEach var="thing" items="${perData}" varStatus="status">
+				<c:choose>
+					  <c:when test="${status.index=='0'}">
+					    <div name="org" style="display: none">${thing}</div>
+					  </c:when>
+					  <c:when test="${status.index=='1'}">
+					    <div name="orgMonth" style="display: none">${thing}</div>
+					  </c:when>
 					  <c:when test="${status.index=='2'}">
-					    <div name="sum" style="display: none">SUM:${thing}</div>
+					    <div name="orgCount" style="display: none">${thing}</div>
 					  </c:when>
 				</c:choose>
 			</c:forEach>
@@ -32,7 +47,7 @@
     
     </div>
        <div id="container" style="height: 80%"></div>
-       <div>捐款統計表(進資料庫查)</div>
+       <div>捐款統計表(進資料庫查，只查2018)</div>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
@@ -67,7 +82,7 @@
        		$.each(months,function(idx,value){
     			data0.push($(this).text());
     			data0.shift();
-       			console.log("年月：" + $(this).text()+",")
+//        			console.log("年月：" + $(this).text()+",")
        			
        		})
        		
@@ -77,14 +92,23 @@
        		$.each(counts,function(idx,value){
     			data1.push(parseInt($(this).text()));
     			data1.shift();
-       			console.log("捐款：" + $(this).text()+",")
-       			
+//        			console.log("捐款：" + $(this).text()+",")
        		})
        		
 			
 			if (option && typeof option === "object") {
 			    myChart.setOption(option, true);
 			}
+       		
+       		
+       		
+       		//處理前三名機構資料
+       		var orgs = $("div[name='org']");
+       		$.each(orgs,function(idx,value){
+    			
+       			console.log("前三名機構:" + $(this).text()+",")
+       			
+       		})
        </script>
    </body>
 </html>

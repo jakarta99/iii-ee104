@@ -138,6 +138,11 @@ public class AdminDonationController {
 	public String chartPage(Model model) {
 		List<Object[]> donationCalResult = donationService.countDonateTimeByYearAndMonth();
 		model.addAttribute("donationCalResult", donationCalResult);
+		
+		List<Object[]> Top3OrgDonateTimeByYearAndMonth = donationService.countTop3OrgDonateTimeByYearAndMonth();
+		model.addAttribute("Top3OrgDonateTimeByYearAndMonth", Top3OrgDonateTimeByYearAndMonth);
+		
+		
 		return "/admin/others/donationCharts";
 	}
 
