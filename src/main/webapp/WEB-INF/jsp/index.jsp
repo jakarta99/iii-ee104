@@ -16,6 +16,7 @@
 		body{
 			font-family: 微軟正黑體;
 		}
+	
 	</style>
   </head>
   <body>
@@ -50,7 +51,7 @@
 				</div>
 			</div>
 			<!-- Carousel End-->
-		</section>
+
       <section class="bg-white bar">
         <div class="container">
           <div class="heading text-center">
