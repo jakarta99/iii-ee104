@@ -76,7 +76,11 @@ public class TimeLedgerService {
 			payerTimeLedger.setTransactionTime(new Date());
 			payerTimeLedger.setBalanceValue(payerLastTimeLedger.getBalanceValue() - hours);
 			payerTimeLedger.setDescription(missionTitle + "撥款");
-			payer.setBalanceValue(payer.getBalanceValue() - hours);
+			if(payer.getBalanceValue() == null) {
+				payer.setBalanceValue(0);
+			}else {
+				payer.setBalanceValue(payer.getBalanceValue() - hours);
+			}
 			memberDao.save(payer);
 		}
 		// 3 insert

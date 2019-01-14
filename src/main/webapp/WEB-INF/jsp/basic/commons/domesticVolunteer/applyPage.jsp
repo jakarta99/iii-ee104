@@ -168,22 +168,9 @@
               </div>
               <div class="col-md-4">
               	<img  style="width:200px;height:180px;border:1px solid black;" id="missionImg" alt="" src="/image/user/mission/${mission.missionPicName}" class="img-fluid rounded-square">
-<!--               	<table> -->
-<%--               		<c:if test='${member.memberType == P}'> --%>
-<!--             		<tr> -->
-<%--             			<td>會員帳號:${member.account}(debug用)</td> --%>
-<!--             		</tr> -->
-<!--             		<tr> -->
-<!--             			<td>會員名稱:</td> -->
-<!--             		</tr> -->
-<!--             		<tr> -->
-<%--             			<td>會員名稱:${member.name}</td> --%>
-<!--             		</tr> -->
-<!--             		<tr> -->
-<%--             			<td>會員名稱:${member.name}</td> --%>
-<!--             		</tr> -->
-<%--             		</c:if>         	 --%>
-<!--             	</table> -->
+				<table>
+					<tr><td><a href="">刊登者 : ${member.name}</a></td></tr>
+				</table>
               
               </div>
             </div>
@@ -269,7 +256,7 @@
 							}else{
 								swal({
 								  title: "申請失敗",
-								  text: data.messages,
+								  text: " "+data.messages,//空格不可以刪
 								  icon: "error",
 								  buttons: false,
 								  dangerMode: false,

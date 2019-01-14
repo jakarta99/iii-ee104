@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.entity.Mission;
+import team.lala.timebank.enums.OrderStatus;
 import team.lala.timebank.service.MissionService;
 import team.lala.timebank.service.OrderService;
 
@@ -25,7 +26,7 @@ public class ClosedController {
 	public String listPage(@RequestParam(value = "id") Long missionId, Model model) {
 		
 		model.addAttribute("mission", missionService.getOne(missionId));
-		model.addAttribute("orders", missionService.getOne(missionId).getOrders());
+		model.addAttribute("orders", orderService.findByMissionAndOrderStatus(missionService.getOne(missionId), OrderStatus.ServiceFinishPayMatchSuccess));
 		return "/basic/user/volunteerRecruitment/endRecord";
 	}
 
