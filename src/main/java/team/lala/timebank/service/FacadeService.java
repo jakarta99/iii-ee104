@@ -89,12 +89,13 @@ public class FacadeService {
 
 			// 搜尋mission中的所有order 若全付款則將 mission 狀態改變
 			List<Order> orders = orderDao.findByMissionAndOrderStatus(mission, OrderStatus.ServiceFinishPayMatchSuccess);
-				if (orders.size() == mission.getOrders().size()) {
-					mission.setMissionstatus(MissionStatus.C_Finish);
-					mission.setFinishDate(new Date());
-					missionDao.save(mission);
-					systemMessageService.finishMission(payer, missionTitle);
-				}
+				
+			if (orders.size() == mission.getApprovedQuantity().intValue()) {
+				mission.setMissionstatus(MissionStatus.C_Finish);
+				mission.setFinishDate(new Date());
+				missionDao.save(mission);
+				systemMessageService.finishMission(payer, missionTitle);
+			}
 			orderDao.save(order);
 		}
 
