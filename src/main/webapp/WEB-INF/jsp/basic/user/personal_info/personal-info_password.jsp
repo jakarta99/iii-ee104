@@ -74,7 +74,7 @@
 				<h3>個人資訊</h3>
 				<h5>您在 TimeBank中使用的基本資訊</h5>
 				<hr>
-				<form>
+				<form id="personalinfoform">
 					<fieldset>
 						<div class="heading">
           					<h3>帳戶資料</h3>
@@ -248,7 +248,7 @@
 					method : "put",
 					dataType : "json",
 					url : "/user/personal-info/updatePassword",
-					data : $("form").serialize(),
+					data : $("#personalinfoform").serialize(),
 				}).done(function(response) {
 // 					alert(response.obj);							
 					if (response.status =='SUCCESS'){

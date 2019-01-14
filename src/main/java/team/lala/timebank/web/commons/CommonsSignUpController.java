@@ -443,7 +443,7 @@ public class CommonsSignUpController {
 //					mailService.sendInlineResourceMail(newMember);
 					log.debug("newMember.getId()={}", newMember.getId());
 //					memberService.addRole(newMember.getId(), 2L);	//轉換至驗證信後，才給角色
-					
+
 //					result.put("member", newMember);
 //					response.setObj(result);
 					response.setObj(newMember);
@@ -509,7 +509,7 @@ public class CommonsSignUpController {
 			ajaxResponse.addMessage(e.getMessage());
 			return "/basic/commons/login";
 		}
-		return "/basic/commons//login";
+		return "/basic/commons/login";
 	}
 
 	@RequestMapping("/edit")

@@ -642,7 +642,7 @@
 			});
 
 			//update member info. event
-			$("#updateButt").click(function() {
+			$("#updateButt").click(function() {		
 				$.ajax({
 					method : "put",
 					dataType : "json",

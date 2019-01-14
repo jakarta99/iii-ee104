@@ -793,6 +793,26 @@
 			$("#submit").click(function(){
 // 				alert($("#idPassword").val())
 // 				console.log($("#idPassword").val())
+				document.getElementById("idspAccount").innerHTML = "" ;
+				document.getElementById("idspPassword").innerHTML = "" ;
+				document.getElementById("idspPasswordCheck").innerHTML = "" ;
+				document.getElementById("idspName").innerHTML = "" ;
+				document.getElementById("idspCertificateIdNumber").innerHTML = "" ;
+				document.getElementById("idspDate").innerHTML = "" ;
+				document.getElementById("idspEmail").innerHTML = "" ;
+				document.getElementById("idspTelephone").innerHTML = "" ;
+				document.getElementById("idspMobile").innerHTML = "" ;
+				document.getElementById("error").innerHTML = "" ;
+				
+				if(${memberType eq 'O' }){
+					document.getElementById("idspOrgFounder").innerHTML = "" ;
+					document.getElementById("idspOrgCeo").innerHTML = "" ;
+					document.getElementById("idspOrgContactPerson").innerHTML = "" ;
+					document.getElementById("idspOrgContactPersonTel").innerHTML = "" ;
+					document.getElementById("idspOrgContactPersonMobile").innerHTML = "" ;
+					document.getElementById("idspOrgWebsiteLink").innerHTML = "" ;
+				}
+				
  				swal({
  		            icon: "/image/user/member/loading.gif",
  					button: false,
