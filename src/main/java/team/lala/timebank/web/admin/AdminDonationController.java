@@ -114,5 +114,23 @@ public class AdminDonationController {
 
 		return donations;
 	}
+	
+	//Jasmine
+	//統計圖表用
+	@RequestMapping("/calculate")
+	@ResponseBody
+	public List<Object[]> calculateDonation() {
+		List<Object[]> donationCalResult = donationService.countDonateTimeByYearAndMonth();
+		
+		for(Object[] i : donationCalResult) {
+			for(Object ii : i) {
+				System.out.print(String.valueOf(ii));
+				System.out.print("-");
+			}
+			System.out.println("");
+		}
+
+		return donationCalResult;
+	}
 
 }
