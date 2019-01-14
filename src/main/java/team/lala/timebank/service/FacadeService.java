@@ -87,8 +87,10 @@ public class FacadeService {
 			systemMessageService.earn(payer, volunteer, hours, missionTitle);
 			// 5.2 產生入賬後收到的訊息完成
 			
+			//6 付款計數器++
 			mission.setPayedQuantity(mission.getPayedQuantity()+1);
 			missionDao.save(mission);
+			
 			// 搜尋mission中的所有order 若全付款則將 mission 狀態改變
 			List<Order> orders = orderDao.findByMissionAndOrderStatus(mission, OrderStatus.ServiceFinishPayMatchSuccess);
 				

@@ -99,7 +99,7 @@
                 </div>
                 <div class="row">
                		<div class="col-md-6">
-                	<p class="lead">目前審核人數X人</p>
+                	<p class="lead" id="people"></p>
                 	</div>
                 	<div class="col-md-6" align="right">
                 	<button class='btn btn-primary btn-lg_1' onclick="payAll()">一鍵核發</button>
@@ -290,11 +290,14 @@
 	        	console.log(orders)
 	        	$("#boxbox").text("");
 	        	$("#pagebox").text("");
+	        	$("#people").text("");
 	        	totalElements=orders.totalElements;
 	        	var totalPages=orders.totalPages;
 	        	first=orders.first;
 	        	last=orders.last;
 	        	page=orders.number;
+	        	console.log(orders.content)
+	        	$("#people").append("目前已審核"+orders.content[0].mission.payedQuantity+"人")
 	        	$.each(orders.content,function(index, order){
 	        		orderids.push(order.id)
 	        		vIds.push(order.volunteer.id)
@@ -340,6 +343,7 @@
 	        			box+="<li class='s3'><a href='#' class='email'><i class='fa fa-envelope'></i></a>Email:"+order.volunteer.email+"</li>"
 	        			box+="</ul></div></div>"
 	        		var boxbox=$("#boxbox").append(box)
+	        		
 	        	})
 	        	$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
 	        	for (var index = 1; index <= totalPages ; index++) {

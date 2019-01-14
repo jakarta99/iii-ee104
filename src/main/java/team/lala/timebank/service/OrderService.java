@@ -109,6 +109,11 @@ public class OrderService {
 			}
 			order.setOrderStatus(OrderStatus.ServiceFinishPayMatchSuccess);
 			orderDao.save(order);
+			//付款計數器++
+			Mission mission=order.getMission();
+			mission.setPayedQuantity(mission.getPayedQuantity()+1);
+			missionDao.save(mission);
+			
 			return penalty;
 		}
 		

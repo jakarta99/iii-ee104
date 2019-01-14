@@ -42,6 +42,9 @@
 			border-radius: 3px;
 			
 		}
+		.container-1>.row{
+			margin-top: 30px;
+		}
 		.s3{
 			width:100%;
 			margin-bottom:60px;
@@ -51,17 +54,23 @@
 		.s4{
 			width:100%;
 			margin: auto;
-			padding-top:40px;
+/* 			padding-top:40px; */
 		}
 		.s5{
-			background-color: rgba(234, 234, 234); 
+			background-color: rgba(234, 234, 234);
+			border-right:solid;
+			border-color:#13b5b1;
+ 			padding: 15px; 
 		}
 		.s6{
 			width:100%;
 			margin: auto;
-			padding-top:40px;
-			border-style:solid;
-			border-color:#13b5b1;
+/* 			margin-top: 30px; */
+		    padding: 10px;
+		    border: 2px solid #1ec7c3;
+		    border-radius: 3px;
+		    background-color: #ffc48ba8;
+			
 		}
 		.s7{
 			margin-left:5%;
