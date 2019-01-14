@@ -31,6 +31,7 @@
 	    bottom: 0;
 	    left: 0;
 	    border: 0;
+	    border-radius: 5px;
 	}
 	.embed-responsive {
 	    position: relative;
@@ -53,8 +54,11 @@
   		margin-bottom: 30px;
 	}
 	.nav-pills .nav-link {
-    border-radius: 8cm;
-}
+    border-radius: 8px;
+	}
+	.a{
+		background-color: #e2eae1db;
+	}
     </style>
 </head>
 <body>
@@ -73,7 +77,7 @@
         </div>
       </div>
 		<div id="content">
-		<div class="container">
+		<div class="container a">
 		<section class="bar_1">
 			<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
                <li class="nav-item abc"><a id="orderStatus1" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active">申請中</a></li>
