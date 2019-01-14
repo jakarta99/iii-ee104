@@ -14,36 +14,36 @@
 <body style="height: 100%; margin: 0">
 	<jsp:include page="../admin_layout/nav.jsp" />
     <div>
-    	<c:forEach var="perData" items="${donationCalResult}">
-			<c:forEach var="thing" items="${perData}" varStatus="status">
-				<c:choose>
-					  <c:when test="${status.index=='0'}">
-					    <div name="month" style="display: none">${thing}</div>
-					  </c:when>
-					  <c:when test="${status.index=='1'}">
-					    <div name="count" style="display: none">${thing}</div>
-					  </c:when>
+<%--     	<c:forEach var="perData" items="${donationCalResult}"> --%>
+<%-- 			<c:forEach var="thing" items="${perData}" varStatus="status"> --%>
+<%-- 				<c:choose> --%>
+<%-- 					  <c:when test="${status.index=='0'}"> --%>
+<%-- 					    <div name="month" style="display: none">${thing}</div> --%>
+<%-- 					  </c:when> --%>
+<%-- 					  <c:when test="${status.index=='1'}"> --%>
+<%-- 					    <div name="count" style="display: none">${thing}</div> --%>
+<%-- 					  </c:when> --%>
 					  
-				</c:choose>
-			</c:forEach>
-		</c:forEach>
+<%-- 				</c:choose> --%>
+<%-- 			</c:forEach> --%>
+<%-- 		</c:forEach> --%>
 		
 <!-- 		Top3OrgDonateTimeByYearAndMonth -->
-		<c:forEach var="perData" items="${Top3OrgDonateTimeByYearAndMonth}">
-			<c:forEach var="thing" items="${perData}" varStatus="status">
-				<c:choose>
-					  <c:when test="${status.index=='0'}">
-					    <div name="org" style="display: none">${thing}</div>
-					  </c:when>
-					  <c:when test="${status.index=='1'}">
-					    <div name="orgMonth" style="display: none">${thing}</div>
-					  </c:when>
-					  <c:when test="${status.index=='2'}">
-					    <div name="orgCount" style="display: none">${thing}</div>
-					  </c:when>
-				</c:choose>
-			</c:forEach>
-		</c:forEach>
+<%-- 		<c:forEach var="perData" items="${Top3OrgDonateTimeByYearAndMonth}"> --%>
+<%-- 			<c:forEach var="thing" items="${perData}" varStatus="status"> --%>
+<%-- 				<c:choose> --%>
+<%-- 					  <c:when test="${status.index=='0'}"> --%>
+<%-- 					    <div name="org" style="display: none">${thing}</div> --%>
+<%-- 					  </c:when> --%>
+<%-- 					  <c:when test="${status.index=='1'}"> --%>
+<%-- 					    <div name="orgMonth" style="display: none">${thing}</div> --%>
+<%-- 					  </c:when> --%>
+<%-- 					  <c:when test="${status.index=='2'}"> --%>
+<%-- 					    <div name="orgCount" style="display: none">${thing}</div> --%>
+<%-- 					  </c:when> --%>
+<%-- 				</c:choose> --%>
+<%-- 			</c:forEach> --%>
+<%-- 		</c:forEach> --%>
     
     </div>
        <div id="container" style="height: 80%"></div>
@@ -58,57 +58,115 @@
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
        <script type="text/javascript">
-
+       
+       
+       		var totalDatas;
+       		var firstOrg;
+       		var secondOrg;
+       		var thirdOrg;
+       		var OrgsName;
+       
+       
 			var dom = document.getElementById("container");
 			var myChart = echarts.init(dom);
 			var app = {};
 			option = null;
-			option = {
-			    xAxis: {
-			        type: 'category',
-			        data: ['','', '', '', '','', '','', '', '', '', ''] //從Controller回傳資料填X軸
-			    },
-			    yAxis: {
-			        type: 'value'
-			    },
-			    series: [{
-			        data: [, , , , , , , , , , , , ],//從Controller回傳資料填值
-			        type: 'line'
-			    }]
-			};
 			
-			var months = $("div[name='month']");
-			var data0 = option.xAxis.data;
-       		$.each(months,function(idx,value){
-    			data0.push($(this).text());
-    			data0.shift();
-//        			console.log("年月：" + $(this).text()+",")
-       			
-       		})
+
        		
        		
-       		var counts = $("div[name='count']");
-			var data1 = option.series[0].data;
-       		$.each(counts,function(idx,value){
-    			data1.push(parseInt($(this).text()));
-    			data1.shift();
-//        			console.log("捐款：" + $(this).text()+",")
-       		})
        		
+       		//用ajax取得前三名及總計資料
+       		$.ajax({
+  			url:"/admin/donation/donationDatasForChart",
+  			method:"post",
+  			dataType : "json",
+  			success : function(result){
+  				totalDatas=result[3];
+  				firstOrg=result[0];
+  				secondOrg=result[1];
+  				thirdOrg=result[2];
+  				OrgsName=result[4];
+  				
+  				myChart.setOption(
+  				option = {
+  					    title: {
+  					        text: '2018年捐款統計圖'
+  					    },
+  					    tooltip : {
+  					        trigger: 'axis',
+  					        axisPointer: {
+  					            type: 'cross',
+  					            label: {
+  					                backgroundColor: '#6a7985'
+  					            }
+  					        }
+  					    },
+  					    legend: {
+  					        data:['總捐款時數','联盟广告','视频广告','直接访问','搜索引擎']
+  					    },
+  					    toolbox: {
+  					        feature: {
+  					            saveAsImage: {}
+  					        }
+  					    },
+  					    grid: {
+  					        left: '3%',
+  					        right: '4%',
+  					        bottom: '3%',
+  					        containLabel: true
+  					    },
+  					    xAxis : [
+  					        {
+  					            type : 'category',
+  					            boundaryGap : false,
+  					            data : ['2018/1','2018/2','2018/3','2018/4','2018/5','2018/6','2018/7','2018/8','2018/9','2018/10','2018/11','2018/12']
+  					        }
+  					    ],
+  					    yAxis : [
+  					        {
+  					            type : 'value'
+  					        }
+  					    ],
+  					  	series: [
+  					        {
+  					            name:'總捐款時數',
+  					            type:'line',
+  					            stack: '總量',
+  					            areaStyle: {},
+  					            data:totalDatas,
+  					        },
+  					        {
+  					            name:"全年第一名:" + OrgsName[0],
+  					            type:'line',
+  					            stack: '總量',
+  					            areaStyle: {},
+  					            data:firstOrg,
+  					        },
+  					        {
+  					            name:'全年第二名:' + OrgsName[1],
+  					            type:'line',
+  					            stack: '總量',
+  					            areaStyle: {},
+  					            data:secondOrg,
+  					        },
+  					        {
+  					            name:'全年第三名:' + OrgsName[2],
+  					            type:'line',
+  					            stack: '總量',
+  					            areaStyle: {},
+  					            data:thirdOrg,
+  					        }
+  					    ]
+  					}
+  				
+  				
+  				)
+  			},
+  		})	
 			
-			if (option && typeof option === "object") {
-			    myChart.setOption(option, true);
-			}
        		
        		
-       		
-       		//處理前三名機構資料
-       		var orgs = $("div[name='org']");
-       		$.each(orgs,function(idx,value){
-    			
-       			console.log("前三名機構:" + $(this).text()+",")
-       			
-       		})
        </script>
    </body>
 </html>
