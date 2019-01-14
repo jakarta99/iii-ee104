@@ -136,9 +136,6 @@
 												<li>
 													<div class="icon-filled"></div>網址  : ${member.orgWebsiteLink}
 												</li>
-												<li>
-													<div class="icon-filled"></div>創立宗旨  : ${member.orgFoundPurpose}
-												</li>
 											</ul>
 										</div>
 									</div>	
@@ -160,6 +157,17 @@
 				        		</div>
 							</c:if>
                       	</div>
+                    </div>
+                    <div class="col-md-8">
+                      	<div class="form-group">
+                      		<c:if test="${member.memberType eq 'O' }">
+                      			<ul class="ul-icons list-unstyled">
+                      				<li>
+										<div class="icon-filled"></div>創立宗旨  : <div>${member.orgFoundPurpose}</div>
+									</li>
+								</ul>
+							</c:if>
+						</div>
                     </div>
                 </div>
 			</article>

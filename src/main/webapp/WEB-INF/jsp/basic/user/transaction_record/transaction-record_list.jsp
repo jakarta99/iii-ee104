@@ -6,11 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Transaction Record</title>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
 <!-- css -->
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp" />
 <!-- Javascript files -->
 <jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
 <!-- date picker -->
 <script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
