@@ -12,11 +12,11 @@ import team.lala.timebank.entity.SystemMessage;
 import team.lala.timebank.enums.YesNo;
 
 public interface SystemMessageDao extends JpaRepository<SystemMessage, Long>, JpaSpecificationExecutor<SystemMessage>  {
-	public Page<SystemMessage> findByReadStatusAndMember(YesNo readStatus, Member member, Pageable Pageable);
+	public Page<SystemMessage> findByReadStatusAndMemberAccount(YesNo readStatus, String memberAccount, Pageable Pageable);
 	
-	public List<SystemMessage> findByReadStatusAndMember(YesNo readStatus, Member member);
+	public List<SystemMessage> findByReadStatusAndMemberAccount(YesNo readStatus, String memberAccount);
 	
-	public Page<SystemMessage> findByMember(Member member, Pageable Pageable);
+	public Page<SystemMessage> findByMemberAccount(String memberAccount, Pageable Pageable);
 	
-	public List<SystemMessage> findByMember(Member member);
+	public List<SystemMessage> findByMemberAccount(String memberAccount);
 }

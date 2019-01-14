@@ -48,10 +48,10 @@ public class SystemMessageController {
 		Page<SystemMessage> systemMessages = null;
 		Sort sort = new Sort(Sort.Direction.DESC, "releaseTime"); //傳入PageRequest.of()當第三個參數，從最近的訊息開始列
 		if(readStatus == null) {
-			systemMessages = systemMessageService.findAllByPageAndMember(principal, PageRequest.of(page, length.orElse(10), sort));
+			systemMessages = systemMessageService.findAllByPageAndMemberAccount(principal, PageRequest.of(page, length.orElse(10), sort));
 			systemMessageService.readAllMessage(principal);//1/6進入系統信箱直接預設讀取所有系統訊息
 		} else {
-			systemMessages = systemMessageService.findByReadStatusAndMember(
+			systemMessages = systemMessageService.findByReadStatusAndMemberAccount(
 					readStatus, principal, PageRequest.of(page, length.orElse(10), sort));
 		}
 		return systemMessages;

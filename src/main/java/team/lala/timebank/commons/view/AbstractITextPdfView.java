@@ -25,10 +25,12 @@ public abstract class AbstractITextPdfView extends AbstractView {
 	protected boolean generatesDownloadContent() {
 		return true;
 	}
-		
+
+	
+
 	@Override
-	protected void renderMergedOutputModel(Map<String, Object> model,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		// IE workaround: write into byte array first.
 		ByteArrayOutputStream baos = createTemporaryOutputStream();
 
@@ -38,6 +40,8 @@ public abstract class AbstractITextPdfView extends AbstractView {
 		prepareWriter(model, writer, request);
 		buildPdfMetadata(model, document, request);
 
+		
+		
 		// Build PDF document.
 		document.open();
 		buildPdfDocument(model, document, writer, request, response);
@@ -49,32 +53,32 @@ public abstract class AbstractITextPdfView extends AbstractView {
 
 	protected Document newDocument() {
 		Document document = new Document();
-		
-		//A4改橫向
+
+		// A4改橫向
 		Rectangle pageSize = new Rectangle(PageSize.A4.getHeight(), PageSize.A4.getWidth());
-        pageSize.rotate();
-        document.setPageSize(pageSize);
-		
+		pageSize.rotate();
+		document.setPageSize(pageSize);
+
 		return document;
 	}
-	
-	protected PdfWriter newWriter(Document document, OutputStream os) throws DocumentException {
+
+	public PdfWriter newWriter(Document document, OutputStream os) throws DocumentException {
 		return PdfWriter.getInstance(document, os);
 	}
-	
+
 	protected void prepareWriter(Map<String, Object> model, PdfWriter writer, HttpServletRequest request)
 			throws DocumentException {
 
 		writer.setViewerPreferences(getViewerPreferences());
 	}
-	
+
 	protected int getViewerPreferences() {
 		return PdfWriter.ALLOW_PRINTING | PdfWriter.PageLayoutSinglePage;
 	}
-	
+
 	protected void buildPdfMetadata(Map<String, Object> model, Document document, HttpServletRequest request) {
 	}
-	
+
 	protected abstract void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
-			HttpServletRequest request, HttpServletResponse response) throws Exception;	
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

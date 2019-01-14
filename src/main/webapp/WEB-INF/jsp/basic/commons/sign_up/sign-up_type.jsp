@@ -19,9 +19,23 @@
 	<jsp:include page="../commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="../commons_layout/commons_nav.jsp"/>
+	<div id="heading-breadcrumbs">
+    	<div class="container">
+        	<div class="row d-flex align-items-center flex-wrap">
+            	<div class="col-md-7">
+              		<h1 class="h2">建立您的TimeBank帳戶</h1>
+            	</div>
+	            <div class="col-md-5">
+	              	<ul class="breadcrumb d-flex justify-content-end">
+	                	<li class="breadcrumb-item"><a href="/">Home</a></li>
+	                	<li class="breadcrumb-item active">Select account type</li>
+	              	</ul>
+	            </div>
+        	</div>
+        </div>
+    </div>
 	<section class="bar">
 		<div id="all">  
-
 <!--       <div id="heading-breadcrumbs"> -->
 <!--         <div class="container"> -->
 <!--           <div class="row d-flex align-items-center flex-wrap"> -->

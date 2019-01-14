@@ -24,6 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itextpdf.text.pdf.PdfStamper;
+
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
 import team.lala.timebank.commons.view.ExcelView;
@@ -167,10 +169,13 @@ public class PenaltyVertifyController {
 		PenaltySpecification penaltySpec = new PenaltySpecification(inputPenalty);
 		List<List<String>> results = penaltyService.findAllBySpecificationForExcelAndPdf(penaltySpec);
 		pdfModel.put("results", results);
-
+		
 		response.setHeader("Content-disposition", "attachment; filename=penaltiesFile.pdf");//設定下載檔名，如不設則直接在網頁上顯示
 		
-		return new ModelAndView(new PdfView(), pdfModel);
+		PdfView pdfView = new PdfView();
+		
+		
+		return new ModelAndView(pdfView, pdfModel);
 	}
 
 	// Jasmine

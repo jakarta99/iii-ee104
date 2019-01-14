@@ -1238,11 +1238,6 @@ color: rgba(100, 100, 100);
   float: left;
 }
 
-#blog-listing-big p.intro, #blog-listing-medium p.intro_3 {
-  margin-top: 10px;
-  color: #777;
-  font-size: 15px;
-}
 
 .pager {
   padding: 20px 0;

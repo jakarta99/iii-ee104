@@ -7,6 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Personal Information</title>
+<!-- icon -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <!-- css -->
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp" />
 <!-- Javascript files -->
@@ -18,8 +20,6 @@
 <script type="text/javascript" src="/js/datepicker/bootstrap-datepicker.js"></script>
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
-<!-- icon -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 <style>
 	body{
@@ -28,18 +28,6 @@
 	article{
 		width:100%;
 	}
-/* 	.county,.district { */
-/* 	  	padding: 0.375rem 0.75rem; */
-/* 	  	font-size: 1rem; */
-/* 		line-height: 1.5; */
-/* 		color: #495057; */
-/* 		background-color: #fff; */
-/* 		background-image: none; */
-/* 		background-clip: padding-box; */
-/* 		border: 1px solid #ced4da; */
-/* 		border-radius: 0.25rem; */
-/* 		transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; */
-/* 	}  */
 </style>
 
 </head>
@@ -54,13 +42,12 @@
             	<div class="col-md-7">
               		<h1 class="h2">${member.name}</h1>
             	</div>
-<!-- 	            <div class="col-md-5"> -->
-<!-- 	              	<ul class="breadcrumb d-flex justify-content-end"> -->
-<!-- 	                	<li class="breadcrumb-item"><a href="index.html">Home</a></li> -->
-<!-- 	                	<li class="breadcrumb-item"><a href="team.html">Our Team</a></li> -->
-<!-- 	                	<li class="breadcrumb-item active">Team Member</li> -->
-<!-- 	              	</ul> -->
-<!-- 	            </div> -->
+	            <div class="col-md-5">
+	              	<ul class="breadcrumb d-flex justify-content-end">
+	                	<li class="breadcrumb-item"><a href="/">Home</a></li>
+	                	<li class="breadcrumb-item active">Member Information</li>
+	              	</ul>
+	            </div>
         	</div>
         </div>
     </div>

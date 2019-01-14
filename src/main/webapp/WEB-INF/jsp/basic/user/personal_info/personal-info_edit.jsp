@@ -54,13 +54,13 @@
             	<div class="col-md-7">
               		<h1 class="h2">我的個人資訊</h1>
             	</div>
-<!-- 	            <div class="col-md-5"> -->
-<!-- 	              	<ul class="breadcrumb d-flex justify-content-end"> -->
-<!-- 	                	<li class="breadcrumb-item"><a href="index.html">Home</a></li> -->
-<!-- 	                	<li class="breadcrumb-item"><a href="team.html">Our Team</a></li> -->
-<!-- 	                	<li class="breadcrumb-item active">Team Member</li> -->
-<!-- 	              	</ul> -->
-<!-- 	            </div> -->
+	            <div class="col-md-5">
+	              	<ul class="breadcrumb d-flex justify-content-end">
+	                	<li class="breadcrumb-item"><a href="/">Home</a></li>
+	                	<li class="breadcrumb-item"><a href="/user/personal-info/list">Member Information</a></li>
+	                	<li class="breadcrumb-item active">Edit Information</li>
+	              	</ul>
+	            </div>
         	</div>
         </div>
     </div>

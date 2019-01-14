@@ -29,23 +29,23 @@ public class SystemMessage {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name="MEMBER_ID",
-				referencedColumnName="id",  
-				insertable=true, updatable=true) 
-	private Member member;
+//	@ManyToOne
+//	@JoinColumn(name="MEMBER_ID",
+//				referencedColumnName="id",  
+//				insertable=true, updatable=true) 
+	private String memberAccount;
 	
-	@ManyToOne
-	@JoinColumn(name="SENDER_ID",
-				referencedColumnName="id",  
-				insertable=true, updatable=true) 
-	private Member sender;
+//	@ManyToOne
+//	@JoinColumn(name="SENDER_ID",
+//				referencedColumnName="id",  
+//				insertable=true, updatable=true) 
+	private String senderAccount;
 	
 	@ManyToOne
 	@JoinColumn(name="PENALTY_ID",
 				referencedColumnName="id",  
 				insertable=true, updatable=true) 
-	private Penalty penalty;
+	private Penalty penalty;  //for申訴功能
 	
 	
 	@Column(name="RELEASE_TIME")
@@ -61,11 +61,14 @@ public class SystemMessage {
 	@Enumerated(EnumType.STRING)
 	@Column(name="READ_STATUS")
 	private YesNo readStatus;
-	
+
 	@Override
 	public String toString() {
-		return "SystemMessage [id=" + id + ", member=" + member + ", Sender=" + sender + ", ReleaseTime=" + releaseTime
-				+ ", MessageType=" + messageType + ", message=" + message + ", readStatus=" + readStatus + "]";
+		return "SystemMessage [id=" + id + ", memberAccount=" + memberAccount + ", senderAccount=" + senderAccount
+				+ ", penalty=" + penalty + ", releaseTime=" + releaseTime + ", messageType=" + messageType
+				+ ", message=" + message + ", readStatus=" + readStatus + "]";
 	}
+	
+	
 
 }
