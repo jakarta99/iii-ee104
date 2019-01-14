@@ -187,5 +187,38 @@ public class MemberService {
 			return member;
 		}
 	}
+	
+	//忘記密碼，亂碼產生(digitOfSet:位數;set:組數)
+	public String pwdGenerator(int digitOfSet, int set) {
+		String newPwd = "";
+		String pwdSet = "";
+	    int num = 0;
+	    for (int i = 0; i < set; i++) {
+	        if(i > 0) {
+	        	newPwd += "-";	//各組英數之間的分隔號	        	
+	        }
+		    pwdSet = "";
+	        while (pwdSet.length() < digitOfSet)  {
+	        	// 48~57  ASCII中的數字
+	        	// 65~90  ASCII中的大寫英文字母
+	        	// 97-122 ASCII中的小寫英文字母
+	        	// ~:126, !:33, @:64, #:35, $:36, %:37, ^:94, &:38, *:42
+	        	num = (int)(Math.random()*(126-33+1))+33;
+	        	//排除
+	        	if(num == 34 || num > 38 && num < 42 || num > 42 && num < 48) {
+	            	continue;
+	            }else if (num > 57 && num < 64) {
+	            	continue;           	
+	            }else if (num > 90 && num < 94 || num > 94 && num < 97) {
+	            	continue;
+	            }else if (num > 122 && num < 126) {
+	            	continue;
+	            }
+	            pwdSet += (char)num;	//將數字轉換為字元
+	        }
+	        newPwd += pwdSet;
+	    }
+	    return newPwd;
+	}
 
 }

@@ -40,6 +40,7 @@
                   <div class="text-center">
                     <button type="submit" class="btn btn-template-outlined"><i class="fa fa-sign-in"></i> Log in</button>
                   </div>
+                  <div class="text-right"><a href="commons/login-forget/type">忘記密碼</a></div>
                 </form>
               </div>
             </div>

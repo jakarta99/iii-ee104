@@ -80,17 +80,48 @@ public class MailServiceImpl implements MailService {
 	}
 	
 	@Override
+	public void sendNewPasswordMail(Member member, String newPassword) {
+		MimeMessage message = mailSender.createMimeMessage();
+		try {
+	        //true表示需要創建一个multipart message
+	        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+	        helper.setFrom(from);
+	        helper.setTo(member.getEmail());
+	        helper.setSubject("TimeBank帳戶，您的新密碼");
+	        String content="<html>" +
+	                "<body>" +
+	                "    <h3>TimeBank帳戶，您的新密碼</h3>" +
+	                "Dear " + member.getName() +
+    				",<br/> Your account is " + member.getAccount() + ".<br/>" +
+	                "Your new password is " + newPassword + ".<br>" +
+    				"<a href='http://localhost:8080/login'>請由此登入</a><br/>" +
+	                "並請盡快至[會員專區]>[個人資訊]修改密碼，謝謝您。<br/>" +
+	                "</body>" +
+	                "</html>";
+	        helper.setText(content, true);
+
+	        mailSender.send(message);
+	        logger.info("NewPassword email已發送。");
+	    } catch (MessagingException e) {
+	        logger.error("NewPassword email發生異常！", e);
+	    } catch (javax.mail.MessagingException e) {
+	    	logger.error("NewPassword email發生異常！！", e);
+	    	e.printStackTrace();
+		}
+	}
+	
+	@Override
 	public void sendInlineResourceMail(Member member) {
 		MimeMessage message = mailSender.createMimeMessage();
 		try {
-			String imgPath = "C:\\Users\\ancho\\git\\iii-ee104\\src\\main\\resources\\static\\img";
+			String imgPath = "https://drive.google.com/open?id=1GItUz6YJN3YmoPZXX8WvgvQ2WQeL8yIj";
+//			String imgPath = "C:\\Users\\ancho\\git\\iii-ee104\\src\\main\\resources\\static\\img";
 	        //true表示需要创建一个multipart message
 	        MimeMessageHelper helper = new MimeMessageHelper(message, true);
 	        helper.setFrom(from);
 	        helper.setTo(member.getEmail());
 	        helper.setSubject("已註冊TimeBank帳戶");
 	        String rscId = member.getAccount();
-//	        String content="<html><body>有圖片的mail：<img src=\'cid:" + rscId + "\' ></body></html>";
 	        String content="<html>" +
 			                "<body>" +
 			                "    <h3>TimeBank:</h3>" +
