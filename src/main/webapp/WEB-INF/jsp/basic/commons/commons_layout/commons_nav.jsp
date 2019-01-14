@@ -70,6 +70,7 @@
                     <li class="dropdown-item"><a href="/admin/serviceType/list" class="nav-link" id="backStage-role">serviceType</a></li>
 <!--                     <li class="dropdown-item"><a href="/admin/penaltyVertify/tempPenaltyEntrance" class="nav-link" id="backStage-personalinfo">【使用者】模擬提出檢舉(暫放)</a></li> -->
                     <li class="dropdown-item"><a href="/admin/penaltyVertify/showVertifyList" class="nav-link" id="backStage-personalinfo">審核檢舉／申訴案件</a></li>
+                    <li class="dropdown-item"><a href="/admin/donation/chart" class="nav-link" id="backStage-personalinfo">捐款統計(測試中)</a></li>
                   </ul>
                 </li>
                 </sec:authorize>

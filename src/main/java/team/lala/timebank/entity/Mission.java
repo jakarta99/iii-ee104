@@ -115,6 +115,9 @@ public class Mission {
 	@Column(name = "APPROVED_QUANTITY", nullable = false)
 	private Integer approvedQuantity; //被核准的志工數量
 	
+	@Column(name = "PAYED_QUANTITY", nullable = false)
+	private Integer payedQuantity; //已付款的志工數量
+	
 	@Column(name = "UPDATE_DATE")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date updateDate;

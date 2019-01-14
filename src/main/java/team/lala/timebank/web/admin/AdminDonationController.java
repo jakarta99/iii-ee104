@@ -132,5 +132,13 @@ public class AdminDonationController {
 
 		return donationCalResult;
 	}
+	
+	
+	@RequestMapping("/chart")
+	public String chartPage(Model model) {
+		List<Object[]> donationCalResult = donationService.countDonateTimeByYearAndMonth();
+		model.addAttribute("donationCalResult", donationCalResult);
+		return "/admin/others/donationCharts";
+	}
 
 }
