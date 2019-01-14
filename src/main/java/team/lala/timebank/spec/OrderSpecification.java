@@ -17,6 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
+import team.lala.timebank.enums.MissionStatus;
+import team.lala.timebank.enums.OrderStatus;
 
 @Slf4j
 @SuppressWarnings("serial")
@@ -49,6 +51,10 @@ public class OrderSpecification implements Specification<Order>  {
 			if (!StringUtils.isEmpty(inputOrder.getOrderStatusDetail())) {
 				list.add(criteriaBuilder.like(root.get("orderStatus").as(String.class), "%" + inputOrder.getOrderStatusDetail() + "%"));
 			}
+		}
+		
+		if (!StringUtils.isEmpty(inputOrder.getOrderStatusNeedPay())) {
+			list.add(criteriaBuilder.in(root.get("orderStatus").as(OrderStatus.class)).value(OrderStatus.ServiceFinishNotPay).value(OrderStatus.ServiceFinishPayMatchSuccess).value(OrderStatus.ServiceFinishNotPay));
 		}
 		
 		if(!StringUtils.isEmpty(inputOrder.getOrderStatus())) {

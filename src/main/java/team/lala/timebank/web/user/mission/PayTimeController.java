@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,7 @@ import team.lala.timebank.service.FacadeService;
 import team.lala.timebank.service.MissionService;
 import team.lala.timebank.service.OrderService;
 import team.lala.timebank.service.PenaltyService;
+import team.lala.timebank.spec.OrderSpecification;
 
 @Slf4j
 @Controller
@@ -57,7 +59,12 @@ public class PayTimeController {
 		Mission mission = missionService.getOne(id);
 		// Page<Mission> missions = missionService.findByAccount(principal,
 		// inputMission, PageRequest.of(page, length.orElse(10)));
-		Page<Order> orders = orderService.findByMission(mission, page, length);
+		Order inputorder =new Order();
+		inputorder.setMission(mission);
+		inputorder.setOrderStatusNeedPay("NeedPay");
+		OrderSpecification orderSpec = new OrderSpecification(inputorder);
+		
+		Page<Order> orders = orderService.findNeedPayOrder(orderSpec, PageRequest.of(page, length.orElse(10)));
 		return orders;
 	}
 

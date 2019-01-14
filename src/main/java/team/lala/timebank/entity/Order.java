@@ -54,6 +54,11 @@ public class Order{
 	@Transient
 	private String orderStatusDetail;
 	
+	
+	//找出需要付款的order spec用的
+	@Transient
+	private String orderStatusNeedPay;
+	
 	@DateTimeFormat(pattern = "yyyy/MM/dd" )
 	@Column(name="VOLUNTEER_APPLY_TIME")
 	private Date volunteerApplyTime;

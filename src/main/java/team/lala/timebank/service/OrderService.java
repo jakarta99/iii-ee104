@@ -42,15 +42,21 @@ public class OrderService {
 	// 根據會員查詢order
 	public Page<Order> findBySpecification(Specification<Order> specification, PageRequest pageRequest) {
 		return orderDao.findAll(specification, pageRequest);
-	}	
+	}
 	
 	public Page<Order> findByMission(Mission inputMission, int page, Optional<Integer> length) {
-		Page<Order> orders = orderDao.findByMission(inputMission, PageRequest.of(page, length.orElse(10)));
-		// mission.setMember(memberDao.findByAccount(principal.getName()));
-		// OrderSpecification orderSpec = new OrderSpecification(inputMission);
-		// Page<Order> orders = findBySpecification(orderSpec,
-		// PageRequest.of(page, length.orElse(10)));
-		log.debug("Orders={}", orders);
+		  Page<Order> orders = orderDao.findByMission(inputMission, PageRequest.of(page, length.orElse(10)));
+		  // mission.setMember(memberDao.findByAccount(principal.getName()));
+		  // OrderSpecification orderSpec = new OrderSpecification(inputMission);
+		  // Page<Order> orders = findBySpecification(orderSpec,
+		  // PageRequest.of(page, length.orElse(10)));
+		  log.debug("Orders={}", orders);
+		  return orders;
+		 }
+	
+	public Page<Order> findNeedPayOrder(Specification<Order> specification, PageRequest pageRequest) {
+		Page<Order> orders = orderDao.findAll(specification, pageRequest);
+		
 		return orders;
 	}
 	public List<Order> findByMissionAndOrderStatus(Mission mission, OrderStatus orderStatus){
