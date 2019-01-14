@@ -51,13 +51,13 @@
 			option = {
 			    xAxis: {
 			        type: 'category',
-			        data: ['','', '', '', '','', '','', '', '', '', '', '']
+			        data: ['','', '', '', '','', '','', '', '', '', ''] //從Controller回傳資料填X軸
 			    },
 			    yAxis: {
 			        type: 'value'
 			    },
 			    series: [{
-			        data: [, , , , , , , , , , , , , ],
+			        data: [, , , , , , , , , , , , ],//從Controller回傳資料填值
 			        type: 'line'
 			    }]
 			};
