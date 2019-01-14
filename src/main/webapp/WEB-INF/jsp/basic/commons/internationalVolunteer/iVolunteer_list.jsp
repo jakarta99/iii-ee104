@@ -55,15 +55,15 @@
 
 .btn-outline-primary {
     color: #fff;
-    border-color:#13b5b1a8;
-    background-color: #13b5b1a8; 
+    border-color:#13b5b100;
+    background-color: #13b5b1c4; 
     transition:all 0.5s;
 
 }
 .btn-outline-primary:hover {
 	color: #fff; 
-    background-color: #13b5b1ed;
     border-color: #13b5b1ed;  
+    background-color: #0e9a97a8;
     transition:all 0.5s;
 }
 </style>

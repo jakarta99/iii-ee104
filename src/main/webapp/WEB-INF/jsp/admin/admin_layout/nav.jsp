@@ -17,15 +17,18 @@
             <li class="nav-item mx-0 mx-lg-1">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
             </li>
-            <li class="nav-item dropdown"><a
-					class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="http://example.com"
-					id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false" style="font-family: 微軟正黑體">審核檢舉案件</a>
-					<div class="dropdown-menu" aria-labelledby="dropdown01">	
-						<a class="dropdown-item" href="/admin/penaltyVertify/tempPenaltyEntrance" id="backStage-personalinfo" style="font-family: 微軟正黑體">【使用者】模擬提出檢舉(暫放)</a>
-                    	<a class="dropdown-item" href="/admin/penaltyVertify/showVertifyList" id="backStage-personalinfo" style="font-family: 微軟正黑體">【管理者】檢舉案件審核</a>			
-					</div>
-			</li>
+<!--             <li class="nav-item dropdown"><a -->
+<!-- 					class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="http://example.com" -->
+<!-- 					id="dropdown01" data-toggle="dropdown" aria-haspopup="true" -->
+<!-- 					aria-expanded="false" style="font-family: 微軟正黑體">審核檢舉案件</a> -->
+<!-- 					<div class="dropdown-menu" aria-labelledby="dropdown01">	 -->
+<!-- 						<a class="dropdown-item" href="/admin/penaltyVertify/tempPenaltyEntrance" id="backStage-personalinfo" style="font-family: 微軟正黑體">【使用者】模擬提出檢舉(暫放)</a> -->
+<!--                     	<a class="dropdown-item" href="/admin/penaltyVertify/showVertifyList" id="backStage-personalinfo" style="font-family: 微軟正黑體">【管理者】檢舉案件審核</a>			 -->
+<!-- 					</div> -->
+<!-- 			</li> -->
+			<li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/admin/penaltyVertify/showVertifyList" style="font-family: 微軟正黑體">審核檢舉／申訴案件</a>
+            </li>
             <li class="nav-item dropdown"><a
 					class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="http://example.com"
 					id="dropdown01" data-toggle="dropdown" aria-haspopup="true"

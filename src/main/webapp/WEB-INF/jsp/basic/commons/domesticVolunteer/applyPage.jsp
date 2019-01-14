@@ -11,8 +11,6 @@
 <!-- Javascript files-->
 <jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
 
-<script defer
-	src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <!-- sweet alert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
@@ -32,7 +30,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/i18n/jquery-ui-timepicker-zh-TW.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
 <!-- 轉經緯度 -->
-<!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 <meta charset="UTF-8">
 <title>mission Detail</title>
@@ -139,6 +137,9 @@
 					<li>
 						<div class="icon-filled"></div>聯絡Email:  ${mission.contactEmail}
 					</li>
+					<li>
+						<div class="icon-filled"></div>聯絡Email:  ${mission.contactEmail}
+					</li>
 				</ul>
 
               </div>
@@ -160,7 +161,7 @@
 						<div class="icon-filled"></div>需求人數:${mission.peopleNeeded}人
 					</li>
 					<li>
-						<div class="icon-filled"></div>活動時數:${mission.timeValue}小時
+						<button id="chatButton" class="btn btn-template-outlined">與我們聯絡</button>
 					</li>
               	</ul>
               
@@ -197,13 +198,40 @@
 			    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNASLitmpPiGxtg94A3WqLl8bHHk0lzJM&callback=initMap"></script>
           	 <h3>我的地圖</h3>
 			    <div id="map"></div>
-		   </section>
+			    <script>
+
+			      var map, geocoder, popup;
+			    	
+			      function initMap() {
+			    	geocoder = new google.maps.Geocoder();
+			    	popup = new google.maps.InfoWindow();
+			    	
+			    	
+			    	
+			        var uluru = {lat: 25.0477505, lng: 121.5170599};
+			        map = new google.maps.Map(document.getElementById('map'), {
+			          zoom: 16,
+			          center: uluru
+			        });
+			        var marker = new google.maps.Marker({
+			          position: uluru,
+			          map: map
+			        });
+			      }
+			      
+			    </script>
+          
+          
+          
+          
+          
+          </section>
           
           
           
             </div>
  				
-		 	<jsp:include page="../../user/chatRoom/chatting.jsp"/>
+		 	
         </div>
        
 				
@@ -211,56 +239,8 @@
 	
 
 
-	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNASLitmpPiGxtg94A3WqLl8bHHk0lzJM&callback=initMap"></script>
-	<script> 
-	var address = ${mission.county}${mission.district}${mission.address};
-	console.log(address)
-	var map, geocoder, popup;
-    var geocoder = null;
-    function initMap() {
-  	geocoder = new google.maps.Geocoder();
-  	popup = new google.maps.InfoWindow();  	
-      map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 16,
-        center : {
-			lat : 25.033,
-			lng : 121.543
-		},
-      });
-      var address = ${mission.county}${mission.district}${mission.address};
-		if(geocoder) {
-			geocoder.geocode({"address": address}, function(results, status) {
-				if(status != google.maps.GeocoderStatus.OK)  {
-					alert("Geocoder Failed: " + status);
-				} else {
-					map.setCenter(results[0].geometry.location);
-					var marker = new google.maps.Marker({
-						map: map,
-						position: results[0].geometry.location
-					});
-				}
-			});
-		}
-      
-      
-    }    
-//     function addToUluru() {
-//   		var address = ${mission.county}${mission.district}${mission.address};
-//   		if(geocoder) {
-//   			geocoder.geocode({"address": address}, function(results, status) {
-//   				if(status != google.maps.GeocoderStatus.OK)  {
-//   					alert("Geocoder Failed: " + status);
-//   				} else {
-//   					map.setCenter(results[0].geometry.location);
-//   					var marker = new google.maps.Marker({
-//   						map: map,
-//   						position: results[0].geometry.location
-//   					});
-//   				}
-//   			});
-//   		}
-//   	}
+	
+	<script>
 	
 	
 	
@@ -276,15 +256,35 @@
 					$.ajax({
 						url:"/user/volunteerRecruitment/insert?missionId="+missionId,
 						type:'get',
-						dataType:'json'
+						dataType:'json',
+						success:function(data){
+							if(data.status == 'SUCCESS'){
+								swal({
+								  title: "申請結果",
+								  text: "申請成功",
+								  icon: "success",
+								  buttons: false,
+								  dangerMode: false,
+								})
+							}else{
+								swal({
+								  title: "申請失敗",
+								  text: data.messages,
+								  icon: "error",
+								  buttons: false,
+								  dangerMode: false,
+								})
+							}
+						}
 					}).fail(function( jqXHR, textStatus){
 						if(jqXHR.status == 200){
 							$("#login-modal").addClass("modal fade show");
 				    	   	$("#login-modal").css("display","block");
 				    	   	$("#login-modal").css("padding-right","17px");
-				    	   	$("#volunteerApply").val("volunteerApply");
+				    	   	$("#action").val("volunteerApply");
 						}
 					})
+					
 // 							function( data, textStatus, jqXHR ){
 // 							console.log(jqXHR);
 // 							console.log(data);
@@ -315,15 +315,20 @@
 					
 				}
 			})
+		}
+	
+	function startToChat(){
+		$("#toAccount").text('${mission.member.account}');
+		$("#toName").text('${mission.member.name}');
+		to = $("#toAccount").text();
+		chat();		
 	}
 		
 	$(document).ready(function() {
 		if ('${applying}' == 'Y'){
 			insertOrder('${mission.id}');
 		}
-		
-// 		addToUluru()
-		
+
 	})
 	
 
@@ -337,6 +342,6 @@
 
 
 
-
+	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 </body>
 </html>

@@ -254,21 +254,16 @@ public class PenaltyVertifyController {
 
 		AjaxResponse<Penalty> ajaxResponse = new AjaxResponse<Penalty>();
 		try {
-//			// 進行申訴案件審核，結果存入DB (可能是暫存申訴審核意見，還沒完成審核)
+			// 進行申訴案件審核，結果存入DB (暫存申訴審核意見，還沒完成審核)
 			Penalty penalty = penaltyService.reVertifyPenalty(penaltyId, reVertifystatus, reVertifyPenaltyTimeValue, reVertifyReason);
-//
-//			// 完成審核，寄站內信通知原告
-//			if (status == 2 || status == 3) {
-//				penaltyService.sendSystemMessageToAccuser(penalty); // 寄信
-//				ajaxResponse.setStatusDescription("1.已寄站內信給檢舉人。");
-//			}
-//			// 如果審核結果為2(需懲罰)，才進行被檢舉人帳戶扣款，並且寄站內信給被告
-//			if (status == 2) {
-//				timeLedgerService.doPenaltyDebit(penalty); // 扣款
-//				penaltyService.sendSystemMessageToDefendant(penalty); // 寄信
-//				ajaxResponse.setStatusDescription(ajaxResponse.getStatusDescription() + " 2.已寄站內信給被檢舉人。");
-//			}
-//			// ajaxResponse.setObj(penalty);
+
+			// 完成申訴審核結果，補時數並寄站內信通知申訴人
+			if (reVertifystatus == 3 || reVertifystatus == 2) {
+				timeLedgerService.sendTimeValueAfterReVertify(penalty);
+				penaltyService.sendSystemMessageToDefendantAfterReVertify(penalty); 
+				ajaxResponse.setStatusDescription("已寄站內信給申訴人。");
+			}
+
 		} catch (Exception e) {
 			ajaxResponse.addMessage(e.getMessage());
 			e.printStackTrace();

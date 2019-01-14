@@ -1238,6 +1238,12 @@ color: rgba(100, 100, 100);
   float: left;
 }
 
+#blog-listing-big p.intro, #blog-listing-medium p.intro_3 {
+  margin-top: 10px;
+  color: #777;
+  font-size: 15px;
+}
+
 .pager {
   padding: 20px 0;
   margin-top: 20px;
@@ -2459,14 +2465,14 @@ STYLE SWITCHER FOR DEMO
 
 .btn-primary {
   color: color-yiq(#13b5b1);
-  background-color: #13b5b1;
-  border-color: #13b5b1;
+  background-color: #1ec7c3;
+  border-color: #1ec7c3;
 }
 
 .btn-primary:hover {
   color: color-yiq(#3eaa94);
-  background-color: #3aa18c;
-  border-color: #3aa18c;
+  background-color: #10a9a5;
+  border-color: #10a9a5;
 }
 
 .btn-primary:focus, .btn-primary.focus {

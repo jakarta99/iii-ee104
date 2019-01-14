@@ -7,7 +7,8 @@
 <head>
 <!-- Javascript files-->
 <jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
-
+<!-- sweet alert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- data table -->
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="/js/dataTable_full_numbers_no_ellipses.js"></script>
@@ -64,9 +65,8 @@
 
 </head>
 <body>
-<fmt:formatDate value="${mission.publishDate }" pattern="yyyy/MM/dd" var="publishDate" />
-<fmt:formatDate value="${mission.startDate }" pattern="yyyy/MM/dd HH:mm" var="startDate" />
-<fmt:formatDate value="${mission.endDate }" pattern="yyyy/MM/dd HH:mm" var="endDate" />
+<fmt:formatDate value="${mission.startDate}" pattern="yyyy/MM/dd HH:mm" var="startDate" />
+<fmt:formatDate value="${mission.endDate}" pattern="yyyy/MM/dd HH:mm" var="endDate" />
 	<!-- Top bar-->
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
  	
@@ -234,7 +234,7 @@
 	
 	
 	
-		jQuery(document).ready(function(){
+		$(document).ready(function(){
 			
 			new TwCitySelector();
 			$("div[role='tw-city-selector']").attr("data-county-value",'${mission.county}');
@@ -266,8 +266,26 @@
 			$('#termType').val("${mission.termType}")
 			$('#serviceType').val(${mission.serviceType.id})
 			
-			
-			
+
+		if(${not empty response}){
+			if('${response}' == 'SUCCESS'){
+				swal({
+					title: "更新結果",	
+					text: "更新成功",
+					icon:"success",
+					buttons: false,
+					dangerMode: false,
+				})
+			}else{
+				swal({
+					  title: "更新失敗",
+					  text: '${response}',
+					  icon: "error",
+					  buttons: false,
+					  dangerMode: false,
+					})
+			}
+		}
 			
 			
 			

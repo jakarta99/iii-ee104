@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import team.lala.timebank.commons.handlers.MySimpleUrlAuthenticationSuccessHandler;
+import team.lala.timebank.commons.handler.MySimpleUrlAuthenticationSuccessHandler;
 import team.lala.timebank.service.TimeBankUserDetailsService;
 
 @Configuration
@@ -26,33 +26,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers("/", "/home").permitAll()
-				.antMatchers("/admin/**","/user/**").access("hasRole('ADMIN')")
-				.antMatchers("/user/**").hasAnyRole("USER, ORG_USER")
-				.and().formLogin().loginPage("/login")
-				.successHandler(authenticationSuccessHandler)
-				.failureHandler((req, res, exp) -> {
-					String errMsg = "";
-					if (exp instanceof BadCredentialsException) {
-						errMsg = "帳號或密碼錯誤";
-					} else {
-						errMsg = "Unknown error - " + exp.getMessage();
-					}
-					req.setAttribute("message", errMsg);
-					req.getRequestDispatcher("/WEB-INF/jsp/basic/commons/login.jsp").forward(req, res);
-				}).and().logout().logoutSuccessUrl("/")
-				.deleteCookies("JSESSIONID")
+			.antMatchers("/", "/home","/commons").permitAll()
+			.antMatchers("/admin/**","/image/admin/**").access("hasRole('ADMIN')")
+			.antMatchers("/user/**").hasAnyRole("USER, ORG_USER")
+			.and().formLogin().loginPage("/login")
+			.successHandler(authenticationSuccessHandler)
+			.failureHandler((req, res, exp) -> {
+				String errMsg = "";
+				if (exp instanceof BadCredentialsException) {
+					errMsg = "帳號或密碼錯誤";
+				} else {
+					errMsg = "Unknown error - " + exp.getMessage();
+				}
+				req.setAttribute("message", errMsg);
+				req.getRequestDispatcher("/WEB-INF/jsp/basic/commons/login.jsp").forward(req, res);
+			}).and().logout().logoutSuccessUrl("/")
+			.deleteCookies("JSESSIONID")
 //				.and().oauth2Login().loginPage("/oauth_login")
-				.and().csrf().disable();
-
+			.and().csrf().disable();
+		 http.sessionManagement().maximumSessions(20);
 	}
 
-	// 設定不需檢查的static檔案路徑，
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/js/**", "/css/**", "/img/**", "/vendor/**");
-	}
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(timeBankUserDetailsService).passwordEncoder(passwordEncoder());
@@ -64,6 +59,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return encoder;
 	}
 
+	// 設定不需檢查的static檔案路徑，
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/js/**", "/css/**","/css2/**", "/img/**", "/vendor/**","/vendor2/**","/indexPicture/**");
+	}
 	
 	
 

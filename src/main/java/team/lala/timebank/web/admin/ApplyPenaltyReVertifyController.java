@@ -1,4 +1,4 @@
-package team.lala.timebank.web.user;
+package team.lala.timebank.web.admin;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,7 +28,6 @@ public class ApplyPenaltyReVertifyController {
 	private PenaltyService penaltyService;
 	
 	//Jasmine 提出申訴
-		//如果penalty.getOrder().getReportStatus == ReportStatus.TemporarilyEnd
 		//則更改Penalty狀態為申訴中
 	@ResponseBody
 	@RequestMapping(value = "/applyReVertify", method = RequestMethod.POST)
@@ -38,6 +37,11 @@ public class ApplyPenaltyReVertifyController {
 			MultipartHttpServletRequest request, Model model) {
 		
 		Penalty penalty = penaltyService.getOne(penaltyId);
+		penalty.setUpdateDate(new java.util.Date());
+		penalty.setApplyReVertifyDescription(applyReVertifyDescription);
+		penalty.setApplyReVertify(YesNo.Y);
+		penalty.setStatus(4);
+		penalty = penaltyService.save(penalty);
 		AjaxResponse<Penalty> ajaxResponse = new AjaxResponse<Penalty>();
 		
 		try {
@@ -57,9 +61,6 @@ public class ApplyPenaltyReVertifyController {
 				fos.close();
 				// 將檔名、申訴資訊存入DB
 				penalty.setReVertifyProofPicName("reVertifyPicture_" + penalty.getId() + ".jpg");
-				penalty.setApplyReVertifyDescription(applyReVertifyDescription);
-				penalty.setApplyReVertify(YesNo.Y);
-				penalty.setStatus(4);
 				penaltyService.save(penalty);
 			}
 		} catch (Exception e) {
@@ -69,6 +70,15 @@ public class ApplyPenaltyReVertifyController {
 		
 
 		return ajaxResponse;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/checkReVertifyContent", method = RequestMethod.POST)
+	public Penalty checkReVertifyContent(@RequestParam("penaltyId") Long penaltyId) {
+		
+		Penalty penalty = penaltyService.getOne(penaltyId);
+		return penalty;
 	}
 	
 

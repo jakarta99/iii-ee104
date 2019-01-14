@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <!-- Login Modal-->
-      <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalLabel" aria-hidden="true" class="modal fade">
+      <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalLabel" aria-hidden="true" class="modal fade" >
         <div role="document" class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h4 id="login-modalLabel" class="modal-title">Customer Login</h4>
-              <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+              <button type="button" aria-label="Close" class="close" onclick="closeModal()"><span aria-hidden="true" >×</span></button>
             </div>
             <div class="modal-body">
               <form action="/login"  method="post" id="login-modal">
@@ -14,7 +14,7 @@
                   <input id="sourceUrl" type="hidden" name="sourceUrl" class="form-control">
                 </div>  
                 <div class="form-group">
-                  <input id="volunteerApply" type="hidden" name="volunteerApply" class="form-control">
+                  <input id="action" type="hidden" name="action" class="form-control">
                 </div>
                 <div class="form-group">
                   <input id="email_modal" type="text" placeholder="username" name="username" class="form-control">
@@ -36,6 +36,11 @@
       
       
       <script>
+      
+      	function closeModal(){
+      		$("#login-modal").hide();
+      		
+      	}
        	var parentUrl = parent.window.location.href.substring(10);
        	var index = parentUrl.indexOf("/");
       	$("#sourceUrl").val(parentUrl.substring(index));

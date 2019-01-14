@@ -29,10 +29,10 @@
  		margin-bottom: 20px;  
 	}
 
-	 table tr td, button{
-	 	text-align:center;
-	 	line-height:center; 
-	 }
+ 	 table tr td, button{ */
+/*  	 	text-align:center; */ */
+ 	 	line-height:center;  */
+ 	 } */
 	 article .btn{
 	 	margin-left:3px;
 	 	margin-right:3px
@@ -56,10 +56,7 @@
 				<fieldset style="width:1100px">
 				<legend>Search</legend>
 				<div>
-<!-- 					<label>檢舉人: </label> -->
-<%-- 					<input type="text" value="${param.memberId}" id="accuser" name="accuser" placeholder="accuser" /> --%>
-					
-<!-- 					審核狀態status:-->
+
 					<select id="status" name="status" style="display:none">  
 						<option value="">請選擇</option>
 						<option value=1>審核中</option>
@@ -83,15 +80,9 @@
 					<input type="button" value="搜尋"  id="searchButt" style="margin:10px"/> 
 					<input type="reset" value="重設" id="resetButt" style="margin:10px"/>
 					
-					
-<!-- 					<a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse"  -->
-<!-- 						role="button" aria-expanded="false" aria-controls="collapse">進階查詢:</a> -->
 				</div>
 				<div class="collapse" id="collapse">
-<!-- 					<div> -->
-<!-- 						<label>orderListId</label> -->
-<%-- 						<input type="text" value="${param.orderListId}" id="order" name="order" /> --%>
-<!-- 					</div> -->
+
 					
 				</div>
 				</fieldset>
@@ -100,15 +91,15 @@
 		
 		<fieldset style="width:1300px">
 			<div class="btn-group" style="margin-bottom: 20px">
-			  <button type="button" class="btn btn-info" id="vertifyingCase">【檢舉】審核中</button>
-			  <button type="button" class="btn btn-outline-info" id="reVertifyingCase">【申訴】審核中</button>
+			  <button type="button" class="btn btn-info" id="vertifyingCase">【檢舉】審核</button>
+			  <button type="button" class="btn btn-outline-info" id="reVertifyingCase">【申訴】審核</button>
 			  <button type="button" class="btn btn-outline-info" id="allCases">所有案件</button>
 			  <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="history">
 			    	審核歷史紀錄
 			  </button>
 			  <div class="dropdown-menu">
-			    	<a class="dropdown-item" href="#" id="vertified2">有罪</a>
-			    	<a class="dropdown-item" href="#" id="vertified3">無罪</a>
+			    	<a class="dropdown-item" href="#" id="vertified2">懲罰</a>
+			    	<a class="dropdown-item" href="#" id="vertified3">不懲罰</a>
 			  </div>
 			  <div>
 			  	<a class="btn btn-secondary" href="#" 
@@ -128,19 +119,19 @@
 					<tr style="background-color: white">
 						<th scope="col"></th>
 						<th scope="col" width="50px"></th>
-						<th scope="col">檢舉案件編號</th>
+						<th scope="col">檢舉<br>編號</th>
 <!-- 						<th scope="col">媒合案件編號</th> -->
-						<th scope="col">檢舉案件活動名稱</th>
+						<th scope="col">活動名稱</th>
 						
-						<th scope="col">提出檢舉時間</th>
+						<th scope="col">檢舉時間</th>
 <!-- 						<th scope="col">檢舉人ID</th> -->
-						<th scope="col">檢舉人帳號</th>
+						<th scope="col">檢舉人<br>帳號</th>
 <!-- 						<th scope="col">被檢舉者ID</th> -->
-						<th scope="col">被檢舉者帳號</th>
+						<th scope="col">被檢舉人<br>帳號</th>
 						
 						<th scope="col">檢舉事由</th>
-						<th scope="col">懲罰額度(小時)</th>
-						<th scope="col">處理進度</th>
+						<th scope="col">懲罰額度</th>
+						<th scope="col">處理狀態</th>
 						<th scope="col">是否申訴</th>
 						
 					</tr>
@@ -202,63 +193,63 @@
 		     		{data:null},
 		           	{data: function (data) {
 		           		var vertifyButt = "";
-		           		//已完成審核之案件，不顯示審核按鈕
-// 		           		if(data.status != 1){
-// 		           			vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-info btn-sm\"  onclick=\"javascript:document.location.href='/admin/penaltyVertify/vertify?id="
-// 								+ data.id + "'\" value='檢視紀錄'  /></div>";
-// 						}else{
-// 							vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-info btn-sm\"  onclick=\"javascript:document.location.href='/admin/penaltyVertify/vertify?id="
-// 								+ data.id + "'\" value='審核'  /></div>";
-// 						}
+
 		           		if(data.status == 1){
 		           			vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/penaltyVertify/vertify?id="
-								+ data.id + "'\" value='[檢舉]審核'  /></div>";
+								+ data.id + "'\" value='【檢舉】審核'  /></div>";
 						}else if(data.status == 4){
 							vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-primary btn-sm\"  onclick=\"javascript:document.location.href='/admin/penaltyVertify/vertify?id="
-								+ data.id + "'\" value='[申訴]審核'  /></div>";
+								+ data.id + "'\" value='【申訴】審核'  /></div>";
 						}else{
 							vertifyButt = "<div name='vertifyBtn'><input type='button' class=\"btn btn-info btn-sm\"  onclick=\"javascript:document.location.href='/admin/penaltyVertify/vertify?id="
 								+ data.id + "'\" value='檢視紀錄'  /></div>";
 						}
 		           		
-		           		
-		           		
-		           		
 		               	return vertifyButt;	}
 		           	},
 		           	{data:"id" },
-// 					{data:"order.id"},
 					{data:"order.mission.title"},
 					{data:null, render:function(data, type, row){
 						return new Date(data.updateDate).toLocaleDateString();
 						}
 					},
-// 					{data:"accuser.id"},
 					{data:"accuser.account"},
-// 					{data:"defendant.id"},
 					{data:"defendant.account"},
 					{data:"description"},
-					{data:"penaltyTimeValue"},
-					{data:function (data){
-						var status = data.status;
-						if(status == 1){
-							return "審核中";
-						}else if(status == 2){
-							return "已懲罰";
-						}else if(status == 3){
-							return "不懲罰";
-						}else if(status == 4){
-							return "申訴審核中";
+					{data:function(data){
+							//申訴審核完畢案件，懲罰時數寫申訴審核結果	
+							if(data.reVertifyPenaltyTimeValue != null && data.status != "4"){ 
+								return data.reVertifyPenaltyTimeValue;
+							}else{
+								return data.penaltyTimeValue;
+							}
+						
 						}
-					}
-					
+					},
+					{data:function (data){
+							var status = data.status;
+							var applyReVertify = data.applyReVertify;
+							if(status == 1){
+								return "檢舉審核中";
+							}else if(status == 2 && applyReVertify!="Y"){
+								return "檢舉審核結果：懲罰";
+							}else if(status == 3){
+								return "檢舉審核結果：不懲罰";
+							}else if(status == 4){
+								return "申訴審核中";
+							}else if(status == 2 && applyReVertify=="Y"){
+								return "申訴審核結果：懲罰";
+							}else if(status == 3 && applyReVertify=="Y"){
+								return "申訴審核結果：不懲罰";
+							}
+						}
 					},
 					{data:function (data){
 						var applyReVertify = data.applyReVertify;
-						if(applyReVertify == null){
-							return "N";
+						if(applyReVertify == null || applyReVertify == "N"){
+							return "否";
 						}else{
-							return data.applyReVertify;
+							return "是";
 						}
 					}},
 					

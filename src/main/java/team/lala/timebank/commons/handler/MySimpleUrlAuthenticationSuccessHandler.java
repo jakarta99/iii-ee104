@@ -1,14 +1,11 @@
-package team.lala.timebank.commons.handlers;
+package team.lala.timebank.commons.handler;
 
 import java.io.IOException;
-import java.util.Collection;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
@@ -23,9 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MySimpleUrlAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
 	private RequestCache requestCache = new HttpSessionRequestCache();
-//	private String defaultTargetUrl = "/";
-	private String targetUrlParameter ="sourceUrl";
-//	private boolean useReferer = false;
+	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws ServletException, IOException {
@@ -58,13 +53,15 @@ public class MySimpleUrlAuthenticationSuccessHandler extends SimpleUrlAuthentica
 	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
 		String targetUrl = null;
-		log.debug("sourceUrl={}",request.getParameter(targetUrlParameter));
-		log.debug("volunteerApply={}",request.getParameter("volunteerApply"));
+		log.debug("sourceUrl={}",request.getParameter("sourceUrl"));
+		log.debug("action={}",request.getParameter("action"));
 
-		if (!StringUtils.isEmpty(request.getParameter(targetUrlParameter))) {
-			targetUrl = request.getParameter(targetUrlParameter);
-			if (!StringUtils.isEmpty(request.getParameter("volunteerApply"))) {
+		if (!StringUtils.isEmpty(request.getParameter("sourceUrl"))) {
+			targetUrl = request.getParameter("sourceUrl");
+			if ("volunteerApply".equals(request.getParameter("action"))) {
 				targetUrl += "&apply=Y";
+			} else if ("chatting".equals(request.getParameter("action"))){
+				request.getSession().setAttribute("chatting", "Y");
 			}
 		} else {
 			targetUrl = determineTargetUrl(request, response);			

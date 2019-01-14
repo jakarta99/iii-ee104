@@ -6,6 +6,7 @@
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
     <!-- Google fonts - Roboto-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700">
@@ -16,6 +17,8 @@
     <link rel="stylesheet" href="/vendor/owl.carousel/assets/owl.theme.default.css">
     <!-- theme stylesheet-->
     <link rel="stylesheet" href="/css/style.default.css" id="theme-stylesheet">
+	<!--     聊天室 -->
+    <link rel="stylesheet" href="/css/chat.css" />
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="/css/custom.css">
     <!-- Favicon and apple touch icons-->

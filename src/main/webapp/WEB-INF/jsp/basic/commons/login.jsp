@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Time Bank Login</title>
+<title>登入 | Time Bank </title>
 <!-- css -->
 <jsp:include page="commons_layout/commons_css_links.jsp"/>
 <!-- Javascript files-->
