@@ -36,6 +36,36 @@
 <meta charset="UTF-8">
 <title>mission list(login)</title>
 <style>
+		.container-1{
+		 	
+			max-width: 1500px;
+			border-radius: 3px;
+			
+		}
+		.s3{
+			width:100%;
+			margin-bottom:60px;
+			margin-left:60px;
+			margin-right:60px;
+		}
+		.s4{
+			width:100%;
+			margin: auto;
+			padding-top:40px;
+		}
+		.s5{
+			background-color: rgba(234, 234, 234); 
+		}
+		.s6{
+			width:100%;
+			margin: auto;
+			padding-top:40px;
+			border-style:solid;
+			border-color:#13b5b1;
+		}
+		.s7{
+			margin-left:5%;
+		}
 		
         fieldset {
         	background-color:#CCEEFF;
@@ -70,7 +100,7 @@
 </head>
 <body>
 	  
- <!-- Top bar-->
+ 		<!-- Top bar-->
       <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
  	
 	  <!-- Navbar -->
@@ -94,25 +124,23 @@
       
       
         <div id="content">
-        <div class="container">
-        <section class="bar_1">
+        <div class="container-1 container">
+        <div class="row">
+        <div class="col-md-9">
+        <div class="s5">
+        <div class="s4">
         	<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
 		       <li class="nav-item"><a id="status12Butt" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="false" class="nav-link">未開始</a></li>
 		       <li class="nav-item"><a id="status3Butt" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">時數未核發</a></li>
 		       <li class="nav-item"><a id="status4Butt" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" class="nav-link">歷史紀錄</a></li>
    			 </ul>
-       	  </section>
+       	  </div>
           <div class="row bar">
-          
-            <div id="blog-listing-medium" class="col-md-9">
-          
-          
-              <section class="post_1">
-                <div class="row" id="boxbox">
+            <div id="blog-listing-medium" class="col-md-12">
+          	<div id="boxbox" class="row">
 <!--                 mission內容開始 -->                
-                </div>
-              </section>
-             
+          
+             </div>
              <div >
                	<nav aria-label="Page navigation example" class="d-flex justify-content-center">
                     <ul id ="pagebox" class="pagination pagination-lg">
@@ -121,11 +149,19 @@
                   </nav>
               </div>    
             </div>
-            <div class="col-md-3">
+            
+          
+            </div>
+          </div>
+          </div>
+           <div class="col-md-3">
+            <div class="s6" >
               
               <div class="panel panel-default sidebar-menu">
                 <div class="panel-heading">
+                <div class="s7">
                   <h3 class="h4 panel-title">條件查詢</h3>
+                  </div>
                 </div>
                 
                 
@@ -184,8 +220,10 @@
 		</form>
                 </div>
               </div>
-              
-            </div>
+              </div>
+           
+           
+           </div>
           </div>
         </div>
       </div>
@@ -277,12 +315,12 @@
 	        	last=missions.last;	        	
 	        	page=missions.number;
 	        	if(missions.content.length == 0){
-	        		var box="<h2>目前沒有資料</h2>"
+	        		var box="<div class='s3'><h2>目前沒有資料</h2></div>"
 	        		$("#boxbox").append(box);
 	        	} else {
 	        	$.each(missions.content,function(index, mission){
-// 	        		console.log(mission)
-	        		var box="<div class='col-md-4'>"
+	        		  var box="<div class='s3'><div class='row'>"
+	        		   box+="<div class='col-md-4'>"
 	        		   box+="<div class='video '>"
 	        		   box+="<div class='embed-responsive embed-responsive-4by3'>"	        	
 	        		   box+=" <a href='#'><img src=/image/user/mission/"+mission.missionPicName+" class='embed-responsive-item'></img></a>"     
@@ -325,8 +363,9 @@
 	 					box+="<p class='read-more text-right'><a href='/user/closed/list?id="+mission.id+"' class='btn btn-template-outlined'>結案紀錄</a></p></div>"								
 	 				}else if(mission.missionstatus=="A_VolunteerApproved"){
 	 					box+="<p class='read-more text-right'><span class='badge badge-success'>審核完畢</span></p><div>"
-	 				}                 
-	                var boxbox=$("#boxbox").append(box)
+	 				}
+	                	box+="</div></div>"
+	                boxbox=$("#boxbox").append(box)
 	        	})
 	        		$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
 	        	for (var index = 1; index <= totalPages ; index++) {

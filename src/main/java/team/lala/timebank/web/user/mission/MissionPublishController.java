@@ -125,16 +125,18 @@ public class MissionPublishController {
 		attr.addAttribute("response", "SUCCESS");
 		return "redirect:/user/missionPublish/add";
 	}
-	@RequestMapping("/test")
+	@RequestMapping("/test2")
 	public void test() {
 		//獲得到期的所有mission
 		Mission inputMission = new Mission();
-		inputMission.setMissionstatus(MissionStatus.A_New);
+		inputMission.setMissionstatus(MissionStatus.B_AccountsPayable);
 		inputMission.setAutoPayDate(new Date(new Date().getTime() + 1 * 24 * 60 * 60 * 1000));
 		MissionSpecification missionSpec = new MissionSpecification(inputMission);
 		List<Mission> missions = missionService.findBySpecification(missionSpec);
 		//設定mission狀態
 		for(Mission mission : missions) {
+			//回復刊登任務時預扣值
+			mission.getMember().setBalanceValue(mission.getMember().getBalanceValue() + (mission.getTimeValue() * mission.getPeopleNeeded()));
 			//每個mission的order自動付款評分
 			for(Order order : mission.getOrders()) {
 				//付款評分 自動評5分
@@ -146,7 +148,7 @@ public class MissionPublishController {
 	public void test1() {
 		Mission inputMission = new Mission();
 		inputMission.setMissionstatus(MissionStatus.A_New);
-		inputMission.setEndDate(new Date());
+		inputMission.setEndDate(new Date(new Date().getTime() + 1 * 24 * 60 * 60 * 1000));
 		//搜尋A狀態以及活動到期的Mission
 		MissionSpecification missionSpec = new MissionSpecification(inputMission);
 		List<Mission> missions = missionService.findBySpecification(missionSpec);
@@ -158,6 +160,7 @@ public class MissionPublishController {
 			}else {
 				//申請狀態為apply 即取消
 				List<Order> cancelOrders = orderDao.findByMissionAndOrderStatus(mission, OrderStatus.VolunteerApply);
+				//申請狀態為accept 即轉為FinishNotPay
 				List<Order> acceptOrders = orderDao.findByMissionAndOrderStatus(mission, OrderStatus.RequesterAcceptService);
 				if(acceptOrders.size() == 0 ){
 					mission.setMissionstatus(MissionStatus.C_Cancel);
@@ -168,16 +171,13 @@ public class MissionPublishController {
 						order.setOrderStatus(OrderStatus.ServiceFinishNotPay);
 					}
 					orderDao.saveAll(acceptOrders);
+					mission.setMissionstatus(MissionStatus.B_AccountsPayable);
 				}
 				if(cancelOrders.size() != 0) {
 					systemMessageService.missionCancel(cancelOrders);
 					orderService.rejectOrders(cancelOrders);
-					for(Order order : cancelOrders) {
-						order.setOrderStatus(OrderStatus.RequesterCancleTransactionMatchFail);
-					}
-					orderDao.saveAll(acceptOrders);
 				}
-				mission.setMissionstatus(MissionStatus.B_AccountsPayable);
+				
 			}
 		}
 		missionDao.saveAll(missions);

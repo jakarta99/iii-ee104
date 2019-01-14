@@ -66,6 +66,7 @@ public class MissionService {
 		mission.setPublishDate(new Date());
 		mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
 		mission.setApprovedQuantity(0);
+		mission.setPayedQuantity(0);
 		return missionDao.save(mission);
 	}
 

@@ -156,11 +156,11 @@ public class RecruitController {
 		//使用額度超過member餘額 無法刊登
 		if(member.getBalanceValue().intValue() >= inputMission.getTimeValue().intValue() * inputMission.getPeopleNeeded()) {
 			//member可使用額度減少
-			member.setBalanceValue(member.getBalanceValue().intValue() - inputMission.getTimeValue().intValue());
+			member.setBalanceValue(member.getBalanceValue().intValue() - inputMission.getTimeValue().intValue() * inputMission.getPeopleNeeded());
 			missionService.insert(inputMission, principal);
 		}else {
 			//扣回原本的可使用額度
-			member.setBalanceValue(member.getBalanceValue().intValue() - missionService.getOne(inputMission.getId()).getTimeValue().intValue());
+			member.setBalanceValue(member.getBalanceValue().intValue() - mission.getTimeValue().intValue() * mission.getPeopleNeeded());
 			attr.addAttribute("res", "errorBalance");
 			return "redirect:/user/volunteerRecruitment/edit";
 		}

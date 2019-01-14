@@ -15,7 +15,7 @@
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/">HOME</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/admin/donation/chart" style="font-family: 微軟正黑體">統計(未完成)</a>
             </li>
 <!--             <li class="nav-item dropdown"><a -->
 <!-- 					class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="http://example.com" -->

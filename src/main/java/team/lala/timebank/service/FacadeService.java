@@ -86,15 +86,18 @@ public class FacadeService {
 			// 5.2 入賬後收到的訊息
 			systemMessageService.earn(payer, volunteer, hours, missionTitle);
 			// 5.2 產生入賬後收到的訊息完成
-
+			
+			mission.setPayedQuantity(mission.getPayedQuantity()+1);
+			missionDao.save(mission);
 			// 搜尋mission中的所有order 若全付款則將 mission 狀態改變
 			List<Order> orders = orderDao.findByMissionAndOrderStatus(mission, OrderStatus.ServiceFinishPayMatchSuccess);
-				if (orders.size() == mission.getOrders().size()) {
-					mission.setMissionstatus(MissionStatus.C_Finish);
-					mission.setFinishDate(new Date());
-					missionDao.save(mission);
-					systemMessageService.finishMission(payer, missionTitle);
-				}
+				
+			if (orders.size() == mission.getApprovedQuantity().intValue()) {
+				mission.setMissionstatus(MissionStatus.C_Finish);
+				mission.setFinishDate(new Date());
+				missionDao.save(mission);
+				systemMessageService.finishMission(payer, missionTitle);
+			}
 			orderDao.save(order);
 		}
 

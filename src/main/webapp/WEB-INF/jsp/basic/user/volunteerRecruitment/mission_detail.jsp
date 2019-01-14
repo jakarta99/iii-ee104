@@ -35,7 +35,7 @@
 
 
 <meta charset="UTF-8">
-<title>mission Detail</title>
+<title>任務詳細 | TimeBank</title>
 <style>
 
 	 	
