@@ -143,7 +143,7 @@
 	        		$("#boxbox").append(box);
 	        	} else {
 		        	$.each(orders.content, function(index, order){
-		        	   var box="<section class='post'><div class='row'><div class='col-md-4'>"
+		        	   var box="<section><div class='row'><div class='col-md-4'>"
 	        		   box+="<div class='video'>"
 	        		   box+="<div class='embed-responsive embed-responsive-4by3'>"	        	
 	        		   box+=" <a href='/user/volunteerRecruitment/detail?missionId="+ order.mission.id +"'><img src=/image/user/mission/"+order.mission.missionPicName+" class='img'></img></a>"     

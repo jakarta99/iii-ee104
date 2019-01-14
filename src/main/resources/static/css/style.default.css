@@ -38,6 +38,7 @@ a {
 
 button {
   cursor: pointer;
+ 
 }
 
 strong {
@@ -914,6 +915,7 @@ color: rgba(100, 100, 100);
 
 .features-buttons button {
   margin-bottom: 20px;
+   
 }
 
 .customers {
@@ -1087,6 +1089,7 @@ color: rgba(100, 100, 100);
   border: none;
   margin: 5px;
   outline: none;
+ 
 }
 
 .home-blog-post {
@@ -1172,6 +1175,12 @@ color: rgba(100, 100, 100);
   
 }
 
+#blog-listing-big .post, #blog-listing-medium .post_2 {
+  margin-bottom: 60px;
+  width:100%;
+  margin-right: 60px;
+}
+
 #blog-listing-big .image, #blog-listing-medium .image {
   margin-bottom: 15px;
 }
@@ -1228,7 +1237,7 @@ color: rgba(100, 100, 100);
 #blog-listing-big p.intro, #blog-listing-medium p.intro_1 {
   margin-top: 10px;
   color: #777;
-  font-size: 20px;
+  font-size: 26px;
 }
 
 #blog-listing-big p.intro, #blog-listing-medium p.intro_2 {
@@ -1998,6 +2007,7 @@ table tr td {
 
 .panel-heading h3 {
   margin-top: 5px;
+ 
 }
 
 .panel-heading .btn {
