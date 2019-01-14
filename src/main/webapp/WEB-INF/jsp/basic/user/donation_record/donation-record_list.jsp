@@ -10,8 +10,6 @@
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp" />
 <!-- Javascript files -->
 <jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
-<script defer
-	src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
 <!-- date picker -->
 <script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
@@ -46,13 +44,12 @@
             	<div class="col-md-7">
               		<h1 class="h2">我的捐款</h1>
             	</div>
-<!-- 	            <div class="col-md-5"> -->
-<!-- 	              	<ul class="breadcrumb d-flex justify-content-end"> -->
-<!-- 	                	<li class="breadcrumb-item"><a href="index.html">Home</a></li> -->
-<!-- 	                	<li class="breadcrumb-item"><a href="team.html">Our Team</a></li> -->
-<!-- 	                	<li class="breadcrumb-item active">Team Member</li> -->
-<!-- 	              	</ul> -->
-<!-- 	            </div> -->
+	            <div class="col-md-5">
+	              	<ul class="breadcrumb d-flex justify-content-end">
+	                	<li class="breadcrumb-item"><a href="/">Home</a></li>
+	                	<li class="breadcrumb-item active">Donation record</li>
+	              	</ul>
+	            </div>
         	</div>
         </div>
     </div>
