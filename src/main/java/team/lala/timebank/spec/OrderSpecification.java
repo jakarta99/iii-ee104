@@ -36,6 +36,9 @@ public class OrderSpecification implements Specification<Order>  {
 		if(!StringUtils.isEmpty(inputOrder.getId())) {
 			list.add(criteriaBuilder.equal(root.get("id").as(Long.class), inputOrder.getId()));
 		}
+		if(!StringUtils.isEmpty(inputOrder.getMission())) {
+			list.add(criteriaBuilder.equal(root.get("mission").as(Mission.class), inputOrder.getMission()));
+		}
 
 		if(!StringUtils.isEmpty(inputOrder.getVolunteerAccount())) {
 			Join<Member, Order> join = root.join("volunteer", JoinType.LEFT);
