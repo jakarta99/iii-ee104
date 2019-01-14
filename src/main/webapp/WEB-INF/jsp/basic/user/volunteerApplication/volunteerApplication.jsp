@@ -14,7 +14,47 @@
 <style>
 	.nav-link{
 		font-weight: bold;
-	}	
+	}
+	
+	#blog-listing-big p.intro, #blog-listing-medium p.intro {
+	  margin-top: 10px;
+	  margin-right: 15px;
+	  color: #777;
+	  font-size: 20px;
+	  display: inline-block;
+	}
+	.img{
+		width: 90%;
+		height: 90%;
+		position: absolute;
+	    top: 0;
+	    bottom: 0;
+	    left: 0;
+	    border: 0;
+	}
+	.embed-responsive {
+	    position: relative;
+	    display: block;
+	    width: 100%;
+	    padding: 0;
+	    overflow: hidden;
+	    margin-left: 20px;
+    }
+    #blog-listing-big .date-comments a, #blog-listing-medium .date-comments_1 a {
+		color: #999;
+		margin-left: 25px;
+		font-size: 20px;
+		display: inline-block;
+	}
+	.title{
+		color: #26ab7b;
+	}
+	#blog-listing-big .post, #blog-listing-medium .post {
+  		margin-bottom: 30px;
+	}
+	.nav-pills .nav-link {
+    border-radius: 8cm;
+}
     </style>
 </head>
 <body>
@@ -36,27 +76,25 @@
 		<div class="container">
 		<section class="bar_1">
 			<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
-               <li class="nav-item"><a id="orderStatus1" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active">申請中</a></li>
-               <li class="nav-item"><a id="orderStatus2" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">機構接受服務</a></li>
-               <li class="nav-item"><a id="orderStatus6" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" class="nav-link">活動時間結束，未發時數</a></li>
+               <li class="nav-item abc"><a id="orderStatus1" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active">申請中</a></li>
+               <li class="nav-item abc"><a id="orderStatus2" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">機構接受服務</a></li>
+               <li class="nav-item abc"><a id="orderStatus6" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" class="nav-link">活動時間結束，未發時數</a></li>
             </ul>
 		</section>
 		<div class="row bar">
-			<div id="blog-listing-medium" class="col-md-9">
-			<section class="post_1">
-			<div class="row" id="boxbox">
+			<div id="blog-listing-medium" class="col-md-12">
+			<div id="boxbox">
 				<!--mission內容開始 -->                
+	           	<div>
+		            <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+			            <ul id ="pagebox" class="pagination pagination-lg">
+						<!--換頁控制開始 -->
+			            </ul>
+		            </nav>
+	            </div>
 			</div>
-            </section>
-           	<div>
-            <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-	            <ul id ="pagebox" class="pagination pagination-lg">
-					<!--換頁控制開始 -->
-	            </ul>
-            </nav>
             </div>
-            </div>
-            </div>
+        </div>
 		</div>
 		</div>
 	<!-- FOOTER -->
@@ -105,15 +143,14 @@
 	        		$("#boxbox").append(box);
 	        	} else {
 		        	$.each(orders.content, function(index, order){
-		        	   var box="<div class='col-md-4'>"
+		        	   var box="<section class='post'><div class='row'><div class='col-md-4'>"
 	        		   box+="<div class='video'>"
 	        		   box+="<div class='embed-responsive embed-responsive-4by3'>"	        	
-	        		   box+=" <a href='/commons/domesticVolunteer/apply?missionId="+ order.mission.id +"'><img src=/image/user/mission/"+order.mission.missionPicName+" class='embed-responsive-item'></img></a>"     
+	        		   box+=" <a href='/user/volunteerRecruitment/detail?missionId="+ order.mission.id +"'><img src=/image/user/mission/"+order.mission.missionPicName+" class='img'></img></a>"     
 	        		   box+="</div></div></div>"
 	                   box+="<div class='col-md-8'>"
-	                   box+="<h3 class='h3 mt-0'><a href='/commons/domesticVolunteer/apply?missionId="+ order.mission.id +"'>"+ order.mission.title + "</a></h3>"
-	                   box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
-	                   box+="<p class='author-category_1'><a href='#'>"+ order.mission.member.name + "</a></p>"
+	                   box+="<div class='d-flex flex-wrap justify-content-between'>"
+	                   box+="<h3 class='h2 mt-0'><a href='/user/volunteerRecruitment/detail?missionId="+ order.mission.id +"'>"+ order.mission.title + "</a></h3>"
 	                   if(order.orderStatus == "VolunteerApply"){
 	                   		box+="<p class='date-comments_1'><a href='javascript: void(0)' onclick='deleteRow("+order.id+")' ><i class='fa fa-trash'></i>取消</a></p></div>"
 					   } else if (order.orderStatus == "RequesterAcceptService"){
@@ -125,15 +162,18 @@
 					   } else {
 						   box+="</div>"
 		           	   }
+	                   box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
+	                   box+="<p class='author-category_1'><a href='#' class='title'>"+ order.mission.member.name + "</a></p></div>"
 		        	   if(order.orderStatus == "VolunteerApply"){
-		               		box+="<p class='intro_3'>申請時間:"+new Date(order.volunteerApplyTime).Format('yyyy-MM-dd hh:mm')+"</p>"
-		               		box+="<p class='intro_3'>開始時間:"+new Date(order.mission.startDate).Format('yyyy-MM-dd hh:mm')+"</p>"
+		               		box+="<p class='intro'>申請時間:"+new Date(order.volunteerApplyTime).Format('yyyy-MM-dd hh:mm')+"</p>"
+		               		box+="<p class='intro'>開始時間:"+new Date(order.mission.startDate).Format('yyyy-MM-dd hh:mm')+"</p>"
 			           }else if(order.orderStatus == "RequesterAcceptService"){
-			            	box+="<p class='intro_3'>開始時間:"+new Date(order.mission.startDate).Format('yyyy-MM-dd hh:mm')+"</p>"
+			            	box+="<p class='intro'>開始時間:"+new Date(order.mission.startDate).Format('yyyy-MM-dd hh:mm')+"</p>"
 			           }else if(order.orderStatus == "ServiceFinishNotPay"){
-			            	box+="<p class='intro_3'>結束時間:"+new Date(order.mission.endDate).Format('yyyy-MM-dd hh:mm')+"</p>"
+			            	box+="<p class='intro'>結束時間:"+new Date(order.mission.endDate).Format('yyyy-MM-dd hh:mm')+"</p>"
 			           }
-	                   box+="<p class='intro_3'>活動地點:"+order.mission.county + order.mission.district+"</p>"
+	                   box+="<p class='intro'>活動地點:"+order.mission.county + order.mission.district+"</p>"
+	                   box+="</div></section>"
 				       $("#boxbox").append(box);
 		        	})
 	        	}
