@@ -29,8 +29,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/i18n/jquery-ui-timepicker-zh-TW.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
-<!-- 轉經緯度 -->
-<!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
 
 <meta charset="UTF-8">
 <title>mission Detail</title>
@@ -180,56 +178,72 @@
           </section>
           
           
-          
+<!--      google map  -->
           <section>
-			    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNASLitmpPiGxtg94A3WqLl8bHHk0lzJM&callback=initMap"></script>
-          	 <h3>我的地圖</h3>
+			<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNASLitmpPiGxtg94A3WqLl8bHHk0lzJM&callback=initMap"></script>
+          	<h3>我的地圖</h3>
 			    <div id="map"></div>
-			    <script>
-
-			      var map, geocoder, popup;
-			    	
-			      function initMap() {
-			    	geocoder = new google.maps.Geocoder();
-			    	popup = new google.maps.InfoWindow();
-			    	
-			    	
-			    	
-			        var uluru = {lat: 25.0477505, lng: 121.5170599};
-			        map = new google.maps.Map(document.getElementById('map'), {
-			          zoom: 16,
-			          center: uluru
-			        });
-			        var marker = new google.maps.Marker({
-			          position: uluru,
-			          map: map
-			        });
-			      }
-			      
-			    </script>
-          
-          
-          
-          
-          
-          </section>
-          
-          
-          
+<!-- 			    <div id="content"> -->
+<!--       				Hello world! -->
+<!--     			</div>	            -->
+          </section>        
             </div>
- 				
-		 	
         </div>
-       
-				
-
-	
-
-
-	
+     
 	<script>
-	
-	
+	var map, geocoder;
+	var geocoder;
+	var address = "${mission.county}${mission.district}${mission.address}";
+    function initMap() {
+  	geocoder = new google.maps.Geocoder();
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 16,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        center : {
+			lat : 25.0477505,
+			lng : 121.5170599
+		},
+      });
+	  	if(geocoder){
+	  		geocoder.geocode({"address": address}, function(results, status) {
+    			if(status != google.maps.GeocoderStatus.OK)  {
+    				console.log(status)
+    				alert("Geocoder Failed: " + status);
+    			} else {
+    				map.setCenter(results[0].geometry.location);
+    				var marker = new google.maps.Marker({
+    					map: map,
+    					position: results[0].geometry.location,
+    					title: address
+    				});
+    				var popup = new google.maps.InfoWindow({
+    					content: address,
+    				    position: results[0].geometry.location,
+//     				    maxWidth:200,
+//     				    pixelOffset: new google.maps.Size(100, -20) 
+    				});
+    				popup.open(map,marker);
+    			}
+    		});
+	  	}
+    }	
+//    
+//     function doClick() {
+//     	var address = document.getElementById("address").value;
+//     	if(geocoder) {
+//     		geocoder.geocode({"address": address}, function(results, status) {
+//     			if(status != google.maps.GeocoderStatus.OK)  {
+//     				alert("Geocoder Failed: " + status);
+//     			} else {
+//     				map.setCenter(results[0].geometry.location);
+//     				var marker = new google.maps.Marker({
+//     					map: map,
+//     					position: results[0].geometry.location
+//     				});
+//     			}
+//     		});
+//     	}
+//     }
 	
 	function insertOrder(missionId){
 		swal({
@@ -315,7 +329,6 @@
 		if ('${applying}' == 'Y'){
 			insertOrder('${mission.id}');
 		}
-
 	})
 	
 
