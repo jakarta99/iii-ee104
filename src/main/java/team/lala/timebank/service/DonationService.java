@@ -78,5 +78,12 @@ public class DonationService {
 		return donations;
 
 	}
+	
+	//Jasmine
+	//統計圖表用
+	public List<Object[]> countDonateTimeByYearAndMonth(){
+		List<Object[]> result = donationDao.countDonateTimeByYearAndMonth();
+		return result;
+	};
 
 }
