@@ -35,7 +35,7 @@
 
 <meta http-equiv="Content-Type" content="multipart/form-data;charset=utf-8" />
 
-<title>mission add</title>
+<title>刊登任務 | TimeBank</title>
 <style>
         fieldset {
             width: 600px;

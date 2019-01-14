@@ -49,7 +49,12 @@ public class TimeLedgerService {
 		volunteerTimeLedger.setBalanceValue(volunteerLastTimeLedger.getBalanceValue() + hours);
 		volunteerTimeLedger.setTransactionTime(new Date());
 		volunteerTimeLedger.setDescription(missionTitle + "存入");
-
+		if(volunteer.getBalanceValue() == null) {
+			volunteer.setBalanceValue(0 + hours);
+		}else {
+			volunteer.setBalanceValue(volunteer.getBalanceValue() + hours);
+		}
+		memberDao.save(volunteer);
 		// 2.3 insert
 		return timeLedgerDao.save(volunteerTimeLedger);
 	}
@@ -71,6 +76,8 @@ public class TimeLedgerService {
 			payerTimeLedger.setTransactionTime(new Date());
 			payerTimeLedger.setBalanceValue(payerLastTimeLedger.getBalanceValue() - hours);
 			payerTimeLedger.setDescription(missionTitle + "撥款");
+			payer.setBalanceValue(payer.getBalanceValue() - hours);
+			memberDao.save(payer);
 		}
 		// 3 insert
 		return timeLedgerDao.save(payerTimeLedger);

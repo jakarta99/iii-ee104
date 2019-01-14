@@ -46,11 +46,8 @@ public class MissionSpecification implements Specification<Mission> {
 			list.add(criteriaBuilder.equal(root.get("missionstatus").as(MissionStatus.class), inputMission.getMissionstatus()));
 		}
 
-		if (!StringUtils.isEmpty(inputMission.getEndDate())) {
-			list.add(criteriaBuilder.lessThan(root.get("endDate").as(Date.class), inputMission.getEndDate()));
-		}
 		if (!StringUtils.isEmpty(inputMission.getAutoPayDate())) {
-			list.add(criteriaBuilder.lessThan(root.get("autoPayDate").as(Date.class), inputMission.getAutoPayDate()));
+			list.add(criteriaBuilder.lessThanOrEqualTo(root.get("autoPayDate").as(Date.class), inputMission.getAutoPayDate()));
 		}
 		if (!StringUtils.isEmpty(inputMission.getTitle())) {
 			list.add(criteriaBuilder.like(root.get("title").as(String.class), "%" + inputMission.getTitle() + "%"));
