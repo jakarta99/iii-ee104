@@ -28,7 +28,7 @@ public interface DonationDao extends JpaRepository<Donation, Long>, JpaSpecifica
 	
 	
 	//Jasmine 
-		//統計圖表用
+	//統計圖表用
 	//2018年前三名獲捐機構每月份捐款統計
 	@Query(value=
 	  "SELECT M.[name] as '機構' ,convert(varchar(6),D.[donate_time],112) as '捐款年月', SUM(D.donate_value) as '捐款時數'" +  
