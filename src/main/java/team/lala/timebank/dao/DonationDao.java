@@ -43,4 +43,19 @@ public interface DonationDao extends JpaRepository<Donation, Long>, JpaSpecifica
 	  "order by M.[name],convert(varchar(6),D.donate_time,112) ",
 	  nativeQuery = true)
 	public List<Object[]> countTop3OrgDonateTimeByYearAndMonth();
+	
+	//Jasmine 
+		//統計圖表用
+		//2018年前三名獲捐機構
+	@Query(value=
+		"SELECT TOP 3 M.[name] as '機構' " + 
+		"FROM [timebank].[dbo].[donation] as D left outer join member as M  " + 
+				"on D.[org_donee_id] = M.id " + 
+		"where donate_time between '2018-1-1' and '2018-12-31' " + 
+		"GROUP BY M.[name] " + 
+		"order by SUM(D.donate_value) desc ",
+	  nativeQuery = true)
+	public List<String> countTop3Org();
+	
+	
 }

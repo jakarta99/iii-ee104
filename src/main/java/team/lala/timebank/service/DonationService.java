@@ -94,5 +94,13 @@ public class DonationService {
 		List<Object[]> result = donationDao.countTop3OrgDonateTimeByYearAndMonth();
 		return result;
 	}
+	
+	//Jasmine 
+			//統計圖表用
+			//2018年前三名獲捐機構
+	public List<String> countTop3Org(){
+		List<String> result = donationDao.countTop3Org();
+		return result;
+	}
 
 }

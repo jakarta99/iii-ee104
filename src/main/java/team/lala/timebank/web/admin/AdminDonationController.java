@@ -1,5 +1,7 @@
 package team.lala.timebank.web.admin;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -115,35 +117,107 @@ public class AdminDonationController {
 		return donations;
 	}
 	
-	//Jasmine
-	//統計圖表用
-	@RequestMapping("/calculate")
-	@ResponseBody
-	public List<Object[]> calculateDonation() {
-		List<Object[]> donationCalResult = donationService.countDonateTimeByYearAndMonth();
-		
-		for(Object[] i : donationCalResult) {
-			for(Object ii : i) {
-				System.out.print(String.valueOf(ii));
-				System.out.print("-");
-			}
-			System.out.println("");
-		}
 
-		return donationCalResult;
-	}
-	
 	
 	@RequestMapping("/chart")
-	public String chartPage(Model model) {
-		List<Object[]> donationCalResult = donationService.countDonateTimeByYearAndMonth();
-		model.addAttribute("donationCalResult", donationCalResult);
-		
-		List<Object[]> Top3OrgDonateTimeByYearAndMonth = donationService.countTop3OrgDonateTimeByYearAndMonth();
-		model.addAttribute("Top3OrgDonateTimeByYearAndMonth", Top3OrgDonateTimeByYearAndMonth);
-		
-		
+	public String chartPage() {
 		return "/admin/others/donationCharts";
 	}
+	
+	//Jasmine
+	//待包Service
+	@RequestMapping("/donationDatasForChart")
+	@ResponseBody
+	public List<Object> getDonationDatasForChart() {
+		//**************每月捐款總數量統計**************
+		//Query查詢每月捐款總數量
+		List<Object[]> donateTimeCalByYearAndMonth = donationService.countDonateTimeByYearAndMonth();
+		//邏輯:一定要有12筆資料才能畫圖表，然而可能部分月份無資料(無捐款月份無資料，然而圖表仍需顯示0)
+		Integer[] totalDonation = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		for(int i = 0; i < donateTimeCalByYearAndMonth.size(); i++) {
+			//取月份
+			String strMonth = String.valueOf(donateTimeCalByYearAndMonth.get(i)[0]).substring(4);
+			Integer numMonth = Integer.valueOf(strMonth);
+			//根據月份塞捐款數到陣列的對應位置
+			totalDonation[numMonth-1] = (Integer) donateTimeCalByYearAndMonth.get(i)[1];
+
+		}
+		
+		
+		
+		
+		
+		//**************前三名機構每月捐款數量統計**************
+		//Query查詢:查出前三名機構每月捐款數量
+		List<Object[]> Top3OrgDonateTimeByYearAndMonth = donationService.countTop3OrgDonateTimeByYearAndMonth();
+		
+		//Query查詢:只查出前三名機構名稱
+		List<String> Top3Org = donationService.countTop3Org();
+		
+		//邏輯:一定要有12筆資料才能畫圖表，然而可能部分月份無資料(無捐款月份無資料，然而圖表仍需顯示0)
+		Integer[] firstOrg = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		Integer[] secondOrg = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		Integer[] thirdOrg = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		
+		
+		//2018每月X軸內容
+		String[] months = new String[12];
+		int firstMonth = 201801;
+		for(int i = 0; i < months.length; i++) {
+			months[i] = String.valueOf(firstMonth++);
+		}
+		List<String> monthArray = Arrays.asList(months);
+		System.out.println(monthArray);
+		
+		//抓出前三名機構2018年全部資料集
+		for(int i = 0; i < Top3OrgDonateTimeByYearAndMonth.size(); i++) {
+			//資料集機構名稱
+			String thisOrg = String.valueOf(Top3OrgDonateTimeByYearAndMonth.get(i)[0]);
+			
+			//取月份
+			String strMonth = String.valueOf(Top3OrgDonateTimeByYearAndMonth.get(i)[1]).substring(4);
+			Integer numMonth = Integer.valueOf(strMonth);
+			System.out.println(strMonth + "月");
+			System.out.println(numMonth + "月");
+			
+			//塞資料到前三名機構
+			//根據機構、月份塞捐款數到陣列的對應位置
+			if(thisOrg.equals(Top3Org.get(0))){
+				firstOrg[numMonth-1] = (Integer) Top3OrgDonateTimeByYearAndMonth.get(i)[2];
+			};
+
+			if(thisOrg.equals(Top3Org.get(1))){
+				secondOrg[numMonth-1] = (Integer) Top3OrgDonateTimeByYearAndMonth.get(i)[2];
+			};
+			
+			if(thisOrg.equals(Top3Org.get(2))){
+				thirdOrg[numMonth-1] = (Integer) Top3OrgDonateTimeByYearAndMonth.get(i)[2];
+			};
+			
+
+		}
+		
+		//測試，印Console
+		List<Integer> firstOrgArray = Arrays.asList(firstOrg);
+		List<Integer> secondOrgArray = Arrays.asList(secondOrg);
+		List<Integer> thirdOrgArray = Arrays.asList(thirdOrg);
+		List<Integer> totalDonationArray = Arrays.asList(totalDonation);
+		System.out.println("firstOrgArray=" + firstOrgArray);
+		System.out.println("secondOrgArray=" + secondOrgArray);
+		System.out.println("thirdOrgArray=" + thirdOrgArray);
+		System.out.println("totalDonationArray=" + totalDonationArray);
+		
+		//**************回傳前端資料**************
+		List<Object> result = new ArrayList<>();
+		result.add(firstOrg);
+		result.add(secondOrg);
+		result.add(thirdOrg);
+		result.add(totalDonation);
+		result.add(Top3Org);
+		
+		return result;
+	}
+	
+	
 
 }
