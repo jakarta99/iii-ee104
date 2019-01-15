@@ -78,15 +78,12 @@ public class ChatMessageController {
 		return respData;
 	}
 	
-	//查看所有訊息的頁面
+	//我的訊息頁面(查看所有我的訊息紀錄)
 	@RequestMapping("/oldMessages/all/list")
 	public String listAllChatHistoryPage(Principal principal, Model model) {
-		List<ChatMessage> chatMessages = chatMessageService.findAllChatMessageByAccount(principal.getName());
-		List<Member> chatMemberList = chatMessageService.findChatObjectsByAccount(principal.getName());		
-		model.addAttribute("chatMessagesHistory", chatMessages);
-		model.addAttribute("chatMemberList",chatMemberList);
-		log.debug("chatMessages={}",chatMessages);
-		log.debug("chatMemberList={}",chatMemberList);
+		List<ChatMessage> chatObjectsList = chatMessageService.findLastMessageWithChatObjectsByAccount(principal.getName());		
+		model.addAttribute("chatObjectsList",chatObjectsList);
+		log.debug("chatObjectsList={}",chatObjectsList);
 		return "/basic/user/chatRoom/chatMessagesPage";
 	}
 	

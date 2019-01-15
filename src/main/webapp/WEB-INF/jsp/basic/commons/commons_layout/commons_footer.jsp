@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    	<!-- BEGAIN PRELOADER -->
+	<div id="preloader">
+		<div id="status">&nbsp;</div>
+	</div>
+	<!-- END PRELOADER -->
       <footer class="main-footer">
         <div class="container">
           <div class="row">
@@ -76,3 +80,15 @@
      </footer>    
      <jsp:include page="loginModal.jsp" />
      <jsp:include page="../../user/chatRoom/chattingBox.jsp"/>
+     
+     
+     <script>
+ 	
+	  	$(document).ready(function() { // makes sure the whole site is loaded
+	  	    $("#status").css("display","block");  
+	  		$('#status').fadeOut(); // will first fade out the loading animation
+	  	    $('#preloader').delay(100).fadeOut('slow'); // will fade out the white DIV that covers the website.
+	  	    $('body').delay(100).css('overflow','visible');
+	  	})
+     
+     </script>

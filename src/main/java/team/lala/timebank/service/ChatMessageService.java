@@ -52,37 +52,37 @@ public class ChatMessageService {
 		return chatHistory;
 	}
 	
-	//找出此使用者所有的聊天對象
+	//找出此使用者所有的聊天對象以及彼此間最後的對話
 	@Transactional(readOnly=true)
-	public List<Member> findChatObjectsByAccount(String account){	
-		List<ChatMessage> chatObjectList = chatMessageDao.findChatObjectsByAccount(account);
+	public List<ChatMessage> findLastMessageWithChatObjectsByAccount(String account){	
+		//此清單將存放與聊天對象最後的對話
+		List<ChatMessage> lastMessageWithChatObjectList = new ArrayList<>();
+		//查詢此帳號的所有聊天對象(Object[]裝有使用者帳號、聊天對象帳號、最後對話時間)
+		List<Object[]> objectList = chatMessageDao.findChatObjectsByUserAccountOrderByLastChatTime(account);
+		//將聊天對象帳號放進chatObjectList內，以便後面利用此list進行Member查詢
+		List<String> chatObjectList = new ArrayList<>();
+				
+		for(Object[] object : objectList) {
+			//object[0]:使用者帳號、object[1]:聊天對象帳號、object[2]:最後對話時間
+			chatObjectList.add((String)object[1]);			
+			lastMessageWithChatObjectList.add(null);//增加這個list的size
+		}
 		log.debug("chatObjectList={}",chatObjectList);
-		List<String> chatObjectsSet = new ArrayList<>();
-		for (ChatMessage chatObject:chatObjectList) {
-			System.out.println("chatObject="+chatObject);
-			if (chatObjectsSet.contains(chatObject.getFromAccount()) ) {
-				chatObjectsSet.remove(chatObject.getFromAccount());
-			} else if (chatObjectsSet.contains(chatObject.getToAccount())) {
-				chatObjectsSet.remove(chatObject.getToAccount());
-			}
-			
-			if (!chatObject.getFromAccount().equals(account)) {
-				chatObjectsSet.add(chatObject.getFromAccount());				
-			} else if (!chatObject.getToAccount().equals(account)) {
-				chatObjectsSet.add(chatObject.getToAccount());
-			}
-			
-			System.out.println("set="+chatObjectsSet);
-		}
-		log.debug("chatObjectsSet={}",chatObjectsSet);
-		List<Member> list = memberDao.findMembersByListOfAccounts(chatObjectsSet, em);
-		List<Member> memberList = new ArrayList<>();
-		for (Member m :list) {
-			int idx = chatObjectsSet.indexOf(m.getAccount());
-			memberList.set(idx, m);
-		}
+		//利用chatObjectList內的帳號資料尋找所有對應的Member entity
+		List<Member> memberList = memberDao.findMembersByListOfAccounts(chatObjectList, em);
 		log.debug("memberList={}",memberList);	
-		return memberList;
+		
+		//根據兩人帳號搜尋兩人間的最後對話(lastChatMessage)，並設定聊天對象的name及picture
+		//將lastChatMessage依照最後對話的時間順序將對話加入lastMessageWithChatObjectList內
+		for (Member m :memberList) {
+			ChatMessage lastChatMessage = chatMessageDao.findLastChatMessageBetweenTwoAccounts(account, m.getAccount());
+			lastChatMessage.setToMemberPic(m.getPicture());
+			lastChatMessage.setToName(m.getName());
+			int idx = chatObjectList.indexOf(m.getAccount());
+			lastMessageWithChatObjectList.set(idx, lastChatMessage);
+		}
+		log.debug("lastMessageWithChatObjectList={}",lastMessageWithChatObjectList);	
+		return lastMessageWithChatObjectList;
 	}
 	
 	
