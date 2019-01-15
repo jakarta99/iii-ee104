@@ -288,7 +288,7 @@
 						<div class="col-md-12 text-right">
                       		<div class="form-group">
                       			<span class="bg-primary bar padding-horizontal">
-								<input type="button" class="btn btn-template-outlined-white" id="allin" value="一鍵帶入"/>
+									<input type="button" class="btn btn-template-outlined-white" id="allin" value="一鍵帶入"/>
 								</span>
 							</div>
 						</div>

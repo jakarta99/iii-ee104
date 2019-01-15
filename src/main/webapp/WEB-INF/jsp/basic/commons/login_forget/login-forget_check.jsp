@@ -21,6 +21,9 @@
 	article{
 		width:100%;
 	}
+	.padding-horizontal {
+	    padding: 5px 0px 10px 0px !important;
+	}
 </style>
 
 </head>
@@ -48,79 +51,73 @@
 	<section class="bar">
 	<div class="container">
     	<div class="row">
-          	<article>
-          		<form>
-          			<fieldset>
-          				<div class="row">
-                    		<div class="col-md-6">
-                      			<div class="form-group">
-			          				<div class="heading">
-			          					<h3>帳戶資料</h3>
-			          				</div>
-			          			</div>
-			          		</div>
-			          		<div class="col-md-6">
-                      			<div class="form-group">
-			          				<div class="heading">
-			          					<h3>個人資料</h3>
-			          				</div>
-			          			</div>
-			          		</div>
-			          	</div>
-          				<input type="hidden" value="" id="id" name="id"> 
-						<input type="hidden" value="${memberType}" id="memberType" name="memberType">
-						<div class="row">
-							<div class="col-md-6">
+          	<div class="col-lg-6" style="margin:auto">
+            	<div class="box">
+		          	<article>
+		          		<h2 class="text-uppercase">驗證資訊</h2>
+<!-- 		                <p class="lead">您在 TimeBank中使用的基本資訊</p> -->
+		                <p class="text-muted">請輸入所須資料</p>
+		                <hr>
+		          		<form>
+		          			<fieldset>
+		          				<input type="hidden" value="" id="id" name="id"> 
+								<input type="hidden" value="${memberType}" id="memberType" name="memberType">
 								<div class="row">
-		                    		<div class="col-md-10">
-		                      			<div class="form-group">
-											<label for="idAccount">帳號:</label>
-											<input type="text" value="${param.account}" id="idAccount" placeholder="請輸入帳號" name="account" autofocus autocompelete="off" class="form-control">
-											<span id="idspAccount" style='color:red'></span>
+									<div class="col-md-12">
+										<div class="row">
+				                    		<div class="col-md-12">
+				                      			<div class="form-group">
+													<label for="idAccount">帳號:</label>
+													<input type="text" value="${param.account}" id="idAccount" placeholder="請輸入帳號" name="account" autofocus autocompelete="off" class="form-control">
+													<span id="idspAccount" style='color:red'></span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="row">
+											<c:choose>
+												<c:when test="${memberType eq 'P'}">
+													<div class="col-md-12">
+				                      					<div class="form-group">
+															<label for="idCertificateIdNumber">身分證字號:</label>
+															<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" placeholder="請輸入您的身分證字號" name="certificateIdNumber" autofocus class="form-control">
+															<span id="idspCertificateIdNumber" style='color:red'></span>
+														</div>
+													</div>
+												</c:when>
+												<c:when test="${memberType eq 'O'}">
+													<div class="col-md-12">
+				                      					<div class="form-group">
+															<label for="idCertificateIdNumber">統一編號:</label> 
+															<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" placeholder="請輸入帳戶的統一編號" name="certificateIdNumber" autofocus class="form-control">
+															<span id="idspCertificateIdNumber" style='color:red'></span>
+														</div>
+													</div>
+												</c:when>
+											</c:choose>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="row">
-									<c:choose>
-										<c:when test="${memberType eq 'P'}">
-											<div class="col-md-10">
-		                      					<div class="form-group">
-													<label for="idCertificateIdNumber">身分證字號:</label>
-													<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" placeholder="請輸入您的身分證字號" name="certificateIdNumber" autofocus class="form-control">
-													<span id="idspCertificateIdNumber" style='color:red'></span>
-												</div>
-											</div>
-										</c:when>
-										<c:when test="${memberType eq 'O'}">
-											<div class="col-md-10">
-		                      					<div class="form-group">
-													<label for="idCertificateIdNumber">統一編號:</label> 
-													<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" placeholder="請輸入帳戶的統一編號" name="certificateIdNumber" autofocus class="form-control">
-													<span id="idspCertificateIdNumber" style='color:red'></span>
-												</div>
-											</div>
-										</c:when>
-									</c:choose>
+		          			</fieldset>
+							<fieldset style="border:none">
+								<div class="col-md-12 text-center">
+									<input type="button" class="btn btn-template-outlined" id="submit" value="確定送出" />
+							        <input type="reset" class="btn btn-template-outlined" id="reset" value="清除重填" />
 								</div>
-							</div>
-						</div>
-          			</fieldset>
-					<fieldset style="border:none">
-						<div class="col-md-12 text-center">
-							<input type="button" class="btn btn-template-outlined" id="submit" value="確定送出" />
-					        <input type="reset" class="btn btn-template-outlined" id="reset" value="清除重填" />
-						</div>
-					    <div class="col-md-12 text-center" id="error" style='color:red'></div>
-						<div class="col-md-12 text-right">
-                      		<div class="form-group">
-								<input type="button" class="btn btn-template-outlined" id="allin" value="一鍵帶入"/>
-							</div>
-						</div>
-					</fieldset>
-          		</form>
-          	</article>
+							    <div class="col-md-12 text-center" id="error" style='color:red'></div>
+								<div class="col-md-12 text-right">
+		                      		<div class="form-group">
+		                      			<span class="bg-primary bar padding-horizontal">
+											<input type="button" class="btn btn-template-outlined-white" id="allin" value="一鍵帶入"/>
+										</span>
+									</div>
+								</div>
+							</fieldset>
+		          		</form>
+		          	</article>
+          		</div>
+          	</div>
         </div>
     </div>
     </section>
