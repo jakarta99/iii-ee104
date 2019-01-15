@@ -185,6 +185,8 @@ public class Member implements UserDetails {
 	@Column(name = "PICTURE")
 	private String picture;
 	
+	@Column(name = "VERIFICATION_CODE")
+	private String verificationCode;
 //	 public void addRole(Role role) {
 //	       if (!getRoles().contains(role)) {
 //	           getRoles().add(role);
@@ -242,7 +244,8 @@ public class Member implements UserDetails {
 				+ ", orgContactPersonTel=" + orgContactPersonTel + ", orgContactPersonMobile=" + orgContactPersonMobile
 				+ ", orgWebsiteLink=" + orgWebsiteLink + ", orgFoundPurpose=" + orgFoundPurpose + ", orgIdConfirmation="
 				+ orgIdConfirmation + ", balanceValue=" + balanceValue + ", sumScore=" + sumScore + ", scoredTimes="
-				+ scoredTimes + ", averageScore=" + averageScore + "]";
+				+ scoredTimes + ", averageScore=" + averageScore + ", picture=" + picture + ", verificationCode="
+				+ verificationCode + "]";
 	}
 
 }
