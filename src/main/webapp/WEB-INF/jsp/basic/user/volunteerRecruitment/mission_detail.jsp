@@ -164,19 +164,56 @@
               <div class="col-md-4"><img style="width:300px;height:270px" id="missionImg" alt="" src="/image/user/mission/${mission.missionPicName}" class="img-fluid rounded-circle"></div>
             </div>
           </section>
+          <!--      google map  -->
+          <section>
+			<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNASLitmpPiGxtg94A3WqLl8bHHk0lzJM&callback=initMap"></script>
+          	<h3>我的地圖</h3>
+			    <div id="map"></div>
+          </section>        
  
         </div>
 	 </div>
-
-
+<script>
+	var map, geocoder;
+	var geocoder;
+	var address = "${mission.county}${mission.district}${mission.address}";
+    function initMap() {
+  	geocoder = new google.maps.Geocoder();
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 16,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        center : {
+			lat : 25.0477505,
+			lng : 121.5170599
+		},
+      });
+	  	if(geocoder){
+	  		geocoder.geocode({"address": address}, function(results, status) {
+    			if(status != google.maps.GeocoderStatus.OK)  {
+    				console.log(status)
+    				alert("Geocoder Failed: " + status);
+    			} else {
+    				map.setCenter(results[0].geometry.location);
+    				var marker = new google.maps.Marker({
+    					map: map,
+    					position: results[0].geometry.location,
+    					title: address
+    				});
+    				var popup = new google.maps.InfoWindow({
+    					content: address,
+    				    position: results[0].geometry.location,
+//     				    maxWidth:200,
+//     				    pixelOffset: new google.maps.Size(100, -20) 
+    				});
+    				popup.open(map,marker);
+    			}
+    		});
+	  	}
+    }	
+	</script>
 
 <jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
-	<script>
 	
-	
-	
-	
-	</script>
 
 
 

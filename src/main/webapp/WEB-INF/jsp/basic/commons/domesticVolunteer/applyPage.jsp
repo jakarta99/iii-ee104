@@ -176,16 +176,12 @@
 					<button onclick="insertOrder(${mission.id})" class="btn btn-template-outlined"><i class="fa fa-plus"></i>我要參加</button>
 				</div>    	
           </section>
-          
-          
+     
 <!--      google map  -->
           <section>
 			<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNASLitmpPiGxtg94A3WqLl8bHHk0lzJM&callback=initMap"></script>
           	<h3>我的地圖</h3>
 			    <div id="map"></div>
-<!-- 			    <div id="content"> -->
-<!--       				Hello world! -->
-<!--     			</div>	            -->
           </section>        
             </div>
         </div>
@@ -227,23 +223,6 @@
     		});
 	  	}
     }	
-//    
-//     function doClick() {
-//     	var address = document.getElementById("address").value;
-//     	if(geocoder) {
-//     		geocoder.geocode({"address": address}, function(results, status) {
-//     			if(status != google.maps.GeocoderStatus.OK)  {
-//     				alert("Geocoder Failed: " + status);
-//     			} else {
-//     				map.setCenter(results[0].geometry.location);
-//     				var marker = new google.maps.Marker({
-//     					map: map,
-//     					position: results[0].geometry.location
-//     				});
-//     			}
-//     		});
-//     	}
-//     }
 	
 	function insertOrder(missionId){
 		swal({

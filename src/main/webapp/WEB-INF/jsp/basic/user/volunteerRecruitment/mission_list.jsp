@@ -331,14 +331,13 @@
 	        		  var box="<div class='s3'><div class='row'>"
 	        		   box+="<div class='col-md-4'>"
 	        		   box+="<div class='video '>"
-	        		   box+="<div class='embed-responsive embed-responsive-4by3'>"	        	
+	        		   box+="<div class='embed-responsive embed-responsive-1by1'>"	        	
 	        		   box+=" <a href='#'><img src=/image/user/mission/"+mission.missionPicName+" class='embed-responsive-item'></img></a>"     
 	        		   box+="</div></div></div>"
 	                   box+="<div class='col-md-8'>"
 	                   box+="<h1 class='h1 mt-0'><a href='/user/volunteerRecruitment/detail?id="+mission.id+"'>"+ mission.title + "</a></h1>"
 	                   box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
-// 	                   box+="<p class='author-category_1'><a href='#'>"+ mission.member.name + "</a></p>"
-					    box+="<p class='intro_1'>活動地點:"+mission.county+mission.district+"</p>"	        
+					   box+="<p class='intro_1'>活動地點:"+mission.county+mission.district+"</p>"	        
 					 if(mission.missionstatus=="A_New"||mission.missionstatus=="A_VolunteerApproved"){
 	                   box+="<p class='date-comments_1'><a href='/user/volunteerRecruitment/edit?id="+mission.id+"'><i class='fa fa-edit'></i>編輯</a><a href='javascript:void(0)' onclick=\"cancelMission("+mission.id+",'"+mission.title+"')\" ><i class='fa fa-trash'></i>取消</a></p></div>"
 					 }
@@ -347,7 +346,7 @@
 					 }else if(mission.missionstatus == "C_Finish" || mission.missionstatus == "C_Cancel"){
 					   box+="</div>"
 					 }    		   
-	                            
+	                   box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"         
 	                   if(mission.missionstatus == "A_New" || mission.missionstatus == "A_VolunteerApproved"){
 	                   box+="<p class='intro_1'>開始時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>"   
 		            	}else if(mission.missionstatus == "B_AccountsPayable"){
@@ -356,12 +355,16 @@
 		            		box+="<p class='intro_1'>結束時間:"+new Date(mission.finishDate).toLocaleDateString()+"</p>"
 		            	}else{
 		            		box+="<p class='intro_1'>開始時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>"		                
-		               }  
+		               } 
+	                   box+="</div>"
+	                   box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
 	                   if(mission.missionstatus == "A_New" || mission.missionstatus == "A_VolunteerApproved"){
 	                   box+="<p class='intro_1'>需求人數:"+mission.peopleNeeded+"/目前人數:"+mission.approvedQuantity+"</p>"	
 	                   }else if(mission.missionstatus=="B_AccountsPayable"||mission.missionstatus=="C_Cancel"||mission.missionstatus=="C_Finish"){
 	                　　　　　　　box+="<p class='intro_1'>參與人數:"+mission.approvedQuantity+"</p>"
 		 				}
+	                   box+="</div>"
+	                   
 	                if(mission.missionstatus=="A_New"){
 	                   box+="<p class='read-more text-right'><a href='/user/volunteerVerify/list?id="+mission.id+"' class='btn btn-template-outlined'>志工審核</a></p></div>"	      				
 	 				}else if(mission.missionstatus=="B_AccountsPayable"){
