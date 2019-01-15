@@ -419,7 +419,7 @@ public class CommonsSignUpController {
 						member.setBalanceValue(1000);
 						Member newMember = memberService.insert(member);
 //						mailService.sendSimpleMail(newMember);
-						mailService.sendHtmlMail(newMember);
+//						mailService.sendHtmlMail(newMember);
 //						mailService.sendInlineResourceMail(newMember);
 						log.debug("newMember.getId()={}", newMember.getId());
 //						memberService.addRole(newMember.getId(), 3L);	//轉換至驗證信後，才給角色
@@ -439,7 +439,7 @@ public class CommonsSignUpController {
 					member.setBalanceValue(0);
 					Member newMember = memberService.insert(member);
 //					mailService.sendSimpleMail(newMember);
-					mailService.sendHtmlMail(newMember);
+//					mailService.sendHtmlMail(newMember);
 //					mailService.sendInlineResourceMail(newMember);
 					log.debug("newMember.getId()={}", newMember.getId());
 //					memberService.addRole(newMember.getId(), 2L);	//轉換至驗證信後，才給角色
@@ -495,21 +495,25 @@ public class CommonsSignUpController {
 	}
 	
 	@RequestMapping("/storeMemberPic")
-	public String storeMemberPic(@RequestParam("picture") MultipartFile picture,
+	@ResponseBody
+	public AjaxResponse<Member> storeMemberPic(@RequestParam("picture") MultipartFile picture,
 			MultipartHttpServletRequest request, HttpSession session) {
 		Long memberId = (Long)session.getAttribute("memberId");
 		Member member = memberService.getOne(memberId);	//因session會將member蓋掉，所以以memberId取
 		AjaxResponse<Member> ajaxResponse = new AjaxResponse<Member>();
 		try {
 			Member memberResult = memberService.storeMemberPic(picture, member, request);
+//			mailService.sendSimpleMail(memberResult);
+			mailService.sendHtmlMail(memberResult);
+//			mailService.sendInlineResourceMail(memberResult);
+			log.debug("-----newMember.getId()={}", memberResult.getId());
 			ajaxResponse.setObj(memberResult);
 //			session.invalidate();	//清掉session
 		} catch (Exception e) {
+			ajaxResponse.addMessage("資料有誤");
 			e.printStackTrace();
-			ajaxResponse.addMessage(e.getMessage());
-			return "/basic/commons/login";
 		}
-		return "/basic/commons/login";
+		return ajaxResponse;
 	}
 
 	@RequestMapping("/edit")

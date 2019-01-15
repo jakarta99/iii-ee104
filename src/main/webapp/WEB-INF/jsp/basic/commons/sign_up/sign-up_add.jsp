@@ -277,7 +277,7 @@
 					</c:if>
 					<fieldset style="border:none">
 						<div class="col-md-12 text-center">
-							<input type="button" class="btn btn-template-outlined" id="submit" value="確定送出" />
+							<input type="button" class="btn btn-template-outlined" id="submit" value="下一步" />
 					        <input type="reset" class="btn btn-template-outlined" id="reset" value="清除重填" />
 					        <span id="error" style='color:red'></span>
 						</div>
@@ -813,10 +813,13 @@
 					document.getElementById("idspOrgWebsiteLink").innerHTML = "" ;
 				}
 				
- 				swal({
- 		            icon: "/image/user/member/loading.gif",
- 					button: false,
- 				})
+//  				swal({
+//  		            icon: "/image/user/member/loading.gif",
+//  					button: false,
+//  				})
+				$('#status').css('display','block');  
+	  			$('#status').fadeOut(); // will first fade out the loading animation
+	  			
 				$.ajax({
 					method:"post",
 					dataType: "json",        
@@ -832,12 +835,12 @@
 					if(response.status == "SUCCESS") {
 						swal({
 							  title: "SUCCESS",
-							  text: "註冊成功",
+							  text: "資料填寫完成",
 							  icon: "success",
 							  button: "確定",
 						}).then((result) => {
 							if (result) {
-								window.location.replace("/commons/sign-up/pic");	//讀完導至上傳圖檔(再至LOGIN(之後至驗證信!))
+								window.location.replace("/commons/sign-up/pic");	//讀完導至上傳圖檔(成功送驗證信!(再導至login)))
 							}
 						});
 // 						alert("會員新增成功");
