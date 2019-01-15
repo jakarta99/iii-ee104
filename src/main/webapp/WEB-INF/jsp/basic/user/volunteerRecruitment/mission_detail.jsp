@@ -167,7 +167,6 @@
           <!--      google map  -->
           <section>
 			<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNASLitmpPiGxtg94A3WqLl8bHHk0lzJM&callback=initMap"></script>
-          	<h3>我的地圖</h3>
 			    <div id="map"></div>
           </section>        
  

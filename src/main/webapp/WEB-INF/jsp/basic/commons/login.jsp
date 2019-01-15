@@ -29,7 +29,7 @@
                 <hr>
                 <form action="/login" method="post">
                   <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email">Account</label>
                     <input id="email" type="text" name="username" class="form-control" autofocus>
                   </div>
                   <div class="form-group">

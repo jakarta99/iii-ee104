@@ -69,21 +69,7 @@ public class CommonsSignUpController {
 		boolean fPassword = false;
 		boolean fPassword1 = true;
 		
-		boolean fName = false;
-		boolean fIdNumber = false;
-		boolean fDate = false;
-		boolean fEmail = false;
-		boolean fTelephone = false;
-		boolean fMobile = false;
-		boolean fOrgFounder = false;
-		boolean fOrgCeo = false;
-		boolean fOrgContactPerson = false;
-		boolean fOrgContactPersonTel = false;
-		boolean fOrgContactPersonMobile = false;
-		boolean fOrgWebsiteLink = false;
-
-		log.debug("member={}", member);
-		
+		log.debug("member={}", member);	
 		log.debug("member.getPassword()={}",member.getPassword());
 		AjaxResponse<Member> response = new AjaxResponse<Member>();//回傳前端
 //		Map<String, Object> result = new HashMap<>(); //ajaxResponse.obj
@@ -150,6 +136,123 @@ public class CommonsSignUpController {
 			log.debug("密碼XXX");
 			response.addMessage("密碼格式錯誤");
 		}
+
+		//要放在驗證資料之後
+		if( fAccount && fAccountD && fPassword ) {
+			try {
+				member.setMemberType(member.getMemberType());
+				member.setPassword(encoder.encode(member.getPassword()));
+				Member newMember = memberService.insert(member);
+				log.debug("newMember.getId()={}", newMember.getId());
+				response.setObj(newMember);
+				session.setAttribute("memberId", newMember.getId());
+				log.debug("新增成功");
+			} catch (Exception e) {
+				response.addMessage("新增失敗" + e.getMessage());
+				e.printStackTrace();
+			}
+		}else {
+			response.addMessage("資料有誤");
+		}
+		
+//		model.addAttribute("errors", errors);
+//		result.put("errors", errors);
+//		log.debug("test={}", errors.get("account"));
+		return response;
+	}
+	
+	@RequestMapping("/checkAccount")
+	@ResponseBody
+	public String accountCheck(@RequestParam("account") String account){
+		String result = "帳號可使用";
+		if (memberService.findByAccount(account) != null) {
+			result = "已有此帳號";
+		}
+		return result;
+	}
+	
+	@RequestMapping("/checkPassword")
+	@ResponseBody
+	public String passwordCheck(@RequestParam("passwordCheck") String passwordCheck,
+			@RequestParam("password") String password){
+		//檢查確認密碼，與密碼相同
+		String result = "密碼不一致";
+		if(passwordCheck.equals(password)) {
+			result = "正確";
+		}
+		return result;
+	}
+	
+	@RequestMapping("/pic")
+	public String picPage(HttpSession session) {
+		log.debug("memberId={}", session.getAttribute("memberId"));
+		return "/basic/commons/sign_up/sign-up_pic";
+	}
+	
+	@RequestMapping("/storeMemberPic")
+	@ResponseBody
+	public AjaxResponse<Member> storeMemberPic(@RequestParam("picture") MultipartFile picture,
+			MultipartHttpServletRequest request, HttpSession session) {
+		Long memberId = (Long)session.getAttribute("memberId");
+		Member member = memberService.getOne(memberId);	//因session會將member蓋掉，所以以memberId取
+		AjaxResponse<Member> ajaxResponse = new AjaxResponse<Member>();
+		try {
+			Member memberResult = memberService.storeMemberPic(picture, member, request);
+//			mailService.sendSimpleMail(memberResult);
+			mailService.sendHtmlMail(memberResult);
+//			mailService.sendInlineResourceMail(memberResult);
+			log.debug("-----newMember.getId()={}", memberResult.getId());
+			ajaxResponse.setObj(memberResult);
+//			session.invalidate();	//清掉session
+		} catch (Exception e) {
+			ajaxResponse.addMessage("資料有誤");
+			e.printStackTrace();
+		}
+		return ajaxResponse;
+	}
+
+	@RequestMapping("/edit")
+	public String editPage(Model model, HttpSession session) {
+		Long memberId = (Long)session.getAttribute("memberId");
+		Member member = memberService.getOne(memberId);
+		log.debug("---memberId={}", session.getAttribute("memberId"));
+		model.addAttribute("member", member);
+		return "/basic/commons/sign_up/sign-up_edit";
+	}
+	
+	@RequestMapping("/update")
+	@ResponseBody
+	public AjaxResponse<Member> update(Member member, HttpSession session) {
+		
+		boolean fName = false;
+		boolean fIdNumber = false;
+		boolean fDate = false;
+		boolean fEmail = false;
+		boolean fTelephone = false;
+		boolean fMobile = false;
+		boolean fOrgFounder = false;
+		boolean fOrgCeo = false;
+		boolean fOrgContactPerson = false;
+		boolean fOrgContactPersonTel = false;
+		boolean fOrgContactPersonMobile = false;
+		boolean fOrgWebsiteLink = false;
+
+		log.debug("member={}", member);
+		
+		Long memberId = (Long)session.getAttribute("memberId");
+		Member previousMember = memberService.getOne(memberId);
+		log.debug("previousMember={}", previousMember);
+		member.setId(previousMember.getId());
+		member.setAccount(previousMember.getAccount());
+		member.setPassword(previousMember.getPassword());
+		member.setMemberType(previousMember.getMemberType());
+		member.setEmailVerification(previousMember.getEmailVerification());
+		member.setSignUpDate(previousMember.getSignUpDate());
+		member.setOrgIdConfirmation(previousMember.getOrgIdConfirmation());
+		
+		AjaxResponse<Member> response = new AjaxResponse<Member>();//回傳前端
+		
+		//驗證資料
 		
 		//檢查Name 不可空白，至少2個字以上
 		if (member.getName() != null && member.getName().trim().length() >= 2) {
@@ -406,23 +509,17 @@ public class CommonsSignUpController {
 				fOrgWebsiteLink = true;
 			}
 		}
-
-		
+	
 		//要放在驗證資料之後
-		if( fAccount && fAccountD && fPassword && fName && fIdNumber 
+		if(fName && fIdNumber 
 				/*&& fDate*/ && fEmail && fTelephone && fMobile) {
 			if(member.getMemberType() == MemberType.O) {
 				if( fOrgFounder && fOrgCeo && fOrgContactPerson 
 						&& fOrgContactPersonTel && fOrgContactPersonMobile && fOrgWebsiteLink) {
 					try {
-						member.setPassword(encoder.encode(member.getPassword()));
 						member.setBalanceValue(1000);
-						Member newMember = memberService.insert(member);
-//						mailService.sendSimpleMail(newMember);
-//						mailService.sendHtmlMail(newMember);
-//						mailService.sendInlineResourceMail(newMember);
+						Member newMember = memberService.update(member);
 						log.debug("newMember.getId()={}", newMember.getId());
-//						memberService.addRole(newMember.getId(), 3L);	//轉換至驗證信後，才給角色
 						response.setObj(newMember);
 						session.setAttribute("memberId", newMember.getId());
 						log.debug("新增成功");
@@ -435,17 +532,9 @@ public class CommonsSignUpController {
 				}
 			}else if(member.getMemberType() == MemberType.P){
 				try {
-					member.setPassword(encoder.encode(member.getPassword()));
 					member.setBalanceValue(0);
-					Member newMember = memberService.insert(member);
-//					mailService.sendSimpleMail(newMember);
-//					mailService.sendHtmlMail(newMember);
-//					mailService.sendInlineResourceMail(newMember);
+					Member newMember = memberService.update(member);
 					log.debug("newMember.getId()={}", newMember.getId());
-//					memberService.addRole(newMember.getId(), 2L);	//轉換至驗證信後，才給角色
-
-//					result.put("member", newMember);
-//					response.setObj(result);
 					response.setObj(newMember);
 					session.setAttribute("memberId", newMember.getId());
 					log.debug("新增成功");
@@ -458,82 +547,6 @@ public class CommonsSignUpController {
 			}
 		}else {
 			response.addMessage("資料有誤");
-		}
-		
-//		model.addAttribute("errors", errors);
-//		result.put("errors", errors);
-//		log.debug("test={}", errors.get("account"));
-		return response;
-	}
-	
-	@RequestMapping("/checkAccount")
-	@ResponseBody
-	public String accountCheck(@RequestParam("account") String account){
-		String result = "帳號可使用";
-		if (memberService.findByAccount(account) != null) {
-			result = "已有此帳號";
-		}
-		return result;
-	}
-	
-	@RequestMapping("/checkPassword")
-	@ResponseBody
-	public String passwordCheck(@RequestParam("passwordCheck") String passwordCheck,
-			@RequestParam("password") String password){
-		//檢查確認密碼，與密碼相同
-		String result = "密碼不一致";
-		if(passwordCheck.equals(password)) {
-			result = "正確";
-		}
-		return result;
-	}
-	
-	@RequestMapping("/pic")
-	public String picPage(HttpSession session) {
-		log.debug("memberId={}", session.getAttribute("memberId"));
-		return "/basic/commons/sign_up/sign-up_pic";
-	}
-	
-	@RequestMapping("/storeMemberPic")
-	@ResponseBody
-	public AjaxResponse<Member> storeMemberPic(@RequestParam("picture") MultipartFile picture,
-			MultipartHttpServletRequest request, HttpSession session) {
-		Long memberId = (Long)session.getAttribute("memberId");
-		Member member = memberService.getOne(memberId);	//因session會將member蓋掉，所以以memberId取
-		AjaxResponse<Member> ajaxResponse = new AjaxResponse<Member>();
-		try {
-			Member memberResult = memberService.storeMemberPic(picture, member, request);
-//			mailService.sendSimpleMail(memberResult);
-			mailService.sendHtmlMail(memberResult);
-//			mailService.sendInlineResourceMail(memberResult);
-			log.debug("-----newMember.getId()={}", memberResult.getId());
-			ajaxResponse.setObj(memberResult);
-//			session.invalidate();	//清掉session
-		} catch (Exception e) {
-			ajaxResponse.addMessage("資料有誤");
-			e.printStackTrace();
-		}
-		return ajaxResponse;
-	}
-
-	@RequestMapping("/edit")
-	public String editPage(Member m, Model model) {
-		Member member = memberService.findByAccount(m.getAccount());
-		model.addAttribute("member", member);
-		return "/basic/commons/sign_up/sign-up_edit";
-	}
-	
-	@RequestMapping("/update")
-	@ResponseBody
-	public AjaxResponse<Member> update(Member member) {
-		AjaxResponse<Member> response = new AjaxResponse<Member>();
-		try {
-			memberService.update(member);
-		} catch (Exception e) {
-			response.addMessage("Failed to update. " + e.getMessage());
-			e.printStackTrace();
-		}finally {
-			response.setObj(member);
 		}
 		return response;
 	}

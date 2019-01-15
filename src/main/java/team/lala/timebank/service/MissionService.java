@@ -47,6 +47,15 @@ public class MissionService {
 		Page<Mission> missions = this.findBySpecification(missionSpec, pageRequest);
 		return missions;
 	}
+	
+	
+	public List<Mission> findByStatusAndSpecification(Mission inputMission) {
+		inputMission.setMissionStatusTransient("New");
+		MissionSpecification missionSpec = new MissionSpecification(inputMission);
+
+		List<Mission> missions = this.findBySpecification(missionSpec);
+		return missions;
+	}
 
 	// list for Admin
 	public Page<Mission> findBySpecification(Specification<Mission> specification, PageRequest pageRequest) {

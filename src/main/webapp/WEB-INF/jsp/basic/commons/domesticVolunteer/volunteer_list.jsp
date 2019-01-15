@@ -34,7 +34,33 @@
 <meta charset="UTF-8">
 <title>mission list(login)</title>
 <style>
-
+			.s3{
+		    color: #FF0000;
+	/* 		margin-right:10px; */
+	/* 		margin-left:10px; */
+		}
+		.bar_1 {
+		margin-top:30px;
+		margin-bottom:20px;
+		  padding-top: 30px;
+		  text-align:center;
+		  background-color:#DDDDDD;
+		  border-radius: 10px;
+/* 		  width:500px; */
+/* 		  height:50px; */
+		}
+		.input-group{
+			width: 1100px;
+	    	margin: auto;
+		}
+ 		.form-group{ 
+ 			padding-bottom: 20px; 
+/*  		    padding-left: 5px;  */
+ 		    margin: auto;
+ 		    width:150px 
+ 		} 
+		
+		
 	 	
         fieldset {
             width: 100%;
@@ -50,18 +76,34 @@
         .margintop{
 			 margin-top:70px;
 		}
+		.form-control{
+		display: block;
+		    width: 100%;
+		    padding: .375rem .75rem;
+		    font-size: 1rem;
+		    line-height: 1.5;
+		    color: #495057;
+		    background-color: #fff;
+		    background-clip: padding-box;
+		    border: 1px solid #ced4da;
+		    border-radius: .25rem;
+		    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+		}
 		.county,.district {
-	  padding: 0.375rem 0.75rem;
-	  font-size: 1rem;
-	  line-height: 1.5;
-	  color: #495057;
-	  background-color: #fff;
-	  background-image: none;
-	  background-clip: padding-box;
-	  border: 1px solid #ced4da;
-	  border-radius: 0.25rem;
-	  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-	}
+			margin-left:25px;
+			float:left;
+			display: block;
+		    width: 150px;
+		    padding: .375rem .75rem;
+		    font-size: 1rem;
+		    line-height: 1.5;
+		    color: #495057;
+		    background-color: #fff;
+		    background-clip: padding-box;
+		    border: 1px solid #ced4da;
+		    border-radius: .25rem;
+		    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+		}
  
     </style>
 </head>
@@ -93,8 +135,10 @@
 		<!--查詢 -->
          <section class="bar_1">
             	<form role="search">
-                	<div class="input-group">                                        
-                    	<div  role="tw-city-selector"></div>                                       
+                	<div class="input-group"> 
+                	<div class="form-group" style="width:360px">                                       
+                    	<div  role="tw-city-selector"></div>
+                    	</div>                                         
 	                    <div class="form-group">
 		                    <select  id="serviceTypeDetail" name="serviceTypeDetail" class="form-control">
 								<option value="">服務類型</option>
@@ -123,15 +167,16 @@
 	                    	<input type="text" value="" placeholder="請輸入關鍵字" id="title" name="title" class="form-control">
 	                    </div>
                     
+                    <div class="form-group">
 	                    <span class="input-group-btn">
-	                    
-	                    	<input  type="button" value="搜尋" id="searchButt" class="btn btn-outline-primary" >               
+	                    	<input  type="button" value="搜尋" id="searchButt" class="btn btn-primary btn-lg" style="border-radius: 5px;">               
 	                    </span>
+	                 </div>
                     </div>
                   </form>
           </section>    
 			<!--志工招募清單 -->
-             <section class="post_1">
+             <section class="post_1" >
               <div id="boxbox" class="row">
                </div>
                
@@ -154,7 +199,33 @@
 		list();
 	 		
 		})
-
+	function insertCollection(id) { 		
+ 				 $.ajax({
+ 					url : '/user/myCollection/insertMission?id=' + id,
+ 					type : 'post',
+ 					dataType : 'JSON',
+ 					success : function(cancelResult) {
+ 						if(cancelResult.status == "SUCCESS"){ 							
+ 						}else{ 							
+ 						} 						
+ 						list();								
+ 					},
+ 				}) 				   			   
+	}
+	function cancelCollection(id) { 		
+		 $.ajax({
+			url : '/user/myCollection/cancelMission?id=' + id,
+			type : 'post',
+			dataType : 'JSON',
+			success : function(cancelResult) {
+				if(cancelResult.status == "SUCCESS"){ 							
+				}else{ 							
+				} 						
+				list();								
+			},
+		}) 				   			   
+}
+	
 	function list(){
 		$.ajax({
 			url:"/commons/domesticVolunteer/query?"+$('form').serialize()+"&page="+page+"&length="+length,
@@ -168,14 +239,21 @@
 	        	first=missions.first;
 	        	last=missions.last;
 	        	page=missions.number;
+	        	console.log(missions)
 	        	$.each(missions.content,function(index, mission){
+	        		console.log(mission)
 	        		var box="<div class='col-lg-4 col-md-6'>";
 	        		 box+="<div class='home-blog-post'>";
 	        		 box+="<div class='image' style='text-align:center'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'><img width='300px' height='230px' src=/image/user/mission/"+mission.missionPicName+" alt='...'></a>";
 	        		 box+="</div><div class='text'><h4><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'>"+ mission.title + "</a></h4>";
+	        		 if(mission.isCollected=='Y'){
+	        		 box+="<p><a class='s3' href='javascript:void(0)' onclick=\"cancelCollection("+mission.id+")\"><i class='fa fa-heart'></i>已收藏</a></p>"
+	        		 }else{																										
+	        		 box+="<p><a class='s3' href='javascript:void(0)' onclick=\"insertCollection("+mission.id+")\"><i class='far fa-heart'></i>收藏</a></p>"	 
+	        		 }
 	        		 box+="<p class='author-category_1'>活動時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>";
 	        		 box+="<p class='author-category_1'>活動地點:"+mission.county+mission.district+"</p>";       	
-	        		 box+="<p class='author-category_1'>發布者:<a href='/commons/personal-info/list?memberId="+mission.member.id+"'>"+mission.member.name+"</a></p>";       	
+	        		 box+="<p class='author-category_1'>發布者:<a href='/commons/personal-info/list?memberId="+mission.member.id+"'>"+mission.member.name+"</a></p>";       		        		 
 	        		 box+="</div></div></div>";   
 	        		var boxbox=$("#boxbox").append(box); 
 	        	})

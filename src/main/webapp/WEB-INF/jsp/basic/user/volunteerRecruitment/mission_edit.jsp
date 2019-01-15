@@ -187,7 +187,7 @@
                     <div class="col-md-6 col-lg-3">
                       <div class="form-group">
                         <label for="missionPicture">活動宣傳圖</label>
-                        <a  href="/image/user/mission/${mission.missionPicName}" target="_blank">原上傳圖片</a>
+                        <input type="button" class="btn btn-template-outlined" id="originPicture" value="原上傳圖">
                         <input type="text"  id="missionPicName" name="missionPicName" hidden=true class="form-control" />
                         <input type="file"  id="missionPicture" name="missionPicture" accept="image/*" class="form-control" />
                       </div>
@@ -229,8 +229,14 @@
 		if(missionPicName.length == 0){
 			$("#missionPicName").html("");
 			$("#missionPicName").prop("hidden", true);
+			$("#originPicture").prop("hidden", true);
 		}
-	
+		$("#originPicture").click(function() {
+			swal({
+				title: '', 
+				icon: '/image/user/mission/${mission.missionPicName}',
+			})
+		});
 	
 	
 	
