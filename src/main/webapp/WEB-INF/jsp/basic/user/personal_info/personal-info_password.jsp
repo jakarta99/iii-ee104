@@ -58,7 +58,6 @@
 	              	<ul class="breadcrumb d-flex justify-content-end">
 	                	<li class="breadcrumb-item"><a href="/">Home</a></li>
 	                	<li class="breadcrumb-item"><a href="/user/personal-info/list">Member Information</a></li>
-	                	<li class="breadcrumb-item"><a href="/user/personal-info/edit">Edit Information</a></li>
 	                	<li class="breadcrumb-item active">Change password</li>
 	              	</ul>
 	            </div>
@@ -70,54 +69,62 @@
 	<section class="bar">
 	<div class="container">
     	<div class="row">
-            <article>
-				<h3>個人資訊</h3>
-				<h5>您在 TimeBank中使用的基本資訊</h5>
-				<hr>
-				<form id="personalinfoform">
-					<fieldset>
-						<div class="heading">
-          					<h3>帳戶資料</h3>
-          				</div>
-          				<input type="hidden" value="${member.id}" id="id" name="id"> 
-						<input type="hidden" value="${member.memberType}" id="memberType" name="memberType">
-						<div class="row">
-                    		<div class="col-md-6">
-                      			<div class="form-group">
-									<label for="idPasswordOld">舊密碼:</label>
-									<input type="password" value="" id="idPasswordOld" placeholder="請輸入舊密碼" name="password" autofocus autocompelete="off" class="form-control">
-		<!-- 							<div><label>(1.不可空白，2.至少8個字最多16個字，3.必須包含字母、數字、特殊符號[~!@#$%^&*])</label></div> -->
-									<span id="idspPasswordOld" style='color:red'></span>
+    		<div class="col-lg-6" style="margin:auto">
+            	<div class="box">
+		            <article>
+						<h2 class="text-uppercase">個人資訊</h2>
+		                <p class="lead">您在 TimeBank中使用的基本資訊</p>
+		                <p class="text-muted">帳戶資料</p>
+		                <hr>
+<!-- 						<h3></h3> -->
+<!-- 						<h5>您在 TimeBank中使用的基本資訊</h5> -->
+<!-- 						<hr> -->
+						<form id="personalinfoform">
+							<fieldset>
+<!-- 								<div class="heading"> -->
+<!-- 		          					<h3>帳戶資料</h3> -->
+<!-- 		          				</div> -->
+		          				<input type="hidden" value="${member.id}" id="id" name="id"> 
+								<input type="hidden" value="${member.memberType}" id="memberType" name="memberType">
+								<div class="row">
+		                    		<div class="col-md-12">
+		                      			<div class="form-group">
+											<label for="idPasswordOld">舊密碼:</label>
+											<input type="password" value="" id="idPasswordOld" placeholder="請輸入舊密碼" name="password" autofocus autocompelete="off" class="form-control">
+				<!-- 							<div><label>(1.不可空白，2.至少8個字最多16個字，3.必須包含字母、數字、特殊符號[~!@#$%^&*])</label></div> -->
+											<span id="idspPasswordOld" style='color:red'></span>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
-						<div class="row">
-                    		<div class="col-md-6">
-                      			<div class="form-group">
-									<label for="idPasswordNew">新密碼:</label>
-									<input type="password" value="" id="idPasswordNew" placeholder="請輸入新密碼" name="passwordNew" autofocus autocompelete="off" class="form-control">
-									<div><label>(1.不可空白，2.至少8個字最多16個字，3.必須包含字母、數字、特殊符號[~!@#$%^&*])</label></div>
-									<span id="idspPasswordNew" style='color:red'></span>
+								<div class="row">
+		                    		<div class="col-md-12">
+		                      			<div class="form-group">
+											<label for="idPasswordNew">新密碼:</label>
+											<input type="password" value="" id="idPasswordNew" placeholder="請輸入新密碼" name="passwordNew" autofocus autocompelete="off" class="form-control">
+											<div><label>(1.不可空白，2.至少8個字最多16個字，3.必須包含字母、數字、特殊符號[~!@#$%^&*])</label></div>
+											<span id="idspPasswordNew" style='color:red'></span>
+										</div>
+									</div>
+									<div class="col-md-12">
+		                      			<div class="form-group">
+											<label for="idPasswordCheck">確認新密碼:</label>
+											<input type="password" value="" id="idPasswordCheck" placeholder="請再輸入一次新密碼" name="passwordCheck" autofocus autocompelete="off" class="form-control">
+											<div><label>(1.不可空白，2.須與密碼相同)</label></div>
+											<span id="idspPasswordCheck" style='color:red'></span>
+										</div>
+									</div>
 								</div>
-							</div>
-							<div class="col-md-6">
-                      			<div class="form-group">
-									<label for="idPasswordCheck">確認新密碼:</label>
-									<input type="password" value="" id="idPasswordCheck" placeholder="請再輸入一次新密碼" name="passwordCheck" autofocus autocompelete="off" class="form-control">
-									<div><label>(1.不可空白，2.須與密碼相同)</label></div>
-									<span id="idspPasswordCheck" style='color:red'></span>
+		          			</fieldset>
+							<fieldset style="border:none">
+								<div class="col-md-12 text-center">
+									<button type="button" class="btn btn-template-outlined" id="updateButt"><i class="fa fa-save"></i>儲存</button>
+									<span id="error" style='color:red'></span>
 								</div>
-							</div>
-						</div>
-          			</fieldset>
-					<fieldset style="border:none">
-						<div>
-							<button type="button" class="btn btn-template-outlined" id="updateButt"><i class="fa fa-save"></i>儲存</button>
-							<span id="error" style='color:red'></span>
-						</div>
-					</fieldset>
-				</form>
-			</article>
+							</fieldset>
+						</form>
+					</article>
+				</div>
+			</div>
 		</div>
 	</div>
 	</section>
@@ -259,7 +266,7 @@
 							  button: "確定",
 						}).then((result) => {
 							if (result) {
-								window.location.replace("/user/personal-info/edit");	//讀完導回個人資訊
+								window.location.replace("/user/personal-info/list");	//讀完導回個人資訊
 							}
 						});
 // 						alert("資料更新成功");

@@ -1,9 +1,21 @@
 package team.lala.timebank.web.admin;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
+import javax.swing.JLabel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,9 +25,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
+import team.lala.timebank.commons.view.PdfViewForChart;
 import team.lala.timebank.entity.Donation;
 import team.lala.timebank.service.DonationService;
 import team.lala.timebank.spec.DonationSpecification;
@@ -118,6 +132,45 @@ public class AdminDonationController {
 	}
 	
 
+	@RequestMapping("/turnChartToPdf")
+	public ModelAndView turnChartToPdf(HttpServletResponse response, @RequestParam("htmlStr") String htmlStr) throws IOException {
+		Map<String, Object> pdfModel = new HashMap<String, Object>();
+
+		//****************************************
+//	    JLabel label = new JLabel(htmlStr);
+//	    label.setSize(200, 120);
+//
+//	    BufferedImage image = new BufferedImage(
+//	            label.getWidth(), label.getHeight(), 
+//	            BufferedImage.TYPE_INT_ARGB);
+//
+//	    {
+//	        // paint the html to an image
+//	        Graphics g = image.getGraphics();
+//	        g.setColor(Color.BLACK);
+//	        label.paint(g);
+//	        g.dispose();
+//	    }
+//
+//	    // get the byte array of the image (as jpeg)
+//	    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//	    ImageIO.write(image, "jpg", baos);
+//	    byte[] bytes = baos.toByteArray();
+//	    ImageIO.write(image, "jpg", new File("D://test.png"));
+	  //****************************************
+		
+		// 儲存htmlStr
+		pdfModel.put("htmlStr", htmlStr);
+		System.out.println(htmlStr);
+		response.setHeader("Content-disposition", "attachment; filename=donationChart.pdf");
+		
+		PdfViewForChart pdfView = new PdfViewForChart();
+
+		return new ModelAndView(pdfView);
+	}
+	
+	
+	
 	
 	@RequestMapping("/chart")
 	public String chartPage() {
