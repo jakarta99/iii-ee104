@@ -31,10 +31,51 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
 
 <meta charset="UTF-8">
-<title>mission Detail</title>
+<title>招募申請 | TimeBank</title>
 <style>
+.img-fluid {
+    height: 30px;
+}
+	.icon-filled {
+    width: 90px;
+    height: 24px;
+    line-height: 24px;
+    background: #13b5b1;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 18px;
 
-	 	
+    
+}
+#memberhref{
+ color: #FFAA33;
+}
+#memberhref:hover {
+    color:#AA7700;
+}
+.ul-icons .icon-filled {
+    margin-bottom: 5px;
+}
+
+	table img {
+  min-width: 35px !important;
+  max-width: 35px !important;
+  height: 50px;
+}
+.fc-title{	
+	letter-spacing:3px;
+}
+	 	.img{
+			width: 90%;
+			height: 90%;
+			position: absolute;
+	    	top: 0;
+	    	bottom: 0;
+	    	left: 0;
+	    	border: 0;
+	    	
+	    }
         fieldset {
             width: 100%;
             border-radius: 20px;
@@ -100,12 +141,31 @@
         <div class="container">
           <section class="bar">
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-8">
                 <div class="heading">
                   <h2>活動介紹</h2>
                 </div>
-                <p align="center" class="lead">${mission.discription}
+                <p  class="lead">${mission.discription}
 				</div>
+				 <div class="col-md-4">
+				 	<ul class="ul-icons list-unstyled">
+				 	<li>
+              			<img  style="width:400px;height:250px;border:1px solid black;border-radius: 5px;" id="missionImg" alt="" src="/image/user/mission/${mission.missionPicName}" class="img-fluid rounded-square">
+					</li>
+					<li>
+					<div>
+						<div style="margin-left:5px;background:#FFAA33" class="icon-filled">刊登者</div>
+						<span style="width:70px"><img style="border:1px solid black" id="memberImg" alt="" src="/image/user/member/${member.picture}" class="img-fluid rounded-circle"> 
+							<a id="memberhref" style="font-size:16px;font-weight: 600;" href="/commons/personal-info/list?memberId=${member.id}"> ${member.name}</a>
+						</span>
+					</div>
+					</li>
+					<li>
+					<button style="margin-left:5px;color:#FFAA33" id="chatButton" class="btn btn-template-outlined">與${member.name}聯絡</button>
+					
+					</li>
+				</ul>
+              </div>
             </div>
           <div class="row">
             <div class="col-md-12">
@@ -118,71 +178,64 @@
               <div class="col-md-4">
                 
 				<ul class="ul-icons list-unstyled">
-					<li>
-						<div class="icon-filled"></div>活動地點:${mission.county}${mission.district}${mission.address}
+					<li >
+						<div class="icon-filled">活動地點</div><p style="font-size:16px">${mission.county}${mission.district}${mission.address}</p>
 					</li>
-					
-					
 					<li>
-						<div class="icon-filled"></div>起迄時間:<fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.startDate}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.endDate}"/>
+						<div class="icon-filled">起迄時間</div><p style="font-size:16px"><fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.startDate}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.endDate}"/></p>
 					</li>			
 					<li>
-						<div class="icon-filled"></div>聯絡人:${mission.contactPerson}<br>
+						<div class="icon-filled">聯絡人</div><span style="font-size:16px">${mission.contactPerson}</span>
 					</li>
 					<li>
-						<div class="icon-filled"></div>聯絡電話:${mission.contactPhone}
+						<div class="icon-filled">聯絡電話</div><span style="font-size:16px">${mission.contactPhone}</span>
 					</li>
 					<li>
-						<div class="icon-filled"></div>聯絡Email:  ${mission.contactEmail}
-					</li>
-					<li>
-						<div class="icon-filled"></div>聯絡Email:  ${mission.contactEmail}
+						<div class="icon-filled">聯絡Email</div><span style="font-size:16px">${mission.contactEmail}</span>
 					</li>
 				</ul>
 
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
               	<ul class="ul-icons list-unstyled">
               		<li>
-						<div class="icon-filled"></div>服務種類:${mission.serviceType.serviceType}
+						<div class="icon-filled">服務種類</div><span style="font-size:16px">${mission.serviceType.serviceType}</span>
 					</li>
 					<li>
-						<div class="icon-filled"></div>服務類型:
+						<div class="icon-filled">服務類型</div><span style="font-size:16px">
 							<c:if test="${mission.termType == 'L'}"> 
 								長期
 							</c:if> 
 							<c:if test="${mission.termType == 'S'}"> 
 								短期
 							</c:if>
+						</span>	
 					</li>
 					<li>
-						<div class="icon-filled"></div>需求人數:${mission.peopleNeeded}人
+						<div class="icon-filled">需求人數</div><span style="font-size:16px">${mission.peopleNeeded}人</span>
 					</li>
 					<li>
-						<button id="chatButton" class="btn btn-template-outlined">與我們聯絡</button>
+						<div class="icon-filled">活動時數</div><span style="font-size:16px">${mission.timeValue}小時</span>
 					</li>
               	</ul>
               
               </div>
-              <div class="col-md-4">
-              	<img  style="width:200px;height:180px;border:1px solid black;" id="missionImg" alt="" src="/image/user/mission/${mission.missionPicName}" class="img-fluid rounded-square">
-				<table>
-					<tr><td><a href="">刊登者 : ${member.name}</a></td></tr>
-				</table>
-              
+              <div class="col-md-5">
+<!--      google map  -->
+		          <section>
+					<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNASLitmpPiGxtg94A3WqLl8bHHk0lzJM&callback=initMap"></script>
+
+					    <div style="height:210px" id="map"></div>
+		          </section> 
               </div>
-            </div>
-            	<div class="col-md-12 text-center">
+              <div class="col-md-7 text-center">
 					<button onclick="insertOrder(${mission.id})" class="btn btn-template-outlined"><i class="fa fa-plus"></i>我要參加</button>
-				</div>    	
+				</div> 
+            </div>
+            	   	
           </section>
      
-<!--      google map  -->
-          <section>
-			<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNASLitmpPiGxtg94A3WqLl8bHHk0lzJM&callback=initMap"></script>
-          	<h3>我的地圖</h3>
-			    <div id="map"></div>
-          </section>        
+       
             </div>
         </div>
      
@@ -193,7 +246,7 @@
     function initMap() {
   	geocoder = new google.maps.Geocoder();
       map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 16,
+        zoom: 13,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         center : {
 			lat : 25.0477505,
