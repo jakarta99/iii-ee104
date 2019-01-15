@@ -92,11 +92,9 @@
 // 				button: false,
 // 			})
 			$('#status').css('display','block');  
-			$("#preloader").css("display","block");  
-	  		$('#status').fadeOut(); // will first fade out the loading animation
-	  		$('#preloader').delay(100).fadeOut('slow'); // will fade out the white DIV that covers the website.
-	  	    $('body').delay(100).css('overflow','visible');
-	  		
+			$('#preloader').css('display','block');  
+			$("#preloader").css("background-color","#00000000");  
+	  	
 	  		var data = new FormData($('#pictureForm')[0]);
 			$.ajax({
 				type : 'post',
@@ -110,6 +108,9 @@
 				//alert(response.status);
 				if(response.status == "SUCCESS") {
 // 					alert("註冊完成");
+					$('#status').fadeOut(); // will first fade out the loading animation
+			  		$('#preloader').delay(100).fadeOut('slow'); // will fade out the white DIV that covers the website.
+			  	    $('body').delay(100).css('overflow','visible');
 					swal({
 						  title: "SUCCESS",
 						  text: "註冊完成",
@@ -133,6 +134,8 @@
 					})
 				}						
 			})
+			
+	  		
    		})
    </script>
 </body>

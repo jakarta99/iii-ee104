@@ -65,19 +65,14 @@ header.nav-holder.sticky navbar-nav > li > a:hover{
 }
 #status {
 	display:none;
-  width:200px;
-  height:200px;
+/*   width:200px ; */
+/*   height:200px ; */
   position:absolute;
-  left:50%; centers ;
-/*   the loading animation horizontally one the screen */
-  top:50%; centers ;
-/*   the loading animation vertically one the screen */
-  background-image:url(/gif/loader.gif); 
-/*   path to your loading animation */
-  background-repeat:no-repeat;
-  background-position:center;
+  left:50%; 
+  top:60%; 
+/*   background-repeat:no-repeat; */
+/*   background-position:center; */
   margin:-100px 0 0 -100px; 
-/*   is width and height divided by two */
 }
 
 #preloader {
