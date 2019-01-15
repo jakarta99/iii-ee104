@@ -88,14 +88,14 @@
 	clear:both;
     margin: 0;
 }
-#sendMessage{
+#sendMessage-box{
 	border-radius: 3px;
 	background-color:#1ec7c3;
 	border-color:none;
 }
-#sendMessage:hover{
+#sendMessage-box:hover{
 	background-color:#10a9a5;
 }
-#text{
+#text-box{
 	border-radius: 3px;
 }	

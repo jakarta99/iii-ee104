@@ -78,6 +78,7 @@ public class ChatMessageService {
 			ChatMessage lastChatMessage = chatMessageDao.findLastChatMessageBetweenTwoAccounts(account, m.getAccount());
 			lastChatMessage.setToMemberPic(m.getPicture());
 			lastChatMessage.setToName(m.getName());
+			lastChatMessage.setToAccount(m.getAccount());
 			int idx = chatObjectList.indexOf(m.getAccount());
 			lastMessageWithChatObjectList.set(idx, lastChatMessage);
 		}

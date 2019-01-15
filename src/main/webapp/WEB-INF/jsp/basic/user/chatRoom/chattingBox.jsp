@@ -134,16 +134,26 @@
 <%-- 		<% request.getSession().removeAttribute("stompClientConnection");%> --%>
 	}
 
-	function sendMessage() {
-		var text = $('#text').val();
-		if (text.length >0){
-			//連接成功後，客户端可使用 send()方法向服務器發送信息
-			stompClient.send("/app/chat", {}, JSON.stringify({	
-				'from':from,
-				'to' : to,
-				'text' : text
-			}));			
+	function sendMessage(toChat) {
+		var text;
+		var chatObject;
+		if (toChat != null){
+			chatObject = toChat;
+		} else {
+			chatObject = to;
 		}
+		if (toChat != from){	
+			text= $('#text').val();	
+			if (text.length >0){
+				//連接成功後，客户端可使用 send()方法向服務器發送信息
+				stompClient.send("/app/chat", {}, JSON.stringify({	
+					'from':from,
+					'to' : chatObject,
+					'text' : text
+				}));			
+			}
+		}
+		
 	}
 
 	function showMessageOutput(chatMessage) {
@@ -192,8 +202,8 @@
         		<div id="box">
 					<p id="response"></p>
 				</div>
-				<input type="text" id="text" placeholder="Write a message..." />
-				<button id="sendMessage" class="btn btn-primary btn-sm" disabled onclick="sendMessage();">Send</button>
+				<input type="text" id="text" placeholder="請輸入訊息" />
+				<button id="sendMessage" class="btn btn-primary btn-sm" disabled onclick="sendMessage()">Send</button>
 			</div>
 	    </div>
 	    

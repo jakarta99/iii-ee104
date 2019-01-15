@@ -71,6 +71,7 @@ public class ChatMessageController {
 		respData.put("chatList", chatList);
 		respData.put("toMemberPic", toMember.getPicture());
 		respData.put("fromMemberPic", fromMember.getPicture());
+		respData.put("toMemberName", toMember.getName());
 		//將聊天對象資料存放在session scope內，一旦連線完成，整個網站都能進行對話
 //		model.addAttribute("stompClientConnection", "Y");
 //		model.addAttribute("toMember", toMember);

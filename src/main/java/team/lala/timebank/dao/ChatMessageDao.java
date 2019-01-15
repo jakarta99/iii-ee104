@@ -18,7 +18,7 @@ public interface ChatMessageDao extends JpaRepository<ChatMessage, Long>, JpaSpe
 		"(SELECT  cmsg.id ,cmsg.to_Account,cmsg.from_Account,cmsg.read_Already, cmsg.text , cmsg.time "+
 	    "FROM Chat_Message cmsg WHERE to_Account=?1 )) as cm "+    
 	    "GROUP BY cm.from_Account, cm.to_Account "  +
-	    "ORDER BY maxtime" , nativeQuery=true)
+	    "ORDER BY maxtime DESC" , nativeQuery=true)
 		public List<Object[]> findChatObjectsByUserAccountOrderByLastChatTime(String account); 
 	
 		//查詢此帳號的所有聊天訊息

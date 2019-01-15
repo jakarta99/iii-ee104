@@ -12,61 +12,9 @@
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp" />
 <!-- Javascript files-->
 <jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
-
-<script>
-$(document).ready( function () {	
-	$("#heading-breadcrumbs>div>div>div.col-md-7>h1").text("我的訊息");
-})	
-
-
-</script>
+<link rel="stylesheet" href="/css/chatAll.css">
 <style>
-*{
-	
-}
-#content{
-	margin:10px;
-	overflow:auto;
-	border:1px solid blue;
-	border-radius:3px;
-}
-#chattedPeopleList,#chatMessageBoxArea{
-	float:left;
-	border:1px solid gray;
-	min-height:500px;
-	max-height:800px;
-}
-#chattedPeopleList{
-	width:30%;
-	padding-top: 10px;
-}
-#chatMessageBoxArea{
-	width:70%;
-}
-.item1{
-	text-align:center;
-	padding:3px;	
-}
-.item2{
-	border-top:1px solid gray;
-}
-.chatMemberBox{
-	border-bottom:1px solid gray;
-/* 	border-:1px solid gray; */
-	padding:3px;
-	height: 58px;
-}
-.chatMemberBox:hover{
-	background-color:#80808075;
-}
-.imgToken{
-	float:left;
-	
-}
-.chat-info{
-	width:80%;
-	float:right;
-}
+
 </style>
 </head>
 <body>
@@ -85,16 +33,16 @@ $(document).ready( function () {
 			<div id="chattedPeopleList" >
 				<div class="item1">
 					<div id="title-box" class="item1">我的訊息</div>
-					<div id="search-box" class="item1"><input type="text" placeholder="搜尋"/></div>
+					<div id="search-box" class="item1" ><input type="text" style="width:100%;text-align:center;padding:3px 0px" placeholder="搜尋"/></div>
 				</div>
 				<div class="item2">
 					<c:forEach items="${chatObjectsList}" var="chatMember">
 						<div class="chatMemberBox" >
-							<div class="imgToken" >
+							<div class="imgToken" >							
 								<img src="/image/user/member/${chatMember.toMemberPic}" style="width:50px;border-radius:50px;"/>
 							</div>
 							<div class="chat-info">
-								<div style="display:inline">${chatMember.toName}</div>
+								<div style="display:inline" id="${chatMember.toAccount}">${chatMember.toName}</div>	
 								<fmt:formatDate value="${chatMember.time}" pattern="yyyy-MM-dd" var="lastChatTime"/>
 								<div style="display:inline; float:right">${lastChatTime}</div>
 								<div >${chatMember.text}</div>
@@ -106,19 +54,135 @@ $(document).ready( function () {
 				</div>
 			</div>
 			<div id="chatMessageBoxArea">
-			
+				<div id="chatterName"></div>
+				<div id="box-chatPage" class="box-chatPage">
+					<p id="response"></p>
+				
+				</div>
+				<div style="margin: 15px 0px 5px 0px;">
+				<input type="text"  id="text" class="text-chatPage" placeholder="輸入訊息" />
+				<input type="button" id="sendButton" class="sendButton-chatPage" onclick="sendMessage()" value="傳送"> 
+				</div>
 			</div>
-		
+			<div id="other-info"> </div>
 		</div>
 	
 	</div>
-
 	<!-- FOOTER -->
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
-	
 	<script>
+	
+		
+		function getChatMessages() {
+			console.log("to="+to)
+			//從資料庫中取出聊天室過往的訊息紀錄
+			$.ajax({
+				url:"/user/chatMessage/oldMessages/onePerson/query",
+				type: "post",
+				data: {"to":to, "from":from},
+			    dataType : "json",	
+	        }).done(function(mapObj){
+	        	console.log(mapObj)
+	        	//從回傳的物件中取得聊天室雙方資訊
+	        	toPic=mapObj.toMemberPic;
+	        	fromPic=mapObj.fromMemberPic;
+				//從session scope取得聊天室雙方資訊
+	// 			to='${toMember.account}';
+	//         	toPic='${toMember.picture}';
+	//         	fromPic='${fromMember.picture}';
+	        	console.log("toPic="+toPic);
+	        	console.log("fromPic="+fromPic);
+	        	$.each(mapObj.chatList, function(idx, chatMessage){
+	        	 	var img;
+	        		var m = new Date(chatMessage.time);
+	        		var dateTime = m.getHours() + ":" + m.getUTCMinutes() ;		
+	        	 	var p = $("<p></p>");
+	        	 	$(p).css("wordWrap","break-word");
+	        	 	var msgSpan = "<p class='msgSpan'>"+ chatMessage.text +"</p>";
+	        	 	var dateTimeSpan = "<p class='dateTimeSpan'>"+ dateTime + "</p>"; 	
+	        	 	if (chatMessage.toAccount == to || chatMessage.fromAccount == "${userAccount}"){
+	        	 		$(p).addClass("p1-from");
+	        			$(p).append( msgSpan +"<br>" + dateTimeSpan)
+	        	 	} else {
+	        	 		$(p).addClass("p1-to");
+	        	 		img = "<img src='/image/user/member/"+ toPic +"' class='userImg' />";
+	            		$(p).append(img + msgSpan +"<br>" + dateTimeSpan)
+	        	 	}
+		    	 	$('#response').append(p);    	 	
+	        	})
+	        	$("#chatterName").text(mapObj.toMemberName);
+		    	$('#box-chatPage').animate({ scrollTop: $("#response").height() }, 1);    	    	 	
+	    	 	$("#text").val("");  
+	    	 	connect();
+	       });		
+		}
+// 		function chatPageConnect(){
+// 			var socket = new SockJS('/gs-guide-websocket'); 
+// 			stompClient = Stomp.over(socket); 
+// 			stompClient.connect({}, function(frame) { 
+// 				console.log('Connected: ' + frame);
+// 				stompClient.subscribe('/topic/messages', function(messageOutput) {	
+// 					var chatMessage = JSON.parse(messageOutput.body);
+// 					console.log("fromAccount="+chatMessage.fromAccount);
+// 					console.log("toAccount="+chatMessage.toAccount);
+// 				 	var m = new Date(chatMessage.time);
+// 					var dateTime = m.getHours() + ":" + m.getUTCMinutes();		
+// 				 	var p = $("<p></p>");
+// 				 	$(p).css("wordWrap","break-word");
+// 				 	var msgSpan = "<p class='msgSpan'>"+chatMessage.text+"</p>";
+// 				 	var dateTimeSpan = "<p class='dateTimeSpan'>"+dateTime+"</p>"; 	
+// 				 	if (chatMessage.toAccount == to && chatMessage.fromAccount == '${userAccount}'){
+// 				 		$(p).addClass("p1-from");
+// 						$(p).append(msgSpan +"<br>"+ dateTimeSpan);
+// 				 	} else if (chatMessage.fromAccount == to && chatMessage.toAccount == '${userAccount}'){
+// 				 		$(p).addClass("p1-to");
+// 				 		img = "<img src='/image/user/member/"+ toPic +"' class='userImg' />";
+// 						$(p).append(img + msgSpan +"<br>"+ dateTimeSpan);
+// 				 	}
+// 				 	$('#response').append(p);
+// 				 	$('#box').animate({ scrollTop: $("#response").height() }, 1);
+// 				 	$("#text").val("");
+				
+// 				});
+			
+// 			});
+		
+// 		}
 		
 	
+
+		
+		$(document).ready(function(){	
+			$("#chatbox").html("");
+			$("#heading-breadcrumbs>div>div>div.col-md-7>h1").text("我的訊息");
+			to = $("#chattedPeopleList > div.item2 > div:nth-child(1) > div.chat-info> div:nth-child(1)").attr("id");
+			console.log("toAccount="+to);			
+			getChatMessages();
+			
+			if ('${chatMember.toAccount}'=='${userAccount}'){		
+				console.log('${chatMember.toAccount}:${userAccount}');
+// 		 	<div style="display:inline" id="${chatMember.toAccount}">${chatMember.toName}</div>								
+			}else{
+				console.log('${chatMember.fromAccount}:${userAccount}')
+// 			 	<div style="display:inline" id="${chatMember.fromAccount}">${chatMember.fromName}</div>	
+		
+			}
+			
+		})
+		
+					$(".chatMemberBox").on("click",function(){
+				alert("ddd")
+// 				var id= $(this).children(".chat-info").childern().first().attr("id");
+				var id= $(this).find(">:nth-child(2)>:first-child").attr("id");
+				console.log("id"+id);
+// 				#chattedPeopleList > div.item2 > 
+			})
+			
 	</script>
+	
+	
+
+	
+
 </body>
 </html>
