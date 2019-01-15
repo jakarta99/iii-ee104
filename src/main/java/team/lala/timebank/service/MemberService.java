@@ -202,16 +202,12 @@ public class MemberService {
 	        	// 48~57  ASCII中的數字
 	        	// 65~90  ASCII中的大寫英文字母
 	        	// 97-122 ASCII中的小寫英文字母
-	        	// ~:126, !:33, @:64, #:35, $:36, %:37, ^:94, &:38, *:42
-	        	num = (int)(Math.random()*(126-33+1))+33;
+	        	// 符號亂碼會影響url
+	        	num = (int)(Math.random()*(122-48+1))+48;
 	        	//排除
-	        	if(num == 34 || num > 38 && num < 42 || num > 42 && num < 48) {
-	            	continue;
-	            }else if (num > 57 && num < 64) {
+	        	if (num > 57 && num < 65) {
 	            	continue;           	
-	            }else if (num > 90 && num < 94 || num > 94 && num < 97) {
-	            	continue;
-	            }else if (num > 122 && num < 126) {
+	            }else if (num > 90 && num < 97 ) {
 	            	continue;
 	            }
 	            pwdSet += (char)num;	//將數字轉換為字元

@@ -80,22 +80,24 @@ public class MailServiceImpl implements MailService {
 	}
 	
 	@Override
-	public void sendNewPasswordMail(Member member, String newPassword) {
+	public void sendVerificationCodeMail(Member member) {
 		MimeMessage message = mailSender.createMimeMessage();
 		try {
 	        //true表示需要創建一个multipart message
 	        MimeMessageHelper helper = new MimeMessageHelper(message, true);
 	        helper.setFrom(from);
 	        helper.setTo(member.getEmail());
-	        helper.setSubject("TimeBank帳戶，您的新密碼");
+	        helper.setSubject("TimeBank帳戶，您的驗證連結");
 	        String content="<html>" +
 	                "<body>" +
-	                "    <h3>TimeBank帳戶，您的新密碼</h3>" +
+	                "    <h3>TimeBank帳戶，您的驗證連結</h3>" +
 	                "Dear " + member.getName() +
     				",<br/> Your account is " + member.getAccount() + ".<br/>" +
-	                "Your new password is " + newPassword + ".<br>" +
-    				"<a href='http://localhost:8080/login'>請由此登入</a><br/>" +
-	                "並請盡快至[會員專區]>[個人資訊]修改密碼，謝謝您。<br/>" +
+	                "此驗證連結在五分鐘內有效，請在期限內登入。<br/>" +
+    				"<a href='http://localhost:8080/commons/login-forget/password?account=" + 
+	                member.getAccount() + "&verificationCode=" + member.getVerificationCode() +
+	                "'>請由此進入</a><br/>" +
+    				"請盡快修改密碼，謝謝您。<br/>" +
 	                "</body>" +
 	                "</html>";
 	        helper.setText(content, true);

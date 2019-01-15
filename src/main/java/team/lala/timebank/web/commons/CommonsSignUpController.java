@@ -490,7 +490,7 @@ public class CommonsSignUpController {
 	
 	@RequestMapping("/pic")
 	public String picPage(HttpSession session) {
-		log.debug("memberId={}", session.getAttribute("memberId"));
+		log.debug("---memberId={}", session.getAttribute("memberId"));
 		return "/basic/commons/sign_up/sign-up_pic";
 	}
 	

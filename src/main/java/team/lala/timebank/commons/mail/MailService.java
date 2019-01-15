@@ -5,6 +5,6 @@ import team.lala.timebank.entity.Member;
 public interface MailService {
 	void sendSimpleMail(Member member);
 	void sendHtmlMail(Member member);
-	void sendNewPasswordMail(Member member, String newPassword);	
+	void sendVerificationCodeMail(Member member);	
 	void sendInlineResourceMail(Member member);
 }
