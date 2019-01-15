@@ -3,6 +3,9 @@ package team.lala.timebank.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,8 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Getter;
 import lombok.Setter;
+import team.lala.timebank.enums.MyCollectionType;
+import team.lala.timebank.enums.MissionStatus;
 
 @Getter
 @Setter
@@ -24,18 +31,32 @@ public class MyCollection {
 	private Long id;
 	
 	//收藏者
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_ID", referencedColumnName = "id")
 	private Member member;
+//	
+//	//收藏的mission
+//	@ManyToOne(fetch=FetchType.LAZY)
+//	@JoinColumn(name = "MISSION_ID", referencedColumnName = "id")
+//	private Mission mission;
+//	
+//	//收藏的機構
+//	@ManyToOne
+//	@JoinColumn(name = "ORGANIZATION_ID", referencedColumnName = "id")
+//	private Member organization;
 	
-	//收藏的mission
-	@ManyToOne
-	@JoinColumn(name = "MISSION_ID", referencedColumnName = "id")
-	private Mission mission;
+	//收藏的國際志工
+//	@ManyToOne
+//	@JoinColumn(name = "INTERNATIONALVOLUNTEER_ID", referencedColumnName = "id")
+//	private InternationalVolunteer internationalVolunteer;
 	
-	//收藏的機構
-	@ManyToOne
-	@JoinColumn(name = "ORGANIZATION_ID", referencedColumnName = "id")
-	private Member organization;
+	//分辨收藏哪一種方便查詢
+	@Enumerated(EnumType.STRING)
+	@Column(name = "MYCOLLECTION_TYPE", nullable = false)
+	private MyCollectionType myCollectionType;
+	
+	@Column(name = "FAVORITEOBJECT_ID")
+	private Long favoriteObjectId;
 	
 }

@@ -331,13 +331,14 @@
 	        		  var box="<div class='s3'><div class='row'>"
 	        		   box+="<div class='col-md-4'>"
 	        		   box+="<div class='video '>"
-	        		   box+="<div class='embed-responsive embed-responsive-1by1'>"	        	
+	        		   box+="<div class='embed-responsive embed-responsive-4by3'>"	        	
 	        		   box+=" <a href='#'><img src=/image/user/mission/"+mission.missionPicName+" class='embed-responsive-item'></img></a>"     
 	        		   box+="</div></div></div>"
 	                   box+="<div class='col-md-8'>"
 	                   box+="<h1 class='h1 mt-0'><a href='/user/volunteerRecruitment/detail?id="+mission.id+"'>"+ mission.title + "</a></h1>"
 	                   box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
-					   box+="<p class='intro_1'>活動地點:"+mission.county+mission.district+"</p>"	        
+					   box+="<p class='intro_1'>活動地點:"+mission.county+mission.district+"</p>"
+					   	
 					 if(mission.missionstatus=="A_New"||mission.missionstatus=="A_VolunteerApproved"){
 	                   box+="<p class='date-comments_1'><a href='/user/volunteerRecruitment/edit?id="+mission.id+"'><i class='fa fa-edit'></i>編輯</a><a href='javascript:void(0)' onclick=\"cancelMission("+mission.id+",'"+mission.title+"')\" ><i class='fa fa-trash'></i>取消</a></p></div>"
 					 }
@@ -345,7 +346,14 @@
 					   box+="</div>"
 					 }else if(mission.missionstatus == "C_Finish" || mission.missionstatus == "C_Cancel"){
 					   box+="</div>"
-					 }    		   
+					 }  
+					   box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
+						   if(mission.termType=='s'){
+					   box+="<p class='intro_1'>長短期:短期</p>"
+						   }else{
+					   box+="<p class='intro_1'>長短期:長期</p>"	   
+						   }
+					   box+="</div>"
 	                   box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"         
 	                   if(mission.missionstatus == "A_New" || mission.missionstatus == "A_VolunteerApproved"){
 	                   box+="<p class='intro_1'>開始時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>"   

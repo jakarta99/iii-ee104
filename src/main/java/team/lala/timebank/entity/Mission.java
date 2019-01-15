@@ -27,6 +27,7 @@ import lombok.Getter;
 import lombok.Setter;
 import team.lala.timebank.enums.MissionStatus;
 import team.lala.timebank.enums.TermType;
+import team.lala.timebank.enums.YesNo;
 
 @Getter
 @Setter
@@ -44,7 +45,8 @@ public class Mission {
 
 	@Transient
 	private String memberAccount;
-
+	@Transient
+	private YesNo isCollected;
 	@Column(name = "TITLE", nullable = false, length = 50)
 	private String title;// 活動名稱
 
@@ -134,17 +136,23 @@ public class Mission {
 	
 	@Transient
 	private String missionStatusTransient;
-	
+
 	@Override
 	public String toString() {
-		return "Mission [id=" + id + ", member=" + member + ", memberAccount=" + memberAccount + ", title=" + title
-				+ ", timeValue=" + timeValue + ", termType=" + termType + ", serviceType=" + serviceType
-				+ ", serviceTypeDetail=" + serviceTypeDetail + ", orders=" + orders + ", publishDate=" + publishDate
-				+ ", deadline=" + deadline + ", startDate=" + startDate + ", endDate=" + endDate + ", peopleNeeded="
-				+ peopleNeeded + ", contactPerson=" + contactPerson + ", contactPhone=" + contactPhone
-				+ ", contactEmail=" + contactEmail + ", discription=" + discription + ", county=" + county
-				+ ", district=" + district + ", address=" + address + ", missionstatus=" + missionstatus
-				+ ", approvedQuantity=" + approvedQuantity + "]";
+		return "Mission [id=" + id + ", member=" + member + ", memberAccount=" + memberAccount + ", isCollected="
+				+ isCollected + ", title=" + title + "]";
 	}
+	
+//	@Override
+//	public String toString() {
+//		return "Mission [id=" + id + ", member=" + member + ", memberAccount=" + memberAccount + ", title=" + title
+//				+ ", timeValue=" + timeValue + ", termType=" + termType + ", serviceType=" + serviceType
+//				+ ", serviceTypeDetail=" + serviceTypeDetail + ", orders=" + orders + ", publishDate=" + publishDate
+//				+ ", deadline=" + deadline + ", startDate=" + startDate + ", endDate=" + endDate + ", peopleNeeded="
+//				+ peopleNeeded + ", contactPerson=" + contactPerson + ", contactPhone=" + contactPhone
+//				+ ", contactEmail=" + contactEmail + ", discription=" + discription + ", county=" + county
+//				+ ", district=" + district + ", address=" + address + ", missionstatus=" + missionstatus
+//				+ ", approvedQuantity=" + approvedQuantity + "]";
+//	}
 
 }
