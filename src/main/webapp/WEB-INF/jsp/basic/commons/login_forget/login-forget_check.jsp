@@ -142,10 +142,14 @@
 				document.getElementById("idspAccount").innerHTML = "" ;
 				document.getElementById("idspCertificateIdNumber").innerHTML = "" ;
 				document.getElementById("error").innerHTML = "" ;
- 				swal({
- 		            icon: "/image/user/member/loading.gif",
- 					button: false,
- 				})
+//  				swal({
+//  		            icon: "/image/user/member/loading.gif",
+//  					button: false,
+//  				})
+				$('#status').css('display','block');  
+				$('#preloader').css('display','block');  
+				$("#preloader").css("background-color","#00000000");
+				
 				$.ajax({
 					method:"post",
 					dataType:"json",        
@@ -157,9 +161,12 @@
 // 					console.log("messages="+response.messages);
 // 					alert($("#idPassword").val())
 					if(response.status == "SUCCESS") {
+						$('#status').fadeOut(); // will first fade out the loading animation
+				  		$('#preloader').delay(100).fadeOut('slow'); // will fade out the white DIV that covers the website.
+				  	    $('body').delay(100).css('overflow','visible');
 						swal({
 							  title: "SUCCESS",
-							  text: "新密碼已mail至您的信箱",
+							  text: "驗證連結已mail至您的信箱",
 							  icon: "success",
 							  button: "確定",
 						}).then((result) => {
