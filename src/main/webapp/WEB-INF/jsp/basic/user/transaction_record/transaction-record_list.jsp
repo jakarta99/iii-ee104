@@ -31,6 +31,52 @@
         .margintop{
 			 margin-top:70px;
 		}
+		.table .thead-green th {
+		    color: #fff;
+		    background-color: #13b5b1;
+		    border-color: #13b5b1;
+		    border-radius: 20px;
+		}
+		.btn-outline-secondary {
+		    color: #13b5b1;
+		    background-color: #fff;
+		    background-image: none;
+		    border-color: #13b5b1;
+		}
+		.btn-outline-secondary:hover {
+		    color: #fff;
+		    background-color: #13b5b1;
+		    border-color: #13b5b1;
+		}
+		.btn {
+		    border: 1px solid #13b5b1;
+		    border-radius: 0;
+		}
+		.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+		    color: #13b5b1 !important;
+		}
+		.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+		    color: #13b5b1 !important;
+    		background-color: #13b5b1;
+    		background: linear-gradient(to bottom, white 0%, #13b5b1 100%);
+		}
+		.dataTables_wrapper .dataTables_paginate .paginate_button {
+		    color: #13b5b1 !important;
+		}
+		.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+		    color: #13b5b1;
+		}
+		.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+		    color: white !important;
+		    border: 1px solid #111;
+		    background-color: #13b5b1; 
+		    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #13b5b1), color-stop(100%, #13b5b1)); 
+		    background: -webkit-linear-gradient(top, #13b5b1 0%, #13b5b1 100%);
+		    background: -moz-linear-gradient(top, #13b5b1 0%, #13b5b1 100%);
+		    background: -ms-linear-gradient(top, #13b5b1 0%, #13b5b1 100%);
+		    background: -o-linear-gradient(top, #13b5b1 0%, #13b5b1 100%);
+		    background: linear-gradient(to bottom, #13b5b1 0%, #13b5b1 100%);
+		}
 </style>
 </head>
 <body>
@@ -68,22 +114,26 @@
 						<fieldset style="width:1100px">
 						<legend>Search</legend>
 						<div>
+							<div>
+							    <label>起始時間</label>
+							    <input type="text" value="${param.transactionTimeBegin}" id="transactionTimeBegin" name="transactionTimeBegin" autocomplete="off"/>
+							    <label>結束時間</label>
+							    <input type="text" value="${param.transactionTimeEnd}" id="transactionTimeEnd" name="transactionTimeEnd" autocomplete="off"/>
+						  	</div>
 							<div>	
-								<label>depositValue :</label>
+								<label>存入</label>
 								<input type="text" value="${param.depositValue}" id="depositValue" name="depositValue"/>
-								<label>withdrawalValue :</label> 
+								<label>支出</label> 
 								<input type="text" value="${param.withdrawalValue}"  id="withdrawalValue" name="withdrawalValue"/>
-								<label>balanceValue :</label> 
+								<label>結餘</label> 
 								<input type="text" value="${param.balanceValue}"  id="balanceValue" name="balanceValue"/>
 							</div>
 							<div>
-							    <label>Start Date :</label>
-							    <input type="text" value="${param.transactionTimeBegin}" id="transactionTimeBegin" name="transactionTimeBegin" autocomplete="off"/>
-							    <label>End Date :</label>
-							    <input type="text" value="${param.transactionTimeEnd}" id="transactionTimeEnd" name="transactionTimeEnd" autocomplete="off"/>
-						  	</div>
-							<input type="button" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="search" id="searchButt" />
-						  	<input type="reset" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="reset" id="resetButt" />
+							    <label>摘要</label> 
+								<input type="text" value="${param.description}"  id="description" name="description"/>
+								<input type="button" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="search" id="searchButt" />
+							  	<input type="reset" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="reset" id="resetButt" />
+							</div>
 						</div>
 					  	</fieldset>
 					</form>
@@ -91,14 +141,14 @@
 					
 					<fieldset>
 						<table id="table" class="table table-hover">
-							<thead class="thead-dark">
+							<thead class="thead-green">
 								<tr>
 									<th scope="col"></th>
-									<th scope="col">transactionTime</th>
-			<!-- 						<th scope="col">description</th> -->
-									<th scope="col">depositValue</th>
-									<th scope="col">withdrawalValue</th>
-									<th scope="col">balanceValue</th>
+									<th scope="col">時間</th>
+									<th scope="col">存入</th>
+									<th scope="col">支出</th>
+									<th scope="col">結餘</th>
+									<th scope="col">摘要</th>
 								</tr>
 							</thead>
 							<tbody id="tableBody">
@@ -164,10 +214,10 @@
 				{data: null, render: function ( data, type, row ) {
 	                return new Date(data.transactionTime).toLocaleDateString();
 	            }},
-// 				{data:"description"},
 				{data:"depositValue"},
 				{data:"withdrawalValue"},
 				{data:"balanceValue"},
+				{data:"description"},
 			],
 			columnDefs: [{
 	            "searchable": false,
