@@ -76,7 +76,7 @@
 		                      			<div class="form-group">
 											<label for="idAccount">帳號:</label>
 											<input type="text" value="${param.account}" id="idAccount" placeholder="請輸入帳號" name="account" autofocus autocompelete="off" class="form-control">
-											<span id="idspAccount" style='color:red'>
+											<span id="idspAccount" style='color:red'></span>
 										</div>
 									</div>
 								</div>
@@ -88,7 +88,7 @@
 											<div class="col-md-10">
 		                      					<div class="form-group">
 													<label for="idCertificateIdNumber">身分證字號:</label>
-													<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" name="certificateIdNumber" autofocus autocompelete="off" class="form-control">
+													<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" placeholder="請輸入您的身分證字號" name="certificateIdNumber" autofocus class="form-control">
 													<span id="idspCertificateIdNumber" style='color:red'></span>
 												</div>
 											</div>
@@ -97,7 +97,7 @@
 											<div class="col-md-10">
 		                      					<div class="form-group">
 													<label for="idCertificateIdNumber">統一編號:</label> 
-													<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" name="certificateIdNumber" autofocus autocompelete="off" class="form-control">
+													<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" placeholder="請輸入帳戶的統一編號" name="certificateIdNumber" autofocus class="form-control">
 													<span id="idspCertificateIdNumber" style='color:red'></span>
 												</div>
 											</div>
