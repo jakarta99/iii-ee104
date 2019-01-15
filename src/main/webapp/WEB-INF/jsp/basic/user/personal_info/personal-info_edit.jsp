@@ -173,12 +173,12 @@
 			                        <input type="button" class="btn btn-template-outlined" id="changePicture" value="更改圖片" class="form-control"/>
                         		</div>
                         	</div>
-                        	<div class="col-md-2">
-	                      		<div class="form-group">
-			                        <div><label>密碼:</label></div>
-			                        <input type="button" class="btn btn-template-outlined" id="changePassword" value="修改密碼" class="form-control"/>
-                        		</div>
-                        	</div>
+<!--                         	<div class="col-md-2"> -->
+<!-- 	                      		<div class="form-group"> -->
+<!-- 			                        <div><label>密碼:</label></div> -->
+<!-- 			                        <input type="button" class="btn btn-template-outlined" id="changePassword" value="修改密碼" class="form-control"/> -->
+<!--                         		</div> -->
+<!--                         	</div> -->
                         </div>
 <!-- 						<div class="row"> -->
 <!-- 							<div class="col-md-4"> -->
@@ -636,10 +636,10 @@
 				window.location.replace("/user/personal-info/pic");
 			});
 			
-			//change password event
-			$("#changePassword").click(function() {
-				window.location.replace("/user/personal-info/password");
-			});
+// 			//change password event
+// 			$("#changePassword").click(function() {
+// 				window.location.replace("/user/personal-info/password");
+// 			});
 
 			//update member info. event
 			$("#updateButt").click(function() {		

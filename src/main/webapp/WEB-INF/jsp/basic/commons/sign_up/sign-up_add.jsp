@@ -40,6 +40,9 @@
 		border-radius: 0.25rem;
 		transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	}
+	.padding-horizontal {
+	    padding: 5px 0px 10px 0px !important;
+	}
 </style>
 
 </head>
@@ -284,7 +287,9 @@
 						
 						<div class="col-md-12 text-right">
                       		<div class="form-group">
-								<input type="button" class="btn btn-template-outlined" id="allin" value="一鍵帶入"/>
+                      			<span class="bg-primary bar padding-horizontal">
+								<input type="button" class="btn btn-template-outlined-white" id="allin" value="一鍵帶入"/>
+								</span>
 							</div>
 						</div>
 					</fieldset>
@@ -833,16 +838,17 @@
 // 					console.log("messages="+response.messages);
 // 					alert($("#idPassword").val())
 					if(response.status == "SUCCESS") {
-						swal({
-							  title: "SUCCESS",
-							  text: "資料填寫完成",
-							  icon: "success",
-							  button: "確定",
-						}).then((result) => {
-							if (result) {
-								window.location.replace("/commons/sign-up/pic");	//讀完導至上傳圖檔(成功送驗證信!(再導至login)))
-							}
-						});
+						window.location.replace("/commons/sign-up/pic");	//讀完導至上傳圖檔(成功送驗證信!(再導至login)))
+// 						swal({
+// 							  title: "SUCCESS",
+// 							  text: "資料填寫完成",
+// 							  icon: "success",
+// 							  button: "確定",
+// 						}).then((result) => {
+// 							if (result) {
+// 								window.location.replace("/commons/sign-up/pic");	//讀完導至上傳圖檔(成功送驗證信!(再導至login)))
+// 							}
+// 						});
 // 						alert("會員新增成功");
 // 						window.location.replace("/commons/sign-up/edit");	//edit頁面
 					} else {

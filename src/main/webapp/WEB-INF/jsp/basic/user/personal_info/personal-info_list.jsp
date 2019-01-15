@@ -166,6 +166,7 @@
                 </div>
 	        	<div class="col-md-12 text-center">
 					<button type="button" class="btn btn-template-outlined" id="edit"><i class="fas fa-edit"></i>編輯</button>
+					<input type="button" class="btn btn-template-outlined" id="changePassword" value="修改密碼" class="form-control"/>
 				</div>
 			</article>
 		</div>
@@ -183,6 +184,11 @@
  		//edit pesonal-info event
 		$("#edit").click(function() {
 			window.location.replace("/user/personal-info/edit");
+		});
+ 		
+		//change password event
+		$("#changePassword").click(function() {
+			window.location.replace("/user/personal-info/password");
 		});
 
 		$(document).ready(function(){
