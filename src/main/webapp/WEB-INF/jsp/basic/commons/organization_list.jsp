@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>TimeBank時間銀行-國際志工專區</title>
+<title>公益團體 | TimeBank</title>
 <!-- css -->
 <jsp:include page="commons_layout/commons_css_links.jsp" />
 <!-- Javascript files-->
