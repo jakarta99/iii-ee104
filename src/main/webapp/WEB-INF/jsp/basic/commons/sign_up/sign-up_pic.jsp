@@ -122,6 +122,9 @@
 						}
 					});
 				} else {
+					$('#status').fadeOut(); // will first fade out the loading animation
+			  		$('#preloader').delay(100).fadeOut('slow'); // will fade out the white DIV that covers the website.
+			  	    $('body').delay(100).css('overflow','visible');
 					$.each(response.messages, function(idx, message){
 						if (message == "資料有誤"){
 							swal({
