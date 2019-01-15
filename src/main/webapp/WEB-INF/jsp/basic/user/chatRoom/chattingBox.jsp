@@ -134,21 +134,15 @@
 <%-- 		<% request.getSession().removeAttribute("stompClientConnection");%> --%>
 	}
 
-	function sendMessage(toChat) {
+	function sendMessage() {
 		var text;
-		var chatObject;
-		if (toChat != null){
-			chatObject = toChat;
-		} else {
-			chatObject = to;
-		}
-		if (toChat != from){	
+		if (to != from){	
 			text= $('#text').val();	
 			if (text.length >0){
 				//連接成功後，客户端可使用 send()方法向服務器發送信息
 				stompClient.send("/app/chat", {}, JSON.stringify({	
 					'from':from,
-					'to' : chatObject,
+					'to' : to,
 					'text' : text
 				}));			
 			}

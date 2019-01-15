@@ -10,42 +10,20 @@
 #chattedPeopleList,#chatMessageBoxArea{
 	float:left;
 	border:1px solid gray;
-	min-height:650px;
-	max-height:650px;
+	min-height: 100%;
+    max-height: 100%;
 }
 #chattedPeopleList{
 	width:30%;
-	padding-top: 10px;
+/* 	padding-top: 10px; */
 }
-#chatMessageBoxArea{
-	width:70%;
-}
-.sendButton-chatPage{
-	border:none;
-	font-size: 18px;
-	background-color:#fff;
-	color:gray;
-	width: 10%;
-	float:right;
-	}
-.text-chatPage:focus {
-    outline: none !important;
-}
-.text-chatPage{
-	border:none;
-	width: 85%;
-	padding-left: 20px;
-	padding-top: 5px;
-}
-.box-chatPage{
-	margin: 10px 20px 0px 20px;
-	border-bottom: 1px solid #ced4da;
-	height: 560px; 
-	overflow:auto;	
+.item1-1{
+	min-height:13%;	
+	max-height:13%;	
 }
 .item1{
 	text-align:center;
-	padding:3px;	
+	padding: 3px;	
 }
 .item2{
 	border-top:1px solid gray;
@@ -55,6 +33,7 @@
 /* 	border-:1px solid gray; */
 	padding:3px;
 	height: 58px;
+	overflow: hidden;
 }
 .chatMemberBox:hover{
 	background-color:#80808075;
@@ -72,4 +51,34 @@
     background-color: #66c3c1;
     padding: 5px;
     border-bottom: 1px solid gray;
+}
+#chatMessageBoxArea{
+	width:70%;
+}
+
+.text-chatPage{
+	border:none;
+	width: 75%;
+	padding-left: 20px;
+/* 	padding-top: 5px; */
+	padding-bottom: 5px;
+}
+.text-chatPage:focus {
+    outline: none !important;
+}
+.box-chatPage{
+	margin: 1px 20px 0px 20px;
+	border-bottom: 1px solid #b2b3b5;
+	height: 79%; 
+	overflow:auto;	
+}
+
+.sendButton-chatPage{
+	border:none;
+	font-size: 18px;
+	background-color:#fff;
+	color:gray;
+	width: 10%;
+	float:right;
+	margin-right: 20px;
 }

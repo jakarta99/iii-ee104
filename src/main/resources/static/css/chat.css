@@ -58,6 +58,7 @@
 	text-align:right;
 	margin-bottom: 5px;
 	margin-left:30%;
+	margin-right: 3px;	
 }
 
 .userImg{
@@ -82,20 +83,21 @@
 	background-color:#1db9b5c2;
 	float:right;
 	color:#6d6b6b;	
+	
 }
 .dateTimeSpan{
 	font-size:0.2px !important;
 	clear:both;
     margin: 0;
 }
-#sendMessage-box{
-	border-radius: 3px;
+#sendMessage{
+	border-radius: 5px;
 	background-color:#1ec7c3;
 	border-color:none;
 }
-#sendMessage-box:hover{
+#sendMessage:hover{
 	background-color:#10a9a5;
 }
-#text-box{
+#text{
 	border-radius: 3px;
 }	
