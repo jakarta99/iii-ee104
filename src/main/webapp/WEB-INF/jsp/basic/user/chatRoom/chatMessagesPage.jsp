@@ -51,7 +51,7 @@
 									<div style="display:inline" id="${chatMember.toAccount}">${chatMember.toName}</div>	
 									<fmt:formatDate value="${chatMember.time}" pattern="yyyy-MM-dd" var="lastChatTime"/>
 									<div style="display:inline; float:right">${lastChatTime}</div>
-									<div >${chatMember.text}</div>
+									<div style="overflow: hidden;padding-right:40px">${chatMember.text}</div>
 								</div>
 								
 									

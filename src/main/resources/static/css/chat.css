@@ -71,7 +71,7 @@
     margin: 0;
 	padding:2px 5px;
 	border-radius: 8px;
-    width: min-content;
+    width:  max-content;;
 	max-width: 80%;    
 }
 .p1-to > .msgSpan {	
@@ -90,7 +90,7 @@
 	clear:both;
     margin: 0;
 }
-#sendMessage{
+.quickButton, #sendMessage{
 	border-radius: 5px;
 	background-color:#1ec7c3;
 	border-color:none;

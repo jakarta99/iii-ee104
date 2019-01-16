@@ -46,11 +46,31 @@
 	<div id="all">
 		<!-- Top bar-->
 		<jsp:include page="commons_layout/commons_top-bar.jsp" />
+			<jsp:include page="commons_layout/commons_nav.jsp" />
 		<!-- Navbar -->
-		<jsp:include page="commons_layout/commons_nav.jsp" />
-		<!-- heading-breadcrumbs -->
-		<jsp:include page="commons_layout/commons_heading_breadcrumbs.jsp" />
-		
+		      <!-- Carousel Start-->
+ 	<section style="height:50%;top:-83px;z-index:-1;background: url('/img/photogrid.jpg') center center repeat; background-size: cover;" class="bar background-white relative-positioned">
+<!--         <div class="container"> -->
+          <!-- Carousel Start-->
+          <div class="home-carousel" style="position: initial;">
+            <div class="dark-mask mask-primary" style="background: rgba(79, 191, 168, 0.41);"></div>
+            <div class="container">
+              <div class="homepage owl-carousel">
+                <div class="item">
+                  <div class="row">
+                    <div class="col-md-5 text-right">
+                     
+                      <h1>Multipurpose responsive theme</h1>
+                      <p>Business. Corporate. Agency.<br>Portfolio. Blog. E-commerce.</p>
+                    </div>
+                   
+                  </div>
+                </div>
+			</div>
+          </div>
+        </div>
+          <!-- Carousel End-->      
+      </section>
 
 		<div id="content" style='margin-top:50px'>
 			<div class="container" id='searchbox'>
