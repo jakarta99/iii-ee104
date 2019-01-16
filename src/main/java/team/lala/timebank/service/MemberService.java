@@ -136,14 +136,17 @@ public class MemberService {
 		return memberDao.findAll(specification, page);
 	}
 	
-	
-	
 	public Member findByAccount(String account) {
 		Member member = null;
 		member = memberDao.findByAccount(account);
 		return member;
 	}
 	
+	public Member findByOauth2Id(String oauth2Id) {
+		Member member = null;
+		member = memberDao.findByOauth2Id(oauth2Id);
+		return member;
+	}
 
 	public Page<Member> findByMemberType(MemberType memberType,Pageable pageable) {
 		return memberDao.findByMemberType(memberType, pageable);

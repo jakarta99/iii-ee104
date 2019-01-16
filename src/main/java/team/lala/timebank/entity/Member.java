@@ -190,6 +190,10 @@ public class Member implements UserDetails {
 	
 	@Column(name = "VERIFICATION_CODE")
 	private String verificationCode;
+	
+	@Column(name = "OAUTH2_ID")
+	private String oauth2Id;
+	
 //	 public void addRole(Role role) {
 //	       if (!getRoles().contains(role)) {
 //	           getRoles().add(role);
