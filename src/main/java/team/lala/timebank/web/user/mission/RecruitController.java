@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,12 +79,13 @@ public class RecruitController {
 	public Page<Mission> getMemberMission(Mission inputMission, Principal principal,
 			@RequestParam(value = "page", required = false) Optional<Integer> page,
 			@RequestParam(value = "length", required = false) Optional<Integer> length) {
-
+		
+		Sort sort = new Sort(Sort.Direction.DESC, "publishDate");
 		inputMission.setMemberAccount(principal.getName());
 		MissionSpecification missionSpec = new MissionSpecification(inputMission);
 
 		Page<Mission> missions = missionService.findBySpecification(missionSpec,
-				PageRequest.of(page.orElse(0), length.orElse(10)));
+				PageRequest.of(page.orElse(0), length.orElse(10),sort));
 		return missions;
 	}
 

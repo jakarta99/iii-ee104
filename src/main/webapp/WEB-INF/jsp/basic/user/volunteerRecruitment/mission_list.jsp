@@ -382,7 +382,7 @@
 	 				}else if(mission.missionstatus=="C_Finish"){
 	 					box+="<p class='read-more text-right'><a href='/user/closed/list?id="+mission.id+"' class='btn btn-template-outlined'>結案紀錄</a></p></div>"								
 	 				}else if(mission.missionstatus=="A_VolunteerApproved"){
-	 					box+="<p class='read-more text-right'><span class='badge badge-success'>審核完畢</span></p><div>"
+	 					box+="<p class='read-more text-right'><a href='/user/volunteerVerify/list?id="+mission.id+"' class='btn btn-template-outlined'>審核完畢</a></p></div>"
 	 				}
 	                	box+="</div></div>"
 	                boxbox=$("#boxbox").append(box)
