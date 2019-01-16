@@ -35,7 +35,19 @@
 <meta charset="UTF-8">
 <title>mission list(login)</title>
 <style>
-
+		.img-fluid {
+    		height: 30px;
+		}
+		.icon-filled {
+		    width: 90px;
+		    height: 24px;
+		    line-height: 24px;
+		    background: #13b5b1;
+		    color: #fff;
+		    text-align: center;
+		    border-radius: 5px;
+		    font-size: 18px;
+		}
 	 	
         fieldset {
             width: 100%;
@@ -116,45 +128,45 @@
               <div class="col-md-4">
                 
 				<ul class="ul-icons list-unstyled">
+						
 					<li>
-						<div class="icon-filled"></div>活動地點:${mission.county}${mission.district}${mission.address}
-					</li>
-					
-					
-					<li>
-						<div class="icon-filled"></div>起迄時間:<fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.startDate}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.endDate}"/>
-					</li>			
-					<li>
-						<div class="icon-filled"></div>聯絡人:${mission.contactPerson}<br>
+						<div class="icon-filled">聯絡人</div><span style="font-size:16px">${mission.contactPerson}</span>
 					</li>
 					<li>
-						<div class="icon-filled"></div>聯絡電話:${mission.contactPhone}
+						<div class="icon-filled">聯絡電話</div><span style="font-size:16px">${mission.contactPhone}</span>
 					</li>
 					<li>
-						<div class="icon-filled"></div>聯絡Email:  ${mission.contactEmail}
+						<div class="icon-filled">聯絡Email</div><span style="font-size:16px">${mission.contactEmail}</span>
 					</li>
+					<li >
+						<div class="icon-filled">活動地點</div><p style="font-size:16px">${mission.county}${mission.district}${mission.address}</p>
+					</li>
+					<li>
+						<div class="icon-filled">起迄時間</div><p style="font-size:16px"><fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.startDate}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.endDate}"/></p>
+					</li>		
 				</ul>
 
               </div>
               <div class="col-md-4">
               	<ul class="ul-icons list-unstyled">
               		<li>
-						<div class="icon-filled"></div>服務種類:${mission.serviceType.serviceType}
+						<div class="icon-filled">服務種類</div><span style="font-size:16px">${mission.serviceType.serviceType}</span>
 					</li>
 					<li>
-						<div class="icon-filled"></div>服務類型:
+						<div class="icon-filled">服務類型</div><span style="font-size:16px">
 							<c:if test="${mission.termType == 'L'}"> 
 								長期
 							</c:if> 
 							<c:if test="${mission.termType == 'S'}"> 
 								短期
 							</c:if>
+						</span>	
 					</li>
 					<li>
-						<div class="icon-filled"></div>需求人數:${mission.peopleNeeded}人
+						<div class="icon-filled">需求人數</div><span style="font-size:16px">${mission.peopleNeeded}人</span>
 					</li>
 					<li>
-						<div class="icon-filled"></div>活動時數:${mission.timeValue}小時
+						<div class="icon-filled">活動時數</div><span style="font-size:16px">${mission.timeValue}小時</span>
 					</li>
               	</ul>
               
@@ -171,15 +183,16 @@
             <div class="row">
               <div class="col-md-6">
               	<ul class="ul-icons list-unstyled">
-              	
-              	<c:forEach var="order" items="${orders}">
-              		<li>
-              			<img style="width:60px;height:54px" class="img-fluid rounded-circle" src='/image/user/member/${order.volunteer.picture}'>
-              			名字:${order.volunteer.name}
-              			Email:${order.volunteer.email}
+              	<li>
+              		<c:forEach var="order" items="${orders}">
+              		
+              			<div style="width:150px;display: inline-block;"><img style="border:1px solid black" id="memberImg" alt="" src="/image/user/member/${order.volunteer.picture}" class="img-fluid rounded-circle"> 
+							<a style="font-size:16px;font-weight:600;" href="/commons/personal-info/list?memberId=${order.volunteer.id}">${order.volunteer.name}</a>
+						</div>
               			
-              		</li>
-              	</c:forEach>
+              		
+              		</c:forEach>
+              	</li>
               	</ul>
               </div>
             </div>

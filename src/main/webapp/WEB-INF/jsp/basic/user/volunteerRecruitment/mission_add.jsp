@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page import='java.util.*' %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,6 +68,11 @@
     </style>
 </head>
 <body>
+<!-- 一鍵帶入資料 -->
+<%-- <c:set var="testValue" value="<%=new Date()%>" /> --%>
+<%-- <fmt:formatDate value="${testValue}" type="" pattern="yyyy/MM/dd" var="testStart" /> --%>
+<%-- <fmt:formatDate value="${testValue}" type="" pattern="yyyy/MM/dd" var="testEnd" /> --%>
+<!--  -->
 <fmt:formatDate value="${mission.publishDate }" pattern="yyyy/MM/dd" var="publishDate" />
 <fmt:formatDate value="${mission.startDate }" pattern="yyyy/MM/dd HH:mm" var="startDate" />
 <fmt:formatDate value="${mission.endDate }" pattern="yyyy/MM/dd HH:mm" var="endDate" />
@@ -144,8 +150,8 @@
                       <div class="form-group">
                         <label for="termType">長短期</label>
                         <select id="termType" name="termType" class="form-control">
-					        <option value="L">長期</option>
 					        <option value="S">短期</option>
+					        <option value="L">長期</option>
     					</select>
                       </div>
                     </div>
@@ -197,8 +203,11 @@
                         <textarea class="form-control"  id="discription" name="discription" rows="3">${mission.discription}</textarea>
                       </div>
                     </div>
-                    <div class="col-md-12 text-center">
+                    <div class="col-md-11 text-center">
                       <button id="insertMission" type="submit" class="btn btn-template-outlined"><i class="fa fa-plus"></i>刊登活動</button>
+                    </div>
+                    <div class="col-md-1">
+                    	<span id="setValue" class="btn btn-template-outlined"><i class="fa fa-plus"></i>一鍵帶入</span>
                     </div>
                   </div>
                 </form>
@@ -231,7 +240,24 @@
 // 		})
 		
 	
-	
+		$('#setValue').click(function(){
+			$('#title').val("友夢不老-助爺奶圓夢");
+			$('#serviceType').val("3");
+			$("select[name='county']").val('台北市');
+			$("select[name='district']>option").val("南港區");
+			$("select[name='district']>option").text("南港區");
+			$('#address').val("忠孝東路6段484號B1");
+			$('#startDate').val('2019/01/10 00:00');
+			$('#endDate').val('2019/01/12 00:00');
+			$('#termType').val('S');
+			$('#peopleNeeded').val('2');
+			$('#timeValue').val("8");
+			$('#contactPerson').val('蔡明珠');
+			$('#contactPhone').val('02-66171885');
+			$('#contactEmail').val('juliantsai@canlove.org.tw');
+			$('#discription').val(
+"曾經是老師的小林奶奶快80歲了，她最大的夢想，就是再一次回到校園，聽到孩子們的說一聲: 「小林老師好!」或許你也聽過這些老人話?『老人攏沒路用，攏沒人管 ！』『一個人很孤單、很苦…』『全身都是病啦，死一死算了。』一次用夢想再點燃希望的行動，肯愛協會正在關心離家的弱勢老人，讓有夢的老人有「夢」有活力陪伴離家老人找到生活的意義，身心的健康及好好活的動力。--我們想和你一起--");
+		})
 	
 		$(document).ready(function() {
 			new TwCitySelector();
