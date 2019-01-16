@@ -11,11 +11,11 @@
   crossorigin="anonymous"></script>
 </head>
 <jsp:include page="../admin_layout/admin_css_js_links.jsp" />
-<body style="height: 100%; margin: 0">
+<body style="height: 100%; margin: 0; font-family: 微軟正黑體">
 	<jsp:include page="../admin_layout/nav.jsp" />
 
-       <div id="container" style="height: 80%; width:80%; margin-top: 150px"></div>
-       <div>捐款統計表(進資料庫查，只查2018)</div>
+       <div id="container" style="height: 60%; width:80%; margin-top: 150px;margin-left: auto; margin-right: auto;"></div>
+       
        <form action="/admin/donation/turnChartToPdf" method="post" onsubmit="getHtmlStr()">
 	       <input type="hidden" id="htmlStr" name="htmlStr" >
 <!-- 	       <input type="submit" id="chartPDFbtn" value="產PDF檔"> -->

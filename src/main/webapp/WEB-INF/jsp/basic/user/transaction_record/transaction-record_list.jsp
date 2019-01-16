@@ -35,7 +35,7 @@
 		    color: #fff;
 		    background-color: #13b5b1;
 		    border-color: #13b5b1;
-		    border-radius: 20px;
+		    border-radius: 10px;
 		}
 		.btn-outline-secondary {
 		    color: #13b5b1;
@@ -177,7 +177,7 @@
 			searching: false,				
 		 	processing: true,
 			serverSide: true,  //分頁、排序都交由伺服器處理
-			lengthMenu: [ 3, 6, 9, 12, ],
+// 			lengthMenu: [ 3, 6, 9, 12, ],
 			ajax:{
 				url:'/user/transaction-record/query',
 				type:'get',

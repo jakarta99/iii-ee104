@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,8 +80,9 @@ public class DomesticVolunteerController {
 
 		// List<User> users = userService.findAllByProgramId(programId);
 		//
+		Sort sort = new Sort(Sort.Direction.DESC, "publishDate");
 		Page<Mission> missionPage = missionService.findByStatusAndSpecification(inputMission,
-				PageRequest.of(page.orElse(0), length.orElse(10)));
+				PageRequest.of(page.orElse(0), length.orElse(10),sort));
 
 		return missionPage;
 	}

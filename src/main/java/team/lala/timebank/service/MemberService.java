@@ -149,6 +149,10 @@ public class MemberService {
 		return memberDao.findByMemberType(memberType, pageable);
 	}
 	
+	public List<Member> findByMemberType(MemberType memberType) {
+		return memberDao.findByMemberType(memberType);
+	}
+	
 	public Member setVolunteerScore(Member volunteer,Integer score) {
 		volunteer.setSumScore(volunteer.getSumScore() + score);
 		volunteer.setScoredTimes(volunteer.getScoredTimes() + 1);

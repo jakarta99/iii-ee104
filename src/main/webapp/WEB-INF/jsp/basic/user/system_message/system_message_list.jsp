@@ -53,7 +53,18 @@
 	 	margin-left:3px;
 	 	margin-right:3px
 	 } 
-
+		
+	#heading-breadcrumbs{
+		
+/*     height: 100%; */
+		background: url(../../../image/indexPicture/top_bar3.jpg) center center ;
+		padding: 7.5rem 0;
+		position: absolute;
+	    z-index: -1;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	}
 </style>
 <meta charset="UTF-8">
 <title>系統訊息</title>
@@ -67,12 +78,14 @@
         <div class="container">
           <div class="row d-flex align-items-center flex-wrap">
             <div class="col-md-7">
-              <h1 class="h2" style="font-family: '微軟正黑體'">系統訊息</h1>
+              <h1 class="h2" style="font-family: '微軟正黑體'; margin-top: 60px " >系統訊息</h1>
             </div>
           </div>
         </div>
       </div>
-	<article>
+	
+	
+	<article style="margin-top: 200px">
 		<fieldset style="width:1300px">
 			<div class="btn-group" style="margin-bottom: 20px">
 <!-- 			  <button type="button" class="btn btn-info" id="notRead">未讀</button> -->

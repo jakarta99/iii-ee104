@@ -22,12 +22,23 @@
 		
 	}
 
-.form-group{
-	padding-left:20px;
-}
-.form-control{
-border-radius: 3px;
-}
+	.form-group{
+		padding-left:20px;
+	}
+	
+	.form-control{
+		border-radius: 3px;
+	}
+	
+	a.ex1:hover {
+/* 	 	font-size:110%; */
+	    text-decoration: none;
+	    color: red; 
+	}
+	
+	.s3{
+    	color: #FF0000;
+	}
 </style>
 
 </head>
@@ -112,6 +123,34 @@ border-radius: 3px;
 			list();
  		
 		})
+		
+		function insertCollection(id) { 	
+ 				 $.ajax({
+ 					url : '/user/myCollection/insertOrganization?id=' + id,
+ 					type : 'post',
+ 					dataType : 'JSON',
+ 					success : function(cancelResult) {
+ 						if(cancelResult.status == "SUCCESS"){ 							
+ 						}else{ 							
+ 						} 						
+ 						list();								
+ 					},
+ 				}) 				   			   
+		}
+		
+		function cancelCollection(id) { 		
+			 $.ajax({
+				url : '/user/myCollection/cancelOrganization?id=' + id,
+				type : 'post',
+				dataType : 'JSON',
+				success : function(cancelResult) {
+					if(cancelResult.status == "SUCCESS"){ 							
+					}else{ 							
+					} 						
+					list();								
+				},
+			}) 				   			   
+		}
 
 	
 	
@@ -148,7 +187,12 @@ border-radius: 3px;
 		        		 box+= "<img width='300px'  height='200px' src='/image/user/member/"+org.picture+"' style='border:2px solid rgb(19, 181, 177, 0.5)' class=\"image1\"></a></div>";
 		        		 box+= "<div class=\"text\">";
 		        		 box+= "<h4 style=\"width:270px; margin:auto; margin-bottom:10px\" >";
-		        		 box+= "<a href='"+ org.orgWebsiteLink +"'>"+org.name+ "</a></h4>";	        		 
+		        		 box+= "<a href='"+ org.orgWebsiteLink +"'>"+org.name+ "</a></h4>";
+		        		 if(org.isCollected=='Y'){
+			        		 box+="<p><a name='box1' class='s3 ex1' href='javascript:void(0)' onclick=\"cancelCollection("+org.id+")\"><i name='pic1' class='fa fa-heart'></i>已收藏</a></p>"
+			        		 }else{																										
+			        		 box+="<p><a name='box2' class='s3 ex1' href='javascript:void(0)' onclick=\"insertCollection("+org.id+")\"><i name='pic2' class='far fa-heart'></i>收藏</a></p>"	 
+			        		 }
 		        		 box+="<p><table style=\"margin:auto; \">";
 		        		 box+= "<tr><td width=\"70px\">地區:</td><td width=\"100px\"> "+org.county + org.district +"</td></tr>";
 		        		 box+= "<tr><td width=\"70px\">電話:</td><td width=\"100px\"> "+org.telephone +"</td></tr>";
@@ -209,6 +253,13 @@ border-radius: 3px;
 	                 scrollTop: 0 }, 1);
 	    	})
 	    	
+	    	$("#boxbox").on("mouseover","a[name='box2']",function(){
+				$(this).empty().append("<i name='pic1' class='fa fa-heart'></i>收藏")
+			})
+			
+			$("#boxbox").on("mouseout","a[name='box2']",function(){
+				$(this).empty().append("<i name='pic1' class='far fa-heart'></i>收藏")
+			})
 	    	
 	    	
 		

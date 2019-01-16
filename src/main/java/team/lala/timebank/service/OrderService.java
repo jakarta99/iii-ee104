@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +46,8 @@ public class OrderService {
 	}
 	
 	public Page<Order> findByMission(Mission inputMission, int page, Optional<Integer> length) {
-		  Page<Order> orders = orderDao.findByMission(inputMission, PageRequest.of(page, length.orElse(10)));
+		  Sort sort = new Sort(Sort.Direction.DESC, "volunteerApplyTime");
+		  Page<Order> orders = orderDao.findByMission(inputMission, PageRequest.of(page, length.orElse(10),sort));
 		  // mission.setMember(memberDao.findByAccount(principal.getName()));
 		  // OrderSpecification orderSpec = new OrderSpecification(inputMission);
 		  // Page<Order> orders = findBySpecification(orderSpec,
