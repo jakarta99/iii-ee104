@@ -57,6 +57,10 @@
         .margintop{
 			 margin-top:70px;
 		}
+		.s4{
+/* 		padding-right:20px; */
+		padding-left:50px;
+		}
 		.county,.district {
 	  padding: 0.375rem 0.75rem;
 	  font-size: 1rem;
@@ -83,7 +87,7 @@
        <div class="container">
           <div class="row d-flex align-items-center flex-wrap">
             <div class="col-md-7">
-              <h1 class="h2">志工審核-審核您需要的志工</h1>
+              <h1  class="h2">志工審核-審核您需要的志工</h1>
             </div>
             <div class="col-md-5">
               <ul class="breadcrumb d-flex justify-content-end">
@@ -99,6 +103,10 @@
        <div id="content">
         <div class="container">
           <section class="bar mb-0">
+        <div class="heading">
+                  <h2>志工審核</h2>
+                  <p class="lead" id="titlebox">156431313536</p>
+                </div>
             <div class="row">
               <div class="col-md-12">
 <!--                 <div class="heading"> -->
@@ -209,6 +217,7 @@
 	        }).done(function(orders){
 	        	$("#boxbox").text("");
 	        	$("#pagebox").text("");
+	        	$("#titlebox").text("");  
 	        	var totalElements=orders.totalElements;
 	        	var totalPages=orders.totalPages;
 	        	first=orders.first;
@@ -222,7 +231,7 @@
 	        		var box="<div class='col-md-4'>"
 	        			box+="<div data-animate='fadeInUp' class='team-member'>"
 	        			box+="<div class='image_1'><a href='team-member.html'><img src='/image/user/member/"+order.volunteer.picture+"' class='img-fluid rounded-circle'></a></div>"
-	        			box+="<h1 style='font-family:Microsoft JhengHei'><a href='team-member.html'>"+order.volunteer.name+"</a></h1><div>"
+	        			box+="<h1 style='font-family:Microsoft JhengHei'><a href='team-member.html'>"+order.volunteer.name+"</a></h1><div >"
 	        			if(order.orderStatus=='VolunteerApply'){
 	        			box+="<button class='btn btn-outline-primary' onclick=\"accept("+order.id+",'"+order.volunteer.name+"')\" >接受</button>"
 	        			box+="<button class='btn btn-outline-danger' onclick=\"reject("+order.id+",'"+order.volunteer.name+"')\" >拒絕</button></div>"
@@ -236,12 +245,13 @@
 	        			box+= "<p>不應該出現的狀態</p>";
 						}
 	        			box+="<p class='role_2'>申請時間:"+new Date(order.volunteerApplyTime).toLocaleDateString()+"</p>"		
-	        			box+="<ul class='social list-inline'>"
+	        			box+="<ul class='social list-inline s4'>"
 	        			box+="<li class='s3'><a href='#' class='star'><i class='fa fa-star'></i></a>平均分數:"+order.volunteer.averageScore+"</li>"
 	        			box+="<li class='s3'><a href='#' class='external twitter'><i class='fa fa-phone'></i></a>電話:"+order.volunteer.telephone+"</li>"
 	        			box+="<li class='s3'><a href='#' class='email'><i class='fa fa-envelope'></i></a>Email:"+order.volunteer.email+"</li>"
 	        			box+="</ul></div></div>"
 	        		var boxbox=$("#boxbox").append(box)
+	        		$("#titlebox").text("需求人數"+order.mission.peopleNeeded+"/已審核人數"+order.mission.approvedQuantity+"")
 	        	})
 	        	$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
 	        	for (var index = 1; index <= totalPages ; index++) {

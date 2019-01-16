@@ -297,7 +297,7 @@
 	        	last=orders.last;
 	        	page=orders.number;
 	        	console.log(orders.content)
-	        	$("#people").append("目前已審核"+orders.content[0].mission.payedQuantity+"人")
+	        	$("#people").append("需審核人數"+orders.content[0].mission.approvedQuantity+"/已審核"+orders.content[0].mission.payedQuantity+"")
 	        	$.each(orders.content,function(index, order){
 	        		orderids.push(order.id)
 	        		vIds.push(order.volunteer.id)
