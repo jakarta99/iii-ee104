@@ -168,7 +168,7 @@ li{
 			eventAfterRender: function (event, element, view) {
 				element.css('font-weight', '600')
 				element.css('border', 'white');
-				element.css('color', 'white');
+				element.css('color', 'black');
 				element.css('font-family', 'Microsoft JhengHei');
 		        if (event.status == 'VolunteerApply' || event.status == 'RequesterAcceptService' || event.status == 'ServiceFinishNotPay') {		        	
 		            element.css('background-color', 'deepskyblue');
@@ -177,11 +177,11 @@ li{
 		        	element.css('background-color', '#FFFACD');
 		        	element.css('border', '1px solid #FFDD55');
 		        } else if(event.status == 'C_Finish' || event.status == 'C_Cancel'){
-		        	element.css('background-color', '#DDDDDD');
-		        	element.css('border', '1px solid #AAAAAA');
+		        	element.css('background-color', 'pink');
+		        	element.css('border', '1px solid hotpink');
 		        } else {
-		            element.css('background-color', '#ceffce');
-		            element.css('border', '1px solid #33FF33');
+		            element.css('background-color', 'aquamarine');
+		            element.css('border', '1px solid mediumturquoise');
 		        }
 		    },
 		  eventTextColor: '	#000000',
