@@ -53,7 +53,11 @@
 	 	margin-left:3px;
 	 	margin-right:3px
 	 } 
-
+		
+	#heading-breadcrumbs{
+		background: url(../../../image/indexPicture/top_bar2.jpg) center center ;
+		padding: 8.5rem 0;
+	}
 </style>
 <meta charset="UTF-8">
 <title>系統訊息</title>
