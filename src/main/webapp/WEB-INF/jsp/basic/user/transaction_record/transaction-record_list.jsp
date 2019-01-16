@@ -177,7 +177,7 @@
 			searching: false,				
 		 	processing: true,
 			serverSide: true,  //分頁、排序都交由伺服器處理
-			lengthMenu: [ 3, 6, 9, 12, ],
+// 			lengthMenu: [ 3, 6, 9, 12, ],
 			ajax:{
 				url:'/user/transaction-record/query',
 				type:'get',
