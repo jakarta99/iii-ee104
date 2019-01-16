@@ -33,79 +33,98 @@
 <meta charset="UTF-8">
 <title>招募申請 | TimeBank</title>
 <style>
-.img-fluid {
-    height: 30px;
-}
+	#chatButton {
+	    border: 1px solid #FFAA33 !important;
+	}
+	#chatButton:hover {
+	    background: #FFAA33;
+	}
+	.cover {
+	    overflow: hidden;
+	    position:relative;
+	}
+	.cover:after {
+		position:absolute;
+		content:'';
+		width:100%;
+		height:100%;
+		top:0;
+		left:0;
+		box-shadow:0 0 30px 10px rgba(255,255,255,.7) inset;
+     }
+	
+	.img-fluid {
+	    height: 30px;
+	}
 	.icon-filled {
-    width: 90px;
-    height: 24px;
-    line-height: 24px;
-    background: #13b5b1;
-    color: #fff;
-    text-align: center;
-    border-radius: 5px;
-    font-size: 18px;
-
-    
-}
-#memberhref{
- color: #FFAA33;
-}
-#memberhref:hover {
-    color:#AA7700;
-}
-.ul-icons .icon-filled {
-    margin-bottom: 5px;
-}
+	    width: 90px;
+	    height: 24px;
+	    line-height: 24px;
+	    background: #13b5b1;
+	    color: #fff;
+	    text-align: center;
+	    border-radius: 5px;
+	    font-size: 18px;
+	}
+	#memberhref{
+		color: #FFAA33;
+	}
+	#memberhref:hover{
+	    color:#AA7700;
+	    text-decoration: blink;
+	}
+	.ul-icons .icon-filled {
+	    margin-bottom: 3px;
+	}
 
 	table img {
-  min-width: 35px !important;
-  max-width: 35px !important;
-  height: 50px;
-}
-.fc-title{	
-	letter-spacing:3px;
-}
-	 	.img{
-			width: 90%;
-			height: 90%;
-			position: absolute;
-	    	top: 0;
-	    	bottom: 0;
-	    	left: 0;
-	    	border: 0;
-	    	
-	    }
-        fieldset {
-            width: 100%;
-            border-radius: 20px;
-            padding: 20px;
-            margin: 20px;
-            border: 3px double #bebebe;
-            margin: auto
-        }
-        .s2{
-            text-align: center
-        }
-        .margintop{
-			 margin-top:70px;
-		}
-		.county,.district {
-	  padding: 0.375rem 0.75rem;
-	  font-size: 1rem;
-	  line-height: 1.5;
-	  color: #495057;
-	  background-color: #fff;
-	  background-image: none;
-	  background-clip: padding-box;
-	  border: 1px solid #ced4da;
-	  border-radius: 0.25rem;
-	  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+ 		min-width: 35px !important;
+  		max-width: 35px !important;
+  		height: 50px;
+	}
+	.fc-title{	
+		letter-spacing:3px;
+	}
+ 	.img{
+		width: 90%;
+		height: 90%;
+		position: absolute;
+    	top: 0;
+    	bottom: 0;
+    	left: 0;
+    	border: 0;
+    	
+    }
+    fieldset {
+	   width: 100%;
+	   border-radius: 20px;
+	   padding: 20px;
+	   margin: 20px;
+	   border: 3px double #bebebe;
+	   margin: auto
+    }
+    .s2{
+    	text-align: center
+    }
+    .margintop{
+		margin-top:70px;
+	}
+	.county,.district {
+		 padding: 0.375rem 0.75rem;
+		 font-size: 1rem;
+		 line-height: 1.5;
+		 color: #495057;
+		 background-color: #fff;
+		 background-image: none;
+		 background-clip: padding-box;
+		 border: 1px solid #ced4da;
+		 border-radius: 0.25rem;
+		 transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	}
 	 #map {
         height: 400px;
         width: 100%;
-       }
+     }
  
     </style>
 </head>
@@ -141,27 +160,27 @@
         <div class="container">
           <section class="bar">
             <div class="row">
-              <div class="col-md-8">
+              <div class="col-md-7">
                 <div class="heading">
                   <h2>活動介紹</h2>
                 </div>
                 <p  class="lead">${mission.discription}
 				</div>
-				 <div class="col-md-4">
+				 <div class="col-md-5">
 				 	<ul class="ul-icons list-unstyled">
-				 	<li>
-              			<img  style="width:400px;height:250px;border:1px solid black;border-radius: 5px;" id="missionImg" alt="" src="/image/user/mission/${mission.missionPicName}" class="img-fluid rounded-square">
+				 	<li class="cover">
+              			<img  style="width:445px;height:250px;border-radius: 5px;" id="missionImg" alt="" src="/image/user/mission/${mission.missionPicName}" class="img-fluid rounded-square">
 					</li>
 					<li>
 					<div>
-						<div style="margin-left:5px;background:#FFAA33" class="icon-filled">刊登者</div>
-						<span style="width:70px"><img style="border:1px solid black" id="memberImg" alt="" src="/image/user/member/${member.picture}" class="img-fluid rounded-circle"> 
-							<a id="memberhref" style="font-size:16px;font-weight: 600;" href="/commons/personal-info/list?memberId=${member.id}"> ${member.name}</a>
-						</span>
+						<div style="background:#FFAA33;width:70px;" class="icon-filled">刊登者</div>
+						<div style="width:250px;display: inline-block;"><img style="border:1px solid black" id="memberImg" alt="" src="/image/user/member/${member.picture}" class="img-fluid rounded-circle"> 
+							<a id="memberhref" style="font-size:16px;font-weight: 600;" href="/commons/personal-info/list?memberId=${member.id}">${member.name}</a>
+						</div>
+						<div style="width:90px;display:inline-block;">
+							<button style="margin-left:5px;color:#FFAA33" id="chatButton" class="btn btn-template-outlined">與我聯絡</button>
+						</div>
 					</div>
-					</li>
-					<li>
-					<button style="margin-left:5px;color:#FFAA33" id="chatButton" class="btn btn-template-outlined">與${member.name}聯絡</button>
 					
 					</li>
 				</ul>
@@ -178,12 +197,7 @@
               <div class="col-md-4">
                 
 				<ul class="ul-icons list-unstyled">
-					<li >
-						<div class="icon-filled">活動地點</div><p style="font-size:16px">${mission.county}${mission.district}${mission.address}</p>
-					</li>
-					<li>
-						<div class="icon-filled">起迄時間</div><p style="font-size:16px"><fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.startDate}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.endDate}"/></p>
-					</li>			
+						
 					<li>
 						<div class="icon-filled">聯絡人</div><span style="font-size:16px">${mission.contactPerson}</span>
 					</li>
@@ -193,6 +207,12 @@
 					<li>
 						<div class="icon-filled">聯絡Email</div><span style="font-size:16px">${mission.contactEmail}</span>
 					</li>
+					<li >
+						<div class="icon-filled">活動地點</div><p style="font-size:16px">${mission.county}${mission.district}${mission.address}</p>
+					</li>
+					<li>
+						<div class="icon-filled">起迄時間</div><p style="font-size:16px"><fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.startDate}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.endDate}"/></p>
+					</li>		
 				</ul>
 
               </div>
