@@ -57,7 +57,7 @@
 	#heading-breadcrumbs{
 		
 /*     height: 100%; */
-		background: url(../../../image/indexPicture/top_bar3.jpg) center center ;
+		background: url(../../../image/indexPicture/top_bar4.jpg) center center ;
 		padding: 7.5rem 0;
 		position: absolute;
 	    z-index: -1;

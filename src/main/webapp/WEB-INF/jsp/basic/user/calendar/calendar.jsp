@@ -17,12 +17,16 @@
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 <style type="text/css">
 
+body {
+font-family:Microsoft JhengHei
+}
+
 .fc table{
 	border-collapse: collapse;
 }
 .fc td, .fc th {
 	vertical-align: top;
-	border: 5px solid #13b5b196;
+	border: 1px solid #13b5b196;
 	border-collapse: collapse;
 
   }
@@ -32,9 +36,9 @@
  }
  
 .fc-unthemed td.fc-today {
-	border: 5px solid  #13b5b196;
-    background: #fcf8e3;
-    color: #DDAA00;
+	border: 3px solid  #13b5b196;
+    background: #CCEEFF;
+    color: black;
 }
 
 .fc-unthemed td.fc-sun{
@@ -50,8 +54,8 @@
 	margin:3px;
 }
 .fc-button{
-	  background: #CCFF99;
-	  border: 1px solid #CCFF99 !important;
+	  background: white;
+	  border: 1px solid #13b5b196 !important;
 	  color: black !important;
 	  font-weight: bold;
 	  border-radius: 0.1 !important;
@@ -62,14 +66,14 @@ li{
 	margin-left: 0px;
 }
 .status1{
-	background:#d2e9ff;
+	background:deepskyblue;
 	font-size: 16px;
 	border: 1px solid #5599FF;
 }
 .status2{
-	background:#ceffce;
+	background:aquamarine;
 	font-size: 16px;
-	border: 1px solid #33FF33;
+	border: 1px solid mediumturquoise;
 }
 .status3{
 	background:#FFFACD;
@@ -77,9 +81,9 @@ li{
 	border: 1px solid #FFDD55;
 }
 .status4{
-	background:#DDDDDD;
+	background:pink;
 	font-size: 16px;
-	border: 1px solid #AAAAAA;
+	border: 1px solid hotpink;
 }
 </style>
 </head>
@@ -98,15 +102,13 @@ li{
        </div>
      </div>
     <section class="bar">
-	    <div class="container">
+	    <div class="container" style="padding:50px; background:rgba(201,255,248,0.5)">
     	<ul>
-	    	<li><span class='status1'>　</span><span>:進行中的任務(我是志工)</span></li>
-	    	<li><span class='status2'>　</span><span>:已完成的任務(我是志工)</span></li>
+	    	<li><span class='status1'>　</span><span> 進行中的任務(我是志工)</span></li>
+	    	<li><span class='status2'>　</span><span> 已完成的任務(我是志工)</span></li>
+	    	<li><span class='status3'>　</span><span> 進行中的任務(我是雇主)</span></li>
+	    	<li><span class='status4'>　</span><span> 已完成的任務(我是雇主)</span></li>
 	    </ul>
-	    <ul>
-	    	<li><span class='status3'>　</span><span>:進行中的任務(我是雇主)</span></li>
-	    	<li><span class='status4'>　</span><span>:已完成的任務(我是雇主)</span></li>
-	    </ul>    
 	    <div id="calendar"></div>
 	    </div>
 	<div id="fullCalModal" class="modal fade">
@@ -164,11 +166,12 @@ li{
 	            $('#fullCalModal').modal();
 			},
 			eventAfterRender: function (event, element, view) {
-				element.css('font-weight', '700')
+				element.css('font-weight', '600')
 				element.css('border', 'white');
-				element.css('color', 'black');
+				element.css('color', 'white');
+				element.css('font-family', 'Microsoft JhengHei');
 		        if (event.status == 'VolunteerApply' || event.status == 'RequesterAcceptService' || event.status == 'ServiceFinishNotPay') {		        	
-		            element.css('background-color', '#d2e9ff');
+		            element.css('background-color', 'deepskyblue');
 		            element.css('border', '1px solid #5599FF');
 		        } else if(event.status == 'A_New' || event.status == 'A_VolunteerApproved' || event.status == 'B_AccountsPayable') {
 		        	element.css('background-color', '#FFFACD');
@@ -195,7 +198,7 @@ li{
 	        "s+": this.getSeconds(), //秒
 	        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
 	        "S": this.getMilliseconds() //毫秒
-	    };
+	    };   
 	    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
 	    for (var k in o)
 	        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
