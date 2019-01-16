@@ -35,7 +35,7 @@
 		    color: #fff;
 		    background-color: #13b5b1;
 		    border-color: #13b5b1;
-		    border-radius: 20px;
+		    border-radius: 10px;
 		}
 		.btn-outline-secondary {
 		    color: #13b5b1;
