@@ -20,13 +20,12 @@
 	  margin-top: 10px;
 	  margin-right: 15px;
 	  color: #777;
-	  font-size: 20px;
-	  display: inline-block;
+	  font-size: 15px;
 	}
 	.img{
 		width: 90%;
 		height: 90%;
-		position: absolute;
+ 		position: absolute; 
 	    top: 0;
 	    bottom: 0;
 	    left: 0;
@@ -150,11 +149,11 @@
 		        	   var box="<section><div class='row'><div class='col-md-4'>"
 	        		   box+="<div class='video'>"
 	        		   box+="<div class='embed-responsive embed-responsive-4by3'>"	        	
-	        		   box+=" <a href='/user/volunteerRecruitment/detail?missionId="+ order.mission.id +"'><img src=/image/user/mission/"+order.mission.missionPicName+" class='img'></img></a>"     
+	        		   box+=" <a href='/user/volunteerRecruitment/detail?id="+ order.mission.id +"'><img src=/image/user/mission/"+order.mission.missionPicName+" class='img'></img></a>"     
 	        		   box+="</div></div></div>"
 	                   box+="<div class='col-md-8'>"
 	                   box+="<div class='d-flex flex-wrap justify-content-between'>"
-	                   box+="<h3 class='h2 mt-0'><a href='/user/volunteerRecruitment/detail?missionId="+ order.mission.id +"'>"+ order.mission.title + "</a></h3>"
+	                   box+="<h3 class='h2 mt-0'><a href='/user/volunteerRecruitment/detail?id="+ order.mission.id +"'>"+ order.mission.title + "</a></h3>"
 	                   if(order.orderStatus == "VolunteerApply"){
 	                   		box+="<p class='date-comments_1'><a href='javascript: void(0)' onclick='deleteRow("+order.id+")' ><i class='fa fa-trash'></i>取消</a></p></div>"
 					   } else if (order.orderStatus == "RequesterAcceptService"){

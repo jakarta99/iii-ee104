@@ -103,7 +103,7 @@ li{
 	    	<li><span class='status1'>　</span><span>:進行中的任務(我是志工)</span></li>
 	    	<li><span class='status2'>　</span><span>:已完成的任務(我是志工)</span></li>
 	    </ul>
-	    <ul>	
+	    <ul>
 	    	<li><span class='status3'>　</span><span>:進行中的任務(我是雇主)</span></li>
 	    	<li><span class='status4'>　</span><span>:已完成的任務(我是雇主)</span></li>
 	    </ul>    
