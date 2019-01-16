@@ -25,6 +25,8 @@ public interface MemberDao extends JpaRepository<Member, Long>, JpaSpecification
 	
 	public Page<Member> findByMemberType(MemberType memberType, Pageable pageable);
 	
+	public List<Member> findByMemberType(MemberType memberType);
+	
 	//根據accountList內的帳號尋找其包含的Members
 	public default List<Member> findMembersByListOfAccounts(Collection<String> accountList,EntityManager em){
 		CriteriaBuilder cb = em.getCriteriaBuilder();

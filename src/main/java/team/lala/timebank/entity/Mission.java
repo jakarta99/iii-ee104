@@ -47,6 +47,7 @@ public class Mission {
 	private String memberAccount;
 	@Transient
 	private YesNo isCollected;
+	
 	@Column(name = "TITLE", nullable = false, length = 50)
 	private String title;// 活動名稱
 
@@ -94,7 +95,7 @@ public class Mission {
 	@Column(name = "CONTACT_PHONE", nullable = false, length = 20)
 	private String contactPhone;
 
-	@Column(name = "CONTACT_EMAIL", nullable = false, length = 20)
+	@Column(name = "CONTACT_EMAIL", nullable = false, length = 150)
 	private String contactEmail;
 
 	@Column(name = "DISCRIPTION", nullable = false, length = 1000)

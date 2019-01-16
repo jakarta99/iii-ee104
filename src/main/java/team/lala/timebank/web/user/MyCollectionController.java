@@ -56,4 +56,34 @@ public class MyCollectionController {
 		}
 		return response;
 	}
+	
+	@RequestMapping("/insertOrganization")
+	@ResponseBody
+	public AjaxResponse<MyCollection> insertOrganization(Principal principal, @RequestParam("id") Long memberId) {
+
+		AjaxResponse<MyCollection> response = new AjaxResponse<MyCollection>();
+		try {
+
+			myCollectionService.insert(MyCollectionType.ORGANIZATION, memberId, principal);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.addMessage("加入最愛失敗");
+		}
+		return response;
+	}
+
+	@RequestMapping("/cancelOrganization")
+	@ResponseBody
+	public AjaxResponse<MyCollection> cancelOrganization(Principal principal, @RequestParam("id") Long memberId) {
+
+		AjaxResponse<MyCollection> response = new AjaxResponse<MyCollection>();
+		try {
+
+			myCollectionService.deleteByMemberAndMyCollectionType(MyCollectionType.ORGANIZATION, memberId, principal);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.addMessage("移除最愛失敗");
+		}
+		return response;
+	}
 }

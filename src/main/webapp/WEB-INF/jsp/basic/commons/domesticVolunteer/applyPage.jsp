@@ -241,7 +241,7 @@
      
 	<script>
 	var map, geocoder;
-	var geocoder;
+	
 	var address = "${mission.county}${mission.district}${mission.address}";
     function initMap() {
   	geocoder = new google.maps.Geocoder();

@@ -29,19 +29,32 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/i18n/jquery-ui-timepicker-zh-TW.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
 
+<!-- sweet alert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
+	
 
 
 <meta charset="UTF-8">
-<title>mission list(login)</title>
+<title>志工招募 | TimeBank</title>
 <style>
-			.s3{
-		    color: #FF0000;
-	/* 		margin-right:10px; */
-	/* 		margin-left:10px; */
+
+
+/* 		.home-blog-post .text { */
+		    
+/* 		} */
+		a.ex1:hover,a.ex1:focus {
+/* 		 	font-size:110%; */
+		    text-decoration: none;
+		    color: red; 
+		}
+		
+		.s3{
+	    color: #FF0000;
 		}
 		.bar_1 {
-		margin-top:30px;
-		margin-bottom:20px;
+			margin-top:30px;
+			margin-bottom:20px;
 		  padding-top: 30px;
 		  text-align:center;
 		  background-color:#DDDDDD;
@@ -103,6 +116,10 @@
 		    border: 1px solid #ced4da;
 		    border-radius: .25rem;
 		    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+		}
+		.s4{
+		margin-left:40px;
+		margin-right:40px;
 		}
  
     </style>
@@ -199,18 +216,26 @@
 		list();
 	 		
 		})
-	function insertCollection(id) { 		
+	function insertCollection(id) {
  				 $.ajax({
  					url : '/user/myCollection/insertMission?id=' + id,
  					type : 'post',
  					dataType : 'JSON',
  					success : function(cancelResult) {
- 						if(cancelResult.status == "SUCCESS"){ 							
+ 						if(cancelResult.status == "SUCCESS"){
+ 							swal("收藏成功!", "加入我的收藏成功!", "success");
  						}else{ 							
  						} 						
  						list();								
  					},
- 				}) 				   			   
+ 				}).fail(function( jqXHR, textStatus){
+					if(jqXHR.status == 200){
+						$("#login-modal").addClass("modal fade show");
+			    	   	$("#login-modal").css("display","block");
+			    	   	$("#login-modal").css("padding-right","17px");
+			    	   	
+					}
+				}) 				   			   
 	}
 	function cancelCollection(id) { 		
 		 $.ajax({
@@ -222,9 +247,9 @@
 				}else{ 							
 				} 						
 				list();								
-			},
+			}
 		}) 				   			   
-}
+	}
 	
 	function list(){
 		$.ajax({
@@ -244,17 +269,17 @@
 	        		console.log(mission)
 	        		var box="<div class='col-lg-4 col-md-6'>";
 	        		 box+="<div class='home-blog-post'>";
-	        		 box+="<div class='image' style='text-align:center'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'><img width='300px' height='230px' src=/image/user/mission/"+mission.missionPicName+" alt='...'></a>";
-	        		 box+="</div><div class='text'><h4><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'>"+ mission.title + "</a></h4>";
+	        		 box+="<div class='image' style='text-align:center'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'><img width='300px' height='230px' style='border-radius:10px' src=/image/user/mission/"+mission.missionPicName+" alt='...'></a>";
+	        		 box+="</div><div class='text'><div class='s4'><h4><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'>"+ mission.title + "</a></h4>";
 	        		 if(mission.isCollected=='Y'){
-	        		 box+="<p><a class='s3' href='javascript:void(0)' onclick=\"cancelCollection("+mission.id+")\"><i class='fa fa-heart'></i>已收藏</a></p>"
+	        		 box+="<p><a name='box1' class='s3 ex1' href='javascript:void(0)' onclick=\"cancelCollection("+mission.id+")\"><i name='pic1' class='fa fa-heart'></i>已收藏</a></p>"
 	        		 }else{																										
-	        		 box+="<p><a class='s3' href='javascript:void(0)' onclick=\"insertCollection("+mission.id+")\"><i class='far fa-heart'></i>收藏</a></p>"	 
+	        		 box+="<p><a name='box2' class='s3 ex1' href='javascript:void(0)' onclick=\"insertCollection("+mission.id+")\"><i name='pic2' class='far fa-heart'></i>收藏</a></p>"	 
 	        		 }
 	        		 box+="<p class='author-category_1'>活動時間:"+new Date(mission.startDate).toLocaleDateString()+"</p>";
 	        		 box+="<p class='author-category_1'>活動地點:"+mission.county+mission.district+"</p>";       	
 	        		 box+="<p class='author-category_1'>發布者:<a href='/commons/personal-info/list?memberId="+mission.member.id+"'>"+mission.member.name+"</a></p>";       		        		 
-	        		 box+="</div></div></div>";   
+	        		 box+="</div></div></div></div>";   
 	        		var boxbox=$("#boxbox").append(box); 
 	        	})
 	        	$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
@@ -294,7 +319,14 @@
     		 $('body,html').animate({
                  scrollTop: 0 }, 1);
     	})
-	
+    	$("#boxbox").on("mouseover","a[name='box2']",function(){
+		$(this).empty().append("<i name='pic1' class='fa fa-heart'></i>收藏")
+		})
+		
+		$("#boxbox").on("mouseout","a[name='box2']",function(){
+		$(this).empty().append("<i name='pic1' class='far fa-heart'></i>收藏")
+		})
+		
 	})
 	</script>
 </body>

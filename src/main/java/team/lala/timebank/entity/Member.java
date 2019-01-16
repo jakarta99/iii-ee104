@@ -144,6 +144,9 @@ public class Member implements UserDetails {
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date signUpDateEnd;
 	
+	@Transient
+	private YesNo isCollected;
+	
 	
 	@Column(name = "ORG_FOUNDER")
 	private String orgFounder;
