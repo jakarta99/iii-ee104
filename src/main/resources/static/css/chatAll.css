@@ -3,7 +3,6 @@
 #content{
 	margin:10px;
 	overflow:auto;
-	border:1px solid blue;
 	border-radius:3px;
 	background-color:#fff;
 }
@@ -17,21 +16,31 @@
 	width:30%;
 /* 	padding-top: 10px; */
 }
-.item1-1{
-	min-height:13%;	
-	max-height:13%;	
-}
 .item1{
-	text-align:center;
-	padding: 3px;	
+	min-height:5%;	
+	max-height:5%;	
+	border-bottom:1px solid gray;
+	text-align: center;
+    background-color: #66c3c1;
+    padding: 5px;
+}
+
+
+#search-box{
+	margin:8px 15px;	
 }
 .item2{
 	border-top:1px solid gray;
 }
+.item2-1{
+/* 	text-align:center; */
+/* 	padding: 0px 5px 5px 5px; */
+	border-bottom:1px solid gray; 
+}	
 .chatMemberBox{
 	border-bottom:1px solid gray;
 /* 	border-:1px solid gray; */
-	padding:3px;
+	padding:5px;
 	height: 58px;
 	overflow: hidden;
 }
@@ -46,12 +55,12 @@
 	width:80%;
 	float:right;
 }
-#chatterName{
-    text-align: center;
-    background-color: #66c3c1;
-    padding: 5px;
-    border-bottom: 1px solid gray;
-}
+/* #chatterName{ */
+/*     text-align: center; */
+/*     background-color: #66c3c1; */
+/*     padding: 5px; */
+/*     border-bottom: 1px solid gray; */
+/* } */
 #chatMessageBoxArea{
 	width:70%;
 }
@@ -67,9 +76,9 @@
     outline: none !important;
 }
 .box-chatPage{
-	margin: 1px 20px 0px 20px;
+	padding: 1px 20px 0px 20px;
 	border-bottom: 1px solid #b2b3b5;
-	height: 79%; 
+	height: 89%; 
 	overflow:auto;	
 }
 
