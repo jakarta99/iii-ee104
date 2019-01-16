@@ -296,7 +296,33 @@
     		});
 	  	}
     }	
-	
+	function afterLogin(missionId){
+		$.ajax({url:"/user/volunteerRecruitment/insert?missionId="+missionId,
+				type:'get',
+				dataType:'json',
+				success:function(data){
+					if(data.status == 'SUCCESS'){
+						swal({
+							  title: "申請結果",
+							  text: "申請成功",
+							  icon: "success",
+							  buttons: false,
+							  dangerMode: false,
+							})
+					}else{
+						swal({
+							  title: "申請失敗",
+							  text: " "+data.messages,//空格不可以刪
+							  icon: "error",
+							  buttons: false,
+							  dangerMode: false,
+							})
+					}
+				}
+					
+				})
+		
+	}
 	function insertOrder(missionId){
 		swal({
 			  title: "申請確認",
@@ -379,7 +405,7 @@
 		
 	$(document).ready(function() {
 		if ('${applying}' == 'Y'){
-			insertOrder('${mission.id}');
+			afterLogin('${mission.id}');
 		}
 	})
 	
