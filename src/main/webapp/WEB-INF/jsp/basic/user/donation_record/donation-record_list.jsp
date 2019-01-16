@@ -217,10 +217,10 @@
 				{data:null},
 // 				{data:'id'},
 // 				{data:"donator.account"},
-				{data:"orgDonee.account"},
-				{data:"value"},
-				{data: null, render: function ( data, type, row ) {
-	                return new Date(data.donateTime).toLocaleDateString();
+				{data:"orgDonee.account","orderable": false},
+				{data:"value","orderable": false},
+				{data: null,"orderable": false, render: function ( data, type, row ) {
+	                return new Date(data.donateTime).toLocaleDateString(); 
 	            }},
 			],
 			columnDefs: [{
@@ -228,7 +228,7 @@
 	            "orderable": false,
 	            "targets": [0],
 	        }],
-	        order:[[1, 'asc']]
+	        order:[]
 		});
 		
 		dataTable.on('draw.dt',function() {
