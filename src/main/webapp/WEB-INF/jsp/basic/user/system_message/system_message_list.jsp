@@ -55,7 +55,7 @@
 	 } 
 		
 	#heading-breadcrumbs{
-		background: url(../../../image/indexPicture/top_bar2.jpg) center center ;
+		background: url(../../../image/indexPicture/top_bar3.jpg) center center ;
 		padding: 8.5rem 0;
 	}
 </style>
