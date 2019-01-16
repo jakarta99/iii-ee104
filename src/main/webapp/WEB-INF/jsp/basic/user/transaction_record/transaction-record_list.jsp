@@ -211,20 +211,20 @@
 			//設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
 			columns:[
 				{data:null},
-				{data: null, render: function ( data, type, row ) {
+				{data: null,"orderable": false, render: function ( data, type, row ) {
 	                return new Date(data.transactionTime).toLocaleDateString();
 	            }},
-				{data:"depositValue"},
-				{data:"withdrawalValue"},
-				{data:"balanceValue"},
-				{data:"description"},
+				{data:"depositValue","orderable": false},
+				{data:"withdrawalValue","orderable": false},
+				{data:"balanceValue","orderable": false},
+				{data:"description","orderable": false},
 			],
 			columnDefs: [{
 	            "searchable": false,
 	            "orderable": false,
-	            "targets": [0],
+	            "targets": 0,
 	        }],
-	        order:[[1, 'asc']]
+	        order:[]
 		});
 		
 		dataTable.on('draw.dt',function() {

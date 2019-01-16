@@ -3544,7 +3544,7 @@ a.text-dark:focus, a.text-dark:hover {
 }
 
 .badge-success_1 {
-  	margin-left: 80px;
+  	margin: auto;
     align-items: center;
     justify-content: center;
     display: flex;
