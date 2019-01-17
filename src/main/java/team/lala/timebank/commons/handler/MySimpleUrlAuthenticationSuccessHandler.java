@@ -63,7 +63,7 @@ public class MySimpleUrlAuthenticationSuccessHandler extends SimpleUrlAuthentica
 			}else if ("chatting".equals(request.getParameter("action"))){
 				request.getSession().setAttribute("chatting", "Y");
 			}
-			else if (request.getParameter("action").contains("missionId")) {
+			else if (request.getParameter("action").contains("Id")) {
 				targetUrl +="?";
 				targetUrl +=request.getParameter("action");
 			}

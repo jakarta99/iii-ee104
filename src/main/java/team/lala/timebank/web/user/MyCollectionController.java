@@ -33,8 +33,9 @@ public class MyCollectionController {
 
 		AjaxResponse<MyCollection> response = new AjaxResponse<MyCollection>();
 		try {
-
+			if(myCollectionService.findByMyCollectionTypeAndMemberAccount(MyCollectionType.MISSION, principal, missionId)==null) {
 			myCollectionService.insert(MyCollectionType.MISSION, missionId, principal);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.addMessage("加入最愛失敗");
@@ -63,8 +64,9 @@ public class MyCollectionController {
 
 		AjaxResponse<MyCollection> response = new AjaxResponse<MyCollection>();
 		try {
-
+			if(myCollectionService.findByMyCollectionTypeAndMemberAccount(MyCollectionType.ORGANIZATION, principal, memberId)==null) {
 			myCollectionService.insert(MyCollectionType.ORGANIZATION, memberId, principal);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.addMessage("加入最愛失敗");
@@ -80,6 +82,37 @@ public class MyCollectionController {
 		try {
 
 			myCollectionService.deleteByMemberAndMyCollectionType(MyCollectionType.ORGANIZATION, memberId, principal);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.addMessage("移除最愛失敗");
+		}
+		return response;
+	}
+	
+	@RequestMapping("/insertInternationalVolunteer")
+	@ResponseBody
+	public AjaxResponse<MyCollection> insertInternationalVolunteer(Principal principal, @RequestParam("id") Long internationalVolunteerId) {
+
+		AjaxResponse<MyCollection> response = new AjaxResponse<MyCollection>();
+		try {
+			if(myCollectionService.findByMyCollectionTypeAndMemberAccount(MyCollectionType.INTERNATIONALVOLUNTEER, principal, internationalVolunteerId)==null) {
+			myCollectionService.insert(MyCollectionType.INTERNATIONALVOLUNTEER, internationalVolunteerId, principal);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.addMessage("加入最愛失敗");
+		}
+		return response;
+	}
+
+	@RequestMapping("/cancelInternationalVolunteer")
+	@ResponseBody
+	public AjaxResponse<MyCollection> cancelInternationalVolunteer(Principal principal, @RequestParam("id") Long internationalVolunteerId) {
+
+		AjaxResponse<MyCollection> response = new AjaxResponse<MyCollection>();
+		try {
+
+			myCollectionService.deleteByMemberAndMyCollectionType(MyCollectionType.INTERNATIONALVOLUNTEER, internationalVolunteerId, principal);
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.addMessage("移除最愛失敗");

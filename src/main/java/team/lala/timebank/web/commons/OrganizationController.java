@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.microsoft.sqlserver.jdbc.StringUtils;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.entity.Member;
@@ -33,7 +36,10 @@ public class OrganizationController {
 	private MyCollectionService myCollectionService;
 
 	@RequestMapping("/list")
-	public String listPage() {
+	public String listPage(Model model, @RequestParam(required = false,value = "Id") String Id) {
+		if (!StringUtils.isEmpty(Id)) {
+			model.addAttribute("Id", Id);
+		}
 		return "/basic/commons/organization_list";
 	}
 
