@@ -10,7 +10,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 <meta charset="UTF-8">
-<title>mission list(login)</title>
+<title>進行中任務 | TimeBank</title>
 <style>
 	.nav-link{
 		font-weight: bold;

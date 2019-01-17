@@ -18,7 +18,7 @@
 	
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 <meta charset="UTF-8">
-<title>媒合紀錄查詢</title>
+<title>媒合紀錄查詢 | TimeBank</title>
 <style> 	
     .margintop{
 		 margin-top:70px;
