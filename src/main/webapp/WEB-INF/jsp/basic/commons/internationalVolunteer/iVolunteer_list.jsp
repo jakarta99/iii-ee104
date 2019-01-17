@@ -177,6 +177,15 @@ function query(){
 										<p class="author-category" >
 											<span  >${volunteer.organization}</span>
 										</p>
+<!-- 										 if(mission.isCollected=='Y'){ -->
+<!-- 	        		 box+="<p><a name='box1' class='s3 ex1' href='javascript:void(0)' onclick=\"cancelCollection("+mission.id+")\"><i name='pic1' class='fa fa-heart'></i>已收藏</a></p>" -->
+<!-- 	        		 }else{																										 -->
+<!-- 	        		 box+="<p><a name='box2' class='s3 ex1' href='javascript:void(0)' onclick=\"insertCollection("+mission.id+")\"><i name='pic2' class='far fa-heart'></i>收藏</a></p>"	  -->
+<!-- 	        		 } -->
+										
+										
+										
+										
 										<p>
 											<table style="margin:auto;color:rgba(125, 125, 125)">
 												<tr><td width="70px">服務地區: </td><td width="200px"> 
