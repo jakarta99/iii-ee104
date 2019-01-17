@@ -219,7 +219,7 @@
 	function insertCollection(id) {
  				 $.ajax({
  					url : '/user/myCollection/insertMission?id=' + id,
- 					type : 'post',
+ 					type : 'get',
  					dataType : 'JSON',
  					success : function(cancelResult) {
  						if(cancelResult.status == "SUCCESS"){
@@ -233,6 +233,7 @@
 						$("#login-modal").addClass("modal fade show");
 			    	   	$("#login-modal").css("display","block");
 			    	   	$("#login-modal").css("padding-right","17px");
+			    		$("#action").val("missionId="+id);
 			    	   	
 					}
 				}) 				   			   
@@ -291,7 +292,9 @@
 	        })
 			}
 
-	$(document).ready( function () {		
+	$(document).ready( function () {
+		
+		
 		new TwCitySelector();	
 		list();
 		
@@ -326,6 +329,10 @@
 		$("#boxbox").on("mouseout","a[name='box2']",function(){
 		$(this).empty().append("<i name='pic1' class='far fa-heart'></i>收藏")
 		})
+		
+		if ('${!empty missionId}'){
+			insertCollection('${missionId}');
+		}
 		
 	})
 	</script>

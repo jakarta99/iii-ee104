@@ -47,7 +47,10 @@ public class DomesticVolunteerController {
 	private MyCollectionService myCollectionService;
 
 	@RequestMapping("/list")
-	public String listPage(Model model) {
+	public String listPage(Model model, @RequestParam(required = false) String missionId) {
+		if (!StringUtils.isEmpty(missionId)) {
+			model.addAttribute("missionId", missionId);
+		}
 
 		return "/basic/commons/domesticVolunteer/volunteer_list";
 	}
