@@ -270,7 +270,7 @@
 	        		console.log(mission)
 	        		var box="<div class='col-lg-4 col-md-6'>";
 	        		 box+="<div class='home-blog-post'>";
-	        		 box+="<div class='image' style='text-align:center'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'><img width='300px' height='230px' style='border-radius:10px' src=/image/user/mission/"+mission.missionPicName+" alt='...'></a>";
+	        		 box+="<div class='image' style='text-align:center'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'><img width='300px' height='230px' style='border-radius:5px' src=/image/user/mission/"+mission.missionPicName+" alt='...'></a>";
 	        		 box+="</div><div class='text'><div class='s4'><h4><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'>"+ mission.title + "</a></h4>";
 	        		 if(mission.isCollected=='Y'){
 	        		 box+="<p><a name='box1' class='s3 ex1' href='javascript:void(0)' onclick=\"cancelCollection("+mission.id+")\"><i name='pic1' class='fa fa-heart'></i>已收藏</a></p>"
