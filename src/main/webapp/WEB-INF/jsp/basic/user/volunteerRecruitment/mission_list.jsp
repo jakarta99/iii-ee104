@@ -34,7 +34,7 @@
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></script>
 
 <meta charset="UTF-8">
-<title>mission list(login)</title>
+<title>招募紀錄 | TimeBank</title>
 <style>
 		.container-1{
 		 	
@@ -57,7 +57,7 @@
 /* 			padding-top:40px; */
 		}
 		.s5{
-			background-color: rgba(234, 234, 234);
+			background-color: #FFF2FF;
 			border-right:solid;
 			border-color:#13b5b1;
  			padding: 15px; 
@@ -69,7 +69,7 @@
 		    padding: 10px;
 		    border: 2px solid #1ec7c3;
 		    border-radius: 3px;
-		    background-color: #ffc48ba8;
+		    background-color: #FFE4E1;
 			
 		}
 		.s7{
@@ -332,7 +332,7 @@
 	        		   box+="<div class='col-md-4'>"
 	        		   box+="<div class='video '>"
 	        		   box+="<div class='embed-responsive embed-responsive-4by3'>"	        	
-	        		   box+=" <a href='#'><img src=/image/user/mission/"+mission.missionPicName+" class='embed-responsive-item'></img></a>"     
+	        		   box+=" <a href='#'><img src=/image/user/mission/"+mission.missionPicName+" class='embed-responsive-item' style='border-radius:5px'></img></a>"     
 	        		   box+="</div></div></div>"
 	                   box+="<div class='col-md-8'>"
 	                   box+="<h1 class='h1 mt-0'><a href='/user/volunteerRecruitment/detail?id="+mission.id+"'>"+ mission.title + "</a></h1>"

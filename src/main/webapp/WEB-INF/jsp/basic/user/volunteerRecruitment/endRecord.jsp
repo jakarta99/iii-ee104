@@ -33,7 +33,7 @@
 
 
 <meta charset="UTF-8">
-<title>mission list(login)</title>
+<title>結案紀錄 | TimeBank</title>
 <style>
 		.img-fluid {
     		height: 30px;
