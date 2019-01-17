@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import team.lala.timebank.entity.ChatMessage;
+import team.lala.timebank.enums.YesNo;
 
 public interface ChatMessageDao extends JpaRepository<ChatMessage, Long>, JpaSpecificationExecutor<ChatMessage> {
 
@@ -29,7 +31,13 @@ public interface ChatMessageDao extends JpaRepository<ChatMessage, Long>, JpaSpe
 		@Query(value ="SELECT * FROM CHAT_MESSAGE cmsg " +
 				"WHERE cmsg.FROM_ACCOUNT in ( ?1 , ?2 ) AND cmsg.TO_ACCOUNT in (?1 , ?2)", nativeQuery= true)
 		public List<ChatMessage> findChatMessagesBetweenTwoAccounts(String account1, String account2);
-	
+
+		//更新兩個帳號間聊天訊息的已讀狀態
+		@Modifying
+		@Query(value ="Update CHAT_MESSAGE SET READ_ALREADY=?3 " +
+				"WHERE TO_ACCOUNT=?1 AND FROM_ACCOUNT=?2 ", nativeQuery= true)
+		public void updateChatMessagesReadAlreadyStatusBetweenTwoAccounts(String formAccount, String toAccount,String yesno );
+		
 		@Query(value ="SELECT Top(1) * FROM CHAT_MESSAGE cmsg " +
 				"WHERE cmsg.FROM_ACCOUNT in ( ?1 , ?2 ) AND cmsg.TO_ACCOUNT in (?1 , ?2)"+
 				"ORDER BY cmsg.TIME DESC", nativeQuery= true)

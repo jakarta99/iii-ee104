@@ -271,6 +271,7 @@
 					url:"/login/oauth2/insert",
 					data: $("#memberform").serialize(),
 				}).done(function(response){
+// 					alert(response.status);
 					if(response.status == "SUCCESS") {
 						swal({
 							  title: "SUCCESS",
@@ -279,7 +280,7 @@
 							  button: "確定",
 						}).then((result) => {
 							if (result) {
-								window.location.replace("/index");	//讀完導至首頁
+								window.location.replace("/oauth2?account=" + $("#idAccount").val());	//讀完導至首頁
 							}
 						});
 					} else {

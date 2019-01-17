@@ -22,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.entity.ChatClient;
 import team.lala.timebank.entity.ChatMessage;
 import team.lala.timebank.entity.Member;
+import team.lala.timebank.enums.YesNo;
 import team.lala.timebank.service.ChatMessageService;
 import team.lala.timebank.service.MemberService;
 @Slf4j
@@ -39,19 +40,28 @@ public class ChatMessageController {
 
 	@MessageMapping("/chat")
 	@SendTo("/topic/messages")
-	public ChatMessage send(ChatClient message, Principal principal) throws Exception {
-		log.debug("message={}",message);
-		ChatMessage chatMessage = null;  
-		if (!StringUtils.isEmpty(message.getText()) && !StringUtils.isEmpty(message.getTo()) 
-				&& !StringUtils.isEmpty(message.getFrom())) {
-			chatMessage = new ChatMessage();  
-			chatMessage.setFromAccount(message.getFrom());
-			chatMessage.setToAccount(message.getTo());
-			chatMessage.setText(message.getText());
+	public ChatMessage send(ChatMessage chatMessage, Principal principal) throws Exception {
+		log.debug("chatMessage={}",chatMessage);
+		if ("Y".equals(chatMessage.getReadAlready())){
+			System.out.println("update msg");	
+			chatMessageService.updateChatMessagesReadAlreadyStatusBetweenTwoAccounts(chatMessage,"Y");
+			List<ChatMessage> chatList = chatMessageService.findChatMessagesBetweenFromAndTo(chatMessage);
+			if (chatList.size() >0) {
+				chatMessage = chatList.get(chatList.size() -1);	
+				if (chatMessage.getReadAlready() == "Y") {
+					log.debug("chatMessage return={}",chatMessage);
+					
+				}
+					
+			}
+			
+		}else if (!StringUtils.isEmpty(chatMessage.getText())) {
+			System.out.println("insert msg");	
 			chatMessage.setTime(new Date());
+			chatMessage.setReadAlready("N");
 			chatMessage = chatMessageService.insert(chatMessage);			
-		}
-		
+			log.debug("chatMessage return={}",chatMessage);
+		} 
 		return chatMessage;
 	}
 	
@@ -61,10 +71,13 @@ public class ChatMessageController {
 	public Map<String, Object> findChatMessagesWithAnotherMember(@RequestParam String to, @RequestParam String from,Model model){
 		Map<String, Object> respData = new HashMap<String, Object>();
 		ChatMessage chatMessage = new ChatMessage();
+		log.debug("to={}",to);
 		chatMessage.setToAccount(to);
 		chatMessage.setFromAccount(from);
+		chatMessageService.updateChatMessagesReadAlreadyStatusBetweenTwoAccounts(chatMessage,"Y");
 		List<ChatMessage> chatList = chatMessageService.findChatMessagesBetweenFromAndTo(chatMessage);
 		log.debug("chatList={}",chatList);
+		
 		Member toMember = memberService.findByAccount(to);
 		Member fromMember =  memberService.findByAccount(from);
 		//將所有需要的資訊放進Map中回傳給Browser

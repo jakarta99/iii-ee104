@@ -14,6 +14,7 @@ import team.lala.timebank.dao.ChatMessageDao;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.entity.ChatMessage;
 import team.lala.timebank.entity.Member;
+import team.lala.timebank.enums.YesNo;
 
 @Slf4j
 @Service
@@ -36,12 +37,21 @@ public class ChatMessageService {
 	}
 	
 	public ChatMessage insert(ChatMessage chatMessage) {
-//		Member toMember = memberDao.findByAccount(chatMessage.getToAccount());
-//		Member fromMember =  memberDao.findByAccount(chatMessage.getFromAccount());
-//		chatMessage.setToMemberPic(toMember.getPicture());
-//		chatMessage.setFromMemberPic(fromMember.getPicture());
-		return chatMessageDao.save(chatMessage);
+		if (chatMessage.getId() == null) {
+			return chatMessageDao.save(chatMessage);			
+		}
+		return null;
 	}
+	
+	public void updateChatMessagesReadAlreadyStatusBetweenTwoAccounts(ChatMessage chatMessage,String yesno) {
+		chatMessageDao.updateChatMessagesReadAlreadyStatusBetweenTwoAccounts
+						(chatMessage.getFromAccount(), chatMessage.getToAccount(), yesno);
+		log.debug("updateSuccess");
+
+
+	}
+	
+	
 	
 	//找出此使用者的所有聊天紀錄
 	@Transactional(readOnly=true)

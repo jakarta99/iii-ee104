@@ -33,7 +33,6 @@
 			startToChat();
 		})
 		
-		
 	})
 	
 	
@@ -101,10 +100,19 @@
 			//訂閱後，只要服務端向此地址發送消息，客戶端即可收到此消息
 			stompClient.subscribe('/topic/messages', function(messageOutput) {	
 				//收到消息時的回調方法
-				showMessageOutput(JSON.parse(messageOutput.body),"N");
+				var chatMessage = JSON.parse(messageOutput.body);
+				console.log("chatMessage text="+chatMessage.text);
+// 				if (chatMessage.text != 'null'){
+					showMessageOutput(chatMessage,"N");					
+// 				} else {
+// 					$('#response').append($("<p class='p1-from readAlready'>已讀</p>"));    
+// 				}
 			 	$('#box').animate({ scrollTop: $("#response").height() }, 1);
 			});
 		});	
+		$("#chatBoxDiv").on("click","#chatbox", function(){
+			sendMessage("Y");
+		})
 	}
 	
 
@@ -120,7 +128,7 @@
 	}
 	function addText(text){
 		$('#text').val(text);	
-		sendMessage()
+		sendMessage("N")
 	}
 	
 	
@@ -128,7 +136,7 @@
 
 </script>
 <jsp:include page="webSocketFunctions.jsp"></jsp:include>
-
+	<div id="chatBoxDiv">
 		<div id="chatbox" style="display:none" onload="disconnect()" >
 			<span id="toAccount" style="display:none"></span>
 			<div  id="connect"  class="btn btn-primary btn-sm"  >
@@ -148,7 +156,7 @@
 				<button id="sendMessage" class="btn btn-primary btn-sm" disabled onclick="sendMessage()">Send</button>
 			</div>
 	    </div>
-	    
+	</div>    
 
 	    <c:if test="${chatting eq 'Y'}">
 			<script>

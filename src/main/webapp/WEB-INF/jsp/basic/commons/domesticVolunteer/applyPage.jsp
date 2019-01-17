@@ -36,7 +36,7 @@
 	#chatButton {
 	    border: 1px solid #FFAA33 !important;
 	}
-	#chatButton:hover {
+	#chatButton:hover, #chatButton:focus{
 	    background: #FFAA33;
 	}
 	.cover {
