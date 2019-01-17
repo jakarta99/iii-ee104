@@ -14,6 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
+import team.lala.timebank.enums.YesNo;
 
 @Entity
 @Getter
@@ -25,6 +26,9 @@ public class InternationalVolunteer {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	
+	@Transient
+	private YesNo isCollected;
 	
 	@Column(name="TITLE")
 	private String title;
