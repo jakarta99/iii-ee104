@@ -34,7 +34,7 @@
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></script>
 
 <meta charset="UTF-8">
-<title>mission list(login)</title>
+<title>招募紀錄 | TimeBank</title>
 <style>
 		.container-1{
 		 	
