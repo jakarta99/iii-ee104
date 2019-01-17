@@ -1,20 +1,30 @@
 /* your styles go here */
+body{
+/* 	background-color:#f5f5f5; */
+}
+.top-bar{
+/* 	background-color:#f5f5f5; */
+/* 	color:#fff; */
+/* 	display:none; */
+/* 	width:0px; */
+}
 #navbar {
 /* 	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(243,243,243,1) 50%,rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); */
 /* 	background: linear-gradient(to bottom, rgba(237, 237, 237, 1) 0%, */
 /* 		rgba(243, 243, 243, 1) 50%, rgba(255, 255, 255, 1) 100%); */
-/* 	box-shadow: 3px 0 10px -4px #000; */
-	background-color:transparent;
-}
-.top-bar{
-	background-color:#555;
-	color:#fff;
+	box-shadow: 3px 0 10px -4px #000;
+/* 	background-color:transparent; */
 }
 
 
 header.nav-holder.sticky {
-	background-color:#555;
+	background-color:#fff;
 	color:gray;	
+	box-shadow: 3px 0 10px -4px #000;
+}
+.ml-auto, .mx-auto {
+    margin-left: auto!important;
+/*     margin: auto; */
 }
 #navbar .navbar-nav > li > a{
 	color:gray;
@@ -37,11 +47,34 @@ header.nav-holder.sticky navbar-nav > li > a{
 header.nav-holder.sticky navbar-nav > li > a:hover{
 	color:#13b5b1;
 }
+
+ a.login-btn,a.signup-btn {
+/*  	color:#555; */
+/*     color: black; */
+/* 	color:#fff; */
+/*     text-transform: uppercase; */
+/*     letter-spacing: 0.1em; */
+/*     text-decoration: none !important; */
+/*     font-size: 0.75rem; */
+/*     font-weight: 700; */
+/*     margin-left: 10px; */
+/*     background-color:#13b5b1; */
+/*    background-color: #868e96; */
+/*     padding:6px; */
+/*     border-radius:5px; */
+    
+}
+a.logout-btn{
+	font-size: 0.75rem;
+}
 .home-carousel{
 	position: relative;
-	top: -83px;
+/* 	top: -83px; */
 	z-index:-1;
 		
+}
+.owl-dots {
+    display: none;
 }
 .back-to-top {
 	cursor: pointer;
@@ -65,18 +98,17 @@ header.nav-holder.sticky navbar-nav > li > a:hover{
   letter-spacing: 0.1em;
   color: #13b5b1;
 }
+
+/* 設定頁面loading的轉圈gif */
 #status {
 	display:none;
-/*   width:200px ; */
-/*   height:200px ; */
-  position:absolute;
-  left:50%; 
-  top:60%; 
+  	position:absolute;
+  	left:50%; 
+  	top:60%; 
 /*   background-repeat:no-repeat; */
 /*   background-position:center; */
-  margin:-100px 0 0 -100px; 
+  	margin:-100px 0 0 -100px; 
 }
-
 #preloader {
   position: fixed;
   top:0;

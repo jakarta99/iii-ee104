@@ -4,7 +4,9 @@
 
  <header class="nav-holder make-sticky">
         <div id="navbar" role="navigation" class="navbar navbar-expand-lg">
-          <div class="container"><a href="/" class="navbar-brand home"><img src="/img/logo.png" alt="Universal logo" class="d-none d-md-inline-block" width="50"><img src="/img/logo-small.png" alt="Universal logo" class="d-inline-block d-md-none"><span class="sr-only">Universal - go to homepage</span></a>
+          <div class="container"><a href="/" class="navbar-brand home">
+          	<img src="/img/logo.png" alt="Universal logo" class="d-none d-md-inline-block" width="50">
+          	<img src="/img/logo-small.png" alt="Universal logo" class="d-inline-block d-md-none"><span class="sr-only">Universal - go to homepage</span></a>
             <button type="button" data-toggle="collapse" data-target="#navigation" class="navbar-toggler btn-template-outlined"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
             <div id="navigation" class="navbar-collapse collapse">
               <ul class="nav navbar-nav ml-auto">
@@ -54,9 +56,7 @@
                 </li>
 
                 <!-- ========== admin dropdown ==================-->
-               <sec:authorize access="hasRole('ADMIN')">
-    
-				
+               <sec:authorize access="hasRole('ADMIN')">				
                 <li class="nav-item dropdown"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle">管理者系統 <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li class="dropdown-item"><a href="/admin/member/list" class="nav-link" id="backStage-member">member</a> </li>
@@ -77,15 +77,32 @@
                 <!-- ========== Contact dropdown end ==================-->
               </ul>
             </div>
-            <div id="search" class="collapse clearfix">
-              <form role="search" class="navbar-form">
-                <div class="input-group">
-                  <input type="text" placeholder="Search" class="form-control"><span class="input-group-btn">
-                    <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button></span>
-                </div>
-              </form>
-            </div>
+           
           </div>
+            <!-- sign in & sign out -->
+<!--                 <div class="login" style="width:240px;">        -->
+<%-- 	               	<sec:authorize  access="!isAuthenticated()">         	 --%>
+<!-- 	               	 <a href="/login"  class="login-btn"> -->
+<!-- 	                	<i class="fa fa-sign-in"></i> -->
+<!-- 	                	<span class="d-none d-md-inline-block">Sign In</span> -->
+<!-- 	                 </a> -->
+<!-- 				  	<a href="/commons/sign-up/type" class="signup-btn"> -->
+<!--                 		<i class="fa fa-user"></i><span class="d-none d-md-inline-block">Sign Up</span> -->
+<!--                 	</a> -->
+<%-- 	                </sec:authorize>	                 --%>
+<%-- 					<sec:authorize  access="isAuthenticated()"> --%>
+
+<!-- 						<span class="d-none d-md-inline-block" id="loginName" style="width:200px; text-align:right">  -->
+<%-- 							歡迎回來, <sec:authentication property="name"/>&nbsp&nbsp&nbsp --%>
+<!-- 						</span>					 -->
+						<!-- logout method:get -->
+<!-- 						<a href="/logout" class="logout-btn"> -->
+<!-- 	                		<i class="fa fa-sign-in"></i> -->
+<!-- 	                		<span class="d-none d-md-inline-block">Sign Out</span> -->
+<!-- 		                </a> -->
+	        
+<%-- 	                </sec:authorize> --%>
+<!--                </div> -->
         </div>
       </header>
  
