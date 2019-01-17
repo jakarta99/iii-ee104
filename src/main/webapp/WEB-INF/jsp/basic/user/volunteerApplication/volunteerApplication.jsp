@@ -142,7 +142,7 @@
 	        	last=orders.last;
 	        	page=orders.number;
 	        	if(orders.content.length == 0){
-	        		var box="<h2>目前沒有活動，快去申請吧</h2>"
+	        		var box="<h2 style='text-align: center;margin-top:20px;'>目前沒有活動，快去申請吧</h2>"
 	        		$("#boxbox").append(box);
 	        	} else {
 		        	$.each(orders.content, function(index, order){
