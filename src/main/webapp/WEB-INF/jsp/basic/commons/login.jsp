@@ -19,18 +19,18 @@
 		<jsp:include page="commons_layout/commons_nav.jsp" />
 	<div id="all">  
       <div id="content" >
-        <div class="container">
-          <div class="row">           
+        <div class="container" id="loginContainer">
+          <div class="row" >           
             <div class="col-lg-6" style="margin:auto">
               <div class="box">
                 <h2 class="text-uppercase">Login</h2>
                 <p class="lead">Already our customer?</p>
                 <p class="text-muted"></p>
                 <hr>
-                <form action="/login" method="post">
+                <form action="/login" method="post" id="loginForm">
                   <div class="form-group">
-                    <label for="email">Account</label>
-                    <input id="email" type="text" name="username" class="form-control" autofocus>
+                    <label for="username">Account</label>
+                    <input id="username" type="text" name="username" class="form-control" autofocus>
                   </div>
                   <div class="form-group">
                     <label for="password">Password</label>
@@ -54,7 +54,7 @@
     </div>
     
    <!-- FOOTER -->
-   <jsp:include page="commons_layout/commons_footer.jsp" />
+<%--    <jsp:include page="commons_layout/commons_footer.jsp" /> --%>
    
 <!--Google登入-->
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};HandleGoogleApiLibrary()"
@@ -94,17 +94,50 @@
         	// API call for Google login  
             gapi.auth2.getAuthInstance().signIn().then(
                 function (success) {
-                    // Login API call is successful 
+                	// Login API call is successful 
                     console.log(success);
 //                     let Google_ID = success["El"];
-                  	//id
-                    console.log(success.El);
-                    //email
-                    console.log(success.w3.U3);
                     
                     let oauth2Id = success.El;
                     let email = success.w3.U3;
-                    window.location.href = "/login/oauth2/google?oauth2Id="+oauth2Id+"&email="+email;
+                    let name = success.w3.ig;
+                  	//id
+                    console.log(oauth2Id);
+                    //email
+                    console.log(email);
+                    //name
+                    console.log(name);
+                    	
+                    $.ajax({
+                    	method:"post",
+    					dataType: "json",        
+    					url:"/login/oauth2/google",
+    					data: {name:name,email:email,oauth2Id:oauth2Id}
+                    }).done(function(member){
+                    	$("#loginContainer").css("display","none");
+                    	
+//                     	 alert(member.account + "," + member.password + "," +member.name + "," + member.email + "," + member.oauth2Id);
+                    	 if (member.account != null){//表示資料庫已有這個member
+//                     		alert("I'm member !!!");
+                         	$("#username").val(member.account);
+                         	$("#password").val(member.oauth2Id);
+                         	$("#loginForm").submit();
+                         } else{//表示資料庫沒有這個member，須insert 
+//                         	alert("I'm NEW !!!");
+                        	//使用ajax :insert
+                        	$.ajax({
+		                    	method:"post",
+		    					dataType: "json",        
+		    					url:"/login/oauth2/insert",
+		    					data: {member:member}
+		                    }).done(function(resp){
+		                    	console.log(resp);
+	                        	$("#username").val(resp.obj.account);
+	                         	$("#password").val(resp.obj.oauth2Id);
+	                         	$("#loginForm").submit();
+		                    });    	 
+                         }
+                    });      
                 },
                 function (error) {
                     // Error occurred
@@ -150,7 +183,7 @@
                     //user已登入FB
                     //抓userID
                     let oauth2Id = response["authResponse"]["userID"];
-                    console.log("userID:" + FB_ID);
+                    console.log("userID:" + oauth2Id);
                     window.location.href = "/login/oauth2/facebook?oauth2Id="+oauth2Id;
                 } else {
                     // user FB取消授權
