@@ -26,6 +26,7 @@ import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.ServiceType;
+import team.lala.timebank.enums.MemberType;
 import team.lala.timebank.enums.OrderStatus;
 import team.lala.timebank.service.MemberService;
 import team.lala.timebank.service.MissionService;
@@ -206,13 +207,16 @@ public class RecruitController {
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
 		try {
 			Mission mission = missionService.getOne(missionId);
-			
+			if(memberService.findByAccount(principal.getName()).getMemberType().equals(MemberType.O)) {
+				response.addMessage("機構無法申請活動");
+				return response;
+			}
 			//刊登者與申請者相同 申請失敗
 			if(!mission.getMember().getAccount().equals(principal.getName())) {
 				//已存在相同申請者 申請失敗
 				for(Order order : mission.getOrders()) {
 					if(order.getVolunteer().getAccount().equals(principal.getName())) {
-						response.addMessage("不得重複申請");
+						response.addMessage("無法重複申請");
 						return response;
 					}
 				}
@@ -227,7 +231,7 @@ public class RecruitController {
 				orderService.insert(mission, member);
 			}
 			}else {
-				response.addMessage("不得申請自己的活動");
+				response.addMessage("無法申請自己的活動");
 				return response;
 
 			}
