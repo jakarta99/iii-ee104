@@ -330,7 +330,8 @@
 		$(this).empty().append("<i name='pic1' class='far fa-heart'></i>收藏")
 		})
 		
-		if ('${!empty missionId}'){
+		if (${!empty missionId}){
+			console.log('${missionId}')
 			insertCollection('${missionId}');
 		}
 		
