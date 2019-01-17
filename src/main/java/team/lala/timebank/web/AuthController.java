@@ -1,7 +1,5 @@
 package team.lala.timebank.web;
 
-import java.sql.SQLException;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,18 +53,6 @@ public class AuthController {
 		return member;
 	}
 	
-	@RequestMapping("/login/oauth2/facebook")
-	public String facebookAddPage(@RequestParam("oauth2Id") String oauth2Id, Model model) {
-		if(memberService.findByOauth2Id(oauth2Id) != null) {
-			Member member = memberService.findByOauth2Id(oauth2Id);
-			String account = member.getAccount();
-			return "/index?account="+account;
-		}else {
-			model.addAttribute("oauth2Id", oauth2Id);
-			return "/basic/commons/login_oauth2/login-oauth2_add";
-		}
-	}
-	
 	@RequestMapping("/login/oauth2/insert")
 	@ResponseBody
 	public AjaxResponse<Member> insertMember(HttpSession session) {
@@ -101,4 +87,18 @@ public class AuthController {
 		}
 		return response;
 	}
+	
+	
+//	@RequestMapping("/login/oauth2/facebook")
+//	public String facebookAddPage(@RequestParam("oauth2Id") String oauth2Id, Model model) {
+//		if(memberService.findByOauth2Id(oauth2Id) != null) {
+//			Member member = memberService.findByOauth2Id(oauth2Id);
+//			String account = member.getAccount();
+//			return "/index?account="+account;
+//		}else {
+//			model.addAttribute("oauth2Id", oauth2Id);
+//			return "/basic/commons/login_oauth2/login-oauth2_add";
+//		}
+//	}
+	
 }

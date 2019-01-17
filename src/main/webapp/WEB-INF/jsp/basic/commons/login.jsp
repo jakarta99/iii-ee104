@@ -96,8 +96,7 @@
                 function (success) {
                 	// Login API call is successful 
                     console.log(success);
-//                     let Google_ID = success["El"];
-                    
+
                     let oauth2Id = success.El;
                     let email = success.w3.U3;
                     let name = success.w3.ig;
@@ -115,14 +114,13 @@
     					data: {name:name,email:email,oauth2Id:oauth2Id}
                     }).done(function(member){
                     	$("#loginContainer").css("display","none");
-                    	
 //                     	 alert(member.account + "," + member.password + "," +member.name + "," + member.email + "," + member.oauth2Id);
-                    	 if (member.account != null){//表示資料庫已有這個member
+                    	 if (member.account != null){	//表示資料庫已有這個member
 //                     		alert("I'm member !!!");
                          	$("#username").val(member.account);
                          	$("#password").val(member.oauth2Id);
                          	$("#loginForm").submit();
-                         } else{//表示資料庫沒有這個member，須insert 
+                         } else{	//表示資料庫沒有這個member，須insert 
 //                         	alert("I'm NEW !!!");
                         	//使用ajax :insert
                         	$.ajax({
