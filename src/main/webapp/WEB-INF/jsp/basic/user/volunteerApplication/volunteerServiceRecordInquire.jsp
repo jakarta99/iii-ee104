@@ -165,8 +165,9 @@
 	.modal-footer {
 		padding: 0 1rem 1rem 0;
 	}
-	.container{
-		margin-left:  500px;
+	.container1{
+		margin-left:  380px;
+		height: 100%;
 	}
 	.panel-title{
 		margin-top: 20px;
@@ -250,7 +251,7 @@
     </div>
     </div>
     </div>
-    <div class="container">
+    <div class="container container1">
 	<section class="bar_1">
 		<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
 			<li class="nav-item"><a id="orderStatus7" data-toggle="pill" href="javascript: void(0)" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active">媒合成功紀錄</a></li>
