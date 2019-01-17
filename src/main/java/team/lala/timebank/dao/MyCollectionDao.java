@@ -15,4 +15,7 @@ public interface MyCollectionDao extends JpaRepository<MyCollection, Long>, JpaS
 	// public List<MyCollection> findByMission(Mission mission);
 	public List<MyCollection> findByMyCollectionTypeAndMember(MyCollectionType myCollectionType, Member member);
 
+	public MyCollection findByMyCollectionTypeAndMemberAndFavoriteObjectId(MyCollectionType myCollectionType,
+			Member member, Long favoriteObjectId);
+
 }

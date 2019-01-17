@@ -233,7 +233,7 @@
 						$("#login-modal").addClass("modal fade show");
 			    	   	$("#login-modal").css("display","block");
 			    	   	$("#login-modal").css("padding-right","17px");
-			    		$("#action").val("missionId="+id);
+			    		$("#action").val("Id="+id);
 			    	   	
 					}
 				}) 				   			   
@@ -330,9 +330,10 @@
 		$(this).empty().append("<i name='pic1' class='far fa-heart'></i>收藏")
 		})
 		
-		if (${!empty missionId}){
-			console.log('${missionId}')
-			insertCollection('${missionId}');
+		if (${!empty Id}){
+			
+			console.log('${Id}')
+			insertCollection('${Id}');
 		}
 		
 	})

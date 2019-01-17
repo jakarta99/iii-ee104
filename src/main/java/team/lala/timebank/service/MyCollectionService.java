@@ -54,6 +54,13 @@ public class MyCollectionService {
 				memberDao.findByAccount(memberAccount));
 	};
 
+	public MyCollection findByMyCollectionTypeAndMemberAccount(MyCollectionType myCollectionType, Principal principal,
+			Long favoriteObjectId) {
+
+		return myCollectionDao.findByMyCollectionTypeAndMemberAndFavoriteObjectId(myCollectionType,
+				memberDao.findByAccount(principal.getName()), favoriteObjectId);
+	};
+
 	public MyCollection getOne(Long id) {
 		MyCollection myCollection = myCollectionDao.getOne(id);
 		return myCollection;

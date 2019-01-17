@@ -5,6 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- sweet alert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
+	
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>公益團體 | TimeBank</title>
 <!-- css -->
@@ -147,14 +151,24 @@
 		function insertCollection(id) { 	
  				 $.ajax({
  					url : '/user/myCollection/insertOrganization?id=' + id,
- 					type : 'post',
+ 					type : 'get',
  					dataType : 'JSON',
  					success : function(cancelResult) {
- 						if(cancelResult.status == "SUCCESS"){ 							
+ 						if(cancelResult.status == "SUCCESS"){
+ 							swal("收藏成功!", "加入我的收藏成功!", "success");
  						}else{ 							
  						} 						
  						list();								
  					},
+ 				}).fail(function( jqXHR, textStatus){
+					if(jqXHR.status == 200){
+						$("#login-modal").addClass("modal fade show");
+			    	   	$("#login-modal").css("display","block");
+			    	   	$("#login-modal").css("padding-right","17px");
+			    		$("#action").val("Id="+id);
+			    	   	
+					}
+ 					
  				}) 				   			   
 		}
 		
@@ -280,6 +294,11 @@
 			$("#boxbox").on("mouseout","a[name='box2']",function(){
 				$(this).empty().append("<i name='pic1' class='far fa-heart'></i>收藏")
 			})
+			
+			if (${!empty Id}){
+				console.log('${Id}')
+				insertCollection('${Id}');
+			}
 	    	
 	    	
 		
