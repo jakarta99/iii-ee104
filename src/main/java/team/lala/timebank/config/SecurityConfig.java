@@ -42,9 +42,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				req.getRequestDispatcher("/WEB-INF/jsp/basic/commons/login.jsp").forward(req, res);
 			}).and().logout().logoutSuccessUrl("/")
 			.deleteCookies("JSESSIONID")
-//				.and().oauth2Login().loginPage("/oauth_login")
+				.and().oauth2Login().loginPage("/login")
 			.and().csrf().disable();
 		 http.sessionManagement().maximumSessions(20);
+		 
+//		 http.authorizeRequests()
+//         .anyRequest().authenticated()
+//         .and()
+//         .oauth2Login();
 	}
 
 

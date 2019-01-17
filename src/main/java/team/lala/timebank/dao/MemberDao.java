@@ -23,6 +23,9 @@ public interface MemberDao extends JpaRepository<Member, Long>, JpaSpecification
 	//查詢這個帳號是否在資料庫有資料
 	public Member findByAccount(String loginAccount);
 	
+	//查詢這個第三方登入Id是否在資料庫有資料
+	public Member findByOauth2Id(String oauth2Id);
+	
 	public Page<Member> findByMemberType(MemberType memberType, Pageable pageable);
 	
 	public List<Member> findByMemberType(MemberType memberType);

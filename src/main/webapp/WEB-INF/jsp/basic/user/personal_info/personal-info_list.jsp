@@ -97,6 +97,9 @@
 									<li>
 										<div class="icon-filled"></div>室內電話  : ${member.telephone}
 									</li>
+<!-- 									<li> -->
+<%-- 										<div class="icon-filled"></div>結餘時數 : ${timeledger.balanceValue} --%>
+<!-- 									</li> -->
 								</ul>
 							</div>
 						</div>

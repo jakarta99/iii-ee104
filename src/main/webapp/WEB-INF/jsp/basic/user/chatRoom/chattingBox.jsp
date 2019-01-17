@@ -118,7 +118,12 @@
 		console.log("connected="+connected)
 
 	}
-
+	function addText(text){
+		$('#text').val(text);	
+		sendMessage()
+	}
+	
+	
 
 
 </script>
@@ -134,6 +139,11 @@
         		<div id="box">
 					<p id="response"></p>
 				</div>
+				<div id="quickButtonDiv" style="text-align:left;margin-bottom: 10px;">
+					<button class="btn btn-primary btn-sm quickButton" >Hi~</button>
+					<button class="btn btn-primary btn-sm quickButton" >你好</button>
+					<button class="btn btn-primary btn-sm quickButton" >謝謝!</button>
+				</div>
 				<input type="text" id="text" placeholder="請輸入訊息" />
 				<button id="sendMessage" class="btn btn-primary btn-sm" disabled onclick="sendMessage()">Send</button>
 			</div>
@@ -147,5 +157,12 @@
 			</script>
 			 <% request.getSession().removeAttribute("chatting");%>
 		</c:if>
-
+		
+		<script>
+			$("#quickButtonDiv button").on("click",function(){
+				var text = $(this).html();
+				console.log(text);
+				addText(text);
+			})
+		</script>
 

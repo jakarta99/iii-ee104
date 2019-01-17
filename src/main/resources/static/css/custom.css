@@ -7,15 +7,17 @@
 	background-color:transparent;
 }
 .top-bar{
-	background-color:#5a5a5a;
+	background-color:#555;
+	color:#fff;
 }
 
 
 header.nav-holder.sticky {
-	background-color:#ffffff;	
+	background-color:#555;
+	color:gray;	
 }
 #navbar .navbar-nav > li > a{
-	color:#7c7d7d;
+	color:gray;
 	font-weight: 900;
 	font-size: 1em;
 }
@@ -30,7 +32,7 @@ header.nav-holder.sticky {
 /* 	color:#129c99; */
 }
 header.nav-holder.sticky navbar-nav > li > a{
-	color:rgba(100, 100, 100);
+	color:gray;
 }
 header.nav-holder.sticky navbar-nav > li > a:hover{
 	color:#13b5b1;
