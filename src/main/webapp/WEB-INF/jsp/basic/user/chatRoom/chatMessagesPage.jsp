@@ -132,7 +132,6 @@
 		$(".item2").on("click",".chatMemberBox",function(){
 			var toAccount= $(this).find(">:nth-child(2)>:first-child").attr("id");
 			to = toAccount;
-			alert("clickMemberBox")
 			getChatMessages();
 		})
 
