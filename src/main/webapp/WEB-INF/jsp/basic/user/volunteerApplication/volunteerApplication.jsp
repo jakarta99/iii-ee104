@@ -10,7 +10,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 <meta charset="UTF-8">
-<title>mission list(login)</title>
+<title>進行中任務 | TimeBank</title>
 <style>
 	.nav-link{
 		font-weight: bold;
@@ -142,7 +142,7 @@
 	        	last=orders.last;
 	        	page=orders.number;
 	        	if(orders.content.length == 0){
-	        		var box="<h2>目前沒有活動，快去申請吧</h2>"
+	        		var box="<h2 style='text-align: center;margin-top:20px;'>目前沒有活動，快去申請吧</h2>"
 	        		$("#boxbox").append(box);
 	        	} else {
 		        	$.each(orders.content, function(index, order){

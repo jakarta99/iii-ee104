@@ -18,7 +18,7 @@
 	
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 <meta charset="UTF-8">
-<title>媒合紀錄查詢</title>
+<title>媒合紀錄查詢 | TimeBank</title>
 <style> 	
     .margintop{
 		 margin-top:70px;
@@ -218,7 +218,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="content">
+	<div id="content" style="height: 18cm;">
 	<div class="col-md-3 search">
 	<div class="panel panel-default sidebar-menu">
 		<div class="panel-heading">
@@ -362,7 +362,7 @@
         	last=orders.last;
         	page=orders.number;
         	if(orders.content.length == 0){
-        		var box="<h2>目前沒有活動，快去申請吧</h2>"
+        		var box="<h2 style='text-align: center;margin-top:20px;'>目前沒有活動，快去申請吧</h2>"
         		$("#boxbox").append(box);
         	} else {
 	        	$.each(orders.content, function(index, order){

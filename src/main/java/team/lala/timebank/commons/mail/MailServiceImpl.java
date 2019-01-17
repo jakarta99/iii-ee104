@@ -116,7 +116,7 @@ public class MailServiceImpl implements MailService {
 	public void sendInlineResourceMail(Member member) {
 		MimeMessage message = mailSender.createMimeMessage();
 		try {
-			String imgPath = "https://drive.google.com/open?id=1GItUz6YJN3YmoPZXX8WvgvQ2WQeL8yIj";
+			String imgPath = "http://drive.google.com/open?id=1GItUz6YJN3YmoPZXX8WvgvQ2WQeL8yIj";
 //			String imgPath = "C:\\Users\\ancho\\git\\iii-ee104\\src\\main\\resources\\static\\img";
 	        //true表示需要创建一个multipart message
 	        MimeMessageHelper helper = new MimeMessageHelper(message, true);
