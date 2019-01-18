@@ -11,6 +11,9 @@
 <!-- Javascript files-->
 <jsp:include page="../commons_layout/commons_js_links.jsp" />
 <style>
+	.box {
+	    margin: 30px 0;
+	}
 </style>
 
 </head>
@@ -34,7 +37,7 @@
         	</div>
         </div>
     </div>
-	<section class="bar">
+	<section>
 		<div id="all">  
 <!--       <div id="heading-breadcrumbs"> -->
 <!--         <div class="container"> -->

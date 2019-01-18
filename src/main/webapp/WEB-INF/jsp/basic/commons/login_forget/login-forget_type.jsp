@@ -11,7 +11,7 @@
 <!-- Javascript files-->
 <jsp:include page="../commons_layout/commons_js_links.jsp" />
 <style>
-]	.box {
+	.box {
 	    margin: 30px 0;
 	}
 </style>
