@@ -147,11 +147,6 @@
               <h1 class="h2" align="center" style=color:brown>${mission.title}</h1>
             </div>
             <div class="col-md-5">
-              <ul class="breadcrumb d-flex justify-content-end">
-                <li class="breadcrumb-item"><a href="/">首頁</a></li>
-                <li class="breadcrumb-item"><a href="/commons/domesticVolunteer/list">志工招募</a></li>
-                <li class="breadcrumb-item active">招募申請</li>
-              </ul>
             </div>
           </div>
         </div>
@@ -397,10 +392,9 @@
 		}
 	
 	function startToChat(){
-		$("#toAccount").text('${mission.member.account}');
-		$("#toName").text('${mission.member.name}');
-		to = $("#toAccount").text();
-		chat();		
+		
+// 		setSendToObject('${mission.member.account}', '${mission.member.name}');
+		connect('${mission.member.account}', '${mission.member.name}');		
 	}
 		
 	$(document).ready(function() {

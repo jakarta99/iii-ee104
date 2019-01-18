@@ -96,14 +96,14 @@ public class FacadeService {
 			List<Order> successOrders = orderDao.findByMissionAndOrderStatus(mission, OrderStatus.ServiceFinishPayMatchSuccess);
 			List<Order> reportOrders = orderDao.findByMissionAndReportStatus(mission, ReportStatus.Null);
 			
-			if(reportOrders.size() == 0) {
+			
 				if (successOrders.size() == mission.getApprovedQuantity().intValue()) {
 					mission.setMissionstatus(MissionStatus.C_Finish);
 					mission.setFinishDate(new Date());
 					missionDao.save(mission);
 					systemMessageService.finishMission(payer, missionTitle);
 				}
-			}
+			
 			orderDao.save(order);
 		}
 

@@ -65,9 +65,9 @@
     		<div class="col-lg-6" style="margin:auto">
             	<div class="box">
 		            <article>
-						<h2 class="text-uppercase">個人資訊</h2>
-		                <p class="lead">您在 TimeBank中使用的基本資訊</p>
-		                <p class="text-muted">帳戶資料</p>
+						<h2 class="text-uppercase">請輸入您的新密碼</h2>
+<!-- 		                <p class="lead">您在 TimeBank中使用的基本資訊</p> -->
+<!-- 		                <p class="text-muted">帳戶資料</p> -->
 		                <hr>
 <!-- 						<h3></h3> -->
 <!-- 						<h5>您在 TimeBank中使用的基本資訊</h5> -->

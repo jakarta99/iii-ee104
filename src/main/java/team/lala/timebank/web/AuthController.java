@@ -89,16 +89,19 @@ public class AuthController {
 	}
 	
 	
-//	@RequestMapping("/login/oauth2/facebook")
-//	public String facebookAddPage(@RequestParam("oauth2Id") String oauth2Id, Model model) {
-//		if(memberService.findByOauth2Id(oauth2Id) != null) {
-//			Member member = memberService.findByOauth2Id(oauth2Id);
-//			String account = member.getAccount();
-//			return "/index?account="+account;
-//		}else {
-//			model.addAttribute("oauth2Id", oauth2Id);
-//			return "/basic/commons/login_oauth2/login-oauth2_add";
-//		}
-//	}
+	@RequestMapping("/login/oauth2/facebook")
+	public Member facebookAddPage(@RequestParam("oauth2Id") String oauth2Id, HttpSession session) {
+		Member member = new Member();
+		if(memberService.findByOauth2Id(oauth2Id) != null) {
+			//已有此會員
+			member = memberService.findByOauth2Id(oauth2Id);
+			log.debug("member.getId()={}", member.getId());
+		}else {
+			member.setOauth2Id(oauth2Id);
+			session.setAttribute("member", member);
+		}
+		log.debug("facebook member={}",member);
+		return member;
+	}
 	
 }

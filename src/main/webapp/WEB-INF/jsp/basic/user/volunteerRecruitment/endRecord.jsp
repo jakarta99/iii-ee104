@@ -35,6 +35,19 @@
 <meta charset="UTF-8">
 <title>結案紀錄 | TimeBank</title>
 <style>
+		.cover {
+	    overflow: hidden;
+	    position:relative;
+	}
+	.cover:after {
+		position:absolute;
+		content:'';
+		width:100%;
+		height:100%;
+		top:0;
+		left:0;
+		box-shadow:0 0 30px 10px rgba(255,255,255,.7) inset;
+     }
 		.img-fluid {
     		height: 30px;
 		}
@@ -149,7 +162,7 @@
 				</ul>
 
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
               	<ul class="ul-icons list-unstyled">
               		<li>
 						<div class="icon-filled">服務種類</div><span style="font-size:16px">${mission.serviceType.serviceType}</span>
@@ -173,54 +186,15 @@
               	</ul>
               
               </div>
-              <div class="col-md-4">
+              <div class="col-md-5">
               	<section>
 					<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNASLitmpPiGxtg94A3WqLl8bHHk0lzJM&callback=initMap"></script>
 
 					    <div style="height:210px" id="map"></div>
-		          </section> 
-              </div>
-            </div>
-            <div class="row">
-            	<div class="col-md-12">
-            		<div class="heading">
-                  		<h3>參與志工</h3>
-                	</div>
-            	</div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-              	<ul class="ul-icons list-unstyled">
-              	<li>
-              		<c:forEach var="order" items="${orders}">
-              		
-              			<div style="width:150px;display: inline-block;"><img style="border:1px solid black" id="memberImg" alt="" src="/image/user/member/${order.volunteer.picture}" class="img-fluid rounded-circle"> 
-							<a style="font-size:16px;font-weight:600;" href="/commons/personal-info/list?memberId=${order.volunteer.id}">${order.volunteer.name}</a>
-						</div>
-              			
-              		
-              		</c:forEach>
-              	</li>
-              	</ul>
-              </div>
-            </div>
-            
-          </section>
- 			
-          
-        </div>
-      </div>
-
-     
-
-
-
-
-<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
-	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+		          </section>
+				 <script>
 	
-	<script>
-var map, geocoder;
+	var map, geocoder;
 	
 	var address = "${mission.county}${mission.district}${mission.address}";
     function initMap() {
@@ -256,7 +230,48 @@ var map, geocoder;
     		});
 	  	}
     }
-	</script>
+	</script> 
+              </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-12">
+            		<div class="heading">
+                  		<h3>參與志工</h3>
+                	</div>
+            	</div>
+            </div>
+            <div class="row">
+              <div class="col-md-7">
+              	<ul class="ul-icons list-unstyled">
+              	<li>
+              		<c:forEach var="order" items="${orders}">
+              		
+              			<div style="margin-right: 30px;margin-bottom: 10px;display: inline-block;"><img style="border:1px solid black" id="memberImg" alt="" src="/image/user/member/${order.volunteer.picture}" class="img-fluid rounded-circle"> 
+							<a style="font-size:16px;font-weight:600;" href="/commons/personal-info/list?memberId=${order.volunteer.id}">${order.volunteer.name}</a>
+						</div>
+              			
+              		
+              		</c:forEach>
+              	</li>
+              	</ul>
+              </div>
+            </div>
+            
+          </section>
+ 			
+          
+        </div>
+      </div>
+
+     
+
+
+
+
+<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+	
+	
 
 
 

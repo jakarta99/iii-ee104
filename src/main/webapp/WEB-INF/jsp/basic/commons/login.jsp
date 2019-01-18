@@ -182,7 +182,35 @@
                     //抓userID
                     let oauth2Id = response["authResponse"]["userID"];
                     console.log("userID:" + oauth2Id);
-                    window.location.href = "/login/oauth2/facebook?oauth2Id="+oauth2Id;
+                    $.ajax({
+                    	method:"post",
+    					dataType: "json",        
+    					url:"/login/oauth2/facebook",
+    					data: {oauth2Id:oauth2Id}
+                    }).done(function(member){
+                    	$("#loginContainer").css("display","none");
+                    	 alert(member.account + "," + member.password + "," +member.name + "," + member.email + "," + member.oauth2Id);
+                    	 if (member.account != null){	//表示資料庫已有這個member
+                    		alert("I'm member !!!");
+                         	$("#username").val(member.account);
+                         	$("#password").val(member.oauth2Id);
+                         	$("#loginForm").submit();
+                         } else{	//表示資料庫沒有這個member，須insert 
+                        	alert("I'm NEW !!!");
+                        	//使用ajax :insert
+                        	$.ajax({
+		                    	method:"post",
+		    					dataType: "json",        
+		    					url:"/login/oauth2/insert",
+		    					data: {member:member}
+		                    }).done(function(resp){
+		                    	console.log(resp);
+	                        	$("#username").val(resp.obj.account);
+	                         	$("#password").val(resp.obj.oauth2Id);
+	                         	$("#loginForm").submit();
+		                    });    	 
+                         }
+                    });
                 } else {
                     // user FB取消授權
                     alert("Facebook帳號無法登入");

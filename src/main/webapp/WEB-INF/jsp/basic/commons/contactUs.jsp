@@ -26,13 +26,10 @@ $(document).ready( function () {
 	$("#heading-breadcrumbs>div>div>div.col-md-7>h1").text("聯絡我們");	
 })	
 
-function startToChat(){
-	$("#toAccount").text("royadmin1112");
-	$("#toName").text("TimeBank時間銀行");
-	to = $("#toAccount").text();
-	chat();	
-}
 
+function startToChat(){
+	connect("royadmin1112", "TimeBank時間銀行");		
+}
 </script>
 
 </head>
