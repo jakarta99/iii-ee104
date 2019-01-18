@@ -17,6 +17,7 @@ import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.enums.MissionStatus;
 import team.lala.timebank.enums.OrderStatus;
+import team.lala.timebank.enums.ReportStatus;
 
 @Slf4j
 @Service
@@ -92,13 +93,16 @@ public class FacadeService {
 			missionDao.save(mission);
 			
 			// 搜尋mission中的所有order 若全付款則將 mission 狀態改變
-			List<Order> orders = orderDao.findByMissionAndOrderStatus(mission, OrderStatus.ServiceFinishPayMatchSuccess);
-				
-			if (orders.size() == mission.getApprovedQuantity().intValue()) {
-				mission.setMissionstatus(MissionStatus.C_Finish);
-				mission.setFinishDate(new Date());
-				missionDao.save(mission);
-				systemMessageService.finishMission(payer, missionTitle);
+			List<Order> successOrders = orderDao.findByMissionAndOrderStatus(mission, OrderStatus.ServiceFinishPayMatchSuccess);
+			List<Order> reportOrders = orderDao.findByMissionAndReportStatus(mission, ReportStatus.Null);
+			
+			if(reportOrders.size() == 0) {
+				if (successOrders.size() == mission.getApprovedQuantity().intValue()) {
+					mission.setMissionstatus(MissionStatus.C_Finish);
+					mission.setFinishDate(new Date());
+					missionDao.save(mission);
+					systemMessageService.finishMission(payer, missionTitle);
+				}
 			}
 			orderDao.save(order);
 		}

@@ -11,6 +11,7 @@ import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.enums.OrderStatus;
+import team.lala.timebank.enums.ReportStatus;
 
 public interface OrderDao extends JpaRepository<Order,Long>, JpaSpecificationExecutor<Order>{
 
@@ -21,4 +22,6 @@ public interface OrderDao extends JpaRepository<Order,Long>, JpaSpecificationExe
 	public List<Order> findByMission(Mission mission);
 	
 	public List<Order> findByMissionAndOrderStatus(Mission mission, OrderStatus orderStatus);
+	
+	public List<Order> findByMissionAndReportStatus(Mission mission, ReportStatus reportStatus);
 }

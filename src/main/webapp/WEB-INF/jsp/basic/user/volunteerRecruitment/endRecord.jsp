@@ -97,11 +97,6 @@
               <h1 class="h2">${mission.title}結案紀錄</h1>
             </div>
             <div class="col-md-5">
-              <ul class="breadcrumb d-flex justify-content-end">
-                <li class="breadcrumb-item"><a href="/">首頁</a></li>
-                <li class="breadcrumb-item"><a href="/user/volunteerRecruitment/list?box=3">招募紀錄</a></li>
-                <li class="breadcrumb-item active">結案紀錄</li>
-              </ul>
             </div>
           </div>
         </div>
@@ -110,11 +105,18 @@
         <div class="container">
           <section class="bar">
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-7">
                 <div class="heading">
                   <h2>活動介紹</h2>
                 </div>
                 <p align="center" class="lead">${mission.discription}
+				</div>
+				<div class="col-md-5">
+					<ul class="ul-icons list-unstyled">
+				 	<li class="cover">
+              			<img  style="width:445px;height:250px;border-radius: 5px;" id="missionImg" alt="" src="/image/user/mission/${mission.missionPicName}" class="img-fluid rounded-square">
+					</li>
+					</ul>
 				</div>
             </div>
             <div class="row">
@@ -171,7 +173,13 @@
               	</ul>
               
               </div>
-              <div class="col-md-4"><img style="width:300px;height:270px" id="missionImg" alt="" src="/image/user/mission/${mission.missionPicName}" class="img-fluid rounded-circle"></div>
+              <div class="col-md-4">
+              	<section>
+					<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNASLitmpPiGxtg94A3WqLl8bHHk0lzJM&callback=initMap"></script>
+
+					    <div style="height:210px" id="map"></div>
+		          </section> 
+              </div>
             </div>
             <div class="row">
             	<div class="col-md-12">
@@ -210,14 +218,44 @@
 
 <jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-	<script type="text/javascript">
-	$(document).ready(function(){
-		
-	 
-	})
 	
+	<script>
+var map, geocoder;
 	
-	
+	var address = "${mission.county}${mission.district}${mission.address}";
+    function initMap() {
+  	geocoder = new google.maps.Geocoder();
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 13,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        center : {
+			lat : 25.0477505,
+			lng : 121.5170599
+		},
+      });
+	  	if(geocoder){
+	  		geocoder.geocode({"address": address}, function(results, status) {
+    			if(status != google.maps.GeocoderStatus.OK)  {
+    				console.log(status)
+    				alert("Geocoder Failed: " + status);
+    			} else {
+    				map.setCenter(results[0].geometry.location);
+    				var marker = new google.maps.Marker({
+    					map: map,
+    					position: results[0].geometry.location,
+    					title: address
+    				});
+    				var popup = new google.maps.InfoWindow({
+    					content: address,
+    				    position: results[0].geometry.location,
+//     				    maxWidth:200,
+//     				    pixelOffset: new google.maps.Size(100, -20) 
+    				});
+    				popup.open(map,marker);
+    			}
+    		});
+	  	}
+    }
 	</script>
 
 
