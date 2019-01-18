@@ -23,11 +23,16 @@
     .margintop{
 		 margin-top:70px;
 	}
+	#blog-listing-big .author-category a, #blog-listing-medium .author-category_1 a {
+	    font-weight: 500;
+	    margin-bottom: 0;
+	    font-size: 25px;
+	}
 	#blog-listing-big p.intro, #blog-listing-medium p.intro {
 	  margin-top: 10px;
 	  margin-right: 15px;
 	  color: #777;
-	  font-size: 15px;
+	  font-size: 20px;
 	}
 	.img{
 		width: 90%;

@@ -15,12 +15,16 @@
 	.nav-link{
 		font-weight: bold;
 	}
-	
+	#blog-listing-big .author-category a, #blog-listing-medium .author-category_1 a {
+	    font-weight: 500;
+	    margin-bottom: 0;
+	    font-size: 25px;
+	}
 	#blog-listing-big p.intro, #blog-listing-medium p.intro {
 	  margin-top: 10px;
 	  margin-right: 15px;
 	  color: #777;
-	  font-size: 15px;
+	  font-size: 20px;
 	}
 	.img{
 		width: 90%;
@@ -43,7 +47,7 @@
     #blog-listing-big .date-comments a, #blog-listing-medium .date-comments_1 a {
 		color: #999;
 		margin-left: 25px;
-		font-size: 20px;
+		font-size: 25px;
 		display: inline-block;
 	}
 	.title{
@@ -53,7 +57,7 @@
   		margin-bottom: 30px;
 	}
 	.nav-pills .nav-link {
-    border-radius: 8px;
+    	border-radius: 8px;
 	}
 	.a{
 		background-color: #e2eae1db;
