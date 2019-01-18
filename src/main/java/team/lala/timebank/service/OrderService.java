@@ -1,6 +1,7 @@
 package team.lala.timebank.service;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -112,10 +113,16 @@ public class OrderService {
 			order.setOrderStatus(OrderStatus.ServiceFinishPayMatchSuccess);
 			orderDao.save(order);
 			//付款計數器++
-			Mission mission=order.getMission();
+			Mission mission = order.getMission();
 			mission.setPayedQuantity(mission.getPayedQuantity()+1);
 			missionDao.save(mission);
-			
+			List<Order> successOrders = orderDao.findByMissionAndOrderStatus(mission, OrderStatus.ServiceFinishPayMatchSuccess);
+			if (successOrders.size() == mission.getApprovedQuantity().intValue()) {
+				mission.getMember().setBalanceValue(mission.getMember().getBalanceValue() + mission.getTimeValue());
+				mission.setMissionstatus(MissionStatus.C_Finish);
+				mission.setFinishDate(new Date());
+				missionDao.save(mission);
+			}
 			return penalty;
 		}
 		
