@@ -33,8 +33,9 @@ public class MyCollectionController {
 
 		AjaxResponse<MyCollection> response = new AjaxResponse<MyCollection>();
 		try {
-			if(myCollectionService.findByMyCollectionTypeAndMemberAccount(MyCollectionType.MISSION, principal, missionId)==null) {
-			myCollectionService.insert(MyCollectionType.MISSION, missionId, principal);
+			if (myCollectionService.findByMyCollectionTypeAndMemberAccount(MyCollectionType.MISSION, principal,
+					missionId) == null) {
+				myCollectionService.insert(MyCollectionType.MISSION, missionId, principal);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,15 +58,16 @@ public class MyCollectionController {
 		}
 		return response;
 	}
-	
+
 	@RequestMapping("/insertOrganization")
 	@ResponseBody
 	public AjaxResponse<MyCollection> insertOrganization(Principal principal, @RequestParam("id") Long memberId) {
 
 		AjaxResponse<MyCollection> response = new AjaxResponse<MyCollection>();
 		try {
-			if(myCollectionService.findByMyCollectionTypeAndMemberAccount(MyCollectionType.ORGANIZATION, principal, memberId)==null) {
-			myCollectionService.insert(MyCollectionType.ORGANIZATION, memberId, principal);
+			if (myCollectionService.findByMyCollectionTypeAndMemberAccount(MyCollectionType.ORGANIZATION, principal,
+					memberId) == null) {
+				myCollectionService.insert(MyCollectionType.ORGANIZATION, memberId, principal);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -88,15 +90,18 @@ public class MyCollectionController {
 		}
 		return response;
 	}
-	
+
 	@RequestMapping("/insertInternationalVolunteer")
 	@ResponseBody
-	public AjaxResponse<MyCollection> insertInternationalVolunteer(Principal principal, @RequestParam("id") Long internationalVolunteerId) {
+	public AjaxResponse<MyCollection> insertInternationalVolunteer(Principal principal,
+			@RequestParam("id") Long internationalVolunteerId) {
 
 		AjaxResponse<MyCollection> response = new AjaxResponse<MyCollection>();
 		try {
-			if(myCollectionService.findByMyCollectionTypeAndMemberAccount(MyCollectionType.INTERNATIONALVOLUNTEER, principal, internationalVolunteerId)==null) {
-			myCollectionService.insert(MyCollectionType.INTERNATIONALVOLUNTEER, internationalVolunteerId, principal);
+			if (myCollectionService.findByMyCollectionTypeAndMemberAccount(MyCollectionType.INTERNATIONALVOLUNTEER,
+					principal, internationalVolunteerId) == null) {
+				myCollectionService.insert(MyCollectionType.INTERNATIONALVOLUNTEER, internationalVolunteerId,
+						principal);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -107,16 +112,24 @@ public class MyCollectionController {
 
 	@RequestMapping("/cancelInternationalVolunteer")
 	@ResponseBody
-	public AjaxResponse<MyCollection> cancelInternationalVolunteer(Principal principal, @RequestParam("id") Long internationalVolunteerId) {
+	public AjaxResponse<MyCollection> cancelInternationalVolunteer(Principal principal,
+			@RequestParam("id") Long internationalVolunteerId) {
 
 		AjaxResponse<MyCollection> response = new AjaxResponse<MyCollection>();
 		try {
 
-			myCollectionService.deleteByMemberAndMyCollectionType(MyCollectionType.INTERNATIONALVOLUNTEER, internationalVolunteerId, principal);
+			myCollectionService.deleteByMemberAndMyCollectionType(MyCollectionType.INTERNATIONALVOLUNTEER,
+					internationalVolunteerId, principal);
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.addMessage("移除最愛失敗");
 		}
 		return response;
+	}
+
+	@RequestMapping("/list")
+	public String listPage() {
+
+		return "/user/MyCollection/myCollection";
 	}
 }
