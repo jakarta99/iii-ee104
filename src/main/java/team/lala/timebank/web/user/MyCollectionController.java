@@ -21,6 +21,7 @@ import team.lala.timebank.entity.MyCollection;
 import team.lala.timebank.entity.Order;
 import team.lala.timebank.enums.MyCollectionType;
 import team.lala.timebank.service.MemberService;
+import team.lala.timebank.service.MissionService;
 import team.lala.timebank.service.MyCollectionService;
 
 @Slf4j
@@ -34,6 +35,9 @@ public class MyCollectionController {
 	@Autowired
 	public MemberService memberService;
 
+	@Autowired
+	public MissionService missionService;
+
 	@RequestMapping("/insertMission")
 	@ResponseBody
 	public AjaxResponse<MyCollection> insertMission(Principal principal, @RequestParam("id") Long missionId) {
@@ -42,7 +46,9 @@ public class MyCollectionController {
 		try {
 			if (myCollectionService.findByMyCollectionTypeAndMemberAccount(MyCollectionType.MISSION, principal,
 					missionId) == null) {
-				myCollectionService.insert(MyCollectionType.MISSION, missionId, principal);
+				Mission mission = missionService.getOne(missionId);
+				myCollectionService.insert(MyCollectionType.MISSION, missionId, mission.getTitle(), null,
+						mission.getMissionPicName(), principal);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,7 +80,11 @@ public class MyCollectionController {
 		try {
 			if (myCollectionService.findByMyCollectionTypeAndMemberAccount(MyCollectionType.ORGANIZATION, principal,
 					memberId) == null) {
-				myCollectionService.insert(MyCollectionType.ORGANIZATION, memberId, principal);
+				Member Organization = memberService.getOne(memberId);
+				// myCollectionService.insert(MyCollectionType.ORGANIZATION, memberId,
+				// principal);
+				myCollectionService.insert(MyCollectionType.ORGANIZATION, memberId, Organization.getName(),
+						Organization.getOrgWebsiteLink(), Organization.getPicture(), principal);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,46 +108,50 @@ public class MyCollectionController {
 		return response;
 	}
 
-	@RequestMapping("/insertInternationalVolunteer")
-	@ResponseBody
-	public AjaxResponse<MyCollection> insertInternationalVolunteer(Principal principal,
-			@RequestParam("id") Long internationalVolunteerId) {
-
-		AjaxResponse<MyCollection> response = new AjaxResponse<MyCollection>();
-		try {
-			if (myCollectionService.findByMyCollectionTypeAndMemberAccount(MyCollectionType.INTERNATIONALVOLUNTEER,
-					principal, internationalVolunteerId) == null) {
-				myCollectionService.insert(MyCollectionType.INTERNATIONALVOLUNTEER, internationalVolunteerId,
-						principal);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			response.addMessage("加入最愛失敗");
-		}
-		return response;
-	}
-
-	@RequestMapping("/cancelInternationalVolunteer")
-	@ResponseBody
-	public AjaxResponse<MyCollection> cancelInternationalVolunteer(Principal principal,
-			@RequestParam("id") Long internationalVolunteerId) {
-
-		AjaxResponse<MyCollection> response = new AjaxResponse<MyCollection>();
-		try {
-
-			myCollectionService.deleteByMemberAndMyCollectionType(MyCollectionType.INTERNATIONALVOLUNTEER,
-					internationalVolunteerId, principal);
-		} catch (Exception e) {
-			e.printStackTrace();
-			response.addMessage("移除最愛失敗");
-		}
-		return response;
-	}
+	// @RequestMapping("/insertInternationalVolunteer")
+	// @ResponseBody
+	// public AjaxResponse<MyCollection> insertInternationalVolunteer(Principal
+	// principal,
+	// @RequestParam("id") Long internationalVolunteerId) {
+	//
+	// AjaxResponse<MyCollection> response = new AjaxResponse<MyCollection>();
+	// try {
+	// if
+	// (myCollectionService.findByMyCollectionTypeAndMemberAccount(MyCollectionType.INTERNATIONALVOLUNTEER,
+	// principal, internationalVolunteerId) == null) {
+	// myCollectionService.insert(MyCollectionType.INTERNATIONALVOLUNTEER,
+	// internationalVolunteerId,
+	// principal);
+	// }
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// response.addMessage("加入最愛失敗");
+	// }
+	// return response;
+	// }
+	//
+	// @RequestMapping("/cancelInternationalVolunteer")
+	// @ResponseBody
+	// public AjaxResponse<MyCollection> cancelInternationalVolunteer(Principal
+	// principal,
+	// @RequestParam("id") Long internationalVolunteerId) {
+	//
+	// AjaxResponse<MyCollection> response = new AjaxResponse<MyCollection>();
+	// try {
+	//
+	// myCollectionService.deleteByMemberAndMyCollectionType(MyCollectionType.INTERNATIONALVOLUNTEER,
+	// internationalVolunteerId, principal);
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// response.addMessage("移除最愛失敗");
+	// }
+	// return response;
+	// }
 
 	@RequestMapping("/list")
 	public String listPage() {
 
-		return "/user/MyCollection/myCollection";
+		return "/basic/user/MyCollection/myCollection";
 	}
 
 	@RequestMapping("/query")
