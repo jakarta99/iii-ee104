@@ -169,7 +169,9 @@
                 </div>
 	        	<div class="col-md-12 text-center">
 					<button type="button" class="btn btn-template-outlined" id="edit"><i class="fas fa-edit"></i>編輯</button>
-					<input type="button" class="btn btn-template-outlined" id="changePassword" value="修改密碼" class="form-control"/>
+					<c:if test="${member.oauth2Id eq null }">
+						<input type="button" class="btn btn-template-outlined" id="changePassword" value="修改密碼" class="form-control"/>
+					</c:if>
 				</div>
 			</article>
 		</div>
