@@ -392,9 +392,8 @@
 		}
 	
 	function startToChat(){
-		
-// 		setSendToObject('${mission.member.account}', '${mission.member.name}');
-		connect('${mission.member.account}', '${mission.member.name}');		
+		createChatBox('${mission.member.account}', '${mission.member.name}');		
+	
 	}
 		
 	$(document).ready(function() {

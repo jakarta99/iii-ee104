@@ -12,7 +12,7 @@
 //3.接收訊息並顯示showMessageOutput()
 function sendMessage(toAccount,readStatus) {	
 	if (toAccount != '${userAccount}'){	
-		var text= $('#text').val();	
+		var text= $('#text'+toAccount).val();	
 		var readAlready = readStatus;
 // 		console.log("text="+text+", readAlready="+readStatus);		
 		//#response加入新發出的訊息
@@ -37,7 +37,7 @@ function sendMessage(toAccount,readStatus) {
 	}	
 }
 		
-function showMessageOutput(chatMessage,toMemberPic, changeMemberBoxText) {	
+function showMessageOutput(chatMessage, changeMemberBoxText) {	
 	console.log(chatMessage)
 	var fromAccount = chatMessage.fromAccount;
 	console.log("fromAccount="+fromAccount)
@@ -45,17 +45,21 @@ function showMessageOutput(chatMessage,toMemberPic, changeMemberBoxText) {
 		$("#readAlready"+fromAccount).remove();
 		$('#response'+fromAccount).append($("<p class='p1-from readAlready' id='readAlready'"+fromAccount+"' ><img src='/img/success.png' /></p>"));	 
 	} else {
+		var toMemberPic = $('#response'+fromAccount+" .p1-to>img").get(0).src;
+		console.log("toMemberPic")
+		console.log(toMemberPic)
 		var m = new Date(chatMessage.time);
 		var dateTime = m.getHours() + ":" + m.getUTCMinutes();		
 	 	var p = $("<p></p>");
 	 	$(p).css("wordWrap","break-word");
-	 	var toImg = "<img src='/image/user/member/"+ toMemberPic +"' class='userImg' />";
+	 	var toImg = "<img src='"+ toMemberPic +"' class='userImg' />";
 	 	var msgSpan = "<p class='msgSpan'>"+chatMessage.text+"</p>";
 	 	var dateTimeSpan ="<p class='dateTimeSpan'>"+dateTime+"</p>"; 	 ;
 	 	$(p).addClass("p1-to");
 	 	$(p).append(toImg + msgSpan + dateTimeSpan);
 		$('#response'+fromAccount).append(p);    	
 	}
+	$('#box'+fromAccount).animate({ scrollTop: $("#response"+fromAccount).height() }, 1);
 	    	 	
 	//此頁面若是所有訊息頁面須隨時改變MemberBox順序
 // 	if (changeMemberBoxText=="Y"){

@@ -45,7 +45,8 @@ public class ChatMessageController {
 			if (chatList.size() >0) {
 				 ChatMessage lastChatMessage = chatList.get(chatList.size() -1);	
 				if ("Y".equals(lastChatMessage.getReadAlready())) {
-					log.debug("chatMessage return={}",chatMessage);		
+					log.debug("chatMessage return={}",chatMessage);	
+					chatMessage.setTime(new Date());
 					chatMessageService.sendChatMessageToSingleUser(chatMessage);
 				}					
 			}			

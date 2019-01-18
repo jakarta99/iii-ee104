@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.chatbox{
+.chattingBox{
 	width: 290px;
 	position:fixed;
 	bottom: 2px;
@@ -102,5 +102,6 @@
 	background-color:#10a9a5;
 }
 .text{
+	width:75%;
 	border-radius: 3px;
 }	
