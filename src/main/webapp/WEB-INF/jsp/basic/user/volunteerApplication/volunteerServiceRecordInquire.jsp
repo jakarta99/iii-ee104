@@ -65,11 +65,10 @@
 	.a{
 		background-color: #e2eae1db;
 	}
-	.box{
+	.box1{
 		margin: 15px;
-	}
-	.boxH{
-		height: 100%;
+		border-bottom: 1px solid #ddd;
+		padding: 20px;
 	}
 	.county,.district {
 		padding: 0.375rem 0.75rem;
@@ -167,7 +166,6 @@
 	}
 	.container1{
 		margin-left:  380px;
-		height: 100%;
 	}
 	.panel-title{
 		margin-top: 20px;
@@ -179,6 +177,7 @@
 	    background: #e2eae1db;
 	    z-index: 10;
 	    margin-top: 30px;
+	    height: 18cm;
 	}
 	.search_item {
 	    margin-bottom: 23px;
@@ -203,7 +202,7 @@
 	    margin-bottom: 14px;
 	}
     </style>
-    
+
 </head>
 <body>
 	<!-- Top bar-->
@@ -219,7 +218,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="content" style="height: 18cm;">
+	<div id="content">
 	<div class="col-md-3 search">
 	<div class="panel panel-default sidebar-menu">
 		<div class="panel-heading">
@@ -367,7 +366,7 @@
         		$("#boxbox").append(box);
         	} else {
 	        	$.each(orders.content, function(index, order){
-	        	   var box="<section><div class='row box'><div class='col-md-4 boxH'>"
+	        	   var box="<section><div class='row box1'><div class='col-md-4'>"
         		   box+="<div class='video'>"
         		   box+="<div class='embed-responsive embed-responsive-4by3'>"	        	
         		   box+=" <a href='/user/volunteerRecruitment/detail?id="+ order.mission.id +"'><img src=/image/user/mission/"+order.mission.missionPicName+" class='embed-responsive-item img'></img></a>"     
