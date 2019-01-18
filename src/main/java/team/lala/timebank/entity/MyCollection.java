@@ -1,6 +1,5 @@
 package team.lala.timebank.entity;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -29,34 +28,40 @@ public class MyCollection {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	//收藏者
+
+	// 收藏者
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_ID", referencedColumnName = "id")
 	private Member member;
-//	
-//	//收藏的mission
-//	@ManyToOne(fetch=FetchType.LAZY)
-//	@JoinColumn(name = "MISSION_ID", referencedColumnName = "id")
-//	private Mission mission;
-//	
-//	//收藏的機構
-//	@ManyToOne
-//	@JoinColumn(name = "ORGANIZATION_ID", referencedColumnName = "id")
-//	private Member organization;
-	
-	//收藏的國際志工
-//	@ManyToOne
-//	@JoinColumn(name = "INTERNATIONALVOLUNTEER_ID", referencedColumnName = "id")
-//	private InternationalVolunteer internationalVolunteer;
-	
-	//分辨收藏哪一種方便查詢
+	//
+	// //收藏的mission
+	// @ManyToOne(fetch=FetchType.LAZY)
+	// @JoinColumn(name = "MISSION_ID", referencedColumnName = "id")
+	// private Mission mission;
+	//
+	// //收藏的機構
+	// @ManyToOne
+	// @JoinColumn(name = "ORGANIZATION_ID", referencedColumnName = "id")
+	// private Member organization;
+
+	// 收藏的國際志工
+	// @ManyToOne
+	// @JoinColumn(name = "INTERNATIONALVOLUNTEER_ID", referencedColumnName = "id")
+	// private InternationalVolunteer internationalVolunteer;
+
+	// 分辨收藏哪一種方便查詢
 	@Enumerated(EnumType.STRING)
 	@Column(name = "MYCOLLECTION_TYPE", nullable = false)
 	private MyCollectionType myCollectionType;
-	
+
 	@Column(name = "FAVORITEOBJECT_ID")
 	private Long favoriteObjectId;
-	
+
+	@Column(name = "FAVORITEOBJECT_TITLE")
+	private String favoriteObjectTitle;
+
+	@Column(name = "FAVORITEOBJECT_LINK")
+	private String favoriteObjectLink;
+
 }
