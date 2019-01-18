@@ -54,7 +54,7 @@ p.lead {
 }
 
 .tooltip {
-   font-family: 微軟正黑體 ;
+   font-family: 敺株�迤暺�� ;
 }
 
 .bs-select .dropdown-menu .dropdown-menu {
@@ -71,7 +71,7 @@ p.lead {
   font-size: .8rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-   font-family: 微軟正黑體 ;
+   font-family: 敺株�迤暺�� ;
   outline: none;
 }
 
@@ -1238,7 +1238,7 @@ color: rgba(100, 100, 100);
 }
 
 #blog-listing-big p.intro, #blog-listing-medium p.intro_1 {
-  margin-top: 10px;
+/*   margin-top: 10px; */
   color: #777;
   font-size: 24px;
 }
@@ -2001,7 +2001,7 @@ table tr td {
   right: 15px;
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
-  font-family: 微軟正黑體 ;
+  font-family: 敺株�迤暺�� ;
 }
 
 .panel-heading {
@@ -3108,7 +3108,7 @@ STYLE SWITCHER FOR DEMO
  * 3. TYPE  
  */
 body {
-   font-family: 微軟正黑體 ;
+   font-family: 敺株�迤暺�� ;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -3139,7 +3139,7 @@ h6,
 .h5,
 .h6 {
   margin-bottom: 1rem;
-   font-family: 微軟正黑體 ;
+   font-family: 敺株�迤暺�� ;
   font-weight: 700;
   line-height: 1.1;
   color: inherit;
@@ -3589,6 +3589,20 @@ a.text-dark:focus, a.text-dark:hover {
 .badge-danger {
   color: #fff;
   background-color: #dc3545;
+}
+
+.badge-danger_1 {
+ 
+  	margin: auto;
+    
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 30px;
+    font-size: 18px;
+    width: 200px;
+    color: #fff;
+    background-color: #dc3545;
 }
 
 .badge-danger_1 {

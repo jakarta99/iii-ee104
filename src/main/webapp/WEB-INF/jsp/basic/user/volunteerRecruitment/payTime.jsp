@@ -129,8 +129,8 @@
 <div class="modal-content">
     <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle">檢舉系統</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+        <span aria-hidden="true"  >&times;</span>
         </button>
     </div>
     <div class="modal-body">
@@ -139,7 +139,7 @@
             <h5>檢舉人名</h5>
             <p id="memberAccount"></p>
             <h5>檢舉原因</h5>
-            <textarea cols='40' rows='5' id='description' name='description'></textarea>
+            <textarea id="penaltyresult" cols='40' rows='5' id='description' name='description' ></textarea>
             <input type="file" id="proofPic" name="proofPic" accept="image/*">
             <p>請選擇圖檔，如無佐證資料，則直接送出審核</p>
         </form>
@@ -238,6 +238,13 @@
  			}); 	
 	}
 	
+// 	function clear(){
+// 		alert("111111111111")
+// 		$("#penaltyresult").val("");
+// 	}
+
+	
+	
 	
 	
 	function report() {
@@ -331,10 +338,10 @@
 	        			var value=$("#"+order.volunteer.id+" option:selected").val()
 	        			box+="<button class='btn btn-primary btn-lg_1' onclick=\"pay("+order.id+","+order.volunteer.id+",'"+order.volunteer.name+"')\">時數核發與評分</button>"
 	        			box+="<button class='btn btn-danger btn-lg_1' data-toggle='modal' data-target='#reportModalCenter' id='" + order.id + "' name='" + order.volunteer.name+ "'>檢舉 </button></div>"
-	        			}else if(order.orderStatus=='ServiceFinishPayMatchSuccess'){
+	        			}else if(order.orderStatus=='ServiceFinishPayMatchSuccess'&&order.reportStatus=='Null'){
 	        			box+="<span class='badge badge-success_1'>已付款與評分</span>"
-	        			}else if(order.orderStatus=='ServiceFinishNotPay'){
-	        			box+="<span class='badge badge-danger'>已檢舉</span>"	
+	        			}else if(order.reportStatus=='BothReport'||order.reportStatus=='RequesterReportVolunteer'){
+	        			box+="<span class='badge badge-danger_1'>已檢舉</span>"	
 	        			}else {
 	        			box+= "<p>不應該出現的狀態</p>";
 						}
@@ -384,6 +391,10 @@
 		$("#boxbox").on('click', "[data-target='#reportModalCenter']", function (event) {
 			$("#orderId").attr("value",event.target.id)
 			$("#memberAccount").html(event.target.name)
+		})
+		
+		$('#reportModalCenter').on('hide.bs.modal', function () {
+  			$("#penaltyresult").val("");
 		})
 	});
 </script>
