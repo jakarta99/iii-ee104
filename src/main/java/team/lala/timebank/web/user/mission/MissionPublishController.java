@@ -153,8 +153,13 @@ public class MissionPublishController {
 		MissionSpecification missionSpec = new MissionSpecification(inputMission);
 		List<Mission> missions = missionService.findBySpecification(missionSpec);
 		for(Mission mission : missions) {
+			if(mission.getMember().getBalanceValue() == null) {
+				mission.getMember().setBalanceValue(0);
+			}
 			//沒有人申請即取消
 			if(mission.getOrders().size() == 0) {
+				//加回原先MemberValue
+				mission.getMember().setBalanceValue(mission.getMember().getBalanceValue() + mission.getTimeValue() * mission.getPeopleNeeded());
 				mission.setMissionstatus(MissionStatus.C_Cancel);
 				systemMessageService.missionCancel(mission);
 			}else {
@@ -164,6 +169,7 @@ public class MissionPublishController {
 				List<Order> acceptOrders = orderDao.findByMissionAndOrderStatus(mission, OrderStatus.RequesterAcceptService);
 				if(acceptOrders.size() == 0 ){
 					mission.setMissionstatus(MissionStatus.C_Cancel);
+					mission.getMember().setBalanceValue(mission.getMember().getBalanceValue() + (mission.getTimeValue() * mission.getPeopleNeeded()));
 					systemMessageService.missionCancel(acceptOrders);
 					systemMessageService.missionCancel(mission);
 				} else {
@@ -171,6 +177,8 @@ public class MissionPublishController {
 						order.setOrderStatus(OrderStatus.ServiceFinishNotPay);
 					}
 					orderDao.saveAll(acceptOrders);
+					log.debug("setValue={}",mission.getMember().getBalanceValue() + (mission.getTimeValue() * mission.getPeopleNeeded()));
+					mission.getMember().setBalanceValue(mission.getMember().getBalanceValue() + (mission.getTimeValue() * mission.getPeopleNeeded()));
 					mission.setMissionstatus(MissionStatus.B_AccountsPayable);
 				}
 				if(cancelOrders.size() != 0) {
