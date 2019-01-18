@@ -48,10 +48,11 @@ public class MyCollection {
 	@Column(name = "FAVORITEOBJECT_TITLE")
 	private String favoriteObjectTitle;
 	
-	//收藏東西的連結
+	//收藏東西的超連結
 	@Column(name = "FAVORITEOBJECT_LINK")
 	private String favoriteObjectLink;
 	
+	//收藏東西的圖片連結
 	@Column(name = "FAVORITEOBJECT_PICNAME")
 	private String favoriteObjectPicName;
 

@@ -151,7 +151,7 @@ public class MyCollectionController {
 	@RequestMapping("/list")
 	public String listPage() {
 
-		return "/user/MyCollection/myCollection";
+		return "/basic/user/MyCollection/myCollection";
 	}
 
 	@RequestMapping("/query")
