@@ -199,8 +199,8 @@ public class CommonsSignUpController {
 		try {
 			Member memberResult = memberService.storeMemberPic(picture, member, request);
 //			mailService.sendSimpleMail(memberResult);
-			mailService.sendHtmlMail(memberResult);
-//			mailService.sendInlineResourceMail(memberResult);
+//			mailService.sendHtmlMail(memberResult);
+			mailService.sendInlineResourceMail(memberResult);
 			log.debug("-----newMember.getId()={}", memberResult.getId());
 			ajaxResponse.setObj(memberResult);
 //			session.invalidate();	//清掉session
