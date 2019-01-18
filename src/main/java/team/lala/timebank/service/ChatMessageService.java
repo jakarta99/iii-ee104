@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +15,6 @@ import team.lala.timebank.dao.ChatMessageDao;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.entity.ChatMessage;
 import team.lala.timebank.entity.Member;
-import team.lala.timebank.enums.YesNo;
 
 @Slf4j
 @Service
@@ -30,6 +30,16 @@ public class ChatMessageService {
 	@Autowired
 	protected EntityManager em;
 	
+	@Autowired
+	private SimpMessagingTemplate template;
+
+	public void sendChatMessageToSingleUser(ChatMessage message) {
+	   //可以看出template最大的灵活就是我们可以获取前端传来的参数来指定订阅地址
+	   //前面参数是订阅地址，后面参数是消息信息
+	   template.convertAndSend("/topic/chat/single/"+message.getToAccount(),message);
+	}
+
+	 
 	@Transactional(readOnly=true)
 	public List<ChatMessage> findChatMessagesBetweenFromAndTo(ChatMessage chatMessage){
 		return chatMessageDao.findChatMessagesBetweenTwoAccounts

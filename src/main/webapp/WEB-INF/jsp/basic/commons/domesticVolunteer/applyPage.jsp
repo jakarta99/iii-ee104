@@ -397,10 +397,9 @@
 		}
 	
 	function startToChat(){
-		$("#toAccount").text('${mission.member.account}');
-		$("#toName").text('${mission.member.name}');
-		to = $("#toAccount").text();
-		chat();		
+		
+// 		setSendToObject('${mission.member.account}', '${mission.member.name}');
+		connect('${mission.member.account}', '${mission.member.name}');		
 	}
 		
 	$(document).ready(function() {
