@@ -3,10 +3,13 @@ package team.lala.timebank.service;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -90,5 +93,11 @@ public class MyCollectionService {
 				this.deleteById(myCollect.getId());
 			}
 		}
+	}
+	
+	public Page<MyCollection> findByMember(Principal principal,Integer page,Optional<Integer> length) {
+		Sort sort = new Sort(Sort.Direction.DESC, "id");
+		Page<MyCollection> myCollections = myCollectionDao.findByMember(memberDao.findByAccount(principal.getName()), PageRequest.of(page, length.orElse(10),sort));
+		return myCollections;
 	}
 }

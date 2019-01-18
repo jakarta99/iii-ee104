@@ -2,6 +2,8 @@ package team.lala.timebank.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -17,5 +19,7 @@ public interface MyCollectionDao extends JpaRepository<MyCollection, Long>, JpaS
 
 	public MyCollection findByMyCollectionTypeAndMemberAndFavoriteObjectId(MyCollectionType myCollectionType,
 			Member member, Long favoriteObjectId);
+	
+	public Page<MyCollection> findByMember(Member member,Pageable pageable);
 
 }
