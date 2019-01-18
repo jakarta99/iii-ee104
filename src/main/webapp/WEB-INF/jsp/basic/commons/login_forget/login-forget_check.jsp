@@ -24,6 +24,9 @@
 	.padding-horizontal {
 	    padding: 5px 0px 10px 0px !important;
 	}
+	.box {
+	    margin: 30px 0;
+	}
 </style>
 
 </head>
@@ -48,7 +51,7 @@
         	</div>
         </div>
     </div>
-	<section class="bar">
+	<section>
 	<div class="container">
     	<div class="row">
           	<div class="col-lg-6" style="margin:auto">
@@ -67,7 +70,7 @@
 										<div class="row">
 				                    		<div class="col-md-12">
 				                      			<div class="form-group">
-													<label for="idAccount">帳號:</label>
+													<label for="idAccount">帳號</label>
 													<input type="text" value="${param.account}" id="idAccount" placeholder="請輸入帳號" name="account" autofocus autocompelete="off" class="form-control">
 													<span id="idspAccount" style='color:red'></span>
 												</div>
@@ -80,7 +83,7 @@
 												<c:when test="${memberType eq 'P'}">
 													<div class="col-md-12">
 				                      					<div class="form-group">
-															<label for="idCertificateIdNumber">身分證字號:</label>
+															<label for="idCertificateIdNumber">身分證字號</label>
 															<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" placeholder="請輸入您的身分證字號" name="certificateIdNumber" autofocus class="form-control">
 															<span id="idspCertificateIdNumber" style='color:red'></span>
 														</div>
@@ -89,7 +92,7 @@
 												<c:when test="${memberType eq 'O'}">
 													<div class="col-md-12">
 				                      					<div class="form-group">
-															<label for="idCertificateIdNumber">統一編號:</label> 
+															<label for="idCertificateIdNumber">統一編號</label> 
 															<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" placeholder="請輸入帳戶的統一編號" name="certificateIdNumber" autofocus class="form-control">
 															<span id="idspCertificateIdNumber" style='color:red'></span>
 														</div>

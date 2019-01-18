@@ -33,6 +33,9 @@
 		border-radius: 0.25rem;
 		transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	} 
+	.box {
+	    margin: 30px 0;
+	}
 </style>
 
 </head>
@@ -56,7 +59,7 @@
         	</div>
         </div>
     </div>
-	<section class="bar">
+	<section>
 	<div class="container">
     	<div class="row">
     		<div class="col-lg-6" style="margin:auto">
@@ -79,7 +82,7 @@
 								<div class="row">
 		                    		<div class="col-md-12">
 		                      			<div class="form-group">
-											<label for="idPasswordNew">新密碼:</label>
+											<label for="idPasswordNew">新密碼</label>
 											<input type="password" value="" id="idPasswordNew" placeholder="請輸入新密碼" name="passwordNew" autofocus autocompelete="off" class="form-control">
 											<div><label>(1.不可空白，2.至少8個字最多16個字，3.必須包含字母、數字、特殊符號[~!@#$%^&*])</label></div>
 											<span id="idspPasswordNew" style='color:red'></span>
@@ -87,7 +90,7 @@
 									</div>
 									<div class="col-md-12">
 		                      			<div class="form-group">
-											<label for="idPasswordCheck">確認新密碼:</label>
+											<label for="idPasswordCheck">確認新密碼</label>
 											<input type="password" value="" id="idPasswordCheck" placeholder="請再輸入一次新密碼" name="passwordCheck" autofocus autocompelete="off" class="form-control">
 											<div><label>(1.不可空白，2.須與密碼相同)</label></div>
 											<span id="idspPasswordCheck" style='color:red'></span>
