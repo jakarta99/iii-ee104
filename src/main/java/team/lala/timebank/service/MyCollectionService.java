@@ -37,8 +37,8 @@ public class MyCollectionService {
 	@Autowired
 	private MissionDao missionDao;
 
-	@Autowired
-	private InternationalVolunteerDao internationalVolunteerDao;
+	// @Autowired
+	// private InternationalVolunteerDao internationalVolunteerDao;
 
 	public MyCollection save(MyCollection m) {
 		MyCollection myCollection = myCollectionDao.save(m);
@@ -73,14 +73,15 @@ public class MyCollectionService {
 		myCollectionDao.deleteById(id);
 	}
 
-	public MyCollection insert(MyCollectionType myCollectionType, Long favoriteObjectId, Principal principal) {
+	public MyCollection insert(MyCollectionType myCollectionType, Long favoriteObjectId, String favoriteObjectTitle,
+			String favoriteObjectLink,String favoriteObjectPicName, Principal principal) {
 		MyCollection myCollection = new MyCollection();
 		myCollection.setMember(memberDao.findByAccount(principal.getName()));
 		myCollection.setFavoriteObjectId(favoriteObjectId);
-		// myCollection.setOrganization(memberDao.getOne(organizationId));
+		myCollection.setFavoriteObjectLink(favoriteObjectLink);
 		myCollection.setMyCollectionType(myCollectionType);
-		// myCollection.setInternationalVolunteer(null);
-		// myCollection.setMission(null);
+		myCollection.setFavoriteObjectTitle(favoriteObjectTitle);
+		myCollection.setFavoriteObjectPicName(favoriteObjectPicName);
 		return myCollectionDao.save(myCollection);
 	}
 
@@ -94,10 +95,11 @@ public class MyCollectionService {
 			}
 		}
 	}
-	
-	public Page<MyCollection> findByMember(Principal principal,Integer page,Optional<Integer> length) {
+
+	public Page<MyCollection> findByMember(Principal principal, Integer page, Optional<Integer> length) {
 		Sort sort = new Sort(Sort.Direction.DESC, "id");
-		Page<MyCollection> myCollections = myCollectionDao.findByMember(memberDao.findByAccount(principal.getName()), PageRequest.of(page, length.orElse(10),sort));
+		Page<MyCollection> myCollections = myCollectionDao.findByMember(memberDao.findByAccount(principal.getName()),
+				PageRequest.of(page, length.orElse(10), sort));
 		return myCollections;
 	}
 }

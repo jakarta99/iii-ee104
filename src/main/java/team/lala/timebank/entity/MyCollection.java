@@ -63,5 +63,8 @@ public class MyCollection {
 
 	@Column(name = "FAVORITEOBJECT_LINK")
 	private String favoriteObjectLink;
+	
+	@Column(name = "FAVORITEOBJECT_PICNAME")
+	private String favoriteObjectPicName;
 
 }
