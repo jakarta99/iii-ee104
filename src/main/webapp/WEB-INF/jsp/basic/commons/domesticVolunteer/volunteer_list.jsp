@@ -131,21 +131,33 @@
  	
 	  <!-- Navbar -->
       <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-       <div id="heading-breadcrumbs" class="border-top-0 border-bottom-0">
-        <div class="container">
-          <div class="row d-flex align-items-center flex-wrap">
-            <div class="col-md-7">
-              <h1 class="h2">志工招募</h1>
-            </div>
-            <div class="col-md-5">
-              <ul class="breadcrumb d-flex justify-content-end">
-                <li class="breadcrumb-item"><a href="/">首頁</a></li>
-                <li class="breadcrumb-item active">志工招募</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+      <section style="background: url('/banner/1607281720180.jpg') center center repeat;padding:12rem 0" class="bar background-white relative-positioned">
+		<div class="dark-mask "></div>
+	    <div class="container">
+	         <div class="row d-flex align-items-center flex-wrap">
+	             <h1 class="h2"  style="margin:auto;">志工招募</h1>
+	             <div>
+	                <div class="breadcrumb-item"><a href="/">首頁</a></div>
+	                <div class="breadcrumb-item active">志工招募</div>
+				</div>
+	         </div>
+	     </div>
+	   </section> 
+<!--        <div id="heading-breadcrumbs" class="border-top-0 border-bottom-0"> -->
+<!--         <div class="container"> -->
+<!--           <div class="row d-flex align-items-center flex-wrap"> -->
+<!--             <div class="col-md-7"> -->
+<!--               <h1 class="h2">志工招募</h1> -->
+<!--             </div> -->
+<!--             <div class="col-md-5"> -->
+<!--               <ul class="breadcrumb d-flex justify-content-end"> -->
+<!--                 <li class="breadcrumb-item"><a href="/">首頁</a></li> -->
+<!--                 <li class="breadcrumb-item active">志工招募</li> -->
+<!--               </ul> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--       </div> -->
       <div id="content">
         <div class="container">
        

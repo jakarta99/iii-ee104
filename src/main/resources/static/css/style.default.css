@@ -245,10 +245,11 @@ p.lead {
 }
 
 .background-pentagon, #heading-breadcrumbs {
-  background: url("../img/texture-bw.png") center center repeat;
+  background: url("../banner/1607281719580.jpg") center center repeat;
 /*   background: url("../img/texture-bw.png") center  no-repeat; */
   border-top: 1px solid #999;
   border-bottom: 1px solid #999;
+  padding:10rem 0;
   
 }
 
@@ -378,7 +379,7 @@ p.lead {
 }
 
 .dark-mask {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.15);
   width: 100%;
   height: 100%;
   position: absolute;

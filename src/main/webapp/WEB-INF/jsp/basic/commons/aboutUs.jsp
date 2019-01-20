@@ -9,12 +9,6 @@
 <jsp:include page="commons_layout/commons_css_links.jsp" />
 <!-- Javascript files-->
 <jsp:include page="commons_layout/commons_js_links.jsp" />
-<script>
-$(document).ready( function () {	
-	$("#heading-breadcrumbs>div>div>div.col-md-7>h1").text("關於TimeBank");	
-})	
-
-</script>
 
 </head>
 <body>
@@ -23,7 +17,14 @@ $(document).ready( function () {
 	<!-- Navbar -->
 	<jsp:include page="commons_layout/commons_nav.jsp" />
 	<!-- heading-breadcrumbs -->
-	<jsp:include page="commons_layout/commons_heading_breadcrumbs.jsp" />
+	<section style="background: url('/banner/1607281719580.jpg') center center repeat;padding:12rem 0" class="bar background-white relative-positioned">
+		<div class="dark-mask "></div>
+       	<div class="container">
+         <div class="row d-flex align-items-center flex-wrap">
+             <h1 class="h2"  style="margin:auto;">關於TimeBank</h1>
+         </div>
+       </div>
+    </section> 
 	
 	<div id="all">
 		<div id="content">

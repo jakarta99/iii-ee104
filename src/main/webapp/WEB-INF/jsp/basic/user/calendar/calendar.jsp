@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -92,15 +92,18 @@ li{
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp" />
 	<!-- Nav bar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />
-  	<div id="heading-breadcrumbs">
-       <div class="container">
+	
+	
+  	<section style="background: url('/banner/1607281720360.jpg') center center repeat;padding:12rem 0" class="bar background-white relative-positioned">
+		<div class="dark-mask "></div>
+       	<div class="container">
          <div class="row d-flex align-items-center flex-wrap">
            <div class="col-md-7">
              <h1 class="h2">行事曆</h1>
            </div>
          </div>
        </div>
-     </div>
+    </section> 
     <section class="bar">
 	    <div class="container" style="padding:50px; background:rgba(201,255,248,0.5)">
     	<ul>

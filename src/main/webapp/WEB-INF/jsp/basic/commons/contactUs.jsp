@@ -22,10 +22,6 @@
 
 
 <script>
-$(document).ready( function () {	
-	$("#heading-breadcrumbs>div>div>div.col-md-7>h1").text("聯絡我們");	
-})	
-
 
 function startToChat(){
 	createChatBox("royadmin1112","TimeBank時間銀行")	
@@ -39,7 +35,14 @@ function startToChat(){
 	<!-- Navbar -->
 	<jsp:include page="commons_layout/commons_nav.jsp" />
 	<!-- heading-breadcrumbs -->
-	<jsp:include page="commons_layout/commons_heading_breadcrumbs.jsp" />
+	<section style="background: url('/banner/1607281719580.jpg') center center repeat;padding:12rem 0" class="bar background-white relative-positioned">
+		<div class="dark-mask "></div>
+       	<div class="container">
+         <div class="row d-flex align-items-center flex-wrap">
+             <h1 class="h2"  style="margin:auto;">聯絡我們</h1>
+         </div>
+       </div>
+    </section> 
 	
 	<div class="all">
 		<div id="content">
