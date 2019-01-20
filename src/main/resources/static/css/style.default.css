@@ -245,8 +245,8 @@ p.lead {
 }
 
 .background-pentagon, #heading-breadcrumbs {
-/*   background: url("../img/texture-bw.png") center center repeat; */
-  background: url("../banner/bg3.png") center  no-repeat;
+  background: url("../img/texture-bw.png") center center repeat;
+/*   background: url("../img/texture-bw.png") center  no-repeat; */
   border-top: 1px solid #999;
   border-bottom: 1px solid #999;
   
@@ -333,7 +333,8 @@ p.lead {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 0;
-  padding: 175px 0px 0px 10px;
+  padding:10px 0px;
+/*   padding: 175px 0px 0px 10px; */
 }
 
 #heading-breadcrumbs li {

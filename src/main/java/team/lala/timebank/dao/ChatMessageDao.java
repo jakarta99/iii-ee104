@@ -32,7 +32,7 @@ public interface ChatMessageDao extends JpaRepository<ChatMessage, Long>, JpaSpe
 				"WHERE cmsg.FROM_ACCOUNT in ( ?1 , ?2 ) AND cmsg.TO_ACCOUNT in (?1 , ?2)", nativeQuery= true)
 		public List<ChatMessage> findChatMessagesBetweenTwoAccounts(String account1, String account2);
 
-		//更新兩個帳號間聊天訊息的已讀狀態
+		//更新兩個帳號間聊天訊息的已讀狀態(需判斷點擊窗口的人為誰)
 		@Modifying
 		@Query(value ="Update CHAT_MESSAGE SET READ_ALREADY=?3 " +
 				"WHERE TO_ACCOUNT=?1 AND FROM_ACCOUNT=?2 ", nativeQuery= true)

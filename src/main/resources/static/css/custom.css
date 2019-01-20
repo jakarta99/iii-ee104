@@ -19,7 +19,7 @@ body{
 
 header.nav-holder.sticky {
 	background-color:#fff;
-	color:gray;	
+/* 	color:gray;	 */
 	box-shadow: 3px 0 10px -4px #000;
 }
 .ml-auto, .mx-auto {
@@ -32,13 +32,13 @@ header.nav-holder.sticky {
 	font-size: 1em;
 }
 #navbar .navbar-nav > li > a:hover{
-	background-color:transparent;
-	border-color:transparent;
-	color:#13b5b1;
+/* 	background-color:transparent; */
+/* 	border-color:transparent; */
+/* 	color:#13b5b1; */
 }
 #navbar .navbar-nav > li > a:focus{
-	background-color:transparent !important;
-	border-color:transparent;
+/* 	background-color:transparent !important; */
+/* 	border-color:transparent; */
 /* 	color:#129c99; */
 }
 header.nav-holder.sticky navbar-nav > li > a{

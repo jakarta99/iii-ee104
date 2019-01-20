@@ -10,6 +10,27 @@
 //1.進行websocket連線 connect()，並向server訂閱subscribe():chattingBox.jsp
 //2.發送訊息send()
 //3.接收訊息並顯示showMessageOutput()
+
+function connect() {
+	if (!connected){		
+		//使用SockJS和stomp.js來打開"/gs-guide-websocket"地址的連接，這也是我們使用Spring構建的SockJS服務
+		var socket = new SockJS('/gs-guide-websocket'); // 創建連接對象（還未發起連接）
+		stompClient = Stomp.over(socket); // 獲取 STOMP 子協議的客户端對象
+		// 向服務器發起websocket連接併發送CONNECT
+		stompClient.connect({}, function(frame) { //連接成功時（服務器響應 CONNECTED）的回調方法
+			console.log('Connected: ' + frame);
+			//STOMP客户端必須先訂閲相應的URL，才能不斷接收來自服務器的推送消息
+			//訂閱後，只要服務端向此地址發送消息，客戶端即可收到此消息
+			stompClient.subscribe('/topic/chat/single/${userAccount}', function(messageOutput) {	
+				//收到消息時的回調方法
+				var chatMessage = JSON.parse(messageOutput.body);			
+				showMessageOutput(chatMessage);									 	
+			});
+		});	
+	}
+}
+
+
 function sendMessage(toAccount,readStatus) {	
 	if (toAccount != '${userAccount}'){	
 		var text= $('#text'+toAccount).val();	
@@ -33,73 +54,21 @@ function sendMessage(toAccount,readStatus) {
 			'text' : text,
 			'readAlready': readAlready
 		}));
-		$('.text').val("");
+		$('#text'+toAccount).val("");
 	}	
 }
 		
-function showMessageOutput(chatMessage, changeMemberBoxText) {	
-	console.log(chatMessage)
-	var fromAccount = chatMessage.fromAccount;
-	console.log("fromAccount="+fromAccount)
-	if (chatMessage.readAlready == "Y"){
-		$("#readAlready"+fromAccount).remove();
-		$('#response'+fromAccount).append($("<p class='p1-from readAlready' id='readAlready'"+fromAccount+"' ><img src='/img/success.png' /></p>"));	 
-	} else {
-		var toMemberPic = $('#response'+fromAccount+" .p1-to>img").get(0).src;
-		console.log("toMemberPic")
-		console.log(toMemberPic)
-		var m = new Date(chatMessage.time);
-		var dateTime = m.getHours() + ":" + m.getUTCMinutes();		
-	 	var p = $("<p></p>");
-	 	$(p).css("wordWrap","break-word");
-	 	var toImg = "<img src='"+ toMemberPic +"' class='userImg' />";
-	 	var msgSpan = "<p class='msgSpan'>"+chatMessage.text+"</p>";
-	 	var dateTimeSpan ="<p class='dateTimeSpan'>"+dateTime+"</p>"; 	 ;
-	 	$(p).addClass("p1-to");
-	 	$(p).append(toImg + msgSpan + dateTimeSpan);
-		$('#response'+fromAccount).append(p);    	
-	}
-	$('#box'+fromAccount).animate({ scrollTop: $("#response"+fromAccount).height() }, 1);
-	    	 	
-	//此頁面若是所有訊息頁面須隨時改變MemberBox順序
-// 	if (changeMemberBoxText=="Y"){
-//  		$('#box-chatPage').animate({ scrollTop: $("#response").height() }, 1);    
-//  		if (to != $("#chatterName").text()){			
-// 			var chatMemberBoxMember = $("#chatMemberBox"+to).get(0);
-// 			console.log(chatMemberBoxMember);
-// 			$(chatMemberBoxMember).remove();
-// 			$( ".item2-2" ).prepend(chatMemberBoxMember);
-// 			$("#chatMemberBox"+to+">div.chat-info > div:nth-child(3)").text(chatMessage.text);
-// 			$("#chatMemberBox"+to+">div.chat-info > div:nth-child(2)").text(m.format("yyyy-MM-dd"));		 	
-// 		}		
-//  	} else{
-//  		$('#box').animate({ scrollTop: $("#response").height() }, 1);
-//  	}	
-}
 
 
 function disconnect(toAccount) {
 	if (stompClient != null) {
-// 		stompClient.disconnect(); //斷開連接
-		$.ajax({
-			url:"/user/chatMessage/stompClientConnection/session/clear",
-		})
-		$("#chatbox"+toAccount+" button").unbind();
-// 		$("#chatbox"+toAccount).remove();
+ 		stompClient.disconnect(); //斷開連接
+		
 	}
-	connected = false; 
-	visible = false;
+	connected = false;
 	console.log("Disconnected");
 }
 
-// function setSendToObject(toAccount, toName){
-// 	$("#toAccount").text(toAccount);
-// 	$("#toName").text(toName);
-// 	$("#chatBoxDiv").on("click","#sendMessage",function(){
-// 		sendMessage(toAccount,"N");
-// 	})
-	
-// }
 
 //將以往的聊天紀錄塞入聊天視窗
 function fillChatListIntoResponseBox(toAccount,toMemberPic,chatMsgList){

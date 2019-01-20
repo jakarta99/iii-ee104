@@ -28,7 +28,7 @@ $(document).ready( function () {
 
 
 function startToChat(){
-	connect("royadmin1112", "TimeBank時間銀行");		
+	createChatBox("royadmin1112","TimeBank時間銀行")	
 }
 </script>
 

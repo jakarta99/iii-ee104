@@ -25,7 +25,6 @@ import team.lala.timebank.service.MemberService;
 @Slf4j
 @Controller
 @RequestMapping("/user/chatMessage")
-//@SessionAttributes(value={"stompClientConnection","toMember","fromMember"})
 public class ChatMessageController {
 
 	@Autowired
@@ -38,8 +37,9 @@ public class ChatMessageController {
 	@MessageMapping("/chat")
 	public void sendSingle(ChatMessage chatMessage, Principal principal) throws Exception {
 		log.debug("chatMessage={}",chatMessage);
-		if ("Y".equals(chatMessage.getReadAlready())){
-			System.out.println("update msg");	
+		//若readAlready為"Y"，此chatMessage代表有人點擊聊天窗口(text中並無實質訊息)
+		if ("Y".equals(chatMessage.getReadAlready())){	
+			//根據雙方帳號更新已讀狀態，但這不代表所有雙方間的對話都更新為已讀
 			chatMessageService.updateChatMessagesReadAlreadyStatusBetweenTwoAccounts(chatMessage,"Y");
 			List<ChatMessage> chatList = chatMessageService.findChatMessagesBetweenFromAndTo(chatMessage);
 			if (chatList.size() >0) {
@@ -60,7 +60,7 @@ public class ChatMessageController {
 		} 
 	}
 	
-	//搜尋與他人之前的對話
+	//搜尋與他人之前的對話，並將資料存放session
 	@ResponseBody
 	@RequestMapping("/oldMessages/onePerson/query")
 	public Map<String, Object> findChatMessagesWithAnotherMember(@RequestParam String toAccount, @RequestParam String fromAccount,Model model,HttpSession session){
@@ -80,10 +80,14 @@ public class ChatMessageController {
 		respData.put("toMemberPic", toMember.getPicture());
 		respData.put("fromMemberPic", fromMember.getPicture());
 		respData.put("toMemberName", toMember.getName());
+		if (session.getAttribute(toAccount) != null) {
+			System.out.println("session toMember != null");
+		} else {
+			System.out.println("session toMember == null");
+		}
 		//將聊天對象資料存放在session scope內，一旦連線完成，整個網站都能進行對話
 		session.setAttribute("stompClientConnection", "Y");
 		session.setAttribute("toMember", toMember);
-//		session.setAttribute("fromMember", fromMember);
 		return respData;
 	}
 	
@@ -94,6 +98,12 @@ public class ChatMessageController {
 		model.addAttribute("chatObjectsList",chatObjectsList);
 		log.debug("chatObjectsList={}",chatObjectsList);
 		return "/basic/user/chatRoom/chatMessagesPage";
+	}
+	@ResponseBody
+	@RequestMapping("/oldMessages/all/chatObject")
+	public List<ChatMessage> findLastMessageWithChatObjectsByAccount(Principal principal){
+		return  chatMessageService.findLastMessageWithChatObjectsByAccount(principal.getName());		
+		
 	}
 	
 	@ResponseBody

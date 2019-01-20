@@ -25,7 +25,6 @@
 	text-align: center;
     background-color: #66c3c1;
     padding: 5px;
-    border-radius:5px;
 }
 
 
@@ -36,19 +35,17 @@
 	border-top:1px solid gray;
 }
 .item2-1{
-/* 	text-align:center; */
-/* 	padding: 0px 5px 5px 5px; */
+
 	border-bottom:1px solid gray; 
 }	
 .chatMemberBox{
 	border-bottom:1px solid gray;
-/* 	border-:1px solid gray; */
 	padding:5px;
 	height: 58px;
 	overflow: hidden;
 }
 .chatMemberBox:hover{
-	background-color:#80808075;
+	background-color:#aba8a875;
 }
 .imgToken{
 	float:left;
@@ -88,8 +85,9 @@
 .sendButton-chatPage{
 	border:none;
 	font-size: 18px;
-	background-color:#fff;
-	color:gray;
+	background-color:#20bdb9;
+	border-radius:5px;
+	color:#fff;
 	width: 10%;
 	float:right;
 	margin-right: 20px;
