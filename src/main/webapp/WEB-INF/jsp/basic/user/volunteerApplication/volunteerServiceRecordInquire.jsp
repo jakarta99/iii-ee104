@@ -20,8 +20,44 @@
 <meta charset="UTF-8">
 <title>媒合紀錄查詢 | TimeBank</title>
 <style> 	
-    .margintop{
-		 margin-top:70px;
+	.container1{		 	
+		max-width: 1500px;
+		border-radius: 3px;			
+	}
+	.container-1>.row{
+		margin-top: 30px;
+	}
+	.s3{
+		width:100%;
+		margin-bottom:40px;
+		margin-left:60px;
+		margin-right:60px;
+	}
+	.s4{
+		width:100%;
+		margin: auto;
+	}
+	.s5{
+		background-color: 	#E0FFFF;
+			padding: 15px; 
+	}
+	.s6{
+		width:100%;
+		margin: auto;
+	    padding: 10px;
+	    border-radius: 3px;
+	    border: 2px solid #1ec7c3;
+	    background-color: #FAFAD2;
+		
+	}
+	.s7{
+		margin-left:5%;
+	}
+	.s8{
+		border: 2px solid #1ec7c3;
+	    background-color: #FAFAD2;
+	    padding-top:25px;
+	    padding-bottom:20px;
 	}
 	#blog-listing-big .author-category a, #blog-listing-medium .author-category_1 a {
 	    font-weight: 500;
@@ -29,66 +65,39 @@
 	    font-size: 25px;
 	}
 	#blog-listing-big p.intro, #blog-listing-medium p.intro {
-	  margin-top: 10px;
-	  margin-right: 15px;
-	  color: #777;
-	  font-size: 20px;
+	   	margin-top: 10px;
+	    color: #777;
+	    font-size: 20px;
 	}
-	.img{
-		width: 90%;
-		height: 90%;
- 		position: absolute; 
-	    top: 0;
-	    bottom: 0;
-	    left: 0;
-	    border: 0;
-	    border-radius: 5px;
-	}
-	.embed-responsive {
-	    position: relative;
-	    display: block;
-	    width: 100%;
-	    padding: 0;
-	    overflow: hidden;
-	    margin-left: 20px;
+    fieldset {
+    	background-color:	#E0FFFF;
+        width: 100%;
+        border-radius: 20px;
+        padding: 20px 20px 0px 20px;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 20px;
     }
-    #blog-listing-big .date-comments a, #blog-listing-medium .date-comments_1 a {
-		color: #999;
-		margin-left: 25px;
-		font-size: 20px;
-		display: inline-block;
-	}
-	.title{
-		color: #26ab7b;
-	}
-	#blog-listing-big .post, #blog-listing-medium .post {
-  		margin-bottom: 30px;
-	}
-	.nav-pills .nav-link {
-    	border-radius: 8px;
-	}
-	.a{
-		background-color: #e2eae1db;
-	}
-	.box1{
-		margin: 15px;
-		border-bottom: 1px solid #ddd;
-		padding: 20px;
+    .s2{
+        text-align: center
+    }     
+    .margintop{
+		 margin-top:70px;
 	}
 	.county,.district {
-		padding: 0.375rem 0.75rem;
-		font-size: 1rem;
-		line-height: 1.5;
-		color: #495057;
-		background-color: #fff;
-		background-image: none;
-		background-clip: padding-box;
-		border: 1px solid #ced4da;
-		border-radius: 0.25rem;
-		transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-		margin-right: 30px;
-		margin-bottom: 20px;
+		  padding: 0.375rem 0.75rem;
+		  font-size: 1rem;
+		  line-height: 1.5;
+		  color: #495057;
+		  background-color: #fff;
+		  background-image: none;
+		  background-clip: padding-box;
+		  border: 1px solid #ced4da;
+		  border-radius: 0.25rem;
+		  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+		  margin-right: 20px;
 	}
+ 
 	.smart-green {
 		margin-left:auto;
 		margin-right:auto;
@@ -169,43 +178,6 @@
 	.modal-footer {
 		padding: 0 1rem 1rem 0;
 	}
-	.container1{
-		margin-left:  380px;
-	}
-	.panel-title{
-		margin-top: 20px;
-	}
-	.search {
-	    position: absolute;
-	    left: 0;
-	    width: 370px;
-	    background: #e2eae1db;
-	    z-index: 10;
-	    margin-top: 30px;
-	    height: 18cm;
-	}
-	.search_item {
-	    margin-bottom: 23px;
-	}
-	.search_button {
-	    font-size: 13px;
-	    font-weight: 700;
-	    line-height: 33px;
-	    padding-left: 26px;
-	    padding-right: 26px;
-	    background: #1cb4b1;
-	    border: none;
-	    outline: none;
-	    cursor: pointer;
-	    margin-top: 15px;
-	    margin-left: 230px;
-	}
-	.panel-body label {
-	    font-size: 18px;
-	    font-weight: 700;
-	    color: black;
-	    margin-bottom: 14px;
-	}
     </style>
 
 </head>
@@ -223,11 +195,42 @@
 			</div>
 		</div>
 	</div>
+	
 	<div id="content">
-	<div class="col-md-3 search">
+    <div class="container container1">
+    <div class="row">
+    <div class="col-md-9">
+    <div class="s5">
+	<div class="s4">
+		<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
+			<li class="nav-item"><a id="orderStatus7" data-toggle="pill" href="javascript: void(0)" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active">媒合成功紀錄</a></li>
+			<li class="nav-item"><a id="orderStatus3" data-toggle="pill" href="javascript: void(0)" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">媒合失敗紀錄</a></li>
+		</ul>
+	</div>
+	<div class="row bar">
+	<div id="blog-listing-medium" class="col-md-12">
+		<div id="boxbox" class="row">
+			<!--mission內容開始 -->
+		</div>
+		<div>
+			<nav aria-label="Page navigation example" class="d-flex justify-content-center">
+			<ul id ="pagebox" class="pagination pagination-lg">
+				<!--換頁控制開始 -->
+			</ul>
+			</nav>
+		</div>    
+	</div>
+    </div>
+    </div>
+    </div>
+
+    <div class="col-md-3">
+    <div class="s6" >
 	<div class="panel panel-default sidebar-menu">
 		<div class="panel-heading">
+		<div class="s7">
 			<h4 class="h4 panel-title">條件查詢</h4>
+		</div>
 		</div>
         <div class="panel-body">
         <form>
@@ -235,107 +238,58 @@
 				<label>縣市:</label> 	
 				<div role="tw-city-selector"></div>
 			</div>
-			<div class="form-group mx-sm-3 mb-3 search_item">
+			<div class="form-group mx-sm-3 mb-3">
 				<label>活動名稱 :</label>
-				<input type="text" value="" placeholder="" id="title" name="title" class="form-control"/>
+				<input type="text" value="" placeholder="" id="missionTitle" name="missionTitle" class="form-control"/>
 			</div >
-			<div class="form-group mx-sm-3 mb-3 search_item">
+			<div class="form-group mx-sm-3 mb-3">
 				<label>時數 :</label>
 				<input type="text" value="" placeholder="" id="timeValue" name="timeValue" class="form-control"/>
 			</div>
-			<div class="form-group mx-sm-3 mb-3 search_item">
+			<div class="form-group mx-sm-3 mb-3">
 				<label>開始日期:</label>
 				<input type="text"  id="startDate" name="startDate" autocomplete="off" class="form-control"/>
 				<label>結束日期:</label>
 				<input type="text"  id="endDate" name="endDate" autocomplete="off" class="form-control"/>
 			</div>
 			<input type="hidden" value="" placeholder="missionstatus" id="missionstatus" name="missionstatus"/>
-			<input  type="button" value="搜尋" id="searchButt" class="btn btn-primary search_button" >			
+			<input  type="button" value="搜尋" id="searchButt" class="btn btn-primary" >			
 		</form>
-    </div>
-    </div>
-    </div>
-    <div class="container container1">
-	<section class="bar_1">
-		<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
-			<li class="nav-item"><a id="orderStatus7" data-toggle="pill" href="javascript: void(0)" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active">媒合成功紀錄</a></li>
-			<li class="nav-item"><a id="orderStatus3" data-toggle="pill" href="javascript: void(0)" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">媒合失敗紀錄</a></li>
-		</ul>
-	</section>
-	<div class="row bar">
-	<div id="blog-listing-medium" class="col-md-12">
-			<div id="boxbox">
-			<!--mission內容開始 -->
-			</div>
-		<div>
-			<nav aria-label="Page navigation example" class="d-flex justify-content-center">
-				<ul id ="pagebox" class="pagination pagination-lg">
-				<!--換頁控制開始 -->
-				</ul>
-			</nav>
-		</div>    
 	</div>
     </div>
     </div>
-    </div>
-<!--評分視窗 -->  
-<!-- <div class="modal fade" id="scoreModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"> -->
-<!--     <div class="modal-dialog modal-dialog-centered" role="document"> -->
-<!--         <div class="modal-content"> -->
-<!--             <div class="modal-header"> -->
-<!--                 <h5 class="modal-title" id="exampleModalCenterTitle">評分系統</h5> -->
-<!--                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-<!--                     <span aria-hidden="true">&times;</span> -->
-<!--                 </button> -->
-<!--             </div> -->
-<!--             <div class="modal-body"> -->
-<!--                 <label> -->
-<!--                     <span>分數</span> -->
-<!--                     <select id='score' name='score'> -->
-<!--                         <option value=''>請評分</option> -->
-<!--                         <option value='1'>1</option> -->
-<!--                         <option value='2'>2</option> -->
-<!--                         <option value='3'>3</option> -->
-<!--                         <option value='4'>4</option> -->
-<!--                         <option value='5'>5</option> -->
-<!--                     </select> -->
-<!--                 </label> -->
-<!--             </div> -->
-<!--             <div class="modal-footer"> -->
-<!--                 <input type='button' class='btn btn-primary btn-sm' onclick='' value='評分' /> -->
-<!--             </div> -->
-<!--         </div> -->
-<!--     </div> -->
-<!-- </div> -->
-
-<!-- 檢舉視窗 -->
-<div class="modal fade" id="reportModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered" role="document">
-<div class="modal-content smart-green">
-    <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalCenterTitle"><font color="white">檢舉系統</font></h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <form id="reportForm" enctype="multipart/form-data">
-        	<input type='hidden' id='orderId' name='orderId' value='' />
-            <label>檢舉人名</label>
-            <p id="memberAccount"></p>
-            <label>檢舉原因</label>
-            <textarea cols='40' rows='5' id='description' name='description'></textarea>
-            <input type="file" id="proofPic" name="proofPic" accept="image/*">
-            <p>請選擇圖檔，如無佐證資料，則直接送出審核</p>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <input type='button' class='btn btn-primary btn-sm' onclick='report()' value='檢舉' />
-    </div>
-</div>
-</div>
-</div>
+    </div> 
+	</div>
+	</div>
+	</div>
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
+	<!-- 檢舉視窗 -->
+	<div class="modal fade" id="reportModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+	<div class="modal-content smart-green">
+	    <div class="modal-header">
+	        <h4 class="modal-title" id="exampleModalCenterTitle"><font color="white">檢舉系統</font></h4>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	        <span aria-hidden="true">&times;</span>
+	        </button>
+	    </div>
+	    <div class="modal-body">
+	        <form id="reportForm" enctype="multipart/form-data">
+	        	<input type='hidden' id='orderId' name='orderId' value='' />
+	            <label>檢舉人名</label>
+	            <p id="memberAccount"></p>
+	            <label>檢舉原因</label>
+	            <textarea cols='40' rows='5' id='description' name='description'></textarea>
+	            <input type="file" id="proofPic" name="proofPic" accept="image/*">
+	            <p>請選擇圖檔，如無佐證資料，則直接送出審核</p>
+	        </form>
+	    </div>
+	    <div class="modal-footer">
+	        <input type='button' class='btn btn-primary btn-sm' onclick='report()' value='檢舉' />
+	    </div>
+	</div>
+	</div>
+	</div>	
 	<script>
 	var length=3;
 	var page=0;
@@ -371,14 +325,14 @@
         		$("#boxbox").append(box);
         	} else {
 	        	$.each(orders.content, function(index, order){
-	        	   var box="<section><div class='row box1'><div class='col-md-4'>"
+	        	   var box="<div class='s3'><div class='row s8'><div class='col-md-4'>"
         		   box+="<div class='video'>"
         		   box+="<div class='embed-responsive embed-responsive-4by3'>"	        	
-        		   box+=" <a href='/user/volunteerRecruitment/detail?id="+ order.mission.id +"'><img src=/image/user/mission/"+order.mission.missionPicName+" class='embed-responsive-item img'></img></a>"     
+        		   box+=" <a href='/user/volunteerRecruitment/detail?id="+ order.mission.id +"'><img src=/image/user/mission/"+order.mission.missionPicName+" class='embed-responsive-item' style='border-radius:5px'></img></a>"     
         		   box+="</div></div></div>"
-                   box+="<div class='col-md-8 boxH'>"
+                   box+="<div class='col-md-8'>"
                    box+="<div class='d-flex flex-wrap justify-content-between'>"
-                   box+="<h3 class='h2 mt-0'><a href='/user/volunteerRecruitment/detail?id="+ order.mission.id +"'>"+ order.mission.title + "</a></h3>"
+                   box+="<h1 class='h2 mt-0'><a href='/user/volunteerRecruitment/detail?id="+ order.mission.id +"'>"+ order.mission.title + "</a></h1>"
                    if(order.orderStatus == "ServiceFinishPayMatchSuccess" && order.ReportStatus == null || order.orderStatus == "ServiceFinishPayMatchSuccess" && order.ReportStatus == 'RequesterReportVolunteer'){
                    	   box+="<p class='date-comments_1'><a href='javascript: void(0)' data-toggle='modal' data-target='#reportModalCenter' id='" + order.id + "' name='" + order.mission.member.account + "'><i class='fa fa-trash'></i>檢舉</a></p></div>"
                    } else if(order.ReportStatus == 'VolunteerReportRequester' || order.ReportStatus == 'BothReport'){
@@ -406,7 +360,7 @@
                    	   box+="<p class='intro'>活動地點:"+order.mission.county + order.mission.district+"</p>"					   
 	                   box+="<p class='intro'>獲得時數:"+order.memberScore+"</p>"
 				   }
-				   box+="</div></section>"
+				   box+="</div></div>"
 			       $("#boxbox").append(box);
 	        	})
         	}
