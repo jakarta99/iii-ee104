@@ -1,23 +1,5 @@
-/*
+@charset "UTF-8";
 
-==================================================================================
-==================================================================================
-
-Universal Template 
-
-https://bootstrapious.com/p/universal-business-e-commerce-template
-
-==================================================================================
-==================================================================================
-
-*/
-/*
-*
-* =====================
-* GENERAL
-* =====================
-*
-*/
 .boxed {
   background: url("../img/boxed-pattern.png");
 }
@@ -54,7 +36,7 @@ p.lead {
 }
 
 .tooltip {
-   font-family: 敺株�迤暺�� ;
+   font-family: 微軟正黑體;
 }
 
 .bs-select .dropdown-menu .dropdown-menu {
@@ -71,7 +53,7 @@ p.lead {
   font-size: .8rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-   font-family: 敺株�迤暺�� ;
+   font-family:  微軟正黑體;
   outline: none;
 }
 
@@ -337,6 +319,126 @@ p.lead {
   padding:10px 0px;
 /*   padding: 175px 0px 0px 10px; */
 }
+<<<<<<< HEAD
+
+
+ul.social a:hover {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+ul.social a.facebook {
+  background: #4561ae;
+}
+ul.social a.gery {
+  background: #DCDCDC;
+}
+
+ul.social a.gplus {
+  background: #c22026;
+}
+
+ul.social a.twitter {
+  background: #34ccff;
+}
+
+ul.social a.email {
+  background: #4b8046;
+}
+
+.showcase {
+  color: #555;
+}
+
+.showcase .icon-outlined {
+  border-color: #555;
+}
+
+.showcase .counter {
+  margin-bottom: 20px;
+  display: inline-block;
+  margin-top: 0;
+}
+
+.showcase h4 {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.935rem;
+  margin-top: 0;
+}
+
+.form-control {
+  border-radius: 0;
+}
+
+.form-control:focus {
+  border-color: #13b5b1;
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(79, 191, 168, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(79, 191, 168, 0.25);
+}
+
+.form-group label {
+  color: #555;
+}
+
+.card-primary {
+  border-radius: 0;
+  border-color: #13b5b1;
+}
+
+.card-primary .card-header {
+  background: #13b5b1;
+  color: #fff;
+  border: none;
+  border-radius: 0;
+}
+
+.card-primary .card-header a {
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+.card-primary .card-body {
+  border-color: #13b5b1;
+}
+
+.card-body li {
+  font-size: 0.9rem;
+}
+
+table {
+  font-size: 0.9rem;
+}
+
+table img {
+  min-width: 50px !important;
+  max-width: 50px !important;
+  height: 50px;
+}
+
+table input[type="number"] {
+  max-width: 50px;
+}
+
+.nav-tabs {
+  border-bottom: none;
+}
+
+.nav-tabs a.nav-link {
+  border-radius: 0 !important;
+  font-size: 0.9rem;
+}
+
+.tab-content {
+  padding: 20px;
+  border: 1px solid #ddd;
+  font-size: 0.9rem;
+}
+
+.top-bar {
+=======
 
 #heading-breadcrumbs li {
   text-transform: uppercase;
@@ -471,9 +573,6 @@ ul.social a:hover {
 ul.social a.facebook {
   background: #4561ae;
 }
-ul.social a.gery {
-  background: #DCDCDC;
-}
 
 ul.social a.gplus {
   background: #c22026;
@@ -579,6 +678,7 @@ table input[type="number"] {
 }
 
 .top-bar {
+>>>>>>> branch 'master' of https://github.com/jakarta99/iii-ee104
 /*   background: #555; */
   background:rgba(0, 0, 0, 0.6);
   color: #fff;
@@ -2006,7 +2106,7 @@ table tr td {
   right: 15px;
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
-  font-family: 敺株�迤暺�� ;
+  font-family:  微軟正黑體;
 }
 
 .panel-heading {
@@ -3111,6 +3211,7 @@ STYLE SWITCHER FOR DEMO
 
 /*
  * 3. TYPE  
+<<<<<<< HEAD
  */
 body {
    font-family: 敺株�迤暺�� ;
@@ -3258,6 +3359,145 @@ a.text-primary:focus, a.text-primary:hover {
   color: #3aa18c !important;
 }
 
+=======
+ */
+body {
+   font-family:  微軟正黑體;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+}
+
+a {
+  color: #13b5b1;
+  text-decoration: none;
+}
+
+a:focus, a:hover {
+  color: #348e7b;
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  margin-bottom: 1rem;
+   font-family:  微軟正黑體;
+  font-weight: 700;
+  line-height: 1.1;
+  color: inherit;
+}
+
+h1,
+.h1 {
+  font-size: 2.2rem;
+}
+
+h2,
+.h2 {
+  font-size: 1.8rem;
+}
+
+h3,
+.h3 {
+  font-size: 1.5rem;
+}
+
+h4,
+.h4 {
+  font-size: 1.1rem;
+}
+
+h5,
+.h5 {
+  font-size: 1rem;
+}
+
+h6,
+.h6 {
+  font-size: 0.8rem;
+}
+
+.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+.display-1 {
+  font-size: 6rem;
+  font-weight: 300;
+  line-height: 1.1;
+}
+
+.display-2 {
+  font-size: 5.5rem;
+  font-weight: 300;
+  line-height: 1.1;
+}
+
+.display-3 {
+  font-size: 4.5rem;
+  font-weight: 300;
+  line-height: 1.1;
+}
+
+.display-4 {
+  font-size: 3.5rem;
+  font-weight: 300;
+  line-height: 1.1;
+}
+
+hr {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+small,
+.small {
+  font-size: 80%;
+  font-weight: 400;
+}
+
+mark,
+.mark {
+  padding: 0.2em;
+  background-color: #fcf8e3;
+}
+
+.blockquote {
+  padding: 0.5rem 1rem;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  border-left: 5px solid #13b5b1;
+}
+
+.blockquote-footer {
+  color: #868e96;
+}
+
+.blockquote-footer::before {
+  content: "\2014 \00A0";
+}
+
+.text-primary {
+  color: #13b5b1 !important;
+}
+
+a.text-primary:focus, a.text-primary:hover {
+  color: #3aa18c !important;
+}
+
+>>>>>>> branch 'master' of https://github.com/jakarta99/iii-ee104
 /*
  * 4. PAGINATION
  */

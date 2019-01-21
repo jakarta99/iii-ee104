@@ -29,6 +29,9 @@
 			<li class="nav-item mx-0 mx-lg-1">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/admin/penaltyVertify/showVertifyList" style="font-family: 微軟正黑體">審核檢舉／申訴案件</a>
             </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/admin/chatMessage/messages/all/list" style="font-family: 微軟正黑體">訊息</a>
+            </li>
             <li class="nav-item dropdown"><a
 					class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="http://example.com"
 					id="dropdown01" data-toggle="dropdown" aria-haspopup="true"

@@ -9,10 +9,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>我的訊息 | TimeBank</title>
 <!-- css -->
-<jsp:include page="../../commons/commons_layout/commons_css_links.jsp" />
+<%-- <jsp:include page="../../commons/commons_layout/commons_css_links.jsp" /> --%>
 <!-- Javascript files-->
-<jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
+<jsp:include page="../admin_layout/admin_css_js_links.jsp" />
 <link rel="stylesheet" href="/css/chatAll.css">
+<link rel="stylesheet" href="/css/chat.css">
 <script>
 	var connected=false;
 	
@@ -33,9 +34,9 @@
 </head>
 <body>
 	<!-- Top bar-->
-	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp" />
+<%-- 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp" /> --%>
 	<!-- Navbar -->
-	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />
+<%-- 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" /> --%>
 	
 	<sec:authentication property="name" var="userAccount"/>
 
@@ -87,7 +88,7 @@
 	</div>
 	
 	<!-- chattingBox -->
-	<jsp:include page="webSocketFunctions.jsp"></jsp:include>
+	<jsp:include page="../../basic/user/chatRoom/webSocketFunctions.jsp"></jsp:include>
 
 	
 	<script type="text/javascript">
@@ -105,7 +106,7 @@
 			$("#chatMessageBoxArea").append(chatBox);
 
 			$.ajax({
-				url:"/user/chatMessage/oldMessages/onePerson/query",
+				url:"/admin/chatMessage/messages/onePerson/query",
 				type: "post",
 				data: {"toAccount":toAccount, "fromAccount":"${userAccount}"},
 			    dataType : "json",	
@@ -126,7 +127,7 @@
 		//搜尋資料庫此使用者是否有新訊息，並改變MemberBox順序
 		function changeMemberBoxOrder(){
 			$.ajax({
-				url:"/user/chatMessage/oldMessages/all/chatObject",
+				url:"/admin/chatMessage/messages/all/chatObject",
 				dataType:"json",
 			}).done(function(data){
 				console.log(data)
