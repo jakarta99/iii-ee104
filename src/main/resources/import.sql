@@ -108,7 +108,7 @@ INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (16, 3)
 --個人會員發布的任務
 INSERT INTO mission(address, approved_quantity,pay_date, contact_email, contact_person, contact_phone, county, deadline, discription, district, end_date, mission_pic_name, mission_status, payed_quantity, people_needed, publish_date, start_date, term_type, time_value, title, member_id, service_type) 
 VALUES ('忠孝東路6段484號B1', 0, '2019-01-15 00:00:00:000', 'juliantsai@canlove.org.tw', '蔡明珠', '02-66171885', '台北市','2019-01-05 00:00:00.000', '曾經是老師的小林奶奶快80歲了，她最大的夢想，就是再一次回到校園，聽到孩子們的說一聲: 「小林老師好!」或許你也聽過這些老人話?『老人攏沒路用，攏沒人管 ！』『一個人很孤單、很苦…』『全身都是病啦，死一死算了。』一次用夢想再點燃希望的行動，肯愛協會正在關心離家的弱勢老人，讓有夢的老人有「夢」有活力陪伴離家老人找到生活的意義，身心的健康及好好活的動力。--我們想和你一起--',
-		'南港區','2019-01-12 00:00:00.000','missionPicture_39.jpg','A_New', 0, 2,'2019-01-21 11:19:35.027', '2019-01-10 00:00:00.000', 'S', 8, '友夢不老-助爺奶圓夢', 1,3);
+		'南港區','2019-01-12 00:00:00.000','missionPicture_1.jpg','A_New', 0, 2,'2019-01-21 11:19:35.027', '2019-01-10 00:00:00.000', 'S', 8, '友夢不老-助爺奶圓夢', 1,3);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
 VALUES (5,'[個人5]陪伴家中長者就醫',3,'S',3,'2019/1/9','2019/2/13 14:00','2019/2/13 17:00',1,'曾小潔','0912456789','jasmine@gmail.com','我的母親高齡75歲，行動不便(拄柺杖)且住在五層樓高的無電梯公寓。2019/2/13下午需要去仁愛醫院回診檢查糖尿病，但當天家人都需要工作，無法抽身，因此需要女性志工陪同回診檢查慢性病(包含協助下樓、交通、完成醫療診斷程序後陪同返家、上樓)。','臺北市','大安區','復興南路一段390號15樓','A_New','2019/2/19',0,'old-man.jpg',0);
