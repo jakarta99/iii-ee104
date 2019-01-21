@@ -20,8 +20,8 @@ INSERT INTO ROLE (ROLE_NAME) VALUES  ('ORG_USER');
 
 --member
 
-INSERT INTO MEMBER ( ACCOUNT, PASSWORD, NAME, TYPE, EMAIL,CERTIFICATE_ID_NUMBER, BIRTH_DATE,TEL, MOBILE, COUNTY, DISTRICT, ADDRESS, EMAIL_VERTIFICATION, SIGN_UP_DATE,SUM_SCORE,SCORED_TIMES,AVERAGE_SCORE,PICTURE,BALANCE_VALUE)
-VALUES('sheila1112','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','小萱', 'P', 'sheila000@gmail.com','A129516346', '1970/5/15','02-25644433', '0912-356-278','台北市','大安區','復興南路一段390號15樓', 'Y','2015/5/13',0,0,0,'lalabear.jpg',100);
+INSERT INTO MEMBER (account,address,average_score,balance_value,birth_date,certificate_id_number,county,district,email,email_vertification,type,mobile,name,password,picture,scored_times,sign_up_date,sum_score,tel)
+VALUES('sheila1112','復興南路一段390號15樓',4,100,'1990/08/18','A129885641','台北市','大安區','sheila000@gmail.com','Y','P','0912-356-278','田馥甄','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','hebe.jpg',3,'2019/01/20',12,'02-25644433');
 
 INSERT INTO MEMBER (ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, CERTIFICATE_ID_NUMBER ,BIRTH_DATE, TEL, MOBILE, COUNTY, DISTRICT, ADDRESS, EMAIL_VERTIFICATION, SIGN_UP_DATE,SUM_SCORE,SCORED_TIMES,AVERAGE_SCORE,PICTURE)
 VALUES('anchor1112','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','阿家', 'P', 'anchor001@gmail.com','A129516346','1985/3/6','02-25644433', '0912-356-278','台南市','安南區','大眾路360號', 'N','2015/2/23',0,0,0,'lalabear.jpg');
