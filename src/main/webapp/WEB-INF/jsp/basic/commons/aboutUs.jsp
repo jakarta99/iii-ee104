@@ -21,7 +21,7 @@
 		<div class="dark-mask "></div>
        	<div class="container">
          <div class="row d-flex align-items-center flex-wrap">
-         	 <h1 class="h2"  style="margin:auto;color:#fff;font-size:42px;">關於TimeBank</h1>
+             <h1 class="h2"  style="margin:auto;color:#fff;font-size:42px;">聯絡我們</h1>
          </div>
        </div>
     </section> 
