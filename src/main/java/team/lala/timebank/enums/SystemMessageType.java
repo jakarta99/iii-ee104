@@ -4,6 +4,7 @@ public enum SystemMessageType {
 	Penalty,
 	Score,
 	ReplyPenaltyReport,
+	Report,
 	ReplyTheRevertifyApply,
 	GetTimeValue,
 	PayTimeValue,

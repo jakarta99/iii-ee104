@@ -27,6 +27,7 @@ import team.lala.timebank.service.FacadeService;
 import team.lala.timebank.service.MissionService;
 import team.lala.timebank.service.OrderService;
 import team.lala.timebank.service.PenaltyService;
+import team.lala.timebank.service.SystemMessageService;
 import team.lala.timebank.spec.OrderSpecification;
 
 @Slf4j
@@ -41,6 +42,8 @@ public class PayTimeController {
 	private FacadeService facadeService;
 	@Autowired
 	private PenaltyService penaltyService;
+	@Autowired
+	private SystemMessageService systemMessageService;
 
 	@RequestMapping("/list")
 	public String listPage(@RequestParam(value = "id") Long missionId, Model model) {

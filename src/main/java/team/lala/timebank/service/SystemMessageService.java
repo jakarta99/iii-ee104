@@ -99,7 +99,7 @@ public class SystemMessageService {
 			systemMessage.setReleaseTime(new Date());
 			systemMessage.setReadStatus(YesNo.N);
 			systemMessage.setMemberAccount(order.getVolunteer().getAccount());
-			systemMessage.setMessage("您申請的志工活動:[<a href='https://localhost/commons/domesticVolunteer/apply?missionId=" + order.getMission().getId() + "'>" + order.getMission().getTitle() + "</a>]已被接受");
+			systemMessage.setMessage("您申請的志工活動:[" + order.getMission().getTitle() + "]已被接受");
 			systemMessage.setMessageType(systemMessage.getMessageType());
 
 			return systemMessageDao.save(systemMessage);
@@ -108,7 +108,7 @@ public class SystemMessageService {
 			systemMessage.setReleaseTime(new Date());
 			systemMessage.setReadStatus(YesNo.N);
 			systemMessage.setMemberAccount(order.getVolunteer().getAccount());
-			systemMessage.setMessage("您申請的志工活動:[<a href='https://localhost/commons/domesticVolunteer/apply?missionId=" + order.getMission().getId() + "'>" + order.getMission().getTitle() + "</a>]已被拒絕");
+			systemMessage.setMessage("您申請的志工活動:[" + order.getMission().getTitle() + "]已被拒絕");
 			systemMessage.setMessageType(systemMessage.getMessageType());
 
 			return systemMessageDao.save(systemMessage);
@@ -137,7 +137,7 @@ public class SystemMessageService {
 		systemMessage.setSenderAccount(order.getMission().getMember().getAccount());
 		systemMessage.setReleaseTime(new java.util.Date());
 		systemMessage.setMessageType(SystemMessageType.Score);
-		systemMessage.setMessage("你在<a href='https://localhost/commons/domesticVolunteer/apply?missionId=" + order.getMission().getId() + "'>" + order.getMission().getTitle() + "</a>活動中獲得" + score + "分");
+		systemMessage.setMessage("你在" + order.getMission().getTitle() + "活動中獲得" + score + "分");
 		systemMessage.setReadStatus(YesNo.N);
 		systemMessageDao.save(systemMessage);
 	}
@@ -150,7 +150,7 @@ public class SystemMessageService {
 			systemMessage.setReleaseTime(new Date());
 			systemMessage.setReadStatus(YesNo.N);
 			systemMessage.setMemberAccount(orders.get(i).getVolunteer().getAccount());
-			systemMessage.setMessage("您申請的志工活動:[<a href='https://localhost/commons/domesticVolunteer/apply?missionId=" + orders.get(i).getMission().getId() + "'>" + orders.get(i).getMission().getTitle() + "</a>]活動資料已被變更，請再次確認內容並決定是否參加");
+			systemMessage.setMessage("您申請的志工活動:[" + orders.get(i).getMission().getTitle() + "]活動資料已被變更，請再次確認內容並決定是否參加");
 			systemMessage.setMessageType(SystemMessageType.MissionEdit);
 
 			systemMessageDao.save(systemMessage);
@@ -164,7 +164,7 @@ public class SystemMessageService {
 			systemMessage.setReleaseTime(new Date());
 			systemMessage.setReadStatus(YesNo.N);
 			systemMessage.setMemberAccount(mission.getMember().getAccount());
-			systemMessage.setMessage("您的志工活動:[<a href='https://localhost/commons/domesticVolunteer/apply?missionId="+mission.getId()+"'>" + mission.getTitle() + "</a>]已到期");
+			systemMessage.setMessage("您的志工活動:[" + mission.getTitle() + "]已到期");
 			systemMessage.setMessageType(SystemMessageType.MissionAccecpt);
 			systemMessageDao.save(systemMessage);
 		}
@@ -175,7 +175,7 @@ public class SystemMessageService {
 			systemMessage.setReleaseTime(new Date());
 			systemMessage.setReadStatus(YesNo.N);
 			systemMessage.setMemberAccount(mission.getMember().getAccount());
-			systemMessage.setMessage("您的志工活動:[<a href='https://localhost/commons/domesticVolunteer/apply?missionId="+ mission.getId() + "'>" + mission.getTitle() + "</a>]活動資料已被取消");
+			systemMessage.setMessage("您的志工活動:[" + mission.getTitle() + "]活動資料已被取消");
 			systemMessage.setMessageType(SystemMessageType.MissionCancel);
 			systemMessageDao.save(systemMessage);
 		}
@@ -191,7 +191,7 @@ public class SystemMessageService {
 			systemMessage.setReleaseTime(new Date());
 			systemMessage.setReadStatus(YesNo.N);
 			systemMessage.setMemberAccount(orders.get(i).getVolunteer().getAccount());
-			systemMessage.setMessage("您申請的志工活動:[<a href='https://localhost/commons/domesticVolunteer/apply?missionId=" + orders.get(i).getMission().getId() + "'>" + orders.get(i).getMission().getTitle() + "</a>]活動資料已被取消");
+			systemMessage.setMessage("您申請的志工活動:[" + orders.get(i).getMission().getTitle() + "]活動資料已被取消");
 			systemMessage.setMessageType(SystemMessageType.MissionEdit);
 
 			systemMessageDao.save(systemMessage);
@@ -200,38 +200,51 @@ public class SystemMessageService {
 	}
 	
 	//產生付款後收到的訊息
-	public void pay(Member payer,Member volunteer,Integer hours, Mission mission) {
+	public void pay(Member payer,Member volunteer,Integer hours,String missionTitle) {
 		SystemMessage pay = new SystemMessage();
 		pay.setSenderAccount(payer.getAccount());
 		pay.setReleaseTime(new Date());
 		pay.setReadStatus(YesNo.N);
 		pay.setMemberAccount(payer.getAccount());
-		pay.setMessage("您因為志工活動:[<a href='https://localhost/commons/domesticVolunteer/apply?missionId="+ mission.getId() + "'>" + mission.getTitle() + "</a>]付款給:["
-				+ "<a href='/commons/personal-info/list?memberId="+volunteer.getId()+ "'>" + volunteer.getName() + "</a>]共" + hours + "小時已成功");
+		pay.setMessage("您因為志工活動:[" + missionTitle + "]付款給:["
+				+ volunteer.getName() + "]共" + hours + "小時已成功");
 		pay.setMessageType(SystemMessageType.PayTimeValue);
 		systemMessageDao.save(pay);
 	}
 	//產生入賬後收到的訊息
-	public void earn(Member payer,Member volunteer,Integer hours,Mission mission) {
+	public void earn(Member payer,Member volunteer,Integer hours,String missionTitle) {
 		SystemMessage earn = new SystemMessage();
 		earn.setSenderAccount(payer.getAccount());
 		earn.setReleaseTime(new Date());
 		earn.setReadStatus(YesNo.N);
 		earn.setMemberAccount(volunteer.getAccount());
-		earn.setMessage("您參加志工活動:[<a href='https://localhost/commons/domesticVolunteer/apply?missionId="+ mission.getId() +"'>" + mission.getTitle() + "</a>]獲得" + hours + "小時已入帳");
+		earn.setMessage("您參加志工活動:[" + missionTitle + "]獲得" + hours + "小時已入帳");
 		earn.setMessageType(SystemMessageType.PayTimeValue);
 		systemMessageDao.save(earn);
 	}
 	
-	public void finishMission(Member payer,Mission mission) {
+	public void finishMission(Member payer,String missionTitle) {
 		SystemMessage finishMessage = new SystemMessage();
 		finishMessage.setReleaseTime(new Date());
 		finishMessage.setReadStatus(YesNo.N);
 		finishMessage.setMemberAccount(payer.getAccount());
-		finishMessage.setMessage("您刊登的志工活動:[<a href='https://localhost/commons/domesticVolunteer/apply?missionId=" + mission.getId() + "'>" + mission.getTitle() + "</a>]已結案");
+		finishMessage.setMessage("您刊登的志工活動:[" + missionTitle + "]已結案");
 		finishMessage.setMessageType(SystemMessageType.MissionFinish);
 		systemMessageDao.save(finishMessage);
 	}
+	
+	//雇主檢舉志工，發送訊息告知
+		public void requesterReportVolunteerMessage(Order order) {
+			SystemMessage systemMessage = new SystemMessage();
+			systemMessage.setMemberAccount(order.getMission().getMemberAccount());
+			systemMessage.setSenderAccount(null);
+			systemMessage.setReleaseTime(new java.util.Date());
+			systemMessage.setMessageType(SystemMessageType.Penalty);
+			systemMessage.setMessage("您已檢舉");
+			systemMessage.setReadStatus(YesNo.N);
+			systemMessageDao.save(systemMessage);
+			
+		}
 	
 
 
