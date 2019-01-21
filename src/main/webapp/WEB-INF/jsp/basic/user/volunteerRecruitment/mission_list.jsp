@@ -69,7 +69,7 @@
 		    padding: 10px;
 		    border-radius: 3px;
 		    border: 2px solid #1ec7c3;
-/* 		    background-color: #FAFAD2; */
+		    background-color: #e2e2e2;
 			
 		}
 		.s7{
@@ -77,7 +77,7 @@
 		}
 		.s8{
 			border: 2px solid #1ec7c3;
-/* 		    background-color: #FFFFFF; */
+ 		    background-color: #e2e2e2; 
 		    padding-top:25px;
 		    padding-bottom:20px;
 		}

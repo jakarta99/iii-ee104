@@ -38,16 +38,16 @@
 		margin: auto;
 	}
 	.s5{
-		background-color: 	#E0FFFF;
-			padding: 15px; 
+		padding: 15px; 
 	}
 	.s6{
 		width:100%;
 		margin: auto;
+/* 		margin-top: 30px; */
 	    padding: 10px;
 	    border-radius: 3px;
 	    border: 2px solid #1ec7c3;
-	    background-color: #FAFAD2;
+	    background-color: #e2e2e2;
 		
 	}
 	.s7{
@@ -55,7 +55,7 @@
 	}
 	.s8{
 		border: 2px solid #1ec7c3;
-	    background-color: #FAFAD2;
+	    background-color: #e2e2e2;
 	    padding-top:25px;
 	    padding-bottom:20px;
 	}
@@ -70,7 +70,6 @@
 	    font-size: 20px;
 	}
     fieldset {
-    	background-color:	#E0FFFF;
         width: 100%;
         border-radius: 20px;
         padding: 20px 20px 0px 20px;
