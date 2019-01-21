@@ -292,6 +292,8 @@
 	        		 var discription=mission.discription
 	        		 if(discription.length>36){
 	        			 var shortDiscription=discription.substring(0,35)+"......";
+	        		 }else{
+	        			 var shortDiscription=discription; 
 	        		 }
 	        		 box+="<div class='s10'><p class='author-category_1'>活動介紹:"+shortDiscription+"</p></div>";
 	        		 if(mission.isCollected=='Y'){
@@ -303,6 +305,7 @@
 					 box+="<li class='left s9' ><i class='fas fa-map-marker-alt'></i>&nbsp;&nbsp;&nbsp;"+mission.county+mission.district+"</li>"
 					 box+="<li class='left s9' ><i class='fas fa-calendar-week'></i>&nbsp;&nbsp;&nbsp;"+new Date(mission.startDate).toLocaleDateString()+"~"+new Date(mission.endDate).toLocaleDateString()+"</li>"
 			         box+="<li class='left s9'><i class='fas fa-user'></i>&nbsp;&nbsp;&nbsp;招募中("+mission.approvedQuantity+"/"+mission.peopleNeeded+")</li>"
+			         
 			         box+="</ul>"
 		        	
 	        		 box+="</div></div></div></div>";   
