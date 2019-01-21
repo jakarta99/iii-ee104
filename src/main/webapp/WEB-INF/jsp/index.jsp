@@ -16,8 +16,19 @@
 		body{
 			font-family: 微軟正黑體;
 		}
+		
 	
 	</style>
+	<script>
+		$(document).ready(function(){ 
+			//將首頁的nav標籤標註
+			$("#navbar .navbar-nav > li > a[href='/']")
+				.css("background","rgba(19, 181, 177, 0.9)")
+				.css("color"," rgba(240, 240, 240)");
+		   
+		})
+	
+	</script>
   </head>
   <body>
     <div id="all">

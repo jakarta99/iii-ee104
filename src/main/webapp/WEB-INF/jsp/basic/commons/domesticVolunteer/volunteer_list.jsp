@@ -135,10 +135,18 @@
 		<div class="dark-mask "></div>
 	    <div class="container">
 	         <div class="row d-flex align-items-center flex-wrap">
-	             <h1 class="h2"  style="margin:auto;">志工招募</h1>
-	             <div>
-	                <div class="breadcrumb-item"><a href="/">首頁</a></div>
-	                <div class="breadcrumb-item active">志工招募</div>
+	             <h1 class="h2"  style="margin:auto;color:#fff;font-size:42px;">志工招募</h1>
+<!-- 	             <div> -->
+<!-- 	                <div class="breadcrumb-item"><a href="/">首頁</a></div> -->
+<!-- 	                <div class="breadcrumb-item active">志工招募</div> -->
+<!-- 				</div> -->
+	         </div>
+	     </div>
+	      <div class="container">
+	         <div class="row d-flex align-items-center flex-wrap">
+	             <div  style="margin:auto;color:#fff;font-size:20px;margin-top:20px">
+	                <div class="breadcrumb-item"><a href="/">首頁</a>/志工招募</div>
+<!-- 	                <div class="breadcrumb-item active"></div> -->
 				</div>
 	         </div>
 	     </div>

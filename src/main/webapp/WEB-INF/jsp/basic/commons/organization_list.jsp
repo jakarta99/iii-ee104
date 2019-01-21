@@ -16,6 +16,9 @@
 <!-- Javascript files-->
 <jsp:include page="commons_layout/commons_js_links.jsp" />
 <style>
+	body{
+		font-family: 微軟正黑體;
+	}
 	.container-1{
 		background-color: rgba(234, 234, 234);
 		margin-top:30px;max-width: 1500px;
@@ -57,7 +60,7 @@
 			<div class="dark-mask "></div>
 	       	<div class="container">
 	         <div class="row d-flex align-items-center flex-wrap">
-	             <h1 class="h2"  style="margin:auto;">公益團體</h1>
+	             <h1 class="h2"  style="margin:auto;color:#fff;font-size:42px;">公益團體</h1>
 	         </div>
 	       </div>
 	    </section> 
@@ -244,8 +247,15 @@
 		}
 	
 
-		$(document).ready( function () {	
-			$("#heading-breadcrumbs>div>div>div.col-md-7>h1").text("公益團體");	
+		$(document).ready( function () {			
+			$(document).ready(function(){ 
+				//將首頁的nav標籤標註
+				$("#navbar .navbar-nav > li > a[href='/commons/organization/list']")
+					.css("background","rgba(19, 181, 177, 0.9)")
+					.css("color"," rgba(240, 240, 240)");
+			   
+			})
+		
 			list();
 			
 			$("#pagebox").on("click","li>a[name='backa']", function(){

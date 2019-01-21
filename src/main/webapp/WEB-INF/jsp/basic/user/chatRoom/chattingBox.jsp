@@ -41,7 +41,7 @@
 			chatBox +='<button class="btn btn-primary btn-sm quickButton" onclick="sendBoxMessage()" >你好</button>';
 			chatBox +='<button class="btn btn-primary btn-sm quickButton" onclick="sendBoxMessage()" >謝謝!</button></div>';
 			chatBox +='<div style="text-align:left">';
-			chatBox +='<input type="text" id="text'+toAccount+'" class="text" placeholder="請輸入訊息" />';
+			chatBox +='<input type="text" id="text'+toAccount+'" class="chattext" placeholder="請輸入訊息" />';
 			chatBox +='<button class="btn btn-primary btn-sm sendMessage" onclick="sendText(\''+toAccount+'\')" >Send</button>';
 			chatBox +='</div></div></div>';		
 			$("#chatBoxDiv").append(chatBox);
