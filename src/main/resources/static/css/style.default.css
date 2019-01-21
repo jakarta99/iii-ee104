@@ -1,23 +1,5 @@
-/*
+@charset "UTF-8";
 
-==================================================================================
-==================================================================================
-
-Universal Template 
-
-https://bootstrapious.com/p/universal-business-e-commerce-template
-
-==================================================================================
-==================================================================================
-
-*/
-/*
-*
-* =====================
-* GENERAL
-* =====================
-*
-*/
 .boxed {
   background: url("../img/boxed-pattern.png");
 }
@@ -54,7 +36,7 @@ p.lead {
 }
 
 .tooltip {
-   font-family: 敺株�迤暺�� ;
+   font-family: 微軟正黑體;
 }
 
 .bs-select .dropdown-menu .dropdown-menu {
@@ -71,7 +53,7 @@ p.lead {
   font-size: .8rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-   font-family: 敺株�迤暺�� ;
+   font-family:  微軟正黑體;
   outline: none;
 }
 
@@ -2003,7 +1985,7 @@ table tr td {
   right: 15px;
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
-  font-family: 敺株�迤暺�� ;
+  font-family:  微軟正黑體;
 }
 
 .panel-heading {
@@ -3110,7 +3092,7 @@ STYLE SWITCHER FOR DEMO
  * 3. TYPE  
  */
 body {
-   font-family: 敺株�迤暺�� ;
+   font-family:  微軟正黑體;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -3141,7 +3123,7 @@ h6,
 .h5,
 .h6 {
   margin-bottom: 1rem;
-   font-family: 敺株�迤暺�� ;
+   font-family:  微軟正黑體;
   font-weight: 700;
   line-height: 1.1;
   color: inherit;
