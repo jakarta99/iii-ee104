@@ -124,8 +124,8 @@
 		    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 		}
 		.s4{
-		margin-left:40px;
-		margin-right:40px;
+		margin-left:30px;
+		margin-right:30px;
 		}
  
     </style>
@@ -279,24 +279,28 @@
 	        		 box+="<div class='image' style='text-align:center'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'><img width='350px' height='230px' style='border-radius:5px' src=/image/user/mission/"+mission.missionPicName+" alt='...'></a>";
 	        		 box+="</div><div class='text'><div class='s4'><h4><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'>"+ mission.title + "</a></h4>";
 	        		 box+="<p class='author-category'><a class'gerygery' href='/commons/personal-info/list?memberId="+mission.member.id+"'>"+mission.member.name+"</a></p>"
-	        		 if(mission.isCollected=='Y'){
-	        		 box+="<p><a name='box1' class='s3 ex1' href='javascript:void(0)' onclick=\"cancelCollection("+mission.id+")\"><i name='pic1' class='fa fa-heart'></i>已收藏</a></p>"
-	        		 }else{																										
-	        		 box+="<p><a name='box2' class='s3 ex1' href='javascript:void(0)' onclick=\"insertCollection("+mission.id+")\"><i name='pic2' class='far fa-heart'></i>收藏</a></p>"	 
-	        		 }
+	        		
 	        		 var discription=mission.discription
 	        		 if(discription.length>36){
 	        			 var shortDiscription=discription.substring(0,35)+"......";
 	        		 }
 	        		 box+="<p class='author-category_1 left'>活動介紹:"+shortDiscription+"</p>";
-	        		 box+="<p class='author-category_1 left'>活動地點:"+mission.county+mission.district+"</p>";       	
+	        		 box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
+	        		 box+="<p class='author-category_1 left'>活動地點:"+mission.county+mission.district+"</p>";
+	        		 if(mission.isCollected=='Y'){
+		        		 box+="<p><a name='box1' class='s3 ex1' href='javascript:void(0)' onclick=\"cancelCollection("+mission.id+")\"><i name='pic1' class='fa fa-heart'></i>已收藏</a></p>"
+		        		 }else{																										
+		        		 box+="<p><a name='box2' class='s3 ex1' href='javascript:void(0)' onclick=\"insertCollection("+mission.id+")\"><i name='pic2' class='far fa-heart'></i>收藏</a></p>"	 
+		        		 }
+	        		 box+="</div>"
 // 	        		 box+="<p class='author-category_1'>發布者:<a href='/commons/personal-info/list?memberId="+mission.member.id+"'>"+mission.member.name+"</a></p>";
-					 box+="<div>"
 					 box+="<ul class='social list-inline'>"
 			         box+="<li class='left s9' ><a href='#' class='gery'><i class='fas fa-clock'></i></a>時間:"+new Date(mission.startDate).toLocaleDateString()+"~"+new Date(mission.endDate).toLocaleDateString()+"</li>"
 			         box+="<li class='left s9'><a href='#' class='gery'><i class='fas fa-users'></i></a>招募中("+mission.approvedQuantity+"/"+mission.peopleNeeded+")</li>"
+			        
 			         box+="</ul>"
-	        		 box+="</div></div></div></div></div>";   
+		        	
+	        		 box+="</div></div></div></div>";   
 	        		var boxbox=$("#boxbox").append(box); 
 	        	})
 	        	$("#pagebox").append("<li class='page-item' id='backli'><a name='backa' class='page-link'>«</a></li><li class='page-item' id='nextli'><a name='nexta' class='page-link'>»</a></li>");
