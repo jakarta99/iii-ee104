@@ -51,48 +51,47 @@ function startToChat(){
 					<div class="col-lg-8">
 						<section class="bar">
 							<div class="heading">
-								<h2>We are here to help you <button class="btn btn-primary " id="chatButton" >線上即時客服</button></h2>	
+								<h2>我們是來幫助你的 <button class="btn btn-primary " id="chatButton" >線上即時客服</button></h2>	
 							</div>
-							<p class="text-sm">Please feel free to contact us, our
-								customer service center is working for you 24/7.</p>
+							<p class="text-sm">請隨時與我們聯繫，我們的客戶服務中心正在為您服務</p>
 							<div class="heading">
-								<h3>Contact form</h3>
+								<h3>聯繫表</h3>
 							</div>
 							<form>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label for="firstname">Firstname</label> <input
+											<label for="firstname">名字</label> <input
 												id="firstname" type="text" class="form-control">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label for="lastname">Lastname</label> <input id="lastname"
+											<label for="lastname">姓</label> <input id="lastname"
 												type="text" class="form-control">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label for="email">Email</label> <input id="email"
+											<label for="email">信箱</label> <input id="email"
 												type="text" class="form-control">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label for="subject">Subject</label> <input id="subject"
+											<label for="subject">主題</label> <input id="subject"
 												type="text" class="form-control">
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<label for="message">Message</label>
+											<label for="message">訊息</label>
 											<textarea id="message" class="form-control"></textarea>
 										</div>
 									</div>
 									<div class="col-md-12 text-center">
 										<button type="submit" class="btn btn-template-outlined">
-											<i class="fa fa-envelope-o"></i> Send message
+											<i class="fa fa-envelope-o"></i> 發送
 										</button>
 									</div>
 								</div>
@@ -103,19 +102,16 @@ function startToChat(){
 						<section class="bar mb-0">
 							<h3 class="text-uppercase">地址</h3>
 							<p class="text-sm">
-								13/25 New Avenue<br>New Heaven<br>45Y 73J<br>England<br>
-								<strong>Great Britain</strong>
+								390號2樓 復興南路一段<br>大安區<br>台北市<br>台灣<br>
+								<strong>Roy8787</strong>
 							</p>
 							<h3 class="text-uppercase">電話</h3>
-							<p class="text-muted text-sm">This number is toll free if
-								calling from Great Britain otherwise we advise you to use the
-								electronic form of communication.</p>
+							<p class="text-muted text-sm">如果從台灣打電話，這個號碼是免費的，否則我們建議您使用電子形式的通訊。</p>
 							<p>
 								<strong>02 2548-9561</strong>
 							</p>
 							<h3 class="text-uppercase">電子郵件</h3>
-							<p class="text-muted text-sm">Please feel free to write an
-								email to us or to use our electronic ticketing system.</p>
+							<p class="text-muted text-sm">請隨時給我們發電子郵件或使用您的電子信箱系統。</p>
 							<ul class="text-sm">
 								<li><strong><a href="mailto:">timeBank452196@gmail.com</a></strong></li>
 							</ul>
