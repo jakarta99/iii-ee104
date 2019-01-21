@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+ <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>    
 <!DOCTYPE >
 <html>
 <head>
@@ -39,7 +40,7 @@ function startToChat(){
 		<div class="dark-mask "></div>
        	<div class="container">
          <div class="row d-flex align-items-center flex-wrap">
-             <h1 class="h2"  style="margin:auto;">聯絡我們</h1>
+             <h1 class="h2"  style="margin:auto;color:#fff;font-size:42px;">聯絡我們</h1>
          </div>
        </div>
     </section> 
@@ -51,48 +52,45 @@ function startToChat(){
 					<div class="col-lg-8">
 						<section class="bar">
 							<div class="heading">
-								<h2>We are here to help you <button class="btn btn-primary " id="chatButton" >線上即時客服</button></h2>	
+								<h2>由我們來幫助您 </h2>	
 							</div>
-							<p class="text-sm">Please feel free to contact us, our
-								customer service center is working for you 24/7.</p>
+							<p >若您有任何問題，歡迎留下聯絡資料，
+							 <sec:authorize access="hasAnyRole('USER','ORG_USER')">
+							 	或是使用線上客服，
+							 </sec:authorize>	
+							我們將盡快為您處理，謝謝！</p>
 							<div class="heading">
-								<h3>Contact form</h3>
+								<h3>聯絡表單</h3>
 							</div>
 							<form>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label for="firstname">Firstname</label> <input
+											<label for="firstname">姓名</label> <input
 												id="firstname" type="text" class="form-control">
 										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="lastname">Lastname</label> <input id="lastname"
-												type="text" class="form-control">
-										</div>
-									</div>
+									</div>			
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="email">Email</label> <input id="email"
 												type="text" class="form-control">
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-12">
 										<div class="form-group">
-											<label for="subject">Subject</label> <input id="subject"
+											<label for="subject">主旨</label> <input id="subject"
 												type="text" class="form-control">
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<label for="message">Message</label>
+											<label for="message">內容</label>
 											<textarea id="message" class="form-control"></textarea>
 										</div>
 									</div>
 									<div class="col-md-12 text-center">
 										<button type="submit" class="btn btn-template-outlined">
-											<i class="fa fa-envelope-o"></i> Send message
+											<i class="fa fa-envelope-o"></i> 傳送
 										</button>
 									</div>
 								</div>
@@ -101,29 +99,27 @@ function startToChat(){
 					</div>
 					<div class="col-lg-4">
 						<section class="bar mb-0">
-							<h3 class="text-uppercase">地址</h3>
-							<p class="text-sm">
-								13/25 New Avenue<br>New Heaven<br>45Y 73J<br>England<br>
-								<strong>Great Britain</strong>
-							</p>
-							<h3 class="text-uppercase">電話</h3>
-							<p class="text-muted text-sm">This number is toll free if
-								calling from Great Britain otherwise we advise you to use the
-								electronic form of communication.</p>
+
+							<h3 class="text-uppercase">客服信箱</h3>
 							<p>
-								<strong>02 2548-9561</strong>
+								<strong><a href="mailto:">timeBank452196@gmail.com</a></strong>
 							</p>
-							<h3 class="text-uppercase">電子郵件</h3>
-							<p class="text-muted text-sm">Please feel free to write an
-								email to us or to use our electronic ticketing system.</p>
-							<ul class="text-sm">
-								<li><strong><a href="mailto:">timeBank452196@gmail.com</a></strong></li>
-							</ul>
+							<h3 class="text-uppercase">客服電話</h3>
+							<p class="text-muted text-sm"></p>
+							<p>
+								<strong>(02)2708-2995</strong>
+							</p>
+							<h3 class="text-uppercase">線上客服</h3>
+							<p class="text-muted text-sm"></p>
+							<p>
+								<button class="btn btn-primary " id="chatButton" >線上即時客服</button>
+							</p>
+							
 						</section>
 					</div>
 				</div>
 			</div>
-			<div id="map"></div>
+			
 		</div>
 
 	</div>
