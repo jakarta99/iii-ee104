@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,10 +50,11 @@ public class VolunteerApplicationController {
 			@RequestParam(value="page",required=false) Integer page, 
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
 		Order order = new Order();
+		Sort sort = new Sort(Sort.Direction.DESC, "volunteerApplyTime");
 		order.setOrderStatusDetail(orderStatusDetail);
 		order.setVolunteerAccount(principal.getName());
 		OrderSpecification orderSpecification = new OrderSpecification(order);
-		return orderService.findBySpecification(orderSpecification, PageRequest.of(page, length.orElse(10)));
+		return orderService.findBySpecification(orderSpecification, PageRequest.of(page, length.orElse(10),sort));
 	}
 	
 	@ResponseBody
@@ -61,10 +63,10 @@ public class VolunteerApplicationController {
 			@RequestParam(value="orderStatusDetail") String orderStatusDetail,
 			@RequestParam(value="page",required=false) Integer page,
 			@RequestParam(value="length",required=false) Optional<Integer> length) {
-		log.debug("order={}", order);
 		order.setVolunteerAccount(principal.getName());
 		OrderSpecification orderSpecification = new OrderSpecification(order);
-		return orderService.findBySpecification(orderSpecification, PageRequest.of(page, length.orElse(10)));
+		Sort sort = new Sort(Sort.Direction.DESC, "volunteerApplyTime");
+		return orderService.findBySpecification(orderSpecification, PageRequest.of(page, length.orElse(10),sort));
 	}
 	
 //	@ResponseBody

@@ -59,32 +59,43 @@ function startToChat(){
 							 	或是使用線上客服，
 							 </sec:authorize>	
 							我們將盡快為您處理，謝謝！</p>
+
+
 							<div class="heading">
+
 								<h3>聯絡表單</h3>
+
+								<h3>聯繫表</h3>
+
 							</div>
 							<form>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label for="firstname">姓名</label> <input
-												id="firstname" type="text" class="form-control">
+
+											<label for="firstname">姓名</label> 
+											<input id="firstname" type="text" class="form-control">
 										</div>
+
 									</div>			
+
+									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label for="email">Email</label> <input id="email"
+											<label for="email">信箱</label> <input id="email"
 												type="text" class="form-control">
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<label for="subject">主旨</label> <input id="subject"
-												type="text" class="form-control">
+											<label for="subject">主旨</label> 
+											<input id="subject" type="text" class="form-control">
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
 											<label for="message">內容</label>
+											<label for="message">訊息</label>
 											<textarea id="message" class="form-control"></textarea>
 										</div>
 									</div>
@@ -99,8 +110,10 @@ function startToChat(){
 					</div>
 					<div class="col-lg-4">
 						<section class="bar mb-0">
-
 							<h3 class="text-uppercase">客服信箱</h3>
+
+							<h3 class="text-uppercase">電話</h3>
+							<p class="text-muted text-sm">如果從台灣打電話，這個號碼是免費的，否則我們建議您使用電子形式的通訊。</p>
 							<p>
 								<strong><a href="mailto:">timeBank452196@gmail.com</a></strong>
 							</p>
@@ -115,6 +128,12 @@ function startToChat(){
 								<button class="btn btn-primary " id="chatButton" >線上即時客服</button>
 							</p>
 							
+
+<!-- 							<h3 class="text-uppercase">電子郵件</h3> -->
+<!-- 							<p class="text-muted text-sm">請隨時給我們發電子郵件或使用您的電子信箱系統。</p> -->
+<!-- 							<ul class="text-sm"> -->
+<!-- 								<li><strong><a href="mailto:">timeBank452196@gmail.com</a></strong></li> -->
+<!-- 							</ul> -->
 						</section>
 					</div>
 				</div>
