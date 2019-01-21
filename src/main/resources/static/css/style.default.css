@@ -471,6 +471,9 @@ ul.social a:hover {
 ul.social a.facebook {
   background: #4561ae;
 }
+ul.social a.gery {
+  background: #DCDCDC;
+}
 
 ul.social a.gplus {
   background: #c22026;
@@ -3127,6 +3130,16 @@ a:focus, a:hover {
   color: #348e7b;
   text-decoration: underline;
 }
+
+/* a.gerygery { */
+/*   color: #DCDCDC; */
+/*   text-decoration: none; */
+/* } */
+
+/* a.gery:focus, a.gery:hover { */
+/*   color: #DCDCDC; */
+/*   text-decoration: underline; */
+/* } */
 
 h1,
 h2,

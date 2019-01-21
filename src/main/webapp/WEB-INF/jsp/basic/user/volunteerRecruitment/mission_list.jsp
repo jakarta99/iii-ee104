@@ -57,7 +57,7 @@
 /* 			padding-top:40px; */
 		}
 		.s5{
-			background-color: 	#E0FFFF;
+/* 			background-color: #e9ecef; */
 /* 			border-right:solid; */
 /* 			border-color:#13b5b1; */
  			padding: 15px; 
@@ -69,7 +69,7 @@
 		    padding: 10px;
 		    border-radius: 3px;
 		    border: 2px solid #1ec7c3;
-		    background-color: #FAFAD2;
+/* 		    background-color: #FAFAD2; */
 			
 		}
 		.s7{
@@ -77,13 +77,13 @@
 		}
 		.s8{
 			border: 2px solid #1ec7c3;
-		    background-color: #FAFAD2;
+/* 		    background-color: #FFFFFF; */
 		    padding-top:25px;
 		    padding-bottom:20px;
 		}
 		
         fieldset {
-        	background-color:	#E0FFFF;
+/*         	background-color:	#E0FFFF; */
             width: 100%;
             border-radius: 20px;
             padding: 20px 20px 0px 20px;
@@ -94,6 +94,7 @@
         .s2{
             text-align: center
         }
+       
        
         .margintop{
 			 margin-top:70px;
@@ -121,7 +122,7 @@
 	  <!-- Navbar -->
       <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
       
-      <div id="heading-breadcrumbs" class="border-top-0 border-bottom-0">
+      <div id="heading-breadcrumbs" class="border-top-0 border-bottom-0" style="padding:10rem">
         <div class="container">
           <div class="row d-flex align-items-center flex-wrap">
             <div class="col-md-7">
