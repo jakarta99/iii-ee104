@@ -189,14 +189,14 @@
     					data: {oauth2Id:oauth2Id}
                     }).done(function(member){
                     	$("#loginContainer").css("display","none");
-                    	 alert(member.account + "," + member.password + "," +member.name + "," + member.email + "," + member.oauth2Id);
+//                     	 alert(member.account + "," + member.password + "," +member.name + "," + member.email + "," + member.oauth2Id);
                     	 if (member.account != null){	//表示資料庫已有這個member
-                    		alert("I'm member !!!");
+//                     		alert("I'm member !!!");
                          	$("#username").val(member.account);
                          	$("#password").val(member.oauth2Id);
                          	$("#loginForm").submit();
                          } else{	//表示資料庫沒有這個member，須insert 
-                        	alert("I'm NEW !!!");
+//                         	alert("I'm NEW !!!");
                         	//使用ajax :insert
                         	$.ajax({
 		                    	method:"post",

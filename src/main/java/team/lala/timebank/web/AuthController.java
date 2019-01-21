@@ -61,14 +61,19 @@ public class AuthController {
 		AjaxResponse<Member> response = new AjaxResponse<Member>();
 		if(memberService.findByOauth2Id(member.getOauth2Id()) == null) {
 			try {
-				String[] tokens = member.getEmail().split("@");
-				String account = tokens[0];
-				String password = encoder.encode(member.getOauth2Id());
+				if(member.getEmail() != null) {
+					String[] tokens = member.getEmail().split("@");
+					String account = tokens[0];
+					member.setAccount(account);
+					member.setName(member.getName());
+					member.setEmail(member.getEmail());
+				}else {
+					String account = member.getOauth2Id();
+					member.setAccount(account);
+				}
 				member.setMemberType(MemberType.P);
-				member.setAccount(account);
+				String password = encoder.encode(member.getOauth2Id());					
 				member.setPassword(password);
-				member.setName(member.getName());
-				member.setEmail(member.getEmail());
 				member.setOauth2Id(member.getOauth2Id());
 				Member newMember = memberService.insert(member);
 				member.setEmailVerification(YesNo.Y);
@@ -90,6 +95,7 @@ public class AuthController {
 	
 	
 	@RequestMapping("/login/oauth2/facebook")
+	@ResponseBody
 	public Member facebookAddPage(@RequestParam("oauth2Id") String oauth2Id, HttpSession session) {
 		Member member = new Member();
 		if(memberService.findByOauth2Id(oauth2Id) != null) {
