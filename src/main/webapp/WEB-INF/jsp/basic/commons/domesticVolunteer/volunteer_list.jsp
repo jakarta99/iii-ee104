@@ -90,7 +90,15 @@
             text-align: center
         }
          .s9{
-            margin-bottom: 5px
+            margin-bottom: 5px;
+            color:#A9A9A9;
+        }
+        .s10{
+        	color:#A9A9A9;
+        	 height:72px;
+        }
+        .s11{
+        	margin-top:1rem;
         }
         .margintop{
 			 margin-top:70px;
@@ -126,6 +134,7 @@
 		.s4{
 		margin-left:30px;
 		margin-right:30px;
+		margin-top: 10px;
 		}
  
     </style>
@@ -275,28 +284,30 @@
 	        	$.each(missions.content,function(index, mission){
 	        		console.log(mission)
 	        		var box="<div class='col-lg-4 col-md-6'>";
-	        		 box+="<div class='home-blog-post'>";
-	        		 box+="<div class='image' style='text-align:center'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'><img width='350px' height='230px' style='border-radius:5px' src=/image/user/mission/"+mission.missionPicName+" alt='...'></a>";
+	        		 box+="<div class='home-blog-post_1'>";
+	        		 box+="<div class='image' style='text-align:center'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'><img width='349px' height='230px'  style='border-radius:5px;padding:0.5px;' src=/image/user/mission/"+mission.missionPicName+" alt='...'></a>";
 	        		 box+="</div><div class='text'><div class='s4'><h4><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'>"+ mission.title + "</a></h4>";
-	        		 box+="<p class='author-category'><a class'gerygery' href='/commons/personal-info/list?memberId="+mission.member.id+"'>"+mission.member.name+"</a></p>"
+	        		 box+="<p class='author-category'><a class='sss' href='/commons/personal-info/list?memberId="+mission.member.id+"'>"+mission.member.name+"</a></p>"
 	        		
 	        		 var discription=mission.discription
 	        		 if(discription.length>36){
 	        			 var shortDiscription=discription.substring(0,35)+"......";
 	        		 }
-	        		 box+="<p class='author-category_1 left'>活動介紹:"+shortDiscription+"</p>";
-	        		 box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
-	        		 box+="<p class='author-category_1 left'>活動地點:"+mission.county+mission.district+"</p>";
+	        		 box+="<div class='s10'><p class='author-category_1'>活動介紹:"+shortDiscription+"</p></div>";
+// 	        		 box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
+// 	        		 box+="<p class='author-category_1 left'>活動地點:"+mission.county+mission.district+"</p>";
 	        		 if(mission.isCollected=='Y'){
-		        		 box+="<p><a name='box1' class='s3 ex1' href='javascript:void(0)' onclick=\"cancelCollection("+mission.id+")\"><i name='pic1' class='fa fa-heart'></i>已收藏</a></p>"
+		        		 box+="<p class='s11'><a name='box1' class='s3 ex1' href='javascript:void(0)' onclick=\"cancelCollection("+mission.id+")\"><i name='pic1' class='fa fa-heart'></i>已收藏</a></p>"
 		        		 }else{																										
-		        		 box+="<p><a name='box2' class='s3 ex1' href='javascript:void(0)' onclick=\"insertCollection("+mission.id+")\"><i name='pic2' class='far fa-heart'></i>收藏</a></p>"	 
+		        		 box+="<p class='s11'><a name='box2' class='s3 ex1' href='javascript:void(0)' onclick=\"insertCollection("+mission.id+")\"><i name='pic2' class='far fa-heart'></i>收藏</a></p>"	 
 		        		 }
-	        		 box+="</div>"
+// 	        		 box+="</div>"
 // 	        		 box+="<p class='author-category_1'>發布者:<a href='/commons/personal-info/list?memberId="+mission.member.id+"'>"+mission.member.name+"</a></p>";
 					 box+="<ul class='social list-inline'>"
-			         box+="<li class='left s9' ><a href='#' class='gery'><i class='fas fa-clock'></i></a>時間:"+new Date(mission.startDate).toLocaleDateString()+"~"+new Date(mission.endDate).toLocaleDateString()+"</li>"
-			         box+="<li class='left s9'><a href='#' class='gery'><i class='fas fa-users'></i></a>招募中("+mission.approvedQuantity+"/"+mission.peopleNeeded+")</li>"
+// 						 <i class="fas fa-map-marker-alt"></i>
+					 box+="<li class='left s9' >&nbsp;<i class='fas fa-map-marker-alt'></i>&nbsp;&nbsp;&nbsp;"+mission.county+mission.district+"</li>"
+					 box+="<li class='left s9' >&nbsp;<i class='far fa-clock'></i>&nbsp;&nbsp;"+new Date(mission.startDate).toLocaleDateString()+"~"+new Date(mission.endDate).toLocaleDateString()+"</li>"
+			         box+="<li class='left s9'><i class='fas fa-users'></i>&nbsp;&nbsp;招募中("+mission.approvedQuantity+"/"+mission.peopleNeeded+")</li>"
 			        
 			         box+="</ul>"
 		        	

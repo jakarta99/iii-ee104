@@ -454,6 +454,8 @@ ul.social a.facebook {
   background: #4561ae;
 }
 
+
+
 ul.social a.gery {
   background: #DCDCDC;
 }
@@ -1085,6 +1087,13 @@ color: rgba(100, 100, 100);
 
 .home-blog-post {
   margin: 15px 0;
+}
+.home-blog-post_1 {
+  margin: 15px 0;
+  border:#13b5b1 1px solid;
+  border-radius:5px; 
+  
+  
 }
 
 .home-blog-post .image {
@@ -3108,9 +3117,18 @@ a {
   color: #13b5b1;
   text-decoration: none;
 }
+a.sss {
+  color: #A9A9A9;
+  text-decoration: none;
+}
 
 a:focus, a:hover {
   color: #348e7b;
+  text-decoration: underline;
+}
+
+a.sss:focus, a.sss:hover {
+  color: #A9A9A9;
   text-decoration: underline;
 }
 

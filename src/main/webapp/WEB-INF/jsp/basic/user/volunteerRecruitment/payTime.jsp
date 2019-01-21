@@ -346,6 +346,7 @@
 	        			box+= "<p>不應該出現的狀態</p>";
 						}
 	        			box+="<ul class='social list-inline'>"
+	        			
 	        			box+="<li class='s3'><a href='#' class='external twitter'><i class='fa fa-phone'></i></a>電話:"+order.volunteer.telephone+"</li>"
 	        			box+="<li class='s3'><a href='#' class='email'><i class='fa fa-envelope'></i></a>Email:"+order.volunteer.email+"</li>"
 	        			box+="</ul></div></div>"
