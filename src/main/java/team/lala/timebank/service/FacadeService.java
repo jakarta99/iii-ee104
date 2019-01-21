@@ -81,11 +81,11 @@ public class FacadeService {
 
 			// 5 系統訊息
 			// 5.1 付款後收到的訊息
-			systemMessageService.pay(payer, volunteer, hours, missionTitle);
+			systemMessageService.pay(payer, volunteer, hours, mission);
 			// 5.1 產生付款後收到的訊息完成
 
 			// 5.2 入賬後收到的訊息
-			systemMessageService.earn(payer, volunteer, hours, missionTitle);
+			systemMessageService.earn(payer, volunteer, hours, mission);
 			// 5.2 產生入賬後收到的訊息完成
 			
 			//6 付款計數器++
@@ -101,7 +101,7 @@ public class FacadeService {
 					mission.setMissionstatus(MissionStatus.C_Finish);
 					mission.setFinishDate(new Date());
 					missionDao.save(mission);
-					systemMessageService.finishMission(payer, missionTitle);
+					systemMessageService.finishMission(payer, mission);
 				}
 			
 			orderDao.save(order);

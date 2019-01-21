@@ -140,17 +140,37 @@
 
 
 
-       <div id="heading-breadcrumbs">
-        <div class="container">
-          <div class="row d-flex align-items-center flex-wrap">
-            <div class="col-md-7">
-              <h1 class="h2" align="center" style=color:brown>${mission.title}</h1>
-            </div>
-            <div class="col-md-5">
-            </div>
-          </div>
-        </div>
-      </div>
+<!--        <div id="heading-breadcrumbs"> -->
+<!--         <div class="container"> -->
+<!--           <div class="row d-flex align-items-center flex-wrap"> -->
+<!--             <div class="col-md-7"> -->
+<%--               <h1 class="h2" align="center" style=color:brown>${mission.title}</h1> --%>
+<!--             </div> -->
+<!--             <div class="col-md-5"> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--       </div> -->
+      <!--heading crumbs-->
+      <section style="background: url('/banner/1607281720180.jpg') center center repeat;padding:12rem 0" class="bar background-white relative-positioned">
+		<div class="dark-mask"></div>
+	    <div class="container">
+	         <div class="row d-flex align-items-center flex-wrap">
+	             <h1 class="h2"  style="margin:auto;color:#fff;font-size:42px;">志工招募</h1>
+	         </div>
+	     </div>
+	      <div class="container">
+	         <div class="row d-flex align-items-center flex-wrap">
+	             <div  style="margin:auto;color:#fff;font-size:20px;margin-top:20px">
+	                <div class="breadcrumb-item"><a href="/">首頁</a>/<a href="/commons/domesticVolunteer/list">志工招募</a>/志工申請</div>
+				</div>
+	         </div>
+	     </div>
+	   </section> 
+      
+      
+      
+      
       <div id="content" class="team-member-detail">
         <div class="container">
           <section class="bar">
