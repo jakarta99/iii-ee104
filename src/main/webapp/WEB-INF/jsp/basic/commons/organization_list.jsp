@@ -55,7 +55,7 @@
 		<jsp:include page="commons_layout/commons_top-bar.jsp" />
 		<!-- Navbar -->
 		<jsp:include page="commons_layout/commons_nav.jsp" />
-
+		<!--heading crumbs-->
 		<section style="background: url('/banner/1607281721280.jpg') center center repeat;padding:12rem 0" class="bar background-white relative-positioned">
 			<div class="dark-mask "></div>
 	       	<div class="container">
@@ -248,13 +248,13 @@
 	
 
 		$(document).ready( function () {			
-			$(document).ready(function(){ 
-				//將首頁的nav標籤標註
-				$("#navbar .navbar-nav > li > a[href='/commons/organization/list']")
-					.css("background","rgba(19, 181, 177, 0.9)")
-					.css("color"," rgba(240, 240, 240)");
-			   
-			})
+		
+			//將首頁的nav標籤標註
+			$("#navbar .navbar-nav > li > a[href='/commons/organization/list']")
+				.css("background","rgba(19, 181, 177, 0.9)")
+				.css("color"," rgba(240, 240, 240)");
+		   
+	
 		
 			list();
 			
