@@ -11,7 +11,9 @@
 <!-- css -->
 <!-- Javascript files-->
 <jsp:include page="../admin_layout/admin_css_js_links.jsp" />
-
+ 	<link href="../../../../vendor2/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template -->
+    <link href="../../../../css2/freelancer.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/css/chatAll.css">
 <link rel="stylesheet" href="/css/chat.css">
 <script>
@@ -32,7 +34,7 @@
 
 </script>
 </head>
-<body>
+<body style="font-family: 微軟正黑體">
 	<!-- Top bar-->
 <%-- 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp" /> --%>
 	<!-- Navbar -->
@@ -41,7 +43,7 @@
 	<sec:authentication property="name" var="userAccount"/>
 
 			
-	<div id="all">
+	<div id="all" style="padding-top: 110px; ">
 		<div id="content" style="border:1px solid gray;	height: 83%; ">
 			<div id="chattedPeopleList" >
 				<div>
