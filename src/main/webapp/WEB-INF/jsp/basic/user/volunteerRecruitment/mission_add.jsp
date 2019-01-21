@@ -81,16 +81,8 @@
  	
 	<!-- Navbar -->
     <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-    
-    <div id="heading-breadcrumbs">
-        <div class="container">
-          <div class="row d-flex align-items-center flex-wrap">
-            <div class="col-md-7">
-              <h1 class="h2">刊登任務</h1>
-            </div>
-          </div>
-        </div>
-      </div>
+	<!--heading crumbs-->
+	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 		<section class="bar">
         	<div class="container">
           	<div class="row">
@@ -260,6 +252,7 @@
 		})
 	
 		$(document).ready(function() {
+			$("#webTitle").empty().append("招募紀錄-未開始");
 			new TwCitySelector();
 			$('#startDate').datetimepicker({
 				dateFormat: "yy/mm/dd",

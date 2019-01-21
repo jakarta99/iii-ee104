@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Transaction Record</title>
+<title>我的交易紀錄 | TimeBank</title>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
 <!-- css -->
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp" />
@@ -84,21 +84,8 @@
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-	<div id="heading-breadcrumbs">
-    	<div class="container">
-        	<div class="row d-flex align-items-center flex-wrap">
-            	<div class="col-md-7">
-              		<h1 class="h2">我的交易紀錄</h1>
-            	</div>
-	            <div class="col-md-5">
-	              	<ul class="breadcrumb d-flex justify-content-end">
-	                	<li class="breadcrumb-item"><a href="/">Home</a></li>
-	                	<li class="breadcrumb-item active">Transaction record</li>
-	              	</ul>
-	            </div>
-        	</div>
-        </div>
-    </div>
+	<!--heading crumbs-->
+	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 	<!-- Sidebar -->
     <jsp:include page="../user_layout/user_sidebar.jsp"/>
 	<section class="bar">
@@ -165,6 +152,7 @@
 	<script>
 	var dataTable;
 	$(document).ready(function() {
+		$("#webTitle").empty().append("我的交易紀錄");
 		$("form").addClass("form-inline");
 		$("form div[id!='collapse']").addClass("form-group mx-sm-3 mb-3");
 		$("form input, select").addClass("form-control mx-3");

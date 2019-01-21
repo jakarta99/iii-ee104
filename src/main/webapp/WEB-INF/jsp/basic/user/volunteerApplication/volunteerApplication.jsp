@@ -69,17 +69,10 @@
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp" />
 	<!-- Navbar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />
+	<!--heading crumbs-->
+	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 	
-      <div id="heading-breadcrumbs" class="border-top-0 border-bottom-0">
-        <div class="container">
-          <div class="row d-flex align-items-center flex-wrap">
-            <div class="col-md-7">
-              <h1 id="webtitle" class="h2"></h1>
-            </div>
-          </div>
-        </div>
-      </div>
-		<div id="content">
+	<div id="content">
 		<div class="container a">
 		<section class="bar_1">
 			<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
@@ -241,7 +234,7 @@
 		};
 		$(document).ready(function() {
 			
-			$("#webtitle").empty().append("申請中的任務");
+			$("#webTitle").empty().append("申請中的任務");
 			list();
 			$("#pagebox").on("click","li>a[name='backa']", function(){
 				if(first == false){

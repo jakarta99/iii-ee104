@@ -68,20 +68,11 @@
 <fmt:formatDate value="${mission.startDate}" pattern="yyyy/MM/dd HH:mm" var="startDate" />
 <fmt:formatDate value="${mission.endDate}" pattern="yyyy/MM/dd HH:mm" var="endDate" />
 	<!-- Top bar-->
-	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
- 	
+	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>	
 	<!-- Navbar -->
     <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-    
-    <div id="heading-breadcrumbs">
-        <div class="container">
-          <div class="row d-flex align-items-center flex-wrap">
-            <div class="col-md-7">
-              <h1 class="h2">編輯活動</h1>
-            </div>
-          </div>
-        </div>
-      </div>
+    <!--heading crumbs-->
+	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 		<section class="bar">
         	<div class="container">
           	<div class="row">
@@ -241,7 +232,10 @@
 	
 	
 		$(document).ready(function(){
-			
+			var t = "<a href='/user/volunteerRecruitment/list' style='font-weight: 700;'>/招募紀錄</a>/編輯活動"			
+				$("#webTitle").empty().append("編輯活動");
+				$("#lastPage").after(t);
+				
 			new TwCitySelector();
 			$("div[role='tw-city-selector']").attr("data-county-value",'${mission.county}');
 			$("div[role='tw-city-selector']").attr("data-district-value", '${mission.district}');

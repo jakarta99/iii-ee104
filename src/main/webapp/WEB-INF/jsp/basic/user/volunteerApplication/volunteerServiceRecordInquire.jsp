@@ -186,15 +186,8 @@
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-	<div id="heading-breadcrumbs" class="border-top-0 border-bottom-0">
-		<div class="container">
-			<div class="row d-flex align-items-center flex-wrap">
-			<div class="col-md-7">
-			<h1 class="h2">媒合紀錄查詢</h1>
-			</div>
-			</div>
-		</div>
-	</div>
+	<!--heading crumbs-->
+	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 	
 	<div id="content">
     <div class="container container1">
@@ -462,6 +455,7 @@
 	    return fmt;
 	}
 	$(document).ready(function() {
+		$("#webTitle").empty().append("媒合紀錄查詢");
 		orderStatusDetail = "MatchSuccess";
 		list();
 		$("#pagebox").on("click","li>a[name='backa']", function(){

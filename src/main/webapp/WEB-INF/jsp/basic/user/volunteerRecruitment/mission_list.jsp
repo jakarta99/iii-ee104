@@ -115,29 +115,13 @@
 </head>
 <body>
 	  
- 		<!-- Top bar-->
-      <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
- 	
-	  <!-- Navbar -->
-      <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-      
-      <div id="heading-breadcrumbs" class="border-top-0 border-bottom-0">
-        <div class="container">
-          <div class="row d-flex align-items-center flex-wrap">
-            <div class="col-md-7">
-              <h1 id="webtitle" class="h2"></h1>
-            </div>
-            <div class="col-md-5">
-              <ul class="breadcrumb d-flex justify-content-end">
-                <li class="breadcrumb-item"><a href="/">首頁</a></li>
-                <li class="breadcrumb-item active">招募紀錄</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      
+ 	<!-- Top bar-->
+    <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>	
+	<!-- Navbar -->
+    <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
+	<!--heading crumbs-->
+	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />   
+   
         <div id="content">
         <div class="container-1 container">
         <div class="row">
@@ -405,7 +389,7 @@
 			} 	
  
 	$(document).ready( function () {
-// 		alert('${test}')
+		$("#webTitle").empty().append("招募紀錄");
 		new TwCitySelector();
 		
 		$('#startDate').datetimepicker({

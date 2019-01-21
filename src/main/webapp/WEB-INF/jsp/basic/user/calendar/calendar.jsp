@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>calendar</title>
+<title>行事曆 | TimeBank</title>
 <!-- Java script files-->
 <jsp:include page="../../commons/commons_layout/commons_js_links.jsp" />
 <!-- Moment.js v2.20.0 -->
@@ -92,16 +92,9 @@ li{
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp" />
 	<!-- Nav bar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />
-	
 	<!--heading crumbs-->
-    <section style="background: url('/banner/1607281720360.jpg') center center repeat;padding:12rem 0" class="bar background-white relative-positioned">
-		<div class="dark-mask"></div>
-	    <div class="container">
-	     	<div class="row d-flex align-items-center flex-wrap">
-             	<h1 class="h2"  style="margin:auto;color:#fff;font-size:42px;">行事曆</h1>
-        	</div>
-     	</div>
-   	</section> 
+	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
+	
     <section class="bar">
 	    <div class="container" style="padding:50px; background:rgba(201,255,248,0.5)">
     	<ul>
@@ -140,6 +133,7 @@ li{
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
 	<script>
 	$(document).ready(function(){
+		$("#webTitle").empty().append("行事曆");
 	  $('#calendar').fullCalendar({
 		  header: {
 			  left: 'month,agendaWeek,agendaDay',
