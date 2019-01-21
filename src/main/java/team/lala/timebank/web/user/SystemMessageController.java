@@ -23,7 +23,7 @@ import team.lala.timebank.service.SystemMessageService;
 
 @Slf4j
 @Controller
-@RequestMapping("/system-message")
+@RequestMapping("/user/system-message")
 @SessionAttributes(names= {"notReadMsgSize"})
 public class SystemMessageController {
 	@Autowired
