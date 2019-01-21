@@ -55,7 +55,7 @@
 		<jsp:include page="commons_layout/commons_top-bar.jsp" />
 		<!-- Navbar -->
 		<jsp:include page="commons_layout/commons_nav.jsp" />
-
+		<!--heading crumbs-->
 		<section style="background: url('/banner/1607281721280.jpg') center center repeat;padding:12rem 0" class="bar background-white relative-positioned">
 			<div class="dark-mask "></div>
 	       	<div class="container">
@@ -246,7 +246,6 @@
 		        
 		}
 	
-
 		$(document).ready( function () {		
 			list();
 			

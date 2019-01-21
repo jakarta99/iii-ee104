@@ -24,7 +24,7 @@ import team.lala.timebank.service.ChatMessageService;
 import team.lala.timebank.service.MemberService;
 @Slf4j
 @Controller
-@RequestMapping("/user/chatMessage")
+@RequestMapping("/user/chatMessage") 
 public class ChatMessageController {
 
 	@Autowired
@@ -91,21 +91,7 @@ public class ChatMessageController {
 		return respData;
 	}
 	
-	//我的訊息頁面(查看所有我的訊息紀錄)
-	@RequestMapping("/oldMessages/all/list")
-	public String listAllChatHistoryPage(Principal principal, Model model) {
-		List<ChatMessage> chatObjectsList = chatMessageService.findLastMessageWithChatObjectsByAccount(principal.getName());		
-		model.addAttribute("chatObjectsList",chatObjectsList);
-		log.debug("chatObjectsList={}",chatObjectsList);
-		return "/basic/user/chatRoom/chatMessagesPage";
-	}
-	@ResponseBody
-	@RequestMapping("/oldMessages/all/chatObject")
-	public List<ChatMessage> findLastMessageWithChatObjectsByAccount(Principal principal){
-		return  chatMessageService.findLastMessageWithChatObjectsByAccount(principal.getName());		
-		
-	}
-	
+
 	@ResponseBody
 	@RequestMapping("/stompClientConnection/session/clear")
 	public void clearStompClientConnectionSession(HttpSession session ) {
