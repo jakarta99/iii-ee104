@@ -57,7 +57,7 @@
 			margin-bottom:20px;
 		  padding-top: 30px;
 		  text-align:center;
-		  background-color:#A9A9A9;
+		  background-color:#F5F5F5;
 		  border-radius: 10px;
 /* 		  width:500px; */
 /* 		  height:50px; */
@@ -286,7 +286,7 @@
 	        		var box="<div class='col-lg-4 col-md-6'>";
 	        		 box+="<div class='home-blog-post_1'>";
 	        		 box+="<div class='image' style='text-align:center'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'><img width='349px' height='230px'  style='border-radius:5px;padding:0.5px;' src=/image/user/mission/"+mission.missionPicName+" alt='...'></a>";
-	        		 box+="</div><div class='text'><div class='s4'><h4><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'>"+ mission.title + "</a></h4>";
+	        		 box+="</div><div class='text'><div class='s4'><h3><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'>"+ mission.title + "</a></h3>";
 	        		 box+="<p class='author-category'><a class='sss' href='/commons/personal-info/list?memberId="+mission.member.id+"'>"+mission.member.name+"</a></p>"
 	        		
 	        		 var discription=mission.discription
@@ -294,21 +294,15 @@
 	        			 var shortDiscription=discription.substring(0,35)+"......";
 	        		 }
 	        		 box+="<div class='s10'><p class='author-category_1'>活動介紹:"+shortDiscription+"</p></div>";
-// 	        		 box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
-// 	        		 box+="<p class='author-category_1 left'>活動地點:"+mission.county+mission.district+"</p>";
 	        		 if(mission.isCollected=='Y'){
 		        		 box+="<p class='s11'><a name='box1' class='s3 ex1' href='javascript:void(0)' onclick=\"cancelCollection("+mission.id+")\"><i name='pic1' class='fa fa-heart'></i>已收藏</a></p>"
 		        		 }else{																										
 		        		 box+="<p class='s11'><a name='box2' class='s3 ex1' href='javascript:void(0)' onclick=\"insertCollection("+mission.id+")\"><i name='pic2' class='far fa-heart'></i>收藏</a></p>"	 
 		        		 }
-// 	        		 box+="</div>"
-// 	        		 box+="<p class='author-category_1'>發布者:<a href='/commons/personal-info/list?memberId="+mission.member.id+"'>"+mission.member.name+"</a></p>";
 					 box+="<ul class='social list-inline'>"
-// 						 <i class="fas fa-map-marker-alt"></i>
-					 box+="<li class='left s9' >&nbsp;<i class='fas fa-map-marker-alt'></i>&nbsp;&nbsp;&nbsp;"+mission.county+mission.district+"</li>"
-					 box+="<li class='left s9' >&nbsp;<i class='far fa-clock'></i>&nbsp;&nbsp;"+new Date(mission.startDate).toLocaleDateString()+"~"+new Date(mission.endDate).toLocaleDateString()+"</li>"
-			         box+="<li class='left s9'><i class='fas fa-users'></i>&nbsp;&nbsp;招募中("+mission.approvedQuantity+"/"+mission.peopleNeeded+")</li>"
-			        
+					 box+="<li class='left s9' ><i class='fas fa-map-marker-alt'></i>&nbsp;&nbsp;&nbsp;"+mission.county+mission.district+"</li>"
+					 box+="<li class='left s9' ><i class='fas fa-calendar-week'></i>&nbsp;&nbsp;&nbsp;"+new Date(mission.startDate).toLocaleDateString()+"~"+new Date(mission.endDate).toLocaleDateString()+"</li>"
+			         box+="<li class='left s9'><i class='fas fa-user'></i>&nbsp;&nbsp;&nbsp;招募中("+mission.approvedQuantity+"/"+mission.peopleNeeded+")</li>"
 			         box+="</ul>"
 		        	
 	        		 box+="</div></div></div></div>";   
