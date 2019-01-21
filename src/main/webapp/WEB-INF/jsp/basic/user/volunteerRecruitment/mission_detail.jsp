@@ -79,32 +79,13 @@
 </head>
 <body>
 
- <!-- Top bar-->
-      <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
- 	
-	  <!-- Navbar -->
-      <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
+ 	<!-- Top bar-->
+    <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/> 	
+	<!-- Navbar -->
+    <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
+	<!--heading crumbs-->
+	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 
-
-
-
-
-       <div id="heading-breadcrumbs">
-        <div class="container">
-          <div class="row d-flex align-items-center flex-wrap">
-            <div class="col-md-7">
-              <h1 class="h2" align="center" style=color:brown>${mission.title}</h1>
-            </div>
-            <div class="col-md-5">
-              <ul class="breadcrumb d-flex justify-content-end">
-                <li class="breadcrumb-item"><a href="/">首頁</a></li>
-                <li class="breadcrumb-item"><a href="/user/volunteerRecruitment/list">招募紀錄</a></li>
-                <li class="breadcrumb-item active">招募詳細</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
       <div id="content" class="team-member-detail">
         <div class="container">
           <section class="bar">
@@ -182,6 +163,11 @@
         </div>
 	 </div>
 <script>
+	$(document).ready(function(){
+		var t = "<a href='/user/volunteerRecruitment/list' style='font-weight: 700;'>/招募紀錄</a>/詳細任務"			
+		$("#webTitle").empty().append("${mission.title}");
+		$("#lastPage").after(t);
+	})
 	var map, geocoder;
 	var geocoder;
 	var address = "${mission.county}${mission.district}${mission.address}";

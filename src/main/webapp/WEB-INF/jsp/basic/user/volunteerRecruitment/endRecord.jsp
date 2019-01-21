@@ -92,28 +92,13 @@
     </style>
 </head>
 <body>
+ 	<!-- Top bar-->
+    <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/> 	
+	<!-- Navbar -->
+    <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
+	<!--heading crumbs-->
+	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 
- <!-- Top bar-->
-      <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
- 	
-	  <!-- Navbar -->
-      <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-
-
-
-
-
-       <div id="heading-breadcrumbs">
-        <div class="container">
-          <div class="row d-flex align-items-center flex-wrap">
-            <div class="col-md-7">
-              <h1 class="h2">${mission.title}結案紀錄</h1>
-            </div>
-            <div class="col-md-5">
-            </div>
-          </div>
-        </div>
-      </div>
      <div id="content" class="team-member-detail">
         <div class="container">
           <section class="bar">
@@ -193,7 +178,11 @@
 					    <div style="height:210px" id="map"></div>
 		          </section>
 				 <script>
-	
+	$(document).ready(function(){
+		var t = "<a href='/user/volunteerRecruitment/list' style='font-weight: 700;'>/招募紀錄</a>/結案紀錄"			
+		$("#webTitle").empty().append("結案紀錄");
+		$("#lastPage").after(t);
+	})
 	var map, geocoder;
 	
 	var address = "${mission.county}${mission.district}${mission.address}";

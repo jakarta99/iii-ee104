@@ -68,27 +68,12 @@
 </head>
 <body>
 
- <!-- Top bar-->
-      <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
- 	
-	  <!-- Navbar -->
-      <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-	<div id="heading-breadcrumbs">
-       <div class="container">
-          <div class="row d-flex align-items-center flex-wrap">
-            <div class="col-md-7">
-              <h1 class="h2">時數核發</h1>
-            </div>
-            <div class="col-md-5">
-              <ul class="breadcrumb d-flex justify-content-end">
-                <li class="breadcrumb-item"><a href="/">首頁</a></li>
-                <li class="breadcrumb-item"><a href="/user/volunteerRecruitment/list?box=2">招募紀錄</a></li>
-                <li class="breadcrumb-item active">時數審核</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+ 	<!-- Top bar-->
+    <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
+	<!-- Navbar -->
+    <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
+	<!--heading crumbs-->
+	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
       <div id="content">
         <div class="container">
           <section class="bar mb-0">
@@ -363,6 +348,10 @@
 			}
 	
 	$(document).ready( function () {
+		var t = "<a href='/user/volunteerRecruitment/list' style='font-weight: 700;'>/招募紀錄</a>/時數核發"			
+			$("#webTitle").empty().append("時數核發");
+			$("#lastPage").after(t);
+			
 		list()
 		$("#pagebox").on("click","li>a[name='backa']", function(){
 			if(first == false){
