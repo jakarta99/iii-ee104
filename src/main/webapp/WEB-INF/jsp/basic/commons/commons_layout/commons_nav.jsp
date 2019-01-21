@@ -22,7 +22,7 @@
                       <div class="row">
                         <div class="col-md-6 col-lg-3">
                           <h5><a href="/user/calendar" >行事曆</a></h5>                      
-                          <h5><a href="/system-message/list" id="systemMessage">通知</a></h5>
+                          <h5><a href="/user/system-message/list" id="systemMessage">通知</a></h5>
                           <h5><a href="/user/chatMessage/oldMessages/all/list" id="chatMessage">我的訊息</a></h5>
                           <h5><a href="/user/personal-info/list" >我的個人資訊</a></h5>                          
                         </div>
@@ -58,22 +58,8 @@
 
                 <!-- ========== admin dropdown ==================-->
                <sec:authorize access="hasRole('ADMIN')">				
-                <li class="nav-item dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">管理者系統 <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li class="dropdown-item"><a href="/admin/member/list" class="nav-link" id="backStage-member">member</a> </li>
-                    <li class="dropdown-item"><a href="/admin/order/list" class="nav-link" id="backStage-order">order</a> </li>
-                    <li class="dropdown-item"><a href="/admin/donation/list" class="nav-link" id="backStage-donation">donation</a></li>
-                    <li class="dropdown-item"><a href="/admin/request/list" class="nav-link" id="backStage-request">request</a></li>
-                    <li class="dropdown-item"><a href="/admin/time-ledger/list" class="nav-link" id="backStage-timeledger">time-ledger</a></li>
-                    <li class="dropdown-item"><a href="/admin/penalty/list" class="nav-link" id="backStage-penalty">penalty</a></li>
-                    <li class="dropdown-item"><a href="/admin/mission/list" class="nav-link" id="backStage-penalty">mission</a></li>
-                    <li class="dropdown-item"><a href="/admin/role/list" class="nav-link" id="backStage-role">role</a></li>
-                    <li class="dropdown-item"><a href="/admin/serviceType/list" class="nav-link" id="backStage-role">serviceType</a></li>
-<!--                     <li class="dropdown-item"><a href="/admin/penaltyVertify/tempPenaltyEntrance" class="nav-link" id="backStage-personalinfo">【使用者】模擬提出檢舉(暫放)</a></li> -->
-                    <li class="dropdown-item"><a href="/admin/penaltyVertify/showVertifyList" class="nav-link" id="backStage-personalinfo">審核檢舉／申訴案件</a></li>
-                    <li class="dropdown-item"><a href="/admin/donation/chart" class="nav-link" id="backStage-personalinfo">捐款統計(測試中)</a></li>
-                  </ul>
-                </li>
+                <li class="nav-item"><a href="/admin/donation/chart">管理者系統 <b class="caret"></b></a>
+                
                 </sec:authorize>
                 <!-- ========== Contact dropdown end ==================-->
               </ul>

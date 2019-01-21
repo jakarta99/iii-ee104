@@ -52,7 +52,7 @@
 <!-- 			  <button type="button" class="btn btn-outline-info" id="allMessages">全部訊息</button> -->
 			</div>
 	
-			<form action="/system-message/selectMsgsAsRead" method="post" onSubmit="return checkForm();">
+			<form action="/user/system-message/selectMsgsAsRead" method="post" onSubmit="return checkForm();">
 				<table id="table" class="table table-hover">
 					<thead>
 						<tr class="table-info">
@@ -134,7 +134,7 @@
 		//暫不用此方法。
 		function getMessageId(msgId){
 			$.ajax({
-				url : "/system-message/readMessage",
+				url : "/user/system-message/readMessage",
 				method : "put",
 				dataType : "json",
 				data : {"id":msgId},
@@ -179,7 +179,7 @@
 				serverSide: true,  //DataTable:分頁、排序都交由伺服器處理
 				lengthMenu: [ 10, 15, 20, 25, ],
 				ajax:{
-					url:"/system-message/getSystemMessages",
+					url:"/user/system-message/getSystemMessages",
 					type:"get",
 					dataType:"json",
 					data:function(d){ 				//DataTable:傳送給伺服器的資料(datatable預設會傳送d的資料)
@@ -458,7 +458,7 @@
 								 swal("申訴成功", {icon: "success",})
 								 .then(function(){
 									 //$('#penaltyReVertifyCenter').modal('hide');
-									 window.location.replace("/system-message/list");
+									 window.location.replace("/user/system-message/list");
 								 });
 								 
 							} else {
