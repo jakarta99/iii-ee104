@@ -57,7 +57,7 @@
 			margin-bottom:20px;
 		  padding-top: 30px;
 		  text-align:center;
-		  background-color:#F5F5F5;
+		  background-color:#dee2e6;
 		  border-radius: 10px;
 /* 		  width:500px; */
 /* 		  height:50px; */
