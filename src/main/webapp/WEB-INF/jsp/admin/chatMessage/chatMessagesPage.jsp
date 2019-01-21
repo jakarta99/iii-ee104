@@ -9,9 +9,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>我的訊息 | TimeBank</title>
 <!-- css -->
-<%-- <jsp:include page="../../commons/commons_layout/commons_css_links.jsp" /> --%>
 <!-- Javascript files-->
 <jsp:include page="../admin_layout/admin_css_js_links.jsp" />
+
 <link rel="stylesheet" href="/css/chatAll.css">
 <link rel="stylesheet" href="/css/chat.css">
 <script>
@@ -37,7 +37,7 @@
 <%-- 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp" /> --%>
 	<!-- Navbar -->
 <%-- 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" /> --%>
-	
+	<jsp:include page="../admin_layout/nav.jsp" />
 	<sec:authentication property="name" var="userAccount"/>
 
 			
