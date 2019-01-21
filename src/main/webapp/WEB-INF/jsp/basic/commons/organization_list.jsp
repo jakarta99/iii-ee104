@@ -246,16 +246,7 @@
 		        
 		}
 	
-
-		$(document).ready( function () {			
-		
-			//將首頁的nav標籤標註
-			$("#navbar .navbar-nav > li > a[href='/commons/organization/list']")
-				.css("background","rgba(19, 181, 177, 0.9)")
-				.css("color"," rgba(240, 240, 240)");
-		   
-	
-		
+		$(document).ready( function () {		
 			list();
 			
 			$("#pagebox").on("click","li>a[name='backa']", function(){

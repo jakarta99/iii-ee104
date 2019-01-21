@@ -16,7 +16,7 @@
                 <li class="nav-item menu-large"><a href="/commons/domesticVolunteer/list" >志工招募<b class="caret"></b></a>
                 </li>
 <%--                 <sec:authorize access="hasAnyRole('USER','ORG_USER')"> --%>
-              	<li class="nav-item dropdown menu-large" ><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle">會員專區 <b class="caret"></b></a>
+              	<li class="nav-item dropdown menu-large" ><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle" id='userA'>會員專區 <b class="caret"></b></a>
                   <ul class="dropdown-menu megamenu" style="width:450px;">
                     <li>
                       <div class="row">
@@ -58,7 +58,7 @@
 
                 <!-- ========== admin dropdown ==================-->
                <sec:authorize access="hasRole('ADMIN')">				
-                <li class="nav-item dropdown"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle">管理者系統 <b class="caret"></b></a>
+                <li class="nav-item dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">管理者系統 <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li class="dropdown-item"><a href="/admin/member/list" class="nav-link" id="backStage-member">member</a> </li>
                     <li class="dropdown-item"><a href="/admin/order/list" class="nav-link" id="backStage-order">order</a> </li>
@@ -77,38 +77,46 @@
                 </sec:authorize>
                 <!-- ========== Contact dropdown end ==================-->
               </ul>
-            </div>
-           
+            </div>          
           </div>
-            <!-- sign in & sign out -->
-<!--                 <div class="login" style="width:240px;">        -->
-<%-- 	               	<sec:authorize  access="!isAuthenticated()">         	 --%>
-<!-- 	               	 <a href="/login"  class="login-btn"> -->
-<!-- 	                	<i class="fa fa-sign-in"></i> -->
-<!-- 	                	<span class="d-none d-md-inline-block">Sign In</span> -->
-<!-- 	                 </a> -->
-<!-- 				  	<a href="/commons/sign-up/type" class="signup-btn"> -->
-<!--                 		<i class="fa fa-user"></i><span class="d-none d-md-inline-block">Sign Up</span> -->
-<!--                 	</a> -->
-<%-- 	                </sec:authorize>	                 --%>
-<%-- 					<sec:authorize  access="isAuthenticated()"> --%>
-
-<!-- 						<span class="d-none d-md-inline-block" id="loginName" style="width:200px; text-align:right">  -->
-<%-- 							歡迎回來, <sec:authentication property="name"/>&nbsp&nbsp&nbsp --%>
-<!-- 						</span>					 -->
-						<!-- logout method:get -->
-<!-- 						<a href="/logout" class="logout-btn"> -->
-<!-- 	                		<i class="fa fa-sign-in"></i> -->
-<!-- 	                		<span class="d-none d-md-inline-block">Sign Out</span> -->
-<!-- 		                </a> -->
-	        
-<%-- 	                </sec:authorize> --%>
-<!--                </div> -->
         </div>
       </header>
  
  <script>
 	//登入後，顯示系統訊息未讀數量
+	$(document).ready(function(){
+		console.log(location.href);
+		var href = location.href
+		var com = href.indexOf('commons');
+		var now = href.substr(com+8, 5);
+		console.log(now);
+		if(href.length <= 18){
+			$("#navbar .navbar-nav > li > a[href='/']")
+			.css("background","rgba(19, 181, 177, 0.9)")
+			.css("color"," rgba(240, 240, 240)");
+		} else if(now == 'organ'){
+			$("#navbar .navbar-nav > li > a[href='/commons/organization/list']")
+			.css("background","rgba(19, 181, 177, 0.9)")
+			.css("color"," rgba(240, 240, 240)");
+		} else if(now == 'domes'){
+			$("#navbar .navbar-nav > li > a[href='/commons/domesticVolunteer/list']")
+			.css("background","rgba(19, 181, 177, 0.9)")
+			.css("color"," rgba(240, 240, 240)");
+		} else if(now == 'Inter'){
+			$("#navbar .navbar-nav > li > a[href='/commons/InternationalVolunteer/list']")
+			.css("background","rgba(19, 181, 177, 0.9)")
+			.css("color"," rgba(240, 240, 240)");
+		} else if(now == 'about'){
+			$("#navbar .navbar-nav > li > a[href='javascript: void(0)']")
+			.css("background","rgba(19, 181, 177, 0.9)")
+			.css("color"," rgba(240, 240, 240)");
+		} else {
+			$("#userA")
+			.css("background","rgba(19, 181, 177, 0.9)")
+			.css("color"," rgba(240, 240, 240)");
+		}
+	})
+	
  	if($("#loginName").html() != undefined){ //$("#loginName")來自commons_t0p-bar
  		checkMailBox();
  	}
