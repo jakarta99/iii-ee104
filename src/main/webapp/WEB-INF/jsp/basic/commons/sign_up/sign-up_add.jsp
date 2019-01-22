@@ -59,9 +59,9 @@
             	</div>
 	            <div class="col-md-5">
 	              	<ul class="breadcrumb d-flex justify-content-end">
-	                	<li class="breadcrumb-item"><a href="/">Home</a></li>
-	                	<li class="breadcrumb-item"><a href="/commons/sign-up/type">Select account type</a></li>
-	                	<li class="breadcrumb-item active">Write information</li>
+	                	<li class="breadcrumb-item"><a href="/">首頁</a></li>
+	                	<li class="breadcrumb-item"><a href="/commons/sign-up/type">選擇帳戶類型</a></li>
+	                	<li class="breadcrumb-item active">填寫帳戶資訊</li>
 	              	</ul>
 	            </div>
         	</div>

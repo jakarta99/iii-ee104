@@ -30,8 +30,8 @@
             	</div>
 	            <div class="col-md-5">
 	              	<ul class="breadcrumb d-flex justify-content-end">
-	                	<li class="breadcrumb-item"><a href="/">Home</a></li>
-	                	<li class="breadcrumb-item active">Select account type</li>
+	                	<li class="breadcrumb-item"><a href="/">首頁</a></li>
+	                	<li class="breadcrumb-item active">選擇帳戶類型</li>
 	              	</ul>
 	            </div>
         	</div>
@@ -59,9 +59,9 @@
           <div class="row">           
             <div class="col-lg-6" style="margin:auto">
               <div class="box">
-                <h2 class="text-uppercase">NEW ACCOUNT</h2>
-                <p class="lead">Not our registered customer yet?</p>
-                <p class="text-muted">Select account type</p>
+                <h2 class="text-uppercase">新的帳戶</h2>
+                <p class="lead">還不是我們的會員?</p>
+                <p class="text-muted">選擇帳戶類型</p>
                 <hr>
                 <form>
                   <div class="text-center">

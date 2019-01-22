@@ -16,6 +16,9 @@
 	body{
 		font-family: "微軟正黑體"
 	}
+	.box {
+	    margin: 30px 0;
+	}
 </style>
 
 </head>
@@ -32,10 +35,10 @@
             	</div>
 	            <div class="col-md-5">
 	              	<ul class="breadcrumb d-flex justify-content-end">
-	                	<li class="breadcrumb-item"><a href="/">Home</a></li>
-	                	<li class="breadcrumb-item"><a href="/user/personal-info/list">Member Information</a></li>
-	                	<li class="breadcrumb-item"><a href="/user/personal-info/edit">Edit Information</a></li>
-	                	<li class="breadcrumb-item active">Change picture</li>
+	                	<li class="breadcrumb-item"><a href="/">首頁</a></li>
+	                	<li class="breadcrumb-item"><a href="/user/personal-info/list">我的個人資訊</a></li>
+	                	<li class="breadcrumb-item"><a href="/user/personal-info/edit">修改個人資訊</a></li>
+	                	<li class="breadcrumb-item active">變更照片</li>
 	              	</ul>
 	            </div>
         	</div>
@@ -43,17 +46,17 @@
     </div>
 	<!-- Sidebar -->
 	<jsp:include page="../user_layout/user_sidebar.jsp"/>
-	<section class="bar">
+	<section>
 	<div class="container">
     	<div class="row">          
         	<div class="col-lg-6" style="margin:auto">
             	<div class="box">
                 	<article>
                 	<div class="heading">
-                		<h3>個人資訊(NEW PIC)</h3>
+                		<h3>上傳一張您的照片</h3>
 					</div>
-					<h5>上傳一張您的照片</h5>
-                	<hr>
+<!-- 					<h5>上傳一張您的照片</h5> -->
+<!--                 	<hr> -->
                 	<form id="pictureForm" action="/user/personal-info/changeMemberPic" method="post" enctype="multipart/form-data">
 	                  	<div>
 							<label for="picture">圖片 :</label>

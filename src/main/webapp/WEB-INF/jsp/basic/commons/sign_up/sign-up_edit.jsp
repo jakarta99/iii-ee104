@@ -39,6 +39,7 @@
 		border: 1px solid #ced4da;
 		border-radius: 0.25rem;
 		transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+		margin: 5px;
 	}
 	.padding-horizontal {
 	    padding: 5px 0px 10px 0px !important;
@@ -59,9 +60,9 @@
             	</div>
 	            <div class="col-md-5">
 	              	<ul class="breadcrumb d-flex justify-content-end">
-	                	<li class="breadcrumb-item"><a href="/">Home</a></li>
-	                	<li class="breadcrumb-item"><a href="/commons/sign-up/type">Select account type</a></li>
-	                	<li class="breadcrumb-item active">Write information</li>
+	                	<li class="breadcrumb-item"><a href="/">首頁</a></li>
+	                	<li class="breadcrumb-item"><a href="/commons/sign-up/type">選擇帳戶類型</a></li>
+	                	<li class="breadcrumb-item active">填寫帳戶資訊</li>
 	              	</ul>
 	            </div>
         	</div>
@@ -129,7 +130,7 @@
 						<div class="row">
 							<div class="col-md-4">
                       			<div class="form-group">
-									<label for="idEmail">email:</label> 
+									<label for="idEmail">Email:</label> 
 									<input type="text" value="${param.email}" id="idEmail" name="email" autofocus autocompelete="off" class="form-control">
 									<div><label>(1.不可空白，2.必須填入確切用戶信箱，以供驗證)</label></div>
 									<span id="idspEmail" style='color:red'></span>
@@ -156,7 +157,7 @@
 							<div class="col-md-4">
                       			<div class="form-group">		
 									<div><label>縣市區域:</label></div>
-										<span role="tw-city-selector"></span>
+										<span role="tw-city-selector" class="city"></span>
 								</div>
 							</div>
 							<div class="col-md-4">

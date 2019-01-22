@@ -99,7 +99,7 @@
 				<div id="sideBar">
 					<form>
 						<fieldset style="width:1100px">
-						<legend>Search</legend>
+						<legend>搜尋</legend>
 						<div>
 							<div>
 							    <label>起始時間</label>
@@ -194,7 +194,7 @@
 				var api = this.api();
 				var pageNum = parseInt(d.json.pageable.pageNumber);
 				var totalPages = d.json.totalPages;
-				$('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
+				$('#table_info').html('目前顯示第  '+(pageNum+1)+' 頁，共  '+totalPages+'頁。');
 			},
 			//設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
 			columns:[

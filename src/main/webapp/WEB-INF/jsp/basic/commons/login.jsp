@@ -23,28 +23,29 @@
           <div class="row" >           
             <div class="col-lg-6" style="margin:auto">
               <div class="box">
-                <h2 class="text-uppercase">Login</h2>
-                <p class="lead">Already our customer?</p>
+                <h2 class="text-uppercase">登入</h2>
+                <p class="lead">已經是我們的會員?</p>
                 <p class="text-muted"></p>
                 <hr>
                 <form action="/login" method="post" id="loginForm">
                   <div class="form-group">
-                    <label for="username">Account</label>
+                    <label for="username">帳號</label>
                     <input id="username" type="text" name="username" class="form-control" autofocus>
                   </div>
                   <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">密碼</label>
                     <input id="password" type="password" name="password" class="form-control">
                   </div>
                      <h6 style="text-align: center;color:blue">${message}</h6>
                   <div class="text-center">
-                    <button type="submit" class="btn btn-template-outlined"><i class="fa fa-sign-in"></i> Log in</button>
+                    <button type="submit" class="btn btn-template-outlined"><i class="fa fa-sign-in"></i> 登入</button>
                   </div>
                   <div class="text-right"><a href="commons/login-forget/type">忘記密碼</a></div>
                 </form>
+                <br/>
                 <div class="text-center">
-				    <img src="../../img/facebook.png" onclick="FBLogin()" width="5%" height="5%"/> 
-				    <img src="../../img/google.png" onclick="GoogleLogin()" width="5%" height="5%"/>
+				    <img src="../../img/facebook.png" onclick="FBLogin()" width="52.5%"/> 
+				    <img src="../../img/google.png" onclick="GoogleLogin()" width="46.5%"/>
               	</div>
               </div>
             </div>
@@ -54,7 +55,7 @@
     </div>
     
    <!-- FOOTER -->
-<%--    <jsp:include page="commons_layout/commons_footer.jsp" /> --%>
+   <jsp:include page="commons_layout/commons_footer.jsp" />
    
 <!--Google登入-->
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};HandleGoogleApiLibrary()"

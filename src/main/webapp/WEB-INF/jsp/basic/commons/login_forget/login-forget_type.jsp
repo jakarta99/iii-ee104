@@ -30,8 +30,8 @@
             	</div>
 	            <div class="col-md-5">
 	              	<ul class="breadcrumb d-flex justify-content-end">
-	                	<li class="breadcrumb-item"><a href="/">Home</a></li>
-	                	<li class="breadcrumb-item active">Member type</li>
+	                	<li class="breadcrumb-item"><a href="/">首頁</a></li>
+	                	<li class="breadcrumb-item active">會員類型</li>
 	              	</ul>
 	            </div>
         	</div>
@@ -59,9 +59,9 @@
           <div class="row">           
             <div class="col-lg-6" style="margin:auto">
               <div class="box">
-                <h2 class="text-uppercase">FORGET PASSWORD</h2>
-                <p class="lead">Forget your account password?</p>
-                <p class="text-muted">Select your member type</p>
+                <h2 class="text-uppercase">忘記密碼</h2>
+                <p class="lead">忘記您的帳戶密碼?</p>
+                <p class="text-muted">選擇您的帳戶類型</p>
                 <hr>
                 <form>
                   <div class="text-center">

@@ -16,6 +16,9 @@
 	body{
 		font-family: "微軟正黑體"
 	}
+	.box {
+	    margin: 30px 0;
+	}
 </style>
 
 </head>
@@ -32,14 +35,14 @@
             	</div>
 	            <div class="col-md-5">
 	              	<ul class="breadcrumb d-flex justify-content-end">
-	                	<li class="breadcrumb-item"><a href="/">Home</a></li>
-	                	<li class="breadcrumb-item active">Upload photos</li>
+	                	<li class="breadcrumb-item"><a href="/">首頁</a></li>
+	                	<li class="breadcrumb-item active">上傳帳戶圖片</li>
 	              	</ul>
 	            </div>
         	</div>
         </div>
     </div>
-	<section class="bar">
+	<section>
 		<div id="all">
 <!--       <div id="heading-breadcrumbs"> -->
 <!--         <div class="container"> -->
@@ -62,10 +65,10 @@
             <div class="col-lg-6" style="margin:auto">
               <div class="box">
               	<div class="heading">
-                <h2 class="text-uppercase">NEW PIC</h2>
+                <h2 class="text-uppercase">上傳一張您的照片</h2>
                 </div>
-                <h5>上傳一張您的照片</h5>
-                <hr>
+<!--                 <h5>上傳一張您的照片</h5> -->
+<!--                 <hr> -->
                 <form id="pictureForm" enctype="multipart/form-data">
                   <div>
 					<label for="picture">圖片 :</label>

@@ -43,9 +43,9 @@
             	</div>
 	            <div class="col-md-5">
 	              	<ul class="breadcrumb d-flex justify-content-end">
-	                	<li class="breadcrumb-item"><a href="/">Home</a></li>
-	                	<li class="breadcrumb-item"><a href="/commons/login-forget/type">Member type</a></li>
-						<li class="breadcrumb-item active">Forget Password</li>
+	                	<li class="breadcrumb-item"><a href="/">首頁</a></li>
+	                	<li class="breadcrumb-item"><a href="/commons/login-forget/type">會員類型</a></li>
+						<li class="breadcrumb-item active">忘記密碼</li>
 	              	</ul>
 	            </div>
         	</div>

@@ -39,6 +39,7 @@
 		border: 1px solid #ced4da;
 		border-radius: 0.25rem;
 		transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+		margin: 5px;
 	} 
 </style>
 
@@ -56,9 +57,9 @@
             	</div>
 	            <div class="col-md-5">
 	              	<ul class="breadcrumb d-flex justify-content-end">
-	                	<li class="breadcrumb-item"><a href="/">Home</a></li>
-	                	<li class="breadcrumb-item"><a href="/user/personal-info/list">Member Information</a></li>
-	                	<li class="breadcrumb-item active">Edit Information</li>
+	                	<li class="breadcrumb-item"><a href="/">首頁</a></li>
+	                	<li class="breadcrumb-item"><a href="/user/personal-info/list">我的個人資訊</a></li>
+	                	<li class="breadcrumb-item active">修改個人資訊</li>
 	              	</ul>
 	            </div>
         	</div>
@@ -70,9 +71,9 @@
 	<div class="container">
     	<div class="row">
             <article>
-				<h3>個人資訊</h3>
-				<h5>您在 TimeBank中使用的基本資訊</h5>
-				<hr>
+<!-- 				<h3>個人資訊</h3> -->
+<!-- 				<h5>您在 TimeBank中使用的基本資訊</h5> -->
+<!-- 				<hr> -->
 				<form>					
 					<fieldset>
 						<div class="heading">
