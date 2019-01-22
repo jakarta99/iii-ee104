@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,8 +48,9 @@ public class UserTransactionRecordController {
 			@RequestParam(name = "length", required = false) Optional<Integer> length){
 		int page = start.orElse(0) / length.orElse(10);
 //		Page<TimeLedger> timeLedgers = timeLedgerService.findByMemberId(memberService.findByAccount(principal.getName()), page, length);
+		Sort sort = new Sort(Sort.Direction.DESC, "transactionTime");
 		Page<TimeLedger> timeLedgers = timeLedgerService.findByMemberIdAndSpecification(principal, inputTimeLedger,
-				PageRequest.of(page, length.orElse(10)));
+				PageRequest.of(page, length.orElse(10), sort));
 		return timeLedgers;
 	}
 	
