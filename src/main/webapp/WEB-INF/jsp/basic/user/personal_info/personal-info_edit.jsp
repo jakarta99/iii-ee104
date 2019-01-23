@@ -590,7 +590,7 @@
 // 			$("form div").addClass("form-group");
 // 			$("form input").addClass("form-control");
 // 			$("form textarea").addClass("form-control");
-			var t = "<a href='/user/personal-info/list' style='font-weight: 700;'>/我的個人資料</a>/修改個人資料"			
+			var t = "<a href='/user/personal-info/list' style='font-weight: 700;'>/我的個人資訊</a>/修改個人資料"			
 				$("#webTitle").empty().append("修改個人資料");
 				$("#lastPage").after(t);
 				

@@ -237,7 +237,7 @@
 	    }
 	    
 		$(document).ready(function() {
-			var t = "<a href='/user/personal-info/list' style='font-weight: 700;'>/我的個人資料</a>/修改密碼"			
+			var t = "<a href='/user/personal-info/list' style='font-weight: 700;'>/我的個人資訊</a>/修改密碼"			
 				$("#webTitle").empty().append("修改密碼");
 				$("#lastPage").after(t);
 			//update member info. event
