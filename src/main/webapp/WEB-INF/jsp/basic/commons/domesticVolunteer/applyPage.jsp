@@ -214,19 +214,19 @@
 				<ul class="ul-icons list-unstyled">
 						
 					<li>
-						<div class="icon-filled">聯絡人</div><span style="font-size:16px">${mission.contactPerson}</span>
+						<div class="icon-filled">聯絡人</div><span style="font-size:18px">${mission.contactPerson}</span>
 					</li>
 					<li>
-						<div class="icon-filled">聯絡電話</div><span style="font-size:16px">${mission.contactPhone}</span>
+						<div class="icon-filled">聯絡電話</div><span style="font-size:18px">${mission.contactPhone}</span>
 					</li>
 					<li>
-						<div class="icon-filled">聯絡Email</div><span style="font-size:16px">${mission.contactEmail}</span>
+						<div class="icon-filled">聯絡信箱</div><span style="font-size:18px">${mission.contactEmail}</span>
 					</li>
 					<li >
-						<div class="icon-filled">活動地點</div><p style="font-size:16px">${mission.county}${mission.district}${mission.address}</p>
+						<div class="icon-filled">活動地點</div><p style="font-size:18px">${mission.county}${mission.district}${mission.address}</p>
 					</li>
 					<li>
-						<div class="icon-filled">起迄時間</div><p style="font-size:16px"><fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.startDate}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.endDate}"/></p>
+						<div class="icon-filled">起迄時間</div><p style="font-size:18px"><fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.startDate}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd HH-mm" value="${mission.endDate}"/></p>
 					</li>		
 				</ul>
 
@@ -234,10 +234,10 @@
               <div class="col-md-3">
               	<ul class="ul-icons list-unstyled">
               		<li>
-						<div class="icon-filled">服務種類</div><span style="font-size:16px">${mission.serviceType.serviceType}</span>
+						<div class="icon-filled">服務種類</div><span style="font-size:18px">${mission.serviceType.serviceType}</span>
 					</li>
 					<li>
-						<div class="icon-filled">服務類型</div><span style="font-size:16px">
+						<div class="icon-filled">服務類型</div><span style="font-size:18px">
 							<c:if test="${mission.termType == 'L'}"> 
 								長期
 							</c:if> 
@@ -247,10 +247,10 @@
 						</span>	
 					</li>
 					<li>
-						<div class="icon-filled">需求人數</div><span style="font-size:16px">${mission.peopleNeeded}人</span>
+						<div class="icon-filled">需求人數</div><span style="font-size:18px">${mission.peopleNeeded}人</span>
 					</li>
 					<li>
-						<div class="icon-filled">活動時數</div><span style="font-size:16px">${mission.timeValue}小時</span>
+						<div class="icon-filled">活動時數</div><span style="font-size:18px">${mission.timeValue}小時</span>
 					</li>
               	</ul>
               

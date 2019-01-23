@@ -179,6 +179,7 @@ public class OrderService {
 		if(mission.getMissionstatus() == MissionStatus.A_New) {
 			if (order.getOrderStatus() == OrderStatus.VolunteerApply) {
 				order.setOrderStatus(OrderStatus.RequesterAcceptService);
+				order.setOrderAcceptTime(new Date());
 				return orderDao.save(order);
 			}
 		}	
