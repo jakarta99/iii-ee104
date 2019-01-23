@@ -296,7 +296,7 @@
 	        		console.log(orderids)
 	        		var box="<div class='col-md-4'>"
 	        			box+="<div data-animate='fadeInUp' class='team-member'>"
-	        			box+="<div class='image_1'><a href='team-member.html'><img src='/image/user/member/"+order.volunteer.picture+"' class='img-fluid rounded-circle'></a></div>"
+	        			box+="<div class='image_1'><a href='team-member.html'><img src='/image/user/member/"+order.volunteer.picture+"' class='img-fluid rounded-circle' style='width:245px;height:245px'></a></div>"
 	        			box+="<h1 style='font-family:Microsoft JhengHei'><a href='team-member.html'>"+order.volunteer.name+"</a></h1><div>"
 	        			
 	        			if(order.orderStatus=='ServiceFinishNotPay'){
@@ -323,7 +323,7 @@
 	        			var value=$("#"+order.volunteer.id+" option:selected").val()
 	        			box+="<button class='btn btn-primary btn-lg_1' onclick=\"pay("+order.id+","+order.volunteer.id+",'"+order.volunteer.name+"')\">時數核發與評分</button>"
 	        			box+="<button class='btn btn-danger btn-lg_1' data-toggle='modal' data-target='#reportModalCenter' id='" + order.id + "' name='" + order.volunteer.name+ "'>檢舉 </button></div>"
-	        			}else if(order.orderStatus=='ServiceFinishPayMatchSuccess'&&order.reportStatus=='Null'){
+	        			}else if(order.orderStatus=='ServiceFinishPayMatchSuccess' && order.reportStatus=='Null'){
 	        			box+="<span class='badge badge-success_1'>已付款與評分</span>"
 	        			}else if(order.reportStatus=='BothReport'||order.reportStatus=='RequesterReportVolunteer'){
 	        			box+="<span class='badge badge-danger_1'>已檢舉</span>"	

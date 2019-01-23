@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
+import team.lala.timebank.dao.OrderDao;
 import team.lala.timebank.dao.SystemMessageDao;
 import team.lala.timebank.entity.Member;
 import team.lala.timebank.entity.Mission;
@@ -27,6 +28,8 @@ public class SystemMessageService {
 	private SystemMessageDao systemMessageDao;
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private OrderDao orderDao;
 
 	public SystemMessage save(SystemMessage s) {
 		SystemMessage serviceType = systemMessageDao.save(s);
@@ -231,6 +234,19 @@ public class SystemMessageService {
 		finishMessage.setMessage("您刊登的志工活動:[<a href='https://localhost/commons/domesticVolunteer/apply?missionId=" + mission.getId() + "'>" + mission.getTitle() + "</a>]已結案");
 		finishMessage.setMessageType(SystemMessageType.MissionFinish);
 		systemMessageDao.save(finishMessage);
+	}
+	
+	public void requesterReportVolunteer(Long orderId) {
+		SystemMessage systemMessage = new SystemMessage();
+		
+		systemMessage.setSenderAccount(memberDao.getOne(6L).getAccount());
+		systemMessage.setReleaseTime(new Date());
+		systemMessage.setReadStatus(YesNo.N);
+		systemMessage.setMemberAccount(orderDao.getOne(orderId).getMission().getMember().getAccount());
+		systemMessage.setMessage("您已檢舉志工:[<a href='https://localhost/commons/personal-info/list?memberId="+ orderDao.getOne(orderId).getVolunteer().getId() +"'>" + orderDao.getOne(orderId).getVolunteer().getName() + "</a>]");
+		systemMessage.setMessageType(SystemMessageType.Report);
+		systemMessageDao.save(systemMessage);
+		
 	}
 	
 
