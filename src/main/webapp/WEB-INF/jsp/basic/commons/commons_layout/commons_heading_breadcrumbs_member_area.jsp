@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  	<section style="background: url('/banner/1607281720360.jpg') center center repeat;padding:12rem 0" class="bar background-white relative-positioned">
+  	<section style="background: url('/banner/1607281720360.jpg') center center repeat;padding:10rem 0" class="bar background-white relative-positioned">
 		<div class="dark-mask"></div>
 	    <div class="container">
 	         <div class="row d-flex align-items-center flex-wrap">

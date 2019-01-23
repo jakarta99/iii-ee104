@@ -35,7 +35,7 @@
 		    color: #fff;
 		    background-color: #13b5b1;
 		    border-color: #13b5b1;
-		    border-radius: 10px;
+		    border-left: 1px solid #fff;
 		}
 		.btn-outline-secondary {
 		    color: #13b5b1;
@@ -56,9 +56,9 @@
 		    color: #13b5b1 !important;
 		}
 		.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-		    color: #13b5b1 !important;
+		    color: #fff !important;
     		background-color: #13b5b1;
-    		background: linear-gradient(to bottom, white 0%, #13b5b1 100%);
+    		background: linear-gradient(to bottom, #13b5b1 0%, #13b5b1 100%);
 		}
 		.dataTables_wrapper .dataTables_paginate .paginate_button {
 		    color: #13b5b1 !important;
@@ -244,6 +244,7 @@
 			};
 		$('#donateTimeBegin').datepicker(datePickerSetting);
 		$('#donateTimeEnd').datepicker(datePickerSetting);
+		$("div[id='table_length'] label").css("display","none");
 	})
 		
 	</script>
