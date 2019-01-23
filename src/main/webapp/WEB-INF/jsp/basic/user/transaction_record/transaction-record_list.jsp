@@ -35,7 +35,7 @@
 		    color: #fff;
 		    background-color: #13b5b1;
 		    border-color: #13b5b1;
-		    border-radius: 10px;
+		    border-left: 1px solid #fff;
 		}
 		.btn-outline-secondary {
 		    color: #13b5b1;
@@ -56,9 +56,9 @@
 		    color: #13b5b1 !important;
 		}
 		.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-		    color: #13b5b1 !important;
+		    color: #fff !important;
     		background-color: #13b5b1;
-    		background: linear-gradient(to bottom, white 0%, #13b5b1 100%);
+    		background: linear-gradient(to bottom, #13b5b1 0%, #13b5b1 100%);
 		}
 		.dataTables_wrapper .dataTables_paginate .paginate_button {
 		    color: #13b5b1 !important;
@@ -70,7 +70,7 @@
 		    color: white !important;
 		    border: 1px solid #111;
 		    background-color: #13b5b1; 
-		    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #13b5b1), color-stop(100%, #13b5b1)); 
+		    background: #13b5b1; 
 		    background: -webkit-linear-gradient(top, #13b5b1 0%, #13b5b1 100%);
 		    background: -moz-linear-gradient(top, #13b5b1 0%, #13b5b1 100%);
 		    background: -ms-linear-gradient(top, #13b5b1 0%, #13b5b1 100%);
@@ -162,10 +162,10 @@
 			pageResize: true, 
 			fixedHeader: true,
 			pagingType: 'full_numbers',
-			searching: false,				
+			searching: false,
 		 	processing: true,
 			serverSide: true,  //分頁、排序都交由伺服器處理
-// 			lengthMenu: [ 3, 6, 9, 12, ],
+			lengthMenu: [10],
 			ajax:{
 				url:'/user/transaction-record/query',
 				type:'get',
@@ -240,6 +240,7 @@
 			};
 		$('#transactionTimeBegin').datepicker(datePickerSetting);
 		$('#transactionTimeEnd').datepicker(datePickerSetting);
+		$("div[id='table_length'] label").css("display","none");
 	})
 		
 	</script>
