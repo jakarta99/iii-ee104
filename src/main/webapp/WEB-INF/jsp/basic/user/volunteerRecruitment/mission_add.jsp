@@ -83,8 +83,8 @@
     <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
 	<!--heading crumbs-->
 	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
-		<section class="bar">
-        	<div class="container">
+		<section class="bar" >
+        	<div class="container" style="padding:50px;background-color:#f7f7f7;border-radius:5px;">
           	<div class="row">
           	<div class="bo3">
                 <div class="heading">

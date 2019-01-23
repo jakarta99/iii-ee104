@@ -60,7 +60,7 @@
     	border-radius: 8px;
 	}
 	.a{
-		background-color: #e2eae1db;
+/* 		background-color: #e2eae1db; */
 	}
     </style>
 </head>
@@ -72,7 +72,7 @@
 	<!--heading crumbs-->
 	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 	
-	<div id="content">
+	<div id="content" style="background-color: #f7f7f7;">
 		<div class="container a">
 		<section class="bar_1">
 			<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
@@ -84,7 +84,33 @@
 		<div class="row bar">
 			<div id="blog-listing-medium" class="col-md-12">
 			<div id="boxbox">
-				<!--mission內容開始 -->                
+				<!--mission內容開始 -->
+<!-- 				新版面 -->
+				<section>
+					<div class="row" style="margin-bottom:30px;">
+						<div style="width:100%;display:flex;/* padding-top: 20px; */background-color:#fff;border-radius:3px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);">
+							<div class="col-md-4">
+								<a href="/user/volunteerRecruitment/detail?id=4"><img src="/image/user/mission/canned-food.jpg" class="img" style="height: 100%;"></a>
+							</div>
+							<div class="col-md-8" style="padding: 20px 0px;padding-right: 20px;">
+								<div class="d-flex flex-wrap justify-content-between">
+									<h3 class="h2 mt-0"><a href="/user/volunteerRecruitment/detail?id=7">伊甸基金會-偏鄉暑期陪讀志工 </a></h3>
+									<p class="date-comments_1"><a href="javascript: void(0)" onclick="deleteRow(12)">
+										<i class="fa fa-trash"></i>取消</a>
+									</p>
+								</div>
+								<div class="d-flex flex-wrap justify-content-between text-xs">
+									<p class="author-category_1"><a href="#" class="title">財團法人伊甸社會福利基金會</a></p>
+								</div>
+								<p class="intro">申請時間:2019-01-02 17:00</p>
+								<p class="intro">開始時間:2019-08-24 09:00</p>
+								<p class="intro">活動地點:台東縣東河鄉</p>
+							</div>
+						</div>
+					</div>			
+				</section>
+		
+		                
             </div>
            	<div>
 	            <nav aria-label="Page navigation example" class="d-flex justify-content-center">
@@ -131,7 +157,7 @@
 				type:"get",
 				dataType:"json",
 	 		}).done(function(orders){
-	 			$("#boxbox").text("");
+// 	 			$("#boxbox").text("");
 	        	$("#pagebox").text("");
 	        	var totalElements=orders.totalElements;
 	        	var totalPages=orders.totalPages;
@@ -143,7 +169,8 @@
 	        		$("#boxbox").append(box);
 	        	} else {
 		        	$.each(orders.content, function(index, order){
-		        	   var box="<section><div class='row'><div class='col-md-4'>"
+		        	   var box="<section><div class='row' style='margin-bottom:30px;'><div style='width:100%;display:flex;padding-top: 20px;background-color:#fff;border-radius:3px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);'>"
+		        	   box+="<div class='col-md-4'>"
 	        		   box+="<div class='video'>"
 	        		   box+="<div class='embed-responsive embed-responsive-4by3'>"	        	
 	        		   box+=" <a href='/user/volunteerRecruitment/detail?id="+ order.mission.id +"'><img src=/image/user/mission/"+order.mission.missionPicName+" class='img'></img></a>"     
@@ -173,7 +200,7 @@
 			            	box+="<p class='intro'>結束時間:"+new Date(order.mission.endDate).Format('yyyy-MM-dd hh:mm')+"</p>"
 			           }
 	                   box+="<p class='intro'>活動地點:"+order.mission.county + order.mission.district+"</p>"
-	                   box+="</div></section>"
+	                   box+="</div></div></section>"
 				       $("#boxbox").append(box);
 		        	})
 	        	}

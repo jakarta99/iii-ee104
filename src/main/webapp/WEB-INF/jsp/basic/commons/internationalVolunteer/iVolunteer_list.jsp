@@ -22,7 +22,7 @@
 .container-1{
 /* background-color: #f7f7f7; */
  	background-color: rgba(234, 234, 234); 
-	max-width: 1500px;
+	max-width: 95%;
 	border-radius: 3px;
 	
 }
@@ -166,26 +166,17 @@ function query(){
 							<div class="col-lg-4">
 								<div class="home-blog-post">
 								<div class="product">
-										<a href="${volunteer.websiteUrl}">			
-											<img src="${volunteer.picture}"  class="image1" width="400px"  height="250px" >
+										<a href="${volunteer.websiteUrl}" target="_new">			
+											<img src="${volunteer.picture}"  class="image1" width="370px"  height="250px" >
 										</a>
 									</div>
 									<div class="text">
 										<h3 style="width:370px; margin:auto; margin-bottom:10px; "  >
-											<a href="${volunteer.websiteUrl}">${volunteer.title} </a>
+											<a href="${volunteer.websiteUrl}" target="_new">${volunteer.title} </a>
 										</h3>
 										<p class="author-category" >
 											<span  >${volunteer.organization}</span>
-										</p>
-<!-- 										 if(mission.isCollected=='Y'){ -->
-<!-- 	        		 box+="<p><a name='box1' class='s3 ex1' href='javascript:void(0)' onclick=\"cancelCollection("+mission.id+")\"><i name='pic1' class='fa fa-heart'></i>已收藏</a></p>" -->
-<!-- 	        		 }else{																										 -->
-<!-- 	        		 box+="<p><a name='box2' class='s3 ex1' href='javascript:void(0)' onclick=\"insertCollection("+mission.id+")\"><i name='pic2' class='far fa-heart'></i>收藏</a></p>"	  -->
-<!-- 	        		 } -->
-										
-										
-										
-										
+										</p>										
 										<p>
 											<table style="margin:auto;color:rgba(125, 125, 125)">
 												<tr><td width="70px">服務地區: </td><td width="200px"> 

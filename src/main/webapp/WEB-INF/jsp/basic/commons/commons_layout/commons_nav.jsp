@@ -23,7 +23,6 @@
                         <div class="col-md-6 col-lg-3">
                           <h5><a href="/user/calendar" >行事曆</a></h5>                      
                           <h5><a href="/user/system-message/list" id="systemMessage">通知</a></h5>
-                          <h5><a href="/user/chatMessage/oldMessages/all/list" id="chatMessage">我的訊息</a></h5>
                           <h5><a href="/user/personal-info/list" >我的個人資訊</a></h5>                          
                         </div>
                         <div class="col-md-6 col-lg-3">
@@ -111,7 +110,7 @@
 	function checkMailBox(){
 		$.ajax({
 			type:"get",
-			url:"/system-message/countNotReadMessage",
+			url:"/user/system-message/countNotReadMessage",
 		}).done(function(notReadMsgNum){
 			if(notReadMsgNum > 0){
 				$("#systemMessage").html("通知<font size='2' color='red'>("+ notReadMsgNum +")</font>")

@@ -1093,9 +1093,10 @@ color: rgba(100, 100, 100);
 }
 .home-blog-post_1 {
   margin: 15px 0;
-  border:transparent 1px solid;
+  border:transparent 1.5px solid;
   border-radius:3px; 
   background-color: #f7f7f7;
+/* box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1); */
 }
 
 .home-blog-post_1:hover {
