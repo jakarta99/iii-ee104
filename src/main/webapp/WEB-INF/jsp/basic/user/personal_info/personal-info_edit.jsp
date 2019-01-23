@@ -23,7 +23,7 @@
 
 <style>
 	body{
-		font-family: "微軟正黑體"
+		font-family: "微軟正黑體";
 	}
 	article{
 		width:100%;
@@ -49,22 +49,8 @@
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-	<div id="heading-breadcrumbs">
-    	<div class="container">
-        	<div class="row d-flex align-items-center flex-wrap">
-            	<div class="col-md-7">
-              		<h1 class="h2">我的個人資訊</h1>
-            	</div>
-	            <div class="col-md-5">
-	              	<ul class="breadcrumb d-flex justify-content-end">
-	                	<li class="breadcrumb-item"><a href="/">首頁</a></li>
-	                	<li class="breadcrumb-item"><a href="/user/personal-info/list">我的個人資訊</a></li>
-	                	<li class="breadcrumb-item active">修改個人資訊</li>
-	              	</ul>
-	            </div>
-        	</div>
-        </div>
-    </div>
+	<!--heading crumbs-->
+	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 	<!-- Sidebar -->
 	<jsp:include page="../user_layout/user_sidebar.jsp"/>
 	<section class="bar">
@@ -82,7 +68,7 @@
 						<div class="row">
                     		<div class="col-md-4">
                       			<div class="form-group">
-									<label for="idName">名稱:</label>
+									<label for="idName" style="font-size:20px">名稱</label>
 									<input type="text" value="${member.name}" id="idName" name="name" autofocus autocompelete="off" class="form-control">
 									<div><label>(1.不可空白，2.至少2個字以上，3.必須全部為中文)</label></div>
 									<span id="idspName" style='color:red'></span>
@@ -93,7 +79,7 @@
 								<c:when test="${member.memberType eq 'P'}">
 									<div class="col-md-4">
                       					<div class="form-group">
-											<label for="idCertificateIdNumber">身分證字號:</label>
+											<label for="idCertificateIdNumber" style="font-size:20px">身分證字號</label>
 											<input type="text" value="${member.certificateIdNumber}" id="idCertificateIdNumber" name="certificateIdNumber" autofocus autocompelete="off" class="form-control">
 											<div><label>(1.不可空白，2.必須符合規則)</label></div>
 											<span id="idspCertificateIdNumber" style='color:red'></span>
@@ -101,7 +87,7 @@
 									</div>
 									<div class="col-md-4">
                       					<div class="form-group">
-											<label for="idDate">出生日期:</label>
+											<label for="idDate" style="font-size:20px">出生日期</label>
 											<input type="text" value="${birthDate}" id="idDate" name="birthDate" autofocus autocomplete="off" class="form-control">
 											<div><label>(1.不可空白，2.格式為yyyy/MM/dd)</label></div>
 											<span id="idspDate" style='color:red'></span>
@@ -111,7 +97,7 @@
 								<c:when test="${member.memberType eq 'O'}">
 									<div class="col-md-4">
                       					<div class="form-group">
-											<label for="idCertificateIdNumber">統一編號:</label> 
+											<label for="idCertificateIdNumber" style="font-size:20px">統一編號</label> 
 											<input type="text" value="${member.certificateIdNumber}" id="idCertificateIdNumber" name="certificateIdNumber" autofocus autocompelete="off" class="form-control">
 											<div><label>(1.不可空白，2.必須符合規則)</label></div>
 											<span id="idspCertificateIdNumber" style='color:red'></span>
@@ -119,7 +105,7 @@
 									</div>
 									<div class="col-md-4">
                       					<div class="form-group">
-											<label for="idDate">創立日期:</label> 
+											<label for="idDate" style="font-size:20px">創立日期</label> 
 											<input type="text" value="${birthDate}" id="idDate" name="birthDate" autofocus autocomplete="off" class="form-control">
 											<div><label>(1.不可空白，2.格式為yyyy/MM/dd)</label></div>
 											<span id="idspDate" style='color:red'></span>
@@ -131,7 +117,7 @@
 						<div class="row">
 							<div class="col-md-4">
 	                      		<div class="form-group">
-									<label for="idEmail">email:</label> 
+									<label for="idEmail" style="font-size:20px">email</label> 
 									<input type="text" value="${member.email}" id="idEmail" name="email" autofocus autocompelete="off" class="form-control">
 									<div><label>(1.不可空白)</label></div>
 									<span id="idspEmail" style='color:red'></span>
@@ -139,7 +125,7 @@
 							</div>
 							<div class="col-md-4">
 	                      		<div class="form-group">
-									<label for="idTelephone">室內電話:</label> 
+									<label for="idTelephone" style="font-size:20px">室內電話</label> 
 									<input type="text" value="${member.telephone}" id="idTelephone" name="telephone" autofocus autocompelete="off" class="form-control">
 									<div><label>(格式需為0X-XXXXXXXX)</label></div>
 									<span id="idspTelephone" style='color:red'></span>
@@ -147,7 +133,7 @@
 							</div>
 							<div class="col-md-4">
 	                      		<div class="form-group">
-									<label for="idMobile">手機:</label> 
+									<label for="idMobile" style="font-size:20px">手機</label> 
 									<input type="text" value="${member.mobile}" id="idMobile" name="mobile" autofocus autocompelete="off" class="form-control">
 									<div><label>(格式需為09XX-XXX-XXX)</label></div>
 									<span id="idspMobile" style='color:red'></span>
@@ -157,19 +143,19 @@
 						<div class="row">
 							<div class="col-md-4">
 	                      		<div class="form-group">		
-									<div><label>縣市區域:</label></div>
+									<div><label style="font-size:20px">縣市區域</label></div>
 									<span role="tw-city-selector"></span>
 								</div>
 							</div>
 							<div class="col-md-4">
 	                      		<div class="form-group">
-									<label>住址:</label>
+									<label style="font-size:20px">住址</label>
 									<input type="text" value="${member.address}" id="address" name="address" class="form-control">
 								</div>
 							</div>
 							<div class="col-md-2">
 	                      		<div class="form-group">
-			                        <div><label>圖片:</label></div>
+			                        <div><label style="font-size:20px">圖片</label></div>
 			                        <input type="button" class="btn btn-template-outlined" id="originPicture" value="原圖片" class="form-control"/>
 			                        <input type="button" class="btn btn-template-outlined" id="changePicture" value="更改圖片" class="form-control"/>
                         		</div>
@@ -199,7 +185,7 @@
 							<div class="row">
 								<div class="col-md-4">
 	                      			<div class="form-group">
-										<label for="idOrgFounder">創辦人:</label> 
+										<label for="idOrgFounder" style="font-size:20px">創辦人</label> 
 										<input type="text" value="${member.orgFounder}" id="idOrgFounder" name="orgFounder" autofocus autocompelete="off" class="form-control">
 										<div><label>(1.不可空白，2.至少2個字以上，3.必須全部為中文)</label></div>
 										<span id="idspOrgFounder" style='color:red'></span>
@@ -207,7 +193,7 @@
 								</div>
 								<div class="col-md-4">
 	                      			<div class="form-group">
-										<label for="idOrgCeo">執行長:</label>
+										<label for="idOrgCeo" style="font-size:20px">執行長</label>
 										<input type="text" value="${member.orgCeo}" id="idOrgCeo" name="orgCeo" autofocus autocompelete="off" class="form-control">
 										<div><label>(1.不可空白，2.至少2個字以上，3.必須全部為中文)</label></div>
 										<span id="idspOrgCeo" style='color:red'></span>
@@ -215,7 +201,7 @@
 								</div>
 								<div class="col-md-4">
 	                      			<div class="form-group">
-										<label for="idOrgContactPerson">聯絡人:</label>
+										<label for="idOrgContactPerson" style="font-size:20px">聯絡人</label>
 										<input type="text" value="${member.orgContactPerson}" id="idOrgContactPerson" name="orgContactPerson" autofocus autocompelete="off" class="form-control">
 										<div><label>(1.不可空白，2.至少2個字以上，3.必須全部為中文)</label></div>
 										<span id="idspOrgContactPerson" style='color:red'></span>
@@ -225,7 +211,7 @@
 							<div class="row">
 								<div class="col-md-4">
 	                      			<div class="form-group">
-										<label for="idOrgContactPersonTel">聯絡人電話:</label> 
+										<label for="idOrgContactPersonTel" style="font-size:20px">聯絡人電話</label> 
 										<input type="text" value="${member.orgContactPersonTel}" id="idOrgContactPersonTel" name="orgContactPersonTel" autofocus autocompelete="off" class="form-control">
 										<div><label>(格式需為0X-XXXXXXXX)</label></div>
 										<span id="idspOrgContactPersonTel" style='color:red'></span>
@@ -233,7 +219,7 @@
 								</div>
 								<div class="col-md-4">
 	                      			<div class="form-group">
-										<label for="idOrgContactPersonMobile">聯絡人手機:</label>
+										<label for="idOrgContactPersonMobile" style="font-size:20px">聯絡人手機</label>
 										<input type="text" value="${member.orgContactPersonMobile}" id="idOrgContactPersonMobile" name="orgContactPersonMobile" autofocus autocompelete="off" class="form-control">
 										<div class="remark">(格式需為09XX-XXX-XXX)</div>
 										<span id="idspOrgContactPersonMobile" style='color:red'></span>
@@ -241,7 +227,7 @@
 								</div>
 								<div class="col-md-4">
 	                      			<div class="form-group">
-										<label for="idOrgWebsiteLink">網址:</label>
+										<label for="idOrgWebsiteLink" style="font-size:20px">網址</label>
 										<input type="url" size="50px" value="${member.orgWebsiteLink}" id="idOrgWebsiteLink" name="orgWebsiteLink" autofocus autocompelete="off" class="form-control">
 										<div><label>(必須符合規則)</label></div>
 										<span id="idspOrgWebsiteLink" style='color:red'></span>
@@ -251,7 +237,7 @@
 							<div class="row">
 								<div class="col-md-6">
 	                      			<div class="form-group">
-										<label>創立宗旨:</label>
+										<label style="font-size:20px">創立宗旨</label>
 										<textarea rows="5" id="orgFoundPurpose" name="orgFoundPurpose" class="form-control">
 											${member.orgFoundPurpose}
 										</textarea>
@@ -604,6 +590,10 @@
 // 			$("form div").addClass("form-group");
 // 			$("form input").addClass("form-control");
 // 			$("form textarea").addClass("form-control");
+			var t = "<a href='/user/personal-info/list' style='font-weight: 700;'>/我的個人資料</a>/修改個人資料"			
+				$("#webTitle").empty().append("修改個人資料");
+				$("#lastPage").after(t);
+				
 			new TwCitySelector();
 			
 			var datePickerSetting = {
