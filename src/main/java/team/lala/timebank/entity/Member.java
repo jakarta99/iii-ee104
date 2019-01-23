@@ -166,7 +166,7 @@ public class Member implements UserDetails {
 	@Column(name="ORG_WEBSITE_LINK")
 	private String orgWebsiteLink;
 	
-	@Column(name="ORG_FOUND_PURPOSE")
+	@Column(name="ORG_FOUND_PURPOSE",length=1000)
 	private String orgFoundPurpose;
 	
 	@Enumerated(EnumType.STRING)
