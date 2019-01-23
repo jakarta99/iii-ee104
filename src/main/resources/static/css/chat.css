@@ -9,7 +9,8 @@
 	width: 290px;
 	position:fixed;
 	bottom: 2px;
-	margin-left:50px;	
+	margin-left:50px;
+	z-index:1;	
 }
 
 

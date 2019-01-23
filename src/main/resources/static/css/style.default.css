@@ -494,7 +494,7 @@ ul.social a.email {
 }
 
 .form-control {
-  border-radius: 0;
+  border-radius: 3px;
 }
 
 .form-control:focus {
@@ -579,10 +579,12 @@ table input[type="number"] {
 
 .top-bar.top-bar-light a.login-btn, .top-bar.top-bar-light a.signup-btn {
   color: #555 !important;
+  border-radius:3px;
 }
 
 .top-bar.top-bar-light a.login-btn span, .top-bar.top-bar-light a.signup-btn span {
   display: inline-block;
+  border-radius:3px;
 }
 
 .top-bar p {
@@ -691,7 +693,7 @@ header.nav-holder.sticky {
 }
 
 #navbar .dropdown-menu {
-  border-radius: 0;
+  border-radius: 3px;
   -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   margin-top: 0;
@@ -838,13 +840,14 @@ color: rgba(100, 100, 100);
 .btn {
   text-transform: uppercase;
   letter-spacing: 0.1em;
+   border-radius:3px;
 }
 
 .btn-template-main {
   background: #13b5b1;
   border: 1px solid #13b5b1 !important;
   color: #fff !important;
-  border-radius: 0 !important;
+  border-radius: 3px !important;
   text-decoration: none;
 }
 
@@ -871,7 +874,7 @@ color: rgba(100, 100, 100);
   background: none;
   border: 1px solid #13b5b1 !important;
   color: #13b5b1;
-  border-radius: 0 !important;
+  border-radius: 3px !important;
   text-decoration: none;
 }
 
@@ -1090,10 +1093,19 @@ color: rgba(100, 100, 100);
 }
 .home-blog-post_1 {
   margin: 15px 0;
-  border:#13b5b1 1px solid;
-  border-radius:5px; 
-  
-  
+  border:transparent 1px solid;
+  border-radius:3px; 
+  background-color: #f7f7f7;
+}
+
+.home-blog-post_1:hover {
+  margin: 15px 0;
+  border:#13b5b1 2px solid;
+  border-radius:3px; 
+  background-color: #f7f7f7;
+}
+.home-blog-post_1:hover  .h2>a {
+  color:#129c90;
 }
 
 .home-blog-post .image {
@@ -1475,6 +1487,7 @@ color: rgba(100, 100, 100);
 
 .box a.btn {
   margin-top: 25px;
+   border-radius:3px;
 }
 
 .box .box-header {
@@ -2447,7 +2460,7 @@ STYLE SWITCHER FOR DEMO
   padding: 0.5rem 0.75rem;
   font-size: 0.8rem;
   line-height: 1.5;
-  border-radius: 0;
+  border-radius: 3px;
   -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -3084,7 +3097,7 @@ STYLE SWITCHER FOR DEMO
   padding: 0.5rem 1rem;
   font-size: 1.25rem;
   line-height: 1.5;
-  border-radius: 0;
+  border-radius: 3px;
 }
 
 .btn-lg_1 {
@@ -3123,8 +3136,9 @@ a.sss {
 }
 
 a:focus, a:hover {
-  color: #348e7b;
+  color: #0d8a7e;
   text-decoration: underline;
+/*   text-decoration: none; */
 }
 
 a.sss:focus, a.sss:hover {
@@ -3334,7 +3348,7 @@ a.text-primary:focus, a.text-primary:hover {
   color: #212529;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0;
+  border-radius: 3px;
 }
 
 .dropdown-item {

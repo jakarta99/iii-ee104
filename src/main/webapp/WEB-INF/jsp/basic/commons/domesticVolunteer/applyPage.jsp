@@ -189,7 +189,7 @@
 					<li>
 					<div>
 						<div style="background:#FFAA33;width:70px;" class="icon-filled">刊登者</div>
-						<div style="width:250px;display: inline-block;"><img style="border:1px solid black" id="memberImg" alt="" src="/image/user/member/${member.picture}" class="img-fluid rounded-circle"> 
+						<div style="width:250px;display: inline-block;"><img style="border:0.5px solid white" id="memberImg" alt="" src="/image/user/member/${member.picture}" class="img-fluid rounded-circle"> 
 							<a id="memberhref" style="font-size:16px;font-weight: 600;" href="/commons/personal-info/list?memberId=${member.id}">${member.name}</a>
 						</div>
 						<div style="width:90px;display:inline-block;">

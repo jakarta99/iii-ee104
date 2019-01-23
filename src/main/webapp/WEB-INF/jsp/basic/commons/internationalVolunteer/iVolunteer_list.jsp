@@ -20,6 +20,7 @@
 <style>
 
 .container-1{
+/* background-color: #f7f7f7; */
  	background-color: rgba(234, 234, 234); 
 	max-width: 1500px;
 	border-radius: 3px;
@@ -32,7 +33,6 @@
     display: none;
 }
 .panel-body{
-/* 	background-color: rgba(200, 200, 200);  */
 	background-color:rgba(19, 85, 180, 0.16);
 	border-radius: 5px;
 	margin-bottom:20px;
@@ -123,7 +123,7 @@ function query(){
 		                    <div class="form-group" >
 								<select id="continent" style="height:52px"
 									name="continent" class="form-control">				
-									<option>請選擇</option>
+									<option selected value="">選擇地區</option>
 									<option value="東南亞">東南亞</option>
 									<option value="中南亞">中南亞</option>
 									<option value="東亞">東亞</option>

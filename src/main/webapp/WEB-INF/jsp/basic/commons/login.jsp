@@ -22,11 +22,9 @@
         <div class="container" id="loginContainer">
           <div class="row" >           
             <div class="col-lg-6" style="margin:auto">
-              <div class="box">
-                <h2 class="text-uppercase">登入</h2>
-                <p class="lead">已經是我們的會員?</p>
-                <p class="text-muted"></p>
-                <hr>
+              <div class="box" style="border:1px solid #ddd;border-radius:5px;">
+                <h2 class="text-uppercase" style='text-align:center'>登入</h2>
+
                 <form action="/login" method="post" id="loginForm">
                   <div class="form-group">
                     <label for="username">帳號</label>
@@ -39,14 +37,18 @@
                      <h6 style="text-align: center;color:blue">${message}</h6>
                   <div class="text-center">
                     <button type="submit" class="btn btn-template-outlined"><i class="fa fa-sign-in"></i> 登入</button>
+                  	<div class="text-right"><a href="commons/login-forget/type">忘記密碼</a></div>
                   </div>
-                  <div class="text-right"><a href="commons/login-forget/type">忘記密碼</a></div>
+                  
                 </form>
                 <br/>
                 <div class="text-center">
 				    <img src="../../img/facebook.png" onclick="FBLogin()" width="52.5%"/> 
 				    <img src="../../img/google.png" onclick="GoogleLogin()" width="46.5%"/>
               	</div>
+				<hr>  
+				            	
+               	<p class="lead" style="text-align:center">還不是我們的會員?<button style="margin-left:50px;" class="btn btn-template-outlined" onclick="javascript:location.href='/commons/sign-up/type'">註冊</button></p>
               </div>
             </div>
           </div>

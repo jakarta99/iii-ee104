@@ -49,9 +49,7 @@
 		    color: red; 
 		}
 		
-		.s3{
-	    color: #FF0000;
-		}
+		
 		.bar_1 {
 			margin-top:30px;
 			margin-bottom:20px;
@@ -89,22 +87,32 @@
         .s2{
             text-align: center
         }
-         .s9{
+        .s3{
+	   		color: #FF0000;
+		}
+        .s4{
+			margin-left:30px;
+			margin-right:30px;
+			margin-top: 10px;
+			
+		}
+        .s9{
             margin-bottom: 5px;
-            color:#A9A9A9;
+            color:#757373;
         }
         .s10{
-        	color:#A9A9A9;
-        	 height:72px;
+        	color:#757373;
+        	height:60px;
+        	font-size:1.1rem;
         }
         .s11{
-        	margin-top:1rem;
+/*         	margin-top:1rem; */
         }
         .margintop{
 			 margin-top:70px;
 		}
 		.form-control{
-		display: block;
+			display: block;
 		    width: 100%;
 		    padding: .375rem .75rem;
 		    font-size: 1rem;
@@ -131,12 +139,7 @@
 		    border-radius: .25rem;
 		    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 		}
-		.s4{
-		margin-left:30px;
-		margin-right:30px;
-		margin-top: 10px;
-		}
- 
+	
     </style>
 </head>
 <body>
@@ -285,23 +288,23 @@
 	        		console.log(mission)
 	        		var box="<div class='col-lg-4 col-md-6'>";
 	        		 box+="<div class='home-blog-post_1'>";
-	        		 box+="<div class='image' style='text-align:center'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'><img width='349px' height='230px'  style='border-radius:5px;padding:0.5px;' src=/image/user/mission/"+mission.missionPicName+" alt='...'></a>";
-	        		 box+="</div><div class='text'><div class='s4'><h3><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'>"+ mission.title + "</a></h3>";
-	        		 box+="<p class='author-category'><a class='sss' href='/commons/personal-info/list?memberId="+mission.member.id+"'>"+mission.member.name+"</a></p>"
+	        		 box+="<div class='image' style='text-align:center;margin-bottom: 20px;'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'><img width='349px' height='230px'  style='border-radius:3px;padding:0.5px;' src=/image/user/mission/"+mission.missionPicName+" alt='...'></a>";
+	        		 box+="</div><div class='text'><div class='s4'><h2 class='h2' style='text-align:center;'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'>"+ mission.title + "</a></h2>";
+	        		 box+="<p class='author-category' style='text-align:center;'><a class='sss' href='/commons/personal-info/list?memberId="+mission.member.id+"'>"+mission.member.name+"</a></p>"
 	        		
 	        		 var discription=mission.discription
-	        		 if(discription.length>36){
-	        			 var shortDiscription=discription.substring(0,35)+"......";
+	        		 if(discription.length>30){
+	        			 var shortDiscription=discription.substring(0,30)+"...";
 	        		 }else{
 	        			 var shortDiscription=discription; 
 	        		 }
-	        		 box+="<div class='s10'><p class='author-category_1'>活動介紹:"+shortDiscription+"</p></div>";
+	        		 box+="<div class='s10'><p class='author-category_1'>"+shortDiscription+"</p></div>";
 	        		 if(mission.isCollected=='Y'){
 		        		 box+="<p class='s11'><a name='box1' class='s3 ex1' href='javascript:void(0)' onclick=\"cancelCollection("+mission.id+")\"><i name='pic1' class='fa fa-heart'></i>已收藏</a></p>"
 		        		 }else{																										
 		        		 box+="<p class='s11'><a name='box2' class='s3 ex1' href='javascript:void(0)' onclick=\"insertCollection("+mission.id+")\"><i name='pic2' class='far fa-heart'></i>收藏</a></p>"	 
 		        		 }
-					 box+="<ul class='social list-inline'>"
+					 box+="<ul class='social list-inline' style='font-size:1.2rem;'>"
 					 box+="<li class='left s9' ><i class='fas fa-map-marker-alt'></i>&nbsp;&nbsp;&nbsp;"+mission.county+mission.district+"</li>"
 					 box+="<li class='left s9' ><i class='fas fa-calendar-week'></i>&nbsp;&nbsp;&nbsp;"+new Date(mission.startDate).toLocaleDateString()+"~"+new Date(mission.endDate).toLocaleDateString()+"</li>"
 			         box+="<li class='left s9'><i class='fas fa-user'></i>&nbsp;&nbsp;&nbsp;招募中("+mission.approvedQuantity+"/"+mission.peopleNeeded+")</li>"
