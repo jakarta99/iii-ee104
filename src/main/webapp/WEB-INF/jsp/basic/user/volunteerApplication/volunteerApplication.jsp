@@ -85,13 +85,13 @@
 			<div id="blog-listing-medium" class="col-md-12">
 			<div id="boxbox">
 				<!--mission內容開始 -->                
-	           	<div>
-		            <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-			            <ul id ="pagebox" class="pagination pagination-lg">
-						<!--換頁控制開始 -->
-			            </ul>
-		            </nav>
-	            </div>
+            </div>
+           	<div>
+	            <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+		            <ul id ="pagebox" class="pagination pagination-lg">
+					<!--換頁控制開始 -->
+		            </ul>
+	            </nav>
 			</div>
             </div>
         </div>

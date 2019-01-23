@@ -51,22 +51,8 @@
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-	<div id="heading-breadcrumbs">
-    	<div class="container">
-        	<div class="row d-flex align-items-center flex-wrap">
-            	<div class="col-md-7">
-              		<h1 class="h2">修改密碼</h1>
-            	</div>
-	            <div class="col-md-5">
-	              	<ul class="breadcrumb d-flex justify-content-end">
-	                	<li class="breadcrumb-item"><a href="/">首頁</a></li>
-	                	<li class="breadcrumb-item"><a href="/user/personal-info/list">我的個人資訊</a></li>
-	                	<li class="breadcrumb-item active">變更密碼</li>
-	              	</ul>
-	            </div>
-        	</div>
-        </div>
-    </div>
+	<!--heading crumbs-->
+	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 	<!-- Sidebar -->
 	<jsp:include page="../user_layout/user_sidebar.jsp"/>
 	<section>
@@ -92,7 +78,7 @@
 								<div class="row">
 		                    		<div class="col-md-12">
 		                      			<div class="form-group">
-											<label for="idPasswordOld">舊密碼</label>
+											<label for="idPasswordOld" style="font-size:20px">舊密碼</label>
 											<input type="password" value="" id="idPasswordOld" placeholder="請輸入舊密碼" name="password" autofocus autocompelete="off" class="form-control">
 				<!-- 							<div><label>(1.不可空白，2.至少8個字最多16個字，3.必須包含字母、數字、特殊符號[~!@#$%^&*])</label></div> -->
 											<span id="idspPasswordOld" style='color:red'></span>
@@ -102,7 +88,7 @@
 								<div class="row">
 		                    		<div class="col-md-12">
 		                      			<div class="form-group">
-											<label for="idPasswordNew">新密碼</label>
+											<label for="idPasswordNew" style="font-size:20px">新密碼</label>
 											<input type="password" value="" id="idPasswordNew" placeholder="請輸入新密碼" name="passwordNew" autofocus autocompelete="off" class="form-control">
 											<div><label>(1.不可空白，2.至少8個字最多16個字，3.必須包含字母、數字、特殊符號[~!@#$%^&*])</label></div>
 											<span id="idspPasswordNew" style='color:red'></span>
@@ -110,7 +96,7 @@
 									</div>
 									<div class="col-md-12">
 		                      			<div class="form-group">
-											<label for="idPasswordCheck">確認新密碼</label>
+											<label for="idPasswordCheck" style="font-size:20px">確認新密碼</label>
 											<input type="password" value="" id="idPasswordCheck" placeholder="請再輸入一次新密碼" name="passwordCheck" autofocus autocompelete="off" class="form-control">
 											<div><label>(1.不可空白，2.須與密碼相同)</label></div>
 											<span id="idspPasswordCheck" style='color:red'></span>
@@ -251,7 +237,9 @@
 	    }
 	    
 		$(document).ready(function() {
-			
+			var t = "<a href='/user/personal-info/list' style='font-weight: 700;'>/我的個人資料</a>/修改密碼"			
+				$("#webTitle").empty().append("修改密碼");
+				$("#lastPage").after(t);
 			//update member info. event
 			$("#updateButt").click(function() {
 				$.ajax({

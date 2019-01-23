@@ -92,11 +92,9 @@ public class FacadeService {
 			mission.setPayedQuantity(mission.getPayedQuantity()+1);
 			missionDao.save(mission);
 			
-			// 搜尋mission中的所有order 若全付款則將 mission 狀態改變
+			// 搜尋mission中的所有order 若全付款則將 mission狀態改變
 			List<Order> successOrders = orderDao.findByMissionAndOrderStatus(mission, OrderStatus.ServiceFinishPayMatchSuccess);
-			List<Order> reportOrders = orderDao.findByMissionAndReportStatus(mission, ReportStatus.Null);
-			
-			
+	
 				if (successOrders.size() == mission.getApprovedQuantity().intValue()) {
 					mission.setMissionstatus(MissionStatus.C_Finish);
 					mission.setFinishDate(new Date());

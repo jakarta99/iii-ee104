@@ -81,7 +81,7 @@
 						<div class="row">
                     		<div class="col-md-6">
                       			<div class="form-group">
-									<label for="idAccount">帳號:</label>
+									<label for="idAccount" style="font-size:20px">帳號</label>
 									<input type="text" value="${param.account}" id="idAccount" placeholder="請輸入帳號" name="account" autofocus autocompelete="off" class="form-control">
 									<div><label>(1.不可空白，2.至少6個字以上，3.必須全部為英文或數字)</label></div>
 									<span id="idspAccount" style='color:red'>${accountDouble}</span><span id="isDoubleAccount"></span>
@@ -91,7 +91,7 @@
 						<div class="row">
                     		<div class="col-md-6">
                       			<div class="form-group">
-									<label for="idPassword">密碼:</label>
+									<label for="idPassword" style="font-size:20px">密碼</label>
 									<input type="password"  id="idPassword" placeholder="請輸入密碼" name="password" autofocus autocompelete="off" class="form-control">
 									<div><label>(1.不可空白，2.至少8個字最多16個字，3.必須包含字母、數字、特殊符號[~!@#$%^&*])</label></div>
 									<span id="idspPassword" style='color:red'></span>
@@ -99,7 +99,7 @@
 							</div>
 							<div class="col-md-6">
                       			<div class="form-group">
-									<label for="idPasswordCheck">確認密碼:</label>
+									<label for="idPasswordCheck" style="font-size:20px">確認密碼</label>
 									<input type="password" value="${param.passwordCheck}" id="idPasswordCheck" placeholder="請再輸入一次密碼" name="passwordCheck" autofocus autocompelete="off" class="form-control">
 									<div><label>(1.不可空白，2.須與密碼相同)</label></div>
 									<span id="idspPasswordCheck" style='color:red'></span>

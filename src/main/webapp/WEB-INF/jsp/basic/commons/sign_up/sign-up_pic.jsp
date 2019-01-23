@@ -71,9 +71,9 @@
 <!--                 <hr> -->
                 <form id="pictureForm" enctype="multipart/form-data">
                   <div>
-					<label for="picture">圖片 :</label>
+					<label for="picture" style="font-size:20px">圖片 </label>
  					<input type="file" id="idPicture" name="picture" accept="image/*" class="form-control">
- 					<label class="text-muted">請選擇圖檔，無圖檔亦可直接送出</label>
+ 					<label class="text-muted" style="font-size:20px">請選擇圖檔，無圖檔亦可直接送出</label>
 	                <div class="col-md-12 text-center">
                     	<input id="submit" type="button" class="btn btn-template-outlined" value="上傳">
                     </div>

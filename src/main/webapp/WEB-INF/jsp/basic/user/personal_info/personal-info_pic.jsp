@@ -27,23 +27,8 @@
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
-	<div id="heading-breadcrumbs">
-    	<div class="container">
-        	<div class="row d-flex align-items-center flex-wrap">
-            	<div class="col-md-7">
-              		<h1 class="h2">我的個人資訊</h1>
-            	</div>
-	            <div class="col-md-5">
-	              	<ul class="breadcrumb d-flex justify-content-end">
-	                	<li class="breadcrumb-item"><a href="/">首頁</a></li>
-	                	<li class="breadcrumb-item"><a href="/user/personal-info/list">我的個人資訊</a></li>
-	                	<li class="breadcrumb-item"><a href="/user/personal-info/edit">修改個人資訊</a></li>
-	                	<li class="breadcrumb-item active">變更照片</li>
-	              	</ul>
-	            </div>
-        	</div>
-        </div>
-    </div>
+	<!--heading crumbs-->
+	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 	<!-- Sidebar -->
 	<jsp:include page="../user_layout/user_sidebar.jsp"/>
 	<section>
@@ -59,9 +44,9 @@
 <!--                 	<hr> -->
                 	<form id="pictureForm" action="/user/personal-info/changeMemberPic" method="post" enctype="multipart/form-data">
 	                  	<div>
-							<label for="picture">圖片 :</label>
+							<label for="picture" style="font-size:20px">圖片</label>
 	 						<input type="file" id="idPicture" name="picture" accept="image/*" class="form-control">
-	 						<label class="text-muted">請選擇圖檔，無圖檔亦可直接送出</label>
+	 						<label class="text-muted" style="font-size:20px">請選擇圖檔，無圖檔亦可直接送出</label>
 		                	<div class="col-md-12 text-center">
 	                    		<button type="submit" class="btn btn-template-outlined"><i class="fa fa-plus"></i>上傳</button>
 	                    	</div>
@@ -76,6 +61,12 @@
    	<!-- FOOTER -->
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-
+	<script>
+	$(document).ready(function() {
+		var t = "<a href='/user/personal-info/list' style='font-weight: 700;'>/我的個人資料</a>/變更照片"			
+			$("#webTitle").empty().append("變更照片");
+			$("#lastPage").after(t);
+	});
+	</script>
 </body>
 </html>
