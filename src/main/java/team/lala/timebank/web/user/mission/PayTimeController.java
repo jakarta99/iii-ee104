@@ -100,7 +100,7 @@ public class PayTimeController {
 		AjaxResponse<Order> response = new AjaxResponse<Order>();
 
 		Penalty penalty = orderService.requesterReportVolunteer(orderId, description);
-
+		systemMessageService.requesterReportVolunteer(orderId);
 		try {
 			if (proofPic.getOriginalFilename().length() > 0) {
 				// 取得應用程式根目錄中圖片之路徑
