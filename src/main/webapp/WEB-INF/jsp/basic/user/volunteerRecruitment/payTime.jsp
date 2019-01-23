@@ -296,8 +296,8 @@
 	        		console.log(orderids)
 	        		var box="<div class='col-md-4'>"
 	        			box+="<div data-animate='fadeInUp' class='team-member'>"
-	        			box+="<div class='image_1'><a href='team-member.html'><img src='/image/user/member/"+order.volunteer.picture+"' class='img-fluid rounded-circle' style='width:245px;height:245px'></a></div>"
-	        			box+="<h1 style='font-family:Microsoft JhengHei'><a href='team-member.html'>"+order.volunteer.name+"</a></h1><div>"
+	        			box+="<div class='image_1'><a href='/commons/personal-info/list?memberId="+order.volunteer.id+"'><img src='/image/user/member/"+order.volunteer.picture+"' class='img-fluid rounded-circle' style='width:245px;height:245px'></a></div>"
+	        			box+="<h1 style='font-family:Microsoft JhengHei'><a href='/commons/personal-info/list?memberId="+order.volunteer.id+"'>"+order.volunteer.name+"</a></h1><div>"
 	        			
 	        			if(order.orderStatus=='ServiceFinishNotPay'){
 	        			box+= "<div class='row' ><div class='col-md-6 center-block'><div class='input-group mb-3' ><div class='input-group-prepend'><label class='input-group-text'>分數:</label></div><select class='custom-select' id='score"+order.volunteer.id+"' name='timeValue' >"
