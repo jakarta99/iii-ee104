@@ -40,6 +40,11 @@
 		border-radius: 0.25rem;
 		transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 		margin: 5px;
+	}
+	.container-1 {
+	    width: 72.5%;
+	    margin:auto;
+		padding:50px;
 	} 
 </style>
 
@@ -53,8 +58,8 @@
 	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 	<!-- Sidebar -->
 	<jsp:include page="../user_layout/user_sidebar.jsp"/>
-	<section class="bar">
-	<div class="container">
+	<section class="bar" style="background-color: #f7f7f7">
+	<div class="container-1" style="border-radius:5px;background-color: #fff;border-radius:3px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);">
     	<div class="row">
             <article>
 <!-- 				<h3>個人資訊</h3> -->
@@ -153,7 +158,7 @@
 									<input type="text" value="${member.address}" id="address" name="address" class="form-control">
 								</div>
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-4">
 	                      		<div class="form-group">
 			                        <div><label style="font-size:20px">圖片</label></div>
 			                        <input type="button" class="btn btn-template-outlined" id="originPicture" value="原圖片" class="form-control"/>
@@ -178,6 +183,7 @@
 <!-- 						</div> -->
 					</fieldset>
 					<c:if test="${member.memberType eq 'O' }">
+						<hr>
 						<fieldset>
 							<div class="heading">
 								<h3>公司資料</h3>
@@ -235,10 +241,10 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-12">
 	                      			<div class="form-group">
 										<label style="font-size:20px">創立宗旨</label>
-										<textarea rows="5" id="orgFoundPurpose" name="orgFoundPurpose" class="form-control">
+										<textarea rows="5"  id="orgFoundPurpose" name="orgFoundPurpose" class="form-control">
 											${member.orgFoundPurpose}
 										</textarea>
 									</div>
@@ -590,7 +596,7 @@
 // 			$("form div").addClass("form-group");
 // 			$("form input").addClass("form-control");
 // 			$("form textarea").addClass("form-control");
-			var t = "<a href='/user/personal-info/list' style='font-weight: 700;'>/我的個人資料</a>/修改個人資料"			
+			var t = "<a href='/user/personal-info/list' style='font-weight: 700;'>/我的個人資訊</a>/修改個人資料"			
 				$("#webTitle").empty().append("修改個人資料");
 				$("#lastPage").after(t);
 				

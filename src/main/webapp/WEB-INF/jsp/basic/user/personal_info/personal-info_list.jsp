@@ -52,7 +52,7 @@
 							</div>
 						</div>
 						<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-6">
 		                    <div class="form-group">
 		                      	<ul class="ul-icons list-unstyled">
 									<fmt:formatDate value="${member.birthDate}" pattern="yyyy/MM/dd" var="birthDate"/>
@@ -75,7 +75,7 @@
 								</ul>
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 			                <div class="form-group">
 			                    <ul class="ul-icons list-unstyled">
 									<li>
@@ -100,7 +100,7 @@
                     </div>
                 </div>
 				<div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-9">
                       	<div class="form-group">
                       		<c:if test="${member.memberType eq 'O' }">
 								<div class="heading">
@@ -147,7 +147,7 @@
                       		<c:if test="${member.memberType eq 'O' }">
                       			<ul class="ul-icons list-unstyled">
                       				<li>
-										<div class="icon-filled"></div><span style="font-size:20px">創立宗旨  : </span><div>${member.orgFoundPurpose}</div>
+										<div class="icon-filled"></div><span style="font-size:20px">創立宗旨  : </span><div style="font-size:20px">${member.orgFoundPurpose}</div>
 									</li>
 								</ul>
 							</c:if>
@@ -185,6 +185,7 @@
 
 		$(document).ready(function(){
 			$("#webTitle").empty().append("我的個人資訊");
+			$("#lastPage").after("/${member.name}");
 			var date = '${member.birthDate}'
 			var d = new Date(date).Format('yyyy-MM-dd')
 			$("#date").html(d)

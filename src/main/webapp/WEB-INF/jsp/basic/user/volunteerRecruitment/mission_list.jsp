@@ -40,6 +40,7 @@
 		 	
 			max-width: 1500px;
 			border-radius: 3px;
+			 background-color: #f7f7f7;
 			
 		}
 		.container-1>.row{
@@ -68,16 +69,16 @@
 /* 			margin-top: 30px; */
 		    padding: 10px;
 		    border-radius: 3px;
-		    border: 2px solid #1ec7c3;
-		    background-color: #e2e2e2;
+/* 		    border: 2px solid #1ec7c3; */
+/* 		    background-color: #e2e2e2; */
 			
 		}
 		.s7{
 			margin-left:5%;
 		}
 		.s8{
-			border: 2px solid #1ec7c3;
- 		    background-color: #e2e2e2; 
+/* 			border: 2px solid #1ec7c3; */
+            background-color: #FFF;  
 		    padding-top:25px;
 		    padding-bottom:20px;
 		}
@@ -337,7 +338,7 @@
 					   box+="</div>"
 					 }  
 					   box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
-						   if(mission.termType=='s'){
+						   if(mission.termType=='S'){
 					   box+="<p class='intro_1'>長短期:短期</p>"
 						   }else{
 					   box+="<p class='intro_1'>長短期:長期</p>"	   

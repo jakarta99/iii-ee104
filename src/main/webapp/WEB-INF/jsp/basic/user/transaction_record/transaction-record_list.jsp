@@ -42,6 +42,7 @@
 		    background-color: #fff;
 		    background-image: none;
 		    border-color: #13b5b1;
+		    font-size: 16px;
 		}
 		.btn-outline-secondary:hover {
 		    color: #fff;
@@ -50,7 +51,7 @@
 		}
 		.btn {
 		    border: 1px solid #13b5b1;
-		    border-radius: 0;
+		    border-radius: 3px;
 		}
 		.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
 		    color: #13b5b1 !important;
@@ -70,12 +71,18 @@
 		    color: white !important;
 		    border: 1px solid #111;
 		    background-color: #13b5b1; 
-		    background: #13b5b1; 
+		    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #13b5b1), color-stop(100%, #13b5b1)); 
 		    background: -webkit-linear-gradient(top, #13b5b1 0%, #13b5b1 100%);
 		    background: -moz-linear-gradient(top, #13b5b1 0%, #13b5b1 100%);
 		    background: -ms-linear-gradient(top, #13b5b1 0%, #13b5b1 100%);
 		    background: -o-linear-gradient(top, #13b5b1 0%, #13b5b1 100%);
 		    background: linear-gradient(to bottom, #13b5b1 0%, #13b5b1 100%);
+		}
+		.form-1{
+			padding-top:20px;
+			width: 75%;
+			text-align:center;
+			margin:auto;
 		}
 </style>
 </head>
@@ -88,7 +95,7 @@
 	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 	<!-- Sidebar -->
     <jsp:include page="../user_layout/user_sidebar.jsp"/>
-	<section class="bar">
+	<section class="bar"  style="background-color: #f7f7f7" >
 	<div class="container">
     	<div class="row">
             <article>
@@ -97,31 +104,31 @@
 <!-- 			        <hr class="star-dark mb-5"> -->
 <!-- 				</div> -->
 				<div id="sideBar">
-					<form>
+					<form class="form-1" style="border-radius:5px;background-color: #fff;border-radius:3px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);">
 						<fieldset style="width:1100px">
-						<legend>搜尋</legend>
-						<div>
-							<div>
-							    <label>起始時間</label>
-							    <input type="text" value="${param.transactionTimeBegin}" id="transactionTimeBegin" name="transactionTimeBegin" autocomplete="off"/>
-							    <label>結束時間</label>
-							    <input type="text" value="${param.transactionTimeEnd}" id="transactionTimeEnd" name="transactionTimeEnd" autocomplete="off"/>
+<!-- 						<legend>搜尋</legend> -->
+<!-- 						<div> -->
+							<div class="d-flex justify-content-center">
+<!-- 							    <label>起始時間</label> -->
+							    <input type="text" value="${param.transactionTimeBegin}" placeholder="起始時間" id="transactionTimeBegin" name="transactionTimeBegin" autocomplete="off"/>
+<!-- 							    <label>結束時間</label> -->
+							    <input type="text" value="${param.transactionTimeEnd}" placeholder="結束時間" id="transactionTimeEnd" name="transactionTimeEnd" autocomplete="off"/>
+<!-- 							    <label>摘要</label>  -->
+								<input type="text" value="${param.description}" placeholder="摘要" id="description" name="description"/>
 						  	</div>
-							<div>	
-								<label>存入</label>
-								<input type="text" value="${param.depositValue}" id="depositValue" name="depositValue"/>
-								<label>支出</label> 
-								<input type="text" value="${param.withdrawalValue}"  id="withdrawalValue" name="withdrawalValue"/>
-								<label>結餘</label> 
-								<input type="text" value="${param.balanceValue}"  id="balanceValue" name="balanceValue"/>
+							<div class="d-flex justify-content-center">	
+<!-- 								<label>存入</label> -->
+								<input type="text" value="${param.depositValue}" placeholder="存入" id="depositValue" name="depositValue"/>
+<!-- 								<label>支出</label>  -->
+								<input type="text" value="${param.withdrawalValue}" placeholder="支出" id="withdrawalValue" name="withdrawalValue"/>
+<!-- 								<label>結餘</label>  -->
+								<input type="text" value="${param.balanceValue}" placeholder="結餘" id="balanceValue" name="balanceValue"/>
 							</div>
-							<div>
-							    <label>摘要</label> 
-								<input type="text" value="${param.description}"  id="description" name="description"/>
-								<input type="button" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="search" id="searchButt" />
-							  	<input type="reset" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="reset" id="resetButt" />
+							<div class="d-flex justify-content-center">
+								<input type="button" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="搜尋" id="searchButt" />
+							  	<input type="reset" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="清除重填" id="resetButt" />
 							</div>
-						</div>
+<!-- 						</div> -->
 					  	</fieldset>
 					</form>
 					</div>

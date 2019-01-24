@@ -18,37 +18,37 @@
  		<!-- Navbar -->
 		<jsp:include page="commons_layout/commons_nav.jsp" />
 	<div id="all">  
-      <div id="content" >
+      <div id="content" style="background-color: #f7f7f7">
         <div class="container" id="loginContainer">
           <div class="row" >           
             <div class="col-lg-6" style="margin:auto">
-              <div class="box" style="border:1px solid #ddd;border-radius:5px;">
+              <div class="box" style="border-radius:5px;background-color: #fff;border-radius:3px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);">
                 <h2 class="text-uppercase" style='text-align:center'>登入</h2>
 
                 <form action="/login" method="post" id="loginForm">
                   <div class="form-group">
-                    <label for="username">帳號</label>
+                    <label for="username" style="font-size:20px">帳號</label>
                     <input id="username" type="text" name="username" class="form-control" autofocus>
                   </div>
                   <div class="form-group">
-                    <label for="password">密碼</label>
+                    <label for="password" style="font-size:20px">密碼</label>
                     <input id="password" type="password" name="password" class="form-control">
                   </div>
                      <h6 style="text-align: center;color:blue">${message}</h6>
                   <div class="text-center">
                     <button type="submit" class="btn btn-template-outlined"><i class="fa fa-sign-in"></i> 登入</button>
-                  	<div class="text-right"><a href="commons/login-forget/type">忘記密碼</a></div>
+                  	<hr>
                   </div>
                   
                 </form>
-                <br/>
                 <div class="text-center">
-				    <img src="../../img/facebook.png" onclick="FBLogin()" width="52.5%"/> 
-				    <img src="../../img/google.png" onclick="GoogleLogin()" width="46.5%"/>
-              	</div>
-				<hr>  
-				            	
-               	<p class="lead" style="text-align:center">還不是我們的會員?<button style="margin-left:50px;" class="btn btn-template-outlined" onclick="javascript:location.href='/commons/sign-up/type'">註冊</button></p>
+				    <img src="../../img/facebook.png" onclick="FBLogin()" width="50%"/><br/>
+				    <img src="../../img/google.png" onclick="GoogleLogin()" width="50.75%"/>
+              	</div><br/>
+              	<div class="text-center" style="font-size:20px;color: #13b5b1" >
+	                <span><a href="commons/login-forget/type">忘記密碼</a></span><span> | </span>
+	               	<span><a href="/commons/sign-up/type">註冊</a></span>
+               	</div>
               </div>
             </div>
           </div>

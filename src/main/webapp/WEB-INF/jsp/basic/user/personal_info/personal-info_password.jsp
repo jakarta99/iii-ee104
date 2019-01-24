@@ -55,11 +55,11 @@
 	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 	<!-- Sidebar -->
 	<jsp:include page="../user_layout/user_sidebar.jsp"/>
-	<section>
+	<section style="background-color: #f7f7f7">
 	<div class="container">
     	<div class="row">
     		<div class="col-lg-6" style="margin:auto">
-            	<div class="box">
+            	<div class="box" style="border-radius:5px;background-color: #fff;border-radius:3px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);">
 		            <article>
 <!-- 						<h2 class="text-uppercase">個人資訊</h2> -->
 <!-- 		                <p class="lead">修改密碼</p> -->
@@ -237,7 +237,7 @@
 	    }
 	    
 		$(document).ready(function() {
-			var t = "<a href='/user/personal-info/list' style='font-weight: 700;'>/我的個人資料</a>/修改密碼"			
+			var t = "<a href='/user/personal-info/list' style='font-weight: 700;'>/我的個人資訊</a>/修改密碼"			
 				$("#webTitle").empty().append("修改密碼");
 				$("#lastPage").after(t);
 			//update member info. event
