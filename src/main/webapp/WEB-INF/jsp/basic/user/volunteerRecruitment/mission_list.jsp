@@ -56,6 +56,7 @@
 			width:100%;
 			margin: auto;
 /* 			padding-top:40px; */
+			font-size: 20px;
 		}
 		.s5{
 /* 			background-color: #e9ecef; */
@@ -70,11 +71,11 @@
 /* 			margin-top: 30px; */
 		    padding: 10px;
 		    border-radius: 3px;
-			border: 2px solid #1ec7c3; 
+/* 			border: 2px solid #1ec7c3;  */
 /* 		    background-color: #e2e2e2; */
 			background-color:#fff;
             border-radius:3px;
-/*             box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5); */
+			box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5); 
 			
 		}
 		.s7{
@@ -121,6 +122,10 @@
 	body {
     background-color: #f5f5f5;
 	}
+	.panel-heading h3 {
+    margin-top: 15px;
+    margin-bottom: 8px;
+	}
  
     </style>
 </head>
@@ -132,19 +137,20 @@
 	<!--heading crumbs-->
 	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />   
         <div id="content">
-        <div class="container-1 container">
-        <div class="row">
-        <div class="col-md-9">
-        <div class="s5">
-        <div class="s4">
-        	<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
-		       <li class="nav-item"><a id="status12Butt" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="false" class="nav-link">未開始</a></li>
-		       <li class="nav-item"><a id="status3Butt" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">時數未核發</a></li>
-		       <li class="nav-item"><a id="status4Butt" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" class="nav-link">歷史紀錄</a></li>
-   			 </ul>
-       	  </div>
+         <div class="container-1 container">
+          <div class="row">
+           <div class="col-md-12">
+            <div class="s5">
+             <div class="s4">
+	        	<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
+			       <li class="nav-item"><a id="status12Butt" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="false" class="nav-link">未開始</a></li>
+			       <li class="nav-item"><a id="status3Butt" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">時數未核發</a></li>
+			       <li class="nav-item"><a id="status4Butt" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" class="nav-link">歷史紀錄</a></li>
+	   			 </ul>
+       	     </div>
+<!--        	  s4結尾 -->
           <div class="row bar">
-            <div id="blog-listing-medium" class="col-md-12">
+            <div id="blog-listing-medium" class="col-md-9">
           	<div id="boxbox" class="row">
 <!--                 mission內容開始 -->                
           
@@ -157,18 +163,13 @@
                   </nav>
               </div>    
             </div>
-            
-          
-            </div>
-          </div>
-          </div>
-           <div class="col-md-3">
+             <div class="col-md-3">
             <div class="s6" >
               
               <div class="panel panel-default sidebar-menu">
                 <div class="panel-heading">
                 <div class="s7">
-                  <h3 class="h4 panel-title">條件查詢</h3>
+                  <h3 class="h3 panel-title">條件查詢</h3>
                   </div>
                 </div>
                 
@@ -232,6 +233,11 @@
            
            
            </div>
+          
+            </div>
+          </div>
+          </div>
+          
           </div>
         </div>
       </div>
