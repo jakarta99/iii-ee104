@@ -288,7 +288,7 @@
 	        		console.log(mission)
 	        		var box="<div class='col-lg-4 col-md-6'>";
 	        		 box+="<div class='home-blog-post_1'>";
-	        		 box+="<div class='image' style='text-align:center;margin-bottom: 20px;'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'><img width='349px' height='230px'  style='border-radius:3px;padding:0.5px;' src=/image/user/mission/"+mission.missionPicName+" alt='...'></a>";
+	        		 box+="<div class='image' style='text-align:center;margin-bottom: 20px;'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'><img width='347px' height='230px'  style='border-radius:3px;padding:0.5px;' src=/image/user/mission/"+mission.missionPicName+" alt='...'></a>";
 	        		 box+="</div><div class='text'><div class='s4'><h2 class='h2' style='text-align:center;'><a href='/commons/domesticVolunteer/apply?missionId="+mission.id+"'>"+ mission.title + "</a></h2>";
 	        		 box+="<p class='author-category' style='text-align:center;'><a class='sss' href='/commons/personal-info/list?memberId="+mission.member.id+"'>"+mission.member.name+"</a></p>"
 	        		

@@ -337,7 +337,7 @@
 					   box+="</div>"
 					 }  
 					   box+="<div class='d-flex flex-wrap justify-content-between text-xs'>"
-						   if(mission.termType=='s'){
+						   if(mission.termType=='S'){
 					   box+="<p class='intro_1'>長短期:短期</p>"
 						   }else{
 					   box+="<p class='intro_1'>長短期:長期</p>"	   

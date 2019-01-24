@@ -105,126 +105,47 @@ INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (16, 3)
 --個人會員發布的任務
 INSERT INTO mission(address, approved_quantity,pay_date, contact_email, contact_person, contact_phone, county, deadline, discription, district, end_date, mission_pic_name, mission_status, payed_quantity, people_needed, publish_date, start_date, term_type, time_value, title, member_id, service_type) 
 VALUES ('忠孝東路6段484號B1', 0, '2019-01-15 00:00:00:000', 'juliantsai@canlove.org.tw', '蔡明珠', '02-66171885', '台北市','2019-01-05 00:00:00.000', '曾經是老師的小林奶奶快80歲了，她最大的夢想，就是再一次回到校園，聽到孩子們的說一聲: 「小林老師好!」或許你也聽過這些老人話?『老人攏沒路用，攏沒人管 ！』『一個人很孤單、很苦…』『全身都是病啦，死一死算了。』一次用夢想再點燃希望的行動，肯愛協會正在關心離家的弱勢老人，讓有夢的老人有「夢」有活力陪伴離家老人找到生活的意義，身心的健康及好好活的動力。--我們想和你一起--',
-		'南港區','2019-01-12 00:00:00.000','missionPicture_1.jpg','A_New', 0, 2,'2019-01-21 11:19:35.027', '2019-01-10 00:00:00.000', 'S', 8, '友夢不老-助爺奶圓夢', 1,3);
+		'南港區','2019-01-12 00:00:00.000','GP.jpg','A_New', 0, 2,'2019-01-21 11:19:35.027', '2019-01-10 00:00:00.000', 'S', 8, '友夢不老-助爺爺爺奶奶圓夢', 1,3);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (5,'[個人5]陪伴家中長者就醫',3,'S',3,'2019/1/9','2019/2/13 14:00','2019/2/13 17:00',1,'曾小潔','0912456789','jasmine@gmail.com','我的母親高齡75歲，行動不便(拄柺杖)且住在五層樓高的無電梯公寓。2019/2/13下午需要去仁愛醫院回診檢查糖尿病，但當天家人都需要工作，無法抽身，因此需要女性志工陪同回診檢查慢性病(包含協助下樓、交通、完成醫療診斷程序後陪同返家、上樓)。','臺北市','大安區','復興南路一段390號15樓','A_New','2019/2/19',0,'old-man.jpg',0);
+VALUES (5,'陪伴家中長者就醫-殘障照顧',3,'S',3,'2019/1/9','2019/2/13 14:00','2019/2/13 17:00',1,'曾小潔','0912456789','jasmine@gmail.com','我的母親高齡75歲，行動不便(拄柺杖)且住在五層樓高的無電梯公寓。2019/2/13下午需要去仁愛醫院回診檢查糖尿病，但當天家人都需要工作，無法抽身，因此需要女性志工陪同回診檢查慢性病(包含協助下樓、交通、完成醫療診斷程序後陪同返家、上樓)。','臺北市','大安區','復興南路一段390號15樓','A_New','2019/2/19',0,'old-man.jpg',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (5,'[個人5]協助獨居身心障礙者年節前大掃除',6,'S',2,'2019/1/12','2019/2/1 10:00','2019/2/1 17:00',1,'趙技安','0912456789','jasmine@gmail.com','我患有帕金森氏症，無法獨力負擔粗重的打掃工作，農曆年前希望能徵得好心人協助我進行大掃除工作(包含幫忙回收大型家具、換燈泡等較粗重或需要爬高的項目)。','臺北市','南港區','愛心路一段390號15樓','A_New','2019/1/31',0,'kitchen-clean.jpg',0);
+VALUES (5,'協助獨居身心障礙者年節前大掃除',6,'S',2,'2019/1/12','2019/2/1 10:00','2019/2/1 17:00',1,'趙技安','0912456789','jasmine@gmail.com','我患有帕金森氏症，無法獨力負擔粗重的打掃工作，農曆年前希望能徵得好心人協助我進行大掃除工作(包含幫忙回收大型家具、換燈泡等較粗重或需要爬高的項目)。','臺北市','南港區','愛心路一段390號15樓','A_New','2019/1/31',0,'kitchen-clean.jpg',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'[個人1]協助在過年期間餵食流浪貓',6,'L',5,'2019/1/9','2019/2/4 19:00','2019/2/9 19:00',1,'陳大德','0912456789','brian@gmail.com','我平常每天晚上七點左右會在淡水街頭固定餵食大約8~9隻流浪貓，但過年期間共有5天要回南部老家，實在找不到人幫忙。希望能找到過年期間可以幫忙餵貓和收拾飼料盆的朋友，我會把飼料寄放在附近店家，也會先找一天帶您熟悉放置貓飼料的位置。','新北市','淡水區','貓奴路一段390號15樓','A_New','2019/1/31',0,'canned-food.jpg',0);
+VALUES (1,'協助在過年期間餵食流浪貓',6,'L',5,'2019/1/9','2019/2/4 19:00','2019/2/9 19:00',1,'陳大德','0912456789','brian@gmail.com','我平常每天晚上七點左右會在淡水街頭固定餵食大約8~9隻流浪貓，但過年期間共有5天要回南部老家，實在找不到人幫忙。希望能找到過年期間可以幫忙餵貓和收拾飼料盆的朋友，我會把飼料寄放在附近店家，也會先找一天帶您熟悉放置貓飼料的位置。','新北市','淡水區','貓奴路一段390號15樓','A_New','2019/1/31',0,'canned-food.jpg',0);
 
 --機構會員發布的任務
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (7,'臺灣國際淨灘行動',3,'S',7,'2019/1/2','2019/4/27 14:00','2019/4/27 17:00',10,'劉先生','0912456789','brian@gmail.com','全球海灘上塑膠垃圾的密度是海底的29倍，更是大海表面的兩千倍。海岸線像一台不用插電的吸塵器，透過潮汐與波浪的日夜推移，讓漂浮的垃圾不斷堆積在沙灘上。<br>原來我們不一定要辛苦航行到太平洋中心打撈稀薄的塑膠碎片，與海底與海面相比，海岸是人類最容易到達的海洋環境，讓「淨灘」成為每個地球人守護海洋最直接的行動。<br>誠摯地邀請您與我們及全世界愛海的朋友一齊來加入淨灘的行列。','新北市','八里區','挖仔尾海灘','A_New','2019/4/10',0,'beach.jpg',0);
+VALUES (7,'臺灣國際淨灘行動-守護海洋',3,'S',7,'2019/1/2','2019/4/27 14:00','2019/4/27 17:00',10,'劉先生','0912456789','brian@gmail.com','全球海灘上塑膠垃圾的密度是海底的29倍，更是大海表面的兩千倍。海岸線像一台不用插電的吸塵器，透過潮汐與波浪的日夜推移，讓漂浮的垃圾不斷堆積在沙灘上。<br>原來我們不一定要辛苦航行到太平洋中心打撈稀薄的塑膠碎片，與海底與海面相比，海岸是人類最容易到達的海洋環境，讓「淨灘」成為每個地球人守護海洋最直接的行動。<br>誠摯地邀請您與我們及全世界愛海的朋友一齊來加入淨灘的行列。','新北市','八里區','挖仔尾海灘','A_New','2019/4/10',0,'beach.jpg',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
 VALUES (12,'愛愛院-社區照顧關懷據點志工 ',3,'L',3,'2019/1/2','2019/3/1 14:00','2019/7/31 17:00',8,'陳小姐','02-28828899','aiaiai@gmail.com','如果您想要豐富退休的生活，如果您想要好好充實自己的生活；<br>如果您對於老人服務充滿熱忱，如果您想要投入公益服務；<br>那麼愛愛院期待您的加入。<br>愛愛院急徵有志一同的志工夥伴們一起加入『愛』的行列。<br>愛愛院的志工項目：<br>☆ 關懷陪談<br>☆ 電話問安<br>☆ 活動支援<br>☆ 庶務機動<br>☆ 居家訪視<br>','台北市','萬華區','大理街175巷27號','A_New','2019/6/30',0,'aiai.jpg',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (13,'伊甸基金會-偏鄉暑期陪讀志工 ',8,'S',1,'2019/7/7','2019/8/24 09:00','2019/7/31 17:00',4,'廖先生','03-28828899','eedian@gmail.com','在偏鄉社區中，許多孩子有著不同的天賦，如音樂、舞蹈等，卻因為城鄉差距、貧富落差的關係，失去了發展的機會；或是沒有經費可以栽培孩子、或是地處偏僻比較缺乏老師願意來教，對許多偏鄉弱勢的孩子來說，才藝學習是遥不可及的夢想，冀望能夠透過音樂教學相關才藝課程，給予多元刺激適性發展，偏鄉孩子一樣能，同時我們深信「教育」是提高人口素質的根本方法：唯有「教育」能幫助人脫離貧困和愚昧。所以我們很願意協助更多的偏鄉兒童、原住民學子，努力求學、奮發向上、發揮偏鄉兒童、原住民的才華，找到每個人的一片天空。<br>希望徵求兩名志工，陪伴孩子、豐富孩子的暑假。','台東縣','東河鄉','泰源村泰源書屋','A_New','2019/6/10',0,'readwithchild.jpg',0);
+VALUES (13,'伊甸基金會-偏鄉暑期陪讀志工 ',8,'S',1,'2019/7/7','2019/8/24 09:00','2019/7/31 17:00',4,'廖先生','03-28828899','eedian@gmail.com','在偏鄉社區中，許多孩子有著不同的天賦，如音樂、舞蹈等，卻因為城鄉差距、貧富落差的關係，失去了發展的機會；或是沒有經費可以栽培孩子、或是地處偏僻比較缺乏老師願意來教，對許多偏鄉弱勢的孩子來說，才藝學習是遥不可及的夢想，冀望能夠透過音樂教學相關才藝課程，給予多元刺激適性發展，偏鄉孩子一樣能，同時我們深信「教育」是提高人口素質的根本方法：唯有「教育」能幫助人脫離貧困和愚昧。所以我們很願意協助更多的偏鄉兒童、原住民學子，努力求學、奮發向上、發揮偏鄉兒童、原住民的才華，找到每個人的一片天空。<br>希望徵求兩名志工，陪伴孩子、豐富孩子的暑假。','台東縣','東河鄉','南東河15鄰420號','A_New','2019/6/10',0,'readwithchild.jpg',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (13,'伊甸基金會-為家漆上愛志工 ',8,'S',4,'2019/1/3','2019/1/5 09:00','2019/1/5 17:00',15,'曹小姐','03-28828899','eedian@gmail.com','伊甸基金會與特力屋士林店招募羅賴把志工，一起聯手打造友善安居家庭日，訂於107年12月30日(六)至特力屋士林店受訓後，於108年1月5日(六)至弱勢家庭家中刷油漆，一起為家漆上愛。','台北市','文山區','萬和街6號4樓之2','B_AccountsPayable','2019/1/5',0,'paint.jpg',0);
+VALUES (13,'伊甸基金會-為家漆上愛志工 ',8,'S',4,'2019/1/3','2019/1/5 09:00','2019/1/5 17:00',15,'曹小姐','03-28828899','eedian@gmail.com','伊甸基金會與特力屋士林店招募羅賴把志工，一起聯手打造友善安居家庭日，訂於107年12月30日(六)至特力屋士林店受訓後，於108年1月5日(六)至弱勢家庭家中刷油漆，一起為家漆上愛。','台北市','文山區','萬和街6號4樓之2','B_AccountsPayable','2019/1/5',5,'paint.jpg',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (13,'伊甸基金會-視障重建中心導盲志工 ',3,'L',2,'2019/1/8','2019/3/1 09:00','2019/12/31 17:00',5,'董小姐','08-28828899','eedian@gmail.com','你是充滿熱忱、有滿腔愛心的人嗎？是否遇過視障者需要協助時，卻不知該怎麼幫忙呢？竭誠邀請您一同參與導盲志工培訓招募，完成培訓後可排班協助視障者外出購物、休閒活動及陪同參與社區化活動。歡迎您一同加入我們的行列，協助視障者參與社會。','台北市','松山區','光復北路60巷19-6號B1樓','A_New','2019/12/31',0,'blindvol.jpg',0);
+VALUES (13,'伊甸基金會-視障重建中心導盲志工 ',3,'S',2,'2019/1/8','2019/3/1 09:00','2019/12/31 17:00',5,'董小姐','08-28828899','eedian@gmail.com','你是充滿熱忱、有滿腔愛心的人嗎？是否遇過視障者需要協助時，卻不知該怎麼幫忙呢？竭誠邀請您一同參與導盲志工培訓招募，完成培訓後可排班協助視障者外出購物、休閒活動及陪同參與社區化活動。歡迎您一同加入我們的行列，協助視障者參與社會。','台北市','松山區','光復北路60巷19-6號B1樓','A_New','2019/12/31',0,'blindvol.jpg',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
 VALUES (11,'失智者照顧協會-失智關懷志工 ',4,'L',2,'2019/1/8','2019/3/1 09:00','2019/12/31 17:00',20,'魏先生','08-28828899','shichih@gmail.com','有鑑於失智症罹患率逐年增加，及其為家庭、社會帶來的衝擊與壓力，本會與臺北市立聯合醫院團隊一直致力於失智整合照護服務的建構與發展，成立失智症醫療照護聯盟，凝聚社區力量、提升社區對失智者的認同與支持，達到失智友善社區的願景。<br>而這願景的實現需要團隊的共識，更需志工的投入和參與。 因此我們預計在108年度辦理失智關懷志工招募，並予以一連串的專業訓練培養所需識能，協助臺北市立聯合醫院各院區日照、據點、篩檢、記憶門診…等，予以失智症患者與家屬更專業用心的陪伴，共同走過漫長醫療與照護的無助歷程。竭誠邀請您一同加入!','台北市','松山區','光復北路60巷19-6號B1樓','A_New','2019/12/31',0,'dementia.jpg',0);
 
 
+--伊甸結案活動
 
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity,finish_date) 
+VALUES (13,'伊甸基金會-除夕陪伴志工 ',6,'S',4,'2018/1/8','2018/2/1 15:00','2018/2/8 21:00',4,'魏先生','08-28828899','shichih@gmail.com','隨著年紀的增長，能夠回家過年的住民越來越少，但他們的內心深處，也很渴望如同親屬一般的關愛，因此，我們希望有人能像家人或朋友一般，來陪伴他們吃吃飯，聊聊天，一圓他們也想有家人陪伴的夢。','台北市','松山區','光復北路60巷19-6號B1樓','C_Finish','2018/2/5',4,'newyear.png',4,'2018/2/20');
 
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (2,'一起照顧老人',2,'L',3,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','大安區','復興南路一段390號15樓','A_New','2018/12/31',0,'detailsquare.jpg',0);
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity,finish_date) 
+VALUES (13,'伊甸基金會-送餐志工 ',6,'S',4,'2018/5/6','2018/6/6 15:00','2018/6/13 21:00',4,'李先生','02-24428811','alex@gmail.com','隨著高齡社會的來臨，許多長者需要您我的關懷特別是行動不便的長者，在飲食的準備跟購買更是一大困難！為配合本國長照政策，信義老人服務中心安排每週週間中午，透過送餐服務，來幫助這些經照管中心評估為失能的長者，以維持其生活及健康飲食。','台北市','信義區','信義路五段7號','C_Finish','2018/7/7',4,'food.jpg',4,'2018/7/9');
 
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (2,'一起照顧小孩',2,'S',1,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','板橋區','復興南路一段390號15樓','A_New','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (2,'一起照顧動物',2,'L',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','信義區','復興南路一段390號15樓','A_New','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧老人10',2,'L',3,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','大安區','復興南路一段390號15樓','A_New','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧小孩10',2,'S',1,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','板橋區','復興南路一段390號15樓','A_New','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧動物10',2,'L',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','信義區','復興南路一段390號15樓','A_New','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧老人11',2,'L',3,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','大安區','復興南路一段390號15樓','A_New','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧小孩11',2,'S',1,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','板橋區','復興南路一段390號15樓','A_New','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧動物11',2,'L',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','信義區','復興南路一段390號15樓','A_New','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧老人12',2,'L',3,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','大安區','復興南路一段390號15樓','A_New','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧小孩12',2,'S',1,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','板橋區','復興南路一段390號15樓','A_New','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧動物12',2,'L',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','信義區','復興南路一段390號15樓','A_New','2018/12/31',0,'detailsquare.jpg',0);
-
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧老人2',3,'S',3,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','樹林區','復興南路一段390號15樓','A_VolunteerApproved','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧老人3',3,'S',3,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','台北市','信義區','復興南路一段390號15樓','A_VolunteerApproved','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧老人4',3,'S',3,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','A_VolunteerApproved','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧老人5',3,'S',3,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','樹林區','復興南路一段390號15樓','A_VolunteerApproved','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧小孩2',3,'L',1,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','大安區','復興南路一段390號15樓','B_AccountsPayable','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧小孩3',3,'L',1,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','信義區','復興南路一段390號15樓','B_AccountsPayable','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧小孩4',3,'L',1,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','大安區','復興南路一段390號15樓','B_AccountsPayable','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧小孩5',3,'L',1,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','信義區','復興南路一段390號15樓','B_AccountsPayable','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧小孩6',3,'L',1,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Brian','0912456789','brian@gmail.com','這是一份好工作喔','台北市','大安區','復興南路一段390號15樓','B_AccountsPayable','2018/12/31',0,'detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,FINISH_DATE,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧動物2',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Finish','2018/12/31',0,'2019/01/01','detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,FINISH_DATE,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧動物3',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Finish','2018/12/31',0,'2019/01/01','detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,FINISH_DATE,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧動物4',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','樹林區','復興南路一段390號15樓','C_Finish','2018/12/31',0,'2019/01/01','detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,FINISH_DATE,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Finish','2018/12/31',0,'2019/01/01','detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,FINISH_DATE,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Cancel','2018/12/31',0,'2019/01/01','detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,FINISH_DATE,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Cancel','2018/12/31',0,'2019/01/01','detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,FINISH_DATE,MISSION_PIC_NAME,payed_quantity) 
-VALUES (1,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Cancel','2018/12/31',0,'2019/01/01','detailsquare.jpg',0);
-
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,FINISH_DATE,MISSION_PIC_NAME,payed_quantity) 
-VALUES (2,'一起照顧動物5',3,'S',5,'1970/5/15','2018/11/11 17:00','2018/12/31 17:00',5,'Kevin','0912456789','brian@gmail.com','這是一份好工作喔','新北市','土城區','復興南路一段390號15樓','C_Cancel','2018/12/31',0,'2019/01/01','detailsquare.jpg',0);
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity,finish_date) 
+VALUES (13,'伊甸基金會-陪讀志工、才藝志工 ',6,'S',4,'2018/1/8','2018/2/1 15:00','2018/2/1 21:00',4,'魏先生','08-28828899','shichih@gmail.com','🌷課後輔導 🌹陪伴孩童📌具有愛心耐心服務熱忱的你，絕對不可錯過👊👊👊只要你喜歡和孩子們相處，就可以來幫助孩子們，讓他們快樂學習喲😊😊😊','台北市','松山區','光復北路60巷19-6號B1樓','C_Finish','2018/2/5',3,'kid.jpg',3,'2018/2/20');
 
 --ORDER_LIST
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
@@ -257,11 +178,49 @@ VALUES(7, 5,  'VolunteerApply', '2018/10/11 17:00','Null');
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS)
 VALUES(7, 1,  'VolunteerApply', '2018/10/11 17:00','Null');
 
+--結案order
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
+VALUES(11, 1,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
+VALUES(11, 2,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
+VALUES(11, 3,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
+VALUES(11, 4,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
+VALUES(12, 1,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
+VALUES(12, 2,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
+VALUES(12, 3,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
+VALUES(12, 4,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
+VALUES(13, 1,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
+VALUES(13, 2,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
+VALUES(13, 3,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+
+
+
+
+
+
+
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME, member_score) 
 VALUES(6, 1,  'ServiceFinishPayMatchSuccess', '2018/12/24 17:00', 5);
 
-INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME, member_score,REPORT_STATUS)
-VALUES(7, 1,  'VolunteerApply', '2019/01/02 17:00', 2,'Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
 VALUES(4, 1,  'VolunteerApply', '2018/10/11 17:00');
