@@ -106,7 +106,7 @@
 				<div id="sideBar">
 					<form class="form-1" style="border-radius:5px;background-color: #fff;border-radius:3px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);">
 						<fieldset style="width:1100px">
-<!-- 						<legend>搜尋</legend> -->
+						<legend>搜尋</legend>
 						<div class="d-flex justify-content-center">
 <!-- 						    <label>id:</label> -->
 <%-- 						    <input type="text" value="${param.id}" id="id" name="id"/> --%>
