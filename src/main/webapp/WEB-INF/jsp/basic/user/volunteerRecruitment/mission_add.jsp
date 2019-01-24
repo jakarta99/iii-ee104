@@ -81,6 +81,9 @@
 	  border-radius: 0.25rem;
 	  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	}
+	body {
+    background-color: #f5f5f5;
+	}
 
     </style>
 </head>
@@ -101,7 +104,7 @@
 	<!--heading crumbs-->
 	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 		<section class="bar" >
-        	<div class="container" style="padding:50px;background-color:#f7f7f7;border-radius:5px;">
+        	<div class="container" style="padding:50px;background-color:#fff;border-radius:5px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);">
           	<div class="row">
           	<div class="bo3">
                 <div class="heading">

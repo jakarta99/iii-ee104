@@ -66,7 +66,7 @@
 		.s6{
 			width:100%;
 			margin: auto;
-			margin-top:100px;
+/* 			margin-top:100px; */
 /* 			margin-top: 30px; */
 		    padding: 10px;
 		    border-radius: 3px;
@@ -117,6 +117,9 @@
 	  border: 1px solid #ced4da;
 	  border-radius: 0.25rem;
 	  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	}
+	body {
+    background-color: #f5f5f5;
 	}
  
     </style>
