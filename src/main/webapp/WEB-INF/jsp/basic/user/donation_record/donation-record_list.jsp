@@ -42,6 +42,7 @@
 		    background-color: #fff;
 		    background-image: none;
 		    border-color: #13b5b1;
+    		font-size: 16px;
 		}
 		.btn-outline-secondary:hover {
 		    color: #fff;
@@ -50,7 +51,7 @@
 		}
 		.btn {
 		    border: 1px solid #13b5b1;
-		    border-radius: 0;
+		    border-radius: 3px;
 		}
 		.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
 		    color: #13b5b1 !important;
@@ -77,6 +78,12 @@
 		    background: -o-linear-gradient(top, #13b5b1 0%, #13b5b1 100%);
 		    background: linear-gradient(to bottom, #13b5b1 0%, #13b5b1 100%);
 		}
+		.form-1{
+			padding-top:20px;
+			width: 75%;
+			text-align:center;
+			margin:auto;
+		}
 </style>
 </head>
 <body>
@@ -88,7 +95,7 @@
 	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 	<!-- Sidebar -->
     <jsp:include page="../user_layout/user_sidebar.jsp"/>
-	<section class="bar">
+	<section class="bar"  style="background-color: #f7f7f7" >
 	<div class="container">
     	<div class="row">
             <article>
@@ -97,24 +104,24 @@
 <!-- 			        <hr class="star-dark mb-5"> -->
 <!-- 				</div> -->
 				<div id="sideBar">
-					<form>
+					<form class="form-1" style="border-radius:5px;background-color: #fff;border-radius:3px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);">
 						<fieldset style="width:1100px">
-						<legend>搜尋</legend>
-						<div>
+<!-- 						<legend>搜尋</legend> -->
+						<div class="d-flex justify-content-center">
 <!-- 						    <label>id:</label> -->
 <%-- 						    <input type="text" value="${param.id}" id="id" name="id"/> --%>
 <!-- 						    <label>donator:</label> -->
 <%-- 						    <input type="text" value="${param.donator}" id="donatorAccount" name="donatorAccount"/> --%>
-						    <label>起始時間</label>
-						    <input type="text" value="${param.donateTimeBegin}" id="donateTimeBegin" name="donateTimeBegin" autocomplete="off"/>
-						    <label>結束時間</label>
-						    <input type="text" value="${param.donateTimeEnd}" id="donateTimeEnd" name="donateTimeEnd" autocomplete="off"/>
+<!-- 						    <label>起始時間</label> -->
+						    <input type="text" value="${param.donateTimeBegin}" placeholder="起始時間" id="donateTimeBegin" name="donateTimeBegin" autocomplete="off"/>
+<!-- 						    <label>結束時間</label> -->
+						    <input type="text" value="${param.donateTimeEnd}" placeholder="結束時間" id="donateTimeEnd" name="donateTimeEnd" autocomplete="off"/>
+<!-- 						    <label>被捐贈者</label> -->
+						    <input type="text" value="${param.orgDonee}" placeholder="被捐贈者" id="orgDoneeAccount" name="orgDoneeAccount"/>
 						</div>
-						<div>    
-						    <label>被捐贈者</label>
-						    <input type="text" value="${param.orgDonee}" id="orgDoneeAccount" name="orgDoneeAccount"/>
-					    	<input type="button" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="search"  id="searchButt"/> 
-							<input type="reset" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="reset" id="resetButt"/>
+						<div class="d-flex justify-content-center">
+					    	<input type="button" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="搜尋"  id="searchButt"/> 
+							<input type="reset" class="btn btn-outline-secondary" onclick="dataTable.ajax.reload()" value="清除重填" id="resetButt"/>
 <!-- 							<a class="btn btn-secondary" data-toggle="collapse" href="#collapse"  -->
 <!-- 									role="button" aria-expanded="false" aria-controls="collapse">進階查詢</a> -->
 					    </div>

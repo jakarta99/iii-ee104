@@ -113,7 +113,8 @@
                     <div class="col-md-4 text-center">
                     	<div>
 	                		<img style="width:250px;height:225px" id="picture" alt="" src="/image/user/member/${member.picture}" class="img-fluid rounded-circle">
-	                	</div>
+	                	</div><br/>
+	                	<button id="chatButton" class="btn btn-template-outlined">與我聯絡</button>
                     </div>
                 </div>
 				<div class="row">
@@ -178,6 +179,10 @@
 	<jsp:include page="commons_layout/commons_footer.jsp"/>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
  	<script>
+	 	function startToChat(){
+			createChatBox('${member.account}', '${member.name}');		
+		
+		}
 		$(document).ready(function(){
 			var date = '${member.birthDate}'
 			var d = new Date(date).Format('yyyy-MM-dd')
