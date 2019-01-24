@@ -140,11 +140,13 @@ INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publ
 VALUES (13,'伊甸基金會-義勇消防志工招募 ',3,'S',2,'2019/1/8','2019/3/1 09:00','2019/12/31 17:00',5,'陳小姐','08-28828899','eedian@gmail.com','協助火災搶救、災害搶救、車禍救助、水域救援等勤務參加相關專業訓練','台中市','石岡區','豐勢路1171號','A_New','2019/12/31',0,'car.png',0);
 
 --伊甸時數未核發
-INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (13,'伊甸基金會-為家漆上愛志工 ',8,'S',4,'2019/1/3','2019/1/5 09:00','2019/1/5 17:00',15,'曹小姐','03-28828899','eedian@gmail.com','伊甸基金會與特力屋士林店招募羅賴把志工，一起聯手打造友善安居家庭日，訂於107年12月30日(六)至特力屋士林店受訓後，於108年1月5日(六)至弱勢家庭家中刷油漆，一起為家漆上愛。','台北市','文山區','萬和街6號4樓之2','B_AccountsPayable','2019/1/5',5,'paint.jpg',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (13,'伊甸基金會-為家漆上愛志工 ',8,'S',4,'2019/1/3','2019/1/5 09:00','2019/1/5 17:00',15,'曹小姐','03-28828899','eedian@gmail.com','伊甸基金會與特力屋士林店招募羅賴把志工，一起聯手打造友善安居家庭日，訂於107年12月30日(六)至特力屋士林店受訓後，於108年1月5日(六)至弱勢家庭家中刷油漆，一起為家漆上愛。','台北市','文山區','萬和街6號4樓之2','B_AccountsPayable','2019/1/5',5,'paint.jpg',0);
+VALUES (13,'伊甸基金會-社區適應 ',8,'S',4,'2019/1/3','2019/1/5 09:00','2019/1/5 17:00',15,'李小姐','03-28828899','eedian@gmail.com','協助身障學員參與社區適應活動','台北市','文山區','萬和街6號4樓之2','B_AccountsPayable','2019/1/5',5,'home.jpg',0);
+
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
+VALUES (13,'伊甸基金會-為家漆上愛志工 ',8,'S',4,'2019/1/3','2019/1/4 09:00','2019/1/4 17:00',15,'曹小姐','03-28828899','eedian@gmail.com','伊甸基金會與特力屋士林店招募羅賴把志工，一起聯手打造友善安居家庭日，訂於107年12月30日(六)至特力屋士林店受訓後，於108年1月5日(六)至弱勢家庭家中刷油漆，一起為家漆上愛。','台北市','文山區','萬和街6號4樓之2','B_AccountsPayable','2019/1/5',5,'paint.jpg',0);
+
 
 --伊甸結案活動
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity,finish_date) 
@@ -158,68 +160,68 @@ VALUES (13,'伊甸基金會-陪讀志工、才藝志工 ',6,'S',4,'2018/1/8','20
 
 --ORDER_LIST
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(8, 1,  'ServiceFinishNotPay', '2018/10/11 17:00','Null');
+VALUES(13, 1,  'ServiceFinishNotPay', '2018/10/11 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(8, 2,  'ServiceFinishNotPay', '2018/10/11 17:00','Null');
+VALUES(13, 2,  'ServiceFinishNotPay', '2018/10/11 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(8, 3,  'ServiceFinishNotPay', '2018/10/11 17:00','Null');
+VALUES(13, 3,  'ServiceFinishNotPay', '2018/10/11 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(8, 4,  'ServiceFinishNotPay', '2018/10/11 17:00','Null');
+VALUES(13, 4,  'ServiceFinishNotPay', '2018/10/11 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(8, 5,  'ServiceFinishNotPay', '2018/10/11 17:00','Null');
+VALUES(13, 5,  'ServiceFinishNotPay', '2018/10/11 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS)
-VALUES(7, 2,  'VolunteerApply', '2018/10/11 17:00','Null');
+VALUES(8, 2,  'VolunteerApply', '2018/10/11 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS)
-VALUES(7, 3,  'VolunteerApply', '2018/10/11 17:00','Null');
+VALUES(8, 3,  'VolunteerApply', '2018/10/11 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS)
-VALUES(7, 4,  'VolunteerApply', '2018/10/11 17:00','Null');
+VALUES(8, 4,  'VolunteerApply', '2018/10/11 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS)
-VALUES(7, 5,  'VolunteerApply', '2018/10/11 17:00','Null');
+VALUES(8, 5,  'VolunteerApply', '2018/10/11 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS)
-VALUES(7, 1,  'VolunteerApply', '2018/10/11 17:00','Null');
+VALUES(8, 1,  'VolunteerApply', '2018/10/11 17:00','Null');
 
 --結案order
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(11, 1,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+VALUES(15, 1,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(11, 2,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+VALUES(15, 2,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(11, 3,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+VALUES(15, 3,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(11, 4,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+VALUES(15, 4,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(12, 1,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+VALUES(14, 1,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(12, 2,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+VALUES(14, 2,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(12, 3,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+VALUES(14, 3,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(12, 4,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+VALUES(14, 4,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(13, 1,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+VALUES(16, 1,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(13, 2,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+VALUES(16, 2,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(13, 3,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+VALUES(16, 3,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
 
 
 
