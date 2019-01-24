@@ -1095,15 +1095,16 @@ color: rgba(100, 100, 100);
   margin: 15px 0;
   border:transparent 1.5px solid;
   border-radius:3px; 
-  background-color: #f7f7f7;
-/* box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1); */
+  background-color: #fff;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 .home-blog-post_1:hover {
   margin: 15px 0;
   border:#13b5b1 2px solid;
   border-radius:3px; 
-  background-color: #f7f7f7;
+  background-color: #fff;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
 }
 .home-blog-post_1:hover  .h2>a {
   color:#129c90;

@@ -142,7 +142,7 @@
 	
     </style>
 </head>
-<body>
+<body style="background-color:#f7f7f7;">
 
  	<!-- Top bar-->
       <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/> 	
@@ -164,8 +164,8 @@
 	         </div>
 	     </div>
 	   </section> 
-      <div id="content">
-        <div class="container">
+      <div id="content" >
+        <div class="container" >
        
 		<!--查詢 -->
          <section class="bar_1">
