@@ -104,7 +104,7 @@
 	<!--heading crumbs-->
 	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 		<section class="bar" >
-        	<div class="container" style="padding:50px;background-color:#fff;border-radius:5px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);">
+        	<div class="container" style="padding-left:60px;padding-right:60px;padding-top:50px;padding-bottom:10px;background-color:#fff;border-radius:5px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);">
           	<div class="row">
           	<div class="bo3">
                 <div class="heading">
@@ -215,8 +215,10 @@
                         <textarea class="form-control"  id="discription" name="discription" rows="3">${mission.discription}</textarea>
                       </div>
                     </div>
-                    <div class="col-md-11 text-center">
+                    <div class="col-md-12 text-center">
                       <button id="insertMission" type="submit" class="btn btn-template-outlined"><i class="fa fa-plus"></i>刊登活動</button>
+                    </div>
+                    <div class="col-md-11">
                     </div>
                     <div class="col-md-1">
                     	<span id="setValue" class="btn btn-template-outlined"><i class="fa fa-plus"></i>一鍵帶入</span>

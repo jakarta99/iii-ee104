@@ -61,6 +61,9 @@
 	  border-radius: 0.25rem;
 	  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	}
+	body {
+    background-color: #f5f5f5;
+	}
     </style>
 
 </head>
@@ -74,7 +77,7 @@
     <!--heading crumbs-->
 	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 		<section class="bar">
-        	<div class="container">
+        	<div class="container" style="padding-left:60px;padding-right:60px;padding-top:40px;padding-bottom:40px;background-color:#fff;border-radius:5px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);">
           	<div class="row">
           	<div class="bo3">
                 <div class="heading">
@@ -171,7 +174,7 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                       <div class="form-group">
-                        <label for="email">聯絡Email</label>
+                        <label for="email">聯絡信箱</label>
                         <input type="email" value="${mission.contactEmail}" id="contactEmail" name="contactEmail" class="form-control"/>
                       </div>
                     </div>
@@ -193,7 +196,7 @@
                         <textarea class="form-control"  id="discription" name="discription" rows="3">${mission.discription}</textarea>
                       </div>
                     </div>
-                    <div class="col-md-12 text-center">
+                    <div class="col-md-12 text-center" style='margin-top:10px'>
                       <button type="submit" id="updateButton" class="btn btn-template-outlined"><i class="fa fa-save"></i>更新活動</button>
                     </div>
                   </div>
