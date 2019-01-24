@@ -34,8 +34,22 @@
 	<jsp:include page="commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="commons_layout/commons_nav.jsp"/>
-	<!--heading crumbs-->
-	<jsp:include page="commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
+    <!--heading crumbs-->
+    <section style="background: url('/banner/1607281720180.jpg') center center repeat;padding:12rem 0" class="bar background-white relative-positioned">
+	<div class="dark-mask"></div>
+    <div class="container">
+    	<div class="row d-flex align-items-center flex-wrap">
+        	<h1 class="h2"  style="margin:auto;color:#fff;font-size:42px;">志工招募</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row d-flex align-items-center flex-wrap">
+            <div  style="margin:auto;color:#fff;font-size:20px;margin-top:20px">
+            	<div class="breadcrumb-item"><a href="/">首頁</a>/<a href="/commons/domesticVolunteer/list">志工招募</a>/${member.name}</div>
+			</div>
+        </div>
+    </div>
+   	</section> 
 <!-- 	<div id="heading-breadcrumbs"> -->
 <!--     	<div class="container"> -->
 <!--         	<div class="row d-flex align-items-center flex-wrap"> -->

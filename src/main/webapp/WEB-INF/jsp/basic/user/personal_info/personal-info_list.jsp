@@ -185,6 +185,7 @@
 
 		$(document).ready(function(){
 			$("#webTitle").empty().append("我的個人資訊");
+			$("#lastPage").after("/${member.name}");
 			var date = '${member.birthDate}'
 			var d = new Date(date).Format('yyyy-MM-dd')
 			$("#date").html(d)
