@@ -21,7 +21,7 @@ INSERT INTO ROLE (ROLE_NAME) VALUES  ('ORG_USER');
 --member
 
 INSERT INTO MEMBER (account,address,average_score,balance_value,birth_date,certificate_id_number,county,district,email,email_vertification,type,mobile,name,password,picture,scored_times,sign_up_date,sum_score,tel)
-VALUES('sheila1112','復興南路一段390號15樓',4,100,'1990/08/18','A129885641','台北市','大安區','sheila000@gmail.com','Y','P','0912-356-278','田馥甄','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','hebe.jpg',3,'2019/01/20',12,'02-25644433');
+VALUES('sheila1112','復興南路一段390號',4,100,'1990/08/18','A129885641','台北市','大安區','sheila000@gmail.com','Y','P','0912-356-278','田馥甄','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','hebe.jpg',3,'2019/01/20',12,'02-25644433');
 
 INSERT INTO MEMBER (account,address,average_score,balance_value,birth_date,certificate_id_number,county,district,email,email_vertification,type,mobile,name,password,picture,scored_times,sign_up_date,sum_score,tel)
 VALUES('anchor1112','信義路三段143號',4.5,100,'1992/09/21','A129885641','台北市','大安區','brian@gmail.com','Y','P','0912-111-123','郭富城','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','郭富城.jpg',2,'2019/01/23',9,'02-25641111');
@@ -63,7 +63,7 @@ INSERT INTO MEMBER (ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, TEL, COUNTY, DISTRICT, 
 values('sw1','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','財團法人臺北市私立愛愛院','O','sw1@aiai.org.tw', '02-23060493', '台北市', '萬華區', '大理街175巷27號', 'Y', '2019/1/8', 'Y' ,'謝蕙如', '02-23060493分機2300' , '', 'http://aiai.org.tw', 0, 0, 0, 'memberpic12.jpg')
 
 INSERT INTO MEMBER (ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, TEL, COUNTY, DISTRICT, ADDRESS,EMAIL_VERTIFICATION, SIGN_UP_DATE, ORG_IDENTITY_CONFIRMATION, ORG_CONTACT_PERSON_TEL , ORG_FOUND_PURPOSE, ORG_WEBSITE_LINK,SUM_SCORE,SCORED_TIMES,AVERAGE_SCORE,PICTURE,BALANCE_VALUE,birth_date,certificate_id_number,org_ceo,mobile,org_contact_person,org_founder,org_contact_person_mobile)
-values('dep138','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','財團法人伊甸社會福利基金會','O','dep138@gmail.com', '02-22307715', '台北市', '文山區', '台北市文山區萬和街6號4樓之2', 'Y', '2019/1/8', 'Y' , '02-22307715分機5104' , '伊甸基金會成立邁向35年，以「服務弱勢、見證基督、推動雙福、領人歸主」為服務宗旨。有鑑於台灣身心障礙人口已超過百萬人，且有七成以上是後天因素所造成，伊甸將繼續為弱勢族群爭取權益，並倡導更合理的社會福利政策與爭取社會福利預算，推動全人關懷，讓福音與福利得以實踐。', 'http://www.eden.org.tw', 0, 0, 0, 'memberpic13.jpg',1000,'1983/05/21','22099131','黃琢嵩','0917-654-5600','0957-325-753','劉俠','0935-972-156')
+values('dep138','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','財團法人伊甸社會福利基金會','O','dep138@gmail.com', '02-22307715', '台北市', '文山區', '萬和街6號4樓之2', 'Y', '2019/1/8', 'Y' , '02-22307715分機5104' , '伊甸基金會成立邁向35年，以「服務弱勢、見證基督、推動雙福、領人歸主」為服務宗旨。有鑑於台灣身心障礙人口已超過百萬人，且有七成以上是後天因素所造成，伊甸將繼續為弱勢族群爭取權益，並倡導更合理的社會福利政策與爭取社會福利預算，推動全人關懷，讓福音與福利得以實踐。', 'http://www.eden.org.tw', 0, 0, 0, 'memberpic13.jpg',1000,'1983/05/21','22099131','黃琢嵩','0917-654-5600','0957-325-753','劉俠','0935-972-156')
 
 INSERT INTO MEMBER (ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, TEL, COUNTY, DISTRICT, ADDRESS,EMAIL_VERTIFICATION, SIGN_UP_DATE, ORG_IDENTITY_CONFIRMATION, ORG_CONTACT_PERSON, ORG_CONTACT_PERSON_TEL , ORG_FOUND_PURPOSE, ORG_WEBSITE_LINK,SUM_SCORE,SCORED_TIMES,AVERAGE_SCORE,PICTURE)
 values('good119','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','社團法人中華民國恩友愛心協會','O','good119.org@gmail.com', '02-27515345', '台北市', '大安區', '忠孝東路三段248巷19弄36號', 'Y', '2019/1/8', 'Y' ,'詹熒熒', '02-27515345' , '', 'http://good119.org', 0, 0, 0, 'memberpic14.jpg')
@@ -124,20 +124,29 @@ INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publ
 VALUES (12,'愛愛院-社區照顧關懷據點志工 ',3,'L',3,'2019/1/2','2019/3/1 14:00','2019/7/31 17:00',8,'陳小姐','02-28828899','aiaiai@gmail.com','如果您想要豐富退休的生活，如果您想要好好充實自己的生活；<br>如果您對於老人服務充滿熱忱，如果您想要投入公益服務；<br>那麼愛愛院期待您的加入。<br>愛愛院急徵有志一同的志工夥伴們一起加入『愛』的行列。<br>愛愛院的志工項目：<br>☆ 關懷陪談<br>☆ 電話問安<br>☆ 活動支援<br>☆ 庶務機動<br>☆ 居家訪視<br>','台北市','萬華區','大理街175巷27號','A_New','2019/6/30',0,'aiai.jpg',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (13,'伊甸基金會-偏鄉暑期陪讀志工 ',8,'S',1,'2019/7/7','2019/8/24 09:00','2019/7/31 17:00',4,'廖先生','03-28828899','eedian@gmail.com','在偏鄉社區中，許多孩子有著不同的天賦，如音樂、舞蹈等，卻因為城鄉差距、貧富落差的關係，失去了發展的機會；或是沒有經費可以栽培孩子、或是地處偏僻比較缺乏老師願意來教，對許多偏鄉弱勢的孩子來說，才藝學習是遥不可及的夢想，冀望能夠透過音樂教學相關才藝課程，給予多元刺激適性發展，偏鄉孩子一樣能，同時我們深信「教育」是提高人口素質的根本方法：唯有「教育」能幫助人脫離貧困和愚昧。所以我們很願意協助更多的偏鄉兒童、原住民學子，努力求學、奮發向上、發揮偏鄉兒童、原住民的才華，找到每個人的一片天空。<br>希望徵求兩名志工，陪伴孩子、豐富孩子的暑假。','台東縣','東河鄉','南東河15鄰420號','A_New','2019/6/10',0,'readwithchild.jpg',0);
+VALUES (11,'失智者照顧協會-失智關懷志工 ',4,'L',2,'2019/1/8','2019/3/1 09:00','2019/12/31 17:00',20,'魏先生','08-28828899','shichih@gmail.com','有鑑於失智症罹患率逐年增加，及其為家庭、社會帶來的衝擊與壓力，本會與臺北市立聯合醫院團隊一直致力於失智整合照護服務的建構與發展，成立失智症醫療照護聯盟，凝聚社區力量、提升社區對失智者的認同與支持，達到失智友善社區的願景。<br>而這願景的實現需要團隊的共識，更需志工的投入和參與。 因此我們預計在108年度辦理失智關懷志工招募，並予以一連串的專業訓練培養所需識能，協助臺北市立聯合醫院各院區日照、據點、篩檢、記憶門診…等，予以失智症患者與家屬更專業用心的陪伴，共同走過漫長醫療與照護的無助歷程。竭誠邀請您一同加入!','台北市','松山區','光復北路60巷19-6號B1樓','A_New','2019/12/31',0,'dementia.jpg',0);
 
+--伊甸未開始工作
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (13,'伊甸基金會-為家漆上愛志工 ',8,'S',4,'2019/1/3','2019/1/5 09:00','2019/1/5 17:00',15,'曹小姐','03-28828899','eedian@gmail.com','伊甸基金會與特力屋士林店招募羅賴把志工，一起聯手打造友善安居家庭日，訂於107年12月30日(六)至特力屋士林店受訓後，於108年1月5日(六)至弱勢家庭家中刷油漆，一起為家漆上愛。','台北市','文山區','萬和街6號4樓之2','B_AccountsPayable','2019/1/5',5,'paint.jpg',0);
+VALUES (13,'伊甸基金會-偏鄉暑期陪讀志工 ',8,'S',1,'2019/7/7','2019/8/24 09:00','2019/7/31 17:00',4,'廖先生','03-28828899','eedian@gmail.com','在偏鄉社區中，許多孩子有著不同的天賦，如音樂、舞蹈等，卻因為城鄉差距、貧富落差的關係，失去了發展的機會；或是沒有經費可以栽培孩子、或是地處偏僻比較缺乏老師願意來教，對許多偏鄉弱勢的孩子來說，才藝學習是遥不可及的夢想，冀望能夠透過音樂教學相關才藝課程，給予多元刺激適性發展，偏鄉孩子一樣能，同時我們深信「教育」是提高人口素質的根本方法：唯有「教育」能幫助人脫離貧困和愚昧。所以我們很願意協助更多的偏鄉兒童、原住民學子，努力求學、奮發向上、發揮偏鄉兒童、原住民的才華，找到每個人的一片天空。<br>希望徵求兩名志工，陪伴孩子、豐富孩子的暑假。','台東縣','東河鄉','南東河15鄰420號','A_New','2019/6/10',0,'readwithchild.jpg',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
 VALUES (13,'伊甸基金會-視障重建中心導盲志工 ',3,'S',2,'2019/1/8','2019/3/1 09:00','2019/12/31 17:00',5,'董小姐','08-28828899','eedian@gmail.com','你是充滿熱忱、有滿腔愛心的人嗎？是否遇過視障者需要協助時，卻不知該怎麼幫忙呢？竭誠邀請您一同參與導盲志工培訓招募，完成培訓後可排班協助視障者外出購物、休閒活動及陪同參與社區化活動。歡迎您一同加入我們的行列，協助視障者參與社會。','台北市','松山區','光復北路60巷19-6號B1樓','A_New','2019/12/31',0,'blindvol.jpg',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (11,'失智者照顧協會-失智關懷志工 ',4,'L',2,'2019/1/8','2019/3/1 09:00','2019/12/31 17:00',20,'魏先生','08-28828899','shichih@gmail.com','有鑑於失智症罹患率逐年增加，及其為家庭、社會帶來的衝擊與壓力，本會與臺北市立聯合醫院團隊一直致力於失智整合照護服務的建構與發展，成立失智症醫療照護聯盟，凝聚社區力量、提升社區對失智者的認同與支持，達到失智友善社區的願景。<br>而這願景的實現需要團隊的共識，更需志工的投入和參與。 因此我們預計在108年度辦理失智關懷志工招募，並予以一連串的專業訓練培養所需識能，協助臺北市立聯合醫院各院區日照、據點、篩檢、記憶門診…等，予以失智症患者與家屬更專業用心的陪伴，共同走過漫長醫療與照護的無助歷程。竭誠邀請您一同加入!','台北市','松山區','光復北路60巷19-6號B1樓','A_New','2019/12/31',0,'dementia.jpg',0);
+VALUES (13,'伊甸基金會-音樂輔療初階班志工',4,'S',2,'2019/4/4','2019/3/1 09:00','2019/12/31 17:00',5,'林小姐','08-28828899','eedian@gmail.com','藉由音樂陪伴失能長輩紓壓、訓練肢體動作、刺激五感，以延緩退化','台北市','中正區','南海路49號','A_New','2019/12/31',0,'music.jpg',0);
 
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
+VALUES (13,'伊甸基金會-義勇消防志工招募 ',3,'S',2,'2019/1/8','2019/3/1 09:00','2019/12/31 17:00',5,'陳小姐','08-28828899','eedian@gmail.com','協助火災搶救、災害搶救、車禍救助、水域救援等勤務參加相關專業訓練','台中市','石岡區','豐勢路1171號','A_New','2019/12/31',0,'car.png',0);
+
+--伊甸時數未核發
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
+VALUES (13,'伊甸基金會-為家漆上愛志工 ',8,'S',4,'2019/1/3','2019/1/5 09:00','2019/1/5 17:00',15,'曹小姐','03-28828899','eedian@gmail.com','伊甸基金會與特力屋士林店招募羅賴把志工，一起聯手打造友善安居家庭日，訂於107年12月30日(六)至特力屋士林店受訓後，於108年1月5日(六)至弱勢家庭家中刷油漆，一起為家漆上愛。','台北市','文山區','萬和街6號4樓之2','B_AccountsPayable','2019/1/5',5,'paint.jpg',0);
+
+INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
+VALUES (13,'伊甸基金會-為家漆上愛志工 ',8,'S',4,'2019/1/3','2019/1/5 09:00','2019/1/5 17:00',15,'曹小姐','03-28828899','eedian@gmail.com','伊甸基金會與特力屋士林店招募羅賴把志工，一起聯手打造友善安居家庭日，訂於107年12月30日(六)至特力屋士林店受訓後，於108年1月5日(六)至弱勢家庭家中刷油漆，一起為家漆上愛。','台北市','文山區','萬和街6號4樓之2','B_AccountsPayable','2019/1/5',5,'paint.jpg',0);
 
 --伊甸結案活動
-
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity,finish_date) 
 VALUES (13,'伊甸基金會-除夕陪伴志工 ',6,'S',4,'2018/1/8','2018/2/1 15:00','2018/2/8 21:00',4,'魏先生','08-28828899','shichih@gmail.com','隨著年紀的增長，能夠回家過年的住民越來越少，但他們的內心深處，也很渴望如同親屬一般的關愛，因此，我們希望有人能像家人或朋友一般，來陪伴他們吃吃飯，聊聊天，一圓他們也想有家人陪伴的夢。','台北市','松山區','光復北路60巷19-6號B1樓','C_Finish','2018/2/5',4,'newyear.png',4,'2018/2/20');
 
