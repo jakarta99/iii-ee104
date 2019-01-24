@@ -69,7 +69,7 @@
 /* 			margin-top: 30px; */
 		    padding: 10px;
 		    border-radius: 3px;
-		    border: 2px solid #1ec7c3;
+/* 		    border: 2px solid #1ec7c3; */
 /* 		    background-color: #e2e2e2; */
 			
 		}
@@ -77,8 +77,8 @@
 			margin-left:5%;
 		}
 		.s8{
-			border: 2px solid #1ec7c3;
-/*  		    background-color: #e2e2e2;  */
+/* 			border: 2px solid #1ec7c3; */
+            background-color: #FFF;  
 		    padding-top:25px;
 		    padding-bottom:20px;
 		}
