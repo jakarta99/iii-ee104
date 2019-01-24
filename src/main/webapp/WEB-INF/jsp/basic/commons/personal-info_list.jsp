@@ -26,18 +26,6 @@
 	article{
 		width:100%;
 	}
-/* 	.county,.district { */
-/* 	  	padding: 0.375rem 0.75rem; */
-/* 	  	font-size: 1rem; */
-/* 		line-height: 1.5; */
-/* 		color: #495057; */
-/* 		background-color: #fff; */
-/* 		background-image: none; */
-/* 		background-clip: padding-box; */
-/* 		border: 1px solid #ced4da; */
-/* 		border-radius: 0.25rem; */
-/* 		transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; */
-/* 	}  */
 </style>
 
 </head>
@@ -46,27 +34,29 @@
 	<jsp:include page="commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="commons_layout/commons_nav.jsp"/>
-	<div id="heading-breadcrumbs">
-    	<div class="container">
-        	<div class="row d-flex align-items-center flex-wrap">
-            	<div class="col-md-7">
-              		<h1 class="h2">${member.name}</h1>
-            	</div>
-	            <div class="col-md-5">
-	              	<ul class="breadcrumb d-flex justify-content-end">
-	                	<li class="breadcrumb-item"><a href="/">Home</a></li>
-	                	<li class="breadcrumb-item active">Member Information</li>
-	              	</ul>
-	            </div>
-        	</div>
-        </div>
-    </div>
+	<!--heading crumbs-->
+	<jsp:include page="commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
+<!-- 	<div id="heading-breadcrumbs"> -->
+<!--     	<div class="container"> -->
+<!--         	<div class="row d-flex align-items-center flex-wrap"> -->
+<!--             	<div class="col-md-7"> -->
+<%--               		<h1 class="h2">${member.name}</h1> --%>
+<!--             	</div> -->
+<!-- 	            <div class="col-md-5"> -->
+<!-- 	              	<ul class="breadcrumb d-flex justify-content-end"> -->
+<!-- 	                	<li class="breadcrumb-item"><a href="/">Home</a></li> -->
+<!-- 	                	<li class="breadcrumb-item active">Member Information</li> -->
+<!-- 	              	</ul> -->
+<!-- 	            </div> -->
+<!--         	</div> -->
+<!--         </div> -->
+<!--     </div> -->
 	<section class="bar">
 	<div class="container">
     	<div class="row">
             <article>
             	<div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                       	<div class="form-group">
                       		<div class="heading">
 								<h3>基本介紹</h3>
@@ -80,18 +70,18 @@
 									<li>
 										<c:choose>
 											<c:when test="${member.memberType eq 'P'}">
-												<div class="icon-filled"></div>出生日期  : <span id="date"></span>
+												<div class="icon-filled"></div><span style="font-size:20px">出生日期  : <span id="date"></span></span>
 											</c:when>
 											<c:when test="${member.memberType eq 'O'}">
-												<div class="icon-filled"></div>創立日期  : <span id="date"></span>
+												<div class="icon-filled"></div><span style="font-size:20px">創立日期  : <span id="date"></span></span>
 											</c:when>
 										</c:choose>
 									</li>			
 									<li>
-										<div class="icon-filled"></div>Email : ${member.email}
+										<div class="icon-filled"></div><span style="font-size:20px">Email : ${member.email}</span>
 									</li>
 									<li>
-										<div class="icon-filled"></div>地址  : ${member.county}${member.district}${member.address}
+										<div class="icon-filled"></div><span style="font-size:20px">地址  : ${member.county}${member.district}${member.address}</span>
 									</li>
 								</ul>
 							</div>
@@ -100,17 +90,17 @@
 			                <div class="form-group">
 			                    <ul class="ul-icons list-unstyled">
 									<li>
-										<div class="icon-filled"></div>手機  : ${member.mobile}
+										<div class="icon-filled"></div><span style="font-size:20px">手機  : ${member.mobile}</span>
 									</li>
 									<li>
-										<div class="icon-filled"></div>室內電話  : ${member.telephone}
+										<div class="icon-filled"></div><span style="font-size:20px">室內電話  : ${member.telephone}</span>
 									</li>
 								</ul>
 							</div>
 						</div>
 					</div>
 					</div>
-                    <div class="col-md-4 text-center">
+                    <div class="col-md-3 text-center">
                     	<div>
 	                		<img style="width:250px;height:225px" id="picture" alt="" src="/image/user/member/${member.picture}" class="img-fluid rounded-circle">
 	                	</div><br/>
@@ -118,7 +108,7 @@
                     </div>
                 </div>
 				<div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                       	<div class="form-group">
                       		<c:if test="${member.memberType eq 'O' }">
 								<div class="heading">
@@ -129,13 +119,13 @@
 						            	<div class="form-group">		
 											<ul class="ul-icons list-unstyled">
 												<li>
-													<div class="icon-filled"></div>創辦人  : ${member.orgFounder}
+													<div class="icon-filled"></div><span style="font-size:20px">創辦人  : ${member.orgFounder}</span>
 												</li>
 												<li>
-													<div class="icon-filled"></div>執行長  : ${member.orgCeo}
+													<div class="icon-filled"></div><span style="font-size:20px">執行長  : ${member.orgCeo}</span>
 												</li>
 												<li>
-													<div class="icon-filled"></div>網址  : ${member.orgWebsiteLink}
+													<div class="icon-filled"></div><span style="font-size:20px">網址  : ${member.orgWebsiteLink}</span>
 												</li>
 											</ul>
 										</div>
@@ -144,13 +134,13 @@
 						            	<div class="form-group">		
 											<ul class="ul-icons list-unstyled">
 												<li>
-													<div class="icon-filled"></div>聯絡人  : ${member.orgContactPerson}
+													<div class="icon-filled"></div><span style="font-size:20px">聯絡人  : ${member.orgContactPerson}</span>
 												</li>
 												<li>
-													<div class="icon-filled"></div>聯絡人手機  : ${member.orgContactPersonMobile}
+													<div class="icon-filled"></div><span style="font-size:20px">聯絡人手機  : ${member.orgContactPersonMobile}</span>
 												</li>
 												<li>
-													<div class="icon-filled"></div>聯絡人電話  : ${member.orgContactPersonTel}
+													<div class="icon-filled"></div><span style="font-size:20px">聯絡人電話  : ${member.orgContactPersonTel}</span>
 												</li>
 											</ul>
 										</div>
@@ -159,12 +149,12 @@
 							</c:if>
                       	</div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                       	<div class="form-group">
                       		<c:if test="${member.memberType eq 'O' }">
                       			<ul class="ul-icons list-unstyled">
                       				<li>
-										<div class="icon-filled"></div>創立宗旨  : <div>${member.orgFoundPurpose}</div>
+										<div class="icon-filled"></div><span style="font-size:20px">創立宗旨  : </span><div style="font-size:20px">${member.orgFoundPurpose}</div>
 									</li>
 								</ul>
 							</c:if>

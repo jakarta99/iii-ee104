@@ -31,11 +31,11 @@
 	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 	<!-- Sidebar -->
 	<jsp:include page="../user_layout/user_sidebar.jsp"/>
-	<section>
+	<section style="background-color: #f7f7f7">
 	<div class="container">
     	<div class="row">          
         	<div class="col-lg-6" style="margin:auto">
-            	<div class="box">
+            	<div class="box" style="border-radius:5px;background-color: #fff;border-radius:3px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);">
                 	<article>
                 	<div class="heading">
                 		<h3>上傳一張您的照片</h3>
