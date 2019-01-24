@@ -126,6 +126,9 @@
     margin-top: 15px;
     margin-bottom: 8px;
 	}
+	.nav-pills .nav-link {
+    	border-radius: 8px;
+	}
  
     </style>
 </head>
