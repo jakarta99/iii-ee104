@@ -43,6 +43,11 @@
 	.padding-horizontal {
 	    padding: 5px 0px 10px 0px !important;
 	}
+	.container-1 {
+	    width: 72.5%;
+	    margin:auto;
+		padding:50px;
+	}
 </style>
 
 </head>
@@ -51,24 +56,24 @@
 	<jsp:include page="../commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="../commons_layout/commons_nav.jsp"/>
-	<div id="heading-breadcrumbs">
-    	<div class="container">
-        	<div class="row d-flex align-items-center flex-wrap">
-            	<div class="col-md-7">
-              		<h1 class="h2">建立您的TimeBank帳戶</h1>
-            	</div>
-	            <div class="col-md-5">
-	              	<ul class="breadcrumb d-flex justify-content-end">
-	                	<li class="breadcrumb-item"><a href="/">首頁</a></li>
-	                	<li class="breadcrumb-item"><a href="/commons/sign-up/type">選擇帳戶類型</a></li>
-	                	<li class="breadcrumb-item active">填寫帳戶資訊</li>
-	              	</ul>
-	            </div>
-        	</div>
-        </div>
-    </div>
-	<section class="bar">
-	<div class="container">
+<!-- 	<div id="heading-breadcrumbs"> -->
+<!--     	<div class="container"> -->
+<!--         	<div class="row d-flex align-items-center flex-wrap"> -->
+<!--             	<div class="col-md-7"> -->
+<!--               		<h1 class="h2">建立您的TimeBank帳戶</h1> -->
+<!--             	</div> -->
+<!-- 	            <div class="col-md-5"> -->
+<!-- 	              	<ul class="breadcrumb d-flex justify-content-end"> -->
+<!-- 	                	<li class="breadcrumb-item"><a href="/">首頁</a></li> -->
+<!-- 	                	<li class="breadcrumb-item"><a href="/commons/sign-up/type">選擇帳戶類型</a></li> -->
+<!-- 	                	<li class="breadcrumb-item active">填寫帳戶資訊</li> -->
+<!-- 	              	</ul> -->
+<!-- 	            </div> -->
+<!--         	</div> -->
+<!--         </div> -->
+<!--     </div> -->
+	<section class="bar" style="background-color: #f7f7f7" >
+	<div class="container-1" style="border-radius:5px;background-color: #fff;border-radius:3px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);">
     	<div class="row">
           	<article>
           		<form id="memberform" class="myform" action="#" method="post" enctype="multipart/form-data">
