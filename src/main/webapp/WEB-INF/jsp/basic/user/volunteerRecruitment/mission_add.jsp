@@ -38,6 +38,23 @@
 
 <title>刊登任務 | TimeBank</title>
 <style>
+		.county {
+	  		margin-right:10px;
+		}
+		#setValue {
+		    background: #13b5b1;
+		    color: #fff;
+		    text-decoration: none;
+		    border: 1px solid #13b5b1 !important;
+		    border-radius: 3px !important;
+		}
+		#setValue:hover {
+			color: #13b5b1 !important;
+		    background: none;
+		    border: 1px solid #13b5b1 !important;
+		    border-radius: 3px !important;
+		    text-decoration: none;
+		}
         fieldset {
             width: 600px;
             border-radius: 20px;
@@ -111,7 +128,7 @@
                     <div class="col-md-3">
                      <div class="form-group">
                      	<label>活動地點</label>
-                     	<div role="tw-city-selector" ></div>
+                     	<div role="tw-city-selector"></div>
                      </div>
                     </div>
                      <div class="col-md-3">
@@ -175,7 +192,7 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                       <div class="form-group">
-                        <label for="email">聯絡Email</label>
+                        <label for="email">聯絡信箱</label>
                         <input value='${mission.contactEmail}' type="email" id="contactEmail" name="contactEmail" class="form-control"/>
                       </div>
                     </div>
