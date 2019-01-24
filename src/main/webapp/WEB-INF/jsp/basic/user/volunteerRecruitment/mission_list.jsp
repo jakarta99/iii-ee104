@@ -66,11 +66,15 @@
 		.s6{
 			width:100%;
 			margin: auto;
+			margin-top:100px;
 /* 			margin-top: 30px; */
 		    padding: 10px;
 		    border-radius: 3px;
-/* 		    border: 2px solid #1ec7c3; */
+			border: 2px solid #1ec7c3; 
 /* 		    background-color: #e2e2e2; */
+			background-color:#fff;
+            border-radius:3px;
+/*             box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5); */
 			
 		}
 		.s7{
@@ -78,7 +82,9 @@
 		}
 		.s8{
 /* 			border: 2px solid #1ec7c3; */
-            background-color: #FFF;  
+            background-color:#fff;
+            border-radius:3px;
+            box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
 		    padding-top:25px;
 		    padding-bottom:20px;
 		}

@@ -88,7 +88,7 @@
 <!-- 				新版面 -->
 				<section>
 					<div class="row" style="margin-bottom:30px;">
-						<div style="width:100%;display:flex;/* padding-top: 20px; */background-color:#fff;border-radius:3px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);">
+						<div style="width:100%;display:flex;/* padding-top: 20px; */background-color:#fff;border-radius:3px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);">
 							<div class="col-md-4">
 								<a href="/user/volunteerRecruitment/detail?id=4"><img src="/image/user/mission/canned-food.jpg" class="img" style="height: 100%;"></a>
 							</div>

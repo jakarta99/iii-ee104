@@ -129,3 +129,6 @@ a.logout-btn{
   background-color:#fff; /* change if the mask should have another color then white */
   z-index:99999; /* makes sure it stays on top */ 
 }
+.rounded-circle {
+    border-radius: 100%!important;
+}

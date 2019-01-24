@@ -321,7 +321,7 @@
 	        			box +='</select></div></div></div>'	
 						
 	        			var value=$("#"+order.volunteer.id+" option:selected").val()
-	        			box+="<button class='btn btn-primary btn-lg_1' onclick=\"pay("+order.id+","+order.volunteer.id+",'"+order.volunteer.name+"')\">時數核發與評分</button>"
+	        			box+="<button class='btn btn-primary btn-lg_1' onclick=\"pay("+order.id+","+order.volunteer.id+",'"+order.volunteer.name+"')\">時數核發與評分</button>&nbsp&nbsp"
 	        			box+="<button class='btn btn-danger btn-lg_1' data-toggle='modal' data-target='#reportModalCenter' id='" + order.id + "' name='" + order.volunteer.name+ "'>檢舉 </button></div>"
 	        			}else if(order.orderStatus=='ServiceFinishPayMatchSuccess' && order.reportStatus=='Null'){
 	        			box+="<span class='badge badge-success_1'>已付款與評分</span>"

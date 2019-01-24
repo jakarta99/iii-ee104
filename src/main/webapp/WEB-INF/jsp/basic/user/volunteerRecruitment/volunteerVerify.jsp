@@ -216,10 +216,10 @@
 	        		var box="<div class='col-md-4'>"
 	        			box+="<div data-animate='fadeInUp' class='team-member'>"
 	        			box+="<div class='image_1'><a href='/commons/personal-info/list?memberId="+order.volunteer.id+"'><img src='/image/user/member/"+order.volunteer.picture+"' class='img-fluid rounded-circle' style='width:245px;height:245px'></a></div>"
-	        			box+="<h1 style='font-family:Microsoft JhengHei'><a href='/commons/personal-info/list?memberId="+order.volunteer.id+"'>"+order.volunteer.name+"</a></h1><div >"
+	        			box+="<h1 style='font-family:Microsoft JhengHei'><a href='/commons/personal-info/list?memberId="+order.volunteer.id+"'>"+order.volunteer.name+"</a></h1><div>"
 	        			if(order.orderStatus=='VolunteerApply'){
-	        			box+="<button class='btn btn-outline-primary' onclick=\"accept("+order.id+",'"+order.volunteer.name+"')\" >接受</button>"
-	        			box+="<button class='btn btn-outline-danger' onclick=\"reject("+order.id+",'"+order.volunteer.name+"')\" >拒絕</button></div>"
+	        			box+="<button class='btn btn-primary btn-lg_1' onclick=\"accept("+order.id+",'"+order.volunteer.name+"')\" >接受</button>&nbsp&nbsp"
+	        			box+="<button class='btn btn-danger btn-lg_1' onclick=\"reject("+order.id+",'"+order.volunteer.name+"')\" >拒絕</button></div>"
 	        			}else if(order.orderStatus=='RequesterAcceptService'){
 	        			box+="<span class='badge badge-success_1'>已接受</span>"
 	        			}else if(order.orderStatus=='RequesterRefuceServiceMatchFail'){

@@ -3104,9 +3104,9 @@ STYLE SWITCHER FOR DEMO
 
 .btn-lg_1 {
     padding: 0.5rem 1rem;
-    font-size: 1.25rem;
+    font-size: 1rem;
     line-height: 1.5;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .btn-sm {
