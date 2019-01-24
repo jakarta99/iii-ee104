@@ -48,6 +48,9 @@
 	    margin:auto;
 		padding:50px;
 	}
+ 	.btn-template-outlined-white { 
+ 	    border: 1px solid #17a2b8 !important; 
+ 	} 
 </style>
 
 </head>
