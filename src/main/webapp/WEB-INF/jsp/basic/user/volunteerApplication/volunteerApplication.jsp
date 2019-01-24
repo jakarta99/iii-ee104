@@ -157,7 +157,7 @@
 				type:"get",
 				dataType:"json",
 	 		}).done(function(orders){
-// 	 			$("#boxbox").text("");
+	 			$("#boxbox").text("");
 	        	$("#pagebox").text("");
 	        	var totalElements=orders.totalElements;
 	        	var totalPages=orders.totalPages;
