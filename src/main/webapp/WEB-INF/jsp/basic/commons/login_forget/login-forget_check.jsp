@@ -24,6 +24,9 @@
 	.padding-horizontal {
 	    padding: 5px 0px 10px 0px !important;
 	}
+	.btn-template-outlined-white { 
+ 	    border: 1px solid #17a2b8 !important; 
+ 	} 
 </style>
 
 </head>

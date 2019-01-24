@@ -16,23 +16,88 @@
 <script src="/js/datepicker/bootstrap-datepicker.zh-TW.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css" />
 <!-- data table -->
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script> -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">   -->
+<!-- <script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	 -->
+<!-- <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>	 -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
-<script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>	
-<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>	
 
 <!-- sweetAlert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 <style>
-	  fieldset {
-             width: 1200px; 
-             padding-left: 450px; */
-			
-
+/* 	  fieldset { */
+/*              width: 1200px;  */
+/*              padding-left: 450px; */
+/*         } */
+      
+      fieldset {
+            width: 72.5%;
+            border: 3px solid rgba(0,0,0,0);
+            padding: 20px;
+            margin: 20px;
+            margin: auto
+      }
+      .s2{
+            text-align: center
         }
-       
+        .margintop{
+			 margin-top:70px;
+		}
+		.table .thead-green th {
+		    color: #fff;
+		    background-color: #13b5b1;
+		    border-color: #13b5b1;
+		    border-left: 1px solid #fff;
+		}
+		.btn-outline-secondary {
+		    color: #13b5b1;
+		    background-color: #fff;
+		    background-image: none;
+		    border-color: #13b5b1;
+    		font-size: 16px;
+		}
+		.btn-outline-secondary:hover {
+		    color: #fff;
+		    background-color: #13b5b1;
+		    border-color: #13b5b1;
+		}
+		.btn {
+		    border: 1px solid #13b5b1;
+		    border-radius: 3px;
+		}
+		.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+		    color: #13b5b1 !important;
+		}
+		.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+		    color: #fff !important;
+    		background-color: #13b5b1;
+    		background: linear-gradient(to bottom, #13b5b1 0%, #13b5b1 100%);
+		}
+		.dataTables_wrapper .dataTables_paginate .paginate_button {
+		    color: #13b5b1 !important;
+		}
+		.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+		    color: #13b5b1;
+		}
+		.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+		    color: white !important;
+		    border: 1px solid #111;
+		    background-color: #13b5b1; 
+		    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #13b5b1), color-stop(100%, #13b5b1)); 
+		    background: -webkit-linear-gradient(top, #13b5b1 0%, #13b5b1 100%);
+		    background: -moz-linear-gradient(top, #13b5b1 0%, #13b5b1 100%);
+		    background: -ms-linear-gradient(top, #13b5b1 0%, #13b5b1 100%);
+		    background: -o-linear-gradient(top, #13b5b1 0%, #13b5b1 100%);
+		    background: linear-gradient(to bottom, #13b5b1 0%, #13b5b1 100%);
+		}
+		.form-1{
+			padding-top:20px;
+			width: 75%;
+			text-align:center;
+			margin:auto;
+		}
 </style>
 <meta charset="UTF-8">
 <title>系統訊息 | TimeBank</title>
@@ -45,7 +110,7 @@
 	<!--heading crumbs-->
 	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
 	
-		<fieldset>
+		<article>
 			<div class="btn-group">
 <!-- 			  <button type="button" class="btn btn-info" id="notRead">未讀</button> -->
 <!-- 			  <button type="button" class="btn btn-outline-info" id="alreadyRead" name="HI">已讀</button> -->
@@ -53,14 +118,15 @@
 			</div>
 	
 			<form action="/user/system-message/selectMsgsAsRead" method="post" onSubmit="return checkForm();">
+				<fieldset>
 				<table id="table" class="table table-hover">
-					<thead>
-						<tr class="table-info">
+					<thead class="thead-green">
+						<tr>
 							<th scope="col"></th>
 <!-- 							<th scope="col" width="50px"> -->
 <!-- 								<input type="checkbox" style="display:inline;" name="CheckAll" value="全選" id="CheckAll" /> -->
 <!-- 							</th> -->
-							<th scope="col" width="50px">
+							<th scope="col" width="130px">
 <!-- 								<input id="submit" style="display:inline;" type="submit" value="標記已讀" class="btn btn-outline-info btn-sm"/> -->
 							</th>
 							<th scope="col">時間</th>
@@ -74,8 +140,9 @@
 						<!-- 會員資料 -->
 					</tbody>
 				</table>
+				</fieldset>
 			</form>
-		</fieldset>
+		</article>
 	
 	<!-- FOOTER -->
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp" />
@@ -123,6 +190,7 @@
 
 
 	
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 	
 	<script>
 
@@ -177,7 +245,7 @@
 				searching: false,				
 			 	processing: true,
 				serverSide: true,  //DataTable:分頁、排序都交由伺服器處理
-				lengthMenu: [ 10, 15, 20, 25, ],
+				lengthMenu: [ 10 ],
 				ajax:{
 					url:"/user/system-message/getSystemMessages",
 					type:"get",
@@ -201,7 +269,7 @@
 					var api = this.api();
 					var pageNum = parseInt(d.json.pageable.pageNumber) ;
 					var totalPages = d.json.totalPages;
-					$('#table_info').html('Currently showing page '+(pageNum+1)+' of '+totalPages+' pages.');
+					$('#table_info').html('目前顯示第  '+(pageNum+1)+' 頁，共  '+totalPages+'頁。');
 				}, columns: [ 		//DataTable:設定datatable要顯示的資訊，需與表頭<th>數量一致(可隨意串接資料內容)
 		     		{data:null},
 // 		     		{data:function(data){
@@ -227,9 +295,9 @@
 		           			readButt = "<button class='btn btn-info btn-sm' data-toggle='modal' data-target='#penaltyReVertifyCenter' onclick='bringApplyReVertifyDescriptionToModal(" + data.penalty.id +")'>  檢視申訴紀錄    </button>"
 		           		}
 		           		
-		               	return readButt;	}
+		               	return readButt;	},"orderable": false
 		           	},
-		           	{data:null, render:function(data, type, row){
+		           	{data:null,"orderable": false, render:function(data, type, row){
 						return new Date(data.releaseTime).toLocaleDateString();
 						}
 					},
@@ -269,17 +337,17 @@
 		           			return "活動完成";
 		           		}
 	
-		           	}
+		           	},"orderable": false
 		           	},
-					{data:"message"},
+					{data:"message","orderable": false},
 // 					{data:"readStatus"},
 // 					{data:"member.account"},
 					
 				], columnDefs:[{		//DataTable:禁用第0123列的搜索和排序
 					"searchable": false,
 	                "orderable": false,
-	                "targets": [0, 1],
-				}], order: [[1, 'asc']]   
+	                "targets": [0],
+				}], order: []   
 			 });
 			
 			
@@ -357,7 +425,7 @@
 				   }
 			  })
 			
-
+			  $("div[id='table_length'] label").css("display","none");
 
 		})
 						
@@ -475,6 +543,7 @@
 		
 		
 		}
+		
 		
 		
 		
