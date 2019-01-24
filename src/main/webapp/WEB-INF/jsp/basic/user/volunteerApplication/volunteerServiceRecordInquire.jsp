@@ -22,7 +22,8 @@
 <style> 	
 	.container1{		 	
 		max-width: 1500px;
-		border-radius: 3px;			
+		border-radius: 3px;	
+		background-color: #f7f7f7;	
 	}
 	.container-1>.row{
 		margin-top: 30px;
@@ -43,21 +44,22 @@
 	.s6{
 		width:100%;
 		margin: auto;
-/* 		margin-top: 30px; */
 	    padding: 10px;
 	    border-radius: 3px;
-	    border: 2px solid #1ec7c3;
-	    background-color: #e2e2e2;
+	    background-color:#fff;
+        border-radius:3px;
+		box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5); 
 		
 	}
 	.s7{
 		margin-left:5%;
 	}
 	.s8{
-		border: 2px solid #1ec7c3;
-	    background-color: #e2e2e2;
-	    padding-top:25px;
-	    padding-bottom:20px;
+		 background-color:#fff;
+         border-radius:3px;
+         box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+	     padding-top:25px;
+ 	    padding-bottom:20px;
 	}
 	#blog-listing-big .author-category a, #blog-listing-medium .author-category_1 a {
 	    font-weight: 500;
@@ -191,7 +193,7 @@
 	<div id="content">
     <div class="container container1">
     <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-12">
     <div class="s5">
 	<div class="s4">
 		<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
@@ -200,7 +202,7 @@
 		</ul>
 	</div>
 	<div class="row bar">
-	<div id="blog-listing-medium" class="col-md-12">
+	<div id="blog-listing-medium" class="col-md-9">
 		<div id="boxbox" class="row">
 			<!--mission內容開始 -->
 		</div>
@@ -212,10 +214,6 @@
 			</nav>
 		</div>    
 	</div>
-    </div>
-    </div>
-    </div>
-
     <div class="col-md-3">
     <div class="s6" >
 	<div class="panel panel-default sidebar-menu">
@@ -248,9 +246,12 @@
 			<input  type="button" value="搜尋" id="searchButt" class="btn btn-primary" >			
 		</form>
 	</div>
+	</div>
+	</div>
     </div>
     </div>
     </div> 
+	</div>
 	</div>
 	</div>
 	</div>
