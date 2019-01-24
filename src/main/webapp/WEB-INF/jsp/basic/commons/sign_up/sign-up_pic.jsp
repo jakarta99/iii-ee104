@@ -16,9 +16,6 @@
 	body{
 		font-family: "微軟正黑體"
 	}
-	.box {
-	    margin: 30px 0;
-	}
 </style>
 
 </head>
@@ -27,21 +24,21 @@
 	<jsp:include page="../commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="../commons_layout/commons_nav.jsp"/>
-	<div id="heading-breadcrumbs">
-    	<div class="container">
-        	<div class="row d-flex align-items-center flex-wrap">
-            	<div class="col-md-7">
-              		<h1 class="h2">上傳照片</h1>
-            	</div>
-	            <div class="col-md-5">
-	              	<ul class="breadcrumb d-flex justify-content-end">
-	                	<li class="breadcrumb-item"><a href="/">首頁</a></li>
-	                	<li class="breadcrumb-item active">上傳帳戶圖片</li>
-	              	</ul>
-	            </div>
-        	</div>
-        </div>
-    </div>
+<!-- 	<div id="heading-breadcrumbs"> -->
+<!--     	<div class="container"> -->
+<!--         	<div class="row d-flex align-items-center flex-wrap"> -->
+<!--             	<div class="col-md-7"> -->
+<!--               		<h1 class="h2">上傳照片</h1> -->
+<!--             	</div> -->
+<!-- 	            <div class="col-md-5"> -->
+<!-- 	              	<ul class="breadcrumb d-flex justify-content-end"> -->
+<!-- 	                	<li class="breadcrumb-item"><a href="/">首頁</a></li> -->
+<!-- 	                	<li class="breadcrumb-item active">上傳帳戶圖片</li> -->
+<!-- 	              	</ul> -->
+<!-- 	            </div> -->
+<!--         	</div> -->
+<!--         </div> -->
+<!--     </div> -->
 	<section>
 		<div id="all">
 <!--       <div id="heading-breadcrumbs"> -->
@@ -59,11 +56,11 @@
 <!--           </div> -->
 <!--         </div> -->
 <!--       </div> -->
-      <div id="content" >
+      <div id="content" style="background-color: #f7f7f7" >
         <div class="container">
           <div class="row">           
             <div class="col-lg-6" style="margin:auto">
-              <div class="box">
+              <div class="box" style="border-radius:5px;background-color: #fff;border-radius:3px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);">
               	<div class="heading">
                 <h2 class="text-uppercase">上傳一張您的照片</h2>
                 </div>
@@ -73,7 +70,7 @@
                   <div>
 					<label for="picture" style="font-size:20px">圖片 </label>
  					<input type="file" id="idPicture" name="picture" accept="image/*" class="form-control">
- 					<label class="text-muted" style="font-size:20px">請選擇圖檔，無圖檔亦可直接送出</label>
+ 					<label class="text-muted" style="font-size:16px">*請選擇圖檔，無圖檔亦可直接送出</label>
 	                <div class="col-md-12 text-center">
                     	<input id="submit" type="button" class="btn btn-template-outlined" value="上傳">
                     </div>

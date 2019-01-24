@@ -24,9 +24,6 @@
 	.padding-horizontal {
 	    padding: 5px 0px 10px 0px !important;
 	}
-	.box {
-	    margin: 30px 0;
-	}
 </style>
 
 </head>
@@ -35,31 +32,34 @@
 	<jsp:include page="../commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="../commons_layout/commons_nav.jsp"/>
-	<div id="heading-breadcrumbs">
-    	<div class="container">
-        	<div class="row d-flex align-items-center flex-wrap">
-            	<div class="col-md-7">
-              		<h1 class="h2">忘記密碼</h1>
-            	</div>
-	            <div class="col-md-5">
-	              	<ul class="breadcrumb d-flex justify-content-end">
-	                	<li class="breadcrumb-item"><a href="/">首頁</a></li>
-	                	<li class="breadcrumb-item"><a href="/commons/login-forget/type">會員類型</a></li>
-						<li class="breadcrumb-item active">忘記密碼</li>
-	              	</ul>
-	            </div>
-        	</div>
-        </div>
-    </div>
-	<section>
+<!-- 	<div id="heading-breadcrumbs"> -->
+<!--     	<div class="container"> -->
+<!--         	<div class="row d-flex align-items-center flex-wrap"> -->
+<!--             	<div class="col-md-7"> -->
+<!--               		<h1 class="h2">忘記密碼</h1> -->
+<!--             	</div> -->
+<!-- 	            <div class="col-md-5"> -->
+<!-- 	              	<ul class="breadcrumb d-flex justify-content-end"> -->
+<!-- 	                	<li class="breadcrumb-item"><a href="/">首頁</a></li> -->
+<!-- 	                	<li class="breadcrumb-item"><a href="/commons/login-forget/type">會員類型</a></li> -->
+<!-- 						<li class="breadcrumb-item active">忘記密碼</li> -->
+<!-- 	              	</ul> -->
+<!-- 	            </div> -->
+<!--         	</div> -->
+<!--         </div> -->
+<!--     </div> -->
+	<section style="background-color: #f7f7f7" >
 	<div class="container">
     	<div class="row">
           	<div class="col-lg-6" style="margin:auto">
-            	<div class="box">
+            	<div class="box" style="border-radius:5px;background-color: #fff;border-radius:3px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);">
 		          	<article>
-		          		<h2 class="text-uppercase">驗證資訊</h2>
+		          		<div class="heading">
+		          			<h3>驗證資訊</h3>
+		          		</div>
+<!-- 		          		<h2 class="text-uppercase">驗證資訊</h2> -->
 <!-- 		                <p class="lead">您在 TimeBank中使用的基本資訊</p> -->
-		                <p class="text-muted">請輸入所須資料</p>
+		                <p class="text-muted" style='font-size:20px'>請輸入所須資料</p>
 		                <hr>
 		          		<form>
 		          			<fieldset>
@@ -70,7 +70,7 @@
 										<div class="row">
 				                    		<div class="col-md-12">
 				                      			<div class="form-group">
-													<label for="idAccount">帳號</label>
+													<label for="idAccount" style='font-size:20px'>帳號</label>
 													<input type="text" value="${param.account}" id="idAccount" placeholder="請輸入帳號" name="account" autofocus autocompelete="off" class="form-control">
 													<span id="idspAccount" style='color:red'></span>
 												</div>
@@ -83,7 +83,7 @@
 												<c:when test="${memberType eq 'P'}">
 													<div class="col-md-12">
 				                      					<div class="form-group">
-															<label for="idCertificateIdNumber">身分證字號</label>
+															<label for="idCertificateIdNumber" style='font-size:20px'>身分證字號</label>
 															<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" placeholder="請輸入您的身分證字號" name="certificateIdNumber" autofocus class="form-control">
 															<span id="idspCertificateIdNumber" style='color:red'></span>
 														</div>
@@ -92,7 +92,7 @@
 												<c:when test="${memberType eq 'O'}">
 													<div class="col-md-12">
 				                      					<div class="form-group">
-															<label for="idCertificateIdNumber">統一編號</label> 
+															<label for="idCertificateIdNumber" style='font-size:20px'>統一編號</label> 
 															<input type="text" value="${param.certificateIdNumber}" id="idCertificateIdNumber" placeholder="請輸入帳戶的統一編號" name="certificateIdNumber" autofocus class="form-control">
 															<span id="idspCertificateIdNumber" style='color:red'></span>
 														</div>

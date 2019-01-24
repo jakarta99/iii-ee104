@@ -11,9 +11,6 @@
 <!-- Javascript files-->
 <jsp:include page="../commons_layout/commons_js_links.jsp" />
 <style>
-	.box {
-	    margin: 30px 0;
-	}
 </style>
 
 </head>
@@ -22,21 +19,21 @@
 	<jsp:include page="../commons_layout/commons_top-bar.jsp"/>
 	<!-- Navbar -->
 	<jsp:include page="../commons_layout/commons_nav.jsp"/>
-	<div id="heading-breadcrumbs">
-    	<div class="container">
-        	<div class="row d-flex align-items-center flex-wrap">
-            	<div class="col-md-7">
-              		<h1 class="h2">忘記密碼</h1>
-            	</div>
-	            <div class="col-md-5">
-	              	<ul class="breadcrumb d-flex justify-content-end">
-	                	<li class="breadcrumb-item"><a href="/">首頁</a></li>
-	                	<li class="breadcrumb-item active">會員類型</li>
-	              	</ul>
-	            </div>
-        	</div>
-        </div>
-    </div>
+<!-- 	<div id="heading-breadcrumbs"> -->
+<!--     	<div class="container"> -->
+<!--         	<div class="row d-flex align-items-center flex-wrap"> -->
+<!--             	<div class="col-md-7"> -->
+<!--               		<h1 class="h2">忘記密碼</h1> -->
+<!--             	</div> -->
+<!-- 	            <div class="col-md-5"> -->
+<!-- 	              	<ul class="breadcrumb d-flex justify-content-end"> -->
+<!-- 	                	<li class="breadcrumb-item"><a href="/">首頁</a></li> -->
+<!-- 	                	<li class="breadcrumb-item active">會員類型</li> -->
+<!-- 	              	</ul> -->
+<!-- 	            </div> -->
+<!--         	</div> -->
+<!--         </div> -->
+<!--     </div> -->
 	<section>
 		<div id="all">  
 <!--       <div id="heading-breadcrumbs"> -->
@@ -54,15 +51,18 @@
 <!--           </div> -->
 <!--         </div> -->
 <!--       </div> -->
-      <div id="content" >
+      <div id="content" style="background-color: #f7f7f7" >
         <div class="container">
           <div class="row">           
             <div class="col-lg-6" style="margin:auto">
-              <div class="box">
-                <h2 class="text-uppercase">忘記密碼</h2>
-                <p class="lead">忘記您的帳戶密碼?</p>
-                <p class="text-muted">選擇您的帳戶類型</p>
-                <hr>
+              <div class="box" style="border-radius:5px;background-color: #fff;border-radius:3px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);">
+                <h2 class="text-uppercase" style='text-align:center'>忘記密碼</h2>
+                <p class="text-muted" style='text-align:center;font-size:20px'>忘記您的帳戶密碼?</p>
+                <div class="heading">
+          			<h3>選擇您的帳戶類型</h3>
+          		</div>
+<!--                 <p class="text-muted">選擇您的帳戶類型</p> -->
+<!--                 <hr> -->
                 <form>
                   <div class="text-center">
                     <input type="button" class="btn btn-template-outlined" onclick="javascript:document.location.href='/commons/login-forget/check?memberType=P'" value="一般會員"/>
