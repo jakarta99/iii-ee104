@@ -36,40 +36,17 @@ public class InternationalVolunteerController {
 	@Autowired
 	private InternationalVolunteerService internationalVolunteerService;
 
-	@Autowired
-	private MyCollectionService myCollectionService;
-
-	// @RequestMapping("/search")
-	// public String searchPage() {
-	// return "/basic/commons/internationalVolunteer/iVolunteer_search";
-	// }
+	@ResponseBody
+	@RequestMapping("/search")
+	public List<InternationalVolunteer> searchIVolunteer(InternationalVolunteer iVolunteer, Principal principal) {
+		Specification<InternationalVolunteer> spec = new InternationalVolunteerSpecification(iVolunteer);
+		return internationalVolunteerService.findBySpecification(spec);
+	}
 
 	@RequestMapping("/list")
-	public String listPage(InternationalVolunteer iVolunteer, Model model, Principal principal,
-			@RequestParam(required = false, value = "Id") String Id) {
+	public String listPage(InternationalVolunteer iVolunteer, Model model, Principal principal) {
 		log.debug("iVolunteer={}", iVolunteer);
 		Specification<InternationalVolunteer> spec = new InternationalVolunteerSpecification(iVolunteer);
-
-		if (!StringUtils.isEmpty(Id)) {
-			model.addAttribute("Id", Id);
-		}
-
-		List<InternationalVolunteer> internationalVolunteerList = internationalVolunteerService
-				.findBySpecification(spec);
-		if (principal != null) {
-			List<MyCollection> myCollections = myCollectionService
-					.findByMyCollectionTypeAndMemberAccount(MyCollectionType.MISSION, principal.getName());
-			// log.debug("myCollections={}",myCollections);
-
-			for (InternationalVolunteer internationalVolunteer : internationalVolunteerList) {
-				for (MyCollection myCollect : myCollections) {
-					if (myCollect.getFavoriteObjectId() == internationalVolunteer.getId()) {
-						internationalVolunteer.setIsCollected(YesNo.Y);
-						log.debug("mission={}", internationalVolunteer);
-					}
-				}
-			}
-		}
 
 		model.addAttribute("IVolunteers", internationalVolunteerService.findBySpecification(spec));
 		return "/basic/commons/internationalVolunteer/iVolunteer_list";
@@ -105,46 +82,6 @@ public class InternationalVolunteerController {
 	}
 
 	// 以下均為爬蟲各網頁的測試程式
-
-	@ResponseBody
-	@RequestMapping("/spidertest1")
-	public String iVolunteerSpiderProjectsAbroad(Model model) {
-		System.out.println("----開始執行ProjectsAbroad文章爬蟲定時任務");
-		Spider spider = Spider.create(projectsAbroadPageProcessor);
-		spider.addUrl("https://www.projects-abroad.com.tw/volunteer-projects/").addPipeline(projectsAbroadPipeline)
-				.thread(5).setExitWhenComplete(true).start();
-		spider.stop();
-		String msg = "爬蟲進行中，請耐心等候10秒，再重新整理頁面";
-		return msg;
-	}
-
-	// 成功
-	@ResponseBody
-	@RequestMapping("/spidertest3")
-	public String iVolunteerSpiderStep30(Model model) {
-		System.out.println("----開始執行step30文章爬蟲定時任務");
-		Spider spider = Spider.create(step30PageProcessor);
-		spider.addUrl("https://www.step30.org/action_explain.php?select=1").thread(5).setExitWhenComplete(true).start();
-		spider.stop();
-		String msg = "爬蟲進行中，請耐心等候10秒，再重新整理頁面";
-		return msg;
-	}
-
-	// 成功
-
-	@ResponseBody
-	@RequestMapping("/spidertest4")
-	public String iVolunteerSpiderVYA(Model model) {
-		System.out.println("----開始執行VYA文章爬蟲定時任務");
-		Spider spider = Spider.create(vyaPageProcessor);
-		spider.addUrl("http://www.volunteermatch.org.tw/IW/3-1-group-pariticipant.htm")
-				// .addPipeline(vyaPipeline)
-				.thread(5).setExitWhenComplete(true).start();
-		spider.stop();
-		String msg = "爬蟲進行中，請耐心等候10秒，再重新整理頁面";
-		return msg;
-	}
-
 	// 未成功
 	@Autowired
 	private WakerPipeline wakerPipeline;

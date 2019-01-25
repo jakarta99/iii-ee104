@@ -66,6 +66,10 @@
     background-color: #0e9a97a8;
     transition:all 0.5s;
 }
+
+.author-category {
+    font-size: 1rem;
+}
 </style>
 <script>
 function doSpider(){
@@ -118,7 +122,7 @@ function query(){
 		<div id="content" >
 			<div class="container" >
 				<div class="panel-body" >
-	            	<form action="/commons/InternationalVolunteer/list" method="get" role="search">
+	            	<form action="##" method="get" role="search" id="searchForm">
 	                	<div class="input-group" >                                                                               
 		                    <div class="form-group" >
 								<select id="continent" style="height:52px"
@@ -152,7 +156,7 @@ function query(){
                     
 	                    <span class="input-group-btn form-group">
 	                    
-	                    	<input style="height:48px" type="submit" value="搜尋" id="searchButt" class="btn btn-outline-primary" onclick="query()">               
+	                    	<input style="height:48px" type="button" onclick="searchIVolunteer()" value="搜尋" id="searchButt" class="btn btn-outline-primary" onclick="query()">               
 	                    </span>
                     </div>
                   </form>
@@ -161,30 +165,31 @@ function query(){
 			<div class="container-1 container" >
 			
 				<section class="bar" style="padding: 30px 0;">
-					<div class="row portfolio text-center" >
+					<div class="row portfolio text-center"  id="iVolunteerBox">
+				
 						<c:forEach items="${IVolunteers}" var="volunteer">
 							<div class="col-lg-4">
 								<div class="home-blog-post">
 								<div class="product">
-										<a href="${volunteer.websiteUrl}" target="_new">			
+										<a href="${volunteer.websiteUrl}" target="_blank">			
 											<img src="${volunteer.picture}"  class="image1" width="370px"  height="250px" >
 										</a>
 									</div>
 									<div class="text">
-										<h3 style="width:370px; margin:auto; margin-bottom:10px; "  >
-											<a href="${volunteer.websiteUrl}" target="_new">${volunteer.title} </a>
-										</h3>
+										<h2 style="width:370px; margin:auto; margin-bottom:10px; "  >
+											<a href="${volunteer.websiteUrl}" target="_blank">${volunteer.title} </a>
+										</h2>
 										<p class="author-category" >
-											<span  >${volunteer.organization}</span>
+											<span style="font-size:1rem;">${volunteer.organization}</span>
 										</p>										
 										<p>
-											<table style="margin:auto;color:rgba(125, 125, 125)">
-												<tr><td width="70px">服務地區: </td><td width="200px"> 
+											<table style="margin:auto;color:rgba(125, 125, 125);font-size:1.2rem;">
+												<tr><td width="100px">服務地區：</td><td width="250px"> 
 													<c:if test="${not empty volunteer.country}">${volunteer.country}
 														<c:if test="${not empty volunteer.place}">${volunteer.place}</c:if>
 													</c:if>
 												</td></tr>
-												<tr><td width="70px">服務時間: </td><td width="200px">
+												<tr><td width="10px">服務時間：</td><td width="250px">
 													<c:choose>
 	  													<c:when test="${empty volunteer.startDate}">自由選擇，沒有限定</c:when>
 	 													<c:otherwise>
@@ -199,7 +204,7 @@ function query(){
 									</div>							
 								</div>
 							</div>
-						</c:forEach>						
+						</c:forEach>					
 					</div>
 				</section>
 			</div>
@@ -228,13 +233,58 @@ function query(){
 				};			
 			$('#dateChosenStart').datepicker(datePickerSetting);
 			$('#dateChosenEnd').datepicker(datePickerSetting);
-			$("#continent").val('${IVolunteers[0].continent}');
+// 			$("#continent").val('${IVolunteers[0].continent}');
 
 			
 			
 			
 		})
+		
+		function searchIVolunteer(){
+			$.ajax({
+				url:"/commons/InternationalVolunteer/search",
+				data: $("#searchForm").serialize(),
+				dataType:"json"
+			}).done(function(resp){
+				$("#iVolunteerBox").html("");
+				$.each(resp, function(idx, iVolunteer){
+					var box = '<div class="col-lg-4"><div class="home-blog-post"><div class="product">';
+					box+= '<a href="'+iVolunteer.websiteUrl+'" target="_blank">';
+					box+= '<img src="'+iVolunteer.picture+'"  class="image1" width="370px"  height="250px" >';
+					box+= '</a></div><div class="text">';
+					box+= '<h2 style="width:370px; margin:auto; margin-bottom:10px;"  >';
+					box+= '<a href="'+iVolunteer.websiteUrl+'" target="_blank">'+iVolunteer.title+' </a>';
+					box+= '</h2><p class="author-category" ><span style="font-size:1rem;" >'+iVolunteer.organization+'</span></p>';
+					box+= '<p><table style="margin:auto;color:rgba(125, 125, 125);font-size:1.2rem;">';
+					box+= '<tr><td width="100px">服務地區：</td><td width="250px"> ';
+					if (iVolunteer.country != null || iVolunteer.country != ''){
+						box += iVolunteer.country;
+					} else if (iVolunteer.place != null || iVolunteer.place != ''){
+						box += iVolunteer.place ;
+					}
+					box+= '</td></tr>';
+					box+= '<tr><td width="100px">服務時間： </td><td width="250px">';
+					
+					if (iVolunteer.startDate == null || iVolunteer.startDate == ''){
+						box+='自由選擇，沒有限定';
+					} else {
+						var startDate = new Date(iVolunteer.startDate).toLocaleDateString();
+						var endDate = new Date(iVolunteer.endDate).toLocaleDateString();
+						box+= startDate +" - " +endDate;
+					}
+					
+					box+= '</td></tr></table></p>';
+					box+= '<a href="${volunteer.websiteUrl}" class="btn btn-template-outlined">更多資訊</a>';
+					box+= '</div></div></div>';
+					
+					$("#iVolunteerBox").append(box);
+				})
+				
+				console.log(resp)
+			})
+		}
 	
+		
 
 	</script>
 
