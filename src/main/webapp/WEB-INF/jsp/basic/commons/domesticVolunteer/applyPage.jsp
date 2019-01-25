@@ -260,7 +260,7 @@
 		          <section>
 					<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNASLitmpPiGxtg94A3WqLl8bHHk0lzJM&callback=initMap"></script>
 
-					    <div style="height:210px" id="map"></div>
+					    <div style="height: 250px;" id="map"></div>
 		          </section> 
               </div>
               <div class="col-md-7 text-center">

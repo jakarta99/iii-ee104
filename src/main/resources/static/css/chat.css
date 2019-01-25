@@ -6,9 +6,9 @@
 /* 	bottom: 2px; */
 }
 .chatbox{
-	width: 290px;
+	width:300px;
 	position:fixed;
-	bottom: 2px;
+	bottom:2px;
 	margin-left:50px;
 	z-index:1;	
 }

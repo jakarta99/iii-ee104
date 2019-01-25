@@ -1,7 +1,5 @@
 /* your styles go here */
-body{
-/* 	background-color:#f5f5f5; */
-}
+
 .top-bar{
 /* 	background-color:#f5f5f5; */
 /* 	color:#fff; */
@@ -13,7 +11,6 @@ body{
 /* 	background: linear-gradient(to bottom, rgba(237, 237, 237, 1) 0%, */
 /* 		rgba(243, 243, 243, 1) 50%, rgba(255, 255, 255, 1) 100%); */
 	box-shadow: 3px 0 10px -4px #000;
-/* 	background-color:transparent; */
 }
 .background .mask {
     background-color: rgba(0,0,0,.3);
