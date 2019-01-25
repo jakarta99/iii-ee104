@@ -12,26 +12,26 @@
 <!-- 	</div> -->
 	</div>
 	<div class="w3-bar-block">
-		<a class="w3-bar-item w3-button" href="javascript:void(0)">行事曆</a>
-		<a class="w3-bar-item w3-button" href="javascript:void(0)">系統訊息</a> 
-		<a class="w3-bar-item w3-button" href="javascript:void(0)">我的個人資訊</a>
+		<a class="w3-bar-item w3-button" href="/user/calendar">行事曆</a>
+		<a class="w3-bar-item w3-button" href="/user/system-message/list">通知</a> 
+		<a class="w3-bar-item w3-button" href="/user/personal-info/list">我的個人資訊</a>
 		<div class="w3-dropdown-hover">
 			<a class="w3-button" data-toggle="collapse" href="#collapseMission">志工招募 <i class="fa fa-caret-down"></i></a>
 			<div class="w3-dropdown-content w3-bar-block w3-card-4 collapse"  id="collapseMission" >
-				<a class="w3-bar-item w3-button" href="/user/recruitFinish/list">招募紀錄</a> 
-				<a class="w3-bar-item w3-button" href="/user/volunteerRecruitment/add">刊登任務</a> 
+				<a class="w3-bar-item w3-button" href="/user/volunteerRecruitment/list">招募紀錄</a> 
+				<a class="w3-bar-item w3-button" href="/user/missionPublish/add">刊登任務</a> 
 			</div>
 		</div>
 		<div class="w3-dropdown-hover">
 			<a class="w3-button" data-toggle="collapse" href="#collapseVolunteerApply">志工申請 <i class="fa fa-caret-down"></i></a>
 			<div class="w3-dropdown-content w3-bar-block w3-card-4 collapse" id="collapseVolunteerApply">
-				<a class="w3-bar-item w3-button" href="/user/recruitFinish/list">申請中</a> 
-				<a class="w3-bar-item w3-button" href="/user/volunteerRecruitment/add">服務紀錄</a> 
+				<a class="w3-bar-item w3-button" href="javascript:document.location.href='/user/volunteerApplication/applicationPage'">申請中</a> 
+				<a class="w3-bar-item w3-button" href="javascript:document.location.href='/user/volunteerRecord/RecordPage'">服務紀錄</a> 
 			</div>
 		</div>
-		<a class="w3-bar-item w3-button" href="javascript:void(0)">我的交易紀錄</a>
-		<a class="w3-bar-item w3-button" href="javascript:void(0)">我的最愛</a>
-		<a class="w3-bar-item w3-button" href="javascript:void(0)">我的捐款</a>
+		<a class="w3-bar-item w3-button" href="/user/transaction-record/list">我的交易紀錄</a>
+		<a class="w3-bar-item w3-button" href="/user/myCollection/list">我的最愛</a>
+		<a class="w3-bar-item w3-button" href="/user/donation-record/list">我的捐款</a>
 	</div>
 </div>
 
