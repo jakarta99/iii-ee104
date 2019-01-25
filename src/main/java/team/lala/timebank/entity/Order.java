@@ -75,7 +75,7 @@ public class Order{
 	private Mission mission;
 	
 	@Column(name="MEMBER_SCORE")
-	private Long memberScore;	//志工拿到的時數
+	private Integer memberScore;	//志工拿到的時數
 	
 	@Column(name="FEEDBACK_SCORE")
 	private Long feedBackScore; //志工對機構評分

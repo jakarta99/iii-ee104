@@ -11,6 +11,7 @@
 <!-- Javascript files-->
 <jsp:include page="../commons_layout/commons_js_links.jsp" />
 <style>
+	.myMOUSE{ cursor: pointer; }
 </style>
 
 </head>
@@ -71,8 +72,8 @@
                   </div>
                 </form>
                 <div class="text-center">
-				    <img src="../../img/facebook.png" onclick="FBLogin()" width="50%"/><br/>
-				    <img src="../../img/google.png" onclick="GoogleLogin()" width="50%"/>
+				    <img src="../../img/facebook.png" class="myMOUSE" onclick="FBLogin()" width="50%"/><br/>
+				    <img src="../../img/google.png" class="myMOUSE" onclick="GoogleLogin()" width="50%"/>
               	</div>
               </div>
             </div>
