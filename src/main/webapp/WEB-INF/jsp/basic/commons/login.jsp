@@ -10,7 +10,9 @@
 <!-- Javascript files-->
 <jsp:include page="commons_layout/commons_js_links.jsp" />
 
-
+<style>
+	.myMOUSE{ cursor: pointer; }
+</style>
 </head>
 <body>
 	  <!-- Top bar-->
@@ -42,8 +44,8 @@
                   
                 </form>
                 <div class="text-center">
-				    <img src="../../img/facebook.png" onclick="FBLogin()" width="50%"/><br/>
-				    <img src="../../img/google.png" onclick="GoogleLogin()" width="50%"/>
+				    <img src="../../img/facebook.png" class="myMOUSE" onclick="FBLogin()" width="50%"/><br/>
+				    <img src="../../img/google.png" class="myMOUSE" onclick="GoogleLogin()" width="50%"/>
               	</div><br/>
               	<div class="text-center" style="font-size:20px;color: #13b5b1" >
 	                <span><a href="commons/login-forget/type">忘記密碼</a></span><span> | </span>
