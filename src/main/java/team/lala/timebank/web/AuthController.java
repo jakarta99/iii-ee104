@@ -2,6 +2,7 @@ package team.lala.timebank.web;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,22 @@ public class AuthController {
 	private PasswordEncoder encoder;
 	
 	@GetMapping("/login")
-	public String loginPage() {
+	public String loginPage(@RequestParam(required=false) String emailVerify,
+			@RequestParam(required=false) String account, Model model) {
+		if (!StringUtils.isEmpty(emailVerify) && !StringUtils.isEmpty(account) ) {
+			Member member = memberService.findByAccount(account);
+			if (member.getMemberType() == MemberType.P) {
+				memberService.addRole(member.getId(), 2l);
+				member.setEmailVerification(YesNo.Y);
+				memberService.update(member);
+			} else if (member.getMemberType() == MemberType.O){
+				memberService.addRole(member.getId(), 3l);
+				member.setEmailVerification(YesNo.Y);
+				member.setOrgIdConfirmation(YesNo.Y);
+				memberService.update(member);
+			}
+			model.addAttribute("emailVerify", emailVerify);			
+		}
 		return "/basic/commons/login";
 	}
 	

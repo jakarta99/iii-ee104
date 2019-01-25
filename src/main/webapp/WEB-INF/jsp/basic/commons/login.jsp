@@ -9,6 +9,7 @@
 <jsp:include page="commons_layout/commons_css_links.jsp"/>
 <!-- Javascript files-->
 <jsp:include page="commons_layout/commons_js_links.jsp" />
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>  
 
 <style>
 	.myMOUSE{ cursor: pointer; }
@@ -224,6 +225,15 @@
         }
     </script>
 <!--fb登入 end-->
+
+    <script>
+	   	if ('${emailVerify}'== 'Y'){
+	   		console.log("emailVerify");
+	   		swal('恭喜你驗證完成', {
+		    	icon: "success",
+		    })
+	   	}
+    </script>
 
 
 </body>

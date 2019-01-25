@@ -63,6 +63,9 @@ public class MemberService {
 		newMember.setSignUpDate(new Date());
 		newMember.setEmailVerification(YesNo.N);
 		newMember.setOrgIdConfirmation(YesNo.N);
+		newMember.setAverageScore(0d);
+		newMember.setScoredTimes(0);
+		newMember.setSumScore(0);
 		Member member = memberDao.save(newMember);			
 		return member;
 	}
