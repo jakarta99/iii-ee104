@@ -147,11 +147,17 @@
 	var vIds=[];
 	
 	function payAll(){
+		
 		var payDatas=[];
-		var hour		
+		var hour
+		
 		for(var x = 0 ; x <totalElements ; x++){
-			payDatas.push({"orderId":orderids[x],"hours":$("#"+vIds[x]+" option:selected").val(),"score":$("#score"+vIds[x]+" option:selected").val()})
+			console.log(vIds[x])
+			console.log("hours"+$("#hours"+vIds[x]+" option:selected").val())
+			console.log("score"+$("#score"+vIds[x]+" option:selected").val())
+			payDatas.push({"orderId":orderids[x],"hours":$("#hours"+vIds[x]+" option:selected").val(),"score":$("#score"+vIds[x]+" option:selected").val()})
 		}
+		console.log(payDatas)
 		swal({
 			  title: "確定評點與審核本頁所有志工嗎?",
 			  text: "確定後將進行付款與志工評點",
@@ -159,7 +165,7 @@
 			  buttons: true,
 			  dangerMode: true,
 			})
-			.then((willpay) => {
+			.then((willpay) =>{
 			  if (willpay) {
 		$.ajax({ 
             type:"POST", 
@@ -190,7 +196,7 @@
 	
 	function pay(orderId,volunteerId,name) {
 		swal({
- 			  title: "確定給予志工"+name+"	"+$("#"+volunteerId+" option:selected").val()+"小時與"+$("#score"+volunteerId+" option:selected").val()+"星評分嗎?",
+ 			  title: "確定給予志工"+name+"	"+$("#hours"+volunteerId+" option:selected").val()+"小時與"+$("#score"+volunteerId+" option:selected").val()+"星評分嗎?",
  			  text: "確定後將進行付款與志工評點",
  			  icon: "warning",
  			  buttons: true,
@@ -239,7 +245,7 @@
 			  buttons: true,
 			  dangerMode: true,
 			})
-			.then((willreport) => {
+			.then((willreport) =>{
 			  if (willreport) {
 				  var data = new FormData($('#reportForm')[0]);
 					$.ajax({
@@ -250,7 +256,7 @@
 						processData: false,
 						contentType: false
 					}).done(function(response){
-						console.log(response)
+// 						console.log(response)
 						if (response.status =="SUCCESS"){
 							 swal("檢舉成功", {icon: "success",});
 						} else {
@@ -279,28 +285,29 @@
 			type: "get",
 		    dataType : "json",
 	        }).done(function(orders){
-	        	console.log(orders)
+// 	        	console.log(orders)
 	        	$("#boxbox").text("");
 	        	$("#pagebox").text("");
 	        	$("#people").text("");
 	        	totalElements=orders.totalElements;
+	        	
 	        	var totalPages=orders.totalPages;
 	        	first=orders.first;
 	        	last=orders.last;
 	        	page=orders.number;
-	        	console.log(orders.content)
+// 	        	console.log(orders.content)
 	        	$("#people").append("需審核人數"+orders.content[0].mission.approvedQuantity+"/已審核"+orders.content[0].mission.payedQuantity+"")
 	        	$.each(orders.content,function(index, order){
 	        		orderids.push(order.id)
 	        		vIds.push(order.volunteer.id)
-	        		console.log(orderids)
+// 	        		console.log(orderids)
 	        		var box="<div class='col-md-4'>"
 	        			box+="<div data-animate='fadeInUp' class='team-member'>"
 	        			box+="<div class='image_1'><a href='/commons/personal-info/list?memberId="+order.volunteer.id+"'><img src='/image/user/member/"+order.volunteer.picture+"' class='img-fluid rounded-circle' style='width:245px;height:245px'></a></div>"
 	        			box+="<h1 style='font-family:Microsoft JhengHei'><a href='/commons/personal-info/list?memberId="+order.volunteer.id+"'>"+order.volunteer.name+"</a></h1><div>"
 	        			
 	        			if(order.orderStatus=='ServiceFinishNotPay'){
-	        			box+= "<div class='row' ><div class='col-md-6 center-block'><div class='input-group mb-3' ><div class='input-group-prepend'><label class='input-group-text'>分數:</label></div><select class='custom-select' id='score"+order.volunteer.id+"' name='timeValue' >"
+	        			box+= "<div class='row'><div class='col-md-6 center-block'><div class='input-group mb-3' ><div class='input-group-prepend'><label class='input-group-text'>分數:</label></div><select class='custom-select' id='score"+order.volunteer.id+"' name='timeValue' >"
 	        			for(var x = 1 ; x <=5 ; x++){
 							if(x==5){
 								box += "<option selected='true' value='" + x + "'>"+ x + "</option>"	
@@ -310,7 +317,7 @@
 						}	
 	        			box +='</select></div></div>'
 	        			
-	        			box +="<div class='col-md-6 center-block'><div class='input-group mb-3' ><div class='input-group-prepend'><label class='input-group-text'>時數:</label></div><select class='custom-select'  id='"+order.volunteer.id+"' name='timeValue'>"
+	        			box +="<div class='col-md-6 center-block'><div class='input-group mb-3' ><div class='input-group-prepend'><label class='input-group-text'>時數:</label></div><select class='custom-select'  id='hours"+order.volunteer.id+"' name='timeValue'>"
 	        			for(var i = 0 ; i <= order.mission.timeValue ; i++){
 								if(i==order.mission.timeValue){
 									box += "<option selected='true' value='" + i + "'>"+ i + "</option>"	
