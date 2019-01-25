@@ -15,6 +15,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.print.css" rel="stylesheet" media="print">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.min.js"></script>
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
+
 <style type="text/css">
 
 body {
@@ -90,7 +91,8 @@ font-family:Microsoft JhengHei
 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" />
 	<!--heading crumbs-->
 	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
-	
+	<!-- Sidebar -->
+	<jsp:include page="../user_layout/user_sidebar.jsp"/>
     <section class="bar">
 	    <div class="container" style="padding:50px; background:rgba(201,255,248,0.5)">
     	<ul>

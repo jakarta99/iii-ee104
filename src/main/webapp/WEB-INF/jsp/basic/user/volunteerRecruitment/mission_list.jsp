@@ -137,6 +137,8 @@
     <jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>	
 	<!-- Navbar -->
     <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
+    <!-- Sidebar -->
+	<jsp:include page="../user_layout/user_sidebar.jsp"/>
 	<!--heading crumbs-->
 	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />   
         <div id="content">
