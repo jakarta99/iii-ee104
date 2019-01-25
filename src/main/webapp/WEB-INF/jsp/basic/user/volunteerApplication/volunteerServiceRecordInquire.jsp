@@ -318,6 +318,8 @@
         		$("#boxbox").append(box);
         	} else {
 	        	$.each(orders.content, function(index, order){
+	        		console.log(order.orderStatus)
+	        		console.log(order.reportStatus)
 	        	   var box="<div class='s3'><div class='row s8'><div class='col-md-4'>"
         		   box+="<div class='video'>"
         		   box+="<div class='embed-responsive embed-responsive-4by3'>"	        	
@@ -326,9 +328,9 @@
                    box+="<div class='col-md-8'>"
                    box+="<div class='d-flex flex-wrap justify-content-between'>"
                    box+="<h1 class='h2 mt-0'><a href='/user/volunteerRecruitment/detail?id="+ order.mission.id +"'>"+ order.mission.title + "</a></h1>"
-                   if((order.orderStatus == "ServiceFinishPayMatchSuccess" && order.ReportStatus == 'Null') || (order.orderStatus == "ServiceFinishPayMatchSuccess" && order.ReportStatus == 'RequesterReportVolunteer')){
+                   if((order.orderStatus == "ServiceFinishPayMatchSuccess" && order.reportStatus == 'Null') || (order.orderStatus == "ServiceFinishPayMatchSuccess" && order.reportStatus == 'RequesterReportVolunteer')){
                    	   box+="<p class='date-comments_1'><a href='javascript: void(0)' data-toggle='modal' data-target='#reportModalCenter' id='" + order.id + "' name='" + order.mission.member.account + "'><i class='fa fa-trash'></i>檢舉</a></p></div>"
-                   } else if(order.ReportStatus == 'VolunteerReportRequester' || order.ReportStatus == 'BothReport'){
+                   } else if(order.reportStatus == 'VolunteerReportRequester' || order.reportStatus == 'BothReport'){
 	            	   box+="<p class='date-comments_1'><i class='fa fa-trash'></i>已檢舉</a></p></div>"
 	               } else {
                 	   box+="</div>"
@@ -431,10 +433,11 @@
 						} else {
 							swal("檢舉失敗，因為"+response.messages+"", {icon: "error",});
 						}
+						$('#reportModalCenter').modal('hide')
 						list();
 					})
 				} else {
-					swal("任務仍繼續進行");
+					swal("取消檢舉");
 				}
 			});
 	}
@@ -479,14 +482,15 @@
     		list();
     		$('body,html').animate({scrollTop: 0 }, 1);
     	})
-    	//彈出評分視窗時，修改裡面的值
-	    $("#boxbox").on('click', "[data-target='#scoreModalCenter']", function (event) {
-			$("[value='評分']").attr("onclick", "score("+ event.target.id +")")
-		})
+
 		//彈出檢舉視窗時，修改裡面的值
 		$("#boxbox").on('click', "[data-target='#reportModalCenter']", function (event) {
 			$("#orderId").attr("value", event.target.id)
 			$("#memberAccount").html(event.target.name)
+		})
+		$('#reportModalCenter').on('hide.bs.modal', function () {
+  			$("#description").val("");
+  			$("#proofPic").val("");
 		})
 	});
 	</script>
