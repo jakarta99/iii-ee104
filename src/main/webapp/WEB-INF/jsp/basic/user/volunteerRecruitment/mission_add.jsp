@@ -255,7 +255,7 @@
 		
 	
 		$('#setValue').click(function(){
-			$('#title').val("友夢不老-助爺奶圓夢");
+			$('#title').val("友夢不老-助爺爺奶奶圓夢");
 			$('#serviceType').val("3");
 			$("select[name='county']").val('台北市');
 			$("select[name='district']>option").val("南港區");
