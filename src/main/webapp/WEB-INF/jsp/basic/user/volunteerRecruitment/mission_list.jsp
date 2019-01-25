@@ -191,7 +191,7 @@
 			<div>
 			
 			
-			<label>會員類型 :</label> 
+			<label>服務類型 :</label> 
 				<select  id="serviceTypeDetail" name="serviceTypeDetail" class="form-control">
 					<option value="">選擇服務類型</option>
 					<option value="婦幼關懷">婦幼關懷</option>
