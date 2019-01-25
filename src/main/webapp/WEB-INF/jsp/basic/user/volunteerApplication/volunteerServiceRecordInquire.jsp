@@ -326,7 +326,7 @@
                    box+="<div class='col-md-8'>"
                    box+="<div class='d-flex flex-wrap justify-content-between'>"
                    box+="<h1 class='h2 mt-0'><a href='/user/volunteerRecruitment/detail?id="+ order.mission.id +"'>"+ order.mission.title + "</a></h1>"
-                   if(order.orderStatus == "ServiceFinishPayMatchSuccess" && order.ReportStatus == null || order.orderStatus == "ServiceFinishPayMatchSuccess" && order.ReportStatus == 'RequesterReportVolunteer'){
+                   if((order.orderStatus == "ServiceFinishPayMatchSuccess" && order.ReportStatus == 'Null') || (order.orderStatus == "ServiceFinishPayMatchSuccess" && order.ReportStatus == 'RequesterReportVolunteer')){
                    	   box+="<p class='date-comments_1'><a href='javascript: void(0)' data-toggle='modal' data-target='#reportModalCenter' id='" + order.id + "' name='" + order.mission.member.account + "'><i class='fa fa-trash'></i>檢舉</a></p></div>"
                    } else if(order.ReportStatus == 'VolunteerReportRequester' || order.ReportStatus == 'BothReport'){
 	            	   box+="<p class='date-comments_1'><i class='fa fa-trash'></i>已檢舉</a></p></div>"
@@ -343,11 +343,11 @@
 				   if(order.orderStatus == 'VolunteerCancleTransactionMatchFail'){
 					   box+="<p class='intro'>失敗原因:志工取消活動</p>"
                    }
-                   if(order.orderStatus == 'ServiceFinishNotPay'){
-                	   box+="<p class='intro'>結束時間:"+new Date(order.mission.endDate).Format('yyyy-MM-dd hh:mm')+"</p>"
-                   	   box+="<p class='intro'>活動地點:"+order.mission.county + order.mission.district+"</p>"					   
-	                   box+="<p class='intro'>獲得時數:尚未收到</p>"
-                   }
+//                    if(order.orderStatus == 'ServiceFinishNotPay'){
+//                 	   box+="<p class='intro'>結束時間:"+new Date(order.mission.endDate).Format('yyyy-MM-dd hh:mm')+"</p>"
+//                    	   box+="<p class='intro'>活動地點:"+order.mission.county + order.mission.district+"</p>"					   
+// 	                   box+="<p class='intro'>獲得時數:尚未收到</p>"
+//                    }
 				   if(order.orderStatus == 'ServiceFinishPayMatchSuccess'){
 		           	   box+="<p class='intro'>結束時間:"+new Date(order.mission.endDate).Format('yyyy-MM-dd hh:mm')+"</p>"
                    	   box+="<p class='intro'>活動地點:"+order.mission.county + order.mission.district+"</p>"					   
