@@ -196,9 +196,9 @@
     <div class="col-md-12">
     <div class="s5">
 	<div class="s4">
-		<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
-			<li class="nav-item"><a id="orderStatus7" data-toggle="pill" href="javascript: void(0)" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active">媒合成功紀錄</a></li>
-			<li class="nav-item"><a id="orderStatus3" data-toggle="pill" href="javascript: void(0)" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">媒合失敗紀錄</a></li>
+		<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified" style="width: 80%; margin: auto;">
+			<li class="nav-item"><a id="orderStatus7" data-toggle="pill" href="javascript: void(0)" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active" style="border-radius:5px;font-family: 微軟正黑體;font-weight: 700;font-size: 20px;">媒合成功紀錄</a></li>
+			<li class="nav-item"><a id="orderStatus3" data-toggle="pill" href="javascript: void(0)" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link" style="border-radius:5px;font-family: 微軟正黑體;font-weight: 700;font-size: 20px;">媒合失敗紀錄</a></li>
 		</ul>
 	</div>
 	<div class="row bar">

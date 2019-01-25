@@ -76,42 +76,16 @@
 		<div class="container a">
 		<section class="bar_1">
 			<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
-               <li class="nav-item abc"><a id="orderStatus1" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active">申請中</a></li>
-               <li class="nav-item abc"><a id="orderStatus2" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">機構接受服務</a></li>
-               <li class="nav-item abc"><a id="orderStatus6" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" class="nav-link">活動時間結束，未發時數</a></li>
+               <li class="nav-item"><a id="orderStatus1" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active">申請中</a></li>
+               <li class="nav-item"><a id="orderStatus2" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">機構接受服務</a></li>
+               <li class="nav-item"><a id="orderStatus6" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" class="nav-link">活動時間結束，未發時數</a></li>
             </ul>
 		</section>
 		<div class="row bar">
 			<div id="blog-listing-medium" class="col-md-12">
 			<div id="boxbox">
 				<!--mission內容開始 -->
-<!-- 				新版面 -->
-				<section>
-					<div class="row" style="margin-bottom:30px;">
-						<div style="width:100%;display:flex;/* padding-top: 20px; */background-color:#fff;border-radius:3px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);">
-							<div class="col-md-4">
-								<a href="/user/volunteerRecruitment/detail?id=4"><img src="/image/user/mission/canned-food.jpg" class="img" style="height: 100%;"></a>
-							</div>
-							<div class="col-md-8" style="padding: 20px 0px;padding-right: 20px;">
-								<div class="d-flex flex-wrap justify-content-between">
-									<h3 class="h2 mt-0"><a href="/user/volunteerRecruitment/detail?id=7">伊甸基金會-偏鄉暑期陪讀志工 </a></h3>
-									<p class="date-comments_1"><a href="javascript: void(0)" onclick="deleteRow(12)">
-										<i class="fa fa-trash"></i>取消</a>
-									</p>
-								</div>
-								<div class="d-flex flex-wrap justify-content-between text-xs">
-									<p class="author-category_1"><a href="#" class="title">財團法人伊甸社會福利基金會</a></p>
-								</div>
-								<p class="intro">申請時間:2019-01-02 17:00</p>
-								<p class="intro">開始時間:2019-08-24 09:00</p>
-								<p class="intro">活動地點:台東縣東河鄉</p>
-							</div>
-						</div>
-					</div>			
-				</section>
-		
-		                
-            </div>
+			</div>
            	<div>
 	            <nav aria-label="Page navigation example" class="d-flex justify-content-center">
 		            <ul id ="pagebox" class="pagination pagination-lg">
