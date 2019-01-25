@@ -11,11 +11,10 @@
             <div id="navigation" class="navbar-collapse collapse">
               <ul class="nav navbar-nav ml-auto">
               	<li class="nav-item"><a href="/">&nbsp&nbsp首頁&nbsp&nbsp<b class="caret"></b></a>
-                <li class="nav-item"><a href="/commons/organization/list">公益團體 <b class="caret"></b></a>
+                <li class="nav-item"><a href="##">公益團體 <b class="caret"></b></a>
                 </li>
                 <li class="nav-item menu-large"><a href="/commons/domesticVolunteer/list" >志工招募<b class="caret"></b></a>
                 </li>
-<%--                 <sec:authorize access="hasAnyRole('USER','ORG_USER')"> --%>
               	<li class="nav-item dropdown menu-large" ><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle" id='userA'>會員專區 <b class="caret"></b></a>
                   <ul class="dropdown-menu megamenu" style="width:450px;">
                     <li>
@@ -31,11 +30,13 @@
                             <li class="nav-item"><a href="/user/volunteerRecruitment/list" class="nav-link">招募紀錄</a></li>
                             <li class="nav-item"><a href="/user/missionPublish/add" class="nav-link">刊登任務</a></li>                      
                           </ul>
+                			<sec:authorize access="hasAnyRole('USER')">
 	                         <h5><a href="#">志工申請</a></h5>
 	                          <ul class="list-unstyled mb-3">
 	                            <li class="nav-item"><a href="javascript:document.location.href='/user/volunteerApplication/applicationPage'" class="nav-link">申請中</a></li>
 	                            <li class="nav-item"><a href="javascript:document.location.href='/user/volunteerRecord/RecordPage'" class="nav-link">服務紀錄</a></li>                          
 	                          </ul>
+                			</sec:authorize>
                         </div>
                         <div class="col-md-6 col-lg-3">
                          <h5><a href="/user/transaction-record/list" >我的交易紀錄</a></h5>
@@ -46,7 +47,6 @@
                     </li>
                   </ul>
                 </li>
-<%--                 </sec:authorize> --%>
                 <li class="nav-item menu-large"><a href="/commons/InternationalVolunteer/list" >國際志工專區<b class="caret"></b></a>                        
                  <li class="nav-item dropdown"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle">關於我們<b class="caret"></b></a>
                   <ul class="dropdown-menu">
