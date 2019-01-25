@@ -465,8 +465,3 @@ VALUES(1,10,16,'2018/6/2');
 INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,DONATE_VALUE,donate_time) 
 VALUES(2,8,17,'2018/12/2');
 
---INSERT INTO mycollection(favoriteobject_id,favoriteobject_link,favoriteobject_picname,favoriteobject_title,mycollection_type,member_id)
---VALUES(14,'http://good119.org','memberpic14.jpg','社團法人中華民國恩友愛心協會','ORGANIZATION',1)
-
---INSERT INTO mycollection(favoriteobject_id,favoriteobject_link,favoriteobject_picname,favoriteobject_title,mycollection_type,member_id)
---VALUES(11,'https://www.cdca.org.tw/','memberpic11.jpg','社團法人中華民國失智者照顧協會','ORGANIZATION',1)
