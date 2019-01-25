@@ -197,6 +197,7 @@
 	}
 	
 	function pay(orderId,volunteerId,name) {
+		console.log(volunteerId)
 		swal({
  			  title: "確定給予志工"+name+"	"+$("#hours"+volunteerId+" option:selected").val()+"小時與"+$("#score"+volunteerId+" option:selected").val()+"星評分嗎?",
  			  text: "確定後將進行付款與志工評點",
@@ -207,7 +208,7 @@
  			.then((willcancel) => {
  			  if (willcancel) {
 		$.ajax({
-			url : '/user/payTime/pay?orderId=' + orderId+'&hours='+$("#"+volunteerId+" option:selected").val()+'&score='+$("#score"+volunteerId+" option:selected").val(),
+			url : '/user/payTime/pay?orderId=' + orderId+'&hours='+$("#hours"+volunteerId+" option:selected").val()+'&score='+$("#score"+volunteerId+" option:selected").val(),
 			type : 'get',
 			dataType : 'JSON',
 			success : function(payResult) {
