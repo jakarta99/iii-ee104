@@ -60,11 +60,7 @@ font-family:Microsoft JhengHei
 	  font-weight: bold;
 	  border-radius: 0.1 !important;
 }
-li{
-	display:inline;
-	margin-right: 5px;
-	margin-left: 0px;
-}
+
 .status1{
 	background:deepskyblue;
 	font-size: 16px;
@@ -98,10 +94,10 @@ li{
     <section class="bar">
 	    <div class="container" style="padding:50px; background:rgba(201,255,248,0.5)">
     	<ul>
-	    	<li><span class='status1'>　</span><span> 進行中的任務(我是志工)</span></li>
-	    	<li><span class='status2'>　</span><span> 已完成的任務(我是志工)</span></li>
-	    	<li><span class='status3'>　</span><span> 進行中的任務(我是雇主)</span></li>
-	    	<li><span class='status4'>　</span><span> 已完成的任務(我是雇主)</span></li>
+	    	<li style='display:inline;margin-right:5px;margin-left:0px;'><span class='status1'>　</span><span> 進行中的任務(我是志工)</span></li>
+	    	<li style='display:inline;margin-right:5px;margin-left:0px;'><span class='status2'>　</span><span> 已完成的任務(我是志工)</span></li>
+	    	<li style='display:inline;margin-right:5px;margin-left:0px;'><span class='status3'>　</span><span> 進行中的任務(我是雇主)</span></li>
+	    	<li style='display:inline;margin-right:5px;margin-left:0px;'><span class='status4'>　</span><span> 已完成的任務(我是雇主)</span></li>
 	    </ul>
 	    <div id="calendar"></div>
 	    </div>
