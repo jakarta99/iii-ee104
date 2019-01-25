@@ -111,6 +111,7 @@ public class OrderService {
 				order.setReportStatus(ReportStatus.BothReport);
 			}
 			order.setOrderStatus(OrderStatus.ServiceFinishPayMatchSuccess);
+			order.setMemberScore(0);
 			orderDao.save(order);
 			//付款計數器++
 			Mission mission = order.getMission();
