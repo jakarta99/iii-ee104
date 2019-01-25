@@ -176,9 +176,9 @@ function query(){
 										</a>
 									</div>
 									<div class="text">
-										<h2 style="width:370px; margin:auto; margin-bottom:10px; "  >
+										<h3 style="width:370px; margin:auto; margin-bottom:10px;font-size: 1.7rem; "  >
 											<a href="${volunteer.websiteUrl}" target="_blank">${volunteer.title} </a>
-										</h2>
+										</h3>
 										<p class="author-category" >
 											<span style="font-size:1rem;">${volunteer.organization}</span>
 										</p>										
@@ -200,7 +200,7 @@ function query(){
 												</td></tr>
 											</table>
 										</p>
-										<a href="${volunteer.websiteUrl}" class="btn btn-template-outlined">更多資訊</a>
+										<a href="${volunteer.websiteUrl}" class="btn btn-template-outlined" target="_blank">更多資訊</a>
 									</div>							
 								</div>
 							</div>
@@ -252,9 +252,9 @@ function query(){
 					box+= '<a href="'+iVolunteer.websiteUrl+'" target="_blank">';
 					box+= '<img src="'+iVolunteer.picture+'"  class="image1" width="370px"  height="250px" >';
 					box+= '</a></div><div class="text">';
-					box+= '<h2 style="width:370px; margin:auto; margin-bottom:10px;"  >';
+					box+= '<h3 style="width:370px; margin:auto; margin-bottom:10px;" font-size: 1.7rem; >';
 					box+= '<a href="'+iVolunteer.websiteUrl+'" target="_blank">'+iVolunteer.title+' </a>';
-					box+= '</h2><p class="author-category" ><span style="font-size:1rem;" >'+iVolunteer.organization+'</span></p>';
+					box+= '</h3><p class="author-category" ><span style="font-size:1rem;" >'+iVolunteer.organization+'</span></p>';
 					box+= '<p><table style="margin:auto;color:rgba(125, 125, 125);font-size:1.2rem;">';
 					box+= '<tr><td width="100px">服務地區：</td><td width="250px"> ';
 					if (iVolunteer.country != null || iVolunteer.country != ''){
@@ -274,7 +274,7 @@ function query(){
 					}
 					
 					box+= '</td></tr></table></p>';
-					box+= '<a href="${volunteer.websiteUrl}" class="btn btn-template-outlined">更多資訊</a>';
+					box+= '<a href="${volunteer.websiteUrl}" class="btn btn-template-outlined" target="_blank">更多資訊</a>';
 					box+= '</div></div></div>';
 					
 					$("#iVolunteerBox").append(box);

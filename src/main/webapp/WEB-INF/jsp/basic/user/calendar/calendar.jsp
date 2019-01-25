@@ -94,7 +94,7 @@ font-family:Microsoft JhengHei
 	<!-- Sidebar -->
 	<jsp:include page="../user_layout/user_sidebar.jsp"/>
     <section class="bar">
-	    <div class="container" style="padding:50px; background:rgba(201,255,248,0.5)">
+	    <div class="container" style="padding:50px; background:rgba(201,255,248,0.5);box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);">
     	<ul>
 	    	<li style='display:inline;margin-right:5px;margin-left:0px;'><span class='status1'>　</span><span> 進行中的任務(我是志工)</span></li>
 	    	<li style='display:inline;margin-right:5px;margin-left:0px;'><span class='status2'>　</span><span> 已完成的任務(我是志工)</span></li>

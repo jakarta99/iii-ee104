@@ -16,6 +16,10 @@
 		body{
 			font-family: 微軟正黑體;
 		}
+		.img-fluid {
+		    max-width: 100%;
+		    height: 170px;
+	    }
 		
 	
 	</style>
@@ -70,49 +74,41 @@
           <div class="row">
             <div class="col-lg-3">
               <div class="home-blog-post">
-                <div class="image"><img src="../image/indexPicture/indexPhoto1.jpg" alt="..." class="img-fluid">
-                  <div class="overlay d-flex align-items-center justify-content-center"><a href="https://www.cw.com.tw/article/article.action?id=5089573" class="btn btn-template-outlined-white"><i class="fa fa-chain"> </i> Read More</a></div>
-                </div>
+                <div class="image"><img src="../image/indexPicture/indexPhoto1.jpg" alt="..." class="img-fluid" > </div>
                 <div class="text">
-                  <h4><a href="https://www.cw.com.tw/article/article.action?id=5089573">[媒體報導]讓60歲的照顧80歲的，瑞士「時間銀行」怎麼做 </a></h4>
+                  <h4><a href="https://www.cw.com.tw/article/article.action?id=5089573" target="_blank">[媒體報導]讓60歲的照顧80歲的，瑞士「時間銀行」怎麼做 </a></h4>
                   <p class="author-category">By <a href="#">天下雜誌</a> ／ <a href="#">緹琪陳雅婷</a></p>
-                  <p class="intro">「時間銀行」的概念近期在台灣掀起熱議，政府單位也開始效仿，新北市也提出了當我們老在一起的「佈老時間銀行」到底什麼是時間銀行，做為實驗先驅的瑞士，為什麼評價正面...</p><a href="https://www.cw.com.tw/article/article.action?id=5089573" class="btn btn-template-outlined">Continue Reading</a>
+                  <p class="intro">「時間銀行」的概念近期在台灣掀起熱議，政府單位也開始效仿，新北市也提出了當我們老在一起的「佈老時間銀行」到底什麼是時間銀行，做為實驗先驅的瑞士，為什麼評價正面...</p><a href="https://www.cw.com.tw/article/article.action?id=5089573" class="btn btn-template-outlined">閱讀更多</a>
                 </div>
               </div>
             </div>
             <div class="col-lg-3">
               <div class="home-blog-post">
-                <div class="image"><img src="../image/indexPicture/indexPhoto2.jpg" alt="..." class="img-fluid">
-                  <div class="overlay d-flex align-items-center justify-content-center"><a href="https://www.thenewslens.com/article/105057" class="btn btn-template-outlined-white"><i class="fa fa-chain"> </i> Read More</a></div>
-                </div>
+                <div class="image"><img src="../image/indexPicture/indexPhoto2.jpg" alt="..." class="img-fluid" > </div>
                 <div class="text">
-                  <h4><a href="https://www.thenewslens.com/article/105057">[媒體報導]長照時間銀行：用現在照顧別人的1小時，換老後被照顧的1小時</a></h4>
+                  <h4><a href="https://www.thenewslens.com/article/105057" target="_blank">[媒體報導]長照時間銀行：用現在照顧別人的1小時，換老後被照顧的1小時</a></h4>
                   <p class="author-category">By <a href="#">關鍵評論</a> ／ <a href="#">鄭貞茂</a></p>
-                  <p class="intro">利用時間銀行，人們可以將自己認為多餘的時間貢獻出去，算是共享經濟的始祖之一，也是無現金社會的體現。此外，時間銀行的優點在於不同技能的分享、強化社區的向心力，以及消耗較少的資源等。...</p><a href="https://www.thenewslens.com/article/105057" class="btn btn-template-outlined">Continue Reading</a>
+                  <p class="intro">利用時間銀行，人們可以將自己認為多餘的時間貢獻出去，算是共享經濟的始祖之一，也是無現金社會的體現。此外，時間銀行的優點在於不同技能的分享、強化社區的向心力，以及消耗較少的資源等。...</p><a href="https://www.thenewslens.com/article/105057" class="btn btn-template-outlined">閱讀更多</a>
                 </div>
               </div>
             </div>
             <div class="col-lg-3">
               <div class="home-blog-post">
-                <div class="image"><img src="../image/indexPicture/indexPhoto3.jpg" alt="..." class="img-fluid">
-                  <div class="overlay d-flex align-items-center justify-content-center"><a href="http://www.taiwanroot.org/report.php?id=452" class="btn btn-template-outlined-white"><i class="fa fa-chain"> </i> Read More</a></div>
-                </div>
+                <div class="image"><img src="../image/indexPicture/indexPhoto3.jpg" alt="..." class="img-fluid"> </div>
                 <div class="text">
-                  <h4><a href="http://www.taiwanroot.org/report.php?id=452">[志工分享]村民的笑容中 感受真摯的互動</a></h4>
+                  <h4><a href="http://www.taiwanroot.org/report.php?id=452" target="_blank">[志工分享]村民的笑容中 感受真摯的互動</a></h4>
                   <p class="author-category">By <a href="#">簡郁如 護理師</a></p>
-                  <p class="intro">這是我第一次參加義診，先前就一直有想當志工的願望，在網路上蒐尋到相關資訊再經歷幾番激烈的搶名額報名後，這次終於能報名上義診團...聽見村民說「上次剪頭髮就是半年前你們來的時候」，才更深刻體會到偏遠地區的資源需求，這也是為什麼要走入偏鄉的其中理由之一...</p><a href="http://www.taiwanroot.org/report.php?id=452" class="btn btn-template-outlined">Continue Reading</a>
+                  <p class="intro">這是我第一次參加義診，先前就一直有想當志工的願望，在網路上蒐尋到相關資訊再經歷幾番激烈的搶名額報名後，這次終於能報名上義診團...聽見村民說「上次剪頭髮就是半年前你們來的時候」，才更深刻體會到偏遠地區的資源需求，這也是為什麼要走入偏鄉的其中理由之一...</p><a href="http://www.taiwanroot.org/report.php?id=452" class="btn btn-template-outlined">閱讀更多</a>
                 </div>
               </div>
             </div>
             <div class="col-lg-3">
               <div class="home-blog-post">
-                <div class="image"><img src="/image/user/mission/beach.jpg" alt="..." class="img-fluid">
-                  <div class="overlay d-flex align-items-center justify-content-center"><a href="https://www.sow.org.tw/faq/iccicc" class="btn btn-template-outlined-white"><i class="fa fa-chain"> </i> Read More</a></div>
-                </div>
+                <div class="image"><img src="/image/indexPicture/cleanBeach.jpg" alt="..." class="img-fluid" > </div>
                 <div class="text">
-                  <h4><a href="https://www.sow.org.tw/faq/iccicc">[機構分享]臺灣國際淨灘行動 </a></h4>
+                  <h4><a href="https://www.sow.org.tw/faq/iccicc" target="_blank">[機構分享]臺灣國際淨灘行動 </a></h4>
                   <p class="author-category">By <a href="#">荒野保護協會</a></p>
-                  <p class="intro">淨灘，不是停止垃圾汙染的終點，卻是每個人親海、愛海與守護海洋的最佳起點。荒野保護協會致力於逐年減少海洋廢棄物的數量，留給子孫可以赤腳奔跑的潔白沙灘、魚群自在優游的透澈藍海。</p><a href="https://www.sow.org.tw/faq/iccicc" class="btn btn-template-outlined">Continue Reading</a>
+                  <p class="intro">淨灘，不是停止垃圾汙染的終點，卻是每個人親海、愛海與守護海洋的最佳起點。荒野保護協會致力於逐年減少海洋廢棄物的數量，留給子孫可以赤腳奔跑的潔白沙灘、魚群自在優游的透澈藍海。</p><a href="https://www.sow.org.tw/faq/iccicc" class="btn btn-template-outlined">閱讀更多</a>
                 </div>
               </div>
             </div>
