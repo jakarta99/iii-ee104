@@ -12,6 +12,10 @@
 <jsp:include page="../commons_layout/commons_js_links.jsp" />
 <style>
 	.myMOUSE{ cursor: pointer; }
+	.box{    
+		padding-top: 40px;
+	    padding-bottom: 40px;
+	}
 </style>
 
 </head>

@@ -11,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Javascript files-->
     <jsp:include page="basic/commons/commons_layout/commons_js_links.jsp"/>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>    
+  
 	<style>
 		body{
 			font-family: 微軟正黑體;
@@ -126,16 +126,7 @@
 
     </div>
     
-    <script>
-    	if ('${emailVerify}'== 'Y'){
-    		console.log("emailVerify");
-    		swal('恭喜你驗證完成', {
-		    	icon: "success",
-		    })
-    	}
-    
-    
-    </script>
+
     
    
     

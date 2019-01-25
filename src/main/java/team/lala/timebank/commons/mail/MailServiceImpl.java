@@ -128,8 +128,8 @@ public class MailServiceImpl implements MailService {
 			                "    <h3>已註冊TimeBank帳戶!</h3>" +
 			                "Dear " + member.getName() +
 		    				",<br/> thank you for signing up. Your account is " + member.getAccount() + ".<br>" +
-		    				"<a href='https://localhost/?emailVerify=Y&account=" + member.getAccount() + "'>請按此驗證</a><br/><br/>" +
-		    				"<a href='https://localhost/?emailVerify=Y&account=" + member.getAccount() + "'>" + "<img src=\'" + imgPath + "\' ></a><br/>" + 
+		    				"<a href='https://localhost/login?emailVerify=Y&account=" + member.getAccount() + "'>請按此驗證</a><br/><br/>" +
+		    				"<a href='https://localhost/login?emailVerify=Y&account=" + member.getAccount() + "'>" + "<img src=\'" + imgPath + "\' ></a><br/>" + 
 			                "</body>" +
 			                "</html>";
 	        helper.setText(content, true);

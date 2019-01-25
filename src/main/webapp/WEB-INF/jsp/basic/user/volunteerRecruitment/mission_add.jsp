@@ -98,7 +98,8 @@
 <fmt:formatDate value="${mission.endDate }" pattern="yyyy/MM/dd HH:mm" var="endDate" />
 	<!-- Top bar-->
 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp"/>
- 	
+ 	<!-- Sidebar -->
+	<jsp:include page="../user_layout/user_sidebar.jsp"/>
 	<!-- Navbar -->
     <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
 	<!--heading crumbs-->
@@ -274,7 +275,7 @@
 		})
 	
 		$(document).ready(function() {
-			$("#webTitle").empty().append("招募紀錄-未開始");
+			$("#webTitle").empty().append("刊登任務");
 			new TwCitySelector();
 			$('#startDate').datetimepicker({
 				dateFormat: "yy/mm/dd",

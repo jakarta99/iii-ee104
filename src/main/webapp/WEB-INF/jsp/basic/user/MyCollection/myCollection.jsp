@@ -107,6 +107,9 @@
     <jsp:include page="../../commons/commons_layout/commons_nav.jsp"/>
 	<!--heading crumbs-->
 	<jsp:include page="../../commons/commons_layout/commons_heading_breadcrumbs_member_area.jsp" />
+		<!-- Sidebar -->
+	<jsp:include page="../user_layout/user_sidebar.jsp"/>
+	
       <div id="content">
         <div class="container">
 			<!--我的最愛清單 -->

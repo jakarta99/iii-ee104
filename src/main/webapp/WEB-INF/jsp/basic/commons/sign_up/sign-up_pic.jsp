@@ -16,6 +16,10 @@
 	body{
 		font-family: "微軟正黑體"
 	}
+	.box{
+		padding-top: 70px;
+	    padding-bottom: 70px;
+	}
 </style>
 
 </head>
@@ -71,8 +75,9 @@
 					<label for="picture" style="font-size:20px">圖片 </label>
  					<input type="file" id="idPicture" name="picture" accept="image/*" class="form-control">
  					<label class="text-muted" style="font-size:16px">*請選擇圖檔，無圖檔亦可直接送出</label>
+ 					<hr>
 	                <div class="col-md-12 text-center">
-                    	<input id="submit" type="button" class="btn btn-template-outlined" value="上傳">
+                    	<input id="submit" type="button" class="btn btn-template-outlined" value="註冊">
                     </div>
                   </div>
                 </form>
