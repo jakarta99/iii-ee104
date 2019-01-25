@@ -105,7 +105,7 @@ INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (16, 3)
 --個人會員發布的任務
 INSERT INTO mission(address, approved_quantity,pay_date, contact_email, contact_person, contact_phone, county, deadline, discription, district, end_date, mission_pic_name, mission_status, payed_quantity, people_needed, publish_date, start_date, term_type, time_value, title, member_id, service_type) 
 VALUES ('忠孝東路6段484號B1', 0, '2019-01-15 00:00:00:000', 'juliantsai@canlove.org.tw', '蔡明珠', '02-66171885', '台北市','2019-01-05 00:00:00.000', '曾經是老師的小林奶奶快80歲了，她最大的夢想，就是再一次回到校園，聽到孩子們的說一聲: 「小林老師好!」或許你也聽過這些老人話?『老人攏沒路用，攏沒人管 ！』『一個人很孤單、很苦…』『全身都是病啦，死一死算了。』一次用夢想再點燃希望的行動，肯愛協會正在關心離家的弱勢老人，讓有夢的老人有「夢」有活力陪伴離家老人找到生活的意義，身心的健康及好好活的動力。--我們想和你一起--',
-		'南港區','2019-01-12 00:00:00.000','GP.jpg','A_New', 0, 2,'2019-01-21 11:19:35.027', '2019-01-10 00:00:00.000', 'S', 8, '友夢不老-助爺爺奶奶圓夢', 1,3);
+		'南港區','2018-01-12 00:00:00.000','care.jpg','A_New', 0, 2,'2018-01-21 11:19:35.027', '2018-01-10 00:00:00.000', 'S', 8, '照顧爺爺奶奶-與老人同聚', 1,3);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
 VALUES (5,'陪伴家中長者就醫-殘障照顧',3,'S',3,'2019/1/9','2019/2/13 14:00','2019/2/13 17:00',1,'曾小潔','0912456789','jasmine@gmail.com','我的母親高齡75歲，行動不便(拄柺杖)且住在五層樓高的無電梯公寓。2019/2/13下午需要去仁愛醫院回診檢查糖尿病，但當天家人都需要工作，無法抽身，因此需要女性志工陪同回診檢查慢性病(包含協助下樓、交通、完成醫療診斷程序後陪同返家、上樓)。','臺北市','大安區','復興南路一段390號15樓','A_New','2019/2/19',0,'old-man.jpg',0);
@@ -128,13 +128,13 @@ VALUES (11,'失智者照顧協會-失智關懷志工 ',4,'L',2,'2019/1/8','2019/
 
 --伊甸未開始工作
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (13,'伊甸基金會-偏鄉暑期陪讀志工 ',8,'S',1,'2019/7/7','2019/8/24 09:00','2019/7/31 17:00',4,'廖先生','03-28828899','eedian@gmail.com','在偏鄉社區中，許多孩子有著不同的天賦，如音樂、舞蹈等，卻因為城鄉差距、貧富落差的關係，失去了發展的機會；或是沒有經費可以栽培孩子、或是地處偏僻比較缺乏老師願意來教，對許多偏鄉弱勢的孩子來說，才藝學習是遥不可及的夢想，冀望能夠透過音樂教學相關才藝課程，給予多元刺激適性發展，偏鄉孩子一樣能，同時我們深信「教育」是提高人口素質的根本方法：唯有「教育」能幫助人脫離貧困和愚昧。所以我們很願意協助更多的偏鄉兒童、原住民學子，努力求學、奮發向上、發揮偏鄉兒童、原住民的才華，找到每個人的一片天空。<br>希望徵求兩名志工，陪伴孩子、豐富孩子的暑假。','台東縣','東河鄉','南東河15鄰420號','A_New','2019/6/10',0,'readwithchild.jpg',0);
+VALUES (13,'伊甸基金會-偏鄉暑期陪讀志工 ',8,'S',1,'2019/1/8','2019/2/5 09:00','2019/2/6 17:00',4,'廖先生','03-28828899','eedian@gmail.com','在偏鄉社區中，許多孩子有著不同的天賦，如音樂、舞蹈等，卻因為城鄉差距、貧富落差的關係，失去了發展的機會；或是沒有經費可以栽培孩子、或是地處偏僻比較缺乏老師願意來教，對許多偏鄉弱勢的孩子來說，才藝學習是遥不可及的夢想，冀望能夠透過音樂教學相關才藝課程，給予多元刺激適性發展，偏鄉孩子一樣能，同時我們深信「教育」是提高人口素質的根本方法：唯有「教育」能幫助人脫離貧困和愚昧。所以我們很願意協助更多的偏鄉兒童、原住民學子，努力求學、奮發向上、發揮偏鄉兒童、原住民的才華，找到每個人的一片天空。<br>希望徵求兩名志工，陪伴孩子、豐富孩子的暑假。','台東縣','東河鄉','南東河15鄰420號','A_New','2019/6/10',0,'readwithchild.jpg',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (13,'伊甸基金會-視障重建中心導盲志工 ',3,'S',2,'2019/1/8','2019/3/1 09:00','2019/12/31 17:00',5,'董小姐','08-28828899','eedian@gmail.com','你是充滿熱忱、有滿腔愛心的人嗎？是否遇過視障者需要協助時，卻不知該怎麼幫忙呢？竭誠邀請您一同參與導盲志工培訓招募，完成培訓後可排班協助視障者外出購物、休閒活動及陪同參與社區化活動。歡迎您一同加入我們的行列，協助視障者參與社會。','台北市','松山區','光復北路60巷19-6號B1樓','A_New','2019/12/31',0,'blindvol.jpg',0);
+VALUES (13,'伊甸基金會-視障重建中心導盲志工 ',3,'S',2,'2019/1/5','2019/3/5 09:00','2019/12/31 17:00',5,'董小姐','08-28828899','eedian@gmail.com','你是充滿熱忱、有滿腔愛心的人嗎？是否遇過視障者需要協助時，卻不知該怎麼幫忙呢？竭誠邀請您一同參與導盲志工培訓招募，完成培訓後可排班協助視障者外出購物、休閒活動及陪同參與社區化活動。歡迎您一同加入我們的行列，協助視障者參與社會。','台北市','松山區','光復北路60巷19-6號B1樓','A_New','2019/12/31',0,'blindvol.jpg',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (13,'伊甸基金會-音樂輔療初階班志工',4,'S',2,'2019/4/4','2019/3/1 09:00','2019/12/31 17:00',5,'林小姐','08-28828899','eedian@gmail.com','藉由音樂陪伴失能長輩紓壓、訓練肢體動作、刺激五感，以延緩退化','台北市','中正區','南海路49號','A_New','2019/12/31',0,'music.jpg',0);
+VALUES (13,'伊甸基金會-音樂輔療初階班志工',4,'S',2,'2019/1/7','2019/2/5 09:00','2019/2/6 17:00',5,'林小姐','08-28828899','eedian@gmail.com','藉由音樂陪伴失能長輩紓壓、訓練肢體動作、刺激五感，以延緩退化','台北市','中正區','南海路49號','A_New','2019/12/31',0,'music.jpg',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
 VALUES (13,'伊甸基金會-義勇消防志工招募 ',3,'S',2,'2019/1/8','2019/3/1 09:00','2019/12/31 17:00',5,'陳小姐','08-28828899','eedian@gmail.com','協助火災搶救、災害搶救、車禍救助、水域救援等勤務參加相關專業訓練','台中市','石岡區','豐勢路1171號','A_New','2019/12/31',0,'car.png',0);
@@ -142,7 +142,7 @@ VALUES (13,'伊甸基金會-義勇消防志工招募 ',3,'S',2,'2019/1/8','2019/
 --伊甸時數未核發
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (13,'伊甸基金會-社區適應 ',8,'S',4,'2019/1/3','2019/1/5 09:00','2019/1/5 17:00',15,'李小姐','03-28828899','eedian@gmail.com','協助身障學員參與社區適應活動','台北市','文山區','萬和街6號4樓之2','B_AccountsPayable','2019/1/5',5,'home.jpg',0);
+VALUES (13,'伊甸基金會-社區適應 ',8,'S',4,'2019/1/3','2019/1/1 09:00','2019/1/1 17:00',15,'李小姐','03-28828899','eedian@gmail.com','協助身障學員參與社區適應活動','台北市','文山區','萬和街6號4樓之2','B_AccountsPayable','2019/1/5',5,'home.jpg',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
 VALUES (13,'伊甸基金會-為家漆上愛志工 ',8,'S',4,'2019/1/3','2019/1/4 09:00','2019/1/4 17:00',15,'曹小姐','03-28828899','eedian@gmail.com','伊甸基金會與特力屋士林店招募羅賴把志工，一起聯手打造友善安居家庭日，訂於107年12月30日(六)至特力屋士林店受訓後，於108年1月5日(六)至弱勢家庭家中刷油漆，一起為家漆上愛。','台北市','文山區','萬和街6號4樓之2','B_AccountsPayable','2019/1/5',5,'paint.jpg',0);
@@ -156,9 +156,12 @@ INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publ
 VALUES (13,'伊甸基金會-送餐志工 ',6,'S',4,'2018/5/6','2018/6/6 15:00','2018/6/13 21:00',4,'李先生','02-24428811','alex@gmail.com','隨著高齡社會的來臨，許多長者需要您我的關懷特別是行動不便的長者，在飲食的準備跟購買更是一大困難！為配合本國長照政策，信義老人服務中心安排每週週間中午，透過送餐服務，來幫助這些經照管中心評估為失能的長者，以維持其生活及健康飲食。','台北市','信義區','信義路五段7號','C_Finish','2018/7/7',4,'food.jpg',4,'2018/7/9');
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity,finish_date) 
-VALUES (13,'伊甸基金會-陪讀志工、才藝志工 ',6,'S',4,'2018/1/8','2018/2/1 15:00','2018/2/1 21:00',4,'魏先生','08-28828899','shichih@gmail.com','🌷課後輔導 🌹陪伴孩童📌具有愛心耐心服務熱忱的你，絕對不可錯過👊👊👊只要你喜歡和孩子們相處，就可以來幫助孩子們，讓他們快樂學習喲😊😊😊','台北市','松山區','光復北路60巷19-6號B1樓','C_Finish','2018/2/5',3,'kid.jpg',3,'2018/2/20');
+VALUES (13,'伊甸基金會-陪讀志工、才藝志工 ',6,'S',4,'2018/1/8','2018/2/1 15:00','2018/2/1 21:00',4,'魏先生','08-28828899','shichih@gmail.com','課後輔導 陪伴孩童具有愛心耐心服務熱忱的你，絕對不可錯過只要你喜歡和孩子們相處，就可以來幫助孩子們，讓他們快樂學習喲','台北市','松山區','光復北路60巷19-6號B1樓','C_Finish','2018/2/5',3,'kid.jpg',3,'2018/2/20');
 
 --ORDER_LIST
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME, member_score) 
+VALUES(12, 1,  'ServiceFinishNotPay', '2018/12/24 17:00', 5);
+
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
 VALUES(13, 1,  'ServiceFinishNotPay', '2018/10/11 17:00','Null');
 
@@ -190,47 +193,51 @@ INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME
 VALUES(8, 1,  'VolunteerApply', '2018/10/11 17:00','Null');
 
 --結案order
-INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(15, 1,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS,member_score) 
+VALUES(15, 1,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null',6);
 
-INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(15, 2,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS,member_score) 
+VALUES(15, 2,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null',6);
 
-INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(15, 3,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS,member_score) 
+VALUES(15, 3,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null',6);
 
-INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(15, 4,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS,member_score) 
+VALUES(15, 4,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null',6);
 
-INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(14, 1,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS,member_score) 
+VALUES(14, 1,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null',6);
 
-INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(14, 2,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS,member_score) 
+VALUES(14, 2,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null',6);
 
-INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(14, 3,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS,member_score) 
+VALUES(14, 3,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null',6);
 
-INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(14, 4,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS,member_score) 
+VALUES(14, 4,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null',6);
 
-INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(16, 1,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS,member_score) 
+VALUES(16, 1,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null',6);
 
-INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(16, 2,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS,member_score) 
+VALUES(16, 2,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null',6);
 
-INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS) 
-VALUES(16, 3,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null');
-
-
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS,member_score) 
+VALUES(16, 3,  'ServiceFinishPayMatchSuccess', '2018/1/20 17:00','Null',6);
 
 
 
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS,member_score) 
+VALUES(5, 1,  'RequesterAcceptService', '2018/1/20 17:00','Null',6);
+
+INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME,REPORT_STATUS,member_score) 
+VALUES(6, 1,  'RequesterAcceptService', '2018/1/20 17:00','Null',6);
 
 
-INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME, member_score) 
-VALUES(6, 1,  'ServiceFinishPayMatchSuccess', '2018/12/24 17:00', 5);
+
+
+
 
 
 INSERT INTO ORDER_LIST(MISSION, VOLUNTEER_ID, ORDER_STATUS, VOLUNTEER_APPLY_TIME) 
@@ -457,3 +464,9 @@ VALUES(1,10,16,'2018/6/2');
 
 INSERT INTO DONATION(DONATOR_ID,ORG_DONEE_ID,DONATE_VALUE,donate_time) 
 VALUES(2,8,17,'2018/12/2');
+
+--INSERT INTO mycollection(favoriteobject_id,favoriteobject_link,favoriteobject_picname,favoriteobject_title,mycollection_type,member_id)
+--VALUES(14,'http://good119.org','memberpic14.jpg','社團法人中華民國恩友愛心協會','ORGANIZATION',1)
+
+--INSERT INTO mycollection(favoriteobject_id,favoriteobject_link,favoriteobject_picname,favoriteobject_title,mycollection_type,member_id)
+--VALUES(11,'https://www.cdca.org.tw/','memberpic11.jpg','社團法人中華民國失智者照顧協會','ORGANIZATION',1)

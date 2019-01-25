@@ -1096,7 +1096,7 @@ color: rgba(100, 100, 100);
   border:transparent 1.5px solid;
   border-radius:3px; 
   background-color: #fff;
-  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
 .home-blog-post_1:hover {

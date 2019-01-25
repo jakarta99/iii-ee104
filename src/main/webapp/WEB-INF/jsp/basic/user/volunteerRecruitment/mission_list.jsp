@@ -34,7 +34,7 @@
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></script>
 
 <meta charset="UTF-8">
-<title>招募紀錄 | TimeBank</title>
+<title>志工招募紀錄 | TimeBank</title>
 <style>
 		.container-1{
 		 	
@@ -146,8 +146,8 @@
             <div class="s5">
              <div class="s4">
 	        	<ul id="pills-tab" role="tablist" class="nav nav-pills nav-justified">
-			       <li class="nav-item"><a id="status12Butt" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="false" class="nav-link">未開始</a></li>
-			       <li class="nav-item"><a id="status3Butt" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">時數未核發</a></li>
+			       <li class="nav-item"><a id="status12Butt" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="false" class="nav-link">活動未開始</a></li>
+			       <li class="nav-item"><a id="status3Butt" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" class="nav-link">活動結束-時數待核發</a></li>
 			       <li class="nav-item"><a id="status4Butt" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" class="nav-link">歷史紀錄</a></li>
 	   			 </ul>
        	     </div>
@@ -377,7 +377,7 @@
 	                   if(mission.missionstatus == "A_New" || mission.missionstatus == "A_VolunteerApproved"){
 	                   box+="<p class='intro_1'>需求人數:"+mission.peopleNeeded+"/目前人數:"+mission.approvedQuantity+"</p>"	
 	                   }else if(mission.missionstatus=="B_AccountsPayable"||mission.missionstatus=="C_Cancel"||mission.missionstatus=="C_Finish"){
-	                　　　　　　　box+="<p class='intro_1'>參與人數:"+mission.approvedQuantity+"</p>"
+	                   box+="<p class='intro_1'>參與人數:"+mission.approvedQuantity+"</p>"
 		 				}
 	                   
 		                if(mission.missionstatus=="A_New"){
@@ -407,7 +407,7 @@
 			} 	
  
 	$(document).ready( function () {
-		$("#webTitle").empty().append("招募紀錄");
+		$("#webTitle").empty().append("志工招募紀錄");
 		new TwCitySelector();
 		
 		$('#startDate').datetimepicker({
@@ -424,15 +424,15 @@
 		    startView:"years",
 		})
 		
-		if(${box}=="3"){
-			$("#webtitle").empty().append("招募紀錄-歷史紀錄");
+		if('${box}'=="3"){
+			$("#webtitle").empty().append("志工招募紀錄-歷史紀錄");
 			$("#missionstatus").val('C_Finish');
 			
-		}else if (${box}=="2"){
-			$("#webtitle").empty().append("招募紀錄-時數未核發");
+		}else if ('${box}'=="2"){
+			$("#webtitle").empty().append("志工招募紀錄-活動結束-時數待核發");
 			$("#missionstatus").val('B_AccountsPayable');
 		}else{
-			$("#webtitle").empty().append("招募紀錄-未開始");
+			$("#webtitle").empty().append("志工招募紀錄-活動未開始");
 			$("#missionstatus").val("A_VolunteerApproved");
 		}
 		
