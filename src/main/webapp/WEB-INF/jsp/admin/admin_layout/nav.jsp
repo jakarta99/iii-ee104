@@ -11,9 +11,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/admin/chatMessage/messages/all/list" style="font-family: 微軟正黑體">訊息</a>
-            </li>
+            
             <li class="nav-item mx-0 mx-lg-1">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/admin/donation/chart" style="font-family: 微軟正黑體">捐款統計</a>
             </li>
