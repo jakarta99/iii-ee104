@@ -127,12 +127,13 @@
 <!-- 							<th scope="col" width="50px"> -->
 <!-- 								<input type="checkbox" style="display:inline;" name="CheckAll" value="全選" id="CheckAll" /> -->
 <!-- 							</th> -->
-							<th scope="col" width="130px">
-<!-- 								<input id="submit" style="display:inline;" type="submit" value="標記已讀" class="btn btn-outline-info btn-sm"/> -->
-							</th>
+							
 							<th scope="col">時間</th>
 							<th scope="col">類型</th>
 							<th scope="col">內容</th>
+							<th scope="col" width="130px">
+								申訴
+							</th>
 <!-- 							<th scope="col">是否已讀</th> -->
 <!-- 							<th scope="col">會員帳號(debug用)</th> -->
 						</tr>
@@ -280,24 +281,7 @@
 // 		     			}
 // 		     			return checkBox;} 
 // 		     		},//勾選欄位
-		           	{data: function (data) {
-		           		var readButt = "";
-		           		
-		           		//如果是懲罰的message，且未提出申訴
-		           		if(data.messageType=="Penalty" && data.penalty.applyReVertify!="Y"){
-		           			readButt = "<button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#penaltyReVertifyCenter' onclick='bringPenaltyIdToModal(" + data.penalty.id + ")'>  申訴    </button>"
-		           			
-		           		}
-		           		
-		           		//如果是懲罰的message，且已提出申訴
-		           		if(data.messageType=="Penalty" && data.penalty.applyReVertify=="Y"){
-		           			applyReVertifyDescription = data.penalty.applyReVertifyDescription;
-		           			reVertifyProofPicName = data.penalty.reVertifyProofPicName;
-		           			readButt = "<button class='btn btn-info btn-sm' data-toggle='modal' data-target='#penaltyReVertifyCenter' onclick='bringApplyReVertifyDescriptionToModal(" + data.penalty.id +")'>  檢視申訴紀錄    </button>"
-		           		}
-		           		
-		               	return readButt;	},"orderable": false
-		           	},
+		           	
 		           	{data:null,"orderable": false, render:function(data, type, row){
 						return new Date(data.releaseTime).toLocaleDateString();
 						}
@@ -341,6 +325,24 @@
 		           	},"orderable": false
 		           	},
 					{data:"message","orderable": false},
+					{data: function (data) {
+		           		var readButt = "";
+		           		
+		           		//如果是懲罰的message，且未提出申訴
+		           		if(data.messageType=="Penalty" && data.penalty.applyReVertify!="Y"){
+		           			readButt = "<button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#penaltyReVertifyCenter' onclick='bringPenaltyIdToModal(" + data.penalty.id + ")'>  申訴    </button>"
+		           			
+		           		}
+		           		
+		           		//如果是懲罰的message，且已提出申訴
+		           		if(data.messageType=="Penalty" && data.penalty.applyReVertify=="Y"){
+		           			applyReVertifyDescription = data.penalty.applyReVertifyDescription;
+		           			reVertifyProofPicName = data.penalty.reVertifyProofPicName;
+		           			readButt = "<button class='btn btn-info btn-sm' data-toggle='modal' data-target='#penaltyReVertifyCenter' onclick='bringApplyReVertifyDescriptionToModal(" + data.penalty.id +")'>  檢視申訴紀錄    </button>"
+		           		}
+		           		
+		               	return readButt;	},"orderable": false
+		           	},
 // 					{data:"readStatus"},
 // 					{data:"member.account"},
 					
