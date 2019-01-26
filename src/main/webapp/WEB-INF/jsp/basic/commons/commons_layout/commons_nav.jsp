@@ -29,13 +29,11 @@
 <!--                             <li class="nav-item"><a href="/user/volunteerRecruitment/list" class="nav-link">招募紀錄</a></li> -->
 <!--                             <li class="nav-item"><a href="/user/missionPublish/add" class="nav-link">刊登任務</a></li>                       -->
 <!--                           </ul> -->
-<%--                 			<sec:authorize access="hasAnyRole('USER')"> --%>
 <!-- 	                         <h5><a href="#">志工申請</a></h5> -->
 <!-- 	                          <ul class="list-unstyled mb-3"> -->
 <!-- 	                            <li class="nav-item"><a href="javascript:document.location.href='/user/volunteerApplication/applicationPage'" class="nav-link">申請中</a></li> -->
 <!-- 	                            <li class="nav-item"><a href="javascript:document.location.href='/user/volunteerRecord/RecordPage'" class="nav-link">服務紀錄</a></li>                           -->
 <!-- 	                          </ul> -->
-<%--                 			</sec:authorize> --%>
 <!--                         </div> -->
 <!--                         <div class="col-md-6 col-lg-3"> -->
 <!--                          <h5><a href="/user/transaction-record/list" >我的交易紀錄</a></h5> -->
@@ -47,7 +45,10 @@
 <!--                   </ul> -->
                 </li>
                 <sec:authorize access="hasAnyRole('USER','ORG_USER')">
-                <li class="nav-item menu-large" ><a href="##" data-toggle="dropdown" onclick="showChatMessages()">我的訊息 <b class="caret"></b></a>
+                <li class="nav-item dropdown"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle" onclick="showChatMessages()">我的訊息<b class="caret"></b></a>
+<!--                 <li class="nav-item menu-large" ><a href="##" data-toggle="dropdown" >我的訊息 <b class="caret"></b></a> -->
+               	<ul class="dropdown-menu" id="chatMemberBoxList" style="width:300px;">
+                 </ul>
                 </sec:authorize>
                 <li class="nav-item menu-large"><a href="/commons/InternationalVolunteer/list" >國際志工專區<b class="caret"></b></a>                        
                  <li class="nav-item dropdown"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle">關於我們<b class="caret"></b></a>
@@ -134,9 +135,9 @@
 	
 	
 	//我的訊息:取得所有聊天對象與最後一筆聊天紀錄
-	function changeMemberBoxOrder(){
+	function showChatMessages(){
 		$.ajax({
-			url:"/admin/chatMessage/messages/all/chatObject",
+			url:"/user/chatMessage/messages/all/chatObject",
 			dataType:"json",
 		}).done(function(data){
 			console.log(data)
@@ -144,17 +145,27 @@
 			$.each(data, function(idx, obj){
 				var m = new Date(obj.time);
 				var dateTime = m.getFullYear()+"-"+m.getMonth()+"-"+m.getDate();
-				var chatMemberBox = '<div class="chatMemberBox" id="chatMemberBox'+obj.toAccount+'">';
+				
+				var chatMemberBox = '<div class="dropdown-item chatMemberBox" style="padding:5px 5px;"  id="chatMemberBox'+obj.toAccount+'">';
 				chatMemberBox +='<div class="imgToken" >'; 
 				chatMemberBox +='<img src="/image/user/member/'+obj.toMemberPic+'" style="width:50px;border-radius:100px;"/>'; 
 				chatMemberBox +='</div><div class="chat-info">'; 
-				chatMemberBox +='<div style="display:inline" id="'+obj.toAccount+'">'+obj.toName+'</div>';
-				chatMemberBox +='<div style="display:inline; float:right">'+dateTime+'</div>'; 
-				chatMemberBox += '<div style="overflow: hidden;padding-right:40px">'+obj.text+'</div>';
+				chatMemberBox +='<div style="display:inline;color:#535a61;" id="'+obj.toAccount+'">'+obj.toName+'</div>';
+				chatMemberBox +='<div style="display:inline; float:right;color:#777;padding-right:15px;">'+dateTime+'</div>'; 
+				chatMemberBox += '<div style="overflow: hidden;padding-right:40px;color:#777;">'+obj.text+'</div>';
 				chatMemberBox += '</div></div>';	
 				$("#chatMemberBoxList").append(chatMemberBox);					
 			})
-			$("#chattedPeopleList > div.item2> div.item2-2 > div:nth-child(1)").css("background","#80808075");
+			$("#chatMemberBoxList").append('<div style="display:inline; float:right;color:#13b5b1;padding-right:15px;"><a href="##">全部標示已讀</a></div>');	
+			$("#chatMemberBoxList").prepend('<div style="text-align:left;color:#13b5b1;padding:5px 0 2px 5px;"><a href="##">最近訊息</a></div>');	
 		})
-	}
+	}		
+	//我的訊息:chatMemberBox綁定事件，点擊產生chatBox
+	$("#chatMemberBoxList").on("click",".chatMemberBox",function(){
+		var toAccount= $(this).find(">:nth-child(2)>:first-child").attr("id");
+		var toName= $(this).find(">:nth-child(2)>:first-child").text();
+		createChatBox(toAccount,toName);
+	})
+	
+	
 </script>

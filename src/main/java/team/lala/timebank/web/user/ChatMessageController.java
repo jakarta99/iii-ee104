@@ -1,8 +1,11 @@
 package team.lala.timebank.web.user;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -80,23 +83,62 @@ public class ChatMessageController {
 		respData.put("toMemberPic", toMember.getPicture());
 		respData.put("fromMemberPic", fromMember.getPicture());
 		respData.put("toMemberName", toMember.getName());
-		if (session.getAttribute(toAccount) != null) {
-			System.out.println("session toMember != null");
-		} else {
-			System.out.println("session toMember == null");
-		}
+		
 		//將聊天對象資料存放在session scope內，一旦連線完成，整個網站都能進行對話
-		session.setAttribute("stompClientConnection", "Y");
-		session.setAttribute("toMember", toMember);
+		List<Member> chatMemberList;
+		try {
+			if (session.getAttribute("stompClientConnection") != null) {
+				System.out.println("session toMember != null");
+				chatMemberList = (List<Member>) session.getAttribute("chatMemberList");
+			} else {
+				chatMemberList = new ArrayList<>();
+				session.setAttribute("stompClientConnection", "Y");
+			}
+			if (!chatMemberList.contains(toMember)) {
+				chatMemberList.add(toMember);				
+			}
+			session.removeAttribute("chatMemberList");
+			session.setAttribute("chatMemberList", chatMemberList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return respData;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/messages/all/chatObject")
+	public List<ChatMessage> findLastMessageWithChatObjectsByAccount(Principal principal){
+		//查詢所有聊天對象以及與其的最後對話(部分更新畫面)
+		return  chatMessageService.findLastMessageWithChatObjectsByAccount(principal.getName());		
+		
 	}
 	
 
 	@ResponseBody
 	@RequestMapping("/stompClientConnection/session/clear")
-	public void clearStompClientConnectionSession(HttpSession session ) {
-		session.removeAttribute("stompClientConnection");
-		session.removeAttribute("toMember");
+	public void clearStompClientConnectionSession(@RequestParam String toAccount,HttpSession session ) {
+
+		try {
+			Collection<Member> chatMemberList = (List<Member>)session.getAttribute("chatMemberList");
+//			Iterator<Member>  it = chatMemberList.iterator();
+//			Member member;
+//			while (it.hasNext()) {
+//				member= it.next();
+//				if (member.getAccount().equals(toAccount)) {
+//					System.out.println("remove toAccount");
+//					it.remove();
+//					break;
+//				}
+//			}
+//			session.removeAttribute("chatMemberList");
+//			session.setAttribute("chatMemberList", chatMemberList);
+			session.removeAttribute("stompClientConnection");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

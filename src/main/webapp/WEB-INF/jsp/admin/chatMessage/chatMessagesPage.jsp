@@ -35,10 +35,7 @@
 </script>
 </head>
 <body style="font-family: 微軟正黑體">
-	<!-- Top bar-->
-<%-- 	<jsp:include page="../../commons/commons_layout/commons_top-bar.jsp" /> --%>
 	<!-- Navbar -->
-<%-- 	<jsp:include page="../../commons/commons_layout/commons_nav.jsp" /> --%>
 	<jsp:include page="../admin_layout/nav.jsp" />
 	<sec:authentication property="name" var="userAccount"/>
 

@@ -26,6 +26,7 @@ public class AdminChatMessageController {
 	//我的訊息頁面(查看所有我的訊息紀錄)
 	@RequestMapping("/messages/all/list")
 	public String listAllChatHistoryPage(Principal principal, Model model) {
+		//查詢所有聊天對象以及與其的最後對話
 		List<ChatMessage> chatObjectsList = chatMessageService.findLastMessageWithChatObjectsByAccount(principal.getName());		
 		model.addAttribute("chatObjectsList",chatObjectsList);
 		log.debug("chatObjectsList={}",chatObjectsList);
@@ -34,6 +35,7 @@ public class AdminChatMessageController {
 	@ResponseBody
 	@RequestMapping("/messages/all/chatObject")
 	public List<ChatMessage> findLastMessageWithChatObjectsByAccount(Principal principal){
+		//查詢所有聊天對象以及與其的最後對話(部分更新畫面)
 		return  chatMessageService.findLastMessageWithChatObjectsByAccount(principal.getName());		
 		
 	}

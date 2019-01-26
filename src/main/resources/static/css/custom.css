@@ -31,6 +31,29 @@ header.nav-holder.sticky {
 .owl-dots {
     display: none;
 }
+
+/* 我的訊息 */
+.chatMemberBox{
+	border-bottom:1px solid gray;
+	padding:5px;
+	height: 58px;
+	overflow: hidden;
+}
+.chatMemberBox:hover{
+	background-color:#aba8a875;
+	cursor:pointer;
+}
+.imgToken{
+	float:left;
+	
+}
+.chat-info{
+	width:80%;
+	float:right;
+}
+/* 我的訊息 */
+
+
 .back-to-top {
 	cursor: pointer;
 	position: fixed;

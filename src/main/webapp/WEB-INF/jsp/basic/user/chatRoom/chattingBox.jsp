@@ -135,33 +135,14 @@
 </script>
 <jsp:include page="webSocketFunctions.jsp"></jsp:include>
 	
-	<div id="chatBoxDiv">
-<!-- 		<div id="chatboxjack1112" class="chatbox" style="display:block" onload="disconnect()" > -->
-<!-- 			<span id="toAccountjack1112" style="display:none"></span> -->
-<!-- 			<div  id="connectjack1112"   class="btn btn-primary btn-sm connect"   > -->
-<!-- 				<div onclick="conversationDivDisplay('jack1112');" style="display:inline-block;width:80%"><span id="toName"></span></div> -->
-<!-- 				<button type="button" data-dismiss="modal" aria-label="Close" class="close" onclick="closeChatBox('jack1112')"><span aria-hidden="true" >×</span></button> -->
-<!-- 			</div> -->
-<!--         	<div id="conversationDivjack1112" class="conversationDiv"> -->
-<!--         		<div id="boxjack1112" class="responsebox"> -->
-<!-- 					<p id="responsejack1112"></p> -->
-<!-- 				</div> -->
-<!-- 				<div id="quickButtonDiv" style="text-align:left;margin-bottom: 10px;"> -->
-<!-- 					<button class="btn btn-primary btn-sm quickButton" >Hi~</button> -->
-<!-- 					<button class="btn btn-primary btn-sm quickButton" >你好</button> -->
-<!-- 					<button class="btn btn-primary btn-sm quickButton" >謝謝!</button> -->
-<!-- 				</div> -->
-<!-- 				<input type="text" id="text" class="text" placeholder="請輸入訊息" /> -->
-<!-- 				<button id="sendMessage" class="btn btn-primary btn-sm sendMessage">Send</button> -->
-<!-- 			</div> -->
-<!-- 	    </div> -->
-	</div>    
+	<div id="chatBoxDiv"></div>    
 
-<%-- 	    <c:if test="${stompClientConnection eq 'Y'}"> --%>
-			<script>
-// 				createChatBox('${toMember.account}','${toMember.name}');
- 			</script>  
-			 
-<%-- 		</c:if> --%>
+	    <c:if test="${stompClientConnection eq 'Y'}">
+<%-- 	    	<c:forEach items="${chatMemberList}" var="chatMember"> --%>
+				<script>
+// 					createChatBox('${chatMember.account}','${chatMember.name}');
+	 			</script>  		
+<%-- 	    	</c:forEach> --%>			 
+		</c:if>
 	
 
