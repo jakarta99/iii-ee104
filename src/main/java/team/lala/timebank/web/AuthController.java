@@ -126,4 +126,9 @@ public class AuthController {
 		return member;
 	}
 	
+	@GetMapping("/403error")
+	public String errorPage() {
+		return "/basic/commons/403error";
+	}
+	
 }

@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/", "/home","/commons").permitAll()
+			.antMatchers("/", "/home","/commons","/error").permitAll()
 			.antMatchers("/admin/**","/image/admin/**").access("hasRole('ADMIN')")
 			.antMatchers("/user/**").hasAnyRole("USER, ORG_USER")
 			.and().formLogin().loginPage("/login")
@@ -40,7 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				}
 				req.setAttribute("message", errMsg);
 				req.getRequestDispatcher("/WEB-INF/jsp/basic/commons/login.jsp").forward(req, res);
-			}).and().logout().logoutSuccessUrl("/")
+			})
+			.and().exceptionHandling().accessDeniedPage("/403error")
+			.and().logout().logoutSuccessUrl("/")
 			.deleteCookies("JSESSIONID")
 				.and().oauth2Login().loginPage("/login")
 			.and().csrf().disable();
