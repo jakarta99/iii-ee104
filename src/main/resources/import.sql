@@ -75,7 +75,6 @@ INSERT INTO MEMBER (ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, TEL, COUNTY, DISTRICT, 
 values('xinaibt','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','台灣盲人重建院','O','xin@ibt.org.tw', '02-29985588', '新北市', '新莊區', '中正路384號', 'Y', '2019/1/8', 'Y' ,'梁小姐', '02-29985588分機320' , '', 'http://www.ibt.org.tw', 0, 0, 0, 'memberpic16.jpg')
 
 --user_role
-INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (1, 1)
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (1, 2)
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (2, 1)
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (2, 2)

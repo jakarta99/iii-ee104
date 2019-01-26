@@ -9,12 +9,7 @@
               <p>志工媒合平台</p>
             </div>
             <div class="col-md-6">
-              <div class="d-flex justify-content-md-end justify-content-between">
-                <ul class="list-inline contact-info d-block d-md-none">
-                  <li class="list-inline-item"><a href="#"><i class="fa fa-phone"></i></a></li>
-                  <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
-                </ul>
-                
+              <div class="d-flex justify-content-md-end justify-content-between" style="height:26px;">               
                 <!-- sign in & sign out -->
                 <div class="login">       
 	               	<sec:authorize  access="!isAuthenticated()">         	

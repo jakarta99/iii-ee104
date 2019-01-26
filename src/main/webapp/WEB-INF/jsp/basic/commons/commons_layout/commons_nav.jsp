@@ -14,38 +14,41 @@
                 </li>
                 <li class="nav-item menu-large"><a href="/commons/domesticVolunteer/list" >志工招募<b class="caret"></b></a>
                 </li>
-              	<li class="nav-item dropdown menu-large" ><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle" id='userA'>會員專區 <b class="caret"></b></a>
-                  <ul class="dropdown-menu megamenu" style="width:450px;">
-                    <li>
-                      <div class="row">
-                        <div class="col-md-6 col-lg-3">
-                          <h5><a href="/user/calendar" >行事曆</a></h5>                      
-                          <h5><a href="/user/system-message/list" id="systemMessage">通知</a></h5>
-                          <h5><a href="/user/personal-info/list" >我的個人資訊</a></h5>                          
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                          <h5><a href="#" >志工招募</a></h5>
-                          <ul class="list-unstyled mb-3">
-                            <li class="nav-item"><a href="/user/volunteerRecruitment/list" class="nav-link">招募紀錄</a></li>
-                            <li class="nav-item"><a href="/user/missionPublish/add" class="nav-link">刊登任務</a></li>                      
-                          </ul>
-                			<sec:authorize access="hasAnyRole('USER')">
-	                         <h5><a href="#">志工申請</a></h5>
-	                          <ul class="list-unstyled mb-3">
-	                            <li class="nav-item"><a href="javascript:document.location.href='/user/volunteerApplication/applicationPage'" class="nav-link">申請中</a></li>
-	                            <li class="nav-item"><a href="javascript:document.location.href='/user/volunteerRecord/RecordPage'" class="nav-link">服務紀錄</a></li>                          
-	                          </ul>
-                			</sec:authorize>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                         <h5><a href="/user/transaction-record/list" >我的交易紀錄</a></h5>
-                         <h5><a href="/user/myCollection/list" >我的最愛</a></h5>
-                          <h5><a href="/user/donation-record/list" >我的捐款</a></h5>     
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
+              	<li class="nav-item menu-large" ><a href="/user/calendar" id='userA'>會員專區 <b class="caret"></b></a>
+<!--                   <ul class="dropdown-menu megamenu" style="width:450px;"> -->
+<!--                     <li> -->
+<!--                       <div class="row"> -->
+<!--                         <div class="col-md-6 col-lg-3"> -->
+<!--                           <h5><a href="/user/calendar" >行事曆</a></h5>                       -->
+<!--                           <h5><a href="/user/system-message/list" id="systemMessage">通知</a></h5> -->
+<!--                           <h5><a href="/user/personal-info/list" >我的個人資訊</a></h5>                           -->
+<!--                         </div> -->
+<!--                         <div class="col-md-6 col-lg-3"> -->
+<!--                           <h5><a href="#" >志工招募</a></h5> -->
+<!--                           <ul class="list-unstyled mb-3"> -->
+<!--                             <li class="nav-item"><a href="/user/volunteerRecruitment/list" class="nav-link">招募紀錄</a></li> -->
+<!--                             <li class="nav-item"><a href="/user/missionPublish/add" class="nav-link">刊登任務</a></li>                       -->
+<!--                           </ul> -->
+<%--                 			<sec:authorize access="hasAnyRole('USER')"> --%>
+<!-- 	                         <h5><a href="#">志工申請</a></h5> -->
+<!-- 	                          <ul class="list-unstyled mb-3"> -->
+<!-- 	                            <li class="nav-item"><a href="javascript:document.location.href='/user/volunteerApplication/applicationPage'" class="nav-link">申請中</a></li> -->
+<!-- 	                            <li class="nav-item"><a href="javascript:document.location.href='/user/volunteerRecord/RecordPage'" class="nav-link">服務紀錄</a></li>                           -->
+<!-- 	                          </ul> -->
+<%--                 			</sec:authorize> --%>
+<!--                         </div> -->
+<!--                         <div class="col-md-6 col-lg-3"> -->
+<!--                          <h5><a href="/user/transaction-record/list" >我的交易紀錄</a></h5> -->
+<!--                          <h5><a href="/user/myCollection/list" >我的最愛</a></h5> -->
+<!--                           <h5><a href="/user/donation-record/list" >我的捐款</a></h5>      -->
+<!--                         </div> -->
+<!--                       </div> -->
+<!--                     </li> -->
+<!--                   </ul> -->
                 </li>
+                <sec:authorize access="hasAnyRole('USER','ORG_USER')">
+                <li class="nav-item menu-large" ><a href="##" data-toggle="dropdown" onclick="showChatMessages()">我的訊息 <b class="caret"></b></a>
+                </sec:authorize>
                 <li class="nav-item menu-large"><a href="/commons/InternationalVolunteer/list" >國際志工專區<b class="caret"></b></a>                        
                  <li class="nav-item dropdown"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle">關於我們<b class="caret"></b></a>
                   <ul class="dropdown-menu">
@@ -64,6 +67,15 @@
             </div>          
           </div>
         </div>
+        
+        
+        <% String path = request.getServletPath() ;
+	        if (path.indexOf("user")!= -1){		%>
+	      <jsp:include page="../../user/user_layout/user_sidebar.jsp" />
+	   
+	    <% }%>    	
+
+       
       </header>
  
  <script>
@@ -117,6 +129,32 @@
 				$("#systemMessage").html("通知")
 			}
 			
+		})
+	}
+	
+	
+	//我的訊息:取得所有聊天對象與最後一筆聊天紀錄
+	function changeMemberBoxOrder(){
+		$.ajax({
+			url:"/admin/chatMessage/messages/all/chatObject",
+			dataType:"json",
+		}).done(function(data){
+			console.log(data)
+			$("#chatMemberBoxList").html("");
+			$.each(data, function(idx, obj){
+				var m = new Date(obj.time);
+				var dateTime = m.getFullYear()+"-"+m.getMonth()+"-"+m.getDate();
+				var chatMemberBox = '<div class="chatMemberBox" id="chatMemberBox'+obj.toAccount+'">';
+				chatMemberBox +='<div class="imgToken" >'; 
+				chatMemberBox +='<img src="/image/user/member/'+obj.toMemberPic+'" style="width:50px;border-radius:100px;"/>'; 
+				chatMemberBox +='</div><div class="chat-info">'; 
+				chatMemberBox +='<div style="display:inline" id="'+obj.toAccount+'">'+obj.toName+'</div>';
+				chatMemberBox +='<div style="display:inline; float:right">'+dateTime+'</div>'; 
+				chatMemberBox += '<div style="overflow: hidden;padding-right:40px">'+obj.text+'</div>';
+				chatMemberBox += '</div></div>';	
+				$("#chatMemberBoxList").append(chatMemberBox);					
+			})
+			$("#chattedPeopleList > div.item2> div.item2-2 > div:nth-child(1)").css("background","#80808075");
 		})
 	}
 </script>

@@ -4,7 +4,7 @@
 		<div class="dark-mask"></div>
 	    <div class="container">
 	         <div class="row d-flex align-items-center flex-wrap">
-	             <h1 class="h2"  style="margin:auto;color:#fff;font-size:42px;" id='webTitle'>志工招募</h1>
+	             <h1 class="h2"  style="margin:auto;color:#fff;font-size:42px;" id='webTitle'></h1>
 	         </div>
 	     </div>
 	      <div class="container">

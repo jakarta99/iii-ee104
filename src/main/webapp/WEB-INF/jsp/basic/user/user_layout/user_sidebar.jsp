@@ -1,60 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
-<div class="w3-sidebar w3-card-4 w3-animate-left collapse"
-	style="width: 300px; height:400px; top: 160px;" id="mySidebar">
-	<div class="w3-bar w3-dark-grey">
-<!-- 	<div style="width:100%;height: 50px; overflow: hidden;vertical-align:center"> -->
-		<span  class="w3-bar-item" style="padding-top:15px">Content</span>
-		<span onclick="w3_close()" class="w3-bar-item w3-button w3-right" 
-			title="close Sidebar" style="padding-top:15px;padding-bottom:20px">×</span>
-<!-- 	</div> -->
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>       
+<div id="mySidenav" class="sidenav">
+	<div class="content">
+			<a style="padding: 12px 8px 12px 32px;font-size:23px;">會員專區</a>
+			<a href="javascript:void(0)" class="closebtn"  onclick="closeNav()" style="font-size: 30px; padding: 0px 0px 8px 32px;color:#818181; ">&times;</a>
 	</div>
-	<div class="w3-bar-block">
-		<a class="w3-bar-item w3-button" href="/user/calendar">行事曆</a>
-		<a class="w3-bar-item w3-button" href="/user/system-message/list">通知</a> 
-		<a class="w3-bar-item w3-button" href="/user/personal-info/list">我的個人資訊</a>
-		<div class="w3-dropdown-hover">
-			<a class="w3-button" data-toggle="collapse" href="#collapseMission">志工招募 <i class="fa fa-caret-down"></i></a>
-			<div class="w3-dropdown-content w3-bar-block w3-card-4 collapse"  id="collapseMission" >
-				<a class="w3-bar-item w3-button" href="/user/volunteerRecruitment/list">招募紀錄</a> 
-				<a class="w3-bar-item w3-button" href="/user/missionPublish/add">刊登任務</a> 
+ 	 <div id="memberNav"> 
+		<a href="/user/calendar" class="h5">行事曆</a>
+		<a href="/user/system-message/list" class="h5">通知</a> 
+		<a  href="/user/personal-info/list" class="h5">我的個人資訊</a>
+		<div>
+			<a data-toggle="collapse" href="#collapseMission" class="h5">志工招募 <i class="fa fa-caret-down"></i></a>
+			<div class="collapse"  id="collapseMission" >
+				<a href="/user/volunteerRecruitment/list" class="h5" style="color: #5a5959;font-size: 17px;">招募紀錄</a> 
+				<a href="/user/missionPublish/add" class="h5" style="color: #5a5959;font-size: 17px;">刊登任務</a> 
 			</div>
 		</div>
-		<div class="w3-dropdown-hover">
-			<a class="w3-button" data-toggle="collapse" href="#collapseVolunteerApply">志工申請 <i class="fa fa-caret-down"></i></a>
-			<div class="w3-dropdown-content w3-bar-block w3-card-4 collapse" id="collapseVolunteerApply">
-				<a class="w3-bar-item w3-button" href="javascript:document.location.href='/user/volunteerApplication/applicationPage'">申請中</a> 
-				<a class="w3-bar-item w3-button" href="javascript:document.location.href='/user/volunteerRecord/RecordPage'">服務紀錄</a> 
+	<sec:authorize access="hasAnyRole('USER')">
+		<div>
+			<a data-toggle="collapse" href="#collapseVolunteerApply" class="h5">志工申請 <i class="fa fa-caret-down"></i></a>
+			<div class="collapse" id="collapseVolunteerApply">
+				<a href="javascript:document.location.href='/user/volunteerApplication/applicationPage'" class="h5" style="color: #5a5959;font-size: 17px;">申請中</a> 
+				<a href="javascript:document.location.href='/user/volunteerRecord/RecordPage'" class="h5" style="color: #5a5959;font-size: 17px;">服務紀錄</a> 
 			</div>
 		</div>
-		<a class="w3-bar-item w3-button" href="/user/transaction-record/list">我的交易紀錄</a>
-		<a class="w3-bar-item w3-button" href="/user/myCollection/list">我的最愛</a>
-		<a class="w3-bar-item w3-button" href="/user/donation-record/list">我的捐款</a>
-	</div>
+	</sec:authorize>
+		<a href="/user/transaction-record/list" class="h5">我的交易紀錄</a>
+		<a href="/user/myCollection/list" class="h5">我的收藏</a>
+		<a href="/user/donation-record/list" class="h5">我的捐款</a>
+		</div>
 </div>
 
-
-<div id="main" style="margin-left: 0px;">
-
-	<div class="w3-container w3-display-container">
-		<button type="button" data-toggle="collapse"  data-target="#mySidebar" id="style-switch-button" class="btn btn-primary hidden-xs hidden-sm collapsed" aria-expanded="false">
-			<i class="fa fa-cog fa-2x"></i></button>
-<!-- 		<span title="open Sidebar" style="display: inline-block;" id="openNav"  -->
-<!-- 			class="w3-button w3-transparent  w3-xlarge" onclick="w3_open()"> -->
-<!-- 			<i class="fa fa-cog fa-2x"></i></span> -->
-	</div>
-
-</div>
-
+<span style="font-size:30px;cursor:pointer;" onclick="openNav()" id="sideBarButt">
+	<button type="button" style="position:fixed;top:280px;z-index:2;"class="btn btn-primary hidden-xs hidden-sm" > 
+	<i class="fa fa-cog fa-2x"></i></button>
+</span>
 
 <script>
-	function w3_open() {
-		document.getElementById("mySidebar").style.display = "block";
-	}
+function openNav() {
+	document.getElementById("mySidenav").style.width = "250px";
+}
 
-	function w3_close() {
-		document.getElementById("mySidebar").style.display = "none";
-	}
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+
+
 </script>
+
