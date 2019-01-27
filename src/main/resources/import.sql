@@ -141,7 +141,7 @@ VALUES (13,'伊甸基金會-義勇消防志工招募 ',3,'S',2,'2019/1/8','2019/
 --伊甸時數未核發
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (13,'伊甸基金會-社區適應 ',8,'S',4,'2019/1/3','2019/1/1 09:00','2019/1/1 17:00',15,'李小姐','03-28828899','eedian@gmail.com','協助身障學員參與社區適應活動','台北市','文山區','萬和街6號4樓之2','B_AccountsPayable','2019/1/5',5,'home.jpg',0);
+VALUES (13,'伊甸基金會-社區適應 ',8,'S',4,'2019/1/3','2019/1/1 09:00','2019/1/1 17:00',15,'李小姐','03-28828899','eedian@gmail.com','協助身障學員參與社區適應活動','台北市','文山區','萬和街6號4樓之2','B_AccountsPayable','2019/1/5',1,'home.jpg',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
 VALUES (13,'伊甸基金會-為家漆上愛志工 ',8,'S',4,'2019/1/3','2019/1/4 09:00','2019/1/4 17:00',15,'曹小姐','03-28828899','eedian@gmail.com','伊甸基金會與特力屋士林店招募羅賴把志工，一起聯手打造友善安居家庭日，訂於107年12月30日(六)至特力屋士林店受訓後，於108年1月5日(六)至弱勢家庭家中刷油漆，一起為家漆上愛。','台北市','文山區','萬和街6號4樓之2','B_AccountsPayable','2019/1/5',5,'paint.jpg',0);
@@ -290,17 +290,7 @@ VALUES(2,3,'2018/12/13','PENALTY','處罰太重');
 INSERT INTO SYSTEM_MESSAGE(MESSAGE_TYPE,RELEASE_TIME,[MESSAGE],READ_STATUS,SENDER_ACCOUNT,MEMBER_ACCOUNT,PENALTY_ID)
 VALUES('Penalty','2018/8/15 21:35','您被懲罰了!!!!','N','anchor1112','anchor1112',3);
 
-INSERT INTO SYSTEM_MESSAGE(MESSAGE_TYPE,RELEASE_TIME,[MESSAGE],READ_STATUS,SENDER_ACCOUNT,MEMBER_ACCOUNT)
-VALUES('GetTimeValue','2018/9/21 10:00','加值禮包來囉!!打開送您100點','N','anchor1112','anchor1112');
 
-INSERT INTO SYSTEM_MESSAGE(MESSAGE_TYPE,RELEASE_TIME,[MESSAGE],READ_STATUS,SENDER_ACCOUNT,MEMBER_ACCOUNT)
-VALUES('GetTimeValue','2018/8/15 17:00','加值禮包來囉!!打開送您100點','N','anchor1112','sheila1112');
-
-INSERT INTO SYSTEM_MESSAGE(MESSAGE_TYPE,RELEASE_TIME,[MESSAGE],READ_STATUS,SENDER_ACCOUNT,MEMBER_ACCOUNT)
-VALUES('GetTimeValue','2018/9/21 10:00','加值禮包來囉!!打開送您100點','N','anchor1112','sheila1112');
-
-INSERT INTO SYSTEM_MESSAGE(MESSAGE_TYPE,RELEASE_TIME,[MESSAGE],READ_STATUS,SENDER_ACCOUNT,MEMBER_ACCOUNT)
-VALUES('GetTimeValue','2018/8/15 17:00','加值禮包來囉!!打開送您100點','N','anchor1112','anchor1112');
 
 --donation
 
