@@ -238,13 +238,14 @@ public class SystemMessageService {
 	
 	public void requesterReportVolunteer(Long orderId) {
 		SystemMessage systemMessage = new SystemMessage();
-		systemMessage.setMessageType(SystemMessageType.Report);
+		
 		systemMessage.setSenderAccount(memberDao.getOne(6L).getAccount());
 		systemMessage.setReleaseTime(new Date());
 		systemMessage.setReadStatus(YesNo.N);
 		systemMessage.setMemberAccount(orderDao.getOne(orderId).getMission().getMember().getAccount());
 		systemMessage.setMessage("您已檢舉志工:[<a href='https://localhost/commons/personal-info/list?memberId="+ orderDao.getOne(orderId).getVolunteer().getId() +"'>" + orderDao.getOne(orderId).getVolunteer().getName() + "</a>]");
 		systemMessage.setMessageType(SystemMessageType.Report);
+		
 		systemMessageDao.save(systemMessage);
 		
 	}
