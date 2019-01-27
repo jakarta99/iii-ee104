@@ -70,6 +70,10 @@
 .author-category {
     font-size: 1rem;
 }
+/* #iVolunteerBox .col-lg-4:hover{ */
+/* 	background-color:#fff; */
+/* 	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1); */
+/* } */
 </style>
 <script>
 function doSpider(){
@@ -171,8 +175,8 @@ function query(){
 							<div class="col-lg-4">
 								<div class="home-blog-post">
 								<div class="product">
-										<a href="${volunteer.websiteUrl}" target="_blank">			
-											<img src="${volunteer.picture}"  class="image1" width="370px"  height="250px" >
+										<a href="${volunteer.websiteUrl}" style="overflow: hidden;" target="_blank">			
+											<img src="${volunteer.picture}"  class="image1" width="100%"  height="250px" >
 										</a>
 									</div>
 									<div class="text">
@@ -249,10 +253,10 @@ function query(){
 				$("#iVolunteerBox").html("");
 				$.each(resp, function(idx, iVolunteer){
 					var box = '<div class="col-lg-4"><div class="home-blog-post"><div class="product">';
-					box+= '<a href="'+iVolunteer.websiteUrl+'" target="_blank">';
+					box+= '<a href="'+iVolunteer.websiteUrl+'" style="overflow: hidden;" target="_blank">';
 					box+= '<img src="'+iVolunteer.picture+'"  class="image1" width="370px"  height="250px" >';
 					box+= '</a></div><div class="text">';
-					box+= '<h3 style="width:370px; margin:auto; margin-bottom:10px;" font-size: 1.7rem; >';
+					box+= '<h3 style="width:370px; margin:auto; margin-bottom:10px;font-size: 1.7rem;"  >';
 					box+= '<a href="'+iVolunteer.websiteUrl+'" target="_blank">'+iVolunteer.title+' </a>';
 					box+= '</h3><p class="author-category" ><span style="font-size:1rem;" >'+iVolunteer.organization+'</span></p>';
 					box+= '<p><table style="margin:auto;color:rgba(125, 125, 125);font-size:1.2rem;">';

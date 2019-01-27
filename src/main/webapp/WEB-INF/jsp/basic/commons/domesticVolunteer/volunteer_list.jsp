@@ -299,17 +299,22 @@
 	        			 var shortDiscription=discription; 
 	        		 }
 	        		 box+="<div class='s10'><p class='author-category_1'>"+shortDiscription+"</p></div>";
-	        		 if(mission.isCollected=='Y'){
-		        		 box+="<p class='s11'><a name='box1' class='s3 ex1' href='javascript:void(0)' onclick=\"cancelCollection("+mission.id+")\"><i name='pic1' class='fa fa-heart'></i>已收藏</a></p>"
-		        		 }else{																										
-		        		 box+="<p class='s11'><a name='box2' class='s3 ex1' href='javascript:void(0)' onclick=\"insertCollection("+mission.id+")\"><i name='pic2' class='far fa-heart'></i>收藏</a></p>"	 
-		        		 }
+// 	        		 if(mission.isCollected=='Y'){
+// 		        		 box+="<p class='s11'><a name='box1' class='s3 ex1' href='javascript:void(0)' onclick=\"cancelCollection("+mission.id+")\"><i name='pic1' class='fa fa-heart'></i>已收藏</a></p>"
+// 		        		 }else{																										
+// 		        		 box+="<p class='s11'><a name='box2' class='s3 ex1' href='javascript:void(0)' onclick=\"insertCollection("+mission.id+")\"><i name='pic2' class='far fa-heart'></i>收藏</a></p>"	 
+// 		        		 }
 					 box+="<ul class='social list-inline' style='font-size:1.2rem;'>"
 					 box+="<li class='left s9' ><i class='fas fa-map-marker-alt'></i>&nbsp;&nbsp;&nbsp;"+mission.county+mission.district+"</li>"
 					 box+="<li class='left s9' ><i class='fas fa-calendar-week'></i>&nbsp;&nbsp;&nbsp;"+new Date(mission.startDate).toLocaleDateString()+"~"+new Date(mission.endDate).toLocaleDateString()+"</li>"
-			         box+="<li class='left s9'><i class='fas fa-user'></i>&nbsp;&nbsp;&nbsp;招募中("+mission.approvedQuantity+"/"+mission.peopleNeeded+")</li>"
-			         
-			         box+="</ul>"
+			         box+="<li class='left s9'><i class='fas fa-user'></i>&nbsp;&nbsp;&nbsp;招募中("+mission.approvedQuantity+"/"+mission.peopleNeeded+")"
+
+				  	if(mission.isCollected=='Y'){
+		        		 box+="<p class='s11' style='float:right;'   name='box1' ><input type=\"image\" src=\"/img/heart_filled.png\" title='取消收藏' style='width:30px;' onclick=\"cancelCollection("+mission.id+")\"/></p>"
+		        	 }else{																	
+		        		 box+="<p class='s11' style='float:right;'   name='box2' ><input type=\"image\" src=\"/img/heart_blank.png\"  title='收藏' style='width:30px;' onclick=\"insertCollection("+mission.id+")\"/></p>"	 
+		        	 }
+			         box+="</li></ul>";
 		        	
 	        		 box+="</div></div></div></div>";   
 	        		var boxbox=$("#boxbox").append(box); 
@@ -353,12 +358,21 @@
     		 $('body,html').animate({
                  scrollTop: 0 }, 1);
     	})
-    	$("#boxbox").on("mouseover","a[name='box2']",function(){
-		$(this).empty().append("<i name='pic1' class='fa fa-heart'></i>收藏")
+    	
+//     	$("#boxbox").on("mouseover","a[name='box2']",function(){
+// 		$(this).empty().append("<i name='pic1' class='fa fa-heart'></i>收藏")
+// 		})
+		
+// 		$("#boxbox").on("mouseout","a[name='box2']",function(){
+// 		$(this).empty().append("<i name='pic1' class='far fa-heart'></i>收藏")
+// 		})
+		
+		$("#boxbox").on("mouseover","p[name='box2']",function(){
+	 		$(this).find("input")[0].src="/img/heart_filled.png";
 		})
 		
-		$("#boxbox").on("mouseout","a[name='box2']",function(){
-		$(this).empty().append("<i name='pic1' class='far fa-heart'></i>收藏")
+		$("#boxbox").on("mouseout","p[name='box2']",function(){
+			$(this).find("input")[0].src="/img/heart_blank.png";
 		})
 		
 		if (${!empty Id}){

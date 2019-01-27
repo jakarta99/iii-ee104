@@ -175,11 +175,13 @@
 		        		 if(collection.myCollectionType == 'MISSION'){
 		        		 	box+="<div class='image' style='text-align:center'><a href='/commons/domesticVolunteer/apply?missionId="+collection.favoriteObjectId+"'><img width='350px' height='230px' style='border-radius:5px' src=/image/user/mission/"+collection.favoriteObjectPicName+" alt='...'></a>";
 		        		 	box+="</div><div class='text'><div class='s4'><h4><a href='/commons/domesticVolunteer/apply?missionId="+collection.favoriteObjectId+"'>"+ collection.favoriteObjectTitle + "</a></h4>";
-		        		 	box+="<p><a name='box1' class='s3 ex1' href='javascript:void(0)' onclick='cancelCollection("+collection.favoriteObjectId+")'><i name='pic1' class='fa fa-heart'></i>已收藏</a></p>"
+// 		        		 	box+="<p><a name='box1' class='s3 ex1' href='javascript:void(0)' onclick='cancelCollection("+collection.favoriteObjectId+")'><i name='pic1' class='fa fa-heart'></i>已收藏</a></p>"
+		        		 	box+="<p class='s11' style='display:inline;'   name='box1' ><input type=\"image\" src=\"/img/heart_filled.png\" title='取消收藏' style='width:30px;' onclick='cancelCollection("+collection.favoriteObjectId+")'/></p>";
 		        		 } else {
 		        			 box+="<div class='image' style='text-align:center'><a href='"+collection.favoriteObjectLink+"'><img width='350px' height='230px' style='border-radius:5px' src=/image/user/member/"+collection.favoriteObjectPicName+" alt='...'></a>";
 		        			 box+="</div><div class='text'><div class='s4'><h2><a href='"+collection.favoriteObjectLink+"'>"+ collection.favoriteObjectTitle + "</a></h2>";
-			        		 box+="<p><a name='box1' class='s3 ex1' href='javascript:void(0)' onclick='cancleORG("+collection.favoriteObjectId+")'><i name='pic1' class='fa fa-heart'></i>已收藏</a></p>"
+// 			        		 box+="<p><a name='box1' class='s3 ex1' href='javascript:void(0)' onclick='cancleORG("+collection.favoriteObjectId+")'><i name='pic1' class='fa fa-heart'></i>已收藏</a></p>"
+			        		 box+="<p class='s11' style='display:inline;'   name='box1' ><input type=\"image\" src=\"/img/heart_filled.png\" title='取消收藏' style='width:30px;' onclick='cancleORG("+collection.favoriteObjectId+")'/></p>";
 		        		 }	        		 
 		        		 box+="</div></div></div></div>";   
 		        		var boxbox=$("#boxbox").append(box);
@@ -216,12 +218,19 @@
     		list();
     		 $('body,html').animate({scrollTop: 0 }, 1);
     	})
-    	$("#boxbox").on("mouseover","a[name='box2']",function(){
-			$(this).empty().append("<i name='pic1' class='far fa-heart'></i>收藏")
+//     	$("#boxbox").on("mouseover","a[name='box2']",function(){
+// 			$(this).empty().append("<i name='pic1' class='far fa-heart'></i>收藏")
+// 		})		
+// 		$("#boxbox").on("mouseout","a[name='box2']",function(){
+// 			$(this).empty().append("<i name='pic1' class='fa fa-heart'></i>收藏")
+// 		})
+
+     	$("#boxbox").on("mouseover","p[name='box1']",function(){
+     		$(this).find("input")[0].src="/img/heart_blank.png";
 		})		
-		$("#boxbox").on("mouseout","a[name='box2']",function(){
-			$(this).empty().append("<i name='pic1' class='fa fa-heart'></i>收藏")
-		})		
+		$("#boxbox").on("mouseout","p[name='box1']",function(){
+			$(this).find("input")[0].src="/img/heart_filled.png";
+		})	
 		
 	})
 	</script>
