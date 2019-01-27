@@ -18,6 +18,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.dao.MemberDao;
 import team.lala.timebank.dao.RoleDao;
 import team.lala.timebank.entity.Member;
@@ -25,7 +26,7 @@ import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.entity.Role;
 import team.lala.timebank.enums.MemberType;
 import team.lala.timebank.enums.YesNo;
-
+@Slf4j
 @Service
 public class MemberService {
 
@@ -66,7 +67,8 @@ public class MemberService {
 		newMember.setAverageScore(0d);
 		newMember.setScoredTimes(0);
 		newMember.setSumScore(0);
-		Member member = memberDao.save(newMember);			
+		Member member = memberDao.save(newMember);
+		log.debug("newMember={}",newMember);
 		return member;
 	}
 	
@@ -91,9 +93,9 @@ public class MemberService {
 			dbMember.setBirthDate(member.getBirthDate());
 			dbMember.setCertificateIdNumber(member.getCertificateIdNumber());
 			dbMember.setBalanceValue(member.getBalanceValue());
-			dbMember.setSumScore(member.getSumScore());
-			dbMember.setScoredTimes(member.getScoredTimes());
-			dbMember.setAverageScore(member.getAverageScore());
+//			dbMember.setSumScore(member.getSumScore());
+//			dbMember.setScoredTimes(member.getScoredTimes());
+//			dbMember.setAverageScore(member.getAverageScore());
 			
 			if (dbMember.getMemberType() == MemberType.O) {
 				dbMember.setOrgCeo(member.getOrgCeo());

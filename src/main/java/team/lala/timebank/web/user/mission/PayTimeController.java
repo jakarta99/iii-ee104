@@ -111,7 +111,7 @@ public class PayTimeController {
 					dir.mkdirs();
 				}
 				// 檔名
-				String location = realPath + "missionPicture_" + penalty.getId() + ".jpg";
+				String location = realPath + "penaltyPicture_" + penalty.getId() + ".jpg";
 				// 寫出檔案到Server
 				FileOutputStream fos = new FileOutputStream(location);
 				fos.write(proofPic.getBytes());
