@@ -271,7 +271,8 @@
 			$('#termType').val("${mission.termType}")
 			$('#serviceType').val(${mission.serviceType.id})
 			
-
+		var missionId = ${mission.id};
+		console.log('abcd' + missionId);
 		if(${not empty response}){
 			if('${response}' == 'SUCCESS'){
 				swal({
@@ -280,6 +281,8 @@
 					icon:"success",
 					buttons: false,
 					dangerMode: false,
+				}).then(() =>{
+					window.location.href="/user/volunteerRecruitment/detail?id=" + missionId;
 				})
 			}else{
 				swal({

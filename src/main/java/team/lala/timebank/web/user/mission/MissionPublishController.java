@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,27 +59,28 @@ public class MissionPublishController {
 	private ServiceTypeService serviceTypeService;
 
 	@RequestMapping("/add")
-	public String addPage(Model model, Principal principal, @RequestParam(required = false) String response) {
+	public String addPage(Model model, Principal principal, @RequestParam(required = false) String response, @RequestParam(required = false) Long missionId) {
 		
 		List<ServiceType> serviceType = serviceTypeService.findAll();
 		model.addAttribute("serviceType", serviceType);
 		if(response != null) {
 			model.addAttribute("res", response);
 		}
+		model.addAttribute("missionId", missionId);
 		return "/basic/user/volunteerRecruitment/mission_add";
 	}
 	//刊登mission
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(Mission mission, Principal principal,
 			@RequestParam("missionPicture") MultipartFile missionPicture, HttpServletRequest request, Model model,
-			RedirectAttributes attr) {
+			RedirectAttributes attr, HttpSession session) {
 		AjaxResponse<Mission> response = new AjaxResponse<Mission>();
 		Member member = memberService.findByAccount(principal.getName());
 		List<ServiceType> serviceType = serviceTypeService.findAll();
 		model.addAttribute("serviceType", serviceType);
 		model.addAttribute("mission", mission);
 		model.addAttribute("response", response);
-		
+		Mission newMission = null;
 		
 		if(member.getBalanceValue() == null || mission.getTimeValue() == null) {
 			member.setBalanceValue(0);
@@ -116,13 +118,14 @@ public class MissionPublishController {
 				fos.close();
 				// 將檔名存入DB
 				mission.setMissionPicName("missionPicture_" + mission.getId() + ".jpg");
-				missionService.insert(mission, principal);
+				newMission = missionService.insert(mission, principal);
 			}
 		} catch (Exception e) {
 			response.addMessage("刊登失敗，" + e.getMessage());
 			e.printStackTrace();
 		}
 		attr.addAttribute("response", "SUCCESS");
+		session.setAttribute("missionId", newMission.getId());
 		return "redirect:/user/missionPublish/add";
 	}
 	@RequestMapping("/test2")

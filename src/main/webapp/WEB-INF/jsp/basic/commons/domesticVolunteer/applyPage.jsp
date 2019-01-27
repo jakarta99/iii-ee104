@@ -345,7 +345,7 @@
 			  icon: "warning",
 			  buttons: true,
 			  dangerMode: true,
-			}).then((willreject) => {
+			}).then((willreject) =>{
 				if(willreject){
 					$.ajax({
 						url:"/user/volunteerRecruitment/insert?missionId="+missionId,

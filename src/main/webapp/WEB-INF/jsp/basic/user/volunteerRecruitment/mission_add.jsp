@@ -234,7 +234,7 @@
 	  
 	<jsp:include page="../../commons/commons_layout/commons_footer.jsp"/>
 	<script>
-	
+	 
 // 		$('#insertMission').click(function(){
 // 			swal({
 // 				  title: "刊登確認",
@@ -262,8 +262,8 @@
 			$("select[name='district']>option").val("南港區");
 			$("select[name='district']>option").text("南港區");
 			$('#address').val("忠孝東路6段484號B1");
-			$('#startDate').val('2019/03/10 00:00');
-			$('#endDate').val('2019/03/12 00:00');
+			$('#startDate').val('2019/02/09 00:00');
+			$('#endDate').val('2019/02/12 00:00');
 			$('#termType').val('S');
 			$('#peopleNeeded').val('2');
 			$('#timeValue').val("8");
@@ -301,11 +301,12 @@
 
 			$("div[role='tw-city-selector']").attr("data-county-value",'${mission.county}');
 			$("div[role='tw-city-selector']").attr("data-district-value", '${mission.district}');
-			
+			var missionId = '${missionId}';
+			console.log(missionId);
 		
 			
 			if(${not empty response.messages}){
-					swal({
+				swal({
 					  title: "刊登失敗",
 					  text: '${response.messages}',
 					  icon: "error",
@@ -319,7 +320,10 @@
 						icon:"success",
 						buttons: false,
 						dangerMode: false,
+					}).then(() =>{
+						window.location.href="/user/volunteerRecruitment/detail?id=" + missionId;
 					})
+						
 				}
 		})
 		
