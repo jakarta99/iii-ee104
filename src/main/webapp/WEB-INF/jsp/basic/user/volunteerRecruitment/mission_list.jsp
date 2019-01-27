@@ -392,7 +392,7 @@
 		 				}else if(mission.missionstatus=="C_Cancel"){
 		 					box+="<p class='read-more '><a href='javascript:void(0)' onclick=\"cancelEndMission('"+new Date(mission.finishDate).toLocaleDateString()+"','"+mission.title+"')\" class='btn btn-template-outlined'>取消紀錄</a></p>"								
 		 				}else if(mission.missionstatus=="C_Finish"){
-		 					box+="<p class='read-more '><a href='/user/closed/list?id="+mission.id+"' class='btn btn-template-outlined'>結案紀錄</a></p>"								
+		 					box+="<p class='read-more '><a href='/user/closed/list?id="+mission.id+"' class='btn btn-primary'>結案紀錄</a></p>"								
 		 				}else if(mission.missionstatus=="A_VolunteerApproved"){
 		 					box+="<p class='read-more '><a href='/user/volunteerVerify/list?id="+mission.id+"' class='btn btn-primary'>審核完畢</a></p>"
 		 				}
