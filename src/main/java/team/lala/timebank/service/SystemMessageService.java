@@ -238,7 +238,7 @@ public class SystemMessageService {
 	
 	public void requesterReportVolunteer(Long orderId) {
 		SystemMessage systemMessage = new SystemMessage();
-		
+		systemMessage.setMessageType(SystemMessageType.Report);
 		systemMessage.setSenderAccount(memberDao.getOne(6L).getAccount());
 		systemMessage.setReleaseTime(new Date());
 		systemMessage.setReadStatus(YesNo.N);
