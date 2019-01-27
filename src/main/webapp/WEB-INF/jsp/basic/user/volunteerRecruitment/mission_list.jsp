@@ -89,6 +89,9 @@
 		    padding-top:25px;
 		    padding-bottom:20px;
 		}
+		.s9{
+		margin-top:10px
+		}
 		
         fieldset {
 /*         	background-color:	#E0FFFF; */
@@ -226,7 +229,7 @@
 			</div>
 				
 			<input type="hidden" value="" placeholder="missionstatus" id="missionstatus" name="missionstatus"/>
-			<input  type="button" value="搜尋" id="searchButt" class="btn btn-primary btn" >
+			<input  type="button" value="搜尋" id="searchButt" class="btn btn-primary btn s9" >
 			
 			
 			</div>
