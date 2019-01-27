@@ -297,6 +297,9 @@
 		           		if(messageType == "ReplyPenaltyReport"){
 		           			return "檢舉結果";
 		           		}
+		           		if(messageType == "Report"){
+		           			return "檢舉";
+		           		}
 		           		if(messageType == "ReplyTheRevertifyApply"){
 		           			return "申訴結果";
 		           		}
