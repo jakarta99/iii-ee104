@@ -156,7 +156,7 @@
 	                   if(order.orderStatus == "VolunteerApply"){
 	                   		box+="<p class='date-comments_1'><a href='javascript: void(0)' onclick='deleteRow("+order.id+")' ><i class='fa fa-trash'></i>取消</a></p></div>"
 					   } else if (order.orderStatus == "RequesterAcceptService"){
-						   if(Date.parse(new Date()).valueOf() > Date.parse(order.mission.deadline).valueOf()){
+						   if(Date.parse(new Date()).valueOf() < Date.parse(order.mission.deadline).valueOf()){
 							   box+="<p class='date-comments_1'><a id='cancel"+ order.id +"' href='javascript: void(0)' onclick='deleteRow("+order.id+")' ><i class='fa fa-trash'></i>取消</a></p></div>"
 		           			} else {
 		           				box+="</div>"
