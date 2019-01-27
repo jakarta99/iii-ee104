@@ -394,7 +394,7 @@
 		 				}else if(mission.missionstatus=="C_Finish"){
 		 					box+="<p class='read-more '><a href='/user/closed/list?id="+mission.id+"' class='btn btn-template-outlined'>結案紀錄</a></p>"								
 		 				}else if(mission.missionstatus=="A_VolunteerApproved"){
-		 					box+="<p class='read-more '><a href='/user/volunteerVerify/list?id="+mission.id+"' class='btn btn-template-outlined'>審核完畢</a></p>"
+		 					box+="<p class='read-more '><a href='/user/volunteerVerify/list?id="+mission.id+"' class='btn btn-primary'>審核完畢</a></p>"
 		 				}
 	                   box+="</div>"
 	               
