@@ -9,6 +9,9 @@
 <title>Member Edit</title>
 
 <jsp:include page="../admin_layout/admin_css_js_links.jsp" />
+<link href="../../../../vendor2/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template -->
+    <link href="../../../../css2/freelancer.min.css" rel="stylesheet">
 <!-- 台灣縣市地區選單	 -->
 <script src="/js/tw-city-selector.min.js"></script>
 <!-- date picker -->

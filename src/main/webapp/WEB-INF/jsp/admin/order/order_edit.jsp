@@ -52,7 +52,7 @@
 	
 	orderStatus:
 	<select id="orderStatus" name="orderStatus">
-					<option value="${order.orderStatus.id}">${order.orderStatus.orderStatus}</option>
+					<option value="${order.orderStatus}">${order.orderStatus}</option>
 					<option value="1">志工申請了</option>
 			        <option value="2">接受服務</option>
 			        <option value="3">拒絕服務</option>

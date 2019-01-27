@@ -18,25 +18,64 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous">
-
+<jsp:include page="../admin_layout/admin_css_js_links.jsp" />
 <title> edit donation </title>
+<style>
+ 
+	 
+	 fieldset {
+ 		border-radius: 20px; 
+ 		padding: 20px 20px 0px 20px;  
+/*  		border: 3px double #bebebe;  */
+		background-color:#ffeecc;
+		margin: auto; 
+ 		margin-top: 10px;  
+ 		margin-bottom: 20px;  
+ 		width: 1000px;
+ 		
+	}
+
+	 
+	 
+	 
+	 
+	 legend{
+	 	color:#2c3e50;
+	 	font-size: 30px;
+	 }
+</style>
+
+
+
 </head>
 <body>
 <jsp:include page="../admin_layout/nav.jsp" />
+<div class="container" style="margin-top: 140px">
+		<h2 class="text-center text-uppercase text-secondary mb-0">Edit no.${donation.id} donation</h2>
+<!--         <hr class="star-dark mb-5"> -->
+	</div>
 
-<h1> edit id = ${donation.id} donation</h1>
 	<form>
 	  <fieldset>
-	    <legend>insert</legend>
-	    <label>id:</label>
-	    <input type="hidden" value="${donation.id}" id="id" name="id"/>
+<!-- 	    <legend>insert</legend> -->
+<!-- 	    <div> -->
+<!-- 	    <label>id:</label> -->
+<%-- 	    <input type="hidden" value="${donation.id}" id="id" name="id"/> --%>
+<!-- 	    </div> -->
+	    <div>
 	    <label>donator:</label>
 	    <input type="text" disabled="disabled" value="${donation.donator.account}" id="donator" name="donator"/>
+	    </div>
+	    <div>
 	    <label>orgDonee:</label>
 	    <input type="text" disabled="disabled" value="${donation.orgDonee.account}" id="orgDonee" name="orgDonee"/>
+	    </div>
+	    <div>
 	    <label>value:</label>
 	    <input type="text" value="${donation.value}" id="value" name="value"/>
-	  	<input type="button" onclick="editData()" value="更改" id="updateButt" />
+	  	</div>
+	  	
+	  	<input type="button" onclick="editData()" value="更改" id="updateButt"  class="btn btn-outline-secondary"/>
 	  </fieldset>
 	</form>
 <script>

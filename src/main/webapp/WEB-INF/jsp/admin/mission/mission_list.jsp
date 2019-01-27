@@ -301,7 +301,7 @@
 // 						{"data":"contactPerson"},						
 // 						{"data":"contactPhone"},						
 // 						{"data":"contactEmail"},						
-						{"data":"status.missionStatus"},						
+						{"data":"missionstatus"},						
 						{"data": null, render: function ( data, type, row ) {
 			                return data.county + data.district+ data.address;
 			            }},						

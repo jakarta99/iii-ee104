@@ -81,12 +81,18 @@
 						role="button" aria-expanded="false" aria-controls="collapse">進階查詢</a>
 		    </div>
 		    <div class="collapse" id="collapse">
+			    <div>
 			    <label>orgDonee:</label>
 			    <input type="text" value="${param.orgDonee}" id="orgDoneeAccount" name="orgDoneeAccount"/>
+			    </div>
+			    <div>
 			    <label>起始日期</label>
 			    <input type="text" value="${param.donateTimeBegin}" id="donateTimeBegin" name="donateTimeBegin" autocomplete="off"/>
+			    </div>
+			    <div>
 			    <label>結束日期</label>
 			    <input type="text" value="${param.donateTimeEnd}" id="donateTimeEnd" name="donateTimeEnd" autocomplete="off"/>
+		  		</div>
 		  	</div>
 		  </fieldset>
 		</form>

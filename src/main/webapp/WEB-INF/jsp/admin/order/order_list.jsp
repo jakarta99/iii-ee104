@@ -207,7 +207,7 @@
 						return new Date(data.orderAcceptTime).toLocaleDateString();}},
 					{data: null, render: function ( data, type, row ) {
 						return new Date(data.volunteerApplyTime).toLocaleDateString();}},
-					{data:"orderStatus.orderStatus"},
+					{data:"orderStatus"},
 					{data:"mission.title"},
 					{data:"mission.timeValue"},
 							
