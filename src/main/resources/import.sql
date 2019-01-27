@@ -21,23 +21,23 @@ INSERT INTO ROLE (ROLE_NAME) VALUES  ('ORG_USER');
 --member
 
 INSERT INTO MEMBER (account,address,average_score,balance_value,birth_date,certificate_id_number,county,district,email,email_vertification,type,mobile,name,password,picture,scored_times,sign_up_date,sum_score,tel)
-VALUES('sheila1112','復興南路一段390號',4,100,'1990/08/18','A129885641','台北市','大安區','sheila000@gmail.com','Y','P','0912-356-278','田馥甄','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','hebe.jpg',3,'2019/01/20',12,'02-25644433');
+VALUES('sheila1112','復興南路一段390號',4,100,'1990/08/18','A129885641','台北市','大安區','sheila000@gmail.com','Y','P','0912-356-278','田馥甄','$2a$10$MWfxwhnzM4RS9MA4xgjsrONhZt6.Oy.Pqinz8HZG9fpXC3GBHecai','hebe.jpg',3,'2019/01/20',12,'02-25644433');
 
 INSERT INTO MEMBER (account,address,average_score,balance_value,birth_date,certificate_id_number,county,district,email,email_vertification,type,mobile,name,password,picture,scored_times,sign_up_date,sum_score,tel)
-VALUES('anchor1112','信義路三段143號',4.5,100,'1992/09/21','A129885641','台北市','大安區','brian@gmail.com','Y','P','0912-111-123','郭富城','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','郭富城.jpg',2,'2019/01/23',9,'02-25641111');
+VALUES('anchor1112','信義路三段143號',4.5,100,'1992/09/21','A129885641','台北市','大安區','brian@gmail.com','Y','P','0912-111-123','郭富城','$2a$10$MWfxwhnzM4RS9MA4xgjsrONhZt6.Oy.Pqinz8HZG9fpXC3GBHecai','郭富城.jpg',2,'2019/01/23',9,'02-25641111');
 
 INSERT INTO MEMBER (account,address,average_score,balance_value,birth_date,certificate_id_number,county,district,email,email_vertification,type,mobile,name,password,picture,scored_times,sign_up_date,sum_score,tel)
-VALUES('jasmine1112','板新路203號',5,100,'1991/05/03','A129885641','新北市','板橋區','jasmine002@gmail.com','Y','P','0912-567-891','林志玲','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','林志玲.jpg',3,'2019/01/21',15,'02-29882356');
+VALUES('jasmine1112','板新路203號',5,100,'1991/05/03','A129885641','新北市','板橋區','jasmine002@gmail.com','Y','P','0912-567-891','林志玲','$2a$10$MWfxwhnzM4RS9MA4xgjsrONhZt6.Oy.Pqinz8HZG9fpXC3GBHecai','林志玲.jpg',3,'2019/01/21',15,'02-29882356');
 
 INSERT INTO MEMBER (account,address,average_score,balance_value,birth_date,certificate_id_number,county,district,email,email_vertification,type,mobile,name,password,picture,scored_times,sign_up_date,sum_score,tel)
-VALUES('12345678','中山路一段152號',4,100,'1978/05/07','A129885641','新北市','板橋區','anchor001@gmail.com','Y','P','0912-878-787','彭于晏','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','彭于晏.jpg',3,'2019/01/22',12,'02-29561056');
+VALUES('12345678','中山路一段152號',4,100,'1978/05/07','A129885641','新北市','板橋區','anchor001@gmail.com','Y','P','0912-878-787','彭于晏','$2a$10$MWfxwhnzM4RS9MA4xgjsrONhZt6.Oy.Pqinz8HZG9fpXC3GBHecai','彭于晏.jpg',3,'2019/01/22',12,'02-29561056');
 
 INSERT INTO MEMBER (account,address,average_score,balance_value,birth_date,certificate_id_number,county,district,email,email_vertification,type,mobile,name,password,picture,scored_times,sign_up_date,sum_score,tel)
-VALUES('jack1112','信義路5段7號',4,100,'1991/04/16','A129885641','台北市','信義區','jack@gmail.com','Y','P','0912-456-321','劉德華','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','劉德華.jpg',3,'2019/01/19',12,'02-29856456');
+VALUES('jack1112','信義路5段7號',4,100,'1991/04/16','A129885641','台北市','信義區','jack@gmail.com','Y','P','0912-456-321','劉德華','$2a$10$MWfxwhnzM4RS9MA4xgjsrONhZt6.Oy.Pqinz8HZG9fpXC3GBHecai','劉德華.jpg',3,'2019/01/19',12,'02-29856456');
 
 --ADMIN ACCOUNT
 INSERT INTO MEMBER ( ACCOUNT, PASSWORD, NAME ,PICTURE)
-VALUES ('royadmin1112', '$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG', 'TimeBank管理人','admin_pic.png')
+VALUES ('royadmin1112', '$2a$10$MWfxwhnzM4RS9MA4xgjsrONhZt6.Oy.Pqinz8HZG9fpXC3GBHecai', 'TimeBank管理人','admin_pic.png')
 
 
 --INSERT INTO MEMBER ( ACCOUNT, PASSWORD, NAME, TYPE, EMAIL,CERTIFICATE_ID_NUMBER, BIRTH_DATE,TEL, MOBILE, COUNTY, DISTRICT, ADDRESS, EMAIL_VERTIFICATION, SIGN_UP_DATE,SUM_SCORE,SCORED_TIMES,AVERAGE_SCORE,PICTURE)
