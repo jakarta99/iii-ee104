@@ -105,7 +105,7 @@
 			$("#chatMessageBoxArea").append(chatBox);
 
 			$.ajax({
-				url:"/admin/chatMessage/messages/onePerson/query",
+				url:"/admin/chatMessage/oldMessages/onePerson/query",
 				type: "post",
 				data: {"toAccount":toAccount, "fromAccount":"${userAccount}"},
 			    dataType : "json",	
