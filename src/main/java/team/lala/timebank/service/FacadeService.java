@@ -72,7 +72,7 @@ public class FacadeService {
 
 			// 3 變更order狀態
 			order.setOrderStatus(OrderStatus.ServiceFinishPayMatchSuccess);
-			order.setMemberScore(score);
+			order.setMemberScore(hours);
 			orderDao.save(order);
 			// 3 變更order狀態完成
 
