@@ -200,10 +200,8 @@ public class OrderService {
 	//志工取消申請 狀態1 --> 5
 	public void cancle (Long id) {
 		Order order = orderDao.getOne(id);
-		if(order.getOrderStatus() == OrderStatus.VolunteerApply) {
-			order.setOrderStatus(OrderStatus.VolunteerCancleTransactionMatchFail);
-			orderDao.save(order);
-		}
+		order.setOrderStatus(OrderStatus.VolunteerCancleTransactionMatchFail);
+		orderDao.save(order);
 		if(order.getMission().getMissionstatus() == MissionStatus.A_VolunteerApproved) {
 			order.getMission().setMissionstatus(MissionStatus.A_New);
 		}
