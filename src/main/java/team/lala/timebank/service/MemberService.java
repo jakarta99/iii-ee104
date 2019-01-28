@@ -176,8 +176,8 @@ public class MemberService {
 			// 如果有上傳圖片，才存檔案到Server，及存路徑到DB
 			if (picture.getOriginalFilename().length() > 0) {
 				// 取得應用程式根目錄中圖片之路徑
-				System.out.println(request.getServletContext().getRealPath("/"));
-				String realPath = request.getServletContext().getRealPath("/") + "WEB-INF\\image\\user\\member\\";
+//				System.out.println(request.getServletContext().getRealPath("/"));
+				String realPath = /*request.getServletContext().getRealPath("/") + */"WEB-INF\\image\\user\\member\\";
 				// 確認是否有此資料夾，如無則建資料夾
 				File dir = new File(realPath);
 				if (!dir.exists()) {
