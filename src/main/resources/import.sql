@@ -39,40 +39,35 @@ VALUES('jack1112','信義路5段7號',4,100,'1991/04/16','A129885641','台北市
 INSERT INTO MEMBER ( ACCOUNT, PASSWORD, NAME ,PICTURE)
 VALUES ('royadmin1112', '$2a$10$MWfxwhnzM4RS9MA4xgjsrONhZt6.Oy.Pqinz8HZG9fpXC3GBHecai', 'TimeBank管理人','admin_pic.png')
 
-
---INSERT INTO MEMBER ( ACCOUNT, PASSWORD, NAME, TYPE, EMAIL,CERTIFICATE_ID_NUMBER, BIRTH_DATE,TEL, MOBILE, COUNTY, DISTRICT, ADDRESS, EMAIL_VERTIFICATION, SIGN_UP_DATE,SUM_SCORE,SCORED_TIMES,AVERAGE_SCORE,PICTURE)
---VALUES('Louse1112','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','安哥', 'P', 'Louse1112000@gmail.com','A129516346', '1970/5/15','02-25644433', '0912-356-278','台北市','大安區','復興南路一段390號15樓', 'Y','2015/5/13',0,0,0,'lalabear.jpg');
-
+INSERT INTO MEMBER (ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, TEL, COUNTY, DISTRICT, ADDRESS,EMAIL_VERTIFICATION, SIGN_UP_DATE, ORG_IDENTITY_CONFIRMATION, ORG_CONTACT_PERSON, ORG_CONTACT_PERSON_TEL , ORG_FOUND_PURPOSE, ORG_WEBSITE_LINK,SUM_SCORE,SCORED_TIMES,AVERAGE_SCORE,PICTURE)
+values('sowtaiwan','$2a$10$MWfxwhnzM4RS9MA4xgjsrONhZt6.Oy.Pqinz8HZG9fpXC3GBHecai','荒野保護協會','O','sowtaiwan@gmail.com', '02-23071568', '台北市', '中正區', '詔安街204號', 'Y', '2019/1/8', 'Y' ,'何芝迎', '02-23071568分機22' , '', 'https://www.sow.org.tw/', 0, 0, 0, 'memberpic7.jpg')
 
 INSERT INTO MEMBER (ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, TEL, COUNTY, DISTRICT, ADDRESS,EMAIL_VERTIFICATION, SIGN_UP_DATE, ORG_IDENTITY_CONFIRMATION, ORG_CONTACT_PERSON, ORG_CONTACT_PERSON_TEL , ORG_FOUND_PURPOSE, ORG_WEBSITE_LINK,SUM_SCORE,SCORED_TIMES,AVERAGE_SCORE,PICTURE)
-values('sowtaiwan','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','荒野保護協會','O','sowtaiwan@gmail.com', '02-23071568', '台北市', '中正區', '詔安街204號', 'Y', '2019/1/8', 'Y' ,'何芝迎', '02-23071568分機22' , '', 'https://www.sow.org.tw/', 0, 0, 0, 'memberpic7.jpg')
+values('aa0710f','$2a$10$MWfxwhnzM4RS9MA4xgjsrONhZt6.Oy.Pqinz8HZG9fpXC3GBHecai','臺南市重症兒童關懷協會','O', 'aa0710f@yahoo.com.tw', '06-2338685', '台南市', '歸仁區', '大廟六街30之10號', 'Y', '2019/1/8', 'Y' , '蔡雅惠', '02-23071568分機22' , '', 'https://www.facebook.com/pages/%E8%87%BA%E5%8D%97%E5%B8%82%E9%87%8D%E7%97%87%E5%85%92%E7%AB%A5%E9%97', 0, 0, 0, 'memberpic8.jpg')
 
 INSERT INTO MEMBER (ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, TEL, COUNTY, DISTRICT, ADDRESS,EMAIL_VERTIFICATION, SIGN_UP_DATE, ORG_IDENTITY_CONFIRMATION, ORG_CONTACT_PERSON, ORG_CONTACT_PERSON_TEL , ORG_FOUND_PURPOSE, ORG_WEBSITE_LINK,SUM_SCORE,SCORED_TIMES,AVERAGE_SCORE,PICTURE)
-values('aa0710f','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','臺南市重症兒童關懷協會','O', 'aa0710f@yahoo.com.tw', '06-2338685', '台南市', '歸仁區', '大廟六街30之10號', 'Y', '2019/1/8', 'Y' , '蔡雅惠', '02-23071568分機22' , '', 'https://www.facebook.com/pages/%E8%87%BA%E5%8D%97%E5%B8%82%E9%87%8D%E7%97%87%E5%85%92%E7%AB%A5%E9%97', 0, 0, 0, 'memberpic8.jpg')
+values('twtulipmov','$2a$10$MWfxwhnzM4RS9MA4xgjsrONhZt6.Oy.Pqinz8HZG9fpXC3GBHecai','台灣鬱金香動作障礙關懷協會','O','twtulipmov@gmail.com', '03-8576526', '花蓮縣' ,'花蓮市', '中央路三段707號', 'Y', '2019/1/8', 'Y' ,'楊小姐', '03-8576526' , '', 'http://www.twtulipmov.com.tw/', 0, 0, 0, 'memberpic9.jpg')
 
 INSERT INTO MEMBER (ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, TEL, COUNTY, DISTRICT, ADDRESS,EMAIL_VERTIFICATION, SIGN_UP_DATE, ORG_IDENTITY_CONFIRMATION, ORG_CONTACT_PERSON, ORG_CONTACT_PERSON_TEL , ORG_FOUND_PURPOSE, ORG_WEBSITE_LINK,SUM_SCORE,SCORED_TIMES,AVERAGE_SCORE,PICTURE)
-values('twtulipmov','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','台灣鬱金香動作障礙關懷協會','O','twtulipmov@gmail.com', '03-8576526', '花蓮縣' ,'花蓮市', '中央路三段707號', 'Y', '2019/1/8', 'Y' ,'楊小姐', '03-8576526' , '', 'http://www.twtulipmov.com.tw/', 0, 0, 0, 'memberpic9.jpg')
+values('amyho','$2a$10$MWfxwhnzM4RS9MA4xgjsrONhZt6.Oy.Pqinz8HZG9fpXC3GBHecai','千禧之愛健康基金會','O','amyho@mail.pec.com.tw', '02-87860996', '台北市', '信義區', '松高路9號23樓', 'Y', '2019/1/8', 'Y' ,'何明穎', '02-87860996' , '', 'http://www.1000-love.org.tw/', 0, 0, 0, 'memberpic10.jpg')
 
 INSERT INTO MEMBER (ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, TEL, COUNTY, DISTRICT, ADDRESS,EMAIL_VERTIFICATION, SIGN_UP_DATE, ORG_IDENTITY_CONFIRMATION, ORG_CONTACT_PERSON, ORG_CONTACT_PERSON_TEL , ORG_FOUND_PURPOSE, ORG_WEBSITE_LINK,SUM_SCORE,SCORED_TIMES,AVERAGE_SCORE,PICTURE)
-values('amyho','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','千禧之愛健康基金會','O','amyho@mail.pec.com.tw', '02-87860996', '台北市', '信義區', '松高路9號23樓', 'Y', '2019/1/8', 'Y' ,'何明穎', '02-87860996' , '', 'http://www.1000-love.org.tw/', 0, 0, 0, 'memberpic10.jpg')
+values('inworldlife','$2a$10$MWfxwhnzM4RS9MA4xgjsrONhZt6.Oy.Pqinz8HZG9fpXC3GBHecai','社團法人中華民國失智者照顧協會','O','inworldlife@livemail.tw', '04-23028528', '台中市', '西區', '忠明南路203號3樓', 'Y', '2019/1/8', 'Y' ,'施茗棋', '04-23028528分機324' , '', 'https://www.cdca.org.tw/', 0, 0, 0, 'memberpic11.jpg')
 
 INSERT INTO MEMBER (ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, TEL, COUNTY, DISTRICT, ADDRESS,EMAIL_VERTIFICATION, SIGN_UP_DATE, ORG_IDENTITY_CONFIRMATION, ORG_CONTACT_PERSON, ORG_CONTACT_PERSON_TEL , ORG_FOUND_PURPOSE, ORG_WEBSITE_LINK,SUM_SCORE,SCORED_TIMES,AVERAGE_SCORE,PICTURE)
-values('inworldlife','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','社團法人中華民國失智者照顧協會','O','inworldlife@livemail.tw', '04-23028528', '台中市', '西區', '忠明南路203號3樓', 'Y', '2019/1/8', 'Y' ,'施茗棋', '04-23028528分機324' , '', 'https://www.cdca.org.tw/', 0, 0, 0, 'memberpic11.jpg')
-
-INSERT INTO MEMBER (ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, TEL, COUNTY, DISTRICT, ADDRESS,EMAIL_VERTIFICATION, SIGN_UP_DATE, ORG_IDENTITY_CONFIRMATION, ORG_CONTACT_PERSON, ORG_CONTACT_PERSON_TEL , ORG_FOUND_PURPOSE, ORG_WEBSITE_LINK,SUM_SCORE,SCORED_TIMES,AVERAGE_SCORE,PICTURE)
-values('sw1','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','財團法人臺北市私立愛愛院','O','sw1@aiai.org.tw', '02-23060493', '台北市', '萬華區', '大理街175巷27號', 'Y', '2019/1/8', 'Y' ,'謝蕙如', '02-23060493分機2300' , '', 'http://aiai.org.tw', 0, 0, 0, 'memberpic12.jpg')
+values('sw1','$2a$10$MWfxwhnzM4RS9MA4xgjsrONhZt6.Oy.Pqinz8HZG9fpXC3GBHecai','財團法人臺北市私立愛愛院','O','sw1@aiai.org.tw', '02-23060493', '台北市', '萬華區', '大理街175巷27號', 'Y', '2019/1/8', 'Y' ,'謝蕙如', '02-23060493分機2300' , '', 'http://aiai.org.tw', 0, 0, 0, 'memberpic12.jpg')
 
 INSERT INTO MEMBER (ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, TEL, COUNTY, DISTRICT, ADDRESS,EMAIL_VERTIFICATION, SIGN_UP_DATE, ORG_IDENTITY_CONFIRMATION, ORG_CONTACT_PERSON_TEL , ORG_FOUND_PURPOSE, ORG_WEBSITE_LINK,SUM_SCORE,SCORED_TIMES,AVERAGE_SCORE,PICTURE,BALANCE_VALUE,birth_date,certificate_id_number,org_ceo,mobile,org_contact_person,org_founder,org_contact_person_mobile)
-values('dep138','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','財團法人伊甸社會福利基金會','O','dep138@gmail.com', '02-22307715', '台北市', '文山區', '萬和街6號4樓之2', 'Y', '2019/1/8', 'Y' , '02-22307715分機5104' , '伊甸基金會成立邁向35年，以「服務弱勢、見證基督、推動雙福、領人歸主」為服務宗旨。有鑑於台灣身心障礙人口已超過百萬人，且有七成以上是後天因素所造成，伊甸將繼續為弱勢族群爭取權益，並倡導更合理的社會福利政策與爭取社會福利預算，推動全人關懷，讓福音與福利得以實踐。', 'http://www.eden.org.tw', 0, 0, 0, 'memberpic13.jpg',1000,'1983/05/21','22099131','黃琢嵩','0917-654-5600','0957-325-753','劉俠','0935-972-156')
+values('dep138','$2a$10$MWfxwhnzM4RS9MA4xgjsrONhZt6.Oy.Pqinz8HZG9fpXC3GBHecai','財團法人伊甸社會福利基金會','O','dep138@gmail.com', '02-22307715', '台北市', '文山區', '萬和街6號4樓之2', 'Y', '2019/1/8', 'Y' , '02-22307715分機5104' , '伊甸基金會成立邁向35年，以「服務弱勢、見證基督、推動雙福、領人歸主」為服務宗旨。有鑑於台灣身心障礙人口已超過百萬人，且有七成以上是後天因素所造成，伊甸將繼續為弱勢族群爭取權益，並倡導更合理的社會福利政策與爭取社會福利預算，推動全人關懷，讓福音與福利得以實踐。', 'http://www.eden.org.tw', 0, 0, 0, 'memberpic13.jpg',1000,'1983/05/21','22099131','黃琢嵩','0917-654-5600','0957-325-753','劉俠','0935-972-156')
 
 INSERT INTO MEMBER (ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, TEL, COUNTY, DISTRICT, ADDRESS,EMAIL_VERTIFICATION, SIGN_UP_DATE, ORG_IDENTITY_CONFIRMATION, ORG_CONTACT_PERSON, ORG_CONTACT_PERSON_TEL , ORG_FOUND_PURPOSE, ORG_WEBSITE_LINK,SUM_SCORE,SCORED_TIMES,AVERAGE_SCORE,PICTURE)
-values('good119','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','社團法人中華民國恩友愛心協會','O','good119.org@gmail.com', '02-27515345', '台北市', '大安區', '忠孝東路三段248巷19弄36號', 'Y', '2019/1/8', 'Y' ,'詹熒熒', '02-27515345' , '', 'http://good119.org', 0, 0, 0, 'memberpic14.jpg')
+values('good119','$2a$10$MWfxwhnzM4RS9MA4xgjsrONhZt6.Oy.Pqinz8HZG9fpXC3GBHecai','社團法人中華民國恩友愛心協會','O','good119.org@gmail.com', '02-27515345', '台北市', '大安區', '忠孝東路三段248巷19弄36號', 'Y', '2019/1/8', 'Y' ,'詹熒熒', '02-27515345' , '', 'http://good119.org', 0, 0, 0, 'memberpic14.jpg')
 
 INSERT INTO MEMBER (ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, TEL, COUNTY, DISTRICT, ADDRESS,EMAIL_VERTIFICATION, SIGN_UP_DATE, ORG_IDENTITY_CONFIRMATION, ORG_CONTACT_PERSON, ORG_CONTACT_PERSON_TEL , ORG_FOUND_PURPOSE, ORG_WEBSITE_LINK,SUM_SCORE,SCORED_TIMES,AVERAGE_SCORE,PICTURE)
-values('brain016','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','精神健康基金會','O','brain016@mhf.org.tw', '02-23279938', '台北市', '中正區', '羅斯福路一段24號9樓', 'Y', '2019/1/8', 'Y' ,'陳小姐', '02-23279938分機16' , '', 'http://www.mhf.org.tw', 0, 0, 0, 'memberpic15.jpg')
+values('brain016','$2a$10$MWfxwhnzM4RS9MA4xgjsrONhZt6.Oy.Pqinz8HZG9fpXC3GBHecai','精神健康基金會','O','brain016@mhf.org.tw', '02-23279938', '台北市', '中正區', '羅斯福路一段24號9樓', 'Y', '2019/1/8', 'Y' ,'陳小姐', '02-23279938分機16' , '', 'http://www.mhf.org.tw', 0, 0, 0, 'memberpic15.jpg')
 
 INSERT INTO MEMBER (ACCOUNT, PASSWORD,NAME, TYPE, EMAIL, TEL, COUNTY, DISTRICT, ADDRESS,EMAIL_VERTIFICATION, SIGN_UP_DATE, ORG_IDENTITY_CONFIRMATION, ORG_CONTACT_PERSON, ORG_CONTACT_PERSON_TEL , ORG_FOUND_PURPOSE, ORG_WEBSITE_LINK,SUM_SCORE,SCORED_TIMES,AVERAGE_SCORE,PICTURE)
-values('xinaibt','$2a$10$GQn5XIqeZU9PDIcuJNOE3ertKltshuwA98pfQQmNvvwdOKDmdVZBG','台灣盲人重建院','O','xin@ibt.org.tw', '02-29985588', '新北市', '新莊區', '中正路384號', 'Y', '2019/1/8', 'Y' ,'梁小姐', '02-29985588分機320' , '', 'http://www.ibt.org.tw', 0, 0, 0, 'memberpic16.jpg')
+values('xinaibt','$2a$10$MWfxwhnzM4RS9MA4xgjsrONhZt6.Oy.Pqinz8HZG9fpXC3GBHecai','台灣盲人重建院','O','xin@ibt.org.tw', '02-29985588', '新北市', '新莊區', '中正路384號', 'Y', '2019/1/8', 'Y' ,'梁小姐', '02-29985588分機320' , '', 'http://www.ibt.org.tw', 0, 0, 0, 'memberpic16.jpg')
 
 --user_role
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (1, 2)
