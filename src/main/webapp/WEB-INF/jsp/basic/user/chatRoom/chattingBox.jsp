@@ -71,15 +71,18 @@
 	}
 	
 	function changeMessageStatus(toAccount){
-		console.log(toAccount)
-		sendMessage(toAccount,"Y");
+		var responseLastChildClass = $("#response"+toAccount +"> p:last-child").attr("class");
+		if (responseLastChildClass == 'p1-to'){
+			sendMessage(toAccount,"Y");
+		}
+		
 	}
 
 	function closeChatBox(toAccount){
 		$("#chatbox"+toAccount).hide();	
-		$.ajax({ //clear session toAccount
- 			url:"/user/chatMessage/stompClientConnection/session/clear?toAccount="+toAccount,
-		})
+// 		$.ajax({ //clear session toAccount
+//  			url:"/user/chatMessage/stompClientConnection/session/clear?toAccount="+toAccount,
+// 		})
  		$("#chatbox"+toAccount).remove();
 	}
 	
@@ -106,12 +109,15 @@
 	
 	function showMessageOutput(chatMessage) {	
 		console.log(chatMessage)
+// 		if (chatMessage.unreadMessageCount != 0){
+// 			$("#navigation > ul > li:nth-child(5) > a > div").text(chatMessage.unreadMessageCount);
+// 		}
 		var fromAccount = chatMessage.fromAccount;
 		console.log("fromAccount="+fromAccount)
 		var toMemberPic = $("#connect"+fromAccount +" img").attr("src");
 		if (chatMessage.readAlready == "Y"){
 			$("#readAlready"+fromAccount).remove();
-			$('#response'+fromAccount).append($("<p class='p1-from readAlready' id='readAlready"+fromAccount+"' ><img src='/img/success.png' /></p>"));	 
+			$('#response'+fromAccount).append($("<p class='p1-from readAlready' id='readAlready"+fromAccount+"' ><img src='/img/readAlready.png' width='17px'/></p>"));	 
 		} else {
 			var toMemberPic = $("#connect"+fromAccount +" img").attr("src");
 			console.log("toMemberPic")

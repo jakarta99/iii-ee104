@@ -94,7 +94,7 @@ function fillChatListIntoResponseBox(toAccount,toMemberPic,chatMsgList){
 	})
 	if(lastMsg != null && lastMsg.readAlready=="Y" 
 			&& (lastMsg.toAccount == toAccount || lastMsg.fromAccount == "${userAccount}") ){
-		$('#response'+toAccount).append($("<p class='p1-from readAlready' id='readAlready"+toAccount+"' ><img src='/img/success.png' /></p>"));    	 
+		$('#response'+toAccount).append($("<p class='p1-from readAlready' id='readAlready"+toAccount+"' ><img src='/img/readAlready.png' width='17px'/></p>"));    	 
  	}
 
 }

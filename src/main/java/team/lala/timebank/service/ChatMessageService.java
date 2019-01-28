@@ -34,12 +34,14 @@ public class ChatMessageService {
 	private SimpMessagingTemplate template;
 
 	public void sendChatMessageToSingleUser(ChatMessage message) {
-	   //可以看出template最大的灵活就是我们可以获取前端传来的参数来指定订阅地址
-	   //前面参数是订阅地址，后面参数是消息信息
-	   template.convertAndSend("/topic/chat/single/"+message.getToAccount(),message);
+		Integer unreadMessageCount = chatMessageDao.findAllChatMessagesByAccountAndReadAlreadyStatus(message.getToAccount(),"N");
+		message.setUnreadMessageCount(unreadMessageCount);
+		//可以看出template最大的灵活就是我们可以获取前端传来的参数来指定订阅地址
+		//前面参数是订阅地址，后面参数是消息信息
+		template.convertAndSend("/topic/chat/single/"+message.getToAccount(),message);
 	}
 
-	 
+	
 	@Transactional(readOnly=true)
 	public List<ChatMessage> findChatMessagesBetweenFromAndTo(ChatMessage chatMessage){
 		return chatMessageDao.findChatMessagesBetweenTwoAccounts
@@ -71,6 +73,12 @@ public class ChatMessageService {
 		log.debug("chatHistory={}",chatHistory);
 		return chatHistory;
 	}
+	
+	//找出此使用者的未讀的聊天紀錄筆數
+	public Integer findAllChatMessagesByAccountAndReadAlreadyStatus(String account,String readAlready){
+		return chatMessageDao.findAllChatMessagesByAccountAndReadAlreadyStatus(account, readAlready);
+	}
+	
 	
 	//找出此使用者所有的聊天對象以及彼此間最後的對話
 	@Transactional(readOnly=true)

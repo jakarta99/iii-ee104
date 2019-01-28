@@ -45,10 +45,10 @@
 <!--                   </ul> -->
                 </li>
                 <sec:authorize access="hasAnyRole('USER','ORG_USER')">
-                <li class="nav-item dropdown"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle" onclick="showChatMessages()">我的訊息<b class="caret"></b></a>
-<!--                 <li class="nav-item menu-large" ><a href="##" data-toggle="dropdown" >我的訊息 <b class="caret"></b></a> -->
-               	<ul class="dropdown-menu" id="chatMemberBoxList" style="width:300px;">
-                 </ul>
+                <li class="nav-item dropdown"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle" onclick="showChatMessages()">我的訊息
+<!--                 	<div style='background-color:red;border-radius:100px;color:#fff;width:10px;display:inline'></div><b class="caret"></b></a> -->
+	               	<ul class="dropdown-menu" id="chatMemberBoxList" style="width:300px;">
+	                 </ul></li>
                 </sec:authorize>
                 <li class="nav-item menu-large"><a href="/commons/InternationalVolunteer/list" >國際志工專區<b class="caret"></b></a>                        
                  <li class="nav-item dropdown"><a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle">關於我們<b class="caret"></b></a>

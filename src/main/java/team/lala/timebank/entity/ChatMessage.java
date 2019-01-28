@@ -54,6 +54,9 @@ public class ChatMessage {
 	@Transient 
 	private String toName;
 	
+	@Transient 
+	private Integer unreadMessageCount;
+	
 
 
 	public ChatMessage() {
@@ -69,10 +72,11 @@ public class ChatMessage {
 	public String toString() {
 		return "ChatMessage [id=" + id + ", text=" + text + ", time=" + time + ", fromAccount=" + fromAccount
 				+ ", toAccount=" + toAccount + ", readAlready=" + readAlready + ", fromMemberPic=" + fromMemberPic
-				+ ", toMemberPic=" + toMemberPic + ", fromName=" + fromName + ", toName=" + toName + "]";
+				+ ", toMemberPic=" + toMemberPic + ", fromName=" + fromName + ", toName=" + toName
+				+ ", unreadMessageCount=" + unreadMessageCount + "]";
 	}
 
-
+	
 
 	
 

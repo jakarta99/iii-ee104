@@ -27,6 +27,10 @@ public interface ChatMessageDao extends JpaRepository<ChatMessage, Long>, JpaSpe
 		@Query("SELECT cmsg FROM ChatMessage cmsg WHERE cmsg.fromAccount=?1 OR cmsg.toAccount=?1")
 		public List<ChatMessage> findAllChatMessagesByAccount(String account); 
 		
+		//查詢此帳號的所有聊天訊息
+		@Query("SELECT count(id) FROM ChatMessage cmsg WHERE (cmsg.fromAccount=?1 OR cmsg.toAccount=?1) AND cmsg.readAlready=?2")
+		public Integer findAllChatMessagesByAccountAndReadAlreadyStatus(String account,String readAlready); 
+		
 		//查詢兩個帳號間的聊天訊息
 		@Query(value ="SELECT * FROM CHAT_MESSAGE cmsg " +
 				"WHERE cmsg.FROM_ACCOUNT in ( ?1 , ?2 ) AND cmsg.TO_ACCOUNT in (?1 , ?2)", nativeQuery= true)
