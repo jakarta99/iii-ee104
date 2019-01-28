@@ -46,7 +46,7 @@ public class ApplyPenaltyReVertifyController {
 		
 		try {
 			if (reVertifyProofPicName.getOriginalFilename().length() > 0) {
-				// 取得應用程式根目錄中圖片之路徑request.getServletContext().getRealPath("/") + 
+				// 取得應用程式根目錄中圖片之路徑  request.getServletContext().getRealPath("/") + 
 				String realPath = "WEB-INF\\image\\user\\reVertify\\";
 				InputStream is = request.getServletContext().getResourceAsStream("/");
 				

@@ -33,6 +33,16 @@
 
 
 </script>
+<style>
+.item1 {
+    
+    background-color: #2c3e50;
+    color:white;
+    
+}
+
+</style>
+
 </head>
 <body style="font-family: 微軟正黑體">
 	<!-- Navbar -->
