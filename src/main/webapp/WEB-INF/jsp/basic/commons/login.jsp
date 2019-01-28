@@ -219,7 +219,8 @@
                     });
                 } else {
                     // user FB取消授權
-                    alert("Facebook帳號無法登入");
+//                     alert("Facebook帳號無法登入");
+                	console.log("Facebook帳號無法登入");
                 }
             }, { scope: 'public_profile,email' });
         }

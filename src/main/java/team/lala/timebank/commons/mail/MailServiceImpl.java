@@ -61,7 +61,7 @@ public class MailServiceImpl implements MailService {
 	                "    <h3>已註冊TimeBank帳戶!</h3>" +
 	                "Dear " + member.getName() +
     				",<br/> thank you for signing up. Your account is " + member.getAccount() + ".<br>" +
-    				"<a href='https://localhost/?emailVerify=Y&account=" + member.getAccount() + "'>請按此驗證</a><br/><br/>" +
+    				"<a href='https://eeit104timebank.southeastasia.cloudapp.azure.com/?emailVerify=Y&account=" + member.getAccount() + "'>請按此驗證</a><br/><br/>" +
 	                "</body>" +
 	                "</html>";
 	        helper.setText(content, true);
@@ -92,11 +92,11 @@ public class MailServiceImpl implements MailService {
 	                "Dear " + member.getName() +
     				",<br/> Your account is " + member.getAccount() + ".<br/>" +
 	                "此驗證連結在五分鐘內有效，請在期限內登入。<br/>" +
-    				"<a href='https://localhost/commons/login-forget/password?account=" + 
+    				"<a href='https://eeit104timebank.southeastasia.cloudapp.azure.com/commons/login-forget/password?account=" + 
 	                member.getAccount() + "&verificationCode=" + member.getVerificationCode() +
 	                "'>請由此進入</a><br/>" +
     				"請盡快修改密碼，謝謝您。<br/>" +
-    				"<a href='https://localhost/commons/login-forget/password?account=" + 
+    				"<a href='https://eeit104timebank.southeastasia.cloudapp.azure.com/commons/login-forget/password?account=" + 
 	                member.getAccount() + "&verificationCode=" + member.getVerificationCode() +
 	                "'>" + "<img src=\'" + imgPath + "\' ></a><br/>" +
 	                "</body>" +
@@ -128,8 +128,8 @@ public class MailServiceImpl implements MailService {
 			                "    <h3>已註冊TimeBank帳戶!</h3>" +
 			                "Dear " + member.getName() +
 		    				",<br/> thank you for signing up. Your account is " + member.getAccount() + ".<br>" +
-		    				"<a href='https://localhost/login?emailVerify=Y&account=" + member.getAccount() + "'>請按此驗證</a><br/><br/>" +
-		    				"<a href='https://localhost/login?emailVerify=Y&account=" + member.getAccount() + "'>" + "<img src=\'" + imgPath + "\' ></a><br/>" + 
+		    				"<a href='https://eeit104timebank.southeastasia.cloudapp.azure.com/login?emailVerify=Y&account=" + member.getAccount() + "'>請按此驗證</a><br/><br/>" +
+		    				"<a href='https://eeit104timebank.southeastasia.cloudapp.azure.com/login?emailVerify=Y&account=" + member.getAccount() + "'>" + "<img src=\'" + imgPath + "\' ></a><br/>" + 
 			                "</body>" +
 			                "</html>";
 	        helper.setText(content, true);
