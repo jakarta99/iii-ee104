@@ -14,14 +14,14 @@
 			<a data-toggle="collapse" href="#collapseMission" class="h5">志工招募 <i class="fa fa-caret-down"></i></a>
 			<div class="collapse"  id="collapseMission" >
 				<a href="/user/volunteerRecruitment/list" class="h5" style="color: #5a5959;font-size: 17px;">招募紀錄</a> 
-				<a href="/user/missionPublish/add" class="h5" style="color: #5a5959;font-size: 17px;">刊登任務</a> 
+				<a href="/user/missionPublish/add" class="h5" style="color: #5a5959;font-size: 17px;">發佈活動</a> 
 			</div>
 		</div>
 	<sec:authorize access="hasAnyRole('USER')">
 		<div>
 			<a data-toggle="collapse" href="#collapseVolunteerApply" class="h5">志工申請 <i class="fa fa-caret-down"></i></a>
 			<div class="collapse" id="collapseVolunteerApply">
-				<a href="javascript:document.location.href='/user/volunteerApplication/applicationPage'" class="h5" style="color: #5a5959;font-size: 17px;">申請中</a> 
+				<a href="javascript:document.location.href='/user/volunteerApplication/applicationPage'" class="h5" style="color: #5a5959;font-size: 17px;">進行中的活動</a> 
 				<a href="javascript:document.location.href='/user/volunteerRecord/RecordPage'" class="h5" style="color: #5a5959;font-size: 17px;">服務紀錄</a> 
 			</div>
 		</div>

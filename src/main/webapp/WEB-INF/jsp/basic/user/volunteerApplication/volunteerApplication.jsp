@@ -10,7 +10,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <jsp:include page="../../commons/commons_layout/commons_css_links.jsp"/>
 <meta charset="UTF-8">
-<title>進行中任務 | TimeBank</title>
+<title>進行中活動 | TimeBank</title>
 <style>
 	.nav-link{
 		font-weight: bold;
@@ -109,13 +109,13 @@
 		//切換服務狀態
 		$('#orderStatus1').click(function(){
 			orderStatusDetail = "VolunteerApply";
-			$("#webtitle").empty().append("申請中的任務");
+			$("#webtitle").empty().append("申請中的活動");
 			page=0;
 			list();
 		})
 		$('#orderStatus2').click(function(){
 			orderStatusDetail = "RequesterAcceptService";
-			$("#webtitle").empty().append("等待開始的任務");
+			$("#webtitle").empty().append("等待開始的活動");
 			page=0;
 			list();
 		})
@@ -214,7 +214,7 @@
 	 						}
 	 					})
 	 				} else {
-	 					swal("任務仍繼續進行");
+	 					swal("活動仍繼續進行");
 	 				}
 	 			});
 			}
@@ -236,7 +236,7 @@
 		};
 		$(document).ready(function() {
 			
-			$("#webTitle").empty().append("申請中的任務");
+			$("#webTitle").empty().append("申請中的活動");
 			list();
 			$("#pagebox").on("click","li>a[name='backa']", function(){
 				if(first == false){

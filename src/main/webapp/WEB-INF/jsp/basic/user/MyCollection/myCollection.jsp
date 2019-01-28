@@ -174,7 +174,7 @@
 		        		 box+="<div class='home-blog-post' style='border-radius:3px;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);'>";
 		        		 if(collection.myCollectionType == 'MISSION'){
 		        		 	box+="<div class='image' style='text-align:center'><a href='/commons/domesticVolunteer/apply?missionId="+collection.favoriteObjectId+"'><img width='350px' height='230px' style='border-radius:5px' src=/image/user/mission/"+collection.favoriteObjectPicName+" alt='...'></a>";
-		        		 	box+="</div><div class='text'><div class='s4'><h4><a href='/commons/domesticVolunteer/apply?missionId="+collection.favoriteObjectId+"'>"+ collection.favoriteObjectTitle + "</a></h4>";
+		        		 	box+="</div><div class='text'><div class='s4'><h3><a href='/commons/domesticVolunteer/apply?missionId="+collection.favoriteObjectId+"'>"+ collection.favoriteObjectTitle + "</a></h3>";
 // 		        		 	box+="<p><a name='box1' class='s3 ex1' href='javascript:void(0)' onclick='cancelCollection("+collection.favoriteObjectId+")'><i name='pic1' class='fa fa-heart'></i>已收藏</a></p>"
 		        		 	box+="<p class='s11' style='display:inline;'   name='box1' ><input type=\"image\" src=\"/img/heart_filled.png\" title='取消收藏' style='width:30px;' onclick='cancelCollection("+collection.favoriteObjectId+")'/></p>";
 		        		 } else {

@@ -96,10 +96,10 @@ font-family:Microsoft JhengHei
     <section class="bar">
 	    <div class="container" style="padding:50px; background:rgba(201,255,248,0.5);box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);">
     	<ul>
-	    	<li style='display:inline;margin-right:5px;margin-left:0px;'><span class='status1'>　</span><span> 進行中的活動(我是志工)</span></li>
-	    	<li style='display:inline;margin-right:5px;margin-left:0px;'><span class='status2'>　</span><span> 已完成的活動(我是志工)</span></li>
-	    	<li style='display:inline;margin-right:5px;margin-left:0px;'><span class='status3'>　</span><span> 進行中的活動(我是雇主)</span></li>
-	    	<li style='display:inline;margin-right:5px;margin-left:0px;'><span class='status4'>　</span><span> 已完成的活動(我是雇主)</span></li>
+	    	<li style='display:inline;margin-right:5px;margin-left:0px;'><span class='status1'>　</span><span> 申請的活動(進行中)</span></li>
+	    	<li style='display:inline;margin-right:5px;margin-left:0px;'><span class='status2'>　</span><span> 申請的活動(已完成)</span></li>
+	    	<li style='display:inline;margin-right:5px;margin-left:0px;'><span class='status3'>　</span><span> 發佈的活動(進行中)</span></li>
+	    	<li style='display:inline;margin-right:5px;margin-left:0px;'><span class='status4'>　</span><span> 發佈的活動(已完成)</span></li>
 	    </ul>
 	    <div id="calendar"></div>
 	    </div>
