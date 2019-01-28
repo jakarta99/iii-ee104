@@ -104,7 +104,9 @@ public class PayTimeController {
 		try {
 			if (proofPic.getOriginalFilename().length() > 0) {
 				// 取得應用程式根目錄中圖片之路徑
-				String realPath = request.getServletContext().getRealPath("/") + "WEB-INF\\image\\admin\\penalty\\";
+				String realPath = 
+//						request.getServletContext().getRealPath("/") + 
+						"WEB-INF\\image\\admin\\penalty\\";
 				// 確認是否有此資料夾，如無則建資料夾
 				File dir = new File(realPath);
 				if (!dir.exists()) {
