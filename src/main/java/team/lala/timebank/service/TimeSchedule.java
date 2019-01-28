@@ -2,9 +2,10 @@ package team.lala.timebank.service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -124,7 +125,7 @@ public class TimeSchedule {
 	private InternationalVolunteerService internationalVolunteerService;
   
 	//執行國際志工網路爬蟲
-//    @PostConstruct //系統一啟動就執行  
+    @PostConstruct //系統一啟動就執行  
 //    @Scheduled(cron = "0 15 10 15 * ?")//定期執行:每月15日上午10:15執行(順序:"秒 分 時 天 月 星期 年分")
     public void iVolunteerSpider() {
     	internationalVolunteerService.deleteAll();

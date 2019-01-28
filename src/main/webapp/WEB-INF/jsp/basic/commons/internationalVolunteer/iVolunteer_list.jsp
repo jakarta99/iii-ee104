@@ -176,7 +176,7 @@ function query(){
 								<div class="home-blog-post">
 								<div class="product">
 										<a href="${volunteer.websiteUrl}" style="overflow: hidden;" target="_blank">			
-											<img src="${volunteer.picture}"  class="image1" width="100%"  height="250px" >
+											<img src="${volunteer.picture}"  class="image1" width="370px"  height="250px" >
 										</a>
 									</div>
 									<div class="text">
@@ -213,7 +213,7 @@ function query(){
 				</section>
 			</div>
 		</div>
-				<h4 class="h4"><a href="#" onclick="doSpider()">若無資料，請按此進行爬蟲功能	</a></h4>
+<!-- 				<h4 class="h4"><a href="#" onclick="doSpider()">若無資料，請按此進行爬蟲功能	</a></h4> -->
 	
 
 		
