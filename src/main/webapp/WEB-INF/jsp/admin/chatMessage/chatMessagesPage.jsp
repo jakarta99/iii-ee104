@@ -41,6 +41,19 @@
     
 }
 
+.item2 {
+    background-color: #d1e9e9;
+}
+
+/*  .box-chatPage {  */
+/*      background-color: #fff8d7;  */
+/*  }  */
+
+#chattedPeopleList{
+	background-color: #d1e9e9;
+
+}
+
 </style>
 
 </head>
