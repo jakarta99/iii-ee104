@@ -84,10 +84,18 @@
 	$(document).ready(function(){
 		console.log(location.href);
 		var href = location.href
+		if (href.indexOf("azure.com")!= -1){
+			href = href.substring(href.indexOf("azure.com")+9);
+			console.log(href);
+		} else if (href.indexOf("localhost")!= -1){
+			href = href.substring(href.indexOf("localhost")+9);
+			console.log("url=")
+			console.log(href);
+		}
 		var com = href.indexOf('commons');
 		var now = href.substr(com+8, 5);
 		console.log(now);
-		if(href.length <= 18){
+		if(href.length <= 5){
 			$("#navbar .navbar-nav > li > a[href='/']")
 			.css("background","rgba(19, 181, 177, 0.9)")
 			.css("color"," rgba(240, 240, 240)");
