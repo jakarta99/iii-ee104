@@ -1,1 +1,1 @@
-java -jar target\iii-ee104-0.0.1-SNAPSHOT.jar --spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=timebank1234 --spring.datasource.user=xxxx --spring.datasource.password=pass@@@
+java -Dfile.encoding=UTF-8 -jar iii-ee104-0.0.1-SNAPSHOT.war --spring.datasource.url=jdbc:sqlserver://deservereeit10405.database.windows.net:1433;database=TimeBank --spring.datasource.username=memberuser@deservereeit10405 --spring.datasource.password=asdf123!@#
