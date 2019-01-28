@@ -98,7 +98,7 @@ INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (16, 3)
 --mission
 --個人會員發布的任務
 INSERT INTO mission(address, approved_quantity,pay_date, contact_email, contact_person, contact_phone, county, deadline, discription, district, end_date, mission_pic_name, mission_status, payed_quantity, people_needed, publish_date, start_date, term_type, time_value, title, member_id, service_type) 
-VALUES ('忠孝東路6段484號B1', 0, '2019-01-15 00:00:00:000', 'juliantsai@canlove.org.tw', '蔡明珠', '02-66171885', '台北市','2019-01-05 00:00:00.000', '曾經是老師的小林奶奶快80歲了，她最大的夢想，就是再一次回到校園，聽到孩子們的說一聲: 「小林老師好!」或許你也聽過這些老人話?『老人攏沒路用，攏沒人管 ！』『一個人很孤單、很苦…』『全身都是病啦，死一死算了。』一次用夢想再點燃希望的行動，肯愛協會正在關心離家的弱勢老人，讓有夢的老人有「夢」有活力陪伴離家老人找到生活的意義，身心的健康及好好活的動力。--我們想和你一起--',
+VALUES ('忠孝東路6段484號B1', 0, '2019-01-15 00:00:00:000', 'juliantsai@canlove.org.tw', '蔡明珠', '02-66171885', '台北市','2019-02-07 00:00:00.000', '曾經是老師的小林奶奶快80歲了，她最大的夢想，就是再一次回到校園，聽到孩子們的說一聲: 「小林老師好!」或許你也聽過這些老人話?『老人攏沒路用，攏沒人管 ！』『一個人很孤單、很苦…』『全身都是病啦，死一死算了。』一次用夢想再點燃希望的行動，肯愛協會正在關心離家的弱勢老人，讓有夢的老人有「夢」有活力陪伴離家老人找到生活的意義，身心的健康及好好活的動力。--我們想和你一起--',
 		'南港區','2018-01-12 00:00:00.000','care.jpg','A_New', 0, 2,'2019-01-03 11:19:35.027', '2019-02-10 00:00:00.000', 'S', 8, '照顧爺爺奶奶-與老人同聚', 3,3);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
@@ -108,7 +108,7 @@ INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publ
 VALUES (5,'協助獨居身心障礙者年節前大掃除',6,'S',2,'2019/1/12','2019/2/1 10:00','2019/2/1 17:00',1,'陳昱任','0912456789','jasmine@gmail.com','我患有帕金森氏症，無法獨力負擔粗重的打掃工作，農曆年前希望能徵得好心人協助我進行大掃除工作(包含幫忙回收大型家具、換燈泡等較粗重或需要爬高的項目)。','臺北市','南港區','愛心路一段390號15樓','A_New','2019/1/31',0,'kitchen-clean.jpg',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (2,'協助在過年期間餵食流浪貓',6,'L',5,'2019/1/9','2019/2/4 19:00','2019/2/9 19:00',1,'陳大德','0912456789','brian@gmail.com','我平常每天晚上七點左右會在淡水街頭固定餵食大約8~9隻流浪貓，但過年期間共有5天要回南部老家，實在找不到人幫忙。希望能找到過年期間可以幫忙餵貓和收拾飼料盆的朋友，我會把飼料寄放在附近店家，也會先找一天帶您熟悉放置貓飼料的位置。','新北市','淡水區','貓奴路一段390號15樓','A_New','2019/1/31',0,'canned-food.jpg',0);
+VALUES (2,'協助在過年期間餵食流浪貓',6,'L',5,'2019/1/9','2019/2/8 19:00','2019/2/9 19:00',1,'陳大德','0912456789','brian@gmail.com','我平常每天晚上七點左右會在淡水街頭固定餵食大約8~9隻流浪貓，但過年期間共有5天要回南部老家，實在找不到人幫忙。希望能找到過年期間可以幫忙餵貓和收拾飼料盆的朋友，我會把飼料寄放在附近店家，也會先找一天帶您熟悉放置貓飼料的位置。','新北市','淡水區','貓奴路一段390號15樓','A_New','2019/2/5',0,'canned-food.jpg',0);
 
 --機構會員發布的任務
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
@@ -122,7 +122,7 @@ VALUES (11,'失智者照顧協會-失智關懷志工 ',4,'L',2,'2019/1/8','2019/
 
 --伊甸未開始工作
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
-VALUES (13,'伊甸基金會-偏鄉暑期陪讀志工 ',8,'S',1,'2019/1/8','2019/2/5 09:00','2019/2/6 17:00',4,'廖先生','03-28828899','eedian@gmail.com','在偏鄉社區中，許多孩子有著不同的天賦，如音樂、舞蹈等，卻因為城鄉差距、貧富落差的關係，失去了發展的機會；或是沒有經費可以栽培孩子、或是地處偏僻比較缺乏老師願意來教，對許多偏鄉弱勢的孩子來說，才藝學習是遥不可及的夢想，冀望能夠透過音樂教學相關才藝課程，給予多元刺激適性發展，偏鄉孩子一樣能，同時我們深信「教育」是提高人口素質的根本方法：唯有「教育」能幫助人脫離貧困和愚昧。所以我們很願意協助更多的偏鄉兒童、原住民學子，努力求學、奮發向上、發揮偏鄉兒童、原住民的才華，找到每個人的一片天空。<br>希望徵求兩名志工，陪伴孩子、豐富孩子的暑假。','台北市','信義區','光復南路271號','A_New','2019/6/10',0,'readwithchild.jpg',0);
+VALUES (13,'伊甸基金會-偏鄉暑期陪讀志工 ',8,'S',1,'2019/1/8','2019/2/5 09:00','2019/2/6 17:00',4,'廖先生','03-28828899','eedian@gmail.com','在偏鄉社區中，許多孩子有著不同的天賦，如音樂、舞蹈等，卻因為城鄉差距、貧富落差的關係，失去了發展的機會；或是沒有經費可以栽培孩子、或是地處偏僻比較缺乏老師願意來教，對許多偏鄉弱勢的孩子來說，才藝學習是遥不可及的夢想，冀望能夠透過音樂教學相關才藝課程，給予多元刺激適性發展，偏鄉孩子一樣能，同時我們深信「教育」是提高人口素質的根本方法：唯有「教育」能幫助人脫離貧困和愚昧。所以我們很願意協助更多的偏鄉兒童、原住民學子，努力求學、奮發向上、發揮偏鄉兒童、原住民的才華，找到每個人的一片天空。<br>希望徵求兩名志工，陪伴孩子、豐富孩子的暑假。','台北市','信義區','光復南路271號','A_New','2019/2/2',0,'readwithchild.jpg',0);
 
 INSERT INTO mission( member_Id, title, time_Value, term_Type, service_Type, publish_Date ,start_Date ,end_Date ,people_Needed ,contact_Person ,contact_Phone ,contact_Email ,discription ,county ,district ,address,mission_status,DEADLINE,APPROVED_QUANTITY,MISSION_PIC_NAME,payed_quantity) 
 VALUES (13,'伊甸基金會-視障重建中心導盲志工 ',3,'S',2,'2019/1/5','2019/3/5 09:00','2019/12/31 17:00',5,'董小姐','08-28828899','eedian@gmail.com','你是充滿熱忱、有滿腔愛心的人嗎？是否遇過視障者需要協助時，卻不知該怎麼幫忙呢？竭誠邀請您一同參與導盲志工培訓招募，完成培訓後可排班協助視障者外出購物、休閒活動及陪同參與社區化活動。歡迎您一同加入我們的行列，協助視障者參與社會。','台北市','松山區','光復北路60巷19-6號B1樓','A_New','2019/12/31',0,'blindvol.jpg',0);
