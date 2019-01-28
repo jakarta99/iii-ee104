@@ -8,7 +8,7 @@
 	</div>
  	 <div id="memberNav"> 
 		<a href="/user/calendar" class="h5">行事曆</a>
-		<a href="/user/system-message/list" class="h5">通知</a> 
+		<a href="/user/system-message/list" class="h5" id="systemMessage">通知</a> 
 		<a  href="/user/personal-info/list" class="h5">我的個人資訊</a>
 		<div>
 			<a data-toggle="collapse" href="#collapseMission" class="h5">志工招募 <i class="fa fa-caret-down"></i></a>
@@ -45,6 +45,8 @@ function openNav() {
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
+
+
 
 
 </script>

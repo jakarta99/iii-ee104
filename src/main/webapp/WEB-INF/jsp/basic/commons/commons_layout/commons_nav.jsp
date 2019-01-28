@@ -126,7 +126,7 @@
  		checkMailBox();
  	}
 
-	
+	checkMailBox();
 	function checkMailBox(){
 		$.ajax({
 			type:"get",
