@@ -2,6 +2,7 @@ package team.lala.timebank.web.admin;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
 import team.lala.timebank.commons.ajax.AjaxResponse;
-import team.lala.timebank.entity.Order;
 import team.lala.timebank.entity.Penalty;
 import team.lala.timebank.enums.YesNo;
 import team.lala.timebank.service.PenaltyService;
@@ -46,8 +46,10 @@ public class ApplyPenaltyReVertifyController {
 		
 		try {
 			if (reVertifyProofPicName.getOriginalFilename().length() > 0) {
-				// 取得應用程式根目錄中圖片之路徑
-				String realPath = request.getServletContext().getRealPath("/") + "WEB-INF\\image\\user\\reVertify\\";
+				// 取得應用程式根目錄中圖片之路徑request.getServletContext().getRealPath("/") + 
+				String realPath = "WEB-INF\\image\\user\\reVertify\\";
+				InputStream is = request.getServletContext().getResourceAsStream("/");
+				
 				// 確認是否有此資料夾，如無則建資料夾
 				File dir = new File(realPath);
 				if (!dir.exists()) {
