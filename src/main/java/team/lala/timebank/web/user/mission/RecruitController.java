@@ -173,7 +173,7 @@ public class RecruitController {
 			systemMessageService.missionEdit(orders);
 			if (missionPicture.getOriginalFilename().length() > 0) {
 				// 取得應用程式根目錄中圖片之路徑
-				String realPath = request.getServletContext().getRealPath("/") + "WEB-INF\\image\\user\\mission\\";
+				String realPath = "WEB-INF\\image\\user\\mission\\";
 				// 確認是否有此資料夾，如無則建資料夾
 				File dir = new File(realPath);
 				if (!dir.exists()) {
