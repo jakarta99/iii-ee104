@@ -187,6 +187,7 @@
 		 			});
 				}
 				list()
+				checkMailBox();
 				
 			},
 		})
@@ -223,6 +224,7 @@
 		 			});
 				}
 				list()
+				checkMailBox();
 				
 			},
 		})
@@ -267,6 +269,7 @@
 						}
 						$('#reportModalCenter').modal('hide')
 						list();
+						checkMailBox();
 					})	
 	
 			  } else {

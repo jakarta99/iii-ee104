@@ -149,7 +149,8 @@
 				 			      icon: "error",
 				 			});
 						}
-						list()		
+						list()
+						checkMailBox();
 					},
 				})
 			  } else {
@@ -185,6 +186,7 @@
 				 			});
 						}
 						list()
+						checkMailBox();
 					},
 				})
 
