@@ -118,12 +118,12 @@ public class MissionPublishController {
 				fos.close();
 				// 將檔名存入DB
 				mission.setMissionPicName("missionPicture_" + mission.getId() + ".jpg");
-				newMission = missionService.insert(mission, principal);
 			}
 		} catch (Exception e) {
 			response.addMessage("刊登失敗，" + e.getMessage());
 			e.printStackTrace();
 		}
+		newMission = missionService.insert(mission, principal);
 		attr.addAttribute("response", "SUCCESS");
 		session.setAttribute("missionId", newMission.getId());
 		return "redirect:/user/missionPublish/add";
