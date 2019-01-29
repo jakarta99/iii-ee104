@@ -38,6 +38,9 @@
     
     background-color: #2c3e50;
     color:white;
+    font-size: larger;
+	min-height:5%;	
+	max-height:8%;
     
 }
 
@@ -52,6 +55,18 @@
 #chattedPeopleList{
 	background-color: #d1e9e9;
 
+}
+
+.p1-from > .msgSpan {
+    font-size: larger;
+}
+
+.p1-to > .msgSpan {
+    font-size: larger;
+}
+
+.sendButton-chatPage {
+    font-size: larger;
 }
 
 </style>
