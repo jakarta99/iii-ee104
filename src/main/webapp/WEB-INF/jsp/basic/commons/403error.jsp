@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>錯誤 | TimeBank</title>
+<title>無法進入此頁面 | TimeBank</title>
 <!-- css -->
 <jsp:include page="commons_layout/commons_css_links.jsp" />
 <!-- Javascript files-->
