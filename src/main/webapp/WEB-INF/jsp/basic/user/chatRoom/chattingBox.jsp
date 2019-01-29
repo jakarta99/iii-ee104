@@ -109,9 +109,9 @@
 	
 	function showMessageOutput(chatMessage) {	
 		console.log(chatMessage)
-// 		if (chatMessage.unreadMessageCount != 0){
-// 			$("#navigation > ul > li:nth-child(5) > a > div").text(chatMessage.unreadMessageCount);
-// 		}
+		if (chatMessage.unreadMessageCount != 0){
+			$("#navigation > ul > li:nth-child(5) > a > div").text(chatMessage.unreadMessageCount);
+		}
 		var fromAccount = chatMessage.fromAccount;
 		console.log("fromAccount="+fromAccount)
 		var toMemberPic = $("#connect"+fromAccount +" img").attr("src");
