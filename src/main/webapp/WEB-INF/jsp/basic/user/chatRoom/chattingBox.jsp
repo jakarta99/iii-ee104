@@ -109,8 +109,19 @@
 	
 	function showMessageOutput(chatMessage) {	
 		console.log(chatMessage)
-		if (chatMessage.unreadMessageCount != 0){
-			$("#navigation > ul > li:nth-child(5) > a > div").text(chatMessage.unreadMessageCount);
+		if (chatMessage.unreadMessageCount == 0){	
+		}else if(chatMessage.unreadMessageCount == 1){
+			$("#navigation > ul > li:nth-child(5) > a > div").html('<img src="/img/1.png" style="width:20px" />');
+		}else if(chatMessage.unreadMessageCount == 2){
+			$("#navigation > ul > li:nth-child(5) > a > div").html('<img src="/img/2.png" style="width:20px"/>');
+		}else if(chatMessage.unreadMessageCount == 3){
+			$("#navigation > ul > li:nth-child(5) > a > div").html('<img src="/img/3.png" style="width:20px"/>');
+		}else if(chatMessage.unreadMessageCount == 4){
+			$("#navigation > ul > li:nth-child(5) > a > div").html('<img src="/img/4.png" style="width:20px"/>');
+		}else if(chatMessage.unreadMessageCount == 5){
+			$("#navigation > ul > li:nth-child(5) > a > div").html('<img src="/img/5.png" style="width:20px"/>');
+		}else if(chatMessage.unreadMessageCount >= 6){
+			$("#navigation > ul > li:nth-child(5) > a > div").html('<img src="/img/5+.png" style="width:20px" />');
 		}
 		var fromAccount = chatMessage.fromAccount;
 		console.log("fromAccount="+fromAccount)
