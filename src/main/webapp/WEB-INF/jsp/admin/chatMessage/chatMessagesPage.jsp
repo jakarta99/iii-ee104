@@ -148,6 +148,7 @@
 		
 		//搜尋資料庫此使用者是否有新訊息，並改變MemberBox順序
 		function changeMemberBoxOrder(){
+			console.log("changeMemberBoxOrder")
 			$.ajax({
 				url:"/admin/chatMessage/messages/all/chatObject",
 				dataType:"json",
@@ -174,12 +175,9 @@
 		
 		function sendText(toAccount){
 			sendMessage(toAccount,"N")
-			if($("#chattedPeopleList > div.item2> div.item2-2 > div:nth-child(1) > div.chat-info> div:nth-child(1)").attr("id") != toAccount){
-				//需改變MemberBox順序
-				console.log("change box order")
-				changeMemberBoxOrder();
-				
-			}
+			//需改變MemberBox順序/聊天內容
+			changeMemberBoxOrder();
+
 		}
 
 
