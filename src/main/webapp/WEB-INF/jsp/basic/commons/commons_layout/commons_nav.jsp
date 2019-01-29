@@ -15,34 +15,7 @@
                 <li class="nav-item menu-large"><a href="/commons/domesticVolunteer/list" >志工招募<b class="caret"></b></a>
                 </li>
               	<li class="nav-item menu-large" ><a href="/user/calendar" id='userA'>會員專區 <b class="caret"></b></a>
-<!--                   <ul class="dropdown-menu megamenu" style="width:450px;"> -->
-<!--                     <li> -->
-<!--                       <div class="row"> -->
-<!--                         <div class="col-md-6 col-lg-3"> -->
-<!--                           <h5><a href="/user/calendar" >行事曆</a></h5>                       -->
-<!--                           <h5><a href="/user/system-message/list" id="systemMessage">通知</a></h5> -->
-<!--                           <h5><a href="/user/personal-info/list" >我的個人資訊</a></h5>                           -->
-<!--                         </div> -->
-<!--                         <div class="col-md-6 col-lg-3"> -->
-<!--                           <h5><a href="#" >志工招募</a></h5> -->
-<!--                           <ul class="list-unstyled mb-3"> -->
-<!--                             <li class="nav-item"><a href="/user/volunteerRecruitment/list" class="nav-link">招募紀錄</a></li> -->
-<!--                             <li class="nav-item"><a href="/user/missionPublish/add" class="nav-link">刊登任務</a></li>                       -->
-<!--                           </ul> -->
-<!-- 	                         <h5><a href="#">志工申請</a></h5> -->
-<!-- 	                          <ul class="list-unstyled mb-3"> -->
-<!-- 	                            <li class="nav-item"><a href="javascript:document.location.href='/user/volunteerApplication/applicationPage'" class="nav-link">申請中</a></li> -->
-<!-- 	                            <li class="nav-item"><a href="javascript:document.location.href='/user/volunteerRecord/RecordPage'" class="nav-link">服務紀錄</a></li>                           -->
-<!-- 	                          </ul> -->
-<!--                         </div> -->
-<!--                         <div class="col-md-6 col-lg-3"> -->
-<!--                          <h5><a href="/user/transaction-record/list" >我的交易紀錄</a></h5> -->
-<!--                          <h5><a href="/user/myCollection/list" >我的最愛</a></h5> -->
-<!--                           <h5><a href="/user/donation-record/list" >我的捐款</a></h5>      -->
-<!--                         </div> -->
-<!--                       </div> -->
-<!--                     </li> -->
-<!--                   </ul> -->
+
                 </li>
                 <sec:authorize access="hasAnyRole('USER','ORG_USER')">
                 <li class="nav-item dropdown"><a href="javascript: void(0)" data-toggle="dropdown"  onclick="showChatMessages()">我的訊息
@@ -154,7 +127,7 @@
 				var m = new Date(obj.time);
 				var dateTime = m.getFullYear()+"-"+m.getMonth()+"-"+m.getDate();
 				
-				var chatMemberBox = '<div class="dropdown-item chatMemberBox" style="padding:5px 5px;"  id="chatMemberBox'+obj.toAccount+'">';
+				var chatMemberBox = '<div class="dropdown-item chatMemberBox" style="padding:5px 5px;"   id="chatMemberBox'+obj.toAccount+'">';
 				chatMemberBox +='<div class="imgToken" >'; 
 				chatMemberBox +='<img src="/image/user/member/'+obj.toMemberPic+'" style="width:50px;border-radius:100px;"/>'; 
 				chatMemberBox +='</div><div class="chat-info">'; 
@@ -170,10 +143,13 @@
 	}		
 	//我的訊息:chatMemberBox綁定事件，点擊產生chatBox
 	$("#chatMemberBoxList").on("click",".chatMemberBox",function(){
+		$("#navigation > ul > li:nth-child(5) > a > div").html("");
 		var toAccount= $(this).find(">:nth-child(2)>:first-child").attr("id");
 		var toName= $(this).find(">:nth-child(2)>:first-child").text();
 		createChatBox(toAccount,toName);
 	})
+	
+	
 	
 	
 </script>
