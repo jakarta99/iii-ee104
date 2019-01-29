@@ -86,7 +86,17 @@ public class MissionService {
 		mission.setAutoPayDate(new Date(mission.getEndDate().getTime() + 3 * 24 * 60 * 60 * 1000));
 		return missionDao.save(mission);
 	}
-
+	
+	public Mission update(Mission mission, Principal principal) {
+		mission.setMember(memberDao.findByAccount(principal.getName()));
+		mission.setMissionstatus(MissionStatus.A_New);
+		mission.setAutoPayDate(new Date(mission.getEndDate().getTime() + 3 * 24 * 60 * 60 * 1000));
+		mission.setPublishDate(new Date());
+		mission.setDeadline(new Date(mission.getEndDate().getTime() - 7 * 24 * 60 * 60 * 1000));
+		mission.setApprovedQuantity(mission.getApprovedQuantity());
+		mission.setPayedQuantity(mission.getPayedQuantity());
+		return missionDao.save(mission);
+	}
 	// 檢查mission的orders 全數審核完改變其狀態
 	public void checkMissionStatus(Long orderId) {
 		Mission mission = orderDao.getOne(orderId).getMission();

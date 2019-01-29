@@ -91,7 +91,7 @@
 					<input type="hidden" value="${publishDate}"  id="publishDate" name="publishDate"/>
 					<input type="hidden" value="${mission.approvedQuantity}"  id="approvedQuantity" name="approvedQuantity"/>
 					<input type="hidden" value="${mission.missionstatus}"  id="missionstatus" name="missionstatus"/>
-                  
+                  	<input type="hidden" value="${mission.payedQuantity}"  id="payedQuantity" name="payedQuantity"/>
                   <div class="row">
                     <div class="col-md-3">
                       <div class="form-group">

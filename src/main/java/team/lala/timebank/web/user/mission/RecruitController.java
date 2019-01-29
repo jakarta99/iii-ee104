@@ -160,7 +160,7 @@ public class RecruitController {
 		if(member.getBalanceValue().intValue() >= inputMission.getTimeValue().intValue() * inputMission.getPeopleNeeded()) {
 			//member可使用額度減少
 			member.setBalanceValue(member.getBalanceValue().intValue() - inputMission.getTimeValue().intValue() * inputMission.getPeopleNeeded());
-			missionService.insert(inputMission, principal);
+			missionService.update(inputMission, principal);
 		}else {
 			//扣回原本的可使用額度
 			member.setBalanceValue(member.getBalanceValue().intValue() - mission.getTimeValue().intValue() * mission.getPeopleNeeded());
