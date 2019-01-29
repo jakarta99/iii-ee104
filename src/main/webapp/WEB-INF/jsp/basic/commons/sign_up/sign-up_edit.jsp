@@ -317,7 +317,7 @@
     			);
     	//判斷元素值是否為空白
         if (theCertificateIdNumberLen != ""){
-        	if(${memberType eq 'P' }){
+        	if(${member.memberType eq 'P' }){
 	        	// 使用「正規表達式」檢驗格式
 	        	if (theCertificateIdNumber.search(/^[A-Z](1|2)\d{8}$/i) == -1) {
 	        		msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>請輸入正確身分證字號格式</span>";
@@ -339,7 +339,7 @@
 	        		}
 	        	}
         	}
-        	if(${memberType eq 'O' }){
+        	if(${member.memberType eq 'O' }){
         		var invalidList = "00000000,11111111";
         	    if (/^\d{8}$/.test(theCertificateIdNumber) == false || invalidList.indexOf(theCertificateIdNumber) != -1) {
         	    	msgChk.innerHTML = "<img src='/img/X.jpg'><span style='color:red'>請輸入正確統一編號格式</span>";
@@ -455,7 +455,7 @@
     	}
     }
     
-    if(${memberType eq 'O' }){
+    if(${member.memberType eq 'O' }){
     	    
 	    document.addEventListener("DOMContentLoaded", function () {
 	        document.getElementById("idOrgFounder").addEventListener("keyup", chkOrgFounder);
