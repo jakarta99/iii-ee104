@@ -99,6 +99,11 @@
         function GoogleLogin() {
         	// API call for Google login  
             gapi.auth2.getAuthInstance().signIn().then(
+           		$('#status').css('display','block');  
+         		$('#preloader').css('display','block');  
+          		$("#preloader").css("background-color","#fff9");
+          		$("#username").css("color","#fff");
+          		$("#password").css("color","#fff");
                 function (success) {
                 	// Login API call is successful 
                     console.log(success);
@@ -112,14 +117,17 @@
                     console.log(email);
                     //name
                     console.log(name);
-                    	
+        				
                     $.ajax({
                     	method:"post",
     					dataType: "json",        
     					url:"/login/oauth2/google",
     					data: {name:name,email:email,oauth2Id:oauth2Id}
                     }).done(function(member){
-                    	$("#loginContainer").css("display","none");
+//                     	$("#loginContainer").css("display","none");
+                	 	$('#status').fadeOut(); // will first fade out the loading animation
+			  			$('#preloader').delay(100).fadeOut('slow'); // will fade out the white DIV that covers the website.
+			  	    	$('body').delay(100).css('overflow','visible');
 //                     	 alert(member.account + "," + member.password + "," +member.name + "," + member.email + "," + member.oauth2Id);
                     	 if (member.account != null){	//表示資料庫已有這個member
 //                     		alert("I'm member !!!");
@@ -181,6 +189,11 @@
         function FBLogin() {
             
             FB.login(function (response) {
+            	$('#status').css('display','block');  
+       			$('#preloader').css('display','block');  
+       			$("#preloader").css("background-color","#fff9");
+       			$("#username").css("color","#fff");
+       			$("#password").css("color","#fff");
                 //debug用
                 console.log(response);
                 if (response.status === 'connected') {
@@ -194,7 +207,10 @@
     					url:"/login/oauth2/facebook",
     					data: {oauth2Id:oauth2Id}
                     }).done(function(member){
-                    	$("#loginContainer").css("display","none");
+//                     	$("#loginContainer").css("display","none");
+                	 	$('#status').fadeOut(); // will first fade out the loading animation
+			  			$('#preloader').delay(100).fadeOut('slow'); // will fade out the white DIV that covers the website.
+			  	    	$('body').delay(100).css('overflow','visible');
 //                     	 alert(member.account + "," + member.password + "," +member.name + "," + member.email + "," + member.oauth2Id);
                     	 if (member.account != null){	//表示資料庫已有這個member
 //                     		alert("I'm member !!!");
