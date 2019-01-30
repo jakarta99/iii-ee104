@@ -71,6 +71,7 @@
 	}
 	
 	function changeMessageStatus(toAccount){
+		$("#navigation > ul > li:nth-child(5) > a > div").html("");
 		var responseLastChildClass = $("#response"+toAccount +"> p:last-child").attr("class");
 		if (responseLastChildClass == 'p1-to'){
 			sendMessage(toAccount,"Y");
