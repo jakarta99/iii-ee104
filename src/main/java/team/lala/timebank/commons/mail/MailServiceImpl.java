@@ -85,10 +85,10 @@ public class MailServiceImpl implements MailService {
 	        MimeMessageHelper helper = new MimeMessageHelper(message, true);
 	        helper.setFrom(from);
 	        helper.setTo(member.getEmail());
-	        helper.setSubject("TimeBank帳戶，您的驗證連結");
+	        helper.setSubject("TimeBank帳戶-忘記密碼，您的驗證連結");
 	        String content="<html>" +
 	                "<body>" +
-	                "    <h3>TimeBank帳戶，您的驗證連結</h3>" +
+	                "    <h3>TimeBank帳戶-忘記密碼，您的驗證連結</h3>" +
 	                "Dear " + member.getName() +
     				",<br/> Your account is " + member.getAccount() + ".<br/>" +
 	                "此驗證連結在五分鐘內有效，請在期限內登入。<br/>" +
