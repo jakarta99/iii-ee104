@@ -5,6 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>登入 | Time Bank </title>
+<!-- google -->
+<!-- <meta name="google-signin-scope" content="profile email"> -->
+<!-- <meta name="google-signin-client_id" content="1087090692205-lv4j4t6i5vp87um9nr22fuc4f6mrbb4h.apps.googleusercontent.com"> -->
+<!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
 <!-- css -->
 <jsp:include page="commons_layout/commons_css_links.jsp"/>
 <!-- Javascript files-->
@@ -67,7 +71,7 @@
             onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
     <script type="text/javascript">
 //         進入 https://console.developers.google.com/，找「憑證」頁籤(記得先選對專案)，即可找到用戶端ID
-        let Google_appId = "1087090692205-5vudvov1cgbcj4nrvhtshe15m3c883ih.apps.googleusercontent.com"; 
+        let Google_appId = "563294796470-7vj9sg6ua9c60m95ci22f5pf2utav5d5.apps.googleusercontent.com"; 
         // Called when Google Javascript API Javascript is loaded
         function HandleGoogleApiLibrary() {
             // Load "client" & "auth2" libraries
@@ -99,12 +103,12 @@
         function GoogleLogin() {
         	// API call for Google login  
             gapi.auth2.getAuthInstance().signIn().then(
-           		$('#status').css('display','block');  
-         		$('#preloader').css('display','block');  
-          		$("#preloader").css("background-color","#fff9");
-          		$("#username").css("color","#fff");
-          		$("#password").css("color","#fff");
                 function (success) {
+               		$('#status').css('display','block');  
+             		$('#preloader').css('display','block');  
+              		$("#preloader").css("background-color","#fff9");
+              		$("#username").css("color","#fff");
+              		$("#password").css("color","#fff");
                 	// Login API call is successful 
                     console.log(success);
 
@@ -160,6 +164,23 @@
         }
     </script>
 <!--Google登入 end-->
+<script>
+// // onSignIn
+//       function GoogleLogin(googleUser) {
+//         // Useful data for your client-side scripts:
+//         var profile = googleUser.getBasicProfile();
+//         console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+//         console.log('Full Name: ' + profile.getName());
+//         console.log('Given Name: ' + profile.getGivenName());
+//         console.log('Family Name: ' + profile.getFamilyName());
+//         console.log("Image URL: " + profile.getImageUrl());
+//         console.log("Email: " + profile.getEmail());
+
+//         // The ID token you need to pass to your backend:
+//         var id_token = googleUser.getAuthResponse().id_token;
+//         console.log("ID Token: " + id_token);
+//       }
+</script>
 
 <!-- fb登入 begin -->
    <script type="text/javascript">
